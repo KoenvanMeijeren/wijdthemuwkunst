@@ -1,0 +1,55 @@
+parameters:
+    fileExtensions:
+        - php
+    ignoreErrors:
+        - "#In function .*#"
+        - "#Function .* has .*#"
+        - "#In method .*, parameter .* can be type-hinted to .*.#"
+        - "#Method .* should return .* but returns .*.#"
+        - "#Constructor .* has parameter .* with default value.#"
+        - "#Class .* is not allowed to extend .*#"
+        - "#Variable method call on mixed.#"
+        - "#Access to an undefined property .*#"
+        - "#Call to function .* with array will always evaluate to true.#"
+        - "#Variable property access on .*.#"
+        - "#Method .* has a nullable return type declaration.#"
+        - "#In method .*, return type is .*#"
+        - "#Method .* is not final, but since the containing class is abstract, it should be.#"
+        - "#Method .* has parameter .* with a nullable type declaration.#"
+        - "#Empty array passed to foreach.#"
+        - "#Strict comparison using .* between stdClass and null will always evaluate to .*.#"
+    level: 7
+    paths:
+    - App/
+    - config/
+    - routes/
+includes:
+    - vendor/phpstan/phpstan-deprecation-rules/rules.neon
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor/ergebnis/phpstan-rules/rules.neon
+services:
+  -
+    class: TheCodingMachine\PHPStan\Rules\Exceptions\ThrowMustBundlePreviousExceptionRule
+    tags:
+      - phpstan.rules.rule
+  -
+    class: TheCodingMachine\PHPStan\Rules\Exceptions\DoNotThrowExceptionBaseClassRule
+    tags:
+      - phpstan.rules.rule
+  -
+    class: TheCodingMachine\PHPStan\Rules\Exceptions\EmptyExceptionRule
+    tags:
+      - phpstan.rules.rule
+  -
+    class: TheCodingMachine\PHPStan\Rules\Exceptions\MustRethrowRule
+    tags:
+      - phpstan.rules.rule
+  -
+    class: TheCodingMachine\PHPStan\Rules\TypeHints\MissingTypeHintInFunctionRule
+    tags:
+      - phpstan.rules.rule
+  -
+    class: TheCodingMachine\PHPStan\Rules\TypeHints\MissingTypeHintInMethodRule
+    tags:
+      - phpstan.rules.rule

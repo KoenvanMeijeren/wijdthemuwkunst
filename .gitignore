@@ -1,0 +1,8 @@
+.idea
+/storage
+/vendor
+.phpunit.result.cache
+.php_cs.cache
+/coverage
+.env.development
+.env.production
