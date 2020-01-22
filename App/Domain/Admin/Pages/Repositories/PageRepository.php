@@ -13,7 +13,7 @@ final class PageRepository
     private bool $isPublished;
     private bool $isDeleted;
 
-    private int $slugID;
+    private int $slugId;
     private string $slug;
     private bool $slugIsDeleted;
 
@@ -26,7 +26,7 @@ final class PageRepository
         $this->isPublished = (bool) ($page->page_is_published ?? '0');
         $this->isDeleted = (bool) ($page->page_is_deleted ?? '0');
 
-        $this->slugID = (int) ($page->slug_ID ?? '0');
+        $this->slugId = (int) ($page->slug_ID ?? '0');
         $this->slug = $page->slug_name ?? '';
         $this->slugIsDeleted = (bool) ($page->slug_is_deleted ?? '0');
     }
@@ -61,9 +61,9 @@ final class PageRepository
         return $this->isDeleted;
     }
 
-    public function getSlugID(): int
+    public function getSlugId(): int
     {
-        return $this->slugID;
+        return $this->slugId;
     }
 
     public function getSlug(): string

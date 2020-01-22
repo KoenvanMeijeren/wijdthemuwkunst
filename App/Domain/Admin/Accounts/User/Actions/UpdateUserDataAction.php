@@ -33,7 +33,7 @@ final class UpdateUserDataAction extends FormAction
      */
     protected function handle(): bool
     {
-        $this->user->update($this->user->getID(), [
+        $this->user->update($this->user->getId(), [
             'account_name' => $this->name
         ]);
 

@@ -41,7 +41,7 @@ final class User extends Model
     {
         $this->initializeSoftDelete();
 
-        $this->account = $this->find($this->getID());
+        $this->account = $this->find($this->getId());
 
         $this->authorizeUser();
     }
@@ -72,7 +72,7 @@ final class User extends Model
      *
      * @return int the id of the user
      */
-    public function getID(): int
+    public function getId(): int
     {
         $session = new Session();
         $idEncryption = new IDEncryption();

@@ -21,7 +21,7 @@ final class PublishPageAction extends FormAction
     {
         $this->page = $page;
         $this->session = new Session();
-        $this->pageRepository = new PageRepository($page->find($page->getID()));
+        $this->pageRepository = new PageRepository($page->find($page->getId()));
     }
 
     /**

@@ -15,7 +15,7 @@ final class UpdatePageAction extends PageAction
      */
     protected function handle(): bool
     {
-        $this->page->update($this->page->getID(), [
+        $this->page->update($this->page->getId(), [
             'page_slug_ID' => (string) $this->getSlugId(),
             'page_title' => $this->title,
             'page_content' => $this->content,

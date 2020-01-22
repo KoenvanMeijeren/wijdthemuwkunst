@@ -19,7 +19,7 @@ if (!function_exists('dd')) {
     }
 }
 
-if (!function_exists('array_replace_keys')) {
+if (!function_exists('arrayReplaceKeys')) {
     /**
      * This function replaces the keys of an associate array by those supplied in the keys array.
      *
@@ -28,7 +28,7 @@ if (!function_exists('array_replace_keys')) {
      *
      * @return array with replaced keys
      */
-    function array_replace_keys(array $array, array $keys)
+    function arrayReplaceKeys(array $array, array $keys)
     {
         foreach ($keys as $search => $replace) {
             if (array_key_exists($search, $array)) {
@@ -41,7 +41,7 @@ if (!function_exists('array_replace_keys')) {
     }
 }
 
-if (!function_exists('parseHTMLEntities')) {
+if (!function_exists('parseHtmlEntities')) {
     /**
      * Parse the data into HTML entities.
      *
@@ -49,7 +49,7 @@ if (!function_exists('parseHTMLEntities')) {
      *
      * @return string
      */
-    function parseHTMLEntities(string $data)
+    function parseHtmlEntities(string $data)
     {
         return html_entity_decode(htmlspecialchars_decode($data));
     }
@@ -165,7 +165,7 @@ if (!function_exists('isJson')) {
     }
 }
 
-if (!function_exists('random_string')) {
+if (!function_exists('randomString')) {
     /**
      * Generate a random string, using a cryptographically secure
      * pseudorandom number generator (random_int)
@@ -183,7 +183,7 @@ if (!function_exists('random_string')) {
      * @return string
      * @throws Exception
      */
-    function random_string(
+    function randomString(
         int $length = 64,
         string $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
     ): string {
@@ -201,20 +201,20 @@ if (!function_exists('random_string')) {
     }
 }
 
-if (!function_exists('strip_whitespace')) {
+if (!function_exists('stripWhitespace')) {
     /**
      * Remove al the whitespaces from the string.
      *
      * @param string $string
      * @return string
      */
-    function strip_whitespace(string $string)
+    function stripWhitespace(string $string)
     {
         return trim($string);
     }
 }
 
-if (!function_exists('')) {
+if (!function_exists('encodeUrl')) {
     /**
      * Encode a string into a url-save string.
      *

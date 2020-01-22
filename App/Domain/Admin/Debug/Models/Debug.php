@@ -154,7 +154,7 @@ final class Debug
         return array_reverse($logs);
     }
 
-    public function getPHPInfo(): string
+    public function getPhpInfo(): string
     {
         ob_start();
 

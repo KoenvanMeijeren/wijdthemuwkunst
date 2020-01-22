@@ -14,7 +14,7 @@ final class UpdateSettingAction extends SettingAction
      */
     protected function handle(): bool
     {
-        $this->setting->update($this->setting->getID(), [
+        $this->setting->update($this->setting->getId(), [
             $this->setting->key => $this->key,
             $this->setting->valueKey => $this->value
         ]);

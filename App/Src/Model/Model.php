@@ -55,7 +55,7 @@ abstract class Model
      */
     final public function updateOrCreate(int $id, array $attributes): void
     {
-        if ($this->firstByID($id) === null) {
+        if ($this->firstById($id) === null) {
             $this->create($attributes);
             return;
         }
@@ -157,7 +157,7 @@ abstract class Model
      *
      * @return stdClass|null
      */
-    final protected function firstByID(int $id): ?stdClass
+    final protected function firstById(int $id): ?stdClass
     {
         return DB::table($this->table)
             ->select('*')

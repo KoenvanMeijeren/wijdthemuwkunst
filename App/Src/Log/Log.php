@@ -38,12 +38,11 @@ final class Log
         $formatter = new LineFormatter($format, $timeFormat);
         $formatter->ignoreEmptyContextAndExtra();
 
-        $level = $env->get() === Env::DEVELOPMENT ?
-            Logger::DEBUG : Logger::INFO;
         $defaultHandler = new RotatingFileHandler(
             START_PATH . '/storage/logs/app.log',
             365,
-            $level
+            $env->get() === Env::DEVELOPMENT ?
+                Logger::DEBUG : Logger::INFO
         );
         $defaultHandler->setFormatter($formatter);
 

@@ -34,7 +34,7 @@ final class Account extends Model
      *
      * @return int
      */
-    public function getID(): int
+    public function getId(): int
     {
         return (int) Router::getWildcard();
     }

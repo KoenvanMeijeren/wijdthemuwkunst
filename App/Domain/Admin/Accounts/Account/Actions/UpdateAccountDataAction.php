@@ -38,7 +38,7 @@ final class UpdateAccountDataAction extends FormAction
      */
     protected function handle(): bool
     {
-        $this->account->update($this->account->getID(), [
+        $this->account->update($this->account->getId(), [
             'account_name' => $this->name,
             'account_rights' => (string) $this->rights,
         ]);
@@ -56,7 +56,7 @@ final class UpdateAccountDataAction extends FormAction
     protected function authorize(): bool
     {
         if ($this->rights !== $this->user->getRights()
-            && $this->account->getID() === $this->user->getID()
+            && $this->account->getId() === $this->user->getId()
         ) {
             $this->session->flash(
                 State::FAILED,

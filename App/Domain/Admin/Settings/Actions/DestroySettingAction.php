@@ -22,7 +22,7 @@ final class DestroySettingAction extends FormAction
     {
         $this->setting = $setting;
         $this->settingRepository = new SettingRepository(
-            $this->setting->find($this->setting->getID())
+            $this->setting->find($this->setting->getId())
         );
         $this->session = new Session();
     }
@@ -32,9 +32,9 @@ final class DestroySettingAction extends FormAction
      */
     protected function handle(): bool
     {
-        $this->setting->delete($this->setting->getID());
+        $this->setting->delete($this->setting->getId());
 
-        if ($this->setting->find($this->setting->getID()) === null) {
+        if ($this->setting->find($this->setting->getId()) === null) {
             $this->session->flash(
                 State::SUCCESSFUL,
                 sprintf(

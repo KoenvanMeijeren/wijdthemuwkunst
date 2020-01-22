@@ -222,8 +222,7 @@ trait SelectStatements
         string $tableTwoColumn
     ): self {
         $this->addStatement(
-            "INNER JOIN {$table} " .
-            "ON {$tableOneColumn} = {$tableTwoColumn}) "
+            "INNER JOIN {$table} ON {$tableOneColumn} = {$tableTwoColumn}) "
         );
 
         return $this;
@@ -246,8 +245,7 @@ trait SelectStatements
         string $tableTwoColumn
     ): self {
         $this->addStatement(
-            "LEFT JOIN {$table} " .
-            "ON {$tableOneColumn} = {$tableTwoColumn}) "
+            "LEFT JOIN {$table} ON {$tableOneColumn} = {$tableTwoColumn}) "
         );
 
         return $this;
@@ -270,8 +268,7 @@ trait SelectStatements
         string $tableTwoColumn
     ): self {
         $this->addStatement(
-            "RIGHT JOIN {$table} ON " .
-            "{$tableOneColumn} = {$tableTwoColumn}) "
+            "RIGHT JOIN {$table} ON {$tableOneColumn} = {$tableTwoColumn}) "
         );
 
         return $this;
@@ -295,8 +292,7 @@ trait SelectStatements
         string $tableTwoColumn
     ): self {
         $this->addStatement(
-            "FULL OUTER JOIN {$table} " .
-            "ON {$tableOneColumn} = {$tableTwoColumn}) "
+            "FULL OUTER JOIN {$table} ON {$tableOneColumn} = {$tableTwoColumn}) "
         );
 
         return $this;

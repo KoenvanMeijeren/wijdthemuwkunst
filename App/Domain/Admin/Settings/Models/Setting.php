@@ -24,7 +24,7 @@ final class Setting extends Model
         $this->initializeSoftDelete();
     }
 
-    public function getID(): int
+    public function getId(): int
     {
         return (int) Router::getWildcard();
     }

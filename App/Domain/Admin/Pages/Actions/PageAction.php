@@ -40,7 +40,7 @@ abstract class PageAction extends FormAction
         $this->content = $request->post('content');
 
         $this->pageRepository = new PageRepository(
-            $this->page->find($this->page->getID())
+            $this->page->find($this->page->getId())
         );
         $this->id = $this->pageRepository->getId();
     }

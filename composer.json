@@ -59,6 +59,9 @@
             "php-cs-fixer fix app",
             "phpcbf app"
         ],
+        "phpcs": [
+            "phpcs app"
+        ],
         "phpmd": [
             "phpmd app html phpmd.xml --reportfile web/phpmd/index.html"
         ],

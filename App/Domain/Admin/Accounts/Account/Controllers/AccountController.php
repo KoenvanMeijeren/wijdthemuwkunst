@@ -77,7 +77,7 @@ final class AccountController
     public function edit(string $title = 'admin_edit_account_title')
     {
         $account = new EditViewModel(
-            $this->account->find($this->account->getID())
+            $this->account->find($this->account->getId())
         );
 
         return new DomainView(
@@ -99,7 +99,7 @@ final class AccountController
         $account = new UpdateAccountDataAction($this->account);
         if ($account->execute()) {
             return new Redirect(
-                '/admin/account/edit/' . $this->account->getID()
+                '/admin/account/edit/' . $this->account->getId()
             );
         }
 
@@ -116,7 +116,7 @@ final class AccountController
         $account = new UpdateAccountEmailAction($this->account);
         if ($account->execute()) {
             return new Redirect(
-                '/admin/account/edit/' . $this->account->getID()
+                '/admin/account/edit/' . $this->account->getId()
             );
         }
 
@@ -133,7 +133,7 @@ final class AccountController
         $account = new UpdateAccountPasswordAction($this->account);
         if ($account->execute()) {
             return new Redirect(
-                '/admin/account/edit/' . $this->account->getID()
+                '/admin/account/edit/' . $this->account->getId()
             );
         }
 
@@ -146,7 +146,7 @@ final class AccountController
         $block->execute();
 
         return new Redirect(
-            '/admin/account/edit/' . $this->account->getID()
+            '/admin/account/edit/' . $this->account->getId()
         );
     }
 
@@ -156,7 +156,7 @@ final class AccountController
         $unblock->execute();
 
         return new Redirect(
-            '/admin/account/edit/' . $this->account->getID()
+            '/admin/account/edit/' . $this->account->getId()
         );
     }
 

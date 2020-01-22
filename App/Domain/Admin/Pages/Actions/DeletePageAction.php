@@ -22,7 +22,7 @@ final class DeletePageAction extends FormAction
     {
         $this->page = $page;
         $this->session = new Session();
-        $this->pageRepository = new PageRepository($page->find($page->getID()));
+        $this->pageRepository = new PageRepository($page->find($page->getId()));
     }
 
     /**
@@ -30,9 +30,9 @@ final class DeletePageAction extends FormAction
      */
     protected function handle(): bool
     {
-        $this->page->delete($this->page->getID());
+        $this->page->delete($this->page->getId());
 
-        if ($this->page->find($this->page->getID()) !== null) {
+        if ($this->page->find($this->page->getId()) !== null) {
             $this->session->flash(
                 State::FAILED,
                 sprintf(

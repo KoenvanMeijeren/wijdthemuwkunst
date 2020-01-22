@@ -33,7 +33,7 @@ final class UpdateAccountEmailAction extends FormAction
      */
     protected function handle(): bool
     {
-        $this->account->update($this->account->getID(), [
+        $this->account->update($this->account->getId(), [
             'account_email' => $this->email,
         ]);
 
