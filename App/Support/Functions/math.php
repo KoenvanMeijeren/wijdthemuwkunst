@@ -16,18 +16,18 @@ if (!function_exists('sampling')) {
         }
 
         // initialise array to put new values in
-        $new_combinations = array();
+        $newCombinations = array();
 
         // loop through existing combinations and
         // character set to create strings
         foreach ($combinations as $combination) {
             foreach ($chars as $char) {
-                $new_combinations[] = $combination . $char;
+                $newCombinations[] = $combination . $char;
             }
         }
 
         // call same function again for the next iteration
-        return sampling($chars, $size - 1, $new_combinations);
+        return sampling($chars, $size - 1, $newCombinations);
     }
 }
 

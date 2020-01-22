@@ -12,8 +12,8 @@ declare(strict_types=1);
 function arrayToCSV(array $inputArray)
 {
     $csvFieldRow = [];
-    foreach ($inputArray as $CSBRow) {
-        $csvFieldRow[] = strPutCSV($CSBRow);
+    foreach ($inputArray as $csbRow) {
+        $csvFieldRow[] = strPutCSV($csbRow);
     }
 
     return implode("\n", $csvFieldRow);
