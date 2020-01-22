@@ -1,6 +1,11 @@
 /.idea
+
 /storage
 /vendor
+
+/web/phpmetrics
+/web/phpmd
+
 .php_cs.cache
 
 # .env files
