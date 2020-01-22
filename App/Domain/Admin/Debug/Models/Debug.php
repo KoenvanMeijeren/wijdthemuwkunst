@@ -22,6 +22,18 @@ final class Debug
         return $env->get();
     }
 
+    public function getHeadersInformation(): string
+    {
+        $table = new DataTable();
+
+        $table->addHead('Header');
+        foreach (headers_list() as $value) {
+            $table->addRow($value);
+        }
+
+        return $table->get();
+    }
+
     public function getSessionSettingsInformation(): string
     {
         $table = new DataTable();
