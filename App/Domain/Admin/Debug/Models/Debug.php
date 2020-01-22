@@ -57,7 +57,7 @@ final class Debug
         $table = new DataTable();
 
         $table->addHead('Sleutel', 'Waarde');
-        foreach ($_SESSION as $key => $data) {
+        foreach (array_keys($_SESSION) as $key) {
             if ($key === 'CSRF') {
                 continue;
             }
@@ -86,7 +86,7 @@ final class Debug
         $table = new DataTable();
 
         $table->addHead('Sleutel', 'Waarde');
-        foreach ($_COOKIE as $key => $data) {
+        foreach (array_keys($_COOKIE) as $key) {
             if ($key === 'sessionName' || $key === 'websiteID') {
                 continue;
             }
@@ -154,7 +154,7 @@ final class Debug
         return array_reverse($logs);
     }
 
-    public function getPHPInfo(): string
+    public function getPhpInfo(): string
     {
         ob_start();
 

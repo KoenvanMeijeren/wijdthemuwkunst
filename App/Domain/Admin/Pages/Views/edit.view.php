@@ -146,12 +146,12 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                                 </label>
                                 <textarea class="form-control" id="content"
                                           rows="10" name="content">
-                                    <?= parseHTMLEntities(
-                                       $request->post(
-                                           'content',
-                                           $page->getContent()
-                                       )
-                                   ) ?>
+                                    <?= parseHtmlEntities(
+    $request->post(
+        'content',
+        $page->getContent()
+    )
+) ?>
                                 </textarea>
                             </div>
                         </div>

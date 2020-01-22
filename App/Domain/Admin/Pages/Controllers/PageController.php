@@ -69,7 +69,7 @@ final class PageController
     public function edit(): DomainView
     {
         $page = new EditViewModel(
-            $this->page->find($this->page->getID())
+            $this->page->find($this->page->getId())
         );
         $pageRepository = new PageRepository($page->get());
 
@@ -92,7 +92,7 @@ final class PageController
     {
         $update = new UpdatePageAction($this->page);
         if ($update->execute()) {
-            return new Redirect($this->redirectSame . $this->page->getID());
+            return new Redirect($this->redirectSame . $this->page->getId());
         }
 
         return $this->edit();
@@ -103,7 +103,7 @@ final class PageController
         $publish = new PublishPageAction($this->page);
         $publish->execute();
 
-        return new Redirect($this->redirectSame . $this->page->getID());
+        return new Redirect($this->redirectSame . $this->page->getId());
     }
 
     public function unPublish(): Redirect
@@ -111,7 +111,7 @@ final class PageController
         $unPublish = new UnPublishPageAction($this->page);
         $unPublish->execute();
 
-        return new Redirect($this->redirectSame . $this->page->getID());
+        return new Redirect($this->redirectSame . $this->page->getId());
     }
 
     public function destroy(): Redirect

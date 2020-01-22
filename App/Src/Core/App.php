@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Src\Core;
 
 use App\Domain\Admin\Accounts\User\Models\User;
+use App\Src\Header\Header;
 use App\Src\Log\Log;
 use App\Src\Session\Builder as SessionBuilder;
 use App\Src\Session\Session;
@@ -35,6 +36,12 @@ final class App
 
         $env = new Env();
         $env->setErrorHandling();
+
+        $header = new Header();
+        $header->set(Header::X_XSS_PROTECTION);
+        $header->set(Header::NGINX_X_FRAME_OPTIONS);
+        $header->set(Header::X_CONTENT_TYPE_OPTIONS);
+        $header->set(Header::CONTENT_SECURITY_POLICY);
 
         $sessionBuilder = new SessionBuilder();
         $sessionBuilder->startSession();

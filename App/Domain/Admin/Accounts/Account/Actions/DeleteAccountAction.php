@@ -29,9 +29,9 @@ final class DeleteAccountAction extends Action
      */
     protected function handle(): bool
     {
-        $this->account->delete($this->account->getID());
+        $this->account->delete($this->account->getId());
 
-        if ($this->account->find($this->account->getID()) === null) {
+        if ($this->account->find($this->account->getId()) === null) {
             $this->session->flash(
                 State::SUCCESSFUL,
                 Translation::get('admin_deleted_account_successful_message')
@@ -59,7 +59,7 @@ final class DeleteAccountAction extends Action
      */
     protected function validate(): bool
     {
-        if ($this->user->getID() === $this->account->getID()) {
+        if ($this->user->getId() === $this->account->getId()) {
             $this->session->flash(
                 State::FAILED,
                 Translation::get('cannot_delete_own_account_message')

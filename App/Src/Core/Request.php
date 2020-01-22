@@ -32,7 +32,7 @@ final class Request
      */
     public function server(string $key, string $default = ''): string
     {
-        return $this->request($_SERVER, $key, $default);
+        return $this->requestFromGlobal($_SERVER, $key, $default);
     }
 
     /**
@@ -46,7 +46,7 @@ final class Request
      */
     public function post(string $key, string $default = ''): string
     {
-        return $this->request($_POST, $key, $default);
+        return $this->requestFromGlobal($_POST, $key, $default);
     }
 
     /**
@@ -60,7 +60,7 @@ final class Request
      */
     public function get(string $key, string $default = ''): string
     {
-        return $this->request($_GET, $key, $default);
+        return $this->requestFromGlobal($_GET, $key, $default);
     }
 
     /**
@@ -88,7 +88,7 @@ final class Request
      */
     public function env(string $key, string $default = ''): string
     {
-        return $this->request($_ENV, $key, $default);
+        return $this->requestFromGlobal($_ENV, $key, $default);
     }
 
     /**
@@ -102,7 +102,7 @@ final class Request
      */
     public function cookie(string $key, string $default = ''): string
     {
-        return $this->request($_COOKIE, $key, $default);
+        return $this->requestFromGlobal($_COOKIE, $key, $default);
     }
 
     /**
@@ -116,7 +116,7 @@ final class Request
      */
     public function session(string $key, string $default = ''): string
     {
-        return $this->request($_SESSION, $key, $default);
+        return $this->requestFromGlobal($_SESSION, $key, $default);
     }
 
     /**
@@ -129,8 +129,11 @@ final class Request
      *
      * @return string the data from the super global
      */
-    private function request(array $superGlobal, string $key, string $default = ''): string
-    {
+    private function requestFromGlobal(
+        array $superGlobal,
+        string $key,
+        string $default = ''
+    ): string {
         if (!array_key_exists($key, $superGlobal)) {
             return $default;
         }

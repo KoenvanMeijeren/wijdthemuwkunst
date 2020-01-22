@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ruleset name="Laravel and similar phpmd ruleset"
+<ruleset name="PHPMD ruleset"
          xmlns="http://pmd.sf.net/ruleset/1.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd"
@@ -8,58 +8,34 @@
         Inspired by https://github.com/phpmd/phpmd/issues/137
         using http://phpmd.org/documentation/creating-a-ruleset.html
     </description>
-    <rule ref="rulesets/cleancode.xml">
-        <exclude name="StaticAccess"/>
-        <exclude name="BooleanArgumentFlag"/>
-    </rule>
-    <rule ref="rulesets/codesize.xml/CyclomaticComplexity"/>
-    <rule ref="rulesets/codesize.xml/NPathComplexity"/>
-    <rule ref="rulesets/codesize.xml/ExcessiveMethodLength"/>
-    <rule ref="rulesets/codesize.xml/ExcessiveClassLength"/>
-    <rule ref="rulesets/codesize.xml/ExcessiveParameterList"/>
-    <rule ref="rulesets/codesize.xml/ExcessivePublicCount"/>
-    <rule ref="rulesets/codesize.xml/TooManyFields"/>
-    <rule ref="rulesets/codesize.xml/TooManyMethods">
+    <rule ref="rulesets/codesize.xml"/>
+    <rule ref="rulesets/controversial.xml/CamelCaseClassName"/>
+    <rule ref="rulesets/controversial.xml/CamelCasePropertyName"/>
+    <rule ref="rulesets/controversial.xml/CamelCaseMethodName"/>
+    <rule ref="rulesets/controversial.xml/CamelCaseParameterName"/>
+    <rule ref="rulesets/controversial.xml/CamelCaseVariableName"/>
+    <rule ref="rulesets/design.xml/EvalExpression"/>
+    <rule ref="rulesets/design.xml/GotoStatement"/>
+    <rule ref="rulesets/design.xml/NumberOfChildren"/>
+    <rule ref="rulesets/design.xml/DepthOfInheritance"/>
+    <rule ref="rulesets/design.xml/CouplingBetweenObjects"/>
+    <rule ref="rulesets/naming.xml/ShortVariable">
         <properties>
-            <property name="maxmethods" value="30"/>
-        </properties>
-    </rule>
-    <rule ref="rulesets/codesize.xml/ExcessiveClassComplexity"/>
-    <rule ref="rulesets/controversial.xml"/>
-    <rule ref="rulesets/design.xml">
-        <exclude name="CouplingBetweenObjects"/>
-    </rule>
-    <rule ref="rulesets/design.xml/CouplingBetweenObjects">
-        <properties>
-            <property name="maximum" value="20"/>
-        </properties>
-    </rule>
-    <rule ref="rulesets/naming.xml">
-        <exclude name="ShortVariable"/>
-        <exclude name="LongVariable"/>
-    </rule>
-    <rule ref="rulesets/naming.xml/ShortVariable"
-          since="0.2"
-          message="Avoid variables with short names like {0}. Configured minimum length is {1}."
-          class="PHPMD\Rule\Naming\ShortVariable"
-          externalInfoUrl="http://phpmd.org/rules/naming.html#shortvariable">
-        <priority>3</priority>
-        <properties>
-            <property name="minimum" description="Minimum length for a variable, property or parameter name" value="3"/>
-            <property name="exceptions" value="id,q,w,i,j,v,e,f,fp"/>
+            <property name="minimum" value="2"/>
         </properties>
     </rule>
     <rule ref="rulesets/naming.xml/LongVariable">
         <properties>
-            <property name="maximum" description="The variable length reporting threshold" value="25"/>
+            <property name="maximum" value="50"/>
         </properties>
     </rule>
-    <rule ref="rulesets/unusedcode.xml">
-        <exclude name="UnusedLocalVariable"/>
-    </rule>
-    <rule ref="rulesets/unusedcode.xml/UnusedLocalVariable">
+    <rule ref="rulesets/naming.xml/ShortMethodName">
         <properties>
-            <property name="allow-unused-foreach-variables" value="true"/>
+            <property name="minimum" value="2"/>
         </properties>
     </rule>
+    <rule ref="rulesets/naming.xml/ConstructorWithNameAsEnclosingClass"/>
+    <rule ref="rulesets/naming.xml/ConstantNamingConventions"/>
+    <rule ref="rulesets/naming.xml/BooleanGetMethodName"/>
+    <rule ref="rulesets/unusedcode.xml"/>
 </ruleset>

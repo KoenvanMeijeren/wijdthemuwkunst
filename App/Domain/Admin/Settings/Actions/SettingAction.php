@@ -27,7 +27,7 @@ abstract class SettingAction extends FormAction
     {
         $this->setting = $setting;
         $this->settingRepository = new SettingRepository(
-            $this->setting->find($this->setting->getID())
+            $this->setting->find($this->setting->getId())
         );
         $this->session = new Session();
         $request = new Request();

@@ -264,7 +264,7 @@ final class Router
                 );
                 self::$wildcard = $urlExploded[$key];
                 // @codeCoverageIgnoreStart
-                self::$availableRoutes = array_replace_keys(
+                self::$availableRoutes = arrayReplaceKeys(
                     self::$availableRoutes,
                     [$route => $newRoute]
                 );

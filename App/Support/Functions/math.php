@@ -2,32 +2,34 @@
 declare(strict_types=1);
 
 if (!function_exists('sampling')) {
+    /**
+     * Iterating over the combinations until we
+     * have received the number of possible combinations.
+     *
+     * @param array $chars
+     * @param int $size
+     * @param array $combinations
+     *
+     * @return array all the possible combinations
+     */
     function sampling(array $chars, int $size, array $combinations = array())
     {
-        // if it's the first iteration, the first set
-        // of combinations is the same as the set of characters
         if (sizeof($combinations) < 1) {
             $combinations = $chars;
         }
 
-        // we're done if we're at size 1
         if ($size === 1) {
             return $combinations;
         }
 
-        // initialise array to put new values in
-        $new_combinations = array();
-
-        // loop through existing combinations and
-        // character set to create strings
+        $newCombinations = array();
         foreach ($combinations as $combination) {
             foreach ($chars as $char) {
-                $new_combinations[] = $combination . $char;
+                $newCombinations[] = $combination . $char;
             }
         }
 
-        // call same function again for the next iteration
-        return sampling($chars, $size - 1, $new_combinations);
+        return sampling($chars, $size - 1, $newCombinations);
     }
 }
 
@@ -54,12 +56,20 @@ if (!function_exists('samplingWithOnlyOneUsedCharPerString')) {
 }
 
 if (!function_exists('generateCombinations')) {
+    /**
+     * Generate the combinations.
+     * Figure out how many combinations are possible.
+     * Then we are iterating and yielding the values.
+     *
+     * @param array $values
+     * @param int $count
+     *
+     * @return Generator
+     */
     function generateCombinations(array $values, int $count = 0)
     {
-        // Figure out how many combinations are possible:
         $permCount = count($values) ** $count;
 
-        // Iterate and yield:
         for ($i = 0; $i < $permCount; $i++) {
             yield getCombination($values, $count, $i);
         }
@@ -67,16 +77,24 @@ if (!function_exists('generateCombinations')) {
 }
 
 if (!function_exists('getCombination')) {
-    // State-based way of generating combinations:
-    function getCombination($values, $count, $index)
+    /**
+     * State based way of generating combinations.
+     *
+     * First we figure out where to start in the array.
+     * And afterwards we append it.
+     *
+     * @param array $values
+     * @param int $count
+     * @param int $index
+     *
+     * @return array
+     */
+    function getCombination(array $values, int $count, int $index)
     {
         $result = array();
         for ($i = 0; $i < $count; $i++) {
-            // Figure out where in the array to start from,
-            // given the external state and the internal loop state
             $pos = $index % count($values);
 
-            // Append and continue
             if (!in_array($values[$pos], $result, true)) {
                 $result[] = $values[$pos];
             }

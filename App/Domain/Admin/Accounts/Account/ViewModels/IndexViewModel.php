@@ -53,7 +53,7 @@ final class IndexViewModel
                     '/admin/account/edit/' . $account->getId(),
                     '/admin/account/delete/' . $account->getId(),
                     Translation::get('admin_delete_account_warning_message'),
-                    $this->user->getID() === $account->getId()
+                    $this->user->getId() === $account->getId()
                 )
             );
         }

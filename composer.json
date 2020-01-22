@@ -35,14 +35,16 @@
         "vlucas/phpdotenv": "^4.1.0"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-master",
         "bmitch/churn-php": "^1.0.3",
         "daniel-werner/php-quality-tools": "^1.1.0",
         "ergebnis/phpstan-rules": "^0.13.0",
         "php-coveralls/php-coveralls": "^2.2.0",
         "phploc/phploc": "^5.0.0",
+        "phpmd/phpmd": "^2.8",
+        "phpmetrics/phpmetrics": "^2.5",
         "phpstan/phpstan-deprecation-rules": "^0.11.2",
         "phpstan/phpstan-strict-rules": "^0.11.1",
+        "roave/security-advisories": "dev-master",
         "sebastian/phpcpd": "^4.1.0",
         "thecodingmachine/phpstan-strict-rules": "^0.11.2"
     },
@@ -53,23 +55,23 @@
             "phpmnd app",
             "phpstan analyse -c phpstan.neon"
         ],
-        "inspect-deep": [
-            "phpcs app",
-            "phpcpd app",
-            "phploc app",
-            "phpmnd app",
-            "phpstan analyse app -c phpstan.neon --level=7"
-        ],
-        "phpstan": [
-            "phpstan analyse -c phpstan.neon"
-        ],
         "inspect-fix": [
             "php-cs-fixer fix app",
             "phpcbf app"
         ],
+        "phpcs": [
+            "phpcs app"
+        ],
+        "phpmd": [
+            "phpmd app html phpmd.xml --reportfile web/phpmd/index.html"
+        ],
+        "phpstan": [
+            "phpstan analyse -c phpstan.neon"
+        ],
         "insights": [
             "phploc app",
-            "phpmd app codesize,unusedcode,naming"
+            "phpmetrics --report-html=web/phpmetrics app",
+            "phpmd app html phpmd.xml --reportfile web/phpmd/index.html"
         ]
     },
     "config": {

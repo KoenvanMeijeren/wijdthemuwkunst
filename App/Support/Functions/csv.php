@@ -9,18 +9,18 @@ declare(strict_types=1);
  *
  * @return string
  */
-function arrayToCSV(array $inputArray)
+function arrayToCsv(array $inputArray)
 {
     $csvFieldRow = [];
-    foreach ($inputArray as $CSBRow) {
-        $csvFieldRow[] = strPutCSV($CSBRow);
+    foreach ($inputArray as $csbRow) {
+        $csvFieldRow[] = stringToCsv($csbRow);
     }
 
     return implode("\n", $csvFieldRow);
 }
 
 /**
- * Put a string into csv.
+ * Convert a string to csv.
  *
  * @param array  $input     The input
  * @param string $delimiter The delimiter
@@ -28,7 +28,7 @@ function arrayToCSV(array $inputArray)
  *
  * @return string
  */
-function strPutCSV(
+function stringToCsv(
     array $input,
     string $delimiter = ',',
     string $enclosure = '"'

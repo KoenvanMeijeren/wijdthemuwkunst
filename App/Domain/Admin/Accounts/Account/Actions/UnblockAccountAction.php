@@ -29,7 +29,7 @@ final class UnblockAccountAction extends Action
      */
     protected function handle(): bool
     {
-        $this->account->update($this->account->getID(), [
+        $this->account->update($this->account->getId(), [
             'account_is_blocked' => '0'
         ]);
 
@@ -45,7 +45,7 @@ final class UnblockAccountAction extends Action
      */
     protected function authorize(): bool
     {
-        if ($this->user->getID() === $this->account->getID()) {
+        if ($this->user->getId() === $this->account->getId()) {
             $this->session->flash(
                 State::FAILED,
                 Translation::get('cannot_unblock_own_account_message')

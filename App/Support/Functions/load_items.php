@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Src\Exceptions\File\FileNotFoundException;
 use App\Src\Validate\Validate;
 
 function includeFile(string $filename, $vars = null)
@@ -42,24 +41,4 @@ function includeImage(string $name, string $fallback)
     }
 
     return '';
-}
-
-/**
- * Load a table and return it.
- *
- * @param string $filename the filename
- * @param array  $keys     the keys to use in the loaded table
- * @param array  $rows     the rows to use in the loaded table
- *
- * @return string
- *
- * @throws FileNotFoundException
- */
-function loadTable(string $filename, array $keys, array $rows = [])
-{
-    $filename = RESOURCES_PATH."/partials/tables/{$filename}.view.php";
-
-    Validate::var($filename)->fileExists();
-
-    return include $filename;
 }

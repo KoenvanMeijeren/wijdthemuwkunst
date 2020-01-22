@@ -56,7 +56,7 @@ final class SettingsControllers
     {
         $settings = new IndexViewModel($this->setting->all());
         $setting = new EditViewModel(
-            $this->setting->find($this->setting->getID())
+            $this->setting->find($this->setting->getId())
         );
 
         return new DomainView(

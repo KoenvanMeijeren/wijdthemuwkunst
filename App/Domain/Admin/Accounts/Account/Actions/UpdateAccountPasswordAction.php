@@ -36,7 +36,7 @@ final class UpdateAccountPasswordAction extends FormAction
      */
     protected function handle(): bool
     {
-        $this->account->update($this->account->getID(), [
+        $this->account->update($this->account->getId(), [
             'account_password' => (string) password_hash(
                 $this->password,
                 Account::PASSWORD_HASH_METHOD
@@ -57,7 +57,7 @@ final class UpdateAccountPasswordAction extends FormAction
     {
         $validator = new FormValidator();
         $account = new AccountRepository(
-            $this->account->find($this->account->getID())
+            $this->account->find($this->account->getId())
         );
 
         $validator->input($this->password, 'Wachtwoord')
