@@ -15,7 +15,7 @@ final class IDEncryption
     {
         $request = new Request();
 
-        $this->secretToken = $request->env('secretKey');
+        $this->secretToken = $request->env('id_encryption_secret_key');
     }
 
     /**

@@ -47,7 +47,7 @@ final class Encrypt
         $request = new Request();
 
         return Key::loadFromAsciiSafeString(
-            $request->env('encryptionToken')
+            $request->env('crypto_encryption_token')
         );
     }
 }

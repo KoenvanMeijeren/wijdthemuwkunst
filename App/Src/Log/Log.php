@@ -29,7 +29,7 @@ final class Log
         $timeFormat = 'Y-m-d H:i:s';
         $dateTimeZone = new DateTimeZone('Europe/Amsterdam');
 
-        self::$logger = new Logger($request->env('appName'));
+        self::$logger = new Logger($request->env('app_name'));
         self::$logger->setTimezone($dateTimeZone);
 
         self::$logger->pushProcessor(new IntrospectionProcessor());

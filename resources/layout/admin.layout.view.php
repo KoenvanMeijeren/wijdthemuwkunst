@@ -2,12 +2,14 @@
 
 use App\Domain\Admin\Accounts\Account\Support\AccountRightsConverter;
 use App\Domain\Admin\Accounts\User\Models\User;
+use App\Src\Core\Request;
 use App\Src\Core\URI;
 use App\Src\Translation\Translation;
 use App\Support\Resource;
 
 $user = new User();
-$rights = new AccountRightsConverter($user->getRights())
+$rights = new AccountRightsConverter($user->getRights());
+$request = new Request();
 ?>
 <!DOCTYPE html>
 <html lang="<?= Translation::DUTCH_LANGUAGE_CODE ?>">
@@ -18,7 +20,7 @@ $rights = new AccountRightsConverter($user->getRights())
           content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title -->
-    <title><?= $data['title'] ?? 'Undefined' ?></title>
+    <title><?= $data['title'] ?? $request->env('app_name') ?></title>
 
     <!-- Fav icon -->
     <link rel="icon" type="image/png" sizes="96x96"
@@ -54,7 +56,7 @@ $rights = new AccountRightsConverter($user->getRights())
 
     <!-- Tiny MCE -->
     <script
-        src="https://cdn.tiny.cloud/1/amyz5vlo9d4hlbop0b78rh9earl2dxn0ljxerv4vuyfcqawj/tinymce/5/tinymce.min.js"
+        src="https://cdn.tiny.cloud/1/<?= $request->env('tiny_mce_key') ?>/tinymce/5/tinymce.min.js"
         referrerpolicy="origin"></script>
 </head>
 <body>

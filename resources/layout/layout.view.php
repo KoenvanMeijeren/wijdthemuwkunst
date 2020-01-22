@@ -11,9 +11,9 @@ use App\Src\Translation\Translation;
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- SEO -->
-    <meta name="description" content="Christelijk koor wijdt Hem uw kunst">
+    <meta name="description" content="Christelijk koor Wijdt Hem Uw Kunst">
     <meta name="keywords" content="Christelijk koor, Harderwijk">
-    <meta name="author" content="Chirstelijk koor wijdt Hem uw kunst">
+    <meta name="author" content="Christelijk koor Wijdt Hem Uw Kunst">
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600"

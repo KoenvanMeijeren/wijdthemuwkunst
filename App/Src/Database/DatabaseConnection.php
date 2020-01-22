@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Src\Database;
 
 use App\Src\Core\Request;
-use App\Src\Exceptions\Basic\InvalidKeyException;
 use PDO;
 use PDOException;
 use PDOStatement;
@@ -20,8 +19,8 @@ abstract class DatabaseConnection
     /**
      * Connect with the database and execute the query.
      *
-     * @param string    $query  The query to execute
-     * @param string[]  $values The values to bind to the query
+     * @param string $query The query to execute
+     * @param string[] $values The values to bind to the query
      *
      * @throws PDOException
      */
@@ -29,24 +28,21 @@ abstract class DatabaseConnection
     {
         $request = new Request();
 
-        try {
-            $dsn = $request->env('databaseServer') . ';';
-            $dbName = 'dbname=' . $request->env('databaseName') . ';';
-            $charset = 'charset=' . $request->env('databaseCharset') . ';';
-            $port = 'port=' . $request->env('databasePort') . ';';
+        $dsn = $request->env('database_server') . ';';
+        $dbName = 'dbname=' . $request->env('database_name') . ';';
+        $charset = 'charset=' . $request->env('database_charset') . ';';
+        $port = 'port=' . $request->env('database_port') . ';';
 
-            $this->pdo = new PDO(
-                $dsn . $dbName . $charset . $port,
-                $request->env('databaseUsername'),
-                $request->env('databasePassword'),
-                [
-                    PDO::ATTR_EMULATE_PREPARES, $request->env('PDO_ATTR_EMULATE_PREPARES'),
-                    PDO::ATTR_ERRMODE => $request->env('PDO_ATTR_ERRMODE')
-                ]
-            );
-        } catch (InvalidKeyException $e) {
-            throw new PDOException($e->getMessage(), $e->getCode(), $e);
-        }
+        $this->pdo = new PDO(
+            $dsn . $dbName . $charset . $port,
+            $request->env('database_username'),
+            $request->env('database_password'),
+            [
+                PDO::ATTR_EMULATE_PREPARES,
+                $request->env('PDO_ATTR_EMULATE_PREPARES'),
+                PDO::ATTR_ERRMODE => $request->env('PDO_ATTR_ERROR_MODE')
+            ]
+        );
 
         $this->statement = $this->pdo->prepare($query);
         $this->values = $values;
@@ -54,7 +50,7 @@ abstract class DatabaseConnection
         $this->bindValues($values);
         $this->statement->execute();
 
-        $this->lastInsertedId = (int) $this->pdo->lastInsertId();
+        $this->lastInsertedId = (int)$this->pdo->lastInsertId();
     }
 
     /**

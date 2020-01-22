@@ -10,7 +10,7 @@ use Symfony\Component\Templating\TemplateNameParser;
 
 abstract class BaseView
 {
-    protected string $templatePathPattern = RESOURCES_PATH . '/partials/%name%';
+    protected string $layoutPath = RESOURCES_PATH . '/layout/%name%';
 
     /**
      * @param string    $layout    the layout of the whole view.
@@ -19,7 +19,7 @@ abstract class BaseView
      */
     protected function __construct(string $layout, string $name, array $content)
     {
-        $filesystemLoader = new FilesystemLoader($this->templatePathPattern);
+        $filesystemLoader = new FilesystemLoader($this->layoutPath);
 
         $templating = new PhpEngine(
             new TemplateNameParser(),
