@@ -25,6 +25,21 @@ $request = new Request();
 </div>
 
 <div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">
+                    Header gegevens
+                </h4>
+            </div>
+            <div class="card-body scrollbox-horizontal">
+                <?= $headersInformation ?? 'Geen header informatie gevonden' ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header">
