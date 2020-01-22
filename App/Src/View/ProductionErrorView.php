@@ -6,7 +6,6 @@ namespace App\Src\View;
 
 use App\Src\Core\Env;
 use App\Src\Exceptions\Basic\InvalidKeyException;
-use App\Src\Exceptions\Basic\NoTranslationsForGivenLanguageID;
 use App\Src\Translation\Translation;
 use Whoops\Handler\Handler;
 
@@ -18,7 +17,6 @@ final class ProductionErrorView extends Handler
      * @return int A handler may return nothing,
      * or a Handler::HANDLE_* constant
      * @throws InvalidKeyException
-     * @throws NoTranslationsForGivenLanguageID
      */
     public function handle(): int
     {
