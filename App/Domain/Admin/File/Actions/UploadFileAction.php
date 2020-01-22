@@ -14,7 +14,7 @@ final class UploadFileAction extends FileAction
     {
         $request = new Request();
 
-        $this->acceptedOrigins[] = $request->env('appUri');
+        $this->acceptedOrigins[] = $request->env('app_uri');
     }
 
     /**

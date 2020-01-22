@@ -38,7 +38,7 @@ final class LogUserInAction extends FormAction
         $this->email = $request->post('email');
         $this->password = $request->post('password');
 
-        $this->maximumLoginAttempts = (int) $request->env('loginAttempts');
+        $this->maximumLoginAttempts = (int) $request->env('login_attempts');
 
         $this->account = new AccountRepository(
             $this->user->getByEmail($this->email)
