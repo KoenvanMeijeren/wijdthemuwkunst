@@ -148,9 +148,9 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                                           rows="10" name="content">
                                     <?= parseHtmlEntities(
     $request->post(
-                                           'content',
-                                           $page->getContent()
-                                       )
+        'content',
+        $page->getContent()
+    )
 ) ?>
                                 </textarea>
                             </div>
