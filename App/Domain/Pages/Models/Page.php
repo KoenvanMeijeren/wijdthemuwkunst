@@ -53,8 +53,6 @@ final class Page extends Model
 
     public function getBySlug(string $slug): ?stdClass
     {
-        return $this->firstByAttributes([
-            $this->slugKey => $slug
-        ]);
+        return $this->firstByAttributes([$this->slugKey => $slug]);
     }
 }
