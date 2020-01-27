@@ -8,7 +8,6 @@ use App\Domain\Admin\Accounts\User\Models\User;
 use App\Domain\Admin\Authentication\Actions\LogUserInAction;
 use App\Domain\Admin\Authentication\Actions\LogUserOutAction;
 use App\Src\Exceptions\Basic\InvalidKeyException;
-use App\Src\Exceptions\Basic\NoTranslationsForGivenLanguageID;
 use App\Src\Response\Redirect;
 use App\Src\Translation\Translation;
 use App\Src\View\DomainView;
@@ -32,7 +31,6 @@ final class AuthenticationController
      *
      * @return Redirect|DomainView
      * @throws InvalidKeyException
-     * @throws NoTranslationsForGivenLanguageID
      */
     public function index()
     {
