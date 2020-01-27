@@ -72,7 +72,6 @@ final class AccountController
      *
      * @return Redirect|DomainView
      * @throws InvalidKeyException
-     * @throws NoTranslationsForGivenLanguageID
      */
     public function edit(string $title = 'admin_edit_account_title')
     {

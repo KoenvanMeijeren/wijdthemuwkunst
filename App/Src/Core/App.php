@@ -21,7 +21,6 @@ final class App
      *
      * Set the env based on the current environment (development - production)
      * Start the session and set some basic security protection.
-     * Set the language and load all the corresponding translations.
      * Set the user for the application.
      *
      * @param string $routesLocation the routes file location

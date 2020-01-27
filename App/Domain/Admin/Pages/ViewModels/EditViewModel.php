@@ -6,7 +6,6 @@ namespace App\Domain\Admin\Pages\ViewModels;
 
 use App\Domain\Admin\Pages\Models\Page;
 use App\Src\Exceptions\Basic\InvalidKeyException;
-use App\Src\Exceptions\Basic\NoTranslationsForGivenLanguageID;
 use App\Src\Response\Redirect;
 use App\Src\Session\Session;
 use App\Src\State\State;
@@ -27,7 +26,6 @@ final class EditViewModel
     /**
      * @return Redirect|stdClass
      * @throws InvalidKeyException
-     * @throws NoTranslationsForGivenLanguageID
      */
     public function get()
     {
