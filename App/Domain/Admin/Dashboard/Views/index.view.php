@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use App\Src\Translation\Translation;
+use Src\Translation\Translation;
 
 ?>
 <div class="row">

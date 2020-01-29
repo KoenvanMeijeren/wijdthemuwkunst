@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Settings\Repositories;
+namespace Domain\Admin\Settings\Repositories;
 
 final class SettingRepository
 {

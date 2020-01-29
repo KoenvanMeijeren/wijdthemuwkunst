@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace App\Src\File;
+namespace Src\File;
 
 use Symfony\Component\Filesystem\Filesystem;
 

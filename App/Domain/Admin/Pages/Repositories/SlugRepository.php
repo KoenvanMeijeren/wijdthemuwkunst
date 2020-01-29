@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Pages\Repositories;
+namespace Domain\Admin\Pages\Repositories;
 
 final class SlugRepository
 {

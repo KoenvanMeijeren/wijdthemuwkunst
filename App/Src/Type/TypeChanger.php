@@ -2,9 +2,9 @@
 declare(strict_types=1);
 
 
-namespace App\Src\Type;
+namespace Src\Type;
 
-use App\Src\Core\Sanitize;
+use Src\Core\Sanitize;
 
 final class TypeChanger
 {

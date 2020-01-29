@@ -2,17 +2,17 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Settings\Controllers;
+namespace Domain\Admin\Settings\Controllers;
 
-use App\Domain\Admin\Settings\Actions\CreateSettingAction;
-use App\Domain\Admin\Settings\Actions\DestroySettingAction;
-use App\Domain\Admin\Settings\Actions\UpdateSettingAction;
-use App\Domain\Admin\Settings\Models\Setting;
-use App\Domain\Admin\Settings\ViewModels\EditViewModel;
-use App\Domain\Admin\Settings\ViewModels\IndexViewModel;
-use App\Src\Response\Redirect;
-use App\Src\Translation\Translation;
-use App\Src\View\DomainView;
+use Domain\Admin\Settings\Actions\CreateSettingAction;
+use Domain\Admin\Settings\Actions\DestroySettingAction;
+use Domain\Admin\Settings\Actions\UpdateSettingAction;
+use Domain\Admin\Settings\Models\Setting;
+use Domain\Admin\Settings\ViewModels\EditViewModel;
+use Domain\Admin\Settings\ViewModels\IndexViewModel;
+use Src\Response\Redirect;
+use Src\Translation\Translation;
+use Src\View\DomainView;
 
 final class SettingsControllers
 {

@@ -2,14 +2,14 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Pages\ViewModels;
+namespace Domain\Admin\Pages\ViewModels;
 
-use App\Domain\Admin\Pages\Repositories\PageRepository;
-use App\Domain\Admin\Pages\Support\PageInMenuStateConverter;
-use App\Domain\Admin\Pages\Support\PageIsPublishedStateConverter;
-use App\Src\Translation\Translation;
-use App\Support\DataTable;
-use App\Support\Resource;
+use Domain\Admin\Pages\Repositories\PageRepository;
+use Domain\Admin\Pages\Support\PageInMenuStateConverter;
+use Domain\Admin\Pages\Support\PageIsPublishedStateConverter;
+use Src\Translation\Translation;
+use Support\DataTable;
+use Support\Resource;
 
 final class IndexViewModel
 {

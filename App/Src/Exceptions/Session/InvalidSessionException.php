@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace App\Src\Exceptions\Session;
+namespace Src\Exceptions\Session;
 
 use Exception;
 

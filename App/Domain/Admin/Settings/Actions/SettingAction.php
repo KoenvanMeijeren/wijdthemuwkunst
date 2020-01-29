@@ -2,17 +2,17 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Settings\Actions;
+namespace Domain\Admin\Settings\Actions;
 
-use App\Domain\Admin\Accounts\User\Models\User;
-use App\Domain\Admin\Settings\Models\Setting;
-use App\Domain\Admin\Settings\Repositories\SettingRepository;
-use App\Src\Action\FormAction;
-use App\Src\Core\Request;
-use App\Src\Session\Session;
-use App\Src\State\State;
-use App\Src\Translation\Translation;
-use App\Src\Validate\form\FormValidator;
+use Domain\Admin\Accounts\User\Models\User;
+use Domain\Admin\Settings\Models\Setting;
+use Domain\Admin\Settings\Repositories\SettingRepository;
+use Src\Action\FormAction;
+use Src\Core\Request;
+use Src\Session\Session;
+use Src\State\State;
+use Src\Translation\Translation;
+use Src\Validate\form\FormValidator;
 
 abstract class SettingAction extends FormAction
 {

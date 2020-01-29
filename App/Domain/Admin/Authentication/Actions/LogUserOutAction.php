@@ -2,14 +2,14 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Authentication\Actions;
+namespace Domain\Admin\Authentication\Actions;
 
-use App\Domain\Admin\Accounts\User\Models\User;
-use App\Src\Action\Action;
-use App\Src\Session\Builder;
-use App\Src\Session\Session;
-use App\Src\State\State;
-use App\Src\Translation\Translation;
+use Domain\Admin\Accounts\User\Models\User;
+use Src\Action\Action;
+use Src\Session\Builder;
+use Src\Session\Session;
+use Src\State\State;
+use Src\Translation\Translation;
 
 final class LogUserOutAction extends Action
 {

@@ -2,15 +2,15 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Accounts\Account\ViewModels;
+namespace Domain\Admin\Accounts\Account\ViewModels;
 
-use App\Domain\Admin\Accounts\Account\Support\AccountBlockStateConverter;
-use App\Domain\Admin\Accounts\Account\Support\AccountRightsConverter;
-use App\Domain\Admin\Accounts\Repositories\AccountRepository;
-use App\Domain\Admin\Accounts\User\Models\User;
-use App\Src\Translation\Translation;
-use App\Support\DataTable;
-use App\Support\Resource;
+use Domain\Admin\Accounts\Account\Support\AccountBlockStateConverter;
+use Domain\Admin\Accounts\Account\Support\AccountRightsConverter;
+use Domain\Admin\Accounts\Repositories\AccountRepository;
+use Domain\Admin\Accounts\User\Models\User;
+use Src\Translation\Translation;
+use Support\DataTable;
+use Support\Resource;
 
 final class IndexViewModel
 {

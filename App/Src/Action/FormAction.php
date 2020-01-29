@@ -2,9 +2,9 @@
 declare(strict_types=1);
 
 
-namespace App\Src\Action;
+namespace Src\Action;
 
-use App\Src\Security\CSRF;
+use Src\Security\CSRF;
 
 abstract class FormAction extends Action
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Src\Core;
+namespace Src\Core;
 
-use App\Src\Validate\Validate;
 use Exception;
+use Src\Validate\Validate;
 
 final class Mail
 {

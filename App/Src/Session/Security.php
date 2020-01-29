@@ -2,11 +2,11 @@
 declare(strict_types=1);
 
 
-namespace App\Src\Session;
+namespace Src\Session;
 
-use App\Src\Core\Request;
-use App\Src\Log\Log;
 use Exception;
+use Src\Core\Request;
+use Src\Log\Log;
 
 final class Security
 {

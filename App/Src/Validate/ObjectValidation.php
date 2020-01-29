@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Src\Validate;
+namespace Src\Validate;
 
-use App\Src\Exceptions\Object\InvalidMethodCalledException;
-use App\Src\Exceptions\Object\InvalidObjectException;
-use App\Src\Exceptions\Object\MethodNotCallableException;
+use Src\Exceptions\Object\InvalidMethodCalledException;
+use Src\Exceptions\Object\InvalidObjectException;
+use Src\Exceptions\Object\MethodNotCallableException;
 
 trait ObjectValidation
 {

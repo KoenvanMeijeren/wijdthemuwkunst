@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-use App\Src\Core\Env;
-use App\Src\Core\Request;
-use App\Src\Translation\Translation;
+use Src\Core\Env;
+use Src\Core\Request;
+use Src\Translation\Translation;
 
 $request = new Request();
 ?>

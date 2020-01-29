@@ -1,17 +1,17 @@
 <?php
 declare(strict_types=1);
 
-use App\Domain\Admin\Accounts\Account\Controllers\AccountController;
-use App\Domain\Admin\Accounts\User\Controllers\UserAccountController;
-use App\Domain\Admin\Accounts\User\Models\User;
-use App\Domain\Admin\Authentication\Controllers\AuthenticationController;
-use App\Domain\Admin\Dashboard\Controllers\DashboardController;
-use App\Domain\Admin\Debug\Controllers\DebugController;
-use App\Domain\Admin\File\Controllers\UploadFileController;
-use App\Domain\Admin\Pages\Controllers\PageController as AdminPageController;
-use App\Domain\Admin\Settings\Controllers\SettingsControllers;
-use App\Domain\Pages\Controllers\PageController;
-use App\Src\Core\Router;
+use Domain\Admin\Accounts\Account\Controllers\AccountController;
+use Domain\Admin\Accounts\User\Controllers\UserAccountController;
+use Domain\Admin\Accounts\User\Models\User;
+use Domain\Admin\Authentication\Controllers\AuthenticationController;
+use Domain\Admin\Dashboard\Controllers\DashboardController;
+use Domain\Admin\Debug\Controllers\DebugController;
+use Domain\Admin\File\Controllers\UploadFileController;
+use Domain\Admin\Pages\Controllers\PageController as AdminPageController;
+use Domain\Admin\Settings\Controllers\SettingsControllers;
+use Domain\Pages\Controllers\PageController;
+use Src\Core\Router;
 
 /**
  * Pages routes.

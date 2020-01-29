@@ -2,11 +2,11 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Settings\Actions;
+namespace Domain\Admin\Settings\Actions;
 
-use App\Domain\Admin\Accounts\User\Models\User;
-use App\Src\State\State;
-use App\Src\Translation\Translation;
+use Domain\Admin\Accounts\User\Models\User;
+use Src\State\State;
+use Src\Translation\Translation;
 
 final class CreateSettingAction extends SettingAction
 {

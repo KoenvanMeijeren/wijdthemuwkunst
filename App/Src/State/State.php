@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace App\Src\State;
+namespace Src\State;
 
 abstract class State
 {

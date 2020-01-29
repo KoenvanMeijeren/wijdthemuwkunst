@@ -2,13 +2,13 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Debug\Controllers;
+namespace Domain\Admin\Debug\Controllers;
 
-use App\Domain\Admin\Debug\Models\Debug;
-use App\Src\Core\Request;
-use App\Src\Translation\Translation;
-use App\Src\View\DomainView;
 use Cake\Chronos\Chronos;
+use Domain\Admin\Debug\Models\Debug;
+use Src\Core\Request;
+use Src\Translation\Translation;
+use Src\View\DomainView;
 
 final class DebugController
 {

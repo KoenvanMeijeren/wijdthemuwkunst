@@ -2,15 +2,15 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Pages\Actions;
+namespace Domain\Admin\Pages\Actions;
 
-use App\Domain\Admin\Accounts\User\Models\User;
-use App\Domain\Admin\Pages\Models\Page;
-use App\Domain\Admin\Pages\Repositories\PageRepository;
-use App\Src\Action\FormAction;
-use App\Src\Session\Session;
-use App\Src\State\State;
-use App\Src\Translation\Translation;
+use Domain\Admin\Accounts\User\Models\User;
+use Domain\Admin\Pages\Models\Page;
+use Domain\Admin\Pages\Repositories\PageRepository;
+use Src\Action\FormAction;
+use Src\Session\Session;
+use Src\State\State;
+use Src\Translation\Translation;
 
 final class DeletePageAction extends FormAction
 {

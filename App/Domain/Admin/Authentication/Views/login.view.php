@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-use App\Src\Security\CSRF;
-use App\Src\Session\Session;
-use App\Src\Translation\Translation;
-use App\Support\Resource;
+use Src\Security\CSRF;
+use Src\Session\Session;
+use Src\Translation\Translation;
+use Support\Resource;
 
 $session = new Session();
 ?>

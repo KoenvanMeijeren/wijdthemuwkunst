@@ -2,11 +2,11 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Accounts\Account\Support;
+namespace Domain\Admin\Accounts\Account\Support;
 
-use App\Domain\Admin\Accounts\User\Models\User;
-use App\Src\Converter\Converter;
-use App\Src\Translation\Translation;
+use Domain\Admin\Accounts\User\Models\User;
+use Src\Converter\Converter;
+use Src\Translation\Translation;
 
 final class AccountRightsConverter extends Converter
 {
