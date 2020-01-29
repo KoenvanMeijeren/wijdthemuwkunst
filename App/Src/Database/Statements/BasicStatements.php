@@ -2,11 +2,11 @@
 declare(strict_types=1);
 
 
-namespace App\Src\Database\Statements;
+namespace Src\Database\Statements;
 
-use App\Src\Database\DatabaseProcessor;
-use App\Src\Database\DB;
 use PDOException;
+use Src\Database\DatabaseProcessor;
+use Src\Database\DB;
 
 trait BasicStatements
 {

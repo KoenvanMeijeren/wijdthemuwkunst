@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Accounts\Repositories;
+namespace Domain\Admin\Accounts\Repositories;
 
 final class AccountRepository
 {

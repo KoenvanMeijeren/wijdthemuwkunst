@@ -2,11 +2,11 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Accounts\Account\Models;
+namespace Domain\Admin\Accounts\Account\Models;
 
-use App\Src\Core\Router;
-use App\Src\Model\Model;
-use App\Src\Model\Scopes\SoftDelete\SoftDelete;
+use Src\Core\Router;
+use Src\Model\Model;
+use Src\Model\Scopes\SoftDelete\SoftDelete;
 use stdClass;
 
 final class Account extends Model

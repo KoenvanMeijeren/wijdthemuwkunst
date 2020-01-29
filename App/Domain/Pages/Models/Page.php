@@ -2,13 +2,13 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Pages\Models;
+namespace Domain\Pages\Models;
 
-use App\Src\Core\Router;
-use App\Src\Core\URI;
-use App\Src\Database\DB;
-use App\Src\Model\Model;
-use App\Src\Model\Scopes\SoftDelete\SoftDelete;
+use Src\Core\Router;
+use Src\Core\URI;
+use Src\Database\DB;
+use Src\Model\Model;
+use Src\Model\Scopes\SoftDelete\SoftDelete;
 use stdClass;
 
 final class Page extends Model

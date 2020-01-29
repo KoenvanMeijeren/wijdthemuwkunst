@@ -2,12 +2,12 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Pages\Controllers;
+namespace Domain\Pages\Controllers;
 
-use App\Domain\Admin\Pages\Repositories\PageRepository;
-use App\Domain\Pages\Models\Page;
-use App\Src\Translation\Translation;
-use App\Src\View\DomainView;
+use Domain\Admin\Pages\Repositories\PageRepository;
+use Domain\Pages\Models\Page;
+use Src\Translation\Translation;
+use Src\View\DomainView;
 
 final class PageController
 {

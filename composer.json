@@ -13,7 +13,10 @@
             "App/Support/Functions/autoload.php"
         ],
         "psr-4": {
-            "App\\": "App/"
+            "App\\": "App/",
+            "Domain\\": "App/Domain/",
+            "Src\\": "App/Src/",
+            "Support\\": "App/Support/"
         }
     },
     "require": {

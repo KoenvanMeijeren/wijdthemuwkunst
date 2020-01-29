@@ -2,15 +2,15 @@
 declare(strict_types=1);
 
 
-namespace App\Src\Core;
+namespace Src\Core;
 
-use App\Domain\Admin\Accounts\User\Models\User;
-use App\Src\Exceptions\Basic\UndefinedRouteException;
-use App\Src\Exceptions\Object\InvalidMethodCalledException;
-use App\Src\Exceptions\Object\InvalidObjectException;
-use App\Src\Validate\Validate;
-use App\Src\View\DomainView;
 use Closure;
+use Domain\Admin\Accounts\User\Models\User;
+use Src\Exceptions\Basic\UndefinedRouteException;
+use Src\Exceptions\Object\InvalidMethodCalledException;
+use Src\Exceptions\Object\InvalidObjectException;
+use Src\Validate\Validate;
+use Src\View\DomainView;
 
 final class Router
 {

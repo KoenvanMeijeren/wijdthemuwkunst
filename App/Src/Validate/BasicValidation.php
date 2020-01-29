@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Src\Validate;
+namespace Src\Validate;
 
-use App\Src\Exceptions\Basic\InvalidTypeException;
+use Src\Exceptions\Basic\InvalidTypeException;
 
 trait BasicValidation
 {

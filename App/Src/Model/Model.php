@@ -2,9 +2,9 @@
 declare(strict_types=1);
 
 
-namespace App\Src\Model;
+namespace Src\Model;
 
-use App\Src\Database\DB;
+use Src\Database\DB;
 use stdClass;
 
 abstract class Model

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Src\Core;
+namespace Src\Core;
 
-use App\Src\Security\Encrypt;
+use Src\Security\Encrypt;
 
 final class Cookie
 {

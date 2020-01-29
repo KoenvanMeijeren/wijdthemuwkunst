@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace App\Src\Converter;
+namespace Src\Converter;
 
 abstract class Converter
 {

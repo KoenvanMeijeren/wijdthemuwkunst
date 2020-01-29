@@ -1,6 +1,6 @@
 <?php
 
-use App\Src\Translation\Translation;
+use Src\Translation\Translation;
 
 ?>
 <!DOCTYPE html>

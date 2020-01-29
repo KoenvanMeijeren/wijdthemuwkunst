@@ -2,17 +2,17 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Pages\Actions;
+namespace Domain\Admin\Pages\Actions;
 
-use App\Domain\Admin\Pages\Models\Page;
-use App\Domain\Admin\Pages\Models\Slug;
-use App\Domain\Admin\Pages\Repositories\PageRepository;
-use App\Domain\Admin\Pages\Repositories\SlugRepository;
-use App\Src\Action\FormAction;
-use App\Src\Core\Request;
-use App\Src\Session\Session;
-use App\Src\Translation\Translation;
-use App\Src\Validate\form\FormValidator;
+use Domain\Admin\Pages\Models\Page;
+use Domain\Admin\Pages\Models\Slug;
+use Domain\Admin\Pages\Repositories\PageRepository;
+use Domain\Admin\Pages\Repositories\SlugRepository;
+use Src\Action\FormAction;
+use Src\Core\Request;
+use Src\Session\Session;
+use Src\Translation\Translation;
+use Src\Validate\form\FormValidator;
 
 abstract class PageAction extends FormAction
 {

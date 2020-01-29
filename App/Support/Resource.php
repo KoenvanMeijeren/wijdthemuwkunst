@@ -2,10 +2,10 @@
 declare(strict_types=1);
 
 
-namespace App\Support;
+namespace Support;
 
-use App\Src\Security\CSRF;
-use App\Src\Translation\Translation;
+use Src\Security\CSRF;
+use Src\Translation\Translation;
 
 final class Resource
 {

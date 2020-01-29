@@ -2,20 +2,20 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Pages\Controllers;
+namespace Domain\Admin\Pages\Controllers;
 
-use App\Domain\Admin\Pages\Actions\CreatePageAction;
-use App\Domain\Admin\Pages\Actions\DeletePageAction;
-use App\Domain\Admin\Pages\Actions\PublishPageAction;
-use App\Domain\Admin\Pages\Actions\UnPublishPageAction;
-use App\Domain\Admin\Pages\Actions\UpdatePageAction;
-use App\Domain\Admin\Pages\Models\Page;
-use App\Domain\Admin\Pages\Repositories\PageRepository;
-use App\Domain\Admin\Pages\ViewModels\EditViewModel;
-use App\Domain\Admin\Pages\ViewModels\IndexViewModel;
-use App\Src\Response\Redirect;
-use App\Src\Translation\Translation;
-use App\Src\View\DomainView;
+use Domain\Admin\Pages\Actions\CreatePageAction;
+use Domain\Admin\Pages\Actions\DeletePageAction;
+use Domain\Admin\Pages\Actions\PublishPageAction;
+use Domain\Admin\Pages\Actions\UnPublishPageAction;
+use Domain\Admin\Pages\Actions\UpdatePageAction;
+use Domain\Admin\Pages\Models\Page;
+use Domain\Admin\Pages\Repositories\PageRepository;
+use Domain\Admin\Pages\ViewModels\EditViewModel;
+use Domain\Admin\Pages\ViewModels\IndexViewModel;
+use Src\Response\Redirect;
+use Src\Translation\Translation;
+use Src\View\DomainView;
 
 final class PageController
 {

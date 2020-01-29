@@ -2,14 +2,14 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Accounts\User\Models;
+namespace Domain\Admin\Accounts\User\Models;
 
-use App\Domain\Admin\Authentication\Actions\LogUserOutAction;
-use App\Domain\Admin\Authentication\Support\IDEncryption;
-use App\Src\Model\Model;
-use App\Src\Model\Scopes\SoftDelete\SoftDelete;
-use App\Src\Response\Redirect;
-use App\Src\Session\Session;
+use Domain\Admin\Authentication\Actions\LogUserOutAction;
+use Domain\Admin\Authentication\Support\IDEncryption;
+use Src\Model\Model;
+use Src\Model\Scopes\SoftDelete\SoftDelete;
+use Src\Response\Redirect;
+use Src\Session\Session;
 use stdClass;
 
 final class User extends Model

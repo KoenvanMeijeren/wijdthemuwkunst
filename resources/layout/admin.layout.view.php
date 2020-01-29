@@ -1,11 +1,11 @@
 <?php
 
-use App\Domain\Admin\Accounts\Account\Support\AccountRightsConverter;
-use App\Domain\Admin\Accounts\User\Models\User;
-use App\Src\Core\Request;
-use App\Src\Core\URI;
-use App\Src\Translation\Translation;
-use App\Support\Resource;
+use Domain\Admin\Accounts\Account\Support\AccountRightsConverter;
+use Domain\Admin\Accounts\User\Models\User;
+use Src\Core\Request;
+use Src\Core\URI;
+use Src\Translation\Translation;
+use Support\Resource;
 
 $user = new User();
 $rights = new AccountRightsConverter($user->getRights());

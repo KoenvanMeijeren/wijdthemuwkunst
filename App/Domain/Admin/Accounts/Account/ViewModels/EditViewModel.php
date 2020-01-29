@@ -2,13 +2,13 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Accounts\Account\ViewModels;
+namespace Domain\Admin\Accounts\Account\ViewModels;
 
-use App\Src\Exceptions\Basic\InvalidKeyException;
-use App\Src\Response\Redirect;
-use App\Src\Session\Session;
-use App\Src\State\State;
-use App\Src\Translation\Translation;
+use Src\Exceptions\Basic\InvalidKeyException;
+use Src\Response\Redirect;
+use Src\Session\Session;
+use Src\State\State;
+use Src\Translation\Translation;
 use stdClass;
 
 final class EditViewModel

@@ -2,14 +2,14 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Accounts\Account\Actions;
+namespace Domain\Admin\Accounts\Account\Actions;
 
-use App\Domain\Admin\Accounts\Account\Models\Account;
-use App\Domain\Admin\Accounts\User\Models\User;
-use App\Src\Action\Action;
-use App\Src\Session\Session;
-use App\Src\State\State;
-use App\Src\Translation\Translation;
+use Domain\Admin\Accounts\Account\Models\Account;
+use Domain\Admin\Accounts\User\Models\User;
+use Src\Action\Action;
+use Src\Session\Session;
+use Src\State\State;
+use Src\Translation\Translation;
 
 final class DeleteAccountAction extends Action
 {

@@ -2,13 +2,13 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Settings\ViewModels;
+namespace Domain\Admin\Settings\ViewModels;
 
-use App\Domain\Admin\Accounts\User\Models\User;
-use App\Domain\Admin\Settings\Repositories\SettingRepository;
-use App\Src\Translation\Translation;
-use App\Support\DataTable;
-use App\Support\Resource;
+use Domain\Admin\Accounts\User\Models\User;
+use Domain\Admin\Settings\Repositories\SettingRepository;
+use Src\Translation\Translation;
+use Support\DataTable;
+use Support\Resource;
 
 final class IndexViewModel
 {

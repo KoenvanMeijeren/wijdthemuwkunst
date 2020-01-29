@@ -2,13 +2,13 @@
 declare(strict_types=1);
 
 
-namespace App\Src\Database;
+namespace Src\Database;
 
-use App\Src\Database\Statements\BasicStatements;
-use App\Src\Database\Statements\DataProcessingStatements;
-use App\Src\Database\Statements\SelectStatements;
-use App\Src\Database\Statements\WhereStatements;
 use PDOException;
+use Src\Database\Statements\BasicStatements;
+use Src\Database\Statements\DataProcessingStatements;
+use Src\Database\Statements\SelectStatements;
+use Src\Database\Statements\WhereStatements;
 
 final class DB
 {

@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-use App\Domain\Admin\Accounts\User\Models\User;
-use App\Domain\Admin\Pages\Models\Page;
-use App\Domain\Admin\Pages\Repositories\PageRepository;
-use App\Src\Core\Request;
-use App\Src\Security\CSRF;
-use App\Src\Translation\Translation;
+use Domain\Admin\Accounts\User\Models\User;
+use Domain\Admin\Pages\Models\Page;
+use Domain\Admin\Pages\Repositories\PageRepository;
+use Src\Core\Request;
+use Src\Security\CSRF;
+use Src\Translation\Translation;
 
 $page = new PageRepository($page ?? null);
 $user = new User();

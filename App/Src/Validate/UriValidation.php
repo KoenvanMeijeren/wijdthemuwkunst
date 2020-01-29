@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Src\Validate;
+namespace Src\Validate;
 
-use App\Src\Core\Env;
-use App\Src\Exceptions\Uri\InvalidDomainException;
-use App\Src\Exceptions\Uri\InvalidEnvException;
-use App\Src\Exceptions\Uri\InvalidUriException;
 use Exception;
+use Src\Core\Env;
+use Src\Exceptions\Uri\InvalidDomainException;
+use Src\Exceptions\Uri\InvalidEnvException;
+use Src\Exceptions\Uri\InvalidUriException;
 
 trait UriValidation
 {

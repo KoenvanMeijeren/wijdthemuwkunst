@@ -2,13 +2,13 @@
 declare(strict_types=1);
 
 
-namespace App\Src\Security;
+namespace Src\Security;
 
-use App\Src\Core\Request;
 use Defuse\Crypto\Crypto;
 use Defuse\Crypto\Exception\BadFormatException;
 use Defuse\Crypto\Exception\EnvironmentIsBrokenException;
 use Defuse\Crypto\Key;
+use Src\Core\Request;
 
 final class Encrypt
 {

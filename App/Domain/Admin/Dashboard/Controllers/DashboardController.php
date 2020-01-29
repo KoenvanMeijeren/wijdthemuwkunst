@@ -2,10 +2,10 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Dashboard\Controllers;
+namespace Domain\Admin\Dashboard\Controllers;
 
-use App\Src\Translation\Translation;
-use App\Src\View\DomainView;
+use Src\Translation\Translation;
+use Src\View\DomainView;
 
 final class DashboardController
 {
