@@ -25,7 +25,6 @@
         "ext-intl": "*",
         "ext-json": "*",
         "ext-pdo": "*",
-        "ext-xdebug": "*",
         "cakephp/chronos": "^2.0.1",
         "defuse/php-encryption": "^2.2.1",
         "filp/whoops": "^2.7.1",
@@ -38,6 +37,7 @@
         "vlucas/phpdotenv": "^4.1.0"
     },
     "require-dev": {
+        "ext-xdebug": "*",
         "bmitch/churn-php": "^1.0.3",
         "daniel-werner/php-quality-tools": "^1.1.0",
         "ergebnis/phpstan-rules": "^0.13.0",
