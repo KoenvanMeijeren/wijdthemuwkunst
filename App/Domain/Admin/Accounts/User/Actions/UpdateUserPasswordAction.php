@@ -2,17 +2,17 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Accounts\User\Actions;
+namespace Domain\Admin\Accounts\User\Actions;
 
-use App\Domain\Admin\Accounts\Account\Models\Account;
-use App\Domain\Admin\Accounts\Repositories\AccountRepository;
-use App\Domain\Admin\Accounts\User\Models\User;
-use App\Src\Action\FormAction;
-use App\Src\Core\Request;
-use App\Src\Session\Session;
-use App\Src\State\State;
-use App\Src\Translation\Translation;
-use App\Src\Validate\form\FormValidator;
+use Domain\Admin\Accounts\Account\Models\Account;
+use Domain\Admin\Accounts\Repositories\AccountRepository;
+use Domain\Admin\Accounts\User\Models\User;
+use Src\Action\FormAction;
+use Src\Core\Request;
+use Src\Session\Session;
+use Src\State\State;
+use Src\Translation\Translation;
+use Src\Validate\form\FormValidator;
 
 final class UpdateUserPasswordAction extends FormAction
 {

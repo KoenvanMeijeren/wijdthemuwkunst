@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-use App\Domain\Admin\Accounts\Repositories\AccountRepository;
-use App\Src\Core\Request;
-use App\Src\Security\CSRF;
-use App\Src\Translation\Translation;
+use Domain\Admin\Accounts\Repositories\AccountRepository;
+use Src\Core\Request;
+use Src\Security\CSRF;
+use Src\Translation\Translation;
 
 $request = new Request();
 $account = new AccountRepository($account ?? null);

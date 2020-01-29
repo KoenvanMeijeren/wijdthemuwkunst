@@ -2,9 +2,9 @@
 declare(strict_types=1);
 
 
-namespace App\Src\Response;
+namespace Src\Response;
 
-use App\Src\Core\URI;
+use Src\Core\URI;
 
 final class Redirect
 {

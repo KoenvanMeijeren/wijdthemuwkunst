@@ -2,10 +2,10 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Authentication\Support;
+namespace Domain\Admin\Authentication\Support;
 
-use App\Src\Core\Request;
 use Exception;
+use Src\Core\Request;
 
 final class IDEncryption
 {

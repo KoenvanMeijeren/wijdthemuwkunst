@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace App\Src\Action;
+namespace Src\Action;
 
 abstract class FileAction
 {

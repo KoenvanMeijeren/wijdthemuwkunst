@@ -2,11 +2,11 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Pages\Support;
+namespace Domain\Admin\Pages\Support;
 
-use App\Domain\Admin\Pages\Models\Page;
-use App\Src\Converter\Converter;
-use App\Src\Translation\Translation;
+use Domain\Admin\Pages\Models\Page;
+use Src\Converter\Converter;
+use Src\Translation\Translation;
 
 final class PageInMenuStateConverter extends Converter
 {

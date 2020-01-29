@@ -2,12 +2,12 @@
 declare(strict_types=1);
 
 
-namespace App\Src\Validate;
+namespace Src\Validate;
 
-use App\Src\Exceptions\File\FileNotFoundException;
-use App\Src\Exceptions\File\FileNotOfResourceTypeException;
-use App\Src\Exceptions\File\FileNotReadableException;
-use App\Src\Exceptions\File\FileNotWritableException;
+use Src\Exceptions\File\FileNotFoundException;
+use Src\Exceptions\File\FileNotOfResourceTypeException;
+use Src\Exceptions\File\FileNotReadableException;
+use Src\Exceptions\File\FileNotWritableException;
 
 trait FileValidation
 {

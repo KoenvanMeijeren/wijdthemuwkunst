@@ -2,14 +2,14 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Accounts\User\Controllers;
+namespace Domain\Admin\Accounts\User\Controllers;
 
-use App\Domain\Admin\Accounts\User\Actions\UpdateUserDataAction;
-use App\Domain\Admin\Accounts\User\Actions\UpdateUserPasswordAction;
-use App\Domain\Admin\Accounts\User\Models\User;
-use App\Src\Response\Redirect;
-use App\Src\Translation\Translation;
-use App\Src\View\DomainView;
+use Domain\Admin\Accounts\User\Actions\UpdateUserDataAction;
+use Domain\Admin\Accounts\User\Actions\UpdateUserPasswordAction;
+use Domain\Admin\Accounts\User\Models\User;
+use Src\Response\Redirect;
+use Src\Translation\Translation;
+use Src\View\DomainView;
 
 final class UserAccountController
 {

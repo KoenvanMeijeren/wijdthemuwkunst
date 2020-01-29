@@ -1,7 +1,7 @@
 <?php
 
-use App\Src\Session\Session;
-use App\Src\State\State;
+use Src\Session\Session;
+use Src\State\State;
 
 $session = new Session();
 

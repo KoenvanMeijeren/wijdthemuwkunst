@@ -2,15 +2,15 @@
 declare(strict_types=1);
 
 
-namespace App\Src\Core;
+namespace Src\Core;
 
-use App\Src\Exceptions\File\ErrorWhileUploadingFileException;
-use App\Src\Log\Log;
-use App\Src\Session\Session;
-use App\Src\State\State;
-use App\Src\Translation\Translation;
 use Exception;
 use Sirius\Upload\Handler as UploadHandler;
+use Src\Exceptions\File\ErrorWhileUploadingFileException;
+use Src\Log\Log;
+use Src\Session\Session;
+use Src\State\State;
+use Src\Translation\Translation;
 
 final class Upload
 {

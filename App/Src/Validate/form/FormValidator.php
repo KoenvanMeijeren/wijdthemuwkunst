@@ -2,11 +2,11 @@
 declare(strict_types=1);
 
 
-namespace App\Src\Validate\form;
+namespace Src\Validate\form;
 
-use App\Src\Session\Session;
-use App\Src\State\State;
-use App\Src\Translation\Translation;
+use Src\Session\Session;
+use Src\State\State;
+use Src\Translation\Translation;
 
 final class FormValidator
 {

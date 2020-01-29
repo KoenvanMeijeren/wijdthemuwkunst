@@ -2,23 +2,22 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Accounts\Account\Controllers;
+namespace Domain\Admin\Accounts\Account\Controllers;
 
-use App\Domain\Admin\Accounts\Account\Actions\BlockAccountAction;
-use App\Domain\Admin\Accounts\Account\Actions\CreateAccountAction;
-use App\Domain\Admin\Accounts\Account\Actions\DeleteAccountAction;
-use App\Domain\Admin\Accounts\Account\Actions\UnblockAccountAction;
-use App\Domain\Admin\Accounts\Account\Actions\UpdateAccountDataAction;
-use App\Domain\Admin\Accounts\Account\Actions\UpdateAccountEmailAction;
-use App\Domain\Admin\Accounts\Account\Actions\UpdateAccountPasswordAction;
-use App\Domain\Admin\Accounts\Account\Models\Account;
-use App\Domain\Admin\Accounts\Account\ViewModels\EditViewModel;
-use App\Domain\Admin\Accounts\Account\ViewModels\IndexViewModel;
-use App\Src\Exceptions\Basic\InvalidKeyException;
-use App\Src\Exceptions\Basic\NoTranslationsForGivenLanguageID;
-use App\Src\Response\Redirect;
-use App\Src\Translation\Translation;
-use App\Src\View\DomainView;
+use Domain\Admin\Accounts\Account\Actions\BlockAccountAction;
+use Domain\Admin\Accounts\Account\Actions\CreateAccountAction;
+use Domain\Admin\Accounts\Account\Actions\DeleteAccountAction;
+use Domain\Admin\Accounts\Account\Actions\UnblockAccountAction;
+use Domain\Admin\Accounts\Account\Actions\UpdateAccountDataAction;
+use Domain\Admin\Accounts\Account\Actions\UpdateAccountEmailAction;
+use Domain\Admin\Accounts\Account\Actions\UpdateAccountPasswordAction;
+use Domain\Admin\Accounts\Account\Models\Account;
+use Domain\Admin\Accounts\Account\ViewModels\EditViewModel;
+use Domain\Admin\Accounts\Account\ViewModels\IndexViewModel;
+use Src\Exceptions\Basic\InvalidKeyException;
+use Src\Response\Redirect;
+use Src\Translation\Translation;
+use Src\View\DomainView;
 
 final class AccountController
 {
@@ -91,7 +90,6 @@ final class AccountController
     /**
      * @return Redirect|DomainView
      * @throws InvalidKeyException
-     * @throws NoTranslationsForGivenLanguageID
      */
     public function storeData()
     {
@@ -108,7 +106,6 @@ final class AccountController
     /**
      * @return Redirect|DomainView
      * @throws InvalidKeyException
-     * @throws NoTranslationsForGivenLanguageID
      */
     public function storeEmail()
     {
@@ -125,7 +122,6 @@ final class AccountController
     /**
      * @return Redirect|DomainView
      * @throws InvalidKeyException
-     * @throws NoTranslationsForGivenLanguageID
      */
     public function storePassword()
     {

@@ -2,13 +2,13 @@
 declare(strict_types=1);
 
 
-namespace App\Src\Core;
+namespace Src\Core;
 
-use App\Src\Exceptions\Uri\InvalidDomainException;
-use App\Src\Exceptions\Uri\InvalidEnvException;
-use App\Src\Log\LoggerHandler;
-use App\Src\Validate\Validate;
-use App\Src\View\ProductionErrorView;
+use Src\Exceptions\Uri\InvalidDomainException;
+use Src\Exceptions\Uri\InvalidEnvException;
+use Src\Log\LoggerHandler;
+use Src\Validate\Validate;
+use Src\View\ProductionErrorView;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run as Whoops;
 

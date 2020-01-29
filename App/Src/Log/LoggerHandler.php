@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace App\Src\Log;
+namespace Src\Log;
 
 use Throwable;
 use Whoops\Handler\Handler;

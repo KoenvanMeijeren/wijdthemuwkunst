@@ -2,12 +2,12 @@
 declare(strict_types=1);
 
 
-namespace App\Src\Database;
+namespace Src\Database;
 
-use App\Src\Core\Request;
 use PDO;
 use PDOException;
 use PDOStatement;
+use Src\Core\Request;
 
 abstract class DatabaseConnection
 {

@@ -2,15 +2,15 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Authentication\Controllers;
+namespace Domain\Admin\Authentication\Controllers;
 
-use App\Domain\Admin\Accounts\User\Models\User;
-use App\Domain\Admin\Authentication\Actions\LogUserInAction;
-use App\Domain\Admin\Authentication\Actions\LogUserOutAction;
-use App\Src\Exceptions\Basic\InvalidKeyException;
-use App\Src\Response\Redirect;
-use App\Src\Translation\Translation;
-use App\Src\View\DomainView;
+use Domain\Admin\Accounts\User\Models\User;
+use Domain\Admin\Authentication\Actions\LogUserInAction;
+use Domain\Admin\Authentication\Actions\LogUserOutAction;
+use Src\Exceptions\Basic\InvalidKeyException;
+use Src\Response\Redirect;
+use Src\Translation\Translation;
+use Src\View\DomainView;
 
 final class AuthenticationController
 {

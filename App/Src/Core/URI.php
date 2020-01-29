@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace App\Src\Core;
+namespace Src\Core;
 
 final class URI
 {

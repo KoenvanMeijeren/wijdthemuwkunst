@@ -2,14 +2,14 @@
 declare(strict_types=1);
 
 
-namespace App\Src\Session;
+namespace Src\Session;
 
-use App\Src\Core\Request;
-use App\Src\Core\Sanitize;
-use App\Src\Core\URI;
-use App\Src\Log\Log;
-use App\Src\Security\Encrypt;
-use App\Src\State\State;
+use Src\Core\Request;
+use Src\Core\Sanitize;
+use Src\Core\URI;
+use Src\Log\Log;
+use Src\Security\Encrypt;
+use Src\State\State;
 
 final class Session
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Src\Validate\Validate;
+use Src\Validate\Validate;
 
 function includeFile(string $filename, $vars = null)
 {

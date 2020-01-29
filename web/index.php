@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
 
-use App\Src\Core\App;
 use Dotenv\Dotenv;
+use Src\Core\App;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 

@@ -2,14 +2,14 @@
 declare(strict_types=1);
 
 
-namespace App\Src\Session;
+namespace Src\Session;
 
-use App\Src\Core\Cookie;
-use App\Src\Exceptions\Session\InvalidSessionException;
-use App\Src\Response\Redirect;
-use App\Src\Session\Security as SessionSecurity;
 use Cake\Chronos\Chronos;
 use Exception;
+use Src\Core\Cookie;
+use Src\Exceptions\Session\InvalidSessionException;
+use Src\Response\Redirect;
+use Src\Session\Security as SessionSecurity;
 
 final class Builder
 {

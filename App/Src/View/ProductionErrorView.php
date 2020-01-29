@@ -2,11 +2,11 @@
 declare(strict_types=1);
 
 
-namespace App\Src\View;
+namespace Src\View;
 
-use App\Src\Core\Env;
-use App\Src\Exceptions\Basic\InvalidKeyException;
-use App\Src\Translation\Translation;
+use Src\Core\Env;
+use Src\Exceptions\Basic\InvalidKeyException;
+use Src\Translation\Translation;
 use Whoops\Handler\Handler;
 
 final class ProductionErrorView extends Handler

@@ -2,10 +2,10 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Pages\Support;
+namespace Domain\Admin\Pages\Support;
 
-use App\Src\Converter\Converter;
-use App\Src\Translation\Translation;
+use Src\Converter\Converter;
+use Src\Translation\Translation;
 
 final class PageIsPublishedStateConverter extends Converter
 {

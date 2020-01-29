@@ -2,10 +2,10 @@
 declare(strict_types=1);
 
 
-namespace App\Src\Translation;
+namespace Src\Translation;
 
-use App\Src\Core\URI;
-use App\Src\Exceptions\Basic\InvalidKeyException;
+use Src\Core\URI;
+use Src\Exceptions\Basic\InvalidKeyException;
 
 final class Translation extends Loader
 {

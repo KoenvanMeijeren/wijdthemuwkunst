@@ -2,9 +2,9 @@
 declare(strict_types=1);
 
 
-namespace App\Src\Model\Scopes\SoftDelete;
+namespace Src\Model\Scopes\SoftDelete;
 
-use App\Src\Database\DB;
+use Src\Database\DB;
 
 trait SoftDelete
 {

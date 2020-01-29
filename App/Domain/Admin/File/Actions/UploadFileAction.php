@@ -2,11 +2,11 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\File\Actions;
+namespace Domain\Admin\File\Actions;
 
-use App\Src\Action\FileAction;
-use App\Src\Core\Request;
-use App\Src\Core\Upload;
+use Src\Action\FileAction;
+use Src\Core\Request;
+use Src\Core\Upload;
 
 final class UploadFileAction extends FileAction
 {

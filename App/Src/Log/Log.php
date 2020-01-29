@@ -2,11 +2,8 @@
 declare(strict_types=1);
 
 
-namespace App\Src\Log;
+namespace Src\Log;
 
-use App\Src\Core\Env;
-use App\Src\Core\Request;
-use App\Src\File\File;
 use DateTimeZone;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\FirePHPHandler;
@@ -15,6 +12,9 @@ use Monolog\Logger;
 use Monolog\Processor\IntrospectionProcessor;
 use Monolog\Processor\ProcessIdProcessor;
 use Monolog\Processor\WebProcessor;
+use Src\Core\Env;
+use Src\Core\Request;
+use Src\File\File;
 
 final class Log
 {

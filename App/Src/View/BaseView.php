@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace App\Src\View;
+namespace Src\View;
 
 use Symfony\Component\Templating\Loader\FilesystemLoader;
 use Symfony\Component\Templating\PhpEngine;

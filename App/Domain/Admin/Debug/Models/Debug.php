@@ -2,16 +2,16 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Debug\Models;
+namespace Domain\Admin\Debug\Models;
 
-use App\Src\Core\Cookie;
-use App\Src\Core\Env;
-use App\Src\Log\Log;
-use App\Src\Session\Session;
-use App\Support\DataTable;
-use App\Support\DateTime;
 use Cake\Chronos\Chronos;
+use Src\Core\Cookie;
+use Src\Core\Env;
+use Src\Log\Log;
+use Src\Session\Session;
 use stdClass;
+use Support\DataTable;
+use Support\DateTime;
 
 final class Debug
 {

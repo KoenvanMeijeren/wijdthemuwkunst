@@ -2,9 +2,9 @@
 declare(strict_types=1);
 
 
-namespace App\Src\Translation;
+namespace Src\Translation;
 
-use App\Src\Exceptions\Basic\NoTranslationsForGivenLanguageID;
+use Src\Exceptions\Basic\NoTranslationsForGivenLanguageID;
 
 abstract class Loader
 {

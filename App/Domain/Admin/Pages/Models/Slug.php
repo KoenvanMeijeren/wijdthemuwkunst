@@ -2,10 +2,10 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\Pages\Models;
+namespace Domain\Admin\Pages\Models;
 
-use App\Src\Model\Model;
-use App\Src\Model\Scopes\SoftDelete\SoftDelete;
+use Src\Model\Model;
+use Src\Model\Scopes\SoftDelete\SoftDelete;
 
 final class Slug extends Model
 {
