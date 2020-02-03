@@ -6,7 +6,7 @@ services:
       - 8303:3306
   php:
     environment:
-      PHP_XDEBUG_ENABLED: 1 # Set 1 to enable.
+      PHP_XDEBUG_ENABLED: 1
       MYSQL_PORT: 8303:3306
   nginx:
     environment:
