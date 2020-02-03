@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  mariadb:
+    ports:
+      - 8305:3306
+  php:
+    environment:
+      PHP_XDEBUG_ENABLED: 1 # Set 1 to enable.
+      MYSQL_PORT: 8305:3306
+  nginx:
+    environment:
+      NGINX_ERROR_LOG_LEVEL: debug
+    ports:
+      - 8887:80
