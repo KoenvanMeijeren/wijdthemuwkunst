@@ -9,18 +9,18 @@ services:
       MYSQL_DATABASE: whuk
       MYSQL_USER: whukUser
       MYSQL_PASSWORD: whukPass
-    ports:
-      - 8305:3306
   php:
     container_name: "whuk_php"
-    image: wodby/drupal-php:7.4
+    image: wodby/php:latest
+    depends_on:
+      - mariadb
+      - redis
     environment:
       PHP_FPM_CLEAR_ENV: "no"
       MYSQL_DATABASE: whuk
       MYSQL_HOSTNAME: mariadb
       MYSQL_USER: whukUser
       MYSQL_PASSWORD: whukPass
-      MYSQL_PORT: 8305:3306
       REDIS_HOST: redis
     volumes:
       - ./:/var/www/html:cached
@@ -31,14 +31,11 @@ services:
       - php
     environment:
       NGINX_STATIC_OPEN_FILE_CACHE: "off"
-      NGINX_ERROR_LOG_LEVEL: debug
       NGINX_BACKEND_HOST: php
       NGINX_SERVER_ROOT: /var/www/html/web/
       NGINX_VHOST_PRESET: php
     volumes:
       - ./:/var/www/html:cached
-    ports:
-      - 8887:80
   redis:
     container_name: "whuk_redis"
     image: wodby/redis:latest
