@@ -19,12 +19,20 @@
             "Support\\": "App/Support/"
         }
     },
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "7.4",
+            "ext-iconv": "1.16",
+            "ext-intl": "65.1",
+            "ext-json": "1.0",
+            "ext-pdo": "1.0"
+        },
+        "platform-dev": {
+            "ext-xdebug": "2.8.0"
+        }
+    },
     "require": {
-        "php": "^7.4",
-        "ext-iconv": "*",
-        "ext-intl": "*",
-        "ext-json": "*",
-        "ext-pdo": "*",
         "cakephp/chronos": "^2.0.1",
         "defuse/php-encryption": "^2.2.1",
         "filp/whoops": "^2.7.1",
@@ -37,7 +45,6 @@
         "vlucas/phpdotenv": "^4.1.0"
     },
     "require-dev": {
-        "ext-xdebug": "1.0.3",
         "bmitch/churn-php": "^1.0.3",
         "daniel-werner/php-quality-tools": "^1.1.0",
         "ergebnis/phpstan-rules": "^0.13.0",
@@ -51,6 +58,8 @@
         "sebastian/phpcpd": "^4.1.0",
         "thecodingmachine/phpstan-strict-rules": "^0.11.2"
     },
+    "prefer-stable": true,
+    "minimum-stability": "stable",
     "scripts": {
         "inspect": [
             "phpcs app",
@@ -76,8 +85,5 @@
             "phpmetrics --report-html=web/phpmetrics app",
             "phpmd app html phpmd.xml --reportfile web/phpmd/index.html"
         ]
-    },
-    "config": {
-        "sort-packages": true
     }
 }
