@@ -12,4 +12,4 @@ services:
     environment:
       NGINX_ERROR_LOG_LEVEL: debug
     ports:
-      - 8887:80
+      - 8888:80
