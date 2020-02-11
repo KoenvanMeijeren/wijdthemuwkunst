@@ -8,8 +8,12 @@ services:
     environment:
       PHP_XDEBUG_ENABLED: 1 # Set 1 to enable.
       MYSQL_PORT: 8305:3306
+      PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
   nginx:
     environment:
       NGINX_ERROR_LOG_LEVEL: debug
     ports:
       - 8887:80
+  mailhog:
+    ports:
+      - 8027:8025

@@ -39,3 +39,6 @@ services:
   redis:
     container_name: "whuk_redis"
     image: wodby/redis:latest
+  mailhog:
+    container_name: "whuk_mailhog"
+    image: mailhog/mailhog:latest
