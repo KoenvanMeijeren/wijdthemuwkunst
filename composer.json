@@ -45,7 +45,6 @@
         "vlucas/phpdotenv": "^4.1.0"
     },
     "require-dev": {
-        "behat/behat": "^3.6",
         "bmitch/churn-php": "^1.0.3",
         "daniel-werner/php-quality-tools": "^1.1.0",
         "ergebnis/phpstan-rules": "^0.13.0",
