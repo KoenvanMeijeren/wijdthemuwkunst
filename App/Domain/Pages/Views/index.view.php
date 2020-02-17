@@ -1,93 +1,130 @@
 <?php
 declare(strict_types=1);
-
-use Cake\Chronos\Chronos;
-use Support\DateTime;
-
 ?>
 
-<div class="image-mobile mt-0 pt-0">
-    <img src="https://via.placeholder.com/350x300" alt="foto" width="100%">
-</div>
+<!-- Banner -->
+<section id="banner"></section>
 
-<div class="image-desktop mt-0 pt-0">
-    <img src="/images/test_image.jpg" alt="foto" width="100%">
-</div>
-
-<div class="container page">
-    <div class="mt-5 mb-5">
-        <h1 class="text-center">Opgericht in 1953</h1>
-        <p class="text-center">
+<!-- About us -->
+<section class="text-section" id="over-ons">
+    <div class="inner">
+        <header>
+            <h2>Historie</h2>
+        </header>
+        <p>
             Het Christelijk gemend koor "Wijdt Hem Uw Kunst" uit Harderwijk werd
             opgericht in 1953 en heeft op dit moment 65 leden. Sinds 2018 staat
-            het
-            koor onder leiding van Marijn de Jong. Daarvoor stond het koor 23
-            jaar
-            onder leiding van Evert van de Veen. Het koor verleent haar
-            medewerking
-            aan verschillende zangavonden in Harderwijk en omgeving zoals de
-            jaarlijks terugkerende Kerstzangdienst en Paaszangdienst in de Chr.
-            Geref. Kerk te Harderwijk. De naam van het koor is ontleend aan het
-            tweede vers van Psalm 33: "Wijdt Hem uw kunst". Dit is dan ook de
-            doelstelling van het koor. Het koor oefent iedere woensdagavond.
+            het koor onder leiding van Marijn de Jong. Daarvoor stond het koor
+            23 jaar onder leiding van Evert van de Veen. Het koor verleent haar
+            medewerking aan verschillende zangavonden in Harderwijk en omgeving
+            zoals de jaarlijks terugkerende Kerstzangdienst en Paaszangdienst in
+            de Chr. Geref. Kerk te Harderwijk. De naam van het koor is ontleend
+            aan het tweede vers van Psalm 33: "Wijdt Hem uw kunst". Dit is dan
+            ook de doelstelling van het koor. Het koor oefent iedere
+            woensdagavond.
         </p>
+        <ul class="actions">
+            <li><a href="#" class="button alt">Lees meer</a></li>
+        </ul>
     </div>
-</div>
+</section>
 
-<div class="image-mobile m-0 p-0">
-    <img src="https://via.placeholder.com/350x300" alt="foto" width="100%">
-</div>
-
-<div class="image-desktop m-0 p-0">
-    <img src="https://via.placeholder.com/1519x300" alt="foto" width="100%">
-</div>
-
-<div class="container page">
-    <div class="mt-5 mb-5">
-        <h1 class="text-center">Komende concerten in november</h1>
-
-        <?php
-        $date = new DateTime(new Chronos());
-        for ($x = 8; $x < 12; $x++) : ?>
-            <div class="row event event-border rounded shadow">
-                <div class="col-1 pt-2 default-color">
-                <span class="h3 font-weight-bold">
-                    <?= $x ?>
-                </span>
-                    <span class="text-uppercase">
-                    <?= $date->toShortMonth() ?>
-                </span>
+<!-- Articles -->
+<section class="articles" id="artikelen">
+    <div class="inner">
+        <article>
+            <div class="content">
+                <header>
+                    <h3>Sopraan of alt</h3>
+                </header>
+                <div class="image fit">
+                    <img src="images/pic01.jpg" alt=""/>
                 </div>
-                <div class="col-11 pt-2">
-                    <h5 class="font-weight-bold text-uppercase">
-                        Concert in de grote kerk - Kaatsheuvel
-                    </h5>
+                <p>Cumsan mollis eros. Pellentesque a diam sit amet mi magna
+                    ullamcorper vehicula. Integer adipiscin sem. Nullam quis
+                    massa sit amet lorem ipsum feugiat tempus.</p>
 
-                    <ul class="list-inline">
-                        <li class="list-inline-item">
-                            <i class="fa fa-calendar-o" aria-hidden="true"></i>
-                            Maandag
-                        </li>
-                        <li class="list-inline-item">
-                            <i class="fa fa-clock-o" aria-hidden="true"></i>
-                            12:30 uur
-                        </li>
-                        <li class="list-inline-item">
-                            <i class="fas fa-map-marker-alt"
-                               aria-hidden="true"></i>
-                            Grote kerk
-                        </li>
-                    </ul>
+                <ul class="actions">
+                    <li><a href="#" class="button alt">Lees meer</a></li>
+                </ul>
+            </div>
+        </article>
+        <article class="alt">
+            <div class="content">
+                <header>
+                    <h3>Tenor of bas</h3>
+                </header>
+                <div class="image fit">
+                    <img src="images/pic02.jpg" alt=""/>
+                </div>
+                <p>Cumsan mollis eros. Pellentesque a diam sit amet mi magna
+                    ullamcorper vehicula. Integer adipiscin sem. Nullam quis
+                    massa sit amet lorem ipsum feugiat tempus.</p>
+
+                <ul class="actions">
+                    <li><a href="#" class="button alt">Lees meer</a></li>
+                </ul>
+            </div>
+        </article>
+    </div>
+</section>
+
+<!-- Three -->
+<section class="text-section" id="concerten">
+    <div class="inner">
+        <header>
+            <h2>Concerten</h2>
+        </header>
+        <p>
+            Het Christelijk gemend koor "Wijdt Hem Uw Kunst" uit Harderwijk werd
+            opgericht in 1953 en heeft op dit moment 65 leden. Sinds 2018 staat
+            het koor onder leiding van Marijn de Jong. Daarvoor stond het koor
+            23 jaar onder leiding van Evert van de Veen. Het koor verleent haar
+            medewerking aan verschillende zangavonden in Harderwijk en omgeving
+            zoals de jaarlijks terugkerende Kerstzangdienst en Paaszangdienst in
+            de Chr. Geref. Kerk te Harderwijk. De naam van het koor is ontleend
+            aan het tweede vers van Psalm 33: "Wijdt Hem uw kunst". Dit is dan
+            ook de doelstelling van het koor. Het koor oefent iedere
+            woensdagavond.
+        </p>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="/images/pic05.jpg"
+                         alt="Card image cap">
+                    <div class="card-body">
+                        <h1 class="card-title">Paas uitvoering</h1>
+                        <p class="card-text">Some quick example text to build on
+                            the card title and make up the bulk of the card's
+                            content.</p>
+                    </div>
                 </div>
             </div>
-        <?php endfor; ?>
-
-        <div class="row text-center mt-5 mb-5">
-            <div class="col">
-                <button type="button" class="btn btn-default">
-                    Bekijk alle concerten
-                </button>
+            <div class="col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="/images/pic06.jpg"
+                         alt="Card image cap">
+                    <div class="card-body">
+                        <h1 class="card-title">Kerst uitvoering</h1>
+                        <p class="card-text">Some quick example text to build on
+                            the card title and make up the bulk of the card's
+                            content.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="/images/pic06.jpg"
+                         alt="Card image cap">
+                    <div class="card-body">
+                        <h1 class="card-title">Paas uitvoering</h1>
+                        <p class="card-text">Some quick example text to build on
+                            the card title and make up the bulk of the card's
+                            content.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
