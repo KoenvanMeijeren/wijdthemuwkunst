@@ -38,7 +38,7 @@ declare(strict_types=1);
                     <h3>Sopraan of alt</h3>
                 </header>
                 <div class="image fit">
-                    <img src="images/pic01.jpg" alt=""/>
+                    <img src="images/sopraan.png" alt=""/>
                 </div>
                 <p>Cumsan mollis eros. Pellentesque a diam sit amet mi magna
                     ullamcorper vehicula. Integer adipiscin sem. Nullam quis
@@ -55,7 +55,7 @@ declare(strict_types=1);
                     <h3>Tenor of bas</h3>
                 </header>
                 <div class="image fit">
-                    <img src="images/pic02.jpg" alt=""/>
+                    <img src="images/sopraan.png" alt=""/>
                 </div>
                 <p>Cumsan mollis eros. Pellentesque a diam sit amet mi magna
                     ullamcorper vehicula. Integer adipiscin sem. Nullam quis
@@ -89,42 +89,17 @@ declare(strict_types=1);
         </p>
 
         <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <img class="card-img-top" src="/images/pic05.jpg"
-                         alt="Card image cap">
-                    <div class="card-body">
-                        <h3 class="card-title">Paas uitvoering</h3>
-                        <p class="card-text">Some quick example text to build on
-                            the card title and make up the bulk of the card's
-                            content.</p>
+            <?php for ($x = 0; $x < 6; $x++) : ?>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img class="card-img-top" src="/images/kerk.jfif"
+                             alt="Card image cap">
+                        <div class="card-body p-2">
+                            <h4 class="card-title p-0 m-0">Paas uitvoering</h4>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <img class="card-img-top" src="/images/pic06.jpg"
-                         alt="Card image cap">
-                    <div class="card-body">
-                        <h3 class="card-title">Kerst uitvoering</h3>
-                        <p class="card-text">Some quick example text to build on
-                            the card title and make up the bulk of the card's
-                            content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <img class="card-img-top" src="/images/pic06.jpg"
-                         alt="Card image cap">
-                    <div class="card-body">
-                        <h3 class="card-title">Paas uitvoering</h3>
-                        <p class="card-text">Some quick example text to build on
-                            the card title and make up the bulk of the card's
-                            content.</p>
-                    </div>
-                </div>
-            </div>
+            <?php endfor; ?>
         </div>
     </div>
 </section>
