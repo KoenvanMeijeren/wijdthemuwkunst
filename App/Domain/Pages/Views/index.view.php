@@ -94,7 +94,7 @@ declare(strict_types=1);
                     <img class="card-img-top" src="/images/pic05.jpg"
                          alt="Card image cap">
                     <div class="card-body">
-                        <h1 class="card-title">Paas uitvoering</h1>
+                        <h3 class="card-title">Paas uitvoering</h3>
                         <p class="card-text">Some quick example text to build on
                             the card title and make up the bulk of the card's
                             content.</p>
@@ -106,7 +106,7 @@ declare(strict_types=1);
                     <img class="card-img-top" src="/images/pic06.jpg"
                          alt="Card image cap">
                     <div class="card-body">
-                        <h1 class="card-title">Kerst uitvoering</h1>
+                        <h3 class="card-title">Kerst uitvoering</h3>
                         <p class="card-text">Some quick example text to build on
                             the card title and make up the bulk of the card's
                             content.</p>
@@ -118,7 +118,7 @@ declare(strict_types=1);
                     <img class="card-img-top" src="/images/pic06.jpg"
                          alt="Card image cap">
                     <div class="card-body">
-                        <h1 class="card-title">Paas uitvoering</h1>
+                        <h3 class="card-title">Paas uitvoering</h3>
                         <p class="card-text">Some quick example text to build on
                             the card title and make up the bulk of the card's
                             content.</p>
