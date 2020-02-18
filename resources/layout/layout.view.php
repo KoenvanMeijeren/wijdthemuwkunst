@@ -43,7 +43,7 @@ $setting = new Setting();
             <a href="/">Home</a>
             <a href="/over-ons">Over ons</a>
             <a href="/koor">Het koor</a>
-            <a href="/#concerten">Concerten</a>
+            <a href="/concerten">Concerten</a>
         </nav>
     </div>
 </header>
