@@ -7,7 +7,6 @@ namespace Domain\Admin\Settings\Models;
 use Src\Core\Router;
 use Src\Model\Model;
 use Src\Model\Scopes\SoftDelete\SoftDelete;
-use stdClass;
 
 final class Setting extends Model
 {
@@ -29,10 +28,10 @@ final class Setting extends Model
         return (int) Router::getWildcard();
     }
 
-    public function getByKey(string $key): ?stdClass
+    public function getByKey(string $key): ?string
     {
         return $this->firstByAttributes([
             $this->key => $key
-        ]);
+        ])->setting_value;
     }
 }

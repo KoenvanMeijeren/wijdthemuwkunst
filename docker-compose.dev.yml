@@ -3,12 +3,12 @@ version: "3"
 services:
   mariadb:
     ports:
-      - 8305:3306
+      - 8303:3306
   php:
     environment:
-      PHP_XDEBUG_ENABLED: 1 # Set 1 to enable.
-      MYSQL_PORT: 8305:3306
       PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
+      PHP_XDEBUG_ENABLED: 1
+      MYSQL_PORT: 8303:3306
   nginx:
     environment:
       NGINX_ERROR_LOG_LEVEL: debug
