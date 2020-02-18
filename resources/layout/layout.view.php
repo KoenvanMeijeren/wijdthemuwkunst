@@ -59,7 +59,7 @@ $setting = new Setting();
         <header>
             <h2>Neem contact op</h2>
         </header>
-        <form method="post" action="#">
+        <form method="post" action="/contact">
             <div class="field half first">
                 <label for="name">Naam</label>
                 <input type="text" name="name" id="name" />

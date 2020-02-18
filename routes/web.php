@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use App\Domain\Contact\Controllers\ContactController;
 use Domain\Admin\Accounts\Account\Controllers\AccountController;
 use Domain\Admin\Accounts\User\Controllers\UserAccountController;
 use Domain\Admin\Accounts\User\Models\User;
@@ -18,6 +19,8 @@ use Src\Core\Router;
  */
 Router::get('', PageController::class,
     'index', User::GUEST);
+Router::post('contact', ContactController::class,
+    'send', User::GUEST);
 
 /**
  * Admin routes.
