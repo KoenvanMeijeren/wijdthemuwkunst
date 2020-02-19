@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Domain\Admin\Settings\Models;
 
 use Src\Core\Router;
-use Src\Database\DB;
 use Src\Model\Model;
 use Src\Model\Scopes\SoftDelete\SoftDelete;
 
@@ -22,12 +21,6 @@ final class Setting extends Model
     public function __construct()
     {
         $this->initializeSoftDelete();
-
-        $this->addScope(
-            (new DB)->orderBy(
-                'DESC', $this->primaryKey
-            )
-        );
     }
 
     public function getId(): int
