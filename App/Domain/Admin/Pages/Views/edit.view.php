@@ -112,25 +112,11 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                                     <option
                                         value="<?= Page::PAGE_PUBLIC_IN_MENU ?>"
                                         <?= $pageInMenu === Page::PAGE_PUBLIC_IN_MENU ? 'selected' : '' ?>>
-                                        <?= Translation::get('form_show_page_public_in_menu') ?>
-                                    </option>
-                                    <option
-                                        value="<?= Page::PAGE_LOGGED_IN_IN_MENU ?>"
-                                        <?= $pageInMenu === Page::PAGE_LOGGED_IN_IN_MENU ? 'selected' : '' ?>>
-                                        <?= Translation::get('form_show_page_logged_in_in_menu') ?>
+                                        <?= Translation::get('page_in_menu') ?>
                                     </option>
                                     <option value="<?= Page::PAGE_STATIC ?>"
                                             <?= $pageInMenu === Page::PAGE_STATIC ? 'selected' : '' ?>>
                                         <?= Translation::get('form_show_page_static') ?>
-                                    </option>
-                                    <option value="<?= Page::PAGE_IN_FOOTER ?>"
-                                            <?= $pageInMenu === Page::PAGE_IN_FOOTER ? 'selected' : '' ?>>
-                                        <?= Translation::get('form_show_page_in_footer') ?>
-                                    </option>
-                                    <option
-                                        value="<?= Page::PAGE_IN_MENU_AND_IN_FOOTER ?>"
-                                        <?= $pageInMenu === Page::PAGE_IN_MENU_AND_IN_FOOTER ? 'selected' : '' ?>>
-                                        <?= Translation::get('form_show_page_in_menu_and_in_footer') ?>
                                     </option>
                                 </select>
                             </div>

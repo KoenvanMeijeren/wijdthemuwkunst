@@ -80,10 +80,12 @@ abstract class PageAction extends FormAction
 
         $validator->input((string)$this->inMenu, 'Zichtbaarheid van de pagina')
             ->isRequired()
-            ->isBetweenRange(
-                Page::PAGE_NOT_IN_MENU,
-                Page::PAGE_IN_MENU_AND_IN_FOOTER
-            );
+            ->isInArray(
+                (string)$this->inMenu, [
+                    (string) Page::PAGE_PUBLIC_IN_MENU,
+                    (string) Page::PAGE_NOT_IN_MENU,
+                    (string) Page::PAGE_STATIC,
+                ]);
 
         $validator->input($this->content, 'Pagina content')
             ->isRequired();

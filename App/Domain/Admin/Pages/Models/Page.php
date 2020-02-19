@@ -58,6 +58,12 @@ final class Page extends Model
         );
 
         $this->initializeSoftDelete();
+
+        $this->addScope(
+            (new DB)->orderBy(
+                'DESC', $this->primaryKey
+            )
+        );
     }
 
     public function getId(): int
