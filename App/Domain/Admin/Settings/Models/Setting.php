@@ -32,6 +32,13 @@ final class Setting extends Model
     {
         return $this->firstByAttributes([
             $this->key => $key
+        ]);
+    }
+
+    public function get(string $key): ?string
+    {
+        return $this->firstByAttributes([
+            $this->key => $key
         ])->setting_value;
     }
 }

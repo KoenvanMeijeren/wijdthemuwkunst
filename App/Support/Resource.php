@@ -9,6 +9,11 @@ use Src\Translation\Translation;
 
 final class Resource
 {
+    public static function loadStringMessage(): void
+    {
+        includeFile(RESOURCES_PATH . '/partials/error.view.php');
+    }
+
     public static function loadFlashMessage(): void
     {
         includeFile(RESOURCES_PATH . '/partials/flash.view.php');

@@ -2204,6 +2204,13 @@ hr {
     border-color: #e5474b;
 }
 
+/** Field error  */
+.error-field {
+    padding: 10px;
+    color: #ffffff;
+    border: 5px solid #ffffff;
+}
+
 /* Button */
 
 input[type="submit"],

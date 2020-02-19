@@ -5,22 +5,19 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Controllers;
 
 
-use App\Src\Mail\Mail;
+use App\Domain\Contact\Actions\ContactAction;
 use Src\Response\Redirect;
 
 final class ContactController
 {
-    public function send()
+    public function send(): Redirect
     {
-        $mail = new Mail();
+        $contact = new ContactAction();
 
-        $mail->setFrom('koenvanmeijeren@gmail.com', 'Koen');
-        $mail->addAddress('info@wijdthemuwkunst.nl', 'Wijdt Hem Uw Kunst');
-        $mail->setSubject('contact');
-        $mail->setBody('contact');
+        if ($contact->execute()) {
+            return new Redirect('/contact-verzonden');
+        }
 
-        $mail->send();
-
-        return new Redirect('/contact-verzonden');
+        return new Redirect('/#footer');
     }
 }

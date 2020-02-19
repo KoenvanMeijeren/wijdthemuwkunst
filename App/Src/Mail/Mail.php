@@ -6,6 +6,7 @@ namespace App\Src\Mail;
 
 
 use PHPMailer\PHPMailer\PHPMailer;
+use Src\View\MailView;
 
 final class Mail
 {
@@ -48,10 +49,12 @@ final class Mail
         $this->mailer->Subject = $subject;
     }
 
-    public function setBody(string $body): void
+    public function setBody(string $baseViewPath, string $mail, string $plainTextMail, array $content = []): void
     {
-        $this->mailer->Body = $body;
-        $this->setAltBody($body);
+        $this->mailer->Body = new MailView($baseViewPath, $mail, $content);
+        $this->setAltBody(
+            (string) new MailView($baseViewPath, $plainTextMail, $content)
+        );
     }
 
     public function setAltBody(string $body): void
@@ -82,8 +85,8 @@ final class Mail
         $this->mailer->addEmbeddedImage($path, $name, $encoding, $type);
     }
 
-    public function send(): void
+    public function send(): bool
     {
-        $this->mailer->send();
+        return $this->mailer->send();
     }
 }
