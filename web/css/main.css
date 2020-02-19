@@ -2204,6 +2204,13 @@ hr {
     border-color: #e5474b;
 }
 
+/** Field error  */
+.error-field {
+    padding: 10px;
+    color: #ffffff;
+    border: 5px solid #ffffff;
+}
+
 /* Button */
 
 input[type="submit"],
@@ -3566,7 +3573,7 @@ body {
     display: inline-block;
 }
 
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 1680px) {
 
     #nav {
         display: none;
@@ -3604,7 +3611,7 @@ body {
     width: 3.5em;
 }
 
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 1680px) {
 
     .navPanelToggle {
         display: block;
@@ -3724,7 +3731,7 @@ body {
     color: inherit;
 }
 
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 1680px) {
 
     #navPanel {
         display: block;

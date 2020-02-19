@@ -6,10 +6,14 @@ services:
       - 8303:3306
   php:
     environment:
+      PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
       PHP_XDEBUG_ENABLED: 1
       MYSQL_PORT: 8303:3306
   nginx:
     environment:
       NGINX_ERROR_LOG_LEVEL: debug
     ports:
-      - 8888:80
+      - 8887:80
+  mailhog:
+    ports:
+      - 8027:8025

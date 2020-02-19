@@ -1,0 +1,2 @@
+Bedrijf: <?= $company_name ?? '' ?>
+Bericht: <?= $message ?? '' ?>
