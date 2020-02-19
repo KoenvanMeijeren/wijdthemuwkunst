@@ -47,6 +47,10 @@ $setting = new Setting();
             <a href="/over-ons">Over ons</a>
             <a href="/koor">Het koor</a>
             <a href="/concerten">Concerten</a>
+
+            <?php foreach ($data['inMenuPages'] as $menuPage) : ?>
+                <a href="<?= $menuPage->slug_name ?? '' ?>"><?= $menuPage->page_title ?? '' ?></a>
+            <?php endforeach; ?>
         </nav>
 
         <a href="#navPanel"><span class="fa fa-bars"></span></a>

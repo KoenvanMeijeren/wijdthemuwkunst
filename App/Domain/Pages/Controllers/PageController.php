@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Domain\Pages\Controllers;
 
+use Domain\Admin\Pages\Models\Page as AdminPage;
 use Domain\Admin\Pages\Repositories\PageRepository;
 use Domain\Pages\Models\Page;
 use Src\Translation\Translation;
@@ -18,7 +19,8 @@ final class PageController
         return new DomainView(
             $this->baseViewPath . 'index',
             [
-                'title' => Translation::get('home_page_title')
+                'title' => Translation::get('home_page_title'),
+                'inMenuPages' => $this->getInMenuPages(),
             ]
         );
     }
@@ -45,7 +47,8 @@ final class PageController
             $this->baseViewPath . 'show',
             [
                 'title' => $page->getTitle(),
-                'pageContent' => $page->getContent()
+                'pageContent' => $page->getContent(),
+                'inMenuPages' => $this->getInMenuPages(),
             ]
         );
     }
@@ -56,8 +59,16 @@ final class PageController
             $this->baseViewPath . '404',
             [
                 'title' => Translation::get('page_not_found_title'),
-                'content' => Translation::get('page_not_found_description')
+                'content' => Translation::get('page_not_found_description'),
+                'inMenuPages' => $this->getInMenuPages(),
             ]
         );
+    }
+
+    private function getInMenuPages(): array
+    {
+        $pageModel = new Page();
+
+        return $pageModel->getByVisibility(AdminPage::PAGE_PUBLIC_IN_MENU);
     }
 }

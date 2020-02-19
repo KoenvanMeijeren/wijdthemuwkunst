@@ -22,6 +22,7 @@ final class Page extends Model
     protected string $primarySlugKey = 'slug_ID';
     protected string $slugKey = 'slug_name';
     protected string $slugSoftDeletedKey = 'slug_is_deleted';
+    protected string $inMenu = 'page_in_menu';
     protected string $isPublishedKey = 'page_is_published';
     protected string $softDeletedKey = 'page_is_deleted';
 
@@ -54,5 +55,16 @@ final class Page extends Model
     public function getBySlug(string $slug): ?stdClass
     {
         return $this->firstByAttributes([$this->slugKey => $slug]);
+    }
+
+    public function getByVisibility(int $visibility): array
+    {
+        $this->addScope(
+            (new DB)->where(
+                $this->inMenu, '=', (string) $visibility
+            )
+        );
+
+        return $this->all(['*']);
     }
 }

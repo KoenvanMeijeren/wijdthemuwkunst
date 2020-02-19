@@ -38,6 +38,27 @@ final class FormValidator
         return $this;
     }
 
+    public function isInArray(
+        string $value,
+        array $allowedValues,
+        string $errorMessage = ''
+    ): FormValidator {
+        if (!in_array($value, $allowedValues, true)) {
+            $error = $errorMessage;
+            if ($errorMessage === '') {
+                $error = sprintf(
+                    Translation::get('validator_form_field_value_is_not_in_array'),
+                    $this->alias,
+                    $value
+                );
+            }
+
+            $this->errors[] = $error;
+        }
+
+        return $this;
+    }
+
     public function isBetweenRange(
         int $min,
         int $max,
