@@ -45,9 +45,10 @@ $setting = new Setting();
             <a href="/koor">Het koor</a>
             <a href="/concerten">Concerten</a>
         </nav>
+
+        <a href="#navPanel"><span class="fa fa-bars"></span></a>
     </div>
 </header>
-<a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
 
 <div class="page">
     <?= $content ?? '' ?>

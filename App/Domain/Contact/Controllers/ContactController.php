@@ -16,6 +16,7 @@ final class ContactController
 
         $mail->setFrom('koenvanmeijeren@gmail.com', 'Koen');
         $mail->addAddress('info@wijdthemuwkunst.nl', 'Wijdt Hem Uw Kunst');
+        $mail->setSubject('contact');
         $mail->setBody('contact');
 
         $mail->send();
