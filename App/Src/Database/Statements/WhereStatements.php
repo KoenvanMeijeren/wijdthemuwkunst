@@ -206,11 +206,11 @@ trait WhereStatements
      * The IN operator allows you to specify multiple values in a WHERE clause.
      *
      * @param string    $column       The column to be filtered.
-     * @param string[]  ...$condition The conditions of the filter.
+     * @param string[]  $condition    The conditions of the filter.
      *
      * @return $this
      */
-    public function whereInValue(string $column, ...$condition): self
+    public function whereInValue(string $column, array $condition): self
     {
         $bindColumns = [];
         foreach ($condition as $key => $value) {
