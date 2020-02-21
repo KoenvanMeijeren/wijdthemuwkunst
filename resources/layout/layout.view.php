@@ -44,9 +44,6 @@ $setting = new Setting();
         <a href="/" class="logo">Wijdt Hem Uw Kunst</a>
         <nav id="nav">
             <a href="/">Home</a>
-            <a href="/over-ons">Over ons</a>
-            <a href="/koor">Het koor</a>
-            <a href="/concerten">Concerten</a>
 
             <?php foreach ($data['inMenuPages'] as $menuPage) : ?>
                 <a href="<?= $menuPage->slug_name ?? '' ?>"><?= $menuPage->page_title ?? '' ?></a>

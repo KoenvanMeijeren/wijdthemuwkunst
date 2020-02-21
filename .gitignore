@@ -5,6 +5,7 @@
 
 /web/phpmetrics
 /web/phpmd
+/web/storage
 
 .php_cs.cache
 
