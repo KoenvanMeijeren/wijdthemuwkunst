@@ -16,6 +16,8 @@ final class CreatePageAction extends PageAction
     {
         $this->attributes = [
             'page_slug_ID' => (string) $this->getSlugId(),
+            'page_thumbnail_ID' => $this->thumbnailID,
+            'page_banner_ID' => $this->bannerID,
             'page_title' => $this->title,
             'page_content' => $this->content,
             'page_in_menu' => (string) $this->inMenu

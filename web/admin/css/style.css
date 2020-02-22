@@ -137,6 +137,10 @@
     color: #721c24;
 }
 
+.progress {
+    display: none;
+    margin-bottom: 1rem;
+}
 
 .form-label-group {
     position: relative;

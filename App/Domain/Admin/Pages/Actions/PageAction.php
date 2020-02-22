@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Pages\Actions;
 
+use App\Domain\Admin\File\Actions\SaveFileAction;
 use Domain\Admin\Pages\Models\Page;
 use Domain\Admin\Pages\Models\Slug;
 use Domain\Admin\Pages\Repositories\PageRepository;
@@ -22,6 +23,8 @@ abstract class PageAction extends FormAction
     protected Session $session;
 
     protected int $id;
+    protected int $bannerID;
+    protected int $thumbnailID;
     protected string $title;
     protected string $url;
     protected int $inMenu;
@@ -34,6 +37,18 @@ abstract class PageAction extends FormAction
         $this->session = new Session();
         $request = new Request();
 
+        $thumbnail = json_decode(parseHtmlEntities($request->post('thumbnail')), true, 512,
+            JSON_THROW_ON_ERROR);
+        $banner = json_decode(parseHtmlEntities($request->post('banner')), true, 512,
+            JSON_THROW_ON_ERROR);
+
+        $saveThumbnail = new SaveFileAction();
+        $saveBanner = new SaveFileAction();
+
+        dd(
+            $thumbnail,
+            $banner,
+        );
         $this->title = $request->post('title');
         $this->url = $this->slug->parse($request->post('slug'));
         $this->inMenu = (int)$request->post('pageInMenu');

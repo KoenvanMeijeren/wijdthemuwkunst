@@ -69,10 +69,10 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                                    class="form-control"
                                    placeholder="<?= Translation::get('form_page_slug') ?>"
                                    value="<?= $request->post(
-    'slug',
-    $page->getSlug()
-) ?>"
-                                   <?= $disabled ?>
+                                       'slug',
+                                       $page->getSlug()
+                                   ) ?>"
+                                <?= $disabled ?>
                                    required>
                         </div>
                         <div class="col-sm-6">
@@ -84,9 +84,9 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                                    class="form-control"
                                    placeholder="<?= Translation::get('form_title') ?>"
                                    value="<?= $request->post(
-    'title',
-    $page->getTitle()
-) ?>"
+                                       'title',
+                                       $page->getTitle()
+                                   ) ?>"
                                    required>
                         </div>
                     </div>
@@ -102,7 +102,7 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                                 <select id="pageInMenu"
                                         class="form-control"
                                         name="pageInMenu"
-                                        <?= $disabled ?>
+                                    <?= $disabled ?>
                                         required>
                                     <option
                                         value="<?= Page::PAGE_NOT_IN_MENU ?>"
@@ -115,10 +115,149 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                                         <?= Translation::get('page_in_menu') ?>
                                     </option>
                                     <option value="<?= Page::PAGE_STATIC ?>"
-                                            <?= $pageInMenu === Page::PAGE_STATIC ? 'selected' : '' ?>>
+                                        <?= $pageInMenu === Page::PAGE_STATIC ? 'selected' : '' ?>>
                                         <?= Translation::get('form_show_page_static') ?>
                                     </option>
                                 </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputThumbnail">
+                                    Thumbnail -
+                                    Aanbevolen grootte 350x300
+                                </label>
+                                <input
+                                    class="form-control form-control-file col-sm-10"
+                                    id="inputThumbnail" type="file">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputBanner">
+                                    Banner - Aanbevolen
+                                    grootte 350x300
+                                </label>
+                                <input
+                                    class="form-control form-control-file col-sm-10"
+                                    id="inputBanner" type="file">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <img class="img-thumbnail"
+                                     src=""
+                                     id="thumbnailOutput"
+                                     alt="Thumbnail">
+                                <input type="hidden" name="thumbnail"
+                                       id="thumbnailInputOutput">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <img class="img-thumbnail"
+                                     src=""
+                                     id="bannerOutput"
+                                     alt="Banner">
+                                <input type="hidden" name="banner"
+                                       id="bannerInputOutput">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="thumbnailProgress progress">
+                                    <div
+                                        class="thumbnail-progress-bar progress-bar progress-bar-striped progress-bar-animated"
+                                        role="progressbar"
+                                        aria-valuenow="0" aria-valuemin="0"
+                                        aria-valuemax="100">0%
+                                    </div>
+                                </div>
+
+                                <div class="thumbnailAlert alert" role="alert"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="bannerProgress progress">
+                                    <div
+                                        class="banner-progress-bar progress-bar progress-bar-striped progress-bar-animated"
+                                        role="progressbar"
+                                        aria-valuenow="0" aria-valuemin="0"
+                                        aria-valuemax="100">0%
+                                    </div>
+                                </div>
+
+                                <div class="bannerAlert alert" role="alert"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade thumbnailModal" id="modal"
+                         tabindex="-1" role="dialog"
+                         aria-labelledby="modalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalLabel">
+                                        Foto bijsnijden
+                                    </h5>
+                                    <button type="button" class="close"
+                                            data-dismiss="modal"
+                                            aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="img-container">
+                                        <img class="image" id="thumbnailImage"
+                                             src="" alt="">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button"
+                                            class="btn btn-secondary"
+                                            data-dismiss="modal">
+                                        Annuleren
+                                    </button>
+                                    <button type="button"
+                                            class="btn btn-primary"
+                                            id="cropThumbnail">
+                                        Bijsnijden
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade bannerModal" id="modal" tabindex="-1" role="dialog"
+                         aria-labelledby="modalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalLabel">
+                                        Foto bijsnijden
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="img-container">
+                                        <img class="image" id="bannerImage" src="" alt="">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                        Annuleren
+                                    </button>
+                                    <button type="button" class="btn btn-primary" id="cropBanner">
+                                        Bijsnijden
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -133,11 +272,11 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                                 <textarea class="form-control" id="content"
                                           rows="10" name="content">
                                     <?= parseHtmlEntities(
-    $request->post(
-        'content',
-        $page->getContent()
-    )
-) ?>
+                                        $request->post(
+                                            'content',
+                                            $page->getContent()
+                                        )
+                                    ) ?>
                                 </textarea>
                             </div>
                         </div>

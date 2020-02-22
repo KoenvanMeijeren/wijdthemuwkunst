@@ -7,6 +7,8 @@ namespace Domain\Admin\Pages\Repositories;
 final class PageRepository
 {
     private int $id;
+    private string $banner;
+    private string $thumbnail;
     private string $title;
     private string $content;
     private int $inMenu;
