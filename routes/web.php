@@ -67,7 +67,10 @@ Router::prefix('admin')->group(static function () {
      */
     Router::post('upload/file', UploadFileController::class,
         'store', User::ADMIN);
-
+    Router::post('upload/thumbnail', UploadFileController::class,
+        'thumbnail', User::ADMIN);
+    Router::post('upload/banner', UploadFileController::class,
+        'banner', User::ADMIN);
     /**
      * Settings routes.
      */

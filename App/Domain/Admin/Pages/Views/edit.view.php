@@ -149,7 +149,7 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <img class="img-thumbnail"
-                                     src=""
+                                     src="<?= $page->getThumbnail() ?>"
                                      id="thumbnailOutput"
                                      alt="Thumbnail">
                                 <input type="hidden" name="thumbnail"
@@ -159,7 +159,7 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <img class="img-thumbnail"
-                                     src=""
+                                     src="<?= $page->getBanner() ?>"
                                      id="bannerOutput"
                                      alt="Banner">
                                 <input type="hidden" name="banner"

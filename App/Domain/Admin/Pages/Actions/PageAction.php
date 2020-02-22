@@ -23,8 +23,8 @@ abstract class PageAction extends FormAction
     protected Session $session;
 
     protected int $id;
-    protected int $bannerID;
-    protected int $thumbnailID;
+    protected int $bannerID = 0;
+    protected int $thumbnailID = 0;
     protected string $title;
     protected string $url;
     protected int $inMenu;
@@ -37,18 +37,30 @@ abstract class PageAction extends FormAction
         $this->session = new Session();
         $request = new Request();
 
-        $thumbnail = json_decode(parseHtmlEntities($request->post('thumbnail')), true, 512,
-            JSON_THROW_ON_ERROR);
-        $banner = json_decode(parseHtmlEntities($request->post('banner')), true, 512,
-            JSON_THROW_ON_ERROR);
+        if ($request->post('thumbnail') !== '') {
+            $thumbnail = json_decode(parseHtmlEntities($request->post('thumbnail')), true, 512,
+                JSON_THROW_ON_ERROR);
 
-        $saveThumbnail = new SaveFileAction();
-        $saveBanner = new SaveFileAction();
+            if (array_key_exists('location', $thumbnail)) {
+                $saveThumbnail = new SaveFileAction($thumbnail['location']);
+                $saveThumbnail->execute();
 
-        dd(
-            $thumbnail,
-            $banner,
-        );
+                $this->thumbnailID = $saveThumbnail->getFileId();
+            }
+        }
+
+        if ($request->post('banner') !== '' ) {
+            $banner = json_decode(parseHtmlEntities($request->post('banner')), true, 512,
+                JSON_THROW_ON_ERROR);
+
+            if (array_key_exists('location', $banner)) {
+                $saveBanner = new SaveFileAction($banner['location']);
+                $saveBanner->execute();
+
+                $this->bannerID = $saveBanner->getFileId();
+            }
+        }
+
         $this->title = $request->post('title');
         $this->url = $this->slug->parse($request->post('slug'));
         $this->inMenu = (int)$request->post('pageInMenu');

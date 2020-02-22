@@ -59,6 +59,14 @@ final class ContactAction extends FormAction
     {
         $validator = new FormValidator();
 
+        $setting = new Setting();
+
+        $validator->input($setting->get('bedrijf_email'), 'Bedrijfsemail')
+            ->settingIsRequired();
+
+        $validator->input($setting->get('bedrijf_naam'), 'Bedrijfsnaam')
+            ->settingIsRequired();
+
         $validator->input($this->name, 'Naam')->isRequired();
         $validator->input($this->email, 'Email')->isRequired();
         $validator->input($this->message, 'Bericht')->isRequired();

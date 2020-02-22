@@ -256,6 +256,7 @@ return [
      */
     'validator_form_base_error_message' => 'Het formulier kon niet worden verzonden omdat het de volgende fouten bevat:',
     'validator_form_field_is_required' => '%s is verplicht om in te vullen.',
+    'validator_admin_setting_required' => '%s is niet ingesteld door de beheerder, dit is verplicht om in te laten stellen door de beheerder omdat anders het formulier niet kan worden verzonden.',
     'validator_form_field_is_unique' => '%s bestaat al in de database.',
     'validator_form_field_has_invalid_range' => '%s mag niet kleiner dan %u en niet groter dan %u zijn.',
     'validator_form_field_value_is_not_in_array' => 'Het veld %s bevat een niet toegestane waarde: %s.',

@@ -16,12 +16,18 @@ final class CreatePageAction extends PageAction
     {
         $this->attributes = [
             'page_slug_ID' => (string) $this->getSlugId(),
-            'page_thumbnail_ID' => $this->thumbnailID,
-            'page_banner_ID' => $this->bannerID,
             'page_title' => $this->title,
             'page_content' => $this->content,
             'page_in_menu' => (string) $this->inMenu
         ];
+
+        if ($this->thumbnailID !== 0) {
+            $this->attributes['page_thumbnail_ID'] = (string) $this->thumbnailID;
+        }
+
+        if ($this->bannerID !== 0) {
+            $this->attributes['page_banner_ID'] = (string) $this->bannerID;
+        }
 
         if ($this->inMenu === Page::PAGE_STATIC) {
             $this->attributes['page_is_published'] = '1';

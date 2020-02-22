@@ -101,7 +101,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 var formData = new FormData();
 
                 formData.append('thumbnailOutput', fileName);
-                $.ajax(host + '/admin/upload/file', {
+                $.ajax(host + '/admin/upload/thumbnail', {
                     method: 'POST',
                     data: formData,
                     processData: false,
@@ -215,7 +215,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 var formData = new FormData();
 
                 formData.append('bannerOutput', fileName);
-                $.ajax(host + '/admin/upload/file', {
+                $.ajax(host + '/admin/upload/banner', {
                     method: 'POST',
                     data: formData,
                     processData: false,

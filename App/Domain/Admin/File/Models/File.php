@@ -5,22 +5,22 @@ declare(strict_types=1);
 namespace App\Domain\Admin\File\Models;
 
 
-final class File
+use Src\Model\Model;
+
+final class File extends Model
 {
     protected string $table = 'file';
     protected string $primaryKey = 'file_ID';
-    protected string $path = 'file_path';
+    protected string $pathKey = 'file_path';
     protected string $isDeleted = 'file_is_deleted';
 
-    private string $stored_path;
-
-    public function __construct(string $path)
+    public function getPrimaryKey(): string
     {
-        $this->stored_path = $path;
+        return $this->primaryKey;
     }
 
-    public function exists(): bool
+    public function getPathKey(): string
     {
-        return file_exists($this->stored_path);
+        return $this->pathKey;
     }
 }
