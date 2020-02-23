@@ -18,23 +18,19 @@ $page = $home ?? null;
     </section>
 <?php else : ?>
     <section class="header">
-        <img class="banner" src="/images/banner.jpg" alt="<?= $page->getTitle() . ' image banner' ?>">
+        <img class="banner" src="/images/banner.jpg"
+             alt="<?= $page->getTitle() . ' image banner' ?>">
     </section>
 <?php endif; ?>
 
-<!-- About us -->
-<?php if ($page->getContent() !== '') : ?>
-    <section class="text-section pb-0" id="over-ons">
-        <div class="inner">
-            <div class="page-content">
-                <?= parseHtmlEntities($page->getContent()) ?>
-            </div>
+<div class="container page">
+    <?php if ($page->getContent() !== '') : ?>
+        <div class="mt-5 mb-5">
+            <?= parseHtmlEntities($page->getContent()) ?>
         </div>
-    </section>
-<?php endif; ?>
+    <?php endif; ?>
 
-<section class="text-section" id="concerten">
-    <div class="inner">
+    <div class="mt-5 mb-5">
         <header>
             <h2>Concerten</h2>
         </header>
@@ -49,11 +45,12 @@ $page = $home ?? null;
                         <img class="card-img-top" src="/images/kerk.jfif"
                              alt="Card image cap">
                         <div class="card-body p-2">
-                            <h4 class="card-title p-0 m-0">Paas uitvoering</h4>
+                            <h4 class="card-title p-0 m-0">Paas
+                                uitvoering</h4>
                         </div>
                     </div>
                 </div>
             <?php endfor; ?>
         </div>
     </div>
-</section>
+</div>
