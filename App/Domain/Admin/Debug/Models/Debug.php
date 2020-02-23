@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Domain\Admin\Debug\Models;
 
 use Cake\Chronos\Chronos;
+use Defuse\Crypto\Exception\WrongKeyOrModifiedCiphertextException;
 use Src\Core\Cookie;
 use Src\Core\Env;
 use Src\Log\Log;
@@ -99,10 +100,6 @@ final class Debug
 
         $table->addHead('Sleutel', 'Waarde');
         foreach (array_keys($_COOKIE) as $key) {
-            if ($key === 'sessionName' || $key === 'websiteID') {
-                continue;
-            }
-
             if ($key === $cookie->get('sessionName')
                 && $cookie->exists($cookie->get('sessionName'))
             ) {
@@ -110,10 +107,17 @@ final class Debug
                     'sessie cookie',
                     $_COOKIE[$cookie->get('sessionName')]
                 );
-            } else {
+            }
+
+            try {
                 $table->addRow(
                     $key,
                     $cookie->get($key)
+                );
+            } catch (WrongKeyOrModifiedCiphertextException $e) {
+                $table->addRow(
+                    $key,
+                    $_COOKIE[$key]
                 );
             }
         }
@@ -131,7 +135,7 @@ final class Debug
     public function getLogInformation(string $date): array
     {
         $chronos = new Chronos($date);
-        $logs = (array) preg_split(
+        $logs = (array)preg_split(
             '/(?=\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}])/',
             Log::get($chronos->toDateString())
         );
@@ -172,7 +176,7 @@ final class Debug
 
         phpinfo();
 
-        $phpinfo = (string) ob_get_clean();
+        $phpinfo = (string)ob_get_clean();
 
         return preg_replace(
             '%^.*<body>(.*)</body>.*$%ms',

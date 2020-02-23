@@ -36,6 +36,12 @@ final class App
         $env = new Env();
         $env->setErrorHandling();
 
+        // set the http origin
+        if ($env->get() === Env::DEVELOPMENT) {
+            $request = new Request();
+            $_SERVER[Request::HTTP_ORIGIN] = $request->env('app_uri');
+        }
+
         $header = new Header();
         $header->set(Header::X_XSS_PROTECTION);
         $header->set(Header::NGINX_X_FRAME_OPTIONS);

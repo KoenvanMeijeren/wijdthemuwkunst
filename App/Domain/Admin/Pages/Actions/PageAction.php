@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Pages\Actions;
 
+use App\Domain\Admin\File\Actions\SaveFileAction;
 use Domain\Admin\Pages\Models\Page;
 use Domain\Admin\Pages\Models\Slug;
 use Domain\Admin\Pages\Repositories\PageRepository;
@@ -22,6 +23,8 @@ abstract class PageAction extends FormAction
     protected Session $session;
 
     protected int $id;
+    protected int $bannerID = 0;
+    protected int $thumbnailID = 0;
     protected string $title;
     protected string $url;
     protected int $inMenu;
@@ -33,6 +36,38 @@ abstract class PageAction extends FormAction
         $this->slug = new Slug();
         $this->session = new Session();
         $request = new Request();
+
+        if ($request->post('thumbnail') !== '') {
+            $thumbnail = json_decode(
+                parseHtmlEntities($request->post('thumbnail')),
+                true,
+                512,
+                JSON_THROW_ON_ERROR
+            );
+
+            if (array_key_exists('location', $thumbnail)) {
+                $saveThumbnail = new SaveFileAction($thumbnail['location']);
+                $saveThumbnail->execute();
+
+                $this->thumbnailID = $saveThumbnail->getFileId();
+            }
+        }
+
+        if ($request->post('banner') !== '') {
+            $banner = json_decode(
+                parseHtmlEntities($request->post('banner')),
+                true,
+                512,
+                JSON_THROW_ON_ERROR
+            );
+
+            if (array_key_exists('location', $banner)) {
+                $saveBanner = new SaveFileAction($banner['location']);
+                $saveBanner->execute();
+
+                $this->bannerID = $saveBanner->getFileId();
+            }
+        }
 
         $this->title = $request->post('title');
         $this->url = $this->slug->parse($request->post('slug'));
@@ -81,11 +116,13 @@ abstract class PageAction extends FormAction
         $validator->input((string)$this->inMenu, 'Zichtbaarheid van de pagina')
             ->isRequired()
             ->isInArray(
-                (string)$this->inMenu, [
+                (string)$this->inMenu,
+                [
                     (string) Page::PAGE_PUBLIC_IN_MENU,
                     (string) Page::PAGE_NOT_IN_MENU,
                     (string) Page::PAGE_STATIC,
-                ]);
+                ]
+            );
 
         $validator->input($this->content, 'Pagina content')
             ->isRequired();

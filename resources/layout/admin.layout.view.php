@@ -58,6 +58,9 @@ $request = new Request();
     <script
         src="https://cdn.tiny.cloud/1/<?= $request->env('tiny_mce_key') ?>/tinymce/5/tinymce.min.js"
         referrerpolicy="origin"></script>
+
+    <!-- Cropper JS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.1/cropper.min.css" rel="stylesheet">
 </head>
 <body>
 <?php if ($user->isLoggedIn()) : ?>
@@ -208,6 +211,10 @@ $request = new Request();
 <script type="text/javascript" charset="utf8"
         src="/admin/js/password-strength-indicator.js"></script>
 
+<!-- Progress bar -->
+<script type="text/css" charset="utf8"
+        src="/admin/css/progress-bar.css"></script>
+
 <!-- Theme js -->
 <script type="text/javascript" charset="utf8"
         src="/vendor/cms-theme/js/light-bootstrap-dashboard.js"></script>
@@ -217,6 +224,13 @@ $request = new Request();
 <!-- Initialize the Tiny Mce editor -->
 <script type="text/javascript" charset="utf8"
         src="/js/tinymce/tinymce.js"></script>
+
+<!-- Progress bar -->
+<script type="text/javascript" charset="utf8"
+        src="/admin/js/progress-bar.js"></script>
+
+<!-- Cropper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.1/cropper.min.js"></script>
 
 <!-- Default JS -->
 <script type="text/javascript" charset="utf8"

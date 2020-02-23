@@ -13,25 +13,34 @@ use Src\View\DomainView;
 final class PageController
 {
     private string $baseViewPath = 'Pages/Views/';
+    private Page $page;
+
+    public function __construct()
+    {
+        $this->page = new Page();
+    }
 
     public function index(): DomainView
     {
+        $home = new PageRepository($this->page->getBySlug('home'));
+        $events = new PageRepository($this->page->getBySlug('concerten'));
+
         return new DomainView(
             $this->baseViewPath . 'index',
             [
                 'title' => Translation::get('home_page_title'),
                 'inMenuPages' => $this->getInMenuPages(),
+                'homeRepo' => $home,
+                'eventsRepo' => $events,
             ]
         );
     }
 
     public function findOr404(): DomainView
     {
-        $pageModel = new Page();
-
-        $page = $pageModel->getBySlug($pageModel->getSlug());
+        $page = $this->page->getBySlug($this->page->getSlug());
         if ($page === null) {
-            $page = $pageModel->getBySlug('pagina-niet-gevonden');
+            $page = $this->page->getBySlug('pagina-niet-gevonden');
         }
 
         if ($page !== null) {
@@ -47,7 +56,7 @@ final class PageController
             $this->baseViewPath . 'show',
             [
                 'title' => $page->getTitle(),
-                'pageContent' => $page->getContent(),
+                'pageRepo' => $page,
                 'inMenuPages' => $this->getInMenuPages(),
             ]
         );
@@ -67,8 +76,6 @@ final class PageController
 
     private function getInMenuPages(): array
     {
-        $pageModel = new Page();
-
-        return $pageModel->getByVisibility(AdminPage::PAGE_PUBLIC_IN_MENU);
+        return $this->page->getByVisibility(AdminPage::PAGE_PUBLIC_IN_MENU);
     }
 }

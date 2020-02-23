@@ -43,7 +43,8 @@
         "siriusphp/upload": "^2.1.1",
         "symfony/filesystem": "^4.4.4",
         "symfony/templating": "^4.4.4",
-        "vlucas/phpdotenv": "^4.1.0"
+        "vlucas/phpdotenv": "^4.1.0",
+        "ext-json": "*"
     },
     "require-dev": {
         "bmitch/churn-php": "^1.0.3",
@@ -70,9 +71,7 @@
         ],
         "inspect": [
             "phpcs app",
-            "phpcpd app",
-            "phpmnd app",
-            "phpstan analyse -c phpstan.neon"
+            "phpcpd app"
         ],
         "inspect-fix": [
             "php-cs-fixer fix app",

@@ -51,6 +51,8 @@ return [
     'page_unsuccessfully_published' => 'De pagina \'%s\' kon niet worden gepubliceerd',
     'page_unsuccessfully_unpublished' => 'De publicatie van de pagina \'%s\' kon niet ongedaan worden gemaakt.',
     'page_successfully_published' => 'De pagina \'%s\' is succesvol gepubliceerd',
+    'page_banner_successfully_removed' => 'De banner van de pagina \'%s\' is succesvol verwijderd',
+    'page_thumbnail_successfully_removed' => 'De thumbnail van de pagina \'%s\' is succesvol verwijderd',
     'page_successfully_unpublished' => 'De publicatie van de pagina \'%s\' is succesvol ongedaan gemaakt.',
     'page_already_exists' => 'De pagina \'%s\' bestaat al.',
     'delete_page_confirmation_message' => 'Weet je zeker dat je deze pagina wilt verwijderen?',
@@ -256,6 +258,7 @@ return [
      */
     'validator_form_base_error_message' => 'Het formulier kon niet worden verzonden omdat het de volgende fouten bevat:',
     'validator_form_field_is_required' => '%s is verplicht om in te vullen.',
+    'validator_admin_setting_required' => '%s is niet ingesteld door de beheerder, dit is verplicht om in te laten stellen door de beheerder omdat anders het formulier niet kan worden verzonden.',
     'validator_form_field_is_unique' => '%s bestaat al in de database.',
     'validator_form_field_has_invalid_range' => '%s mag niet kleiner dan %u en niet groter dan %u zijn.',
     'validator_form_field_value_is_not_in_array' => 'Het veld %s bevat een niet toegestane waarde: %s.',

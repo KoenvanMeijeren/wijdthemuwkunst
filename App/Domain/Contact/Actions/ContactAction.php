@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Domain\Contact\Actions;
 
-
 use App\Src\Mail\Mail;
 use Domain\Admin\Settings\Models\Setting;
 use Src\Action\FormAction;
@@ -37,17 +36,22 @@ final class ContactAction extends FormAction
         $setting = new Setting();
 
         $mail->setFrom($this->email, $this->name);
-        $mail->addAddress($setting->get('bedrijf_email'),
-            $setting->get('bedrijf_naam'));
+        $mail->addAddress(
+            $setting->get('bedrijf_email'),
+            $setting->get('bedrijf_naam')
+        );
         $mail->setSubject($setting->get('contactformulier_onderwerp'));
 
-        $mail->setBody($this->baseViewPath,
+        $mail->setBody(
+            $this->baseViewPath,
             'contact',
-            'plain-text-contact', [
+            'plain-text-contact',
+            [
                 'company_name' => $setting->get('bedrijf_naam'),
                 'copyright' => $setting->get('copyright_tekst'),
                 'message' => $this->message,
-            ]);
+            ]
+        );
 
         return $mail->send();
     }
@@ -58,6 +62,14 @@ final class ContactAction extends FormAction
     protected function validate(): bool
     {
         $validator = new FormValidator();
+
+        $setting = new Setting();
+
+        $validator->input($setting->get('bedrijf_email'), 'Bedrijfsemail')
+            ->settingIsRequired();
+
+        $validator->input($setting->get('bedrijf_naam'), 'Bedrijfsnaam')
+            ->settingIsRequired();
 
         $validator->input($this->name, 'Naam')->isRequired();
         $validator->input($this->email, 'Email')->isRequired();

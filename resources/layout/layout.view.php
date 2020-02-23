@@ -19,7 +19,8 @@ $setting = new Setting();
     <meta name="author" content="Christelijk koor Wijdt Hem Uw Kunst">
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
     <!-- Font awesome -->
     <script src="https://kit.fontawesome.com/ec953a682d.js"
@@ -41,12 +42,11 @@ $setting = new Setting();
 <!-- Header -->
 <header id="header">
     <div class="inner">
-        <a href="/" class="logo">Wijdt Hem Uw Kunst</a>
+        <a href="/" class="logo">
+            <?= $setting->get('website_naam') ?>
+        </a>
         <nav id="nav">
             <a href="/">Home</a>
-            <a href="/over-ons">Over ons</a>
-            <a href="/koor">Het koor</a>
-            <a href="/concerten">Concerten</a>
 
             <?php foreach ($data['inMenuPages'] as $menuPage) : ?>
                 <a href="<?= $menuPage->slug_name ?? '' ?>"><?= $menuPage->page_title ?? '' ?></a>

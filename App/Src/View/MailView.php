@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Src\View;
 
-
 final class MailView extends BaseMailView
 {
     /**

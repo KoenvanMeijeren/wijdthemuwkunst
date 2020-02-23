@@ -21,6 +21,14 @@ final class CreatePageAction extends PageAction
             'page_in_menu' => (string) $this->inMenu
         ];
 
+        if ($this->thumbnailID !== 0) {
+            $this->attributes['page_thumbnail_ID'] = (string) $this->thumbnailID;
+        }
+
+        if ($this->bannerID !== 0) {
+            $this->attributes['page_banner_ID'] = (string) $this->bannerID;
+        }
+
         if ($this->inMenu === Page::PAGE_STATIC) {
             $this->attributes['page_is_published'] = '1';
         }

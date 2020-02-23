@@ -7,6 +7,8 @@ namespace Domain\Admin\Pages\Controllers;
 use Domain\Admin\Pages\Actions\CreatePageAction;
 use Domain\Admin\Pages\Actions\DeletePageAction;
 use Domain\Admin\Pages\Actions\PublishPageAction;
+use Domain\Admin\Pages\Actions\RemovePageBannerAction;
+use Domain\Admin\Pages\Actions\RemovePageThumbnailAction;
 use Domain\Admin\Pages\Actions\UnPublishPageAction;
 use Domain\Admin\Pages\Actions\UpdatePageAction;
 use Domain\Admin\Pages\Models\Page;
@@ -110,6 +112,22 @@ final class PageController
     {
         $unPublish = new UnPublishPageAction($this->page);
         $unPublish->execute();
+
+        return new Redirect($this->redirectSame . $this->page->getId());
+    }
+
+    public function removeThumbnail(): Redirect
+    {
+        $removeThumbnail = new RemovePageThumbnailAction($this->page);
+        $removeThumbnail->execute();
+
+        return new Redirect($this->redirectSame . $this->page->getId());
+    }
+
+    public function removeBanner(): Redirect
+    {
+        $removeBanner = new RemovePageBannerAction($this->page);
+        $removeBanner->execute();
 
         return new Redirect($this->redirectSame . $this->page->getId());
     }

@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Pages\Repositories;
 
+use App\Domain\Admin\File\Models\File;
+
 final class PageRepository
 {
     private int $id;
+    private string $banner;
+    private string $thumbnail;
     private string $title;
     private string $content;
     private int $inMenu;
@@ -19,7 +23,13 @@ final class PageRepository
 
     public function __construct(?object $page)
     {
+        $file = new File();
+        $thumbnail = $file->find((int) ($page->page_thumbnail_ID ?? '0'));
+        $banner = $file->find((int) ($page->page_banner_ID ?? '0'));
+
         $this->id = (int) ($page->page_ID ?? '0');
+        $this->thumbnail = $thumbnail->file_path ?? '';
+        $this->banner = $banner->file_path ?? '';
         $this->title = $page->page_title ?? '';
         $this->content = $page->page_content ?? '';
         $this->inMenu = (int) ($page->page_in_menu ?? '0');
@@ -34,6 +44,16 @@ final class PageRepository
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function getThumbnail(): string
+    {
+        return $this->thumbnail;
+    }
+
+    public function getBanner(): string
+    {
+        return $this->banner;
     }
 
     public function getTitle(): string

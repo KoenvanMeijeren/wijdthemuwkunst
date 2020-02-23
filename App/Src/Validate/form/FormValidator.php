@@ -38,6 +38,18 @@ final class FormValidator
         return $this;
     }
 
+    public function settingIsRequired(): FormValidator
+    {
+        if ($this->input === '') {
+            $this->errors[] = sprintf(
+                Translation::get('validator_admin_setting_required'),
+                $this->alias
+            );
+        }
+
+        return $this;
+    }
+
     public function isInArray(
         string $value,
         array $allowedValues,
