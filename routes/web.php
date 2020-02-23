@@ -53,6 +53,10 @@ Router::prefix('admin')->group(static function () {
         'store', User::ADMIN);
     Router::get('page/edit/{slug}', AdminPageController::class,
         'edit', User::ADMIN);
+    Router::post('page/edit/{slug}/remove/banner', AdminPageController::class,
+        'removeBanner', User::ADMIN);
+    Router::post('page/edit/{slug}/remove/thumbnail', AdminPageController::class,
+        'removeThumbnail', User::ADMIN);
     Router::post('page/edit/{slug}/store', AdminPageController::class,
         'update', User::ADMIN);
     Router::post('page/publish/{slug}', AdminPageController::class,

@@ -20,8 +20,12 @@ if ($user->getRights() !== User::DEVELOPER
 }
 
 $action = '/admin/page/create/store';
+$removeBannerAction = '';
+$removeThumbnailAction = '';
 if ($page->getId() !== 0) {
     $action = '/admin/page/edit/' . $page->getId() . '/store';
+    $removeThumbnailAction = '/admin/page/edit/' . $page->getId() . '/remove/thumbnail';
+    $removeBannerAction = '/admin/page/edit/' . $page->getId() . '/remove/banner';
 }
 $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
 ?>
@@ -56,6 +60,36 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                 </div>
             </div>
             <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <?php if ($removeThumbnailAction !== '' && $page->getThumbnail() !== '') : ?>
+                            <form method="post"
+                                  action="<?= $removeThumbnailAction ?>">
+                                <?= CSRF::insertToken($removeThumbnailAction) ?>
+
+                                <button type="submit" name="remove-thumbnail"
+                                        class="btn btn-danger mt-3">
+                                    Delete thumbnail
+                                </button>
+                            </form>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <?php if ($removeBannerAction !== '' && $page->getBanner() !== '') : ?>
+                            <form method="post"
+                                  action="<?= $removeBannerAction ?>">
+                                <?= CSRF::insertToken($removeBannerAction) ?>
+                                <button type="submit"
+                                        name="delete-banner"
+                                        class="btn btn-danger mt-3">
+                                    Delete banner
+                                </button>
+                            </form>
+                        <?php endif; ?>
+                    </div>
+                </div>
+
                 <form method="post" action="<?= $action ?>">
                     <?= CSRF::insertToken($action) ?>
 
@@ -177,7 +211,8 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                                     </div>
                                 </div>
 
-                                <div class="thumbnailAlert alert" role="alert"></div>
+                                <div class="thumbnailAlert alert"
+                                     role="alert"></div>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -191,7 +226,8 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                                     </div>
                                 </div>
 
-                                <div class="bannerAlert alert" role="alert"></div>
+                                <div class="bannerAlert alert"
+                                     role="alert"></div>
                             </div>
                         </div>
                     </div>
@@ -233,7 +269,8 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                         </div>
                     </div>
 
-                    <div class="modal fade bannerModal" id="modal" tabindex="-1" role="dialog"
+                    <div class="modal fade bannerModal" id="modal" tabindex="-1"
+                         role="dialog"
                          aria-labelledby="modalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -241,20 +278,27 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                                     <h5 class="modal-title" id="modalLabel">
                                         Foto bijsnijden
                                     </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <button type="button" class="close"
+                                            data-dismiss="modal"
+                                            aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="img-container">
-                                        <img class="image" id="bannerImage" src="" alt="">
+                                        <img class="image" id="bannerImage"
+                                             src="" alt="">
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                    <button type="button"
+                                            class="btn btn-secondary"
+                                            data-dismiss="modal">
                                         Annuleren
                                     </button>
-                                    <button type="button" class="btn btn-primary" id="cropBanner">
+                                    <button type="button"
+                                            class="btn btn-primary"
+                                            id="cropBanner">
                                         Bijsnijden
                                     </button>
                                 </div>

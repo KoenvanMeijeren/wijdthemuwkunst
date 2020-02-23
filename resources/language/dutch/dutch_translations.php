@@ -51,6 +51,8 @@ return [
     'page_unsuccessfully_published' => 'De pagina \'%s\' kon niet worden gepubliceerd',
     'page_unsuccessfully_unpublished' => 'De publicatie van de pagina \'%s\' kon niet ongedaan worden gemaakt.',
     'page_successfully_published' => 'De pagina \'%s\' is succesvol gepubliceerd',
+    'page_banner_successfully_removed' => 'De banner van de pagina \'%s\' is succesvol verwijderd',
+    'page_thumbnail_successfully_removed' => 'De thumbnail van de pagina \'%s\' is succesvol verwijderd',
     'page_successfully_unpublished' => 'De publicatie van de pagina \'%s\' is succesvol ongedaan gemaakt.',
     'page_already_exists' => 'De pagina \'%s\' bestaat al.',
     'delete_page_confirmation_message' => 'Weet je zeker dat je deze pagina wilt verwijderen?',
