@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Domain\Admin\File\Actions;
 
+use Cake\Chronos\Chronos;
 use Src\Action\FileAction;
 use Src\Core\Request;
 use Src\Core\Upload;
@@ -27,7 +28,8 @@ final class UploadThumbnailAction extends FileAction
         $file = $request->file('thumbnailOutput');
 
         if (array_key_exists('name', $file)) {
-            $file['name'] .= '_thumbnail';
+            $datetime = new Chronos();
+            $file['name'] .= $datetime->toDateTimeString();
         }
 
         $uploader = new Upload($file);

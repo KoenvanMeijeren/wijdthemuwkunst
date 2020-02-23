@@ -54,7 +54,7 @@ final class PageController
             $this->baseViewPath . 'show',
             [
                 'title' => $page->getTitle(),
-                'pageContent' => $page->getContent(),
+                'pageRepo' => $page,
                 'inMenuPages' => $this->getInMenuPages(),
             ]
         );

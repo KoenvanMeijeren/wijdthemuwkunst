@@ -7,17 +7,25 @@ use Domain\Admin\Pages\Repositories\PageRepository;
 $page = $home ?? null;
 ?>
 
-<!-- Banner -->
-<section id="banner"></section>
+<?php if ($page->getBanner() !== '') : ?>
+    <!-- Banner -->
+    <section class="header">
+        <img class="banner" src="<?= $page->getBanner() ?>"
+             alt="<?= $page->getTitle() . ' image banner' ?>">
+
+        <img class="thumbnail" src="<?= $page->getThumbnail() ?>"
+             alt="<?= $page->getTitle() . ' image banner' ?>">
+    </section>
+<?php else : ?>
+    <section class="header">
+        <img class="banner" src="/images/banner.jpg" alt="<?= $page->getTitle() . ' image banner' ?>">
+    </section>
+<?php endif; ?>
 
 <!-- About us -->
 <?php if ($page->getContent() !== '') : ?>
     <section class="text-section pb-0" id="over-ons">
         <div class="inner">
-            <header>
-                <h2><?= $page->getTitle() ?></h2>
-            </header>
-
             <div class="page-content">
                 <?= parseHtmlEntities($page->getContent()) ?>
             </div>

@@ -11,7 +11,7 @@ abstract class FormAction extends Action
     protected function authorize(): bool
     {
         if (! CSRF::validate()) {
-            return true;
+            return false;
         }
 
         return true;

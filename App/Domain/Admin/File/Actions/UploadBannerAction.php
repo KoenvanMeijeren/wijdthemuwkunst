@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Domain\Admin\File\Actions;
 
+use Cake\Chronos\Chronos;
 use Src\Action\FileAction;
 use Src\Core\Request;
 use Src\Core\Upload;
+use Support\DateTime;
 
 final class UploadBannerAction extends FileAction
 {
@@ -27,7 +29,8 @@ final class UploadBannerAction extends FileAction
         $file = $request->file('bannerOutput');
 
         if (array_key_exists('name', $file)) {
-            $file['name'] .= '_banner';
+            $datetime = new Chronos();
+            $file['name'] .= $datetime->toDateTimeString();
         }
 
         $uploader = new Upload($file);

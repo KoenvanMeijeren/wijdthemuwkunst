@@ -3745,6 +3745,26 @@ body {
 }
 
 /* Banner */
+.banner {
+    width: 100%;
+    max-width: 2000px;
+}
+
+.thumbnail {
+    display: none;
+}
+
+@media screen and (max-width: 736px) {
+
+    .banner {
+        display: none;
+    }
+
+    .thumbnail {
+        display: block;
+    }
+
+}
 
 #banner {
     background-color: #e5474b;

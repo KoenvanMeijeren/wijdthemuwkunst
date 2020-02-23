@@ -19,7 +19,8 @@ $setting = new Setting();
     <meta name="author" content="Christelijk koor Wijdt Hem Uw Kunst">
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
     <!-- Font awesome -->
     <script src="https://kit.fontawesome.com/ec953a682d.js"
