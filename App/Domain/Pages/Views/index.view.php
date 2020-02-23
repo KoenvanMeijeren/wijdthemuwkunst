@@ -7,7 +7,11 @@ use Domain\Admin\Pages\Repositories\PageRepository;
 $page = $home ?? null;
 ?>
 
-<?php if ($page->getBanner() !== '') : ?>
+<?php if ($page->getBanner() !== ''
+    && $page->getThumbnail() !== ''
+    && file_exists($page->getBanner())
+    && file_exists($page->getThumbnail())
+) : ?>
     <!-- Banner -->
     <section class="header">
         <img class="banner" src="<?= $page->getBanner() ?>"
