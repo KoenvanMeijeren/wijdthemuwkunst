@@ -2,6 +2,11 @@
 declare(strict_types=1);
 
 use Domain\Admin\Pages\Repositories\PageRepository;
+use Src\Core\Request;
+
+$request = new Request();
+
+$documentRoot = $request->server(Request::DOCUMENT_ROOT);
 
 /** @var PageRepository $home */
 $home = $homeRepo ?? null;
@@ -11,8 +16,8 @@ $events = $eventsRepo ?? null;
 
 <?php if ($home->getBanner() !== ''
     && $home->getThumbnail() !== ''
-    && file_exists($home->getBanner())
-    && file_exists($home->getThumbnail())
+    && file_exists($documentRoot . $home->getBanner())
+    && file_exists($documentRoot . $home->getThumbnail())
 ) : ?>
     <!-- Banner -->
     <section class="header">
