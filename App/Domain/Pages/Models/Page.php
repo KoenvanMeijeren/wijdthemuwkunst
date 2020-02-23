@@ -61,7 +61,9 @@ final class Page extends Model
     {
         $this->addScope(
             (new DB)->where(
-                $this->inMenu, '=', (string) $visibility
+                $this->inMenu,
+                '=',
+                (string) $visibility
             )
         );
 

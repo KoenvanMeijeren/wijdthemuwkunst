@@ -71,9 +71,7 @@
         ],
         "inspect": [
             "phpcs app",
-            "phpcpd app",
-            "phpmnd app",
-            "phpstan analyse -c phpstan.neon"
+            "phpcpd app"
         ],
         "inspect-fix": [
             "php-cs-fixer fix app",

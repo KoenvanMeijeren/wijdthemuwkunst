@@ -8,13 +8,16 @@ use Cake\Chronos\Chronos;
 use Src\Action\FileAction;
 use Src\Core\Request;
 use Src\Core\Upload;
-use Support\DateTime;
 
 final class UploadBannerAction extends FileAction
 {
-    public function __construct()
+    private array $file;
+
+    public function __construct(string $fileName)
     {
         $request = new Request();
+
+        $this->file = $request->file($fileName);
 
         $this->acceptedOrigins[] = $request->env('app_uri');
     }
@@ -24,18 +27,14 @@ final class UploadBannerAction extends FileAction
      */
     protected function handle(): void
     {
-        $request = new Request();
-
-        $file = $request->file('bannerOutput');
-
-        if (array_key_exists('name', $file)) {
+        if (array_key_exists('name', $this->file)) {
             $datetime = new Chronos();
-            $file['name'] .= $datetime->toDateTimeString();
+            $this->file['name'] .= $datetime->toDateTimeString();
         }
 
-        $uploader = new Upload($file);
+        $uploader = new Upload($this->file);
 
-        if (count($file) > 0
+        if (count($this->file) > 0
             && $uploader->prepare()
             && $uploader->getFileIfItExists() === ''
         ) {

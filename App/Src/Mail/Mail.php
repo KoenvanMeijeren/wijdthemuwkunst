@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Src\Mail;
 
-
 use PHPMailer\PHPMailer\PHPMailer;
 use Src\View\MailView;
 
@@ -34,12 +33,12 @@ final class Mail
         $this->mailer->addReplyTo($email, $name);
     }
 
-    public function addCC(string $email, string $name): void
+    public function addCc(string $email, string $name): void
     {
         $this->mailer->addCC($email, $name);
     }
 
-    public function addBCC(string $email, string $name): void
+    public function addBcc(string $email, string $name): void
     {
         $this->mailer->addBCC($email, $name);
     }

@@ -19,14 +19,14 @@ final class UploadFileController
 
     public function thumbnail(): void
     {
-        $upload = new UploadThumbnailAction();
+        $upload = new UploadBannerAction('thumbnailOutput');
 
         $upload->execute();
     }
 
     public function banner(): void
     {
-        $upload = new UploadBannerAction();
+        $upload = new UploadBannerAction('bannerOutput');
 
         $upload->execute();
     }

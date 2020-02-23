@@ -24,8 +24,8 @@ final class PageRepository
     public function __construct(?object $page)
     {
         $file = new File();
-        $thumbnail = $file->find( (int) ($page->page_thumbnail_ID ?? '0'));
-        $banner = $file->find( (int) ($page->page_banner_ID ?? '0'));
+        $thumbnail = $file->find((int) ($page->page_thumbnail_ID ?? '0'));
+        $banner = $file->find((int) ($page->page_banner_ID ?? '0'));
 
         $this->id = (int) ($page->page_ID ?? '0');
         $this->thumbnail = $thumbnail->file_path ?? '';

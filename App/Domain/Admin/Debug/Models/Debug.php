@@ -143,11 +143,11 @@ final class Debug
 
         array_walk($logs, static function (&$value) {
             if (preg_match_all(
-                    '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}|(?<=]).*(?={)|{.*}/',
-                    $value,
-                    $matches,
-                    PREG_PATTERN_ORDER
-                ) !== false) {
+                '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}|(?<=]).*(?={)|{.*}/',
+                $value,
+                $matches,
+                PREG_PATTERN_ORDER
+            ) !== false) {
                 $matches = $matches[0] ?? [];
                 $matches[2] = isJson($matches[2] ?? '') ? json_decode(
                     $matches[2],

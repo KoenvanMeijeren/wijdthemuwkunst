@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Domain\Admin\File\Models;
 
-
 use Src\Model\Model;
 
 final class File extends Model
