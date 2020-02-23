@@ -23,13 +23,15 @@ final class PageController
     public function index(): DomainView
     {
         $home = new PageRepository($this->page->getBySlug('home'));
+        $events = new PageRepository($this->page->getBySlug('concerten'));
 
         return new DomainView(
             $this->baseViewPath . 'index',
             [
                 'title' => Translation::get('home_page_title'),
                 'inMenuPages' => $this->getInMenuPages(),
-                'home' => $home,
+                'homeRepo' => $home,
+                'eventsRepo' => $events,
             ]
         );
     }

@@ -42,7 +42,9 @@ $setting = new Setting();
 <!-- Header -->
 <header id="header">
     <div class="inner">
-        <a href="/" class="logo">Wijdt Hem Uw Kunst</a>
+        <a href="/" class="logo">
+            <?= $setting->get('website_naam') ?>
+        </a>
         <nav id="nav">
             <a href="/">Home</a>
 

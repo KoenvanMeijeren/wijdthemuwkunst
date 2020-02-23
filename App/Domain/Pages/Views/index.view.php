@@ -3,44 +3,43 @@ declare(strict_types=1);
 
 use Domain\Admin\Pages\Repositories\PageRepository;
 
-/** @var PageRepository $page */
-$page = $home ?? null;
+/** @var PageRepository $home */
+$home = $homeRepo ?? null;
+/** @var PageRepository $events */
+$events = $eventsRepo ?? null;
 ?>
 
-<?php if ($page->getBanner() !== ''
-    && $page->getThumbnail() !== ''
-    && file_exists($page->getBanner())
-    && file_exists($page->getThumbnail())
+<?php if ($home->getBanner() !== ''
+    && $home->getThumbnail() !== ''
+    && file_exists($home->getBanner())
+    && file_exists($home->getThumbnail())
 ) : ?>
     <!-- Banner -->
     <section class="header">
-        <img class="banner" src="<?= $page->getBanner() ?>"
-             alt="<?= $page->getTitle() . ' image banner' ?>">
+        <img class="banner" src="<?= $home->getBanner() ?>"
+             alt="<?= $home->getTitle() . ' image banner' ?>">
 
-        <img class="thumbnail" src="<?= $page->getThumbnail() ?>"
-             alt="<?= $page->getTitle() . ' image banner' ?>">
+        <img class="thumbnail" src="<?= $home->getThumbnail() ?>"
+             alt="<?= $home->getTitle() . ' image banner' ?>">
     </section>
 <?php else : ?>
     <section class="header">
         <img class="banner" src="/images/banner.jpg"
-             alt="<?= $page->getTitle() . ' image banner' ?>">
+             alt="<?= $home->getTitle() . ' image banner' ?>">
     </section>
 <?php endif; ?>
 
 <div class="container page">
-    <?php if ($page->getContent() !== '') : ?>
+    <?php if ($home->getContent() !== '') : ?>
         <div class="mt-5 mb-5">
-            <?= parseHtmlEntities($page->getContent()) ?>
+            <?= parseHtmlEntities($home->getContent()) ?>
         </div>
     <?php endif; ?>
 
     <div class="mt-5 mb-5">
-        <header>
-            <h2>Concerten</h2>
-        </header>
-        <p>
-            Concerten tekst
-        </p>
+        <div class="events-content">
+            <?= parseHtmlEntities($events->getContent()) ?>
+        </div>
 
         <div class="row">
             <?php for ($x = 0; $x < 6; $x++) : ?>
