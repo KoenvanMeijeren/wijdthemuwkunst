@@ -20,10 +20,11 @@ final class Request
     public const USER_IP_ADDRESS = 'REMOTE_ADDR';// IP address from the user his IP
     public const DOCUMENT_ROOT = 'DOCUMENT_ROOT';// the root of the document
     public const HTTP_ORIGIN = 'HTTP_ORIGIN';// the http origin of the request
+    public const SERVER_NAME = 'SERVER_NAME';// the server name of the request
 
     public function getHost(): string
     {
-        $urlComponents = parse_url($_SERVER['HTTP_HOST']);
+        $urlComponents = parse_url($this->server(self::HTTP_HOST));
 
         return $urlComponents['host'] ?? '';
     }
