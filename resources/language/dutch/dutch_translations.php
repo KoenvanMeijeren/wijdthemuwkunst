@@ -12,6 +12,7 @@ return [
     'internal_server_error_description' => 'Deze pagina werkt niet meer, neem contact op met de website beheerder.',
     'admin_dashboard_title' => 'Dashboard',
     'admin_page_title' => 'Pagina\'s overzicht',
+    'admin_event_title' => 'Concerten overzicht',
     'admin_account_title' => 'Account overzicht',
     'admin_debug_title' => 'Debug informatie',
 
@@ -20,6 +21,7 @@ return [
      */
     'admin_menu_dashboard' => 'Dashboard',
     'admin_menu_pages' => 'Pagina\'s',
+    'admin_menu_events' => 'Concerten',
     'admin_menu_settings' => 'Website instellingen',
     'admin_menu_translations' => 'Teksten',
     'admin_menu_account' => 'Account',
@@ -72,6 +74,30 @@ return [
     'page_in_menu_state_unknown' => 'Onbekende zichtbaarheid',
     'admin_page_is_published' => 'Gepubliceerd',
     'admin_page_is_not_published' => 'Niet gepubliceerd',
+
+    /**
+     * Admin events maintenance translations.
+     */
+    'admin_events_maintenance_title' => 'Concerten beheren',
+    'admin_create_event_title' => 'Concert aanmaken',
+    'admin_edit_event_title' => 'Concert %s bewerken',
+    'admin_event_cannot_be_visited' => 'Het concert bestaat niet',
+    'no_events_were_found_message' => 'Er zijn geen concerten gevonden.',
+    'event_successfully_created' => 'Het concert \'%s\' is succesvol aangemaakt',
+    'event_unsuccessfully_created' => 'Het concert kon niet worden aangemaakt',
+    'event_successfully_updated' => 'Het concert \'%s\' is succesvol bijgewerkt',
+    'event_unsuccessfully_published' => 'Het concert \'%s\' kon niet worden gepubliceerd',
+    'event_unsuccessfully_unpublished' => 'De publicatie van het concert \'%s\' kon niet ongedaan worden gemaakt.',
+    'event_successfully_published' => 'Het concert \'%s\' is succesvol gepubliceerd',
+    'event_banner_successfully_removed' => 'De banner van het concert \'%s\' is succesvol verwijderd',
+    'event_thumbnail_successfully_removed' => 'De thumbnail van het concert \'%s\' is succesvol verwijderd',
+    'event_successfully_unpublished' => 'De publicatie van het concert \'%s\' is succesvol ongedaan gemaakt.',
+    'event_already_exists' => 'Het concert \'%s\' bestaat al.',
+    'delete_event_confirmation_message' => 'Weet je zeker dat je dit concert wilt verwijderen?',
+    'event_successfully_deleted' => 'Het concert \'%s\' is succesvol verwijderd',
+    'event_unsuccessfully_deleted' => 'Het concert \'%s\' kon niet worden verwijderd',
+    'admin_event_is_published' => 'Gepubliceerd',
+    'admin_event_is_not_published' => 'Niet gepubliceerd',
 
     /**
      * Admin settings page translations.
@@ -154,6 +180,8 @@ return [
      */
     'table_row_identifier' => 'Nr',
     'table_row_name' => 'Naam',
+    'table_row_location' => 'Locatie',
+    'table_row_datetime' => 'Datum en tijdstip',
     'table_row_slug' => 'URL',
     'table_row_page_in_menu' => 'Zichtbaarheid',
     'table_row_title' => 'Titel',
@@ -223,11 +251,13 @@ return [
     'form_invalid_phone_number' => 'Ongeldige telefoonnummer opgegeven.',
     'form_delete_confirmation_message' => 'Weet je zeker dat je dit item wilt verwijderen?',
     'form_title' => 'Titel',
+    'form_datetime' => 'Datum en tijdstip',
     'form_title_placeholder' => 'Typ de titel',
     'form_page_slug' => 'Pagina URL',
     'form_page_slug_placeholder' => 'Typ de pagina URL',
     'form_picture' => 'Afbeelding',
     'form_page_content' => 'De content van de pagina',
+    'form_event_content' => 'De content van het concert',
     'form_project_content' => 'De content van het project',
     'form_show_page_in_menu' => 'Pagina zichtbaarheid',
     'page_in_menu' => 'Ja, toon de pagina in het menu',

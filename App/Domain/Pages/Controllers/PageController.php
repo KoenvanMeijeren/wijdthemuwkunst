@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Domain\Pages\Controllers;
 
-use Domain\Admin\Pages\Models\Page as AdminPage;
+use App\Domain\Event\Models\Event;
 use Domain\Admin\Pages\Repositories\PageRepository;
 use Domain\Pages\Models\Page;
 use Src\Translation\Translation;
@@ -14,10 +14,12 @@ final class PageController
 {
     private string $baseViewPath = 'Pages/Views/';
     private Page $page;
+    private Event $event;
 
     public function __construct()
     {
         $this->page = new Page();
+        $this->event = new Event();
     }
 
     public function index(): DomainView
@@ -29,9 +31,9 @@ final class PageController
             $this->baseViewPath . 'index',
             [
                 'title' => Translation::get('home_page_title'),
-                'inMenuPages' => $this->getInMenuPages(),
                 'homeRepo' => $home,
                 'eventsRepo' => $events,
+                'events' => $this->event->getLimited(3)
             ]
         );
     }
@@ -57,7 +59,6 @@ final class PageController
             [
                 'title' => $page->getTitle(),
                 'pageRepo' => $page,
-                'inMenuPages' => $this->getInMenuPages(),
             ]
         );
     }
@@ -69,13 +70,7 @@ final class PageController
             [
                 'title' => Translation::get('page_not_found_title'),
                 'content' => Translation::get('page_not_found_description'),
-                'inMenuPages' => $this->getInMenuPages(),
             ]
         );
-    }
-
-    private function getInMenuPages(): array
-    {
-        return $this->page->getByVisibility(AdminPage::PAGE_PUBLIC_IN_MENU);
     }
 }
