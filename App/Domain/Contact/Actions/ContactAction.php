@@ -8,6 +8,7 @@ use App\Src\Mail\Mail;
 use Domain\Admin\Settings\Models\Setting;
 use Src\Action\FormAction;
 use Src\Core\Request;
+use Src\Security\Recaptcha;
 use Src\Validate\form\FormValidator;
 
 final class ContactAction extends FormAction
@@ -56,6 +57,17 @@ final class ContactAction extends FormAction
         return $mail->send();
     }
 
+    protected function authorize(): bool
+    {
+        $recaptcha = new Recaptcha();
+
+        if (!$recaptcha->validate()) {
+            return false;
+        }
+
+        return parent::authorize();
+    }
+
     /**
      * @inheritDoc
      */
@@ -66,13 +78,16 @@ final class ContactAction extends FormAction
         $setting = new Setting();
 
         $validator->input($setting->get('bedrijf_email'), 'Bedrijfsemail')
-            ->settingIsRequired();
+            ->settingIsRequired()
+            ->isEmail();
 
         $validator->input($setting->get('bedrijf_naam'), 'Bedrijfsnaam')
             ->settingIsRequired();
 
         $validator->input($this->name, 'Naam')->isRequired();
-        $validator->input($this->email, 'Email')->isRequired();
+        $validator->input($this->email, 'Email')
+            ->isRequired()
+            ->isEmail();
         $validator->input($this->message, 'Bericht')->isRequired();
 
         return $validator->handleFormValidation();

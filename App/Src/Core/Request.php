@@ -21,6 +21,13 @@ final class Request
     public const DOCUMENT_ROOT = 'DOCUMENT_ROOT';// the root of the document
     public const HTTP_ORIGIN = 'HTTP_ORIGIN';// the http origin of the request
 
+    public function getHost(): string
+    {
+        $urlComponents = parse_url($_SERVER['HTTP_HOST']);
+
+        return $urlComponents['host'] ?? '';
+    }
+
     /**
      * Get a server item.
      *

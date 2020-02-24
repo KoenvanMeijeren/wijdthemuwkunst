@@ -4311,3 +4311,7 @@ body.is-loading #banner:after {
     }
 
 }
+
+.grecaptcha-badge {
+    display: none !important;
+}

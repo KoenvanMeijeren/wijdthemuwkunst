@@ -1,9 +1,15 @@
 <?php
 
 use Domain\Admin\Settings\Models\Setting;
+use Src\Core\Request;
+use Src\Security\CSRF;
+use Src\Session\Session;
 use Src\Translation\Translation;
+use Support\Resource;
 
 $setting = new Setting();
+$session = new Session();
+$request = new Request();
 ?>
 <!DOCTYPE html>
 <html lang="<?= Translation::DUTCH_LANGUAGE_CODE ?>">
@@ -33,9 +39,10 @@ $setting = new Setting();
     <!-- Theme -->
     <link rel="stylesheet" href="css/main.css"/>
 
-    <title><?= $data['title'] ?? 'Undefined' ?></title>
+    <!-- Recaptcha -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-    <link rel="icon" href="/images/logo.png">
+    <title><?= $data['title'] ?? 'Undefined' ?></title>
 </head>
 <body>
 
@@ -67,24 +74,33 @@ $setting = new Setting();
         <header>
             <h2>Neem contact op</h2>
         </header>
-        <form method="post" action="/contact">
-            <?php \Support\Resource::loadStringMessage(); ?>
-            <?= \Src\Security\CSRF::insertToken('/contact') ?>
+        <form id="form" method="post" action="/contact">
+            <?php Resource::loadStringMessage(); ?>
+            <?= CSRF::insertToken('/contact') ?>
 
             <div class="field half first">
                 <label for="name">Naam</label>
-                <input type="text" name="name" id="name" required/>
+                <input type="text" name="name" id="name"
+                       value="<?= $session->get('name') ?>" required/>
             </div>
             <div class="field half">
                 <label for="email">Email</label>
-                <input type="text" name="email" id="email" required/>
+                <input type="text" name="email" id="email"
+                       value="<?= $session->get('email') ?>" required/>
             </div>
             <div class="field">
                 <label for="message">Bericht</label>
-                <textarea name="message" id="message" rows="6" required></textarea>
+                <textarea name="message" id="message" rows="6"
+                          required><?= $session->get('message') ?></textarea>
             </div>
+
             <ul class="actions">
-                <li><input type="submit" value="Bericht verzenden" class="alt"/>
+                <li>
+                    <button type="submit" class="button g-recaptcha"
+                            data-sitekey="<?= $request->env('recaptcha_public_key') ?>"
+                            data-callback="onSubmit">
+                        Bericht verzenden
+                    </button>
                 </li>
             </ul>
         </form>

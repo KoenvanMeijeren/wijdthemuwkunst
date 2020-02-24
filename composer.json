@@ -24,26 +24,26 @@
         "platform": {
             "php": "7.4",
             "ext-iconv": "1.16",
-            "ext-intl": "65.1",
-            "ext-json": "1.0",
-            "ext-pdo": "1.0"
+            "ext-intl": "65.1"
         },
         "platform-dev": {
             "ext-xdebug": "2.8.0"
         }
     },
     "require": {
-        "cakephp/chronos": "^2.0.1",
+        "cakephp/chronos": "^2.0.2",
         "defuse/php-encryption": "^2.2.1",
         "filp/whoops": "^2.7.1",
+        "google/recaptcha": "^1.2.3",
         "kminek/email-obfuscator": "^1.0.1",
         "monolog/monolog": "^2.0.2",
         "paragonie/anti-csrf": "^2.2.1",
-        "phpmailer/phpmailer": "^6.1",
+        "phpmailer/phpmailer": "^6.1.4",
         "siriusphp/upload": "^2.1.1",
         "symfony/filesystem": "^4.4.4",
         "symfony/templating": "^4.4.4",
         "vlucas/phpdotenv": "^4.1.0",
+        "ext-pdo": "*",
         "ext-json": "*"
     },
     "require-dev": {
