@@ -91,7 +91,7 @@ $request = new Request();
                         <li class="nav-item <?= strpos(URI::getUrl(),
                             'concerten') !== false ? 'active' : '' ?>">
                             <a class="nav-link" href="/admin/concerten">
-                                <i class="fas fa-sitemap"></i>
+                                <i class="fas fa-church"></i>
                                 <p>
                                     <?= Translation::get('admin_menu_events') ?>
                                 </p>
