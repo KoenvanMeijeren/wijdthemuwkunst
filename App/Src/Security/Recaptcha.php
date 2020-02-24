@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Src\Security;
 
-use Exception;
+use ReCaptcha\ReCaptcha as GoogleRecaptcha;
 use Src\Core\Request;
 use Src\Session\Session;
 use Src\State\State;
@@ -12,57 +12,29 @@ use Src\Translation\Translation;
 
 final class Recaptcha
 {
-    /**
-     * The http request for google recaptcha.
-     */
-    private array $query;
+    private GoogleRecaptcha $recaptcha;
+    private Request $request;
 
-    /**
-     * Build the recaptcha http request.
-     *
-     * @throws Exception
-     */
     public function __construct()
     {
-        $request = new Request();
-
-        $recaptcha = http_build_query([
-            'secret' => $request->env('recaptcha_secret_key'),
-            'response' => $request->post('g-recaptcha-response'),
-            'remoteip' => $request->server(Request::USER_IP_ADDRESS),
-        ]);
-
-        $this->query = [
-            'http' => [
-                'method' => 'POST',
-                'header' => 'Content-type: application/x-www-form-urlencoded',
-                'content' => $recaptcha,
-            ],
-        ];
+        $this->request = new Request();
+        $this->recaptcha = new GoogleRecaptcha(
+            $this->request->env('recaptcha_secret_key')
+        );
     }
 
-    /**
-     * Validate the recaptcha request.
-     *
-     * @return bool
-     * @throws Exception
-     */
     public function validate(): bool
     {
-        $context = stream_context_create($this->query);
-        $response = (string) file_get_contents(
-            'https://www.google.com/recaptcha/api/siteverify',
-            false,
-            $context
-        );
+        $response = $this->recaptcha
+            ->setExpectedHostname(
+                $this->request->getHost()
+            )
+            ->verify(
+                $this->request->post('g-recaptcha-response'),
+                $this->request->server(Request::USER_IP_ADDRESS)
+            );
 
-        $recaptchaResult = json_decode(
-            $response,
-            false,
-            512,
-            JSON_THROW_ON_ERROR
-        );
-        if ($recaptchaResult->success) {
+        if ($response->isSuccess()) {
             return true;
         }
 
@@ -71,6 +43,7 @@ final class Recaptcha
             State::FAILED,
             Translation::get('failed_recaptcha_check_message')
         );
+
         return false;
     }
 }
