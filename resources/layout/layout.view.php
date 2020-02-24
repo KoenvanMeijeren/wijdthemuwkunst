@@ -81,17 +81,17 @@ $request = new Request();
             <div class="field half first">
                 <label for="name">Naam</label>
                 <input type="text" name="name" id="name"
-                       value="<?= $session->get('name') ?>" required/>
+                       value="<?= $session->get('name', true) ?>" required/>
             </div>
             <div class="field half">
                 <label for="email">Email</label>
                 <input type="text" name="email" id="email"
-                       value="<?= $session->get('email') ?>" required/>
+                       value="<?= $session->get('email', true) ?>" required/>
             </div>
             <div class="field">
                 <label for="message">Bericht</label>
                 <textarea name="message" id="message" rows="6"
-                          required><?= $session->get('message') ?></textarea>
+                          required><?= $session->get('message', true) ?></textarea>
             </div>
 
             <ul class="actions">
