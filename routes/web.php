@@ -2,12 +2,14 @@
 declare(strict_types=1);
 
 use App\Domain\Contact\Controllers\ContactController;
+use App\Domain\Event\Controllers\EventController;
 use Domain\Admin\Accounts\Account\Controllers\AccountController;
 use Domain\Admin\Accounts\User\Controllers\UserAccountController;
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Authentication\Controllers\AuthenticationController;
 use Domain\Admin\Dashboard\Controllers\DashboardController;
 use Domain\Admin\Debug\Controllers\DebugController;
+use Domain\Admin\Event\Controllers\EventController as AdminEventController;
 use Domain\Admin\File\Controllers\UploadFileController;
 use Domain\Admin\Pages\Controllers\PageController as AdminPageController;
 use Domain\Admin\Settings\Controllers\SettingsControllers;
@@ -19,6 +21,10 @@ use Src\Core\Router;
  */
 Router::get('', PageController::class,
     'index', User::GUEST);
+Router::get('concerten', EventController::class,
+    'index', User::GUEST);
+Router::get('concert/{slug}', EventController::class,
+    'show', User::GUEST);
 Router::post('contact', ContactController::class,
     'send', User::GUEST);
 
@@ -64,6 +70,30 @@ Router::prefix('admin')->group(static function () {
     Router::post('page/unpublish/{slug}', AdminPageController::class,
         'unPublish', User::ADMIN);
     Router::post('page/delete/{slug}', AdminPageController::class,
+        'destroy', User::ADMIN);
+
+    /**
+     * Events routes.
+     */
+    Router::get('concerten', AdminEventController::class,
+        'index', User::ADMIN);
+    Router::get('concert/create', AdminEventController::class,
+        'create', User::ADMIN);
+    Router::post('concert/create/store', AdminEventController::class,
+        'store', User::ADMIN);
+    Router::get('concert/edit/{slug}', AdminEventController::class,
+        'edit', User::ADMIN);
+    Router::post('concert/edit/{slug}/remove/banner', AdminEventController::class,
+        'removeBanner', User::ADMIN);
+    Router::post('concert/edit/{slug}/remove/thumbnail', AdminEventController::class,
+        'removeThumbnail', User::ADMIN);
+    Router::post('concert/edit/{slug}/store', AdminEventController::class,
+        'update', User::ADMIN);
+    Router::post('concert/publish/{slug}', AdminEventController::class,
+        'publish', User::ADMIN);
+    Router::post('concert/unpublish/{slug}', AdminEventController::class,
+        'unPublish', User::ADMIN);
+    Router::post('concert/delete/{slug}', AdminEventController::class,
         'destroy', User::ADMIN);
 
     /**

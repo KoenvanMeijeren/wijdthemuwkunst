@@ -10,33 +10,11 @@ use Src\Translation\Translation;
 
 final class UpdatePageAction extends PageAction
 {
-    private array $attributes = [];
-
-    private function prepare(): void
-    {
-        $this->attributes = [
-            'page_slug_ID' => (string) $this->getSlugId(),
-            'page_title' => $this->title,
-            'page_content' => $this->content,
-            'page_in_menu' => (string) $this->inMenu
-        ];
-
-        if ($this->thumbnailID !== 0) {
-            $this->attributes['page_thumbnail_ID'] = (string) $this->thumbnailID;
-        }
-
-        if ($this->bannerID !== 0) {
-            $this->attributes['page_banner_ID'] = (string) $this->bannerID;
-        }
-    }
-
     /**
      * @inheritDoc
      */
     protected function handle(): bool
     {
-        $this->prepare();
-
         $this->page->update($this->page->getId(), $this->attributes);
 
         $this->session->flash(

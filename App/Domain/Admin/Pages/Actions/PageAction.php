@@ -30,6 +30,8 @@ abstract class PageAction extends FormAction
     protected int $inMenu;
     protected string $content;
 
+    protected array $attributes = [];
+
     public function __construct(Page $page)
     {
         $this->page = $page;
@@ -78,6 +80,30 @@ abstract class PageAction extends FormAction
             $this->page->find($this->page->getId())
         );
         $this->id = $this->pageRepository->getId();
+
+        $this->prepare();
+    }
+
+    protected function prepare(): void
+    {
+        $this->attributes = [
+            'page_slug_ID' => (string) $this->getSlugId(),
+            'page_title' => $this->title,
+            'page_content' => $this->content,
+            'page_in_menu' => (string) $this->inMenu
+        ];
+
+        if ($this->thumbnailID !== 0) {
+            $this->attributes['page_thumbnail_ID'] = (string) $this->thumbnailID;
+        }
+
+        if ($this->bannerID !== 0) {
+            $this->attributes['page_banner_ID'] = (string) $this->bannerID;
+        }
+
+        if ($this->inMenu === Page::PAGE_STATIC) {
+            $this->attributes['page_is_published'] = '1';
+        }
     }
 
     protected function getSlugId(): int

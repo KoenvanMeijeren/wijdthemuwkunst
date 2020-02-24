@@ -89,6 +89,15 @@ $request = new Request();
                             </a>
                         </li>
                         <li class="nav-item <?= strpos(URI::getUrl(),
+                            'concerten') !== false ? 'active' : '' ?>">
+                            <a class="nav-link" href="/admin/concerten">
+                                <i class="fas fa-church"></i>
+                                <p>
+                                    <?= Translation::get('admin_menu_events') ?>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item <?= strpos(URI::getUrl(),
                             'setting') !== false ? 'active' : '' ?>">
                             <a class="nav-link" href="/admin/settings">
                                 <i class="fas fa-cogs"></i>

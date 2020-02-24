@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use App\Domain\Admin\Event\Repositories\EventRepository;
 use Domain\Admin\Pages\Repositories\PageRepository;
 use Src\Core\Request;
 
@@ -10,8 +11,8 @@ $documentRoot = $request->server(Request::DOCUMENT_ROOT);
 
 /** @var PageRepository $home */
 $home = $homeRepo ?? null;
-/** @var PageRepository $events */
-$events = $eventsRepo ?? null;
+/** @var PageRepository $eventsRepository */
+$eventsRepository = $eventsRepo ?? null;
 ?>
 
 <?php if ($home->getBanner() !== ''
@@ -43,22 +44,36 @@ $events = $eventsRepo ?? null;
 
     <div class="mt-5 mb-5">
         <div class="events-content">
-            <?= parseHtmlEntities($events->getContent()) ?>
+            <?= parseHtmlEntities($eventsRepository->getContent()) ?>
         </div>
 
         <div class="row">
-            <?php for ($x = 0; $x < 6; $x++) : ?>
-                <div class="col-md-4">
-                    <div class="card">
-                        <img class="card-img-top" src="/images/kerk.jfif"
-                             alt="Card image cap">
-                        <div class="card-body p-2">
-                            <h4 class="card-title p-0 m-0">Paas
-                                uitvoering</h4>
+            <?php if (isset($events) && !empty($events)) :
+                foreach ($events as $singleEvent) :
+                    $event = new EventRepository($singleEvent);
+                    ?>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <a href="/concert/<?= $event->getId() ?>"
+                               class="link-without-styling">
+                                <img class="card-img-top"
+                                     alt="<?= $event->getTitle() ?> thumbnail"
+                                     src="<?= $event->getThumbnail() ?>"
+                                >
+                                <div class="card-body p-2">
+                                    <h4 class="card-title p-0 m-0">
+                                        <?= $event->getTitle() ?>
+                                    </h4>
+                                </div>
+                            </a>
                         </div>
                     </div>
+                <?php endforeach;
+            else : ?>
+                <div class="col-md-12">
+                    Er zijn momenteel geen komende concerten.
                 </div>
-            <?php endfor; ?>
+            <?php endif; ?>
         </div>
     </div>
 </div>

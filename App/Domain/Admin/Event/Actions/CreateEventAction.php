@@ -1,25 +1,24 @@
 <?php
-declare(strict_types=1);
 
 
-namespace Domain\Admin\Pages\Actions;
+namespace App\Domain\Admin\Event\Actions;
 
 use Src\State\State;
 use Src\Translation\Translation;
 
-final class CreatePageAction extends PageAction
+final class CreateEventAction extends EventAction
 {
     /**
      * @inheritDoc
      */
     protected function handle(): bool
     {
-        $page = $this->page->firstOrCreate($this->attributes);
+        $event = $this->event->firstOrCreate($this->attributes);
 
-        if ($page === null) {
+        if ($event === null) {
             $this->session->flash(
                 State::FAILED,
-                Translation::get('page_unsuccessfully_created')
+                Translation::get('event_unsuccessfully_created')
             );
 
             return false;
@@ -28,8 +27,8 @@ final class CreatePageAction extends PageAction
         $this->session->flash(
             State::SUCCESSFUL,
             sprintf(
-                Translation::get('page_successfully_created'),
-                $this->url
+                Translation::get('event_successfully_created'),
+                $this->title
             )
         );
 

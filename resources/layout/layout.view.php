@@ -1,6 +1,8 @@
 <?php
 
+use Domain\Admin\Pages\Models\Page as AdminPage;
 use Domain\Admin\Settings\Models\Setting;
+use Domain\Pages\Models\Page;
 use Src\Core\Request;
 use Src\Security\CSRF;
 use Src\Session\Session;
@@ -10,6 +12,8 @@ use Support\Resource;
 $setting = new Setting();
 $session = new Session();
 $request = new Request();
+$page = new Page();
+$pagesInMenu = $page->getByVisibility(AdminPage::PAGE_PUBLIC_IN_MENU);
 ?>
 <!DOCTYPE html>
 <html lang="<?= Translation::DUTCH_LANGUAGE_CODE ?>">
@@ -37,7 +41,7 @@ $request = new Request();
           href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Pacifico">
 
     <!-- Theme -->
-    <link rel="stylesheet" href="css/main.css"/>
+    <link rel="stylesheet" href="/css/main.css"/>
 
     <!-- Recaptcha -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -54,8 +58,9 @@ $request = new Request();
         </a>
         <nav id="nav">
             <a href="/">Home</a>
+            <a href="/concerten">Concerten</a>
 
-            <?php foreach ($data['inMenuPages'] as $menuPage) : ?>
+            <?php foreach ($pagesInMenu as $menuPage) : ?>
                 <a href="<?= $menuPage->slug_name ?? '' ?>"><?= $menuPage->page_title ?? '' ?></a>
             <?php endforeach; ?>
         </nav>
@@ -120,8 +125,8 @@ $request = new Request();
     src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 <!-- Site JS -->
-<script src="js/skel.min.js"></script>
-<script src="js/util.js"></script>
-<script src="js/main.js"></script>
+<script src="/js/skel.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
 </body>
 </html>
