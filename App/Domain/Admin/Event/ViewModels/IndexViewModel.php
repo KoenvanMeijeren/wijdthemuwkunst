@@ -3,7 +3,6 @@
 
 namespace App\Domain\Admin\Event\ViewModels;
 
-
 use App\Domain\Admin\Event\Repositories\EventRepository;
 use App\Domain\Admin\Event\Support\EventIsPublishedStateConverter;
 use Src\Translation\Translation;
@@ -37,7 +36,7 @@ final class IndexViewModel
             Translation::get('table_row_datetime'),
             Translation::get('table_row_publish_state'),
             Translation::get('table_row_edit'),
-            );
+        );
 
         foreach ($this->events as $singleEvent) {
             $event = new EventRepository($singleEvent);

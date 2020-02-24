@@ -3,7 +3,6 @@
 
 namespace Domain\Admin\Event\Controllers;
 
-
 use App\Domain\Admin\Event\Actions\CreateEventAction;
 use App\Domain\Admin\Event\Actions\DeleteEventAction;
 use App\Domain\Admin\Event\Actions\PublishEventAction;

@@ -3,7 +3,6 @@
 
 namespace App\Domain\Admin\Event\ViewModels;
 
-
 use Src\Response\Redirect;
 use Src\Session\Session;
 use Src\State\State;

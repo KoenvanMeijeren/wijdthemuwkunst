@@ -3,7 +3,6 @@
 
 namespace App\Domain\Admin\Event\Actions;
 
-
 use Src\State\State;
 use Src\Translation\Translation;
 

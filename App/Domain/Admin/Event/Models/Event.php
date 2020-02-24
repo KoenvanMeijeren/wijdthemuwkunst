@@ -3,7 +3,6 @@
 
 namespace App\Domain\Admin\Event\Models;
 
-
 use Src\Core\Router;
 use Src\Model\Model;
 use Src\Model\Scopes\SoftDelete\SoftDelete;

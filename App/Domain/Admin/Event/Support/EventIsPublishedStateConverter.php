@@ -3,7 +3,6 @@
 
 namespace App\Domain\Admin\Event\Support;
 
-
 use Src\Converter\Converter;
 use Src\Translation\Translation;
 

@@ -3,7 +3,6 @@
 
 namespace App\Domain\Admin\Event\Actions;
 
-
 use App\Domain\Admin\Event\Models\Event;
 use App\Domain\Admin\Event\Repositories\EventRepository;
 use Src\Action\FormAction;

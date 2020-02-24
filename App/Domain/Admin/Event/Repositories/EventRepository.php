@@ -3,7 +3,6 @@
 
 namespace App\Domain\Admin\Event\Repositories;
 
-
 use App\Domain\Admin\File\Models\File;
 
 final class EventRepository

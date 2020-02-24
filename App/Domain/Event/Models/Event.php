@@ -3,7 +3,6 @@
 
 namespace App\Domain\Event\Models;
 
-
 use Src\Core\Router;
 use Src\Database\DB;
 use Src\Model\Model;

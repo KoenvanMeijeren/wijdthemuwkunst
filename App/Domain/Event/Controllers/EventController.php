@@ -3,7 +3,6 @@
 
 namespace App\Domain\Event\Controllers;
 
-
 use App\Domain\Admin\Event\Repositories\EventRepository;
 use App\Domain\Event\Models\Event;
 use Domain\Admin\Pages\Repositories\PageRepository;
