@@ -3,7 +3,10 @@
 
 namespace App\Domain\Admin\Event\Repositories;
 
+use App\Domain\Admin\Event\Support\EventDatetimeConverter;
 use App\Domain\Admin\File\Models\File;
+use Cake\Chronos\Chronos;
+use Support\DateTime;
 
 final class EventRepository
 {
@@ -70,6 +73,41 @@ final class EventRepository
     public function getDatetime(): string
     {
         return $this->datetime;
+    }
+
+    public function getReadableDatetime(): string
+    {
+        $datetime = new EventDatetimeConverter($this->getDatetime());
+
+        return $datetime->toReadable();
+    }
+
+    public function getDayNumber(): string
+    {
+        $datetime = new DateTime(new Chronos($this->getDatetime()));
+
+        return (string) $datetime->toDayNumber();
+    }
+
+    public function getDate(): string
+    {
+        $datetime = new Chronos($this->getDatetime());
+
+        return $datetime->toDateString();
+    }
+
+    public function getShortDate(): string
+    {
+        $datetime = new DateTime(new Chronos($this->getDatetime()));
+
+        return $datetime->toShortMonth();
+    }
+
+    public function getTime(): string
+    {
+        $datetime = new Chronos($this->getDatetime());
+
+        return $datetime->toTimeString();
     }
 
     public function getLocation(): string

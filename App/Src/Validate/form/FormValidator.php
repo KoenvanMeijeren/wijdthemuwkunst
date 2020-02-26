@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Src\Validate\form;
 
+use DateTime;
 use Src\Session\Session;
 use Src\State\State;
 use Src\Translation\Translation;
@@ -101,6 +102,20 @@ final class FormValidator
             }
 
             $this->errors[] = $error;
+        }
+
+        return $this;
+    }
+
+    public function isDateTime(): FormValidator
+    {
+        $dateTime = DateTime::createFromFormat('Y-m-d H:i:s', $this->input);
+        $errors = DateTime::getLastErrors();
+        if (array_key_exists('warning_count', $errors)
+            && !empty($errors['warning_count'])
+            && $dateTime === false
+        ) {
+            $this->errors[] = Translation::get('validator_form_date_is_invalid');
         }
 
         return $this;

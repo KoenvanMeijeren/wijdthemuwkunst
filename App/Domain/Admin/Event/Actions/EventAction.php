@@ -6,6 +6,7 @@ namespace App\Domain\Admin\Event\Actions;
 use App\Domain\Admin\Event\Models\Event;
 use App\Domain\Admin\Event\Repositories\EventRepository;
 use App\Domain\Admin\File\Actions\SaveFileAction;
+use Cake\Chronos\Chronos;
 use Domain\Admin\Pages\Models\Slug;
 use Domain\Admin\Pages\Repositories\SlugRepository;
 use Src\Action\FormAction;
@@ -28,6 +29,8 @@ abstract class EventAction extends FormAction
     protected string $title;
     protected string $content;
     protected string $datetime;
+    protected string $date;
+    protected string $time;
     protected string $location;
 
     protected array $attributes = [];
@@ -47,8 +50,12 @@ abstract class EventAction extends FormAction
         $this->title = $request->post('title');
         $this->url = $this->slug->parse($this->title);
         $this->content = $request->post('content');
-        $this->datetime = $request->post('datetime');
+        $this->date = $request->post('date');
+        $this->time = $request->post('time');
         $this->location = $request->post('location');
+
+        $datetime = new Chronos($this->date . $this->time);
+        $this->datetime = $datetime->toDateTimeString();
 
         if ($request->post('thumbnail') !== '') {
             $thumbnail = json_decode(
@@ -119,11 +126,14 @@ abstract class EventAction extends FormAction
     {
         $validator = new FormValidator();
 
-        $validator->input($this->thumbnailID, 'Concert thumbnail')->intIsRequired();
-        $validator->input($this->bannerID, 'Concert banner')->intIsRequired();
+        if ($this->id === 0) {
+            $validator->input($this->thumbnailID, 'Concert thumbnail')->intIsRequired();
+            $validator->input($this->bannerID, 'Concert banner')->intIsRequired();
+        }
+
         $validator->input($this->title, 'Concert titel')->isRequired();
         $validator->input($this->content, 'Concert content')->isRequired();
-        $validator->input($this->datetime, 'Concert datum')->isRequired();
+        $validator->input($this->datetime, 'Concert datum en tijdstip')->isDateTime();
         $validator->input($this->location, 'Concert locatie')->isRequired();
 
         if ($this->url !== $this->eventRepository->getSlug()) {

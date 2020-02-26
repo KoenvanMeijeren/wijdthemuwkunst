@@ -4,6 +4,7 @@
 namespace App\Domain\Admin\Event\ViewModels;
 
 use App\Domain\Admin\Event\Repositories\EventRepository;
+use App\Domain\Admin\Event\Support\EventDatetimeConverter;
 use App\Domain\Admin\Event\Support\EventIsPublishedStateConverter;
 use Src\Translation\Translation;
 use Support\DataTable;
@@ -43,6 +44,9 @@ final class IndexViewModel
             $isPublishedState = new EventIsPublishedStateConverter(
                 $event->isPublished()
             );
+            $dateTime = new EventDatetimeConverter(
+                $event->getDatetime()
+            );
 
             if (!$event->isPublished()) {
                 $this->dataTable->addClasses('row-warning');
@@ -54,7 +58,7 @@ final class IndexViewModel
                 $slug,
                 $event->getTitle(),
                 $event->getLocation(),
-                $event->getDatetime(),
+                $dateTime->toReadable(),
                 $isPublishedState->toReadable(),
                 Resource::addTableEditColumn(
                     '/admin/concert/edit/' . $event->getId(),

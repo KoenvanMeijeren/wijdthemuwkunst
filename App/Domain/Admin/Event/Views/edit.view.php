@@ -83,7 +83,7 @@ if ($event->getId() !== 0) {
                     <?= CSRF::insertToken($action) ?>
 
                     <div class="row">
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <label for="title">
                                 <?= Translation::get('form_title') ?>
                                 <span class="text-danger">*</span>
@@ -97,8 +97,6 @@ if ($event->getId() !== 0) {
 ) ?>"
                                    required>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-sm-6">
                             <label for="location">
                                 <?= Translation::get('form_location') ?>
@@ -113,17 +111,33 @@ if ($event->getId() !== 0) {
                                    ) ?>"
                                    required>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-sm-6">
-                            <label for="datetime">
-                                <?= Translation::get('form_datetime') ?>
+                            <label for="date">
+                                <?= Translation::get('form_date') ?>
                                 <span class="text-danger">*</span>
                             </label>
-                            <input type="text" name="datetime" id="datetime"
+                            <input type="date" name="date" id="date"
                                    class="form-control"
-                                   placeholder="<?= Translation::get('form_datetime') ?>"
+                                   placeholder="<?= Translation::get('form_date') ?>"
                                    value="<?= $request->post(
-                                       'datetime',
-                                       $event->getDatetime()
+                                       'date',
+                                       $event->getDate()
+                                   ) ?>"
+                                   required>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="time">
+                                <?= Translation::get('form_time') ?>
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="time" name="time" id="time"
+                                   class="form-control"
+                                   placeholder="<?= Translation::get('form_time') ?>"
+                                   value="<?= $request->post(
+                                       'time',
+                                       $event->getTime()
                                    ) ?>"
                                    required>
                         </div>
