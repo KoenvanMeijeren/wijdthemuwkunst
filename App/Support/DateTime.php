@@ -27,6 +27,11 @@ final class DateTime
         $this->calendar = $calendar;
     }
 
+    public function toDayNumber(): int
+    {
+        return $this->datetime->day;
+    }
+
     /**
      * Convert the datetime to datetime.
      *

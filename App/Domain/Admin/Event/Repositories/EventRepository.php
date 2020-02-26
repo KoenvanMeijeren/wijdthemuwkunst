@@ -3,7 +3,10 @@
 
 namespace App\Domain\Admin\Event\Repositories;
 
+use App\Domain\Admin\Event\Support\EventDatetimeConverter;
 use App\Domain\Admin\File\Models\File;
+use Cake\Chronos\Chronos;
+use Support\DateTime;
 
 final class EventRepository
 {
@@ -16,6 +19,10 @@ final class EventRepository
     protected string $location;
     protected bool $isPublished;
     protected bool $isDeleted;
+
+    private int $slugId;
+    private string $slug;
+    private bool $slugIsDeleted;
 
     public function __construct(?object $event)
     {
@@ -32,6 +39,10 @@ final class EventRepository
         $this->datetime = $event->event_date ?? '';
         $this->isPublished = (bool) ($event->event_is_published ?? '0');
         $this->isDeleted = (bool) ($event->event_is_deleted ?? '0');
+
+        $this->slugId = (int) ($event->slug_ID ?? '0');
+        $this->slug = $event->slug_name ?? '';
+        $this->slugIsDeleted = (bool) ($event->slug_is_deleted ?? '0');
     }
 
     public function getId(): int
@@ -64,6 +75,41 @@ final class EventRepository
         return $this->datetime;
     }
 
+    public function getReadableDatetime(): string
+    {
+        $datetime = new EventDatetimeConverter($this->getDatetime());
+
+        return $datetime->toReadable();
+    }
+
+    public function getDayNumber(): string
+    {
+        $datetime = new DateTime(new Chronos($this->getDatetime()));
+
+        return (string) $datetime->toDayNumber();
+    }
+
+    public function getDate(): string
+    {
+        $datetime = new Chronos($this->getDatetime());
+
+        return $datetime->toDateString();
+    }
+
+    public function getShortDate(): string
+    {
+        $datetime = new DateTime(new Chronos($this->getDatetime()));
+
+        return $datetime->toShortMonth();
+    }
+
+    public function getTime(): string
+    {
+        $datetime = new Chronos($this->getDatetime());
+
+        return $datetime->toTimeString();
+    }
+
     public function getLocation(): string
     {
         return $this->location;
@@ -77,5 +123,20 @@ final class EventRepository
     public function isDeleted(): bool
     {
         return $this->isDeleted;
+    }
+
+    public function getSlugId(): int
+    {
+        return $this->slugId;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    public function isSlugIsDeleted(): bool
+    {
+        return $this->slugIsDeleted;
     }
 }

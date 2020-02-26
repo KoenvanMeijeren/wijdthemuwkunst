@@ -54,16 +54,26 @@ $eventsRepository = $eventsRepo ?? null;
                     ?>
                     <div class="col-md-4">
                         <div class="card">
-                            <a href="/concert/<?= $event->getId() ?>"
+                            <a href="/concert/<?= $event->getSlug() ?>"
                                class="link-without-styling">
                                 <img class="card-img-top"
                                      alt="<?= $event->getTitle() ?> thumbnail"
                                      src="<?= $event->getThumbnail() ?>"
                                 >
                                 <div class="card-body p-2">
-                                    <h4 class="card-title p-0 m-0">
-                                        <?= $event->getTitle() ?>
-                                    </h4>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <h4 class="card-title p-0 m-0">
+                                                <?= $event->getTitle() ?>
+                                            </h4>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h4 class="card-title p-0 m-0">
+                                                <?= $event->getDayNumber() ?>
+                                                <?= $event->getShortDate() ?>
+                                            </h4>
+                                        </div>
+                                    </div>
                                 </div>
                             </a>
                         </div>

@@ -39,7 +39,7 @@ class EventController
 
     public function show(): DomainView
     {
-        $event = $this->event->find($this->event->getId());
+        $event = $this->event->getBySlug($this->event->getSlug());
 
         if ($event === null) {
             return $this->notFound();
