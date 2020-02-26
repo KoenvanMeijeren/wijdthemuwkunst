@@ -106,9 +106,9 @@ if ($event->getId() !== 0) {
                                    class="form-control"
                                    placeholder="<?= Translation::get('form_location') ?>"
                                    value="<?= $request->post(
-                                       'location',
-                                       $event->getLocation()
-                                   ) ?>"
+    'location',
+    $event->getLocation()
+) ?>"
                                    required>
                         </div>
                     </div>
@@ -302,9 +302,9 @@ if ($event->getId() !== 0) {
                                           rows="10" name="content">
                                     <?= parseHtmlEntities(
                                        $request->post(
-                                            'content',
-                                            $event->getContent()
-                                        )
+                                           'content',
+                                           $event->getContent()
+                                       )
                                    ) ?>
                                 </textarea>
                             </div>
