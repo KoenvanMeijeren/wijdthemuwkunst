@@ -53,7 +53,8 @@ class Event extends Model
     public function getLimited(int $limit): array
     {
         $this->addScope(
-            (new DB)->limit($limit)
+            (new DB)->orderBy('asc', 'event_date')
+                ->limit($limit)
         );
 
         return $this->all(['*']);
