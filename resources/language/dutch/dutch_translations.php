@@ -44,7 +44,7 @@ return [
      */
     'admin_pages_maintenance_title' => 'Pagina\'s beheren',
     'admin_create_page_title' => 'Pagina aanmaken',
-    'admin_edit_page_title' => 'Pagina %s bewerken',
+    'admin_edit_page_title' => 'Pagina "%s" bewerken',
     'admin_page_cannot_be_visited' => 'De pagina \'%s\' bestaat niet',
     'no_pages_were_found_message' => 'Er zijn geen pagina\'s gevonden.',
     'page_successfully_created' => 'De pagina \'%s\' is succesvol aangemaakt',
@@ -80,7 +80,7 @@ return [
      */
     'admin_events_maintenance_title' => 'Concerten beheren',
     'admin_create_event_title' => 'Concert aanmaken',
-    'admin_edit_event_title' => 'Concert %s bewerken',
+    'admin_edit_event_title' => 'Concert "%s" bewerken',
     'admin_event_cannot_be_visited' => 'Het concert bestaat niet',
     'no_events_were_found_message' => 'Er zijn geen concerten gevonden.',
     'event_successfully_created' => 'Het concert \'%s\' is succesvol aangemaakt',

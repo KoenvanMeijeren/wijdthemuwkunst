@@ -17,6 +17,10 @@ final class EventRepository
     protected bool $isPublished;
     protected bool $isDeleted;
 
+    private int $slugId;
+    private string $slug;
+    private bool $slugIsDeleted;
+
     public function __construct(?object $event)
     {
         $file = new File();
@@ -32,6 +36,10 @@ final class EventRepository
         $this->datetime = $event->event_date ?? '';
         $this->isPublished = (bool) ($event->event_is_published ?? '0');
         $this->isDeleted = (bool) ($event->event_is_deleted ?? '0');
+
+        $this->slugId = (int) ($event->slug_ID ?? '0');
+        $this->slug = $event->slug_name ?? '';
+        $this->slugIsDeleted = (bool) ($event->slug_is_deleted ?? '0');
     }
 
     public function getId(): int
@@ -77,5 +85,20 @@ final class EventRepository
     public function isDeleted(): bool
     {
         return $this->isDeleted;
+    }
+
+    public function getSlugId(): int
+    {
+        return $this->slugId;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    public function isSlugIsDeleted(): bool
+    {
+        return $this->slugIsDeleted;
     }
 }

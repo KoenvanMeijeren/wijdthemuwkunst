@@ -19,7 +19,7 @@ $eventRepository = $eventRepo ?? null;
                     ?>
                     <div class="col-md-4">
                         <div class="card">
-                            <a href="/concert/<?= $singleEventRepository->getId() ?>"
+                            <a href="/concert/<?= $singleEventRepository->getSlug() ?>"
                                 class="link-without-styling">
                                 <img class="card-img-top"
                                      alt="<?= $singleEventRepository->getTitle() ?> thumbnail"

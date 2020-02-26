@@ -6,18 +6,23 @@ namespace App\Domain\Admin\Event\Actions;
 use App\Domain\Admin\Event\Models\Event;
 use App\Domain\Admin\Event\Repositories\EventRepository;
 use App\Domain\Admin\File\Actions\SaveFileAction;
+use Domain\Admin\Pages\Models\Slug;
+use Domain\Admin\Pages\Repositories\SlugRepository;
 use Src\Action\FormAction;
 use Src\Core\Request;
 use Src\Session\Session;
+use Src\Translation\Translation;
 use Src\Validate\form\FormValidator;
 
 abstract class EventAction extends FormAction
 {
+    protected Slug $slug;
     protected Event $event;
     protected EventRepository $eventRepository;
     protected Session $session;
 
     protected int $id;
+    protected string $url;
     protected int $bannerID = 0;
     protected int $thumbnailID = 0;
     protected string $title;
@@ -30,6 +35,7 @@ abstract class EventAction extends FormAction
     public function __construct(Event $event)
     {
         $this->event = $event;
+        $this->slug = new Slug();
         $this->session = new Session();
         $request = new Request();
 
@@ -39,6 +45,7 @@ abstract class EventAction extends FormAction
         $this->id = $this->eventRepository->getId();
 
         $this->title = $request->post('title');
+        $this->url = $this->slug->parse($this->title);
         $this->content = $request->post('content');
         $this->datetime = $request->post('datetime');
         $this->location = $request->post('location');
@@ -81,6 +88,7 @@ abstract class EventAction extends FormAction
     protected function prepare(): void
     {
         $this->attributes = [
+            'event_slug_ID' => (string) $this->getSlugId(),
             'event_title' => $this->title,
             'event_content' => $this->content,
             'event_date' => $this->datetime,
@@ -96,6 +104,17 @@ abstract class EventAction extends FormAction
         }
     }
 
+    protected function getSlugId(): int
+    {
+        $slugRepository = new SlugRepository(
+            $this->slug->firstOrCreate([
+                'slug_name' => $this->url
+            ])
+        );
+
+        return $slugRepository->getId();
+    }
+
     protected function validate(): bool
     {
         $validator = new FormValidator();
@@ -104,6 +123,18 @@ abstract class EventAction extends FormAction
         $validator->input($this->content, 'Concert content')->isRequired();
         $validator->input($this->datetime, 'Concert datum')->isRequired();
         $validator->input($this->location, 'Concert locatie')->isRequired();
+
+        if ($this->url !== $this->eventRepository->getSlug()) {
+            $validator->input($this->url, 'Slug')
+                ->isRequired()
+                ->isUnique(
+                    $this->event->getBySlug($this->url),
+                    sprintf(
+                        Translation::get('event_already_exists'),
+                        $this->url
+                    )
+                );
+        }
 
         return $validator->handleFormValidation();
     }

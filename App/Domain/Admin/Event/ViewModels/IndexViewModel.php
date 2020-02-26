@@ -48,7 +48,7 @@ final class IndexViewModel
                 $this->dataTable->addClasses('row-warning');
             }
 
-            $slug = "<a href='/concert/{$event->getId()}' target='_blank'>{$event->getTitle()}</a>";
+            $slug = "<a href='/concert/{$event->getSlug()}' target='_blank'>{$event->getSlug()}</a>";
 
             $this->dataTable->addRow(
                 $slug,
