@@ -119,6 +119,8 @@ abstract class EventAction extends FormAction
     {
         $validator = new FormValidator();
 
+        $validator->input($this->thumbnailID, 'Concert thumbnail')->intIsRequired();
+        $validator->input($this->bannerID, 'Concert banner')->intIsRequired();
         $validator->input($this->title, 'Concert titel')->isRequired();
         $validator->input($this->content, 'Concert content')->isRequired();
         $validator->input($this->datetime, 'Concert datum')->isRequired();

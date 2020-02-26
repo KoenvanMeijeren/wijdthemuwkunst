@@ -38,6 +38,18 @@ final class FormValidator
         return $this;
     }
 
+    public function intIsRequired(): FormValidator
+    {
+        if ((int) $this->input === 0) {
+            $this->errors[] = sprintf(
+                Translation::get('validator_form_field_is_required'),
+                $this->alias
+            );
+        }
+
+        return $this;
+    }
+
     public function settingIsRequired(): FormValidator
     {
         if ($this->input === '') {
