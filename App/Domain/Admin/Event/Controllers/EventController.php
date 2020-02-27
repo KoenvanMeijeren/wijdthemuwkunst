@@ -33,7 +33,7 @@ final class EventController
 
     public function index(): DomainView
     {
-        $events = new IndexViewModel($this->event->all());
+        $events = new IndexViewModel($this->event->getAll());
 
         return new DomainView(
             $this->baseViewPath . 'index',

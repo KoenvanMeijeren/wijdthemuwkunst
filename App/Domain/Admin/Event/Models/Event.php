@@ -19,6 +19,7 @@ final class Event extends Model
     protected string $primaryKey = 'event_ID';
     protected string $foreignKey = 'event_slug_ID';
     protected string $primarySlugKey = 'slug_ID';
+    protected string $datetimeKey = 'event_date';
     protected string $softDeletedKey = 'event_is_deleted';
     protected string $slugKey = 'slug_name';
     protected string $slugSoftDeletedKey = 'slug_is_deleted';
@@ -38,6 +39,20 @@ final class Event extends Model
         );
 
         $this->initializeSoftDelete();
+    }
+
+    /**
+     * Get all events.
+     *
+     * @return object[]
+     */
+    public function getAll(): array
+    {
+        $this->addScope(
+            (new DB)->orderBy('asc', $this->datetimeKey)
+        );
+
+        return $this->all();
     }
 
     public function getId(): int
