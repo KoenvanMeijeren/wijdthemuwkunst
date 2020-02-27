@@ -91,9 +91,11 @@ final class EventRepository
 
     public function getDate(): string
     {
-        $datetime = new Chronos($this->getDatetime());
+        $datetime = new DateTime(
+            new Chronos($this->getDatetime())
+        );
 
-        return $datetime->toDateString();
+        return $datetime->toFormattedDate();
     }
 
     public function getShortDate(): string

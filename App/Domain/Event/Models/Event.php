@@ -3,6 +3,7 @@
 
 namespace App\Domain\Event\Models;
 
+use Cake\Chronos\Chronos;
 use Src\Core\Router;
 use Src\Core\URI;
 use Src\Database\DB;
@@ -19,6 +20,7 @@ class Event extends Model
     protected string $primaryKey = 'event_ID';
     protected string $foreignKey = 'event_slug_ID';
     protected string $primarySlugKey = 'slug_ID';
+    protected string $datetimeKey = 'event_date';
     protected string $softDeletedKey = 'event_is_deleted';
     protected string $slugKey = 'slug_name';
     protected string $slugSoftDeletedKey = 'slug_is_deleted';
@@ -26,6 +28,8 @@ class Event extends Model
 
     public function __construct()
     {
+        $currentDate = new Chronos();
+
         $this->addScope(
             (new DB)->innerJoin(
                 $this->foreignTable,
@@ -39,6 +43,10 @@ class Event extends Model
                 $this->isPublishedKey,
                 '=',
                 '1'
+            )->where(
+                $this->datetimeKey,
+                '>=',
+                $currentDate->toDateTimeString()
             )
         );
 

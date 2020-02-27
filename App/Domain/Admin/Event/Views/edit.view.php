@@ -114,13 +114,12 @@ if ($event->getId() !== 0) {
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
-                            <label for="date">
+                            <label for="datepicker">
                                 <?= Translation::get('form_date') ?>
                                 <span class="text-danger">*</span>
                             </label>
-                            <input type="date" name="date" id="date"
+                            <input type="text" name="date" id="datepicker"
                                    class="form-control"
-                                   placeholder="<?= Translation::get('form_date') ?>"
                                    value="<?= $request->post(
                                        'date',
                                        $event->getDate()

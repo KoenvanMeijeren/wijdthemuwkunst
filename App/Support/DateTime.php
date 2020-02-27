@@ -49,6 +49,22 @@ final class DateTime
     }
 
     /**
+     * Convert the datetime to datetime.
+     *
+     * @return string
+     */
+    public function toFormattedDate(): string
+    {
+        $fmt = new IntlDateFormatter(
+            $this->locale,
+            IntlDateFormatter::SHORT,
+            IntlDateFormatter::NONE
+        );
+
+        return $fmt->format(strtotime($this->datetime->toDateTimeString()));
+    }
+
+    /**
      * Convert the datetime to date.
      *
      * @return string
