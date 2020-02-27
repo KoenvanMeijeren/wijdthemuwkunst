@@ -9,6 +9,13 @@ $('#datepicker').datepicker({
     todayHighlight: true
 });
 
+$('#time').clockpicker({
+    placement: 'bottom',
+    align: 'left',
+    autoclose: true,
+    'default': 'now'
+});
+
 $(document).ready(function () {
     $("#searchLog").on("keyup", function () {
         var value = $(this).val().toLowerCase();

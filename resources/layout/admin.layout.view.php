@@ -46,6 +46,12 @@ $request = new Request();
     <link rel="stylesheet" type="text/css"
           href="/vendor/datepicker/css/datepicker.css">
 
+    <!-- Clockpicker -->
+    <link rel="stylesheet" type="text/css"
+          href="/vendor/clockpicker/css/clockpicker-bootstrap.css">
+    <link rel="stylesheet" type="text/css"
+          href="/vendor/clockpicker/css/clockpicker.css">
+
     <?php if (!$user->isLoggedIn()) : ?>
         <!-- Login CSS -->
         <link rel="stylesheet" type="text/css" href="/admin/css/login.css">
@@ -213,6 +219,12 @@ $request = new Request();
 <!-- Datepicker -->
 <script type="text/javascript" charset="utf8"
         src="/vendor/datepicker/js/datepicker.js"></script>
+
+<!-- Clock picker -->
+<script type="text/javascript" charset="utf8"
+        src="/vendor/clockpicker/js/clockpicker-jquery.js"></script>
+<script type="text/javascript" charset="utf8"
+        src="/vendor/clockpicker/js/clockpicker.js"></script>
 
 <!-- Password strength indicator -->
 <script type="text/javascript" charset="utf8"
