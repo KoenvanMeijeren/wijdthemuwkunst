@@ -28,8 +28,6 @@ function makeRandomString(length) {
     return result;
 }
 
-var host = "http://" + window.location.host;
-
 window.addEventListener('DOMContentLoaded', function () {
     // visible image after uploading a image
     var thumbnailOutput = document.getElementById('thumbnailOutput');
@@ -101,7 +99,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 var formData = new FormData();
 
                 formData.append('thumbnailOutput', fileName);
-                $.ajax(host + '/admin/upload/thumbnail', {
+                $.ajax('/admin/upload/thumbnail', {
                     method: 'POST',
                     data: formData,
                     processData: false,
@@ -215,7 +213,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 var formData = new FormData();
 
                 formData.append('bannerOutput', fileName);
-                $.ajax(host + '/admin/upload/banner', {
+                $.ajax('/admin/upload/banner', {
                     method: 'POST',
                     data: formData,
                     processData: false,
