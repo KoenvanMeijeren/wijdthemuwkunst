@@ -3611,7 +3611,14 @@ body {
     width: 3.5em;
 }
 
+.menu-toggle {
+    display: none !important;
+}
+
 @media screen and (max-width: 1680px) {
+    .menu-toggle {
+        display: block !important;
+    }
 
     .navPanelToggle {
         display: block;
@@ -3744,10 +3751,15 @@ body {
     min-height: 60vh;
 }
 
+/* Header */
+.header {
+    max-width: 1750px;
+    margin: auto;
+}
+
 /* Banner */
 .banner {
     width: 100%;
-    max-width: 2000px;
 }
 
 .thumbnail {

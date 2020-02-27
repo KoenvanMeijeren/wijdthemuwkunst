@@ -65,7 +65,7 @@ $pagesInMenu = $page->getByVisibility(AdminPage::PAGE_PUBLIC_IN_MENU);
             <?php endforeach; ?>
         </nav>
 
-        <a href="#navPanel"><span class="fa fa-bars"></span></a>
+        <a class="menu-toggle" href="#navPanel"><span class="fa fa-bars"></span></a>
     </div>
 </header>
 
