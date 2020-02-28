@@ -58,7 +58,10 @@ $pagesInMenu = $page->getByVisibility(AdminPage::PAGE_PUBLIC_IN_MENU);
         </a>
         <nav id="nav">
             <a href="/">Home</a>
-            <a href="/concerten">Concerten</a>
+
+            <?php if (isset($data['events']) && count($data['events']) > 0) : ?>
+                <a href="/concerten">Concerten</a>
+            <?php endif; ?>
 
             <?php foreach ($pagesInMenu as $menuPage) : ?>
                 <a href="<?= $menuPage->slug_name ?? '' ?>"><?= $menuPage->page_title ?? '' ?></a>
