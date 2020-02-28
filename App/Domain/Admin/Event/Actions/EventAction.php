@@ -128,7 +128,6 @@ abstract class EventAction extends FormAction
 
         if ($this->id === 0) {
             $validator->input($this->thumbnailID, 'Concert thumbnail')->intIsRequired();
-            $validator->input($this->bannerID, 'Concert banner')->intIsRequired();
         }
 
         $validator->input($this->title, 'Concert titel')->isRequired();

@@ -13,17 +13,22 @@ $event = $eventRepo ?? null;
 ?>
 
 <?php if ($event->getBanner() !== ''
-    && $event->getThumbnail() !== ''
     && file_exists($documentRoot . $event->getBanner())
+) : ?>
+    <!-- Banner -->
+    <section class="header">
+        <img class="thumbnail" src="<?= $event->getBanner() ?>"
+             alt="<?= $event->getTitle() . ' image banner' ?>">
+    </section>
+<?php endif; ?>
+
+<?php if ($event->getThumbnail() !== ''
     && file_exists($documentRoot . $event->getThumbnail())
 ) : ?>
     <!-- Banner -->
     <section class="header">
-        <img class="banner" src="<?= $event->getBanner() ?>"
-             alt="<?= $event->getTitle() . ' image banner' ?>">
-
         <img class="thumbnail" src="<?= $event->getThumbnail() ?>"
-             alt="<?= $event->getTitle() . ' image banner' ?>">
+             alt="<?= $event->getTitle() . ' image thumbnail' ?>">
     </section>
 <?php endif; ?>
 
