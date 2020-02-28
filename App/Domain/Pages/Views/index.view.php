@@ -46,14 +46,16 @@ if ($home->getThumbnail() !== ''
         </div>
     <?php endif; ?>
 
-    <div class="mt-5 mb-5">
-        <div class="events-content">
-            <?= parseHtmlEntities($eventsRepository->getContent()) ?>
-        </div>
+    <?php if (isset($events) && !empty($events)) : ?>
+        <div class="mt-5 mb-5">
+            <div class="row">
+                <div class="events-content">
+                    <?= parseHtmlEntities($eventsRepository->getContent()) ?>
+                </div>
+            </div>
 
-        <div class="row">
-            <?php if (isset($events) && !empty($events)) :
-                foreach ($events as $singleEvent) :
+            <div class="row">
+                <?php foreach ($events as $singleEvent) :
                     $event = new EventRepository($singleEvent);
                     ?>
                     <div class="col-md-4">
@@ -82,12 +84,8 @@ if ($home->getThumbnail() !== ''
                             </a>
                         </div>
                     </div>
-                <?php endforeach;
-            else : ?>
-                <div class="col-md-12">
-                    Er zijn momenteel geen komende concerten.
-                </div>
-            <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
         </div>
-    </div>
+    <?php endif; ?>
 </div>
