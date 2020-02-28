@@ -13,15 +13,19 @@ $page = $pageRepo ?? null;
 ?>
 
 <?php if ($page->getBanner() !== ''
-    && $page->getThumbnail() !== ''
     && file_exists($documentRoot . $page->getBanner())
-    && file_exists($documentRoot . $page->getThumbnail())
 ) : ?>
     <!-- Banner -->
     <section class="header">
         <img class="banner" src="<?= $page->getBanner() ?>"
              alt="<?= $page->getTitle() . ' image banner' ?>">
-
+    </section>
+<?php endif;
+if ($page->getThumbnail() !== ''
+    && file_exists($documentRoot . $page->getThumbnail())
+) : ?>
+    <!-- Thumbnail -->
+    <section class="header">
         <img class="thumbnail" src="<?= $page->getThumbnail() ?>"
              alt="<?= $page->getTitle() . ' image banner' ?>">
     </section>

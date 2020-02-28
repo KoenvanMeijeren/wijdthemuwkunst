@@ -16,21 +16,25 @@ $eventsRepository = $eventsRepo ?? null;
 ?>
 
 <?php if ($home->getBanner() !== ''
-    && $home->getThumbnail() !== ''
     && file_exists($documentRoot . $home->getBanner())
-    && file_exists($documentRoot . $home->getThumbnail())
 ) : ?>
     <!-- Banner -->
     <section class="header">
         <img class="banner" src="<?= $home->getBanner() ?>"
              alt="<?= $home->getTitle() . ' image banner' ?>">
-
-        <img class="thumbnail" src="<?= $home->getThumbnail() ?>"
-             alt="<?= $home->getTitle() . ' image banner' ?>">
     </section>
 <?php else : ?>
     <section class="header">
         <img class="banner" src="/images/banner.jpg"
+             alt="<?= $home->getTitle() . ' image banner' ?>">
+    </section>
+<?php endif;
+if ($home->getThumbnail() !== ''
+    && file_exists($documentRoot . $home->getThumbnail())
+) : ?>
+    <!-- Thumbnail -->
+    <section class="header">
+        <img class="thumbnail" src="<?= $home->getThumbnail() ?>"
              alt="<?= $home->getTitle() . ' image banner' ?>">
     </section>
 <?php endif; ?>
