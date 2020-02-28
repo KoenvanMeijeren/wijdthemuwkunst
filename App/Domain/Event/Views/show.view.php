@@ -17,7 +17,7 @@ $event = $eventRepo ?? null;
 ) : ?>
     <!-- Banner -->
     <section class="header">
-        <img class="thumbnail" src="<?= $event->getBanner() ?>"
+        <img class="banner" src="<?= $event->getBanner() ?>"
              alt="<?= $event->getTitle() . ' image banner' ?>">
     </section>
 <?php endif; ?>
@@ -25,7 +25,7 @@ $event = $eventRepo ?? null;
 <?php if ($event->getThumbnail() !== ''
     && file_exists($documentRoot . $event->getThumbnail())
 ) : ?>
-    <!-- Banner -->
+    <!-- Thumbnail -->
     <section class="header">
         <img class="thumbnail" src="<?= $event->getThumbnail() ?>"
              alt="<?= $event->getTitle() . ' image thumbnail' ?>">
