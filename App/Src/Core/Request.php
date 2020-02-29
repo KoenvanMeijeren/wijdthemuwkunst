@@ -24,7 +24,7 @@ final class Request
 
     public function getHost(): string
     {
-        $urlComponents = parse_url($this->server(self::HTTP_HOST));
+        $urlComponents = parse_url($this->env('app_uri'));
 
         return $urlComponents['host'] ?? '';
     }

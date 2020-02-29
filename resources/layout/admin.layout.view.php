@@ -24,7 +24,7 @@ $request = new Request();
 
     <!-- Fav icon -->
     <link rel="icon" type="image/png" sizes="96x96"
-          href="/admin/images/favicon/favicon-96x96.png">
+          href="/adminResources/images/favicon/favicon-96x96.png">
 
     <!-- Bootstrap -->
     <link rel="stylesheet"
@@ -54,11 +54,11 @@ $request = new Request();
 
     <?php if (!$user->isLoggedIn()) : ?>
         <!-- Login CSS -->
-        <link rel="stylesheet" type="text/css" href="/admin/css/login.css">
+        <link rel="stylesheet" type="text/css" href="/adminResources/css/login.css">
     <?php endif; ?>
 
     <!-- Customized theme css -->
-    <link rel="stylesheet" type="text/css" href="/admin/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/adminResources/css/style.css">
 
     <!-- Tiny MCE -->
     <script
@@ -214,7 +214,7 @@ $request = new Request();
 <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 <script type="text/javascript" charset="utf8"
-        src="/admin/js/datatables.js"></script>
+        src="/adminResources/js/datatables.js"></script>
 
 <!-- Datepicker -->
 <script type="text/javascript" charset="utf8"
@@ -230,11 +230,11 @@ $request = new Request();
 <script type="text/javascript" charset="utf8"
         src="/vendor/password-strength-indicator/zxcvbn.js"></script>
 <script type="text/javascript" charset="utf8"
-        src="/admin/js/password-strength-indicator.js"></script>
+        src="/adminResources/js/password-strength-indicator.js"></script>
 
 <!-- Progress bar -->
 <script type="text/css" charset="utf8"
-        src="/admin/css/progress-bar.css"></script>
+        src="/adminResources/css/progress-bar.css"></script>
 
 <!-- Theme js -->
 <script type="text/javascript" charset="utf8"
@@ -248,13 +248,13 @@ $request = new Request();
 
 <!-- Progress bar -->
 <script type="text/javascript" charset="utf8"
-        src="/admin/js/progress-bar.js"></script>
+        src="/adminResources/js/progress-bar.js"></script>
 
 <!-- Cropper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.1/cropper.min.js"></script>
 
 <!-- Default JS -->
 <script type="text/javascript" charset="utf8"
-        src="/admin/js/default.js"></script>
+        src="/adminResources/js/default.js"></script>
 </body>
 </html>

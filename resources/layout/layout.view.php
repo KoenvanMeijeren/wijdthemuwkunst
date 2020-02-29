@@ -28,6 +28,10 @@ $pagesInMenu = $page->getByVisibility(AdminPage::PAGE_PUBLIC_IN_MENU);
     <meta name="keywords" content="Christelijk koor, Harderwijk">
     <meta name="author" content="Christelijk koor Wijdt Hem Uw Kunst">
 
+    <!-- Fav icon -->
+    <link rel="icon" type="image/png" sizes="96x96"
+          href="/images/favicon/favicon.ico">
+
     <!-- Bootstrap -->
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
