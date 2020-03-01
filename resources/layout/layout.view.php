@@ -117,7 +117,9 @@ $pagesInMenu = $page->getByVisibility(AdminPage::PAGE_PUBLIC_IN_MENU);
             </ul>
         </form>
         <div class="copyright">
-            &copy; <?= $setting->get('copyright_tekst') ?>
+            <p>
+                &copy; <?= $setting->get('copyright_tekst') ?>
+            </p>
         </div>
     </div>
 </section>
