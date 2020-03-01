@@ -32,7 +32,7 @@ services:
     environment:
       NGINX_STATIC_OPEN_FILE_CACHE: "off"
       NGINX_BACKEND_HOST: php
-      NGINX_SERVER_ROOT: /var/www/html/web/
+      NGINX_SERVER_ROOT: /var/www/html/public_html/
       NGINX_VHOST_PRESET: php
     volumes:
       - ./:/var/www/html:cached

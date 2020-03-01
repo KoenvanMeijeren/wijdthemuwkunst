@@ -3,9 +3,9 @@
 /storage
 /vendor
 
-/web/phpmetrics
-/web/phpmd
-/web/storage
+/public_html/phpmetrics
+/public_html/phpmd
+/public_html/storage
 
 .php_cs.cache
 

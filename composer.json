@@ -81,15 +81,15 @@
             "phpcs app"
         ],
         "phpmd": [
-            "phpmd app html phpmd.xml --reportfile web/phpmd/index.html"
+            "phpmd app html phpmd.xml --reportfile public_html/phpmd/index.html"
         ],
         "phpstan": [
             "phpstan analyse -c phpstan.neon"
         ],
         "insights": [
             "phploc app",
-            "phpmetrics --report-html=web/phpmetrics app",
-            "phpmd app html phpmd.xml --reportfile web/phpmd/index.html"
+            "phpmetrics --report-html=public_html/phpmetrics app",
+            "phpmd app html phpmd.xml --reportfile public_html/phpmd/index.html"
         ]
     }
 }

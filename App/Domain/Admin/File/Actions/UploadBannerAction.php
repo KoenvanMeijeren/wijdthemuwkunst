@@ -19,7 +19,11 @@ final class UploadBannerAction extends FileAction
 
         $this->file = $request->file($fileName);
 
-        $this->acceptedOrigins[] = $request->env('app_uri');
+        $uri = $request->env('app_uri');
+        $shortUri = replaceString('www.', '', $uri);
+
+        $this->acceptedOrigins[] = $uri;
+        $this->acceptedOrigins[] = $shortUri;
     }
 
     /**

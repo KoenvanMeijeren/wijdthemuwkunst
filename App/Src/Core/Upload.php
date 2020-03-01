@@ -41,7 +41,7 @@ final class Upload
      */
     public function __construct(
         array $file,
-        string $path = WEB_PATH . '/storage/media/',
+        string $path = PUBLIC_PATH . '/storage/media/',
         string $stripedPath = '/storage/media/'
     ) {
         $this->session = new Session();
