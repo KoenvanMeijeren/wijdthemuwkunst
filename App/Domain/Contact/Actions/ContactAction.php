@@ -36,11 +36,16 @@ final class ContactAction extends FormAction
         $mail = new Mail();
         $setting = new Setting();
 
-        $mail->setFrom($this->email, $this->name);
+        $mail->setFrom(
+            $setting->get('bedrijf_email'),
+            $setting->get('bedrijf_naam')
+        );
+
         $mail->addAddress(
             $setting->get('bedrijf_email'),
             $setting->get('bedrijf_naam')
         );
+
         $mail->setSubject($setting->get('contactformulier_onderwerp'));
 
         $mail->setBody(
@@ -51,6 +56,8 @@ final class ContactAction extends FormAction
                 'company_name' => $setting->get('bedrijf_naam'),
                 'copyright' => $setting->get('copyright_tekst'),
                 'message' => $this->message,
+                'email' => $this->email,
+                'name' => $this->name,
             ]
         );
 
