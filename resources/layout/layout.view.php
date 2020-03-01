@@ -21,7 +21,7 @@ $pagesInMenu = $page->getByVisibility(AdminPage::PAGE_PUBLIC_IN_MENU);
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport"
-          content="width=device-width, initial-scale=1, user-scalable=no"/>
+          content="width=device-width, initial-scale=1"/>
 
     <!-- SEO -->
     <meta name="description" content="Christelijk koor Wijdt Hem Uw Kunst">
@@ -72,7 +72,7 @@ $pagesInMenu = $page->getByVisibility(AdminPage::PAGE_PUBLIC_IN_MENU);
             <?php endforeach; ?>
         </nav>
 
-        <a class="menu-toggle" href="#navPanel"><span class="fa fa-bars"></span></a>
+        <a class="menu-toggle" href="#navPanel" aria-label="Toon menu"><span class="fa fa-bars"></span></a>
     </div>
 </header>
 
@@ -123,17 +123,18 @@ $pagesInMenu = $page->getByVisibility(AdminPage::PAGE_PUBLIC_IN_MENU);
 </section>
 
 <!-- Jquery -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+<script type="text/javascript"
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
-<script
+<script type="text/javascript"
     src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 <!-- Site JS -->
-<script src="/js/skel.min.js"></script>
-<script src="/js/util.js"></script>
-<script src="/js/main.js"></script>
+<script type="text/javascript" src="/js/skel.min.js"></script>
+<script type="text/javascript" src="/js/util.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
 </body>
 </html>
