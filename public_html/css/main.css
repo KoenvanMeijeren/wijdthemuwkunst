@@ -3509,7 +3509,8 @@ body {
 }
 
 #header .logo {
-    font-family: 'Pacifico', cursive;
+    /*font-family: 'Pacifico', cursive;*/
+    font-family: "Lato", sans-serif;
     display: inline-block;
     height: inherit;
     left: 0;

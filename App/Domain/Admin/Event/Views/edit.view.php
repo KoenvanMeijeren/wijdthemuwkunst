@@ -131,7 +131,7 @@ if ($event->getId() !== 0) {
                                 <?= Translation::get('form_time') ?>
                                 <span class="text-danger">*</span>
                             </label>
-                            <input type="time" name="time" id="time"
+                            <input type="text" name="time" id="time"
                                    class="form-control"
                                    placeholder="<?= Translation::get('form_time') ?>"
                                    value="<?= $request->post(
