@@ -96,11 +96,7 @@ final class Env
         );
         error_reporting((self::DEVELOPMENT === $this->env ? E_ALL : -1));
 
-        if (strpos($this->host, 'localhost') !== false ||
-            strpos($this->host, '127.0.0.1') !== false
-        ) {
-            $this->initializeWhoops();
-        }
+        $this->initializeWhoops();
     }
 
     /**
