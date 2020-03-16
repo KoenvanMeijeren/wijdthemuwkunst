@@ -36,11 +36,6 @@ final class ContactAction extends FormAction
         $mail = new Mail();
         $setting = new Setting();
 
-        $mail->setFrom(
-            $setting->get('bedrijf_email'),
-            $setting->get('bedrijf_naam')
-        );
-
         $mail->addAddress(
             $setting->get('bedrijf_email'),
             $setting->get('bedrijf_naam')

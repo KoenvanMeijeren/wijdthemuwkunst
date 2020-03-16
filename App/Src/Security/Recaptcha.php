@@ -26,9 +26,6 @@ final class Recaptcha
     public function validate(): bool
     {
         $response = $this->recaptcha
-            ->setExpectedHostname(
-                $this->request->getHost()
-            )
             ->verify(
                 $this->request->post('g-recaptcha-response'),
                 $this->request->server(Request::USER_IP_ADDRESS)

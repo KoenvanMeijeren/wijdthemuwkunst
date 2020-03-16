@@ -7,6 +7,7 @@ namespace Src\Session;
 use Cake\Chronos\Chronos;
 use Exception;
 use Src\Core\Cookie;
+use Src\Core\Env;
 use Src\Exceptions\Session\InvalidSessionException;
 use Src\Response\Redirect;
 use Src\Session\Security as SessionSecurity;
@@ -57,8 +58,12 @@ final class Builder
     /**
      * Start the session.
      */
-    public function startSession(): void
+    public function startSession(string $env = Env::PRODUCTION): void
     {
+        if ($env === Env::PRODUCTION) {
+            $this->secure = true;
+        }
+
         if (PHP_SESSION_NONE === session_status() && !headers_sent()) {
             $this->setSessionName();
 
