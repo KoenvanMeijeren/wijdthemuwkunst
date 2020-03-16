@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Src\Mail;
 
+use Domain\Admin\Settings\Models\Setting;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use Src\Core\Env;
@@ -33,14 +34,15 @@ final class Mail
 
         $this->mailer->isHTML(true);
 
+        $setting = new Setting();
         $this->mailer->setFrom(
             $request->env('mail_username'),
-            $request->env('app_name')
+            $setting->get('bedrijf_naam')
         );
 
         $this->mailer->addAddress(
             $request->env('mail_username'),
-            $request->env('app_name')
+            $setting->get('bedrijf_naam')
         );
     }
 
