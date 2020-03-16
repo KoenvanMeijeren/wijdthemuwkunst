@@ -9,7 +9,7 @@ Options +FollowSymLinks
 
     # Force HTTPS
     RewriteCond %{HTTPS} !=on
-    RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
+    RewriteRule ^/?(.*) https://www.%{SERVER_NAME}/$1 [R,L]
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
