@@ -37,6 +37,11 @@ final class Mail
             $request->env('mail_username'),
             $request->env('app_name')
         );
+
+        $this->mailer->addAddress(
+            $request->env('mail_username'),
+            $request->env('app_name')
+        );
     }
 
     public function setFrom(string $email, string $name): void
