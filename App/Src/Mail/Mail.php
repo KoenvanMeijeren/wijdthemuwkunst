@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace App\Src\Mail;
 
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use Src\Core\Env;
+use Src\Core\Request;
 use Src\View\MailView;
 
 final class Mail
@@ -14,8 +17,26 @@ final class Mail
     public function __construct()
     {
         $this->mailer = new PHPMailer(true);
+        $env = new Env();
+        $request = new Request();
+
+        // set mail credentials
+        if ($env->get() === Env::PRODUCTION) {
+            $this->mailer->SMTPDebug = SMTP::DEBUG_SERVER;
+            $this->mailer->Host = $request->env('mail_host');
+            $this->mailer->SMTPAuth = true;
+            $this->mailer->Username = $request->env('mail_username');
+            $this->mailer->Password = $request->env('mail_password');
+            $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $this->mailer->Port = $request->env('mail_port');
+        }
 
         $this->mailer->isHTML(true);
+
+        $this->mailer->setFrom(
+            $request->env('mail_username'),
+            $request->env('app_name')
+        );
     }
 
     public function setFrom(string $email, string $name): void
