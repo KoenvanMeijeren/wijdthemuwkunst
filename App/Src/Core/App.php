@@ -38,12 +38,9 @@ final class App
 
         $header = new Header();
         $header->set(Header::X_XSS_PROTECTION);
-        $header->set(Header::NGINX_X_FRAME_OPTIONS);
-        $header->set(Header::X_CONTENT_TYPE_OPTIONS);
-        $header->set(Header::CONTENT_SECURITY_POLICY);
 
         $sessionBuilder = new SessionBuilder();
-        $sessionBuilder->startSession();
+        $sessionBuilder->startSession($env->get());
         $sessionBuilder->setSessionSecurity();
     }
 
