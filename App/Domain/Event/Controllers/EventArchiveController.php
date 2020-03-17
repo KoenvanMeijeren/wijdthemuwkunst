@@ -3,43 +3,37 @@
 
 namespace App\Domain\Event\Controllers;
 
+
 use App\Domain\Admin\Event\Repositories\EventRepository;
-use App\Domain\Event\Models\Event;
 use App\Domain\Event\Models\EventArchive;
 use Domain\Admin\Pages\Repositories\PageRepository;
 use Domain\Pages\Models\Page;
 use Src\Translation\Translation;
 use Src\View\DomainView;
 
-class EventController
+class EventArchiveController
 {
     private string $baseViewPath = 'Event/Views/';
     private string $pageViewPath = 'Pages/Views/';
     private Page $page;
-    private Event $event;
-    private EventArchive $eventArchive;
+    private EventArchive $event;
 
     public function __construct()
     {
         $this->page = new Page();
-        $this->event = new Event();
-        $this->eventArchive = new EventArchive();
+        $this->event = new EventArchive();
     }
 
     public function index(): DomainView
     {
-        $eventRepo = new PageRepository($this->page->getBySlug('concerten'));
-        $eventArchiveRepo = new PageRepository($this->page->getBySlug('concerten-historie'));
+        $eventRepo = new PageRepository($this->page->getBySlug('concerten-historie'));
 
         return new DomainView(
-            $this->baseViewPath . 'index',
+            $this->baseViewPath . 'index-archive',
             [
                 'title' => $eventRepo->getTitle(),
                 'eventRepo' => $eventRepo,
-                'eventArchiveRepo' => $eventArchiveRepo,
                 'events' => $this->event->all(),
-                'event_archive' => $this->eventArchive->getLimited(3),
-                'amount_of_events' => $this->eventArchive->getAmountOfEvents()
             ]
         );
     }

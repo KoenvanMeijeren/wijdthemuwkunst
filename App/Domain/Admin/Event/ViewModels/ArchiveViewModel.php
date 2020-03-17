@@ -44,7 +44,7 @@ class ArchiveViewModel
                 $event->getDatetime()
             );
 
-            $slug = "<a href='/concert/{$event->getSlug()}' target='_blank'>{$event->getSlug()}</a>";
+            $slug = "<a href='/concert/historie/{$event->getSlug()}' target='_blank'>{$event->getSlug()}</a>";
 
             $actions = '<div class="table-edit-row flex">';
             $actions .= Resource::addTableButtonActionColumn(
