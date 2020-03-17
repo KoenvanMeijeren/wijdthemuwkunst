@@ -3,6 +3,8 @@
 
 namespace Domain\Admin\Event\Controllers;
 
+use App\Domain\Admin\Event\Actions\ActivateEventAction;
+use App\Domain\Admin\Event\Actions\ArchiveEventAction;
 use App\Domain\Admin\Event\Actions\CreateEventAction;
 use App\Domain\Admin\Event\Actions\DeleteEventAction;
 use App\Domain\Admin\Event\Actions\PublishEventAction;
@@ -12,6 +14,7 @@ use App\Domain\Admin\Event\Actions\UnPublishEventAction;
 use App\Domain\Admin\Event\Actions\UpdateEventAction;
 use App\Domain\Admin\Event\Models\Event;
 use App\Domain\Admin\Event\Repositories\EventRepository;
+use App\Domain\Admin\Event\ViewModels\ArchiveViewModel;
 use App\Domain\Admin\Event\ViewModels\EditViewModel;
 use App\Domain\Admin\Event\ViewModels\IndexViewModel;
 use Src\Response\Redirect;
@@ -34,12 +37,14 @@ final class EventController
     public function index(): DomainView
     {
         $events = new IndexViewModel($this->event->getAll());
+        $archived_events = new ArchiveViewModel($this->event->getAllArchived());
 
         return new DomainView(
             $this->baseViewPath . 'index',
             [
                 'title' => Translation::get('admin_event_title'),
-                'events' => $events->table()
+                'events' => $events->table(),
+                'archived_events' => $archived_events->table(),
             ]
         );
     }
@@ -129,6 +134,22 @@ final class EventController
         $removeBanner->execute();
 
         return new Redirect($this->redirectSame . $this->event->getId());
+    }
+
+    public function archive(): Redirect
+    {
+        $archive = new ArchiveEventAction($this->event);
+        $archive->execute();
+
+        return new Redirect($this->redirectBack);
+    }
+
+    public function activate(): Redirect
+    {
+        $activate = new ActivateEventAction($this->event);
+        $activate->execute();
+
+        return new Redirect($this->redirectBack);
     }
 
     public function destroy(): Redirect

@@ -93,6 +93,10 @@ Router::prefix('admin')->group(static function () {
         'publish', User::ADMIN);
     Router::post('concert/unpublish/{slug}', AdminEventController::class,
         'unPublish', User::ADMIN);
+    Router::post('concert/archive/{slug}', AdminEventController::class,
+        'archive', User::ADMIN);
+    Router::post('concert/activate/{slug}', AdminEventController::class,
+        'activate', User::ADMIN);
     Router::post('concert/delete/{slug}', AdminEventController::class,
         'destroy', User::ADMIN);
 

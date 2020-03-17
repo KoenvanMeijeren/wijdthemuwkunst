@@ -6,7 +6,7 @@ use Src\Core\App;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$dotEnv = Dotenv::createImmutable(START_PATH);
+$dotEnv = Dotenv::createImmutable(START_PATH, '.env.development');
 $dotEnv->load();
 
 $app = new App();

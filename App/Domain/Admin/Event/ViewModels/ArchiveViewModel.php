@@ -3,14 +3,14 @@
 
 namespace App\Domain\Admin\Event\ViewModels;
 
+
 use App\Domain\Admin\Event\Repositories\EventRepository;
 use App\Domain\Admin\Event\Support\EventDatetimeConverter;
-use App\Domain\Admin\Event\Support\EventIsPublishedStateConverter;
 use Src\Translation\Translation;
 use Support\DataTable;
 use Support\Resource;
 
-final class IndexViewModel
+class ArchiveViewModel
 {
     /**
      * @var object[]
@@ -32,39 +32,26 @@ final class IndexViewModel
     {
         $this->dataTable->addHead(
             Translation::get('table_row_slug'),
+            Translation::get('table_row_title'),
             Translation::get('table_row_location'),
             Translation::get('table_row_datetime'),
-            Translation::get('table_row_publish_state'),
             Translation::get('table_row_edit'),
-        );
+            );
 
         foreach ($this->events as $singleEvent) {
             $event = new EventRepository($singleEvent);
-            $isPublishedState = new EventIsPublishedStateConverter(
-                $event->isPublished()
-            );
             $dateTime = new EventDatetimeConverter(
                 $event->getDatetime()
             );
 
-            if (!$event->isPublished()) {
-                $this->dataTable->addClasses('row-warning');
-            }
-
             $slug = "<a href='/concert/{$event->getSlug()}' target='_blank'>{$event->getSlug()}</a>";
 
             $actions = '<div class="table-edit-row flex">';
-            $actions .= Resource::addTableLinkActionColumn(
-                '/admin/concert/edit/' . $event->getId(),
-                Translation::get('table_row_edit'),
-                'fas fa-edit'
-            );
             $actions .= Resource::addTableButtonActionColumn(
-                '/admin/concert/archive/' . $event->getId(),
-                'Archiveren',
-                'fas fa-archive',
-                'btn-warning',
-                'Weet je zeker dat je dit concert wilt archiveren?'
+                '/admin/concert/activate/' . $event->getId(),
+                'Activeren',
+                'fas fa-history',
+                'btn-success'
             );
             $actions .= Resource::addTableButtonActionColumn(
                 '/admin/concert/delete/' . $event->getId(),
@@ -77,13 +64,13 @@ final class IndexViewModel
 
             $this->dataTable->addRow(
                 $slug,
+                $event->getTitle(),
                 $event->getLocation(),
                 $dateTime->toReadable(),
-                $isPublishedState->toReadable(),
                 $actions
             );
         }
 
-        return $this->dataTable->get();
+        return $this->dataTable->get('archive-table');
     }
 }

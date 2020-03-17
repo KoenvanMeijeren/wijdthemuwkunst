@@ -23,3 +23,18 @@ declare(strict_types=1);
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title float-left">
+                    Concerten archief
+                </h4>
+            </div>
+            <div class="card-body">
+                <?= $archived_events ?? '' ?>
+            </div>
+        </div>
+    </div>
+</div>
