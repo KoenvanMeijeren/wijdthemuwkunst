@@ -89,6 +89,8 @@ return [
     'event_unsuccessfully_published' => 'Het concert \'%s\' kon niet worden gepubliceerd',
     'event_unsuccessfully_unpublished' => 'De publicatie van het concert \'%s\' kon niet ongedaan worden gemaakt.',
     'event_successfully_published' => 'Het concert \'%s\' is succesvol gepubliceerd',
+    'event_successfully_archived' => 'Het concert \'%s\' is succesvol gearchiveerd',
+    'event_successfully_activated' => 'Het concert \'%s\' is succesvol geactiveerd',
     'event_banner_successfully_removed' => 'De banner van het concert \'%s\' is succesvol verwijderd',
     'event_thumbnail_successfully_removed' => 'De thumbnail van het concert \'%s\' is succesvol verwijderd',
     'event_successfully_unpublished' => 'De publicatie van het concert \'%s\' is succesvol ongedaan gemaakt.',

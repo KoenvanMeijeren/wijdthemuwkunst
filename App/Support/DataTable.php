@@ -195,12 +195,12 @@ final class DataTable
      *
      * @return string
      */
-    public function get(): string
+    public function get(string $id = 'table'): string
     {
         $this->var = 'table';
 
         $this->addClasses('table table-hover customTableStyle');
-        $this->addId('table');
+        $this->addId($id);
         $this->addTableStart();
 
         $this->addHeadStart();

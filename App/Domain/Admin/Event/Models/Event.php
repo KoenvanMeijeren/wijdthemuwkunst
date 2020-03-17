@@ -20,6 +20,7 @@ final class Event extends Model
     protected string $foreignKey = 'event_slug_ID';
     protected string $primarySlugKey = 'slug_ID';
     protected string $datetimeKey = 'event_date';
+    protected string $archivedKey = 'event_is_archived';
     protected string $softDeletedKey = 'event_is_deleted';
     protected string $slugKey = 'slug_name';
     protected string $slugSoftDeletedKey = 'slug_is_deleted';
@@ -49,7 +50,33 @@ final class Event extends Model
     public function getAll(): array
     {
         $this->addScope(
-            (new DB)->orderBy('asc', $this->datetimeKey)
+            (new DB)->where(
+                $this->archivedKey,
+                '=',
+                '0'
+            )->orderBy('asc', $this->datetimeKey)
+        );
+
+        return $this->all();
+    }
+
+    /**
+     * Get all archived events.
+     *
+     * @return object[]
+     */
+    public function getAllArchived(): array
+    {
+        if (array_key_exists('event_is_archived', $this->scopes['values'])) {
+            $this->scopes['values']['event_is_archived'] = '1';
+        }
+
+        $this->addScope(
+            (new DB)->where(
+                $this->archivedKey,
+                '=',
+                '1'
+            )->orderBy('asc', $this->datetimeKey)
         );
 
         return $this->all();

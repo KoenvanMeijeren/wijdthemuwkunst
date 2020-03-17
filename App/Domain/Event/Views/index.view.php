@@ -4,6 +4,8 @@ use App\Domain\Admin\Event\Repositories\EventRepository;
 
 /** @var EventRepository $eventRepository */
 $eventRepository = $eventRepo ?? null;
+/** @var EventRepository $eventArchiveRepository */
+$eventArchiveRepository = $eventArchiveRepo ?? null;
 ?>
 
 <div class="container page">
@@ -20,7 +22,7 @@ $eventRepository = $eventRepo ?? null;
                     <div class="col-md-4">
                         <div class="card">
                             <a href="/concert/<?= $singleEventRepository->getSlug() ?>"
-                                class="link-without-styling">
+                               class="link-without-styling">
                                 <img class="card-img-top"
                                      alt="<?= $singleEventRepository->getTitle() ?> thumbnail"
                                      src="<?= $singleEventRepository->getThumbnail() ?>"
@@ -47,6 +49,51 @@ $eventRepository = $eventRepo ?? null;
             else : ?>
                 <div class="col-md-12">
                     Er zijn momenteel geen komende concerten.
+                </div>
+            <?php endif; ?>
+        </div>
+
+        <div class="row">
+            <?php if (isset($event_archive) && count($event_archive) > 0) : ?>
+                <div class="col-md-12 events-content">
+                    <?= parseHtmlEntities($eventArchiveRepository->getContent()) ?>
+                </div>
+
+                <?php foreach ($event_archive as $singleEvent) :
+                    $singleEventRepository = new EventRepository($singleEvent);
+                    ?>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <a href="/concert/historie/<?= $singleEventRepository->getSlug() ?>"
+                               class="link-without-styling">
+                                <img class="card-img-top"
+                                     alt="<?= $singleEventRepository->getTitle() ?> thumbnail"
+                                     src="<?= $singleEventRepository->getThumbnail() ?>"
+                                >
+                                <div class="card-body p-2">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <h4 class="card-title p-0 m-0">
+                                                <?= $singleEventRepository->getTitle() ?>
+                                            </h4>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h4 class="card-title p-0 m-0">
+                                                <?= $singleEventRepository->getDayNumber() ?>
+                                                <?= $singleEventRepository->getShortDate() ?>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                <?php endforeach;
+            endif; ?>
+
+            <?php if (isset($amount_of_events) && (int) $amount_of_events > 3) : ?>
+                <div class="col-md-12 text-center">
+                    <a class="button" href="/concerten-historie">Bekijk alles</a>
                 </div>
             <?php endif; ?>
         </div>

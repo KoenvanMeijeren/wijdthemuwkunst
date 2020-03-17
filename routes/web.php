@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use App\Domain\Contact\Controllers\ContactController;
+use App\Domain\Event\Controllers\EventArchiveController;
 use App\Domain\Event\Controllers\EventController;
 use Domain\Admin\Accounts\Account\Controllers\AccountController;
 use Domain\Admin\Accounts\User\Controllers\UserAccountController;
@@ -24,6 +25,10 @@ Router::get('', PageController::class,
 Router::get('concerten', EventController::class,
     'index', User::GUEST);
 Router::get('concert/{slug}', EventController::class,
+    'show', User::GUEST);
+Router::get('concerten-historie', EventArchiveController::class,
+    'index', User::GUEST);
+Router::get('concert/historie/{slug}', EventArchiveController::class,
     'show', User::GUEST);
 Router::post('contact', ContactController::class,
     'send', User::GUEST);
@@ -93,6 +98,10 @@ Router::prefix('admin')->group(static function () {
         'publish', User::ADMIN);
     Router::post('concert/unpublish/{slug}', AdminEventController::class,
         'unPublish', User::ADMIN);
+    Router::post('concert/archive/{slug}', AdminEventController::class,
+        'archive', User::ADMIN);
+    Router::post('concert/activate/{slug}', AdminEventController::class,
+        'activate', User::ADMIN);
     Router::post('concert/delete/{slug}', AdminEventController::class,
         'destroy', User::ADMIN);
 

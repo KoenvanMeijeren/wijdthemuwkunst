@@ -3,7 +3,7 @@
 
 namespace App\Domain\Event\Models;
 
-use Cake\Chronos\Chronos;
+
 use Src\Core\Router;
 use Src\Core\URI;
 use Src\Database\DB;
@@ -11,7 +11,7 @@ use Src\Model\Model;
 use Src\Model\Scopes\SoftDelete\SoftDelete;
 use stdClass;
 
-class Event extends Model
+class EventArchive extends Model
 {
     use SoftDelete;
 
@@ -29,8 +29,6 @@ class Event extends Model
 
     public function __construct()
     {
-        $currentDate = new Chronos();
-
         $this->addScope(
             (new DB)->innerJoin(
                 $this->foreignTable,
@@ -45,13 +43,9 @@ class Event extends Model
                 '=',
                 '1'
             )->where(
-                $this->datetimeKey,
-                '>=',
-                $currentDate->toDateTimeString()
-            )->where(
                 $this->archivedKey,
                 '=',
-                '0'
+                '1'
             )
         );
 
@@ -71,6 +65,17 @@ class Event extends Model
         );
 
         return $this->all(['*']);
+    }
+
+    public function getAmountOfEvents(): int
+    {
+        $this->scopes['query'] = '';
+        $this->scopes['values'] = [];
+
+        $this->__construct();
+        $events = $this->all();
+
+        return count($events);
     }
 
     public function getSlug(): string

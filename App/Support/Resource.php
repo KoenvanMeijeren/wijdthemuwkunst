@@ -56,4 +56,59 @@ final class Resource
                     </form>
                 </div>';
     }
+
+    /**
+     * Add a table button action column.
+     */
+    public static function addTableButtonActionColumn(
+        string $action,
+        string $actionTitle,
+        string $icon,
+        string $classes = 'btn-primary',
+        string $actionWarningMessage = '',
+        bool $disableAction = false
+    ): string {
+        $disabledActionButton = '';
+        $removeBorder = '';
+        if ($disableAction) {
+            $removeBorder = 'border-0';
+            $disabledActionButton = 'disabled';
+        }
+
+        $message = '';
+        if ($actionWarningMessage !== '') {
+            $message = 'onclick="return confirm(\'' . $actionWarningMessage . '\')"';
+        }
+
+        return '<form method="post"
+                          action="' . $action . '">
+                          ' . CSRF::insertToken($action) . '
+                        <button class="btn '.$classes.' flex-child edit-button ' . $removeBorder . '"
+                                type="submit"
+                                data-toggle="tooltip"
+                                data-placement="top"
+                                ' . $disabledActionButton . '
+                                title="' . $actionTitle . '"
+                                '.$message.'>
+                            <i class="'.$icon.'"></i>
+                        </button>
+                    </form>';
+    }
+
+    /**
+     * Add a table link action column.
+     */
+    public static function addTableLinkActionColumn(
+        string $action,
+        string $actionTitle,
+        string $icon
+    ): string {
+        return '<a href="' . $action . '"
+                       class="btn btn-success flex-child edit-button"
+                       data-toggle="tooltip"
+                       data-placement="top"
+                       title="' . $actionTitle . '">
+                        <i class="'.$icon.'"></i>
+                    </a>';
+    }
 }

@@ -171,6 +171,12 @@ abstract class Model
 
     final protected function addScope(DB $builder): void
     {
+        if (strpos($this->scopes['query'], $builder->getQuery()) !== false
+            || in_array($builder->getValues(), $this->scopes['values'], true)
+        ) {
+            return;
+        }
+
         $this->scopes['query'] .= $builder->getQuery();
         $this->scopes['values'] += $builder->getValues();
     }
