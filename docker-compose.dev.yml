@@ -7,7 +7,7 @@ services:
   php:
     environment:
       PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
-#      PHP_XDEBUG_ENABLED: 1
+      PHP_XDEBUG_ENABLED: 1
       MYSQL_PORT: 8303:3306
   nginx:
     environment:
