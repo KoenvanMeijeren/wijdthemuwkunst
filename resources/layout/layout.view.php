@@ -1,6 +1,8 @@
 <?php
 
+use App\Domain\Event\Models\Event;
 use Domain\Admin\Pages\Models\Page as AdminPage;
+use Domain\Admin\Pages\Repositories\PageRepository;
 use Domain\Admin\Settings\Models\Setting;
 use Domain\Pages\Models\Page;
 use Src\Core\Request;
@@ -13,6 +15,7 @@ $setting = new Setting();
 $session = new Session();
 $request = new Request();
 $page = new Page();
+$event = new Event();
 $pagesInMenu = $page->getByVisibility(AdminPage::PAGE_PUBLIC_IN_MENU);
 ?>
 <!DOCTYPE html>
@@ -63,12 +66,13 @@ $pagesInMenu = $page->getByVisibility(AdminPage::PAGE_PUBLIC_IN_MENU);
         <nav id="nav">
             <a href="/">Home</a>
 
-            <?php if (isset($data['events']) && count($data['events']) > 0) : ?>
+            <?php if (count($event->getLimited(1)) > 0) : ?>
                 <a href="/concerten">Concerten</a>
             <?php endif; ?>
 
-            <?php foreach ($pagesInMenu as $menuPage) : ?>
-                <a href="<?= $menuPage->slug_name ?? '' ?>"><?= $menuPage->page_title ?? '' ?></a>
+            <?php foreach ($pagesInMenu as $menuPage) :
+                $pageRepository = new PageRepository($menuPage) ?>
+                <a href="<?= $pageRepository->getSlug() ?>"><?= $pageRepository->getTitle() ?></a>
             <?php endforeach; ?>
         </nav>
 
