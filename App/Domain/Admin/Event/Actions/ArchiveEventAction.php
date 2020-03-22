@@ -25,7 +25,7 @@ class ArchiveEventAction extends FormAction
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     protected function handle(): bool
     {
@@ -44,6 +44,29 @@ class ArchiveEventAction extends FormAction
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    protected function authorize(): bool
+    {
+        if (!$this->eventRepository->isPublished()) {
+            $this->session->flash(
+                State::FAILED,
+                sprintf(
+                    Translation::get('event_cannot_archive_not_published'),
+                    $this->eventRepository->getTitle()
+                )
+            );
+
+            return false;
+        }
+
+        return parent::authorize();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     protected function validate(): bool
     {
         return true;
