@@ -104,6 +104,15 @@ $request = new Request();
                             </a>
                         </li>
                         <li class="nav-item <?= strpos(URI::getUrl(),
+                            'contact-form') !== false ? 'active' : '' ?>">
+                            <a class="nav-link" href="/admin/contact-form">
+                                <i class="far fa-envelope"></i>
+                                <p>
+                                    <?= Translation::get('admin_menu_contact_form') ?>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item <?= strpos(URI::getUrl(),
                             'setting') !== false ? 'active' : '' ?>">
                             <a class="nav-link" href="/admin/settings">
                                 <i class="fas fa-cogs"></i>

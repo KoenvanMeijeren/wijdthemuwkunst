@@ -93,7 +93,7 @@ $request = new Request();
                         Log informatie
                     </h4>
 
-                    <?php if (sizeof($logs ?? []) < 1) : ?>
+                    <?php if (count($logs ?? []) < 1) : ?>
                         <p class="mt-2 font-weight-bold">
                             Er is geen log data gevonden op
                             <?= $request->get('logDate') ?>.
@@ -117,7 +117,7 @@ $request = new Request();
             </div>
             <div class="card-body">
                 <div class="row">
-                    <?php if (sizeof($logs ?? []) > 0) : ?>
+                    <?php if (count($logs ?? []) > 0) : ?>
                         <div class="col-sm-4">
                             <div class="form-label-group">
                                 <input type="text" id="searchLog"

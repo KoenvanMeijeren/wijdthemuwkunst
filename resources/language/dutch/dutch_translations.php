@@ -22,6 +22,7 @@ return [
     'admin_menu_dashboard' => 'Dashboard',
     'admin_menu_pages' => 'Pagina\'s',
     'admin_menu_events' => 'Concerten',
+    'admin_menu_contact_form' => 'Contact formulier',
     'admin_menu_settings' => 'Website instellingen',
     'admin_menu_translations' => 'Teksten',
     'admin_menu_account' => 'Account',
@@ -126,6 +127,12 @@ return [
     'admin_updated_translations_failed_message' => 'Teksten opslaan is mislukt.',
     'translation_already_exists' => 'De tekst die je probeerde aan te maken bestaat al.',
     'no_translations_were_found_message' => 'Er zijn geen teksten gevonden.',
+
+    /**
+     * Admin contact form page translations.
+     */
+    'admin_contact_form_title' => 'Contact formulier',
+    'admin_delete_contact_form_message' => 'Het bericht van %s is succesvol verwijderd.',
 
     /**
      * Admin account user maintenance page translations.
