@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use App\Domain\Admin\ContactForm\Controller\ContactFormController;
 use App\Domain\Contact\Controllers\ContactController;
 use App\Domain\Event\Controllers\EventArchiveController;
 use App\Domain\Event\Controllers\EventController;
@@ -114,6 +115,17 @@ Router::prefix('admin')->group(static function () {
         'thumbnail', User::ADMIN);
     Router::post('upload/banner', UploadFileController::class,
         'banner', User::ADMIN);
+
+    /**
+     * Contact form routes.
+     */
+    Router::get('contact-form', ContactFormController::class,
+        'index', User::ADMIN);
+    Router::get('contact-form/filter', ContactFormController::class,
+        'showByDate', User::ADMIN);
+    Router::post('contact-form/delete/{slug}', ContactFormController::class,
+        'destroy', User::ADMIN);
+
     /**
      * Settings routes.
      */
