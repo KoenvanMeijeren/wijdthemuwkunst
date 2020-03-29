@@ -7,7 +7,7 @@ namespace App\Domain\Admin\ContactForm\Repository;
 use Cake\Chronos\Chronos;
 use Support\DateTime;
 
-class ContactFormRepository
+final class ContactFormRepository
 {
     protected int $id;
     protected string $name;
