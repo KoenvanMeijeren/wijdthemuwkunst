@@ -252,3 +252,20 @@ if (!function_exists('encodeUrl')) {
         return $clean;
     }
 }
+
+if (!function_exists('validateDate')) {
+    /**
+     * Check if the given date is a correct type.
+     *
+     * @param string $date The date to be checked.
+     * @param string $format The format of the date.
+     *
+     * @return bool
+     */
+    function validateDate($date, $format = 'Y-m-d')
+    {
+        $d = DateTime::createFromFormat($format, $date);
+
+        return $d && $d->format($format) === $date;
+    }
+}
