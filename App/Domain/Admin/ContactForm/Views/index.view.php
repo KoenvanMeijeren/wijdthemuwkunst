@@ -20,18 +20,26 @@ $amountMessages = count($messages ?? []);
                     <?php endif; ?>
                 </h4>
 
-                <form class="form-inline float-right" method="get">
+                <form class="form-inline float-right" method="get"
+                      action="/admin/contact-form/filter">
                     <div class="form-group mr-2">
                         <label for="datepicker"></label>
-                        <input type="text" name="logDate"
+                        <input type="text" name="date"
                                autocomplete="off"
                                class="form-control" id="datepicker"
-                               value="<?= $request->get('logDate') ?>">
+                               value="<?= $request->get('date') ?>">
                     </div>
 
                     <button class="btn btn-default-small border-0">
                         Filter
                     </button>
+
+                    <?php if (isset($_GET['date'])) : ?>
+                        <a href="/admin/contact-form"
+                           class="btn btn-success ml-3 border-0">
+                            Reset
+                        </a>
+                    <?php endif; ?>
                 </form>
             </div>
             <div class="card-body">
@@ -39,7 +47,7 @@ $amountMessages = count($messages ?? []);
                     <?php if ($amountMessages < 1) : ?>
                         <div class="col-md-12">
                             <p class="mt-2 font-weight-bold">
-                                Er zijn momenteel geen contact aanvragen.
+                                Er zijn geen contact aanvragen.
                             </p>
                         </div>
                     <?php endif; ?>
@@ -63,10 +71,6 @@ $amountMessages = count($messages ?? []);
                                     foreach (($messages ?? []) as $key => $singleMessage) :
                                         $message = new ContactFormRepository($singleMessage);
                                         $date = $message->convertDateTime()->toFormattedDate();
-                                        $filteredDate = $request->get('logDate');
-                                        if ($filteredDate !== '' && $date !== $filteredDate) {
-                                            continue;
-                                        }
                                         ?>
                                         <a class="list-group-item list-group-item-action <?= $active ?>"
                                            id="list-<?= $key ?>-list"
@@ -88,10 +92,6 @@ $amountMessages = count($messages ?? []);
                                 foreach (($messages ?? []) as $key => $singleMessage) :
                                     $message = new ContactFormRepository($singleMessage);
                                     $date = $message->convertDateTime()->toFormattedDate();
-                                    $filteredDate = $request->get('logDate');
-                                    if ($filteredDate !== '' && $date !== $filteredDate) {
-                                        continue;
-                                    }
                                     ?>
                                     <div
                                         class="tab-pane fade show <?= $active ?>"
@@ -104,14 +104,16 @@ $amountMessages = count($messages ?? []);
                                                 </h3>
                                             </div>
                                             <div class="col-md-1">
-                                                <form method="post" action="/admin/contact-form/delete/<?= $message->getId() ?>">
+                                                <form method="post"
+                                                      action="/admin/contact-form/delete/<?= $message->getId() ?>">
                                                     <?= CSRF::insertToken('/admin/contact-form/delete/' . $message->getId()) ?>
 
                                                     <button type="submit"
                                                             class="btn border-0 btn-danger"
                                                             onclick="return confirm('Weet je zeker dat je deze contact aanvraag wilt verwijderen?')"
                                                     >
-                                                        <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                                                        <i class="fas fa-trash-alt"
+                                                           aria-hidden="true"></i>
                                                     </button>
                                                 </form>
                                             </div>

@@ -121,6 +121,8 @@ Router::prefix('admin')->group(static function () {
      */
     Router::get('contact-form', ContactFormController::class,
         'index', User::ADMIN);
+    Router::get('contact-form/filter', ContactFormController::class,
+        'showByDate', User::ADMIN);
     Router::post('contact-form/delete/{slug}', ContactFormController::class,
         'destroy', User::ADMIN);
 

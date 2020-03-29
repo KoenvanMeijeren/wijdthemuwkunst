@@ -4,6 +4,7 @@
 namespace App\Domain\Admin\ContactForm\Model;
 
 
+use Cake\Chronos\Chronos;
 use Src\Core\Router;
 use Src\Database\DB;
 use Src\Model\Model;
@@ -26,10 +27,37 @@ final class ContactForm extends Model
         $this->initializeSoftDelete();
     }
 
-    public function getAll()
+    /**
+     * Get all records.
+     *
+     * @return object[]
+     */
+    public function getAll(): array
     {
         $this->addScope(
             (new DB)->orderBy('desc', $this->createdAtKey)
+        );
+
+        return $this->all();
+    }
+
+    /**
+     * Get all records for the given date.
+     *
+     * @param string $date The date to filter on.
+     *
+     * @return object[]
+     */
+    public function getByDate(string $date): array
+    {
+        $datetime = new Chronos($date);
+
+        $this->addScope(
+            (new DB)->whereBetween(
+                $this->createdAtKey,
+                $datetime->toDateString() . ' 00:00:00',
+                $datetime->toDateString() . ' 23:59:59'
+            )->orderBy('desc', $this->createdAtKey)
         );
 
         return $this->all();
