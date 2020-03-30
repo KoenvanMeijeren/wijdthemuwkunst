@@ -37,12 +37,12 @@ final class Text extends Model
         ]);
     }
 
-    public function get(string $key): ?string
+    public function get(string $key, string $default = ''): ?string
     {
         $text = new TextRepository($this->firstByAttributes([
             $this->key => $key
         ]));
 
-        return $text->getValue();
+        return $text->getValue() !== '' ? $text->getValue() : $default;
     }
 }
