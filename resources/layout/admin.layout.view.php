@@ -113,6 +113,15 @@ $request = new Request();
                             </a>
                         </li>
                         <li class="nav-item <?= strpos(URI::getUrl(),
+                            'text') !== false ? 'active' : '' ?>">
+                            <a class="nav-link" href="/admin/texts">
+                                <i class="fas fa-language"></i>
+                                <p>
+                                    <?= Translation::get('admin_menu_texts') ?>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item <?= strpos(URI::getUrl(),
                             'setting') !== false ? 'active' : '' ?>">
                             <a class="nav-link" href="/admin/settings">
                                 <i class="fas fa-cogs"></i>
