@@ -1,11 +1,11 @@
 <?php
-declare(strict_types=1);
 
 
-namespace Domain\Admin\Settings\ViewModels;
+namespace App\Domain\Admin\Text\ViewModels;
 
+
+use App\Domain\Admin\Text\Repositories\TextRepository;
 use Domain\Admin\Accounts\User\Models\User;
-use Domain\Admin\Settings\Repositories\SettingRepository;
 use Src\Translation\Translation;
 use Support\DataTable;
 use Support\Resource;
@@ -15,16 +15,16 @@ final class IndexViewModel
     /**
      * @var object[]
      */
-    private array $settings;
+    private array $texts;
 
     private DataTable $dataTable;
 
     /**
      * @param object[] $settings
      */
-    public function __construct(array $settings)
+    public function __construct(array $texts)
     {
-        $this->settings = $settings;
+        $this->texts = $texts;
         $this->dataTable = new DataTable();
     }
 
@@ -37,18 +37,18 @@ final class IndexViewModel
         );
 
         $user = new User();
-        foreach ($this->settings as $item) {
-            $setting = new SettingRepository($item);
+        foreach ($this->texts as $item) {
+            $text = new TextRepository($item);
 
             $this->dataTable->addRow(
-                $setting->getReadableKey(),
-                $setting->getValue(),
+                $text->getReadableKey(),
+                $text->getValue(),
                 Resource::addTableEditColumn(
-                    '/admin/setting/edit/' . $setting->getId(),
-                    '/admin/setting/delete/' . $setting->getId(),
+                    '/admin/text/edit/' . $text->getId(),
+                    '/admin/text/delete/' . $text->getId(),
                     sprintf(
-                        Translation::get('delete_setting_confirmation_message'),
-                        $setting->getKey()
+                        Translation::get('delete_text_confirmation_message'),
+                        $text->getKey()
                     ),
                     $user->getRights() !== User::DEVELOPER
                 )

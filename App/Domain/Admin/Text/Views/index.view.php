@@ -1,59 +1,59 @@
 <?php
 declare(strict_types=1);
 
+use App\Domain\Admin\Text\Repositories\TextRepository;
 use Domain\Admin\Accounts\User\Models\User;
-use Domain\Admin\Settings\Repositories\SettingRepository;
 use Src\Core\Request;
 use Src\Security\CSRF;
 use Src\Translation\Translation;
 
-$setting = new SettingRepository($setting ?? null);
+$text = new TextRepository($text ?? null);
 $request = new Request();
 $user = new User();
 
 $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
 ?>
-<?php if ($user->getRights() === User::DEVELOPER && $setting->get() === null) : ?>
+<?php if ($user->getRights() === User::DEVELOPER && $text->get() === null) : ?>
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">
-                        Instelling toevoegen
+                        Tekst toevoegen
                     </h4>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="/admin/setting/create/store">
-                        <?= CSRF::insertToken('/admin/setting/create/store') ?>
+                    <form method="post" action="/admin/text/create/store">
+                        <?= CSRF::insertToken('/admin/text/create/store') ?>
 
                         <div class="row">
                             <div class="col-sm-6">
-                                <label for="setting_key">
+                                <label for="key">
                                     <?= Translation::get('form_key') ?>
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" name="setting_key"
-                                       id="setting_key"
+                                <input type="text" name="key"
+                                       id="key"
                                        class="form-control"
                                        placeholder="<?= Translation::get('form_key') ?>"
-                                       value="<?= $request->post('setting_key') ?>"
+                                       value="<?= $request->post('key') ?>"
                                        required>
                             </div>
                             <div class="col-sm-6">
-                                <label for="setting_value">
+                                <label for="value">
                                     <?= Translation::get('form_value') ?>
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" name="setting_value"
-                                       id="setting_value"
+                                <input type="text" name="value"
+                                       id="value"
                                        class="form-control"
                                        placeholder="<?= Translation::get('form_value') ?>"
-                                       value="<?= $request->post('setting_value') ?>"
+                                       value="<?= $request->post('value') ?>"
                                        required>
                             </div>
                         </div>
 
-                        <a href="/admin/settings"
+                        <a href="/admin/texts"
                            class="btn btn-default-small float-left"
                            data-toggle="tooltip"
                            data-placement="top"
@@ -76,55 +76,55 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
             </div>
         </div>
     </div>
-<?php elseif ($setting->get() !== null) : ?>
+<?php elseif ($text->get() !== null) : ?>
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">
-                        Instelling '<?= $setting->getReadableKey() ?>' bewerken
+                        Tekst '<?= $text->getReadableKey() ?>' bewerken
                     </h4>
                 </div>
                 <div class="card-body">
                     <form method="post"
-                          action="/admin/setting/edit/<?= $setting->getId() ?>/update">
-                        <?= CSRF::insertToken("/admin/setting/edit/{$setting->getId()}/update") ?>
+                          action="/admin/text/edit/<?= $text->getId() ?>/update">
+                        <?= CSRF::insertToken("/admin/text/edit/{$text->getId()}/update") ?>
 
                         <div class="row">
                             <div class="col-sm-6">
-                                <label for="setting_key">
+                                <label for="key">
                                     <?= Translation::get('form_key') ?>
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" name="setting_key"
-                                       id="setting_key"
+                                <input type="text" name="key"
+                                       id="key"
                                        class="form-control"
-                                       <?= $disabled ?>
+                                    <?= $disabled ?>
                                        placeholder="<?= Translation::get('form_key') ?>"
                                        value="<?= $request->post(
-    'setting_key',
-    $setting->getReadableKey()
-) ?>"
+                                           'key',
+                                           $text->getReadableKey()
+                                       ) ?>"
                                        required>
                             </div>
                             <div class="col-sm-6">
-                                <label for="setting_value">
+                                <label for="value">
                                     <?= Translation::get('form_value') ?>
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" name="setting_value"
-                                       id="setting_value"
+                                <input type="text" name="value"
+                                       id="value"
                                        class="form-control"
                                        placeholder="<?= Translation::get('form_value') ?>"
                                        value="<?= $request->post(
-    'setting_value',
-    $setting->getValue()
-) ?>"
+                                           'value',
+                                           $text->getValue()
+                                       ) ?>"
                                        required>
                             </div>
                         </div>
 
-                        <a href="/admin/settings"
+                        <a href="/admin/texts"
                            class="btn btn-default-small float-left"
                            data-toggle="tooltip"
                            data-placement="top"
@@ -154,11 +154,11 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">
-                    Instellingen overzicht
+                    Teksten overzicht
                 </h4>
             </div>
             <div class="card-body">
-                <?= $settings ?? '' ?>
+                <?= $texts ?? '' ?>
             </div>
         </div>
     </div>

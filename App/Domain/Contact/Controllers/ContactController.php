@@ -19,7 +19,7 @@ final class ContactController
         $save = new SaveContactFormMessageAction();
 
         if ($contact->execute() && $save->execute()) {
-            return new Redirect('/contact-verzonden');
+            return new Redirect('/contact-aanvraag-verzonden');
         }
 
         $request = new Request();

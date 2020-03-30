@@ -24,7 +24,7 @@ return [
     'admin_menu_events' => 'Concerten',
     'admin_menu_contact_form' => 'Contact formulier',
     'admin_menu_settings' => 'Website instellingen',
-    'admin_menu_translations' => 'Teksten',
+    'admin_menu_texts' => 'Teksten',
     'admin_menu_account' => 'Account',
     'admin_menu_accounts' => 'Accounts',
     'admin_menu_debug' => 'Debuggen',
@@ -120,13 +120,20 @@ return [
     'delete_setting_confirmation_message' => 'Weet je zeker dat je de instelling %s wil verwijderen?',
 
     /**
-     * Admin translation page translations.
+     * Admin texts page translations.
      */
-    'admin_translations_title' => 'Teksten',
-    'admin_updated_translations_successful_message' => 'Teksten zijn succesvol opgeslagen.',
-    'admin_updated_translations_failed_message' => 'Teksten opslaan is mislukt.',
-    'translation_already_exists' => 'De tekst die je probeerde aan te maken bestaat al.',
-    'no_translations_were_found_message' => 'Er zijn geen teksten gevonden.',
+    'texts_title' => 'Website teksten',
+    'text_does_not_exists' => 'Deze tekst bestaat niet.',
+    'text_already_exists' => 'De tekst \'%s\' bestaat al.',
+    'text_creation_not_allowed' => 'Teksten mogen alleen worden toegevoegd door ontwikkelaars.',
+    'text_editing_key_not_allowed' => 'De tekst sleutel mag alleen worden bijgewerkt door ontwikkelaars.',
+    'text_destroy_not_allowed' => 'Teksten mogen alleen worden verwijderd door ontwikkelaars.',
+    'text_successful_created' => 'De tekst \'%s\' is succesvol aangemaakt.',
+    'text_unsuccessful_created' => 'De tekst \'%s\' kon niet worden aangemaakt.',
+    'text_successful_updated' => 'De tekst \'%s\' is succesvol bijgewerkt.',
+    'text_successful_deleted' => 'De tekst \'%s\' is succesvol verwijderd',
+    'text_unsuccessful_deleted' => 'De tekst \'%s\' kon niet worden verwijderd',
+    'delete_text_confirmation_message' => 'Weet je zeker dat je de tekst %s wil verwijderen?',
 
     /**
      * Admin contact form page translations.

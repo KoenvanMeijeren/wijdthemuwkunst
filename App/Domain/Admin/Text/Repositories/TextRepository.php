@@ -1,31 +1,33 @@
 <?php
-declare(strict_types=1);
 
 
-namespace Domain\Admin\Settings\Repositories;
+namespace App\Domain\Admin\Text\Repositories;
 
-final class SettingRepository
+
+final class TextRepository
 {
-    private ?object $setting;
+    private ?object $text;
 
     private int $id;
     private string $key;
     private string $value;
+    private string $language;
     private bool $isDeleted;
 
-    public function __construct(?object $setting)
+    public function __construct(?object $text)
     {
-        $this->setting = $setting;
+        $this->text = $text;
 
-        $this->id = (int) ($setting->setting_ID ?? '0');
-        $this->key = $setting->setting_key ?? '';
-        $this->value = $setting->setting_value ?? '';
-        $this->isDeleted = (bool) ($setting->setting_is_deleted ?? '0');
+        $this->id = (int) ($text->translation_ID ?? '0');
+        $this->key = $text->translation_key ?? '';
+        $this->value = $text->translation_value ?? '';
+        $this->language = $text->translation_languge ?? '';
+        $this->isDeleted = (bool) ($text->translation_is_deleted ?? '0');
     }
 
     public function get(): ?object
     {
-        return $this->setting;
+        return $this->text;
     }
 
     public function getId(): int
@@ -48,6 +50,11 @@ final class SettingRepository
     public function getValue(): string
     {
         return $this->value;
+    }
+
+    public function getLanguage(): string
+    {
+        return $this->language;
     }
 
     public function isDeleted(): bool

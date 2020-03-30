@@ -1,11 +1,13 @@
 <?php
 
 use App\Domain\Admin\Event\Repositories\EventRepository;
+use App\Domain\Admin\Text\Models\Text;
 
 /** @var EventRepository $eventRepository */
 $eventRepository = $eventRepo ?? null;
 /** @var EventRepository $eventArchiveRepository */
 $eventArchiveRepository = $eventArchiveRepo ?? null;
+$text = new Text();
 ?>
 
 <div class="container page">
@@ -48,7 +50,10 @@ $eventArchiveRepository = $eventArchiveRepo ?? null;
                 <?php endforeach;
             else : ?>
                 <div class="col-md-12">
-                    Er zijn momenteel geen komende concerten.
+                    <?= $text->get(
+                        'er_zijn_geen_concerten',
+                        'Er zijn momenteel geen komende concerten.'
+                    ) ?>
                 </div>
             <?php endif; ?>
         </div>
@@ -93,7 +98,12 @@ $eventArchiveRepository = $eventArchiveRepo ?? null;
 
             <?php if (isset($amount_of_events) && (int) $amount_of_events > 3) : ?>
                 <div class="col-md-12 text-center">
-                    <a class="button" href="/concerten-historie">Bekijk alles</a>
+                    <a class="button" href="/concerten-historie">
+                        <?= $text->get(
+                            'bekijk_alles_knop',
+                            'Bekijk alles'
+                        ) ?>
+                    </a>
                 </div>
             <?php endif; ?>
         </div>

@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use App\Domain\Admin\ContactForm\Controller\ContactFormController;
+use App\Domain\Admin\Text\Controllers\TextController;
 use App\Domain\Contact\Controllers\ContactController;
 use App\Domain\Event\Controllers\EventArchiveController;
 use App\Domain\Event\Controllers\EventController;
@@ -138,6 +139,20 @@ Router::prefix('admin')->group(static function () {
     Router::post('setting/edit/{slug}/update', SettingsControllers::class,
         'update', User::ADMIN);
     Router::post('setting/delete/{slug}', SettingsControllers::class,
+        'destroy', User::ADMIN);
+
+    /**
+     * Texts routes.
+     */
+    Router::get('texts', TextController::class,
+        'index', User::ADMIN);
+    Router::post('text/create/store', TextController::class,
+        'store', User::ADMIN);
+    Router::get('text/edit/{slug}', TextController::class,
+        'edit', User::ADMIN);
+    Router::post('text/edit/{slug}/update', TextController::class,
+        'update', User::ADMIN);
+    Router::post('text/delete/{slug}', TextController::class,
         'destroy', User::ADMIN);
 
     /**
