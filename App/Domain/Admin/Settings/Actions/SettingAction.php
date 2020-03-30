@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Domain\Admin\Settings\Actions;
 
 use Domain\Admin\Accounts\User\Models\User;
+use Domain\Admin\Pages\Models\Slug;
 use Domain\Admin\Settings\Models\Setting;
 use Domain\Admin\Settings\Repositories\SettingRepository;
 use Src\Action\FormAction;
@@ -32,10 +33,12 @@ abstract class SettingAction extends FormAction
         $this->session = new Session();
         $request = new Request();
 
-        $this->key = $request->post('setting_key');
-        if ($this->key === '') {
-            $this->key = $this->settingRepository->getKey();
+        $key = $request->post('setting_key');
+        if ($key === '') {
+            $key = $this->settingRepository->getKey();
         }
+        $slug = new Slug();
+        $this->key = str_replace('-', '_', $slug->parse($key));
 
         $this->value = $request->post('setting_value');
     }

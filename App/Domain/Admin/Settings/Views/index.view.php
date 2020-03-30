@@ -82,7 +82,7 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">
-                        Instelling '<?= $setting->getKey() ?>' bewerken
+                        Instelling '<?= $setting->getReadableKey() ?>' bewerken
                     </h4>
                 </div>
                 <div class="card-body">
@@ -103,7 +103,7 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                                        placeholder="<?= Translation::get('form_key') ?>"
                                        value="<?= $request->post(
     'setting_key',
-    $setting->getKey()
+    $setting->getReadableKey()
 ) ?>"
                                        required>
                             </div>

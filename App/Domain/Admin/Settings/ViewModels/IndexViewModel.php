@@ -41,7 +41,7 @@ final class IndexViewModel
             $setting = new SettingRepository($item);
 
             $this->dataTable->addRow(
-                $setting->getKey(),
+                $setting->getReadableKey(),
                 $setting->getValue(),
                 Resource::addTableEditColumn(
                     '/admin/setting/edit/' . $setting->getId(),

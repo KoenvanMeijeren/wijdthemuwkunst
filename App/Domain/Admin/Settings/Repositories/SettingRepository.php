@@ -38,6 +38,13 @@ final class SettingRepository
         return $this->key;
     }
 
+    public function getReadableKey(): string
+    {
+        $key = ucfirst($this->getKey());
+
+        return str_replace('_', ' ', $key);
+    }
+
     public function getValue(): string
     {
         return $this->value;
