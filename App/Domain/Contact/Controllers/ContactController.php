@@ -29,6 +29,11 @@ final class ContactController
         $session->save('email', $request->post('email'));
         $session->save('message', $request->post('message'));
 
-        return new Redirect(URI::getPreviousUrl() . '#footer');
+        $redirectUrl = URI::getPreviousUrl();
+        if ($redirectUrl === '') {
+            return new Redirect('/#footer');
+        }
+
+        return new Redirect("$redirectUrl#footer");
     }
 }
