@@ -26,6 +26,7 @@ $amountMessages = count($messages ?? []);
                         <label for="datepicker"></label>
                         <input type="text" name="date"
                                autocomplete="off"
+                               placeholder="Datum"
                                class="form-control" id="datepicker"
                                value="<?= $request->get('date') ?>">
                     </div>
@@ -77,9 +78,15 @@ $amountMessages = count($messages ?? []);
                                            data-toggle="list"
                                            href="#list-<?= $key ?>" role="tab"
                                            aria-controls="<?= $key ?>">
-                                            <?= $message->getName() ?> -
-                                            <?= $date ?> om
-                                            <?= $message->convertDateTime()->toTime() ?>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <?= $message->getName() ?>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <?= $date ?> om
+                                                    <?= $message->convertDateTime()->toTime() ?>
+                                                </div>
+                                            </div>
                                         </a>
                                         <?php $active = '';
                                     endforeach; ?>
