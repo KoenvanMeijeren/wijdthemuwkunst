@@ -84,7 +84,7 @@ $request = new Request();
     </div>
 </div>
 
-<div class="row">
+<div class="row" id="logs">
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
@@ -101,7 +101,7 @@ $request = new Request();
                     <?php endif; ?>
                 </div>
 
-                <form class="form-inline float-right" method="get">
+                <form action="#logs" class="form-inline float-right" method="get">
                     <div class="form-group mr-2">
                         <label for="datepicker"></label>
                         <input type="text" name="logDate"
