@@ -86,6 +86,15 @@ $request = new Request();
                             </a>
                         </li>
                         <li class="nav-item <?= strpos(URI::getUrl(),
+                            'menu') !== false ? 'active' : '' ?>">
+                            <a class="nav-link" href="/admin/menu">
+                                <i class="fas fa-bars"></i>
+                                <p>
+                                    <?= Translation::get('admin_menu_menu') ?>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item <?= strpos(URI::getUrl(),
                             'page') !== false ? 'active' : '' ?>">
                             <a class="nav-link" href="/admin/pages">
                                 <i class="fas fa-sitemap"></i>

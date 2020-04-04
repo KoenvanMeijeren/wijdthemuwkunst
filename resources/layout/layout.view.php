@@ -1,11 +1,10 @@
 <?php
 
+use App\Domain\Admin\Menu\Models\Menu;
+use App\Domain\Admin\Menu\Repositories\MenuRepository;
 use App\Domain\Admin\Text\Models\Text;
 use App\Domain\Event\Models\Event;
-use Domain\Admin\Pages\Models\Page as AdminPage;
-use Domain\Admin\Pages\Repositories\PageRepository;
 use Domain\Admin\Settings\Models\Setting;
-use Domain\Pages\Models\Page;
 use Src\Core\Request;
 use Src\Security\CSRF;
 use Src\Session\Session;
@@ -16,9 +15,9 @@ $setting = new Setting();
 $text = new Text();
 $session = new Session();
 $request = new Request();
-$page = new Page();
 $event = new Event();
-$pagesInMenu = $page->getByVisibility(AdminPage::PAGE_PUBLIC_IN_MENU);
+$menu = new Menu();
+$menuItems = $menu->getAll();
 ?>
 <!DOCTYPE html>
 <html lang="<?= Translation::DUTCH_LANGUAGE_CODE ?>">
@@ -65,20 +64,18 @@ $pagesInMenu = $page->getByVisibility(AdminPage::PAGE_PUBLIC_IN_MENU);
         <a href="/" class="logo">
             <?= $setting->get('website_naam') ?>
         </a>
-        <nav id="nav">
-            <a href="/">Home</a>
+        <?php if (count($menuItems) > 0) : ?>
+            <nav id="nav">
+                <?php foreach ($menuItems as $menuItem) :
+                    $menu = new MenuRepository($menuItem) ?>
+                    <a href="<?= $menu->getSlug() ?>"><?= $menu->getTitle() ?></a>
+                <?php endforeach; ?>
+            </nav>
 
-            <?php if (count($event->getLimited(1)) > 0) : ?>
-                <a href="/concerten">Concerten</a>
-            <?php endif; ?>
-
-            <?php foreach ($pagesInMenu as $menuPage) :
-                $pageRepository = new PageRepository($menuPage) ?>
-                <a href="<?= $pageRepository->getSlug() ?>"><?= $pageRepository->getTitle() ?></a>
-            <?php endforeach; ?>
-        </nav>
-
-        <a class="menu-toggle" href="#navPanel" aria-label="Toon menu"><span class="fa fa-bars"></span></a>
+            <a class="menu-toggle" href="#navPanel" aria-label="Toon menu">
+                <span class="fa fa-bars"></span>
+            </a>
+        <?php endif; ?>
     </div>
 </header>
 
@@ -161,7 +158,7 @@ $pagesInMenu = $page->getByVisibility(AdminPage::PAGE_PUBLIC_IN_MENU);
 
 <!-- Bootstrap -->
 <script type="text/javascript"
-    src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 <!-- Site JS -->
 <script type="text/javascript" src="/js/skel.min.js"></script>

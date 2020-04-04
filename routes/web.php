@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use App\Domain\Admin\ContactForm\Controller\ContactFormController;
+use App\Domain\Admin\Menu\Controllers\MenuController;
 use App\Domain\Admin\Text\Controllers\TextController;
 use App\Domain\Contact\Controllers\ContactController;
 use App\Domain\Event\Controllers\EventArchiveController;
@@ -153,6 +154,20 @@ Router::prefix('admin')->group(static function () {
     Router::post('text/edit/{slug}/update', TextController::class,
         'update', User::ADMIN);
     Router::post('text/delete/{slug}', TextController::class,
+        'destroy', User::ADMIN);
+
+    /**
+     * Menu routes.
+     */
+    Router::get('menu', MenuController::class,
+        'index', User::ADMIN);
+    Router::post('menu/item/create/store', MenuController::class,
+        'store', User::ADMIN);
+    Router::get('menu/item/edit/{slug}', MenuController::class,
+        'edit', User::ADMIN);
+    Router::post('menu/item/edit/{slug}/update', MenuController::class,
+        'update', User::ADMIN);
+    Router::post('menu/item/delete/{slug}', MenuController::class,
         'destroy', User::ADMIN);
 
     /**
