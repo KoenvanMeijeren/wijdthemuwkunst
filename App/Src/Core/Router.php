@@ -227,7 +227,7 @@ final class Router
         foreach ($routes as $route) {
             $routeExploded = explode('/', $route);
 
-            if ((bool) preg_match('/{[a-zA-Z]+}/', $route)) {
+            if ((bool) preg_match('/{+[a-zA-Z]+}/', $route)) {
                 $this->updateRoute($routeExploded, $urlExploded, $route);
             }
         }
@@ -250,6 +250,23 @@ final class Router
             return;
         }
 
+        // If the route is not equal to the url,
+        // except for the wildcard, return void.
+        $falseMatches = 0;
+        $urlParts = count($urlExploded);
+        for ($key = 0; $key < $urlParts; $key++){
+            $routePart = $routeExploded[$key];
+            $urlPart = $urlExploded[$key];
+
+            if ($urlPart !== $routePart) {
+                $falseMatches++;
+            }
+        }
+
+        if ($falseMatches > 1) {
+            return;
+        }
+
         // Walk through the exploded route array and if there is a match and
         // if it contains {a-zA-Z} replace it with the same value on the
         // same position from the url exploded array
@@ -258,7 +275,7 @@ final class Router
                 && (bool) preg_match('/{+[a-zA-Z]+}/', $routePart)
             ) {
                 $newRoute = preg_replace(
-                    '/{[a-zA-Z]+}/',
+                    '/{+[a-zA-Z]+}/',
                     $urlExploded[$key],
                     $route
                 );
