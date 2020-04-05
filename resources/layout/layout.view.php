@@ -67,9 +67,13 @@ $menuItems = $menu->getAll();
         <?php if (count($menuItems) > 0) : ?>
             <nav id="nav">
                 <?php foreach ($menuItems as $menuItem) :
-                    $menu = new MenuRepository($menuItem) ?>
-                    <a href="<?= $menu->getSlug() ?>"><?= $menu->getTitle() ?></a>
-                <?php endforeach; ?>
+                    $menu = new MenuRepository($menuItem);
+                    if ($menu->getSlug() === 'index') : ?>
+                        <a href="/"><?= $menu->getTitle() ?></a>
+                    <?php else : ?>
+                        <a href="<?= $menu->getSlug() ?>"><?= $menu->getTitle() ?></a>
+                    <?php endif;
+                endforeach; ?>
             </nav>
 
             <a class="menu-toggle" href="#navPanel" aria-label="Toon menu">

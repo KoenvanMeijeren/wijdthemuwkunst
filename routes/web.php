@@ -21,18 +21,32 @@ use Domain\Pages\Controllers\PageController;
 use Src\Core\Router;
 
 /**
- * Pages routes.
+ * Index routes.
  */
 Router::get('', PageController::class,
     'index', User::GUEST);
+Router::get('index', PageController::class,
+    'index', User::GUEST);
+
+/**
+ * Event routes.
+ */
 Router::get('concerten', EventController::class,
     'index', User::GUEST);
 Router::get('concert/{slug}', EventController::class,
     'show', User::GUEST);
+
+/**
+ * Event history routes.
+ */
 Router::get('concerten-historie', EventArchiveController::class,
     'index', User::GUEST);
 Router::get('concert/historie/{slug}', EventArchiveController::class,
     'show', User::GUEST);
+
+/**
+ * Contact routes.
+ */
 Router::post('contact', ContactController::class,
     'send', User::GUEST);
 
