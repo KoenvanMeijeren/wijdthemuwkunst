@@ -24,6 +24,7 @@ final class AccountController
     private Account $account;
 
     private string $baseViewPath = 'Admin/Accounts/Account/Views/';
+    private string $redirectBack = '/admin/account';
 
     public function __construct()
     {
@@ -34,23 +35,17 @@ final class AccountController
     {
         $accounts = new IndexViewModel($this->account->all());
 
-        return new DomainView(
-            $this->baseViewPath . 'index',
-            [
-                'title' => Translation::get('admin_account_title'),
-                'accounts' => $accounts->table()
-            ]
-        );
+        return new DomainView($this->baseViewPath . 'index', [
+            'title' => Translation::get('admin_account_title'),
+            'accounts' => $accounts->table()
+        ]);
     }
 
     public function create(): DomainView
     {
-        return new DomainView(
-            $this->baseViewPath . 'create',
-            [
-                'title' => Translation::get('admin_create_account_title')
-            ]
-        );
+        return new DomainView($this->baseViewPath . 'create', [
+            'title' => Translation::get('admin_create_account_title')
+        ]);
     }
 
     /**
@@ -58,33 +53,29 @@ final class AccountController
      */
     public function store()
     {
-        $create = new CreateAccountAction($this->account);
+        $create = new CreateAccountAction();
         if ($create->execute()) {
-            return new Redirect('/admin/account');
+            return new Redirect($this->redirectBack);
         }
 
         return $this->create();
     }
 
     /**
-     * @param string $title
-     *
      * @return Redirect|DomainView
      * @throws InvalidKeyException
      */
-    public function edit(string $title = 'admin_edit_account_title')
+    public function edit()
     {
-        $account = new EditViewModel(
-            $this->account->find($this->account->getId())
+        $account = new Account();
+        $accountViewModel = new EditViewModel(
+            $account->find($account->getId())
         );
 
-        return new DomainView(
-            $this->baseViewPath . 'edit',
-            [
-                'title' => Translation::get($title),
-                'account' => $account->get()
-            ]
-        );
+        return new DomainView($this->baseViewPath . 'edit', [
+            'title' => Translation::get('admin_edit_account_title'),
+            'account' => $accountViewModel->get()
+        ]);
     }
 
     /**
@@ -93,14 +84,14 @@ final class AccountController
      */
     public function storeData()
     {
-        $account = new UpdateAccountDataAction($this->account);
+        $account = new UpdateAccountDataAction();
         if ($account->execute()) {
             return new Redirect(
                 '/admin/account/edit/' . $this->account->getId()
             );
         }
 
-        return $this->edit('admin_create_account_title');
+        return $this->edit();
     }
 
     /**
@@ -109,14 +100,14 @@ final class AccountController
      */
     public function storeEmail()
     {
-        $account = new UpdateAccountEmailAction($this->account);
+        $account = new UpdateAccountEmailAction();
         if ($account->execute()) {
             return new Redirect(
                 '/admin/account/edit/' . $this->account->getId()
             );
         }
 
-        return $this->edit('admin_edit_account_title');
+        return $this->edit();
     }
 
     /**
@@ -125,19 +116,19 @@ final class AccountController
      */
     public function storePassword()
     {
-        $account = new UpdateAccountPasswordAction($this->account);
+        $account = new UpdateAccountPasswordAction();
         if ($account->execute()) {
             return new Redirect(
                 '/admin/account/edit/' . $this->account->getId()
             );
         }
 
-        return $this->edit('admin_edit_account_title');
+        return $this->edit();
     }
 
     public function block(): Redirect
     {
-        $block = new BlockAccountAction($this->account);
+        $block = new BlockAccountAction();
         $block->execute();
 
         return new Redirect(
@@ -147,7 +138,7 @@ final class AccountController
 
     public function unblock(): Redirect
     {
-        $unblock = new UnblockAccountAction($this->account);
+        $unblock = new UnblockAccountAction();
         $unblock->execute();
 
         return new Redirect(
@@ -157,9 +148,9 @@ final class AccountController
 
     public function destroy(): Redirect
     {
-        $delete = new DeleteAccountAction($this->account);
+        $delete = new DeleteAccountAction();
         $delete->execute();
 
-        return new Redirect('/admin/account');
+        return new Redirect($this->redirectBack);
     }
 }
