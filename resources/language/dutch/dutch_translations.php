@@ -25,6 +25,7 @@ return [
     'admin_menu_contact_form' => 'Contact formulier',
     'admin_menu_settings' => 'Website instellingen',
     'admin_menu_texts' => 'Teksten',
+    'admin_menu_menu' => 'Menu',
     'admin_menu_account' => 'Account',
     'admin_menu_accounts' => 'Accounts',
     'admin_menu_debug' => 'Debuggen',
@@ -136,6 +137,19 @@ return [
     'delete_text_confirmation_message' => 'Weet je zeker dat je de tekst %s wil verwijderen?',
 
     /**
+     * Admin menu page translations.
+     */
+    'menu_title' => 'Menu',
+    'menu_item_does_not_exists' => 'Dit menu item bestaat niet.',
+    'menu_item_already_exists' => 'Menu item \'%s\' bestaat al.',
+    'menu_item_successful_created' => 'Menu item \'%s\' is succesvol aangemaakt.',
+    'menu_item_unsuccessful_created' => 'Menu item \'%s\' kon niet worden aangemaakt.',
+    'menu_item_successful_updated' => 'Menu item \'%s\' is succesvol bijgewerkt.',
+    'menu_item_successful_deleted' => 'Menu item \'%s\' is succesvol verwijderd',
+    'menu_item_unsuccessful_deleted' => 'Menu item \'%s\' kon niet worden verwijderd',
+    'delete_menu_item_confirmation_message' => 'Weet je zeker dat je menu item `%s` wil verwijderen?',
+
+    /**
      * Admin contact form page translations.
      */
     'admin_contact_form_title' => 'Contact formulier',
@@ -200,6 +214,7 @@ return [
     'table_row_location' => 'Locatie',
     'table_row_datetime' => 'Datum en tijdstip',
     'table_row_slug' => 'URL',
+    'table_row_menu_item_weight' => 'Gewicht',
     'table_row_page_in_menu' => 'Zichtbaarheid',
     'table_row_title' => 'Titel',
     'table_row_key' => 'Sleutel',
@@ -226,6 +241,7 @@ return [
     'form_name' => 'Naam',
     'form_key' => 'Sleutel',
     'form_value' => 'Waarde',
+    'form_weight' => 'Gewicht',
     'form_name_placeholder' => 'Typ naam',
     'form_email' => 'Email',
     'form_email_placeholder' => 'Typ email',
