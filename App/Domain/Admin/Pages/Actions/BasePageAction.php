@@ -32,10 +32,10 @@ abstract class BasePageAction extends FormAction
 
     protected array $attributes = [];
 
-    public function __construct(Page $page)
+    public function __construct()
     {
         $this->slug = new Slug();
-        $this->page = $page;
+        $this->page = new Page();
         $this->pageRepository = new PageRepository(
             $this->page->find($this->page->getId())
         );

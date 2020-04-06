@@ -36,23 +36,17 @@ final class PageController
     {
         $pages = new IndexViewModel($this->page->all());
 
-        return new DomainView(
-            $this->baseViewPath . 'index',
-            [
-                'title' => Translation::get('admin_page_title'),
-                'pages' => $pages->table()
-            ]
-        );
+        return new DomainView($this->baseViewPath . 'index', [
+            'title' => Translation::get('admin_page_title'),
+            'pages' => $pages->table()
+        ]);
     }
 
     public function create(): DomainView
     {
-        return new DomainView(
-            $this->baseViewPath . 'edit',
-            [
-                'title' => Translation::get('admin_create_page_title')
-            ]
-        );
+        return new DomainView($this->baseViewPath . 'edit', [
+            'title' => Translation::get('admin_create_page_title')
+        ]);
     }
 
     /**
@@ -60,7 +54,7 @@ final class PageController
      */
     public function store()
     {
-        $create = new CreatePageAction($this->page);
+        $create = new CreatePageAction();
         if ($create->execute()) {
             return new Redirect($this->redirectBack);
         }
@@ -75,16 +69,13 @@ final class PageController
         );
         $pageRepository = new PageRepository($page->get());
 
-        return new DomainView(
-            $this->baseViewPath . 'edit',
-            [
-                'title' => sprintf(
-                    Translation::get('admin_edit_page_title'),
-                    $pageRepository->getSlug()
-                ),
-                'page' => $page->get()
-            ]
-        );
+        return new DomainView($this->baseViewPath . 'edit', [
+            'title' => sprintf(
+                Translation::get('admin_edit_page_title'),
+                $pageRepository->getSlug()
+            ),
+            'page' => $page->get()
+        ]);
     }
 
     /**
@@ -92,7 +83,7 @@ final class PageController
      */
     public function update()
     {
-        $update = new UpdatePageAction($this->page);
+        $update = new UpdatePageAction();
         if ($update->execute()) {
             return new Redirect($this->redirectSame . $this->page->getId());
         }
@@ -102,7 +93,7 @@ final class PageController
 
     public function publish(): Redirect
     {
-        $publish = new PublishPageAction($this->page);
+        $publish = new PublishPageAction();
         $publish->execute();
 
         return new Redirect($this->redirectSame . $this->page->getId());
@@ -110,7 +101,7 @@ final class PageController
 
     public function unPublish(): Redirect
     {
-        $unPublish = new UnPublishPageAction($this->page);
+        $unPublish = new UnPublishPageAction();
         $unPublish->execute();
 
         return new Redirect($this->redirectSame . $this->page->getId());
@@ -118,7 +109,7 @@ final class PageController
 
     public function removeThumbnail(): Redirect
     {
-        $removeThumbnail = new RemovePageThumbnailAction($this->page);
+        $removeThumbnail = new RemovePageThumbnailAction();
         $removeThumbnail->execute();
 
         return new Redirect($this->redirectSame . $this->page->getId());
@@ -126,7 +117,7 @@ final class PageController
 
     public function removeBanner(): Redirect
     {
-        $removeBanner = new RemovePageBannerAction($this->page);
+        $removeBanner = new RemovePageBannerAction();
         $removeBanner->execute();
 
         return new Redirect($this->redirectSame . $this->page->getId());
@@ -134,7 +125,7 @@ final class PageController
 
     public function destroy(): Redirect
     {
-        $delete = new DeletePageAction($this->page);
+        $delete = new DeletePageAction();
         $delete->execute();
 
         return new Redirect($this->redirectBack);

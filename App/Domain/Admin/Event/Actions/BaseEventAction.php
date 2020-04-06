@@ -35,10 +35,10 @@ abstract class BaseEventAction extends FormAction
 
     protected array $attributes = [];
 
-    public function __construct(Event $event)
+    public function __construct()
     {
         $this->slug = new Slug();
-        $this->event = $event;
+        $this->event = new Event();
         $this->eventRepository = new EventRepository(
             $this->event->find($this->event->getId())
         );

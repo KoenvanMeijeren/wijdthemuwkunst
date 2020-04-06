@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Domain\Admin\File\Controllers;
 
-use Domain\Admin\File\Actions\UploadBannerAction;
 use Domain\Admin\File\Actions\UploadFileAction;
-use Domain\Admin\File\Actions\UploadThumbnailAction;
+use Domain\Admin\File\Actions\UploadImageAction;
 
 final class UploadFileController
 {
@@ -19,15 +18,13 @@ final class UploadFileController
 
     public function thumbnail(): void
     {
-        $upload = new UploadBannerAction('thumbnailOutput');
-
+        $upload = new UploadImageAction('thumbnailOutput');
         $upload->execute();
     }
 
     public function banner(): void
     {
-        $upload = new UploadBannerAction('bannerOutput');
-
+        $upload = new UploadImageAction('bannerOutput');
         $upload->execute();
     }
 }
