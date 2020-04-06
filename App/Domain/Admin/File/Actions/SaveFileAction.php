@@ -9,17 +9,20 @@ use Src\Action\Action;
 
 final class SaveFileAction extends Action
 {
-    private int $fileId = 0;
+    private File $file;
+
     private string $path;
+    private int $id = 0;
 
     public function __construct(string $path)
     {
+        $this->file = new File();
         $this->path = $path;
     }
 
-    public function getFileId(): int
+    public function getId(): int
     {
-        return $this->fileId;
+        return $this->id;
     }
 
     /**
@@ -27,19 +30,17 @@ final class SaveFileAction extends Action
      */
     protected function handle(): bool
     {
-        $file = new File();
-
-        $createdFile = $file->firstOrCreate([
-            $file->getPathKey() => $this->path,
+        $createdFile = $this->file->firstOrCreate([
+            $this->file->getPathKey() => $this->path,
         ]);
 
-        if ($createdFile !== null) {
-            $this->fileId = (int) $createdFile->{$file->getPrimaryKey()};
-
-            return true;
+        if ($createdFile === null) {
+            return false;
         }
 
-        return false;
+        $this->id = (int) $createdFile->{$this->file->getPrimaryKey()};
+
+        return true;
     }
 
     /**

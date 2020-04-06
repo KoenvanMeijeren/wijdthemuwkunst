@@ -5,28 +5,11 @@ declare(strict_types=1);
 namespace Domain\Admin\Settings\Actions;
 
 use Domain\Admin\Accounts\User\Models\User;
-use Domain\Admin\Settings\Models\Setting;
-use Domain\Admin\Settings\Repositories\SettingRepository;
-use Src\Action\FormAction;
-use Src\Session\Session;
 use Src\State\State;
 use Src\Translation\Translation;
 
-final class DestroySettingAction extends FormAction
+final class DestroySettingAction extends BaseSettingAction
 {
-    protected Setting $setting;
-    protected SettingRepository $settingRepository;
-    protected Session $session;
-
-    public function __construct(Setting $setting)
-    {
-        $this->setting = $setting;
-        $this->settingRepository = new SettingRepository(
-            $this->setting->find($this->setting->getId())
-        );
-        $this->session = new Session();
-    }
-
     /**
      * @inheritDoc
      */

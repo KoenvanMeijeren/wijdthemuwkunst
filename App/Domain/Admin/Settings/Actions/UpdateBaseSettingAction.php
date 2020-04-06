@@ -7,7 +7,7 @@ namespace Domain\Admin\Settings\Actions;
 use Src\State\State;
 use Src\Translation\Translation;
 
-final class UpdateSettingAction extends SettingAction
+final class UpdateBaseSettingAction extends BaseSettingAction
 {
     /**
      * @inheritDoc

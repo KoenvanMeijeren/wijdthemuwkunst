@@ -19,6 +19,7 @@ abstract class BaseMenuAction extends FormAction
     protected Menu $menu;
     protected MenuRepository $menuRepository;
     protected Session $session;
+    protected FormValidator $validator;
 
     protected int $id;
     protected string $url;
@@ -32,6 +33,7 @@ abstract class BaseMenuAction extends FormAction
         $this->menu = new Menu();
         $this->slug = new Slug();
         $this->session = new Session();
+        $this->validator = new FormValidator();
         $request = new Request();
 
         $this->url = $this->slug->parse($request->post('slug'));
@@ -63,12 +65,10 @@ abstract class BaseMenuAction extends FormAction
 
     protected function validate(): bool
     {
-        $validator = new FormValidator();
+        $this->validator->input($this->url, 'Url')->isRequired();
+        $this->validator->input($this->title, 'Titel')->isRequired();
+        $this->validator->input($this->weight, 'Gewicht')->isRequired();
 
-        $validator->input($this->url, 'Url')->isRequired();
-        $validator->input($this->title, 'Titel')->isRequired();
-        $validator->input($this->weight, 'Gewicht')->isRequired();
-
-        return $validator->handleFormValidation();
+        return $this->validator->handleFormValidation();
     }
 }

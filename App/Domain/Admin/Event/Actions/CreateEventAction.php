@@ -6,7 +6,7 @@ namespace App\Domain\Admin\Event\Actions;
 use Src\State\State;
 use Src\Translation\Translation;
 
-final class CreateEventAction extends EventAction
+final class CreateEventAction extends BaseEventAction
 {
     /**
      * @inheritDoc

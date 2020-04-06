@@ -15,31 +15,33 @@ use Src\State\State;
 use Src\Translation\Translation;
 use Src\Validate\form\FormValidator;
 
-abstract class SettingAction extends FormAction
+abstract class BaseSettingAction extends FormAction
 {
     protected Setting $setting;
     protected SettingRepository $settingRepository;
     protected Session $session;
+    protected FormValidator $validator;
 
     protected string $key;
     protected string $value;
 
-    public function __construct(Setting $setting)
+    public function __construct()
     {
-        $this->setting = $setting;
+        $this->setting = new Setting();
         $this->settingRepository = new SettingRepository(
             $this->setting->find($this->setting->getId())
         );
         $this->session = new Session();
+        $this->validator = new FormValidator();
         $request = new Request();
 
-        $key = $request->post('setting_key');
-        if ($key === '') {
-            $key = $this->settingRepository->getKey();
-        }
+        $key = $request->post(
+            'setting_key',
+            $this->settingRepository->getKey()
+        );
+
         $slug = new Slug();
         $this->key = str_replace('-', '_', $slug->parse($key));
-
         $this->value = $request->post('setting_value');
     }
 
@@ -65,13 +67,11 @@ abstract class SettingAction extends FormAction
      */
     protected function validate(): bool
     {
-        $validator = new FormValidator();
-
-        $validator->input($this->key, 'Sleutel')->isRequired();
-        $validator->input($this->value, 'Waarde')->isRequired();
+        $this->validator->input($this->key, 'Sleutel')->isRequired();
+        $this->validator->input($this->value, 'Waarde')->isRequired();
 
         if ($this->key !== $this->settingRepository->getKey()) {
-            $validator->input($this->key)
+            $this->validator->input($this->key)
                 ->isUnique(
                     $this->setting->getByKey($this->key),
                     sprintf(
@@ -81,6 +81,6 @@ abstract class SettingAction extends FormAction
                 );
         }
 
-        return $validator->handleFormValidation();
+        return $this->validator->handleFormValidation();
     }
 }

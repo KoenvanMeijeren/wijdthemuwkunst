@@ -15,14 +15,14 @@ use Src\Session\Session;
 use Src\Translation\Translation;
 use Src\Validate\form\FormValidator;
 
-abstract class PageAction extends FormAction
+abstract class BasePageAction extends FormAction
 {
     protected Slug $slug;
     protected Page $page;
     protected PageRepository $pageRepository;
     protected Session $session;
+    protected FormValidator $validator;
 
-    protected int $id;
     protected int $bannerID = 0;
     protected int $thumbnailID = 0;
     protected string $title;
@@ -34,57 +34,29 @@ abstract class PageAction extends FormAction
 
     public function __construct(Page $page)
     {
-        $this->page = $page;
         $this->slug = new Slug();
+        $this->page = $page;
+        $this->pageRepository = new PageRepository(
+            $this->page->find($this->page->getId())
+        );
         $this->session = new Session();
+        $this->validator = new FormValidator();
         $request = new Request();
 
-        if ($request->post('thumbnail') !== '') {
-            $thumbnail = json_decode(
-                parseHtmlEntities($request->post('thumbnail')),
-                true,
-                512,
-                JSON_THROW_ON_ERROR
-            );
-
-            if (array_key_exists('location', $thumbnail)) {
-                $saveThumbnail = new SaveFileAction($thumbnail['location']);
-                $saveThumbnail->execute();
-
-                $this->thumbnailID = $saveThumbnail->getFileId();
-            }
-        }
-
-        if ($request->post('banner') !== '') {
-            $banner = json_decode(
-                parseHtmlEntities($request->post('banner')),
-                true,
-                512,
-                JSON_THROW_ON_ERROR
-            );
-
-            if (array_key_exists('location', $banner)) {
-                $saveBanner = new SaveFileAction($banner['location']);
-                $saveBanner->execute();
-
-                $this->bannerID = $saveBanner->getFileId();
-            }
-        }
-
+        $this->thumbnailID = $this->getFileId($request->post('thumbnail'));
+        $this->bannerID = $this->getFileId($request->post('banner'));
         $this->title = $request->post('title');
         $this->url = $this->slug->parse($request->post('slug'));
         $this->inMenu = (int)$request->post('pageInMenu');
         $this->content = $request->post('content');
 
-        $this->pageRepository = new PageRepository(
-            $this->page->find($this->page->getId())
-        );
-        $this->id = $this->pageRepository->getId();
-
-        $this->prepare();
+        $this->prepareAttributes();
     }
 
-    protected function prepare(): void
+    /**
+     * Prepare the attributes.
+     */
+    protected function prepareAttributes(): void
     {
         $this->attributes = [
             'page_slug_ID' => (string) $this->getSlugId(),
@@ -106,6 +78,9 @@ abstract class PageAction extends FormAction
         }
     }
 
+    /**
+     * Get the first record matching the attributes or create it and return the id.
+     */
     protected function getSlugId(): int
     {
         $slugRepository = new SlugRepository(
@@ -118,17 +93,41 @@ abstract class PageAction extends FormAction
     }
 
     /**
+     * Get the location of the file, save it and return the id.
+     */
+    protected function getFileId(string $fileLocation): int
+    {
+        if ($fileLocation === '') {
+            return 0;
+        }
+
+        $fileLocation = json_decode(
+            parseHtmlEntities($fileLocation),
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
+
+        if (!array_key_exists('location', $fileLocation)) {
+            return 0;
+        }
+
+        $saveFile = new SaveFileAction($fileLocation['location']);
+        $saveFile->execute();
+
+        return $saveFile->getId();
+    }
+
+    /**
      * @inheritDoc
      */
     protected function validate(): bool
     {
-        $validator = new FormValidator();
-
-        $validator->input($this->title, 'Title')
+        $this->validator->input($this->title, 'Title')
             ->isRequired();
 
         if ($this->url !== $this->pageRepository->getSlug()) {
-            $validator->input($this->url, 'Slug')
+            $this->validator->input($this->url, 'Slug')
                 ->isRequired()
                 ->isUnique(
                     $this->page->getBySlug($this->url),
@@ -139,7 +138,7 @@ abstract class PageAction extends FormAction
                 );
         }
 
-        $validator->input((string)$this->inMenu, 'Zichtbaarheid van de pagina')
+        $this->validator->input((string)$this->inMenu, 'Zichtbaarheid van de pagina')
             ->isRequired()
             ->isInArray(
                 (string)$this->inMenu,
@@ -150,9 +149,9 @@ abstract class PageAction extends FormAction
                 ]
             );
 
-        $validator->input($this->content, 'Pagina content')
+        $this->validator->input($this->content, 'Pagina content')
             ->isRequired();
 
-        return $validator->handleFormValidation();
+        return $this->validator->handleFormValidation();
     }
 }

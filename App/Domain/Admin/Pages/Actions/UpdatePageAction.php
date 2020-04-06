@@ -8,7 +8,7 @@ use Domain\Admin\Pages\Models\Page;
 use Src\State\State;
 use Src\Translation\Translation;
 
-final class UpdatePageAction extends PageAction
+final class UpdatePageAction extends BasePageAction
 {
     /**
      * @inheritDoc
@@ -30,6 +30,7 @@ final class UpdatePageAction extends PageAction
 
     protected function authorize(): bool
     {
+        // Url cannot be edited if the page is static.
         $inMenu = $this->pageRepository->getInMenu();
         if ($inMenu === Page::PAGE_STATIC
             && $this->url !== $this->pageRepository->getSlug()
@@ -44,6 +45,7 @@ final class UpdatePageAction extends PageAction
             return false;
         }
 
+        // Visibility cannot be edited if the page is static.
         if ($inMenu === Page::PAGE_STATIC
             && $this->inMenu !== $inMenu
         ) {

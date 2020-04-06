@@ -8,7 +8,7 @@ use Domain\Admin\Accounts\User\Models\User;
 use Src\State\State;
 use Src\Translation\Translation;
 
-final class CreateSettingAction extends SettingAction
+final class CreateBaseSettingAction extends BaseSettingAction
 {
     /**
      * @inheritDoc
