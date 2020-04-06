@@ -37,10 +37,11 @@ final class UnblockAccountAction extends BaseAccountAction
                 State::FAILED,
                 Translation::get('cannot_unblock_own_account_message')
             );
+
             return false;
         }
 
-        return true;
+        return parent::authorize();
     }
 
     /**

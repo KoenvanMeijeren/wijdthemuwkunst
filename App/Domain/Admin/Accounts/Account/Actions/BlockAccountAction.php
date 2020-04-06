@@ -36,10 +36,11 @@ final class BlockAccountAction extends BaseAccountAction
                 State::FAILED,
                 Translation::get('cannot_block_own_account_message')
             );
+
             return false;
         }
 
-        return true;
+        return parent::authorize();
     }
 
     /**
