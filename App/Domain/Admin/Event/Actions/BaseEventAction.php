@@ -45,7 +45,6 @@ abstract class BaseEventAction extends FormAction
         $this->session = new Session();
         $this->validator = new FormValidator();
         $request = new Request();
-        $datetime = new Chronos($this->date . $this->time);
 
         $this->thumbnailID = $this->getFileId($request->post('thumbnail'));
         $this->bannerID = $this->getFileId($request->post('banner'));
@@ -54,8 +53,9 @@ abstract class BaseEventAction extends FormAction
         $this->content = $request->post('content');
         $this->date = $request->post('date');
         $this->time = $request->post('time');
-        $this->location = $request->post('location');
+        $datetime = new Chronos($this->date . $this->time);
         $this->datetime = $datetime->toDateTimeString();
+        $this->location = $request->post('location');
 
         $this->prepareAttributes();
     }
