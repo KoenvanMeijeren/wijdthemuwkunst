@@ -8,7 +8,9 @@ use Src\Security\CSRF;
 use Src\Translation\Translation;
 
 $request = new Request();
+$user = new User();
 $account = new AccountRepository($account ?? null);
+$disabled = $user->getId() === $account->getId() ? 'disabled' : '';
 $rights = (int)$request->post('rights');
 $rights = $rights !== 0 ? $rights : $account->getRights();
 ?>
@@ -50,20 +52,21 @@ $rights = $rights !== 0 ? $rights : $account->getRights();
                                 <select id="rights"
                                         class="form-control"
                                         name="rights"
+                                    <?= $disabled ?>
                                         required>
                                     <option value="0">
                                         <?= Translation::get('form_choose_rights') ?>
                                     </option>
                                     <option value="<?= User::ADMIN ?>"
-                                            <?= $rights === User::ADMIN ? 'selected' : '' ?>>
+                                        <?= $rights === User::ADMIN ? 'selected' : '' ?>>
                                         <?= Translation::get('form_rights_admin') ?>
                                     </option>
                                     <option value="<?= User::SUPER_ADMIN ?>"
-                                            <?= $rights === User::SUPER_ADMIN ? 'selected' : '' ?>>
+                                        <?= $rights === User::SUPER_ADMIN ? 'selected' : '' ?>>
                                         <?= Translation::get('form_rights_super_admin') ?>
                                     </option>
                                     <option value="<?= User::DEVELOPER ?>"
-                                            <?= $rights === User::DEVELOPER ? 'selected' : '' ?>>
+                                        <?= $rights === User::DEVELOPER ? 'selected' : '' ?>>
                                         <?= Translation::get('form_rights_developer') ?>
                                     </option>
                                 </select>
@@ -92,58 +95,62 @@ $rights = $rights !== 0 ? $rights : $account->getRights();
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">
-                    <?= Translation::get('admin_edit_email_account_title') ?>
-                </h4>
-            </div>
-            <div class="card-body">
-                <form method="post"
-                      action="/admin/account/edit/<?= $account->getId() ?>/store/email">
-                    <?= CSRF::insertToken('/admin/account/edit/' . $account->getId() . '/store/email') ?>
 
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label for="email">
-                                    <?= Translation::get('form_email') ?>
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <input type="email" id="email"
-                                       name="email"
-                                       class="form-control"
-                                       placeholder="<?= Translation::get('form_email') ?>"
-                                       value="<?= $request->post('email') !== '' ?
-                                           $request->post('email') : $account->getEmail() ?>"
-                                       required>
+<?php if ($disabled === '') : ?>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        <?= Translation::get('admin_edit_email_account_title') ?>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form method="post"
+                          action="/admin/account/edit/<?= $account->getId() ?>/store/email">
+                        <?= CSRF::insertToken('/admin/account/edit/' . $account->getId() . '/store/email') ?>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="email">
+                                        <?= Translation::get('form_email') ?>
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="email" id="email"
+                                           name="email"
+                                           class="form-control"
+                                           placeholder="<?= Translation::get('form_email') ?>"
+                                           value="<?= $request->post('email') !== '' ?
+                                               $request->post('email') : $account->getEmail() ?>"
+                                           required>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <a href="/admin/account"
-                       class="btn btn-default-small float-left"
-                       data-toggle="tooltip"
-                       data-placement="top"
-                       title="<?= Translation::get('back_button') ?>">
-                        <i class="fas fa-arrow-left"></i>
-                        <?= Translation::get('back_button') ?>
-                    </a>
+                        <a href="/admin/account"
+                           class="btn btn-default-small float-left"
+                           data-toggle="tooltip"
+                           data-placement="top"
+                           title="<?= Translation::get('back_button') ?>">
+                            <i class="fas fa-arrow-left"></i>
+                            <?= Translation::get('back_button') ?>
+                        </a>
 
-                    <button type="submit"
-                            class="btn btn-default-small float-right">
-                        <?= Translation::get('save_button') ?>
-                        <i class="far fa-save"></i>
-                    </button>
+                        <button type="submit"
+                                class="btn btn-default-small float-right">
+                            <?= Translation::get('save_button') ?>
+                            <i class="far fa-save"></i>
+                        </button>
 
-                    <div class="clearfix"></div>
-                </form>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+<?php endif; ?>
+
 <div class="row">
     <div class="col-md-12">
         <div class="card">
@@ -213,44 +220,49 @@ $rights = $rights !== 0 ? $rights : $account->getRights();
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-body">
-                <?php if ($account->isBlocked()) : ?>
-                    <div class="card-text mb-4">
-                        <h4 class="card-title">
-                            Account is geblokkeerd
-                        </h4>
-                    </div>
+<?php if ($disabled === '') : ?>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <?php if ($account->isBlocked()) : ?>
+                        <div class="card-text mb-4">
+                            <h4 class="card-title">
+                                Account is geblokkeerd
+                            </h4>
+                        </div>
 
-                    <form method="post"
-                          action="/admin/account/unblock/<?= $account->getId() ?>">
-                        <button type="submit"
-                                class="btn btn-success">
-                            <?= Translation::get('unblock_button') ?>
-                            <i class="far fa-save"></i>
-                        </button>
-                        <div class="clearfix"></div>
-                    </form>
-                <?php else : ?>
-                    <div class="card-text mb-4">
-                        <h4 class="card-title">
-                            Account blokkeren?
-                        </h4>
-                    </div>
+                        <form method="post"
+                              action="/admin/account/unblock/<?= $account->getId() ?>">
+                            <?= CSRF::insertToken("/admin/account/unblock/{$account->getId()}") ?>
+                            <button type="submit"
+                                    class="btn btn-success">
+                                <?= Translation::get('unblock_button') ?>
+                                <i class="far fa-save"></i>
+                            </button>
+                            <div class="clearfix"></div>
+                        </form>
+                    <?php else : ?>
+                        <div class="card-text mb-4">
+                            <h4 class="card-title">
+                                Account blokkeren?
+                            </h4>
+                        </div>
 
-                    <form method="post"
-                          action="/admin/account/block/<?= $account->getId() ?>">
-                        <button type="submit"
-                                class="btn btn-danger">
-                            <?= Translation::get('block_button') ?>
-                            <i class="far fa-save"></i>
-                        </button>
-                        <div class="clearfix"></div>
-                    </form>
-                <?php endif; ?>
+                        <form method="post"
+                              action="/admin/account/block/<?= $account->getId() ?>">
+                            <?= CSRF::insertToken("/admin/account/block/{$account->getId()}") ?>
+
+                            <button type="submit"
+                                    class="btn btn-danger">
+                                <?= Translation::get('block_button') ?>
+                                <i class="far fa-save"></i>
+                            </button>
+                            <div class="clearfix"></div>
+                        </form>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     </div>
-</div>
+<?php endif; ?>
