@@ -27,21 +27,13 @@ final class Page extends Model
 
     /**
      * Possible page visibility options.
-     * - Page not in menu
-     * - Page public in menu
-     * - Page logged in in menu
+     * - Page is normal
      * - Page is static
-     * - Page in footer
-     * - Page in menu and in footer
      *
      * @var int
      */
-    public const PAGE_NOT_IN_MENU = 0;
-    public const PAGE_PUBLIC_IN_MENU = 1;
-    public const PAGE_LOGGED_IN_IN_MENU = 2;
-    public const PAGE_STATIC = 3;
-    public const PAGE_IN_FOOTER = 4;
-    public const PAGE_IN_MENU_AND_IN_FOOTER = 5;
+    public const PAGE_NORMAL = 1;
+    public const PAGE_STATIC = 2;
 
     public function __construct()
     {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Pages\Actions;
 
+use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Pages\Models\Page;
 use Src\State\State;
 use Src\Translation\Translation;
@@ -30,6 +31,11 @@ final class UpdatePageAction extends BasePageAction
 
     protected function authorize(): bool
     {
+        $user = new User();
+        if ($user->getRights() === User::DEVELOPER) {
+            return parent::authorize();
+        }
+
         // Url cannot be edited if the page is static.
         $inMenu = $this->pageRepository->getInMenu();
         if ($inMenu === Page::PAGE_STATIC

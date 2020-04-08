@@ -143,18 +143,13 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                                     <?= $disabled ?>
                                         required>
                                     <option
-                                        value="<?= Page::PAGE_NOT_IN_MENU ?>"
-                                        <?= $pageInMenu === Page::PAGE_NOT_IN_MENU ? 'selected' : '' ?>>
-                                        <?= Translation::get('form_show_page_not_in_menu') ?>
-                                    </option>
-                                    <option
-                                        value="<?= Page::PAGE_PUBLIC_IN_MENU ?>"
-                                        <?= $pageInMenu === Page::PAGE_PUBLIC_IN_MENU ? 'selected' : '' ?>>
-                                        <?= Translation::get('page_in_menu') ?>
+                                        value="<?= Page::PAGE_NORMAL ?>"
+                                        <?= $pageInMenu === Page::PAGE_NORMAL ? 'selected' : '' ?>>
+                                        <?= Translation::get('page_normal') ?>
                                     </option>
                                     <option value="<?= Page::PAGE_STATIC ?>"
                                         <?= $pageInMenu === Page::PAGE_STATIC ? 'selected' : '' ?>>
-                                        <?= Translation::get('form_show_page_static') ?>
+                                        <?= Translation::get('page_static') ?>
                                     </option>
                                 </select>
                             </div>

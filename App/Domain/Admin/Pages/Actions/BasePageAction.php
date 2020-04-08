@@ -143,8 +143,7 @@ abstract class BasePageAction extends FormAction
             ->isInArray(
                 (string)$this->inMenu,
                 [
-                    (string) Page::PAGE_PUBLIC_IN_MENU,
-                    (string) Page::PAGE_NOT_IN_MENU,
+                    (string) Page::PAGE_NORMAL,
                     (string) Page::PAGE_STATIC,
                 ]
             );
