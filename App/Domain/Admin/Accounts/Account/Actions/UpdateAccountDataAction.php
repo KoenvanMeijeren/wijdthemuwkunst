@@ -4,35 +4,13 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\Account\Actions;
 
-use Domain\Admin\Accounts\Account\Models\Account;
+use App\Domain\Admin\Accounts\Account\Actions\BaseAccountAction;
 use Domain\Admin\Accounts\User\Models\User;
-use Src\Action\FormAction;
-use Src\Core\Request;
-use Src\Session\Session;
 use Src\State\State;
 use Src\Translation\Translation;
-use Src\Validate\form\FormValidator;
 
-final class UpdateAccountDataAction extends FormAction
+final class UpdateAccountDataAction extends BaseAccountAction
 {
-    private Account $account;
-    private User $user;
-    private Session $session;
-
-    protected string $name;
-    protected int $rights;
-
-    public function __construct(Account $account)
-    {
-        $this->account = $account;
-        $this->user = new User();
-        $this->session = new Session();
-        $request = new Request();
-
-        $this->name = $request->post('name');
-        $this->rights = (int) $request->post('rights');
-    }
-
     /**
      * @inheritDoc
      */
@@ -47,6 +25,7 @@ final class UpdateAccountDataAction extends FormAction
             State::SUCCESSFUL,
             Translation::get('admin_edited_account_successful_message')
         );
+
         return true;
     }
 
@@ -74,15 +53,13 @@ final class UpdateAccountDataAction extends FormAction
      */
     protected function validate(): bool
     {
-        $validator = new FormValidator();
-
-        $validator->input($this->name, 'Naam')
+        $this->validator->input($this->name, 'Naam')
             ->isRequired();
 
-        $validator->input((string)$this->rights, 'Rechten')
+        $this->validator->input((string)$this->rights, 'Rechten')
             ->isRequired()
             ->isBetweenRange(User::ADMIN, User::DEVELOPER);
 
-        return $validator->handleFormValidation();
+        return $this->validator->handleFormValidation();
     }
 }

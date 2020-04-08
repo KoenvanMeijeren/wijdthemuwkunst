@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Settings\Controllers;
 
-use Domain\Admin\Settings\Actions\CreateSettingAction;
+use Domain\Admin\Settings\Actions\CreateBaseSettingAction;
 use Domain\Admin\Settings\Actions\DestroySettingAction;
-use Domain\Admin\Settings\Actions\UpdateSettingAction;
+use Domain\Admin\Settings\Actions\UpdateBaseSettingAction;
 use Domain\Admin\Settings\Models\Setting;
 use Domain\Admin\Settings\ViewModels\EditViewModel;
 use Domain\Admin\Settings\ViewModels\IndexViewModel;
@@ -16,27 +16,18 @@ use Src\View\DomainView;
 
 final class SettingsControllers
 {
-    private Setting $setting;
-
     private string $baseViewPath = 'Admin/Settings/Views/';
     private string $redirectBack = '/admin/settings';
 
-    public function __construct()
-    {
-        $this->setting = new Setting();
-    }
-
     public function index(): DomainView
     {
-        $settings = new IndexViewModel($this->setting->all());
+        $setting = new Setting();
+        $settings = new IndexViewModel($setting->all());
 
-        return new DomainView(
-            $this->baseViewPath . 'index',
-            [
-                'title' => Translation::get('settings_title'),
-                'settings' => $settings->getTable()
-            ]
-        );
+        return new DomainView($this->baseViewPath . 'index', [
+            'title' => Translation::get('settings_title'),
+            'settings' => $settings->getTable()
+        ]);
     }
 
     /**
@@ -44,7 +35,7 @@ final class SettingsControllers
      */
     public function store()
     {
-        $create = new CreateSettingAction($this->setting);
+        $create = new CreateBaseSettingAction();
         if ($create->execute()) {
             return new Redirect($this->redirectBack);
         }
@@ -54,19 +45,15 @@ final class SettingsControllers
 
     public function edit(): DomainView
     {
-        $settings = new IndexViewModel($this->setting->all());
-        $setting = new EditViewModel(
-            $this->setting->find($this->setting->getId())
-        );
+        $setting = new Setting();
+        $indexViewModel = new IndexViewModel($setting->all());
+        $editViewModel = new EditViewModel($setting->find($setting->getId()));
 
-        return new DomainView(
-            $this->baseViewPath . 'index',
-            [
-                'title' => Translation::get('settings_title'),
-                'settings' => $settings->getTable(),
-                'setting' => $setting->get()
-            ]
-        );
+        return new DomainView($this->baseViewPath . 'index', [
+            'title' => Translation::get('settings_title'),
+            'settings' => $indexViewModel->getTable(),
+            'setting' => $editViewModel->get()
+        ]);
     }
 
     /**
@@ -74,7 +61,7 @@ final class SettingsControllers
      */
     public function update()
     {
-        $update = new UpdateSettingAction($this->setting);
+        $update = new UpdateBaseSettingAction();
         if ($update->execute()) {
             return new Redirect($this->redirectBack);
         }
@@ -84,7 +71,7 @@ final class SettingsControllers
 
     public function destroy(): Redirect
     {
-        $destroy = new DestroySettingAction($this->setting);
+        $destroy = new DestroySettingAction();
         $destroy->execute();
 
         return new Redirect($this->redirectBack);

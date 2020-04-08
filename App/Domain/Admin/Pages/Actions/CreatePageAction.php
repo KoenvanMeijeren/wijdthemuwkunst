@@ -7,7 +7,7 @@ namespace Domain\Admin\Pages\Actions;
 use Src\State\State;
 use Src\Translation\Translation;
 
-final class CreatePageAction extends PageAction
+final class CreatePageAction extends BasePageAction
 {
     /**
      * @inheritDoc

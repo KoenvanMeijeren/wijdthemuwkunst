@@ -15,18 +15,18 @@ use Src\Session\Session;
 use Src\Translation\Translation;
 use Src\Validate\form\FormValidator;
 
-abstract class EventAction extends FormAction
+abstract class BaseEventAction extends FormAction
 {
     protected Slug $slug;
     protected Event $event;
     protected EventRepository $eventRepository;
     protected Session $session;
+    protected FormValidator $validator;
 
-    protected int $id;
-    protected string $url;
     protected int $bannerID = 0;
     protected int $thumbnailID = 0;
     protected string $title;
+    protected string $url;
     protected string $content;
     protected string $datetime;
     protected string $date;
@@ -35,64 +35,35 @@ abstract class EventAction extends FormAction
 
     protected array $attributes = [];
 
-    public function __construct(Event $event)
+    public function __construct()
     {
-        $this->event = $event;
         $this->slug = new Slug();
-        $this->session = new Session();
-        $request = new Request();
-
+        $this->event = new Event();
         $this->eventRepository = new EventRepository(
             $this->event->find($this->event->getId())
         );
-        $this->id = $this->eventRepository->getId();
+        $this->session = new Session();
+        $this->validator = new FormValidator();
+        $request = new Request();
 
+        $this->thumbnailID = $this->getFileId($request->post('thumbnail'));
+        $this->bannerID = $this->getFileId($request->post('banner'));
         $this->title = $request->post('title');
         $this->url = $this->slug->parse($this->title);
         $this->content = $request->post('content');
         $this->date = $request->post('date');
         $this->time = $request->post('time');
-        $this->location = $request->post('location');
-
         $datetime = new Chronos($this->date . $this->time);
         $this->datetime = $datetime->toDateTimeString();
+        $this->location = $request->post('location');
 
-        if ($request->post('thumbnail') !== '') {
-            $thumbnail = json_decode(
-                parseHtmlEntities($request->post('thumbnail')),
-                true,
-                512,
-                JSON_THROW_ON_ERROR
-            );
-
-            if (array_key_exists('location', $thumbnail)) {
-                $saveThumbnail = new SaveFileAction($thumbnail['location']);
-                $saveThumbnail->execute();
-
-                $this->thumbnailID = $saveThumbnail->getFileId();
-            }
-        }
-
-        if ($request->post('banner') !== '') {
-            $banner = json_decode(
-                parseHtmlEntities($request->post('banner')),
-                true,
-                512,
-                JSON_THROW_ON_ERROR
-            );
-
-            if (array_key_exists('location', $banner)) {
-                $saveBanner = new SaveFileAction($banner['location']);
-                $saveBanner->execute();
-
-                $this->bannerID = $saveBanner->getFileId();
-            }
-        }
-
-        $this->prepare();
+        $this->prepareAttributes();
     }
 
-    protected function prepare(): void
+    /**
+     * Prepare the attributes.
+     */
+    protected function prepareAttributes(): void
     {
         $this->attributes = [
             'event_slug_ID' => (string) $this->getSlugId(),
@@ -111,6 +82,9 @@ abstract class EventAction extends FormAction
         }
     }
 
+    /**
+     * Get the first record matching the attributes or create it and return the id.
+     */
     protected function getSlugId(): int
     {
         $slugRepository = new SlugRepository(
@@ -122,21 +96,48 @@ abstract class EventAction extends FormAction
         return $slugRepository->getId();
     }
 
-    protected function validate(): bool
+    /**
+     * Get the location of the file, save it and return the id.
+     */
+    protected function getFileId(string $fileLocation): int
     {
-        $validator = new FormValidator();
-
-        if ($this->id === 0) {
-            $validator->input($this->thumbnailID, 'Concert thumbnail')->intIsRequired();
+        if ($fileLocation === '') {
+            return 0;
         }
 
-        $validator->input($this->title, 'Concert titel')->isRequired();
-        $validator->input($this->content, 'Concert content')->isRequired();
-        $validator->input($this->datetime, 'Concert datum en tijdstip')->isDateTime();
-        $validator->input($this->location, 'Concert locatie')->isRequired();
+        $fileLocation = json_decode(
+            parseHtmlEntities($fileLocation),
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
+
+        if (!array_key_exists('location', $fileLocation)) {
+            return 0;
+        }
+
+        $saveFile = new SaveFileAction($fileLocation['location']);
+        $saveFile->execute();
+
+        return $saveFile->getId();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function validate(): bool
+    {
+        if ($this->eventRepository->getId() === 0) {
+            $this->validator->input($this->thumbnailID, 'Concert thumbnail')->intIsRequired();
+        }
+
+        $this->validator->input($this->title, 'Concert titel')->isRequired();
+        $this->validator->input($this->content, 'Concert content')->isRequired();
+        $this->validator->input($this->datetime, 'Concert datum en tijdstip')->isDateTime();
+        $this->validator->input($this->location, 'Concert locatie')->isRequired();
 
         if ($this->url !== $this->eventRepository->getSlug()) {
-            $validator->input($this->url, 'Slug')
+            $this->validator->input($this->url, 'Slug')
                 ->isRequired()
                 ->isUnique(
                     $this->event->getBySlug($this->url),
@@ -147,6 +148,6 @@ abstract class EventAction extends FormAction
                 );
         }
 
-        return $validator->handleFormValidation();
+        return $this->validator->handleFormValidation();
     }
 }

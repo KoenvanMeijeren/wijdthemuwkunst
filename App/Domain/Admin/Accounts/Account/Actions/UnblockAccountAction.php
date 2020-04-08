@@ -4,26 +4,12 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\Account\Actions;
 
-use Domain\Admin\Accounts\Account\Models\Account;
-use Domain\Admin\Accounts\User\Models\User;
-use Src\Action\Action;
-use Src\Session\Session;
+use App\Domain\Admin\Accounts\Account\Actions\BaseAccountAction;
 use Src\State\State;
 use Src\Translation\Translation;
 
-final class UnblockAccountAction extends Action
+final class UnblockAccountAction extends BaseAccountAction
 {
-    private Account $account;
-    private Session $session;
-    private User $user;
-
-    public function __construct(Account $account)
-    {
-        $this->account = $account;
-        $this->session = new Session();
-        $this->user = new User();
-    }
-
     /**
      * @inheritDoc
      */
@@ -37,6 +23,7 @@ final class UnblockAccountAction extends Action
             State::SUCCESSFUL,
             Translation::get('admin_account_successful_unblocked_message')
         );
+
         return true;
     }
 
@@ -50,10 +37,11 @@ final class UnblockAccountAction extends Action
                 State::FAILED,
                 Translation::get('cannot_unblock_own_account_message')
             );
+
             return false;
         }
 
-        return true;
+        return parent::authorize();
     }
 
     /**

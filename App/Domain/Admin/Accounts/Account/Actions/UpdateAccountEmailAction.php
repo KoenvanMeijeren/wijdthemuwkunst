@@ -4,30 +4,12 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\Account\Actions;
 
-use Domain\Admin\Accounts\Account\Models\Account;
-use Src\Action\FormAction;
-use Src\Core\Request;
-use Src\Session\Session;
+use App\Domain\Admin\Accounts\Account\Actions\BaseAccountAction;
 use Src\State\State;
 use Src\Translation\Translation;
-use Src\Validate\form\FormValidator;
 
-final class UpdateAccountEmailAction extends FormAction
+final class UpdateAccountEmailAction extends BaseAccountAction
 {
-    private Account $account;
-    private Session $session;
-
-    protected string $email;
-
-    public function __construct(Account $account)
-    {
-        $this->account = $account;
-        $this->session = new Session();
-        $request = new Request();
-
-        $this->email = $request->post('email');
-    }
-
     /**
      * @inheritDoc
      */
@@ -41,6 +23,7 @@ final class UpdateAccountEmailAction extends FormAction
             State::SUCCESSFUL,
             Translation::get('admin_edited_account_successful_message')
         );
+
         return true;
     }
 
@@ -49,9 +32,12 @@ final class UpdateAccountEmailAction extends FormAction
      */
     protected function validate(): bool
     {
-        $validator = new FormValidator();
+        // Only validate if the email has been changed.
+        if ($this->email === $this->accountRepository->getEmail()) {
+            return true;
+        }
 
-        $validator->input($this->email, 'Email')
+        $this->validator->input($this->email, 'Email')
             ->isEmail()
             ->isUnique(
                 $this->account->getByEmail($this->email),
@@ -61,6 +47,6 @@ final class UpdateAccountEmailAction extends FormAction
                 )
             );
 
-        return $validator->handleFormValidation();
+        return $this->validator->handleFormValidation();
     }
 }

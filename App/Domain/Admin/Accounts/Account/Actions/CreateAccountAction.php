@@ -4,39 +4,14 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\Account\Actions;
 
+use App\Domain\Admin\Accounts\Account\Actions\BaseAccountAction;
 use Domain\Admin\Accounts\Account\Models\Account;
 use Domain\Admin\Accounts\User\Models\User;
-use Src\Action\FormAction;
-use Src\Core\Request;
-use Src\Session\Session;
 use Src\State\State;
 use Src\Translation\Translation;
-use Src\Validate\form\FormValidator;
 
-final class CreateAccountAction extends FormAction
+final class CreateAccountAction extends BaseAccountAction
 {
-    private Account $account;
-    private Session $session;
-
-    protected string $name;
-    protected string $email;
-    protected string $password;
-    protected string $confirmationPassword;
-    protected int $rights;
-
-    public function __construct(Account $account)
-    {
-        $this->account = $account;
-        $this->session = new Session();
-        $request = new Request();
-
-        $this->name = $request->post('name');
-        $this->email = $request->post('email');
-        $this->password = $request->post('password');
-        $this->confirmationPassword = $request->post('confirmationPassword');
-        $this->rights = (int)$request->post('rights');
-    }
-
     /**
      * @inheritDoc
      */
@@ -74,12 +49,10 @@ final class CreateAccountAction extends FormAction
      */
     protected function validate(): bool
     {
-        $validator = new FormValidator();
-
-        $validator->input($this->name, 'Naam')
+        $this->validator->input($this->name, 'Naam')
             ->isRequired();
 
-        $validator->input($this->email, 'Email')
+        $this->validator->input($this->email, 'Email')
             ->isRequired()
             ->isEmail()
             ->isUnique(
@@ -90,11 +63,11 @@ final class CreateAccountAction extends FormAction
                 )
             );
 
-        $validator->input($this->password, 'Wachtwoord')
+        $this->validator->input($this->password, 'Wachtwoord')
             ->isRequired()
             ->passwordIsEqual($this->confirmationPassword);
 
-        $validator->input((string)$this->rights, 'Rechten')
+        $this->validator->input((string)$this->rights, 'Rechten')
             ->isRequired()
             ->isBetweenRange(
                 User::ADMIN,
@@ -102,6 +75,6 @@ final class CreateAccountAction extends FormAction
                 Translation::get('admin_invalid_rights_message')
             );
 
-        return $validator->handleFormValidation();
+        return $this->validator->handleFormValidation();
     }
 }

@@ -4,26 +4,12 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\Account\Actions;
 
-use Domain\Admin\Accounts\Account\Models\Account;
-use Domain\Admin\Accounts\User\Models\User;
-use Src\Action\Action;
-use Src\Session\Session;
+use App\Domain\Admin\Accounts\Account\Actions\BaseAccountAction;
 use Src\State\State;
 use Src\Translation\Translation;
 
-final class DeleteAccountAction extends Action
+final class DeleteAccountAction extends BaseAccountAction
 {
-    private Account $account;
-    private Session $session;
-    private User $user;
-
-    public function __construct(Account $account)
-    {
-        $this->account = $account;
-        $this->session = new Session();
-        $this->user = new User();
-    }
-
     /**
      * @inheritDoc
      */
@@ -31,33 +17,27 @@ final class DeleteAccountAction extends Action
     {
         $this->account->delete($this->account->getId());
 
-        if ($this->account->find($this->account->getId()) === null) {
+        if ($this->account->find($this->account->getId()) !== null) {
             $this->session->flash(
-                State::SUCCESSFUL,
-                Translation::get('admin_deleted_account_successful_message')
+                State::FAILED,
+                Translation::get('admin_deleted_account_failed_message')
             );
-            return true;
+
+            return false;
         }
 
         $this->session->flash(
-            State::FAILED,
-            Translation::get('admin_deleted_account_failed_message')
+            State::SUCCESSFUL,
+            Translation::get('admin_deleted_account_successful_message')
         );
-        return false;
-    }
 
-    /**
-     * @inheritDoc
-     */
-    protected function authorize(): bool
-    {
         return true;
     }
 
     /**
      * @inheritDoc
      */
-    protected function validate(): bool
+    protected function authorize(): bool
     {
         if ($this->user->getId() === $this->account->getId()) {
             $this->session->flash(
@@ -67,6 +47,14 @@ final class DeleteAccountAction extends Action
             return false;
         }
 
+        return parent::authorize();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function validate(): bool
+    {
         return true;
     }
 }

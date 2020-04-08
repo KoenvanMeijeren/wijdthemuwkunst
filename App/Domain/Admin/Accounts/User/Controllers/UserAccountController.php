@@ -13,24 +13,17 @@ use Src\View\DomainView;
 
 final class UserAccountController
 {
-    private User $user;
-
     private string $baseViewPath = 'Admin/Accounts/User/Views/';
-
-    public function __construct()
-    {
-        $this->user = new User();
-    }
+    private string $redirectBack = '/admin/user/account';
 
     public function index(): DomainView
     {
-        return new DomainView(
-            $this->baseViewPath . 'index',
-            [
-                'title' => Translation::get('admin_account_title'),
-                'account' => $this->user->getAccount()
-            ]
-        );
+        $user = new User();
+
+        return new DomainView($this->baseViewPath . 'index', [
+            'title' => Translation::get('admin_account_title'),
+            'account' => $user->getAccount()
+        ]);
     }
 
     /**
@@ -38,9 +31,9 @@ final class UserAccountController
      */
     public function storeData()
     {
-        $updateUser = new UpdateUserDataAction($this->user);
+        $updateUser = new UpdateUserDataAction();
         if ($updateUser->execute()) {
-            return new Redirect('/admin/user/account');
+            return new Redirect($this->redirectBack);
         }
 
         return $this->index();
@@ -51,9 +44,9 @@ final class UserAccountController
      */
     public function storePassword()
     {
-        $updateUser = new UpdateUserPasswordAction($this->user);
+        $updateUser = new UpdateUserPasswordAction();
         if ($updateUser->execute()) {
-            return new Redirect('/admin/user/account');
+            return new Redirect($this->redirectBack);
         }
 
         return $this->index();

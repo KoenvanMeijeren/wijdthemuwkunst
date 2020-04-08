@@ -4,33 +4,13 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\Account\Actions;
 
+use App\Domain\Admin\Accounts\Account\Actions\BaseAccountAction;
 use Domain\Admin\Accounts\Account\Models\Account;
-use Domain\Admin\Accounts\Repositories\AccountRepository;
-use Src\Action\FormAction;
-use Src\Core\Request;
-use Src\Session\Session;
 use Src\State\State;
 use Src\Translation\Translation;
-use Src\Validate\form\FormValidator;
 
-final class UpdateAccountPasswordAction extends FormAction
+final class UpdateAccountPasswordAction extends BaseAccountAction
 {
-    private Account $account;
-    private Session $session;
-
-    protected string $password;
-    protected string $confirmationPassword;
-
-    public function __construct(Account $account)
-    {
-        $this->account = $account;
-        $this->session = new Session();
-        $request = new Request();
-
-        $this->password = $request->post('password');
-        $this->confirmationPassword = $request->post('confirmationPassword');
-    }
-
     /**
      * @inheritDoc
      */
@@ -47,6 +27,7 @@ final class UpdateAccountPasswordAction extends FormAction
             State::SUCCESSFUL,
             Translation::get('admin_edited_account_successful_message')
         );
+
         return true;
     }
 
@@ -55,16 +36,11 @@ final class UpdateAccountPasswordAction extends FormAction
      */
     protected function validate(): bool
     {
-        $validator = new FormValidator();
-        $account = new AccountRepository(
-            $this->account->find($this->account->getId())
-        );
-
-        $validator->input($this->password, 'Wachtwoord')
+        $this->validator->input($this->password, 'Wachtwoord')
             ->isRequired()
             ->passwordIsEqual($this->confirmationPassword)
-            ->passwordIsNotCurrentPassword($account->getPassword());
+            ->passwordIsNotCurrentPassword($this->accountRepository->getPassword());
 
-        return $validator->handleFormValidation();
+        return $this->validator->handleFormValidation();
     }
 }

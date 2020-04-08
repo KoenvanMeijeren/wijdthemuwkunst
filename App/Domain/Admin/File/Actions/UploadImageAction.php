@@ -9,7 +9,7 @@ use Src\Action\FileAction;
 use Src\Core\Request;
 use Src\Core\Upload;
 
-final class UploadBannerAction extends FileAction
+final class UploadImageAction extends FileAction
 {
     private array $file;
 

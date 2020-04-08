@@ -39,24 +39,18 @@ final class EventController
         $events = new IndexViewModel($this->event->getAll());
         $archived_events = new ArchiveViewModel($this->event->getAllArchived());
 
-        return new DomainView(
-            $this->baseViewPath . 'index',
-            [
-                'title' => Translation::get('admin_event_title'),
-                'events' => $events->table(),
-                'archived_events' => $archived_events->table(),
-            ]
-        );
+        return new DomainView($this->baseViewPath . 'index', [
+            'title' => Translation::get('admin_event_title'),
+            'events' => $events->table(),
+            'archived_events' => $archived_events->table(),
+        ]);
     }
 
     public function create(): DomainView
     {
-        return new DomainView(
-            $this->baseViewPath . 'edit',
-            [
-                'title' => Translation::get('admin_create_event_title')
-            ]
-        );
+        return new DomainView($this->baseViewPath . 'edit', [
+            'title' => Translation::get('admin_create_event_title')
+        ]);
     }
 
     /**
@@ -64,7 +58,7 @@ final class EventController
      */
     public function store()
     {
-        $create = new CreateEventAction($this->event);
+        $create = new CreateEventAction();
         if ($create->execute()) {
             return new Redirect($this->redirectBack);
         }
@@ -79,16 +73,13 @@ final class EventController
         );
         $eventRepository = new EventRepository($event->get());
 
-        return new DomainView(
-            $this->baseViewPath . 'edit',
-            [
-                'title' => sprintf(
-                    Translation::get('admin_edit_event_title'),
-                    $eventRepository->getTitle()
-                ),
-                'event' => $event->get()
-            ]
-        );
+        return new DomainView($this->baseViewPath . 'edit', [
+            'title' => sprintf(
+                Translation::get('admin_edit_event_title'),
+                $eventRepository->getTitle()
+            ),
+            'event' => $event->get()
+        ]);
     }
 
     /**
@@ -96,7 +87,7 @@ final class EventController
      */
     public function update()
     {
-        $update = new UpdateEventAction($this->event);
+        $update = new UpdateEventAction();
         if ($update->execute()) {
             return new Redirect($this->redirectSame . $this->event->getId());
         }
@@ -106,7 +97,7 @@ final class EventController
 
     public function publish(): Redirect
     {
-        $publish = new PublishEventAction($this->event);
+        $publish = new PublishEventAction();
         $publish->execute();
 
         return new Redirect($this->redirectSame . $this->event->getId());
@@ -114,7 +105,7 @@ final class EventController
 
     public function unPublish(): Redirect
     {
-        $unPublish = new UnPublishEventAction($this->event);
+        $unPublish = new UnPublishEventAction();
         $unPublish->execute();
 
         return new Redirect($this->redirectSame . $this->event->getId());
@@ -122,7 +113,7 @@ final class EventController
 
     public function removeThumbnail(): Redirect
     {
-        $removeThumbnail = new RemoveEventThumbnailAction($this->event);
+        $removeThumbnail = new RemoveEventThumbnailAction();
         $removeThumbnail->execute();
 
         return new Redirect($this->redirectSame . $this->event->getId());
@@ -130,7 +121,7 @@ final class EventController
 
     public function removeBanner(): Redirect
     {
-        $removeBanner = new RemoveEventBannerAction($this->event);
+        $removeBanner = new RemoveEventBannerAction();
         $removeBanner->execute();
 
         return new Redirect($this->redirectSame . $this->event->getId());
@@ -138,7 +129,7 @@ final class EventController
 
     public function archive(): Redirect
     {
-        $archive = new ArchiveEventAction($this->event);
+        $archive = new ArchiveEventAction();
         $archive->execute();
 
         return new Redirect($this->redirectBack);
@@ -146,7 +137,7 @@ final class EventController
 
     public function activate(): Redirect
     {
-        $activate = new ActivateEventAction($this->event);
+        $activate = new ActivateEventAction();
         $activate->execute();
 
         return new Redirect($this->redirectBack);
@@ -154,7 +145,7 @@ final class EventController
 
     public function destroy(): Redirect
     {
-        $delete = new DeleteEventAction($this->event);
+        $delete = new DeleteEventAction();
         $delete->execute();
 
         return new Redirect($this->redirectBack);
