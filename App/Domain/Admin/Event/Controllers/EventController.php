@@ -10,6 +10,7 @@ use App\Domain\Admin\Event\Actions\DeleteEventAction;
 use App\Domain\Admin\Event\Actions\PublishEventAction;
 use App\Domain\Admin\Event\Actions\RemoveEventBannerAction;
 use App\Domain\Admin\Event\Actions\RemoveEventThumbnailAction;
+use App\Domain\Admin\Event\Actions\SaveAndPublishEventAction;
 use App\Domain\Admin\Event\Actions\UnPublishEventAction;
 use App\Domain\Admin\Event\Actions\UpdateEventAction;
 use App\Domain\Admin\Event\Models\Event;
@@ -59,6 +60,10 @@ final class EventController
     public function store()
     {
         $create = new CreateEventAction();
+        if (array_key_exists('save-and-publish', $_POST)) {
+            $create = new SaveAndPublishEventAction();
+        }
+
         if ($create->execute()) {
             return new Redirect($this->redirectBack);
         }
@@ -88,6 +93,10 @@ final class EventController
     public function update()
     {
         $update = new UpdateEventAction();
+        if (array_key_exists('save-and-publish', $_POST)) {
+            $update = new SaveAndPublishEventAction();
+        }
+
         if ($update->execute()) {
             return new Redirect($this->redirectSame . $this->event->getId());
         }

@@ -1,22 +1,24 @@
 <?php
-declare(strict_types=1);
 
 
-namespace Domain\Admin\Pages\Actions;
+namespace App\Domain\Admin\Pages\Actions;
 
-use Domain\Admin\Accounts\User\Models\User;
+
+use Domain\Admin\Pages\Actions\BasePageAction;
 use Domain\Admin\Pages\Models\Page;
 use Src\State\State;
 use Src\Translation\Translation;
 
-final class UpdatePageAction extends BasePageAction
+final class SaveAndPublishPageAction extends BasePageAction
 {
     /**
      * @inheritDoc
      */
     protected function handle(): bool
     {
-        $this->page->update($this->page->getId(), $this->attributes);
+        $this->attributes['page_is_published'] = '1';
+
+        $this->page->updateOrCreate($this->page->getId(), $this->attributes);
 
         $this->session->flash(
             State::SUCCESSFUL,
@@ -31,8 +33,7 @@ final class UpdatePageAction extends BasePageAction
 
     protected function authorize(): bool
     {
-        $user = new User();
-        if ($user->getRights() === User::DEVELOPER) {
+        if ($this->pageRepository->getId() === 0) {
             return parent::authorize();
         }
 

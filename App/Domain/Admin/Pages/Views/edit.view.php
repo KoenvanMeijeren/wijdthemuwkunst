@@ -22,7 +22,9 @@ if ($user->getRights() !== User::DEVELOPER
 $action = '/admin/page/create/store';
 $removeBannerAction = '';
 $removeThumbnailAction = '';
+$visible = false;
 if ($page->getId() !== 0) {
+    $visible = true;
     $action = '/admin/page/edit/' . $page->getId() . '/store';
     $removeThumbnailAction = '/admin/page/edit/' . $page->getId() . '/remove/thumbnail';
     $removeBannerAction = '/admin/page/edit/' . $page->getId() . '/remove/banner';
@@ -37,27 +39,29 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                     <?= $title ?? '' ?>
                 </h4>
 
-                <div class="float-right">
-                    <?php if ($disabled === '' && $page->isPublished()) : ?>
-                        <form method="post"
-                              action="/admin/page/unpublish/<?= $page->getId() ?>">
-                            <?= CSRF::insertToken('/admin/page/unpublish/' . $page->getId()) ?>
+                <?php if ($visible) : ?>
+                    <div class="float-right">
+                        <?php if ($disabled === '' && $page->isPublished()) : ?>
+                            <form method="post"
+                                  action="/admin/page/unpublish/<?= $page->getId() ?>">
+                                <?= CSRF::insertToken('/admin/page/unpublish/' . $page->getId()) ?>
 
-                            <button type="submit" class="btn btn-danger">
-                                <?= Translation::get('unpublish_button') ?>
-                            </button>
-                        </form>
-                    <?php elseif ($disabled === '') : ?>
-                        <form method="post"
-                              action="/admin/page/publish/<?= $page->getId() ?>">
-                            <?= CSRF::insertToken('/admin/page/publish/' . $page->getId()) ?>
+                                <button type="submit" class="btn btn-danger">
+                                    <?= Translation::get('unpublish_button') ?>
+                                </button>
+                            </form>
+                        <?php elseif ($disabled === '') : ?>
+                            <form method="post"
+                                  action="/admin/page/publish/<?= $page->getId() ?>">
+                                <?= CSRF::insertToken('/admin/page/publish/' . $page->getId()) ?>
 
-                            <button type="submit" class="btn btn-success">
-                                <?= Translation::get('publish_button') ?>
-                            </button>
-                        </form>
-                    <?php endif; ?>
-                </div>
+                                <button type="submit" class="btn btn-success">
+                                    <?= Translation::get('publish_button') ?>
+                                </button>
+                            </form>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -103,9 +107,9 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                                    class="form-control"
                                    placeholder="<?= Translation::get('form_page_slug') ?>"
                                    value="<?= $request->post(
-    'slug',
-    $page->getSlug()
-) ?>"
+                                       'slug',
+                                       $page->getSlug()
+                                   ) ?>"
                                 <?= $disabled ?>
                                    required>
                         </div>
@@ -139,18 +143,13 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                                     <?= $disabled ?>
                                         required>
                                     <option
-                                        value="<?= Page::PAGE_NOT_IN_MENU ?>"
-                                        <?= $pageInMenu === Page::PAGE_NOT_IN_MENU ? 'selected' : '' ?>>
-                                        <?= Translation::get('form_show_page_not_in_menu') ?>
-                                    </option>
-                                    <option
-                                        value="<?= Page::PAGE_PUBLIC_IN_MENU ?>"
-                                        <?= $pageInMenu === Page::PAGE_PUBLIC_IN_MENU ? 'selected' : '' ?>>
-                                        <?= Translation::get('page_in_menu') ?>
+                                        value="<?= Page::PAGE_NORMAL ?>"
+                                        <?= $pageInMenu === Page::PAGE_NORMAL ? 'selected' : '' ?>>
+                                        <?= Translation::get('page_normal') ?>
                                     </option>
                                     <option value="<?= Page::PAGE_STATIC ?>"
                                         <?= $pageInMenu === Page::PAGE_STATIC ? 'selected' : '' ?>>
-                                        <?= Translation::get('form_show_page_static') ?>
+                                        <?= Translation::get('page_static') ?>
                                     </option>
                                 </select>
                             </div>
@@ -316,11 +315,11 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                                 <textarea class="form-control" id="content"
                                           rows="10" name="content">
                                     <?= parseHtmlEntities(
-                                       $request->post(
+                                        $request->post(
                                             'content',
                                             $page->getContent()
                                         )
-                                   ) ?>
+                                    ) ?>
                                 </textarea>
                             </div>
                         </div>
@@ -335,14 +334,26 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                         <?= Translation::get('back_button') ?>
                     </a>
 
-                    <button type="submit"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="<?= Translation::get('save_button') ?>"
-                            class="btn btn-default-small float-right">
-                        <?= Translation::get('save_button') ?>
-                        <i class="far fa-save"></i>
-                    </button>
+                    <div class="float-right">
+                        <button type="submit"
+                                data-toggle="tooltip"
+                                data-placement="top"
+                                title="<?= Translation::get('save_button') ?>"
+                                class="btn btn-warning">
+                            <?= Translation::get('save_button') ?>
+                            <i class="far fa-save"></i>
+                        </button>
+
+                        <button type="submit"
+                                data-toggle="tooltip"
+                                data-placement="top"
+                                name="save-and-publish"
+                                title="<?= Translation::get('save_and_publish_button') ?>"
+                                class="btn btn-success">
+                            <?= Translation::get('save_and_publish_button') ?>
+                            <i class="far fa-save"></i>
+                        </button>
+                    </div>
 
                     <div class="clearfix"></div>
                 </form>

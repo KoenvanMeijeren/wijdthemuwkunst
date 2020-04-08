@@ -12,7 +12,9 @@ $request = new Request();
 $action = '/admin/concert/create/store';
 $removeBannerAction = '';
 $removeThumbnailAction = '';
+$visible = false;
 if ($event->getId() !== 0) {
+    $visible = true;
     $action = '/admin/concert/edit/' . $event->getId() . '/store';
     $removeThumbnailAction = '/admin/concert/edit/' . $event->getId() . '/remove/thumbnail';
     $removeBannerAction = '/admin/concert/edit/' . $event->getId() . '/remove/banner';
@@ -26,27 +28,29 @@ if ($event->getId() !== 0) {
                     <?= $title ?? '' ?>
                 </h4>
 
-                <div class="float-right">
-                    <?php if ($event->isPublished()) : ?>
-                        <form method="post"
-                              action="/admin/concert/unpublish/<?= $event->getId() ?>">
-                            <?= CSRF::insertToken('/admin/concert/unpublish/' . $event->getId()) ?>
+                <?php if ($visible) : ?>
+                    <div class="float-right">
+                        <?php if ($event->isPublished()) : ?>
+                            <form method="post"
+                                  action="/admin/concert/unpublish/<?= $event->getId() ?>">
+                                <?= CSRF::insertToken('/admin/concert/unpublish/' . $event->getId()) ?>
 
-                            <button type="submit" class="btn btn-danger">
-                                <?= Translation::get('unpublish_button') ?>
-                            </button>
-                        </form>
-                    <?php else : ?>
-                        <form method="post"
-                              action="/admin/concert/publish/<?= $event->getId() ?>">
-                            <?= CSRF::insertToken('/admin/concert/publish/' . $event->getId()) ?>
+                                <button type="submit" class="btn btn-danger">
+                                    <?= Translation::get('unpublish_button') ?>
+                                </button>
+                            </form>
+                        <?php else : ?>
+                            <form method="post"
+                                  action="/admin/concert/publish/<?= $event->getId() ?>">
+                                <?= CSRF::insertToken('/admin/concert/publish/' . $event->getId()) ?>
 
-                            <button type="submit" class="btn btn-success">
-                                <?= Translation::get('publish_button') ?>
-                            </button>
-                        </form>
-                    <?php endif; ?>
-                </div>
+                                <button type="submit" class="btn btn-success">
+                                    <?= Translation::get('publish_button') ?>
+                                </button>
+                            </form>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -92,9 +96,9 @@ if ($event->getId() !== 0) {
                                    class="form-control"
                                    placeholder="<?= Translation::get('form_title') ?>"
                                    value="<?= $request->post(
-    'title',
-    $event->getTitle()
-) ?>"
+                                       'title',
+                                       $event->getTitle()
+                                   ) ?>"
                                    required>
                         </div>
                         <div class="col-sm-6">
@@ -106,9 +110,9 @@ if ($event->getId() !== 0) {
                                    class="form-control"
                                    placeholder="<?= Translation::get('form_location') ?>"
                                    value="<?= $request->post(
-    'location',
-    $event->getLocation()
-) ?>"
+                                       'location',
+                                       $event->getLocation()
+                                   ) ?>"
                                    required>
                         </div>
                     </div>
@@ -300,11 +304,11 @@ if ($event->getId() !== 0) {
                                 <textarea class="form-control" id="content"
                                           rows="10" name="content">
                                     <?= parseHtmlEntities(
-                                       $request->post(
-                                           'content',
-                                           $event->getContent()
-                                       )
-                                   ) ?>
+                                        $request->post(
+                                            'content',
+                                            $event->getContent()
+                                        )
+                                    ) ?>
                                 </textarea>
                             </div>
                         </div>
@@ -319,14 +323,26 @@ if ($event->getId() !== 0) {
                         <?= Translation::get('back_button') ?>
                     </a>
 
-                    <button type="submit"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="<?= Translation::get('save_button') ?>"
-                            class="btn btn-default-small float-right">
-                        <?= Translation::get('save_button') ?>
-                        <i class="far fa-save"></i>
-                    </button>
+                    <div class="float-right">
+                        <button type="submit"
+                                data-toggle="tooltip"
+                                data-placement="top"
+                                title="<?= Translation::get('save_button') ?>"
+                                class="btn btn-warning">
+                            <?= Translation::get('save_button') ?>
+                            <i class="far fa-save"></i>
+                        </button>
+
+                        <button type="submit"
+                                data-toggle="tooltip"
+                                data-placement="top"
+                                name="save-and-publish"
+                                title="<?= Translation::get('save_and_publish_button') ?>"
+                                class="btn btn-success">
+                            <?= Translation::get('save_and_publish_button') ?>
+                            <i class="far fa-save"></i>
+                        </button>
+                    </div>
 
                     <div class="clearfix"></div>
                 </form>

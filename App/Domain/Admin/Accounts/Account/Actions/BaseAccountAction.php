@@ -37,10 +37,10 @@ abstract class BaseAccountAction extends FormAction
         $this->validator = new FormValidator();
         $request = new Request();
 
-        $this->name = $request->post('name');
-        $this->email = $request->post('email');
+        $this->name = $request->post('name', $this->accountRepository->getName());
+        $this->email = $request->post('email', $this->accountRepository->getEmail());
         $this->password = $request->post('password');
         $this->confirmationPassword = $request->post('confirmationPassword');
-        $this->rights = (int)$request->post('rights');
+        $this->rights = (int)$request->post('rights', $this->accountRepository->getRights());
     }
 }
