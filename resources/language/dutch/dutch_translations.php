@@ -353,6 +353,7 @@ return [
     'unpublish_button' => 'Publicatie terugtrekken',
     'add_account_button' => 'Account toevoegen',
     'create_page_button' => 'Pagina toevoegen',
+    'save_and_publish_button' => 'Opslaan & publiceren',
 
     /**
      * Texts

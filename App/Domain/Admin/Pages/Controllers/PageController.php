@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Pages\Controllers;
 
+use App\Domain\Admin\Pages\Actions\SaveAndPublishPageAction;
 use Domain\Admin\Pages\Actions\CreatePageAction;
 use Domain\Admin\Pages\Actions\DeletePageAction;
 use Domain\Admin\Pages\Actions\PublishPageAction;
@@ -55,6 +56,10 @@ final class PageController
     public function store()
     {
         $create = new CreatePageAction();
+        if (array_key_exists('save-and-publish', $_POST)) {
+            $create = new SaveAndPublishPageAction();
+        }
+
         if ($create->execute()) {
             return new Redirect($this->redirectBack);
         }
@@ -84,6 +89,10 @@ final class PageController
     public function update()
     {
         $update = new UpdatePageAction();
+        if (array_key_exists('save-and-publish', $_POST)) {
+            $update = new SaveAndPublishPageAction();
+        }
+
         if ($update->execute()) {
             return new Redirect($this->redirectSame . $this->page->getId());
         }
