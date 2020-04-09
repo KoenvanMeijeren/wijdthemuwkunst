@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Pages\ViewModels;
 
+use Domain\Admin\Accounts\User\Models\User;
+use Domain\Admin\Pages\Models\Page;
 use Domain\Admin\Pages\Repositories\PageRepository;
 use Domain\Admin\Pages\Support\PageInMenuStateConverter;
 use Domain\Admin\Pages\Support\PageIsPublishedStateConverter;
@@ -39,6 +41,7 @@ final class IndexViewModel
             Translation::get('table_row_edit'),
         );
 
+        $user = new User();
         foreach ($this->pages as $singlePage) {
             $page = new PageRepository($singlePage);
             $inMenuState = new PageInMenuStateConverter($page->getInMenu());
@@ -50,18 +53,37 @@ final class IndexViewModel
                 $this->dataTable->addClasses('row-warning');
             }
 
+            $destroyBtnDisabled = false;
+            if ($user->getRights() !== User::DEVELOPER
+                && $page->getInMenu() === Page::PAGE_STATIC
+            ) {
+                $destroyBtnDisabled = true;
+            }
+
             $slug = "<a href='/{$page->getSlug()}' target='_blank'>{$page->getSlug()}</a>";
+
+            $actions = '<div class="table-edit-row flex">';
+            $actions .= Resource::addTableLinkActionColumn(
+                '/admin/page/edit/' . $page->getId(),
+                Translation::get('table_row_edit'),
+                'fas fa-edit'
+            );
+            $actions .= Resource::addTableButtonActionColumn(
+                '/admin/page/delete/' . $page->getId(),
+                Translation::get('table_row_delete'),
+                'fas fa-trash-alt',
+                'btn-danger',
+                Translation::get('delete_page_confirmation_message'),
+                $destroyBtnDisabled
+            );
+            $actions .= '</div>';
 
             $this->dataTable->addRow(
                 $slug,
                 $page->getTitle(),
                 $inMenuState->toReadable(),
                 $isPublishedState->toReadable(),
-                Resource::addTableEditColumn(
-                    '/admin/page/edit/' . $page->getId(),
-                    '/admin/page/delete/' . $page->getId(),
-                    Translation::get('delete_page_confirmation_message')
-                )
+                $actions
             );
         }
 

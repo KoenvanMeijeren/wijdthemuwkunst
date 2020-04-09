@@ -46,8 +46,13 @@ abstract class BasePageAction extends FormAction
         $this->thumbnailID = $this->getFileId($request->post('thumbnail'));
         $this->bannerID = $this->getFileId($request->post('banner'));
         $this->title = $request->post('title');
-        $this->url = $this->slug->parse($request->post('slug'));
-        $this->inMenu = (int)$request->post('pageInMenu');
+        $this->url = $this->slug->parse(
+            $request->post('slug', $this->pageRepository->getSlug())
+        );
+        $this->inMenu = (int)$request->post(
+            'pageInMenu',
+            (string)$this->pageRepository->getInMenu()
+        );
         $this->content = $request->post('content');
 
         $this->prepareAttributes();
