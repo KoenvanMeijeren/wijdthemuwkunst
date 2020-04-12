@@ -24,9 +24,7 @@
         "platform": {
             "php": "7.4",
             "ext-iconv": "1.16",
-            "ext-intl": "65.1",
-            "ext-pdo": "*",
-            "ext-json": "*"
+            "ext-intl": "65.1"
         },
         "platform-dev": {
             "ext-xdebug": "2.8.0"
@@ -44,7 +42,9 @@
         "siriusphp/upload": "^2.1.1",
         "symfony/filesystem": "^4.4.4",
         "symfony/templating": "^4.4.4",
-        "vlucas/phpdotenv": "^4.1.0"
+        "vlucas/phpdotenv": "^4.1.0",
+        "ext-pdo": "*",
+        "ext-json": "*"
     },
     "require-dev": {
         "bmitch/churn-php": "^1.0.3",
