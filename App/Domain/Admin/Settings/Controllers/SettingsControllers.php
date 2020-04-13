@@ -9,7 +9,7 @@ use Domain\Admin\Settings\Actions\DestroySettingAction;
 use Domain\Admin\Settings\Actions\UpdateBaseSettingAction;
 use Domain\Admin\Settings\Models\Setting;
 use Domain\Admin\Settings\ViewModels\EditViewModel;
-use Domain\Admin\Settings\ViewModels\IndexViewModel;
+use Domain\Admin\Settings\ViewModels\SettingTable;
 use Src\Response\Redirect;
 use Src\Translation\Translation;
 use Src\View\DomainView;
@@ -22,11 +22,11 @@ final class SettingsControllers
     public function index(): DomainView
     {
         $setting = new Setting();
-        $settings = new IndexViewModel($setting->all());
+        $settingTable = new SettingTable($setting->all());
 
         return new DomainView($this->baseViewPath . 'index', [
             'title' => Translation::get('settings_title'),
-            'settings' => $settings->getTable()
+            'settings' => $settingTable->get()
         ]);
     }
 
@@ -46,12 +46,12 @@ final class SettingsControllers
     public function edit(): DomainView
     {
         $setting = new Setting();
-        $indexViewModel = new IndexViewModel($setting->all());
+        $settingTable = new SettingTable($setting->all());
         $editViewModel = new EditViewModel($setting->find($setting->getId()));
 
         return new DomainView($this->baseViewPath . 'index', [
             'title' => Translation::get('settings_title'),
-            'settings' => $indexViewModel->getTable(),
+            'settings' => $settingTable->get(),
             'setting' => $editViewModel->get()
         ]);
     }

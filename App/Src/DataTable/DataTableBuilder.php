@@ -45,9 +45,11 @@ abstract class DataTableBuilder
     /**
      * Get the build table.
      *
+     * @param string $id the id of the table.
+     *
      * @return string
      */
-    final public function get(): string
+    final public function get(string $id = 'table'): string
     {
         $this->dataTable->addHead(
             $this->buildHead()
@@ -60,6 +62,6 @@ abstract class DataTableBuilder
             );
         }
 
-        return $this->dataTable->get();
+        return $this->dataTable->get($id);
     }
 }

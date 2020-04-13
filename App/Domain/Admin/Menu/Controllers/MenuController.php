@@ -9,7 +9,7 @@ use App\Domain\Admin\Menu\Actions\DestroyMenuAction;
 use App\Domain\Admin\Menu\Actions\UpdateMenuAction;
 use App\Domain\Admin\Menu\Models\Menu;
 use App\Domain\Admin\Menu\ViewModels\EditViewModel;
-use App\Domain\Admin\Menu\ViewModels\IndexViewModel;
+use App\Domain\Admin\Menu\ViewModels\MenuTable;
 use Src\Response\Redirect;
 use Src\Translation\Translation;
 use Src\View\DomainView;
@@ -28,11 +28,11 @@ final class MenuController
 
     public function index(): DomainView
     {
-        $menu = new IndexViewModel($this->menu->getAll());
+        $menuTable = new MenuTable($this->menu->getAll());
 
         return new DomainView($this->baseViewPath . 'index', [
             'title' => Translation::get('menu_title'),
-            'menu_items' => $menu->getTable()
+            'menu_items' => $menuTable->get()
         ]);
     }
 
@@ -54,11 +54,11 @@ final class MenuController
         $menuItem = new EditViewModel(
             $this->menu->find($this->menu->getId())
         );
-        $menuItems = new IndexViewModel($this->menu->getAll());
+        $menuTable = new MenuTable($this->menu->getAll());
 
         return new DomainView($this->baseViewPath . 'index', [
             'title' => Translation::get('menu_title'),
-            'menu_items' => $menuItems->getTable(),
+            'menu_items' => $menuTable->get(),
             'menu_item' => $menuItem->get()
         ]);
     }

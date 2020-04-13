@@ -15,9 +15,9 @@ use App\Domain\Admin\Event\Actions\UnPublishEventAction;
 use App\Domain\Admin\Event\Actions\UpdateEventAction;
 use App\Domain\Admin\Event\Models\Event;
 use App\Domain\Admin\Event\Repositories\EventRepository;
-use App\Domain\Admin\Event\ViewModels\ArchiveViewModel;
+use App\Domain\Admin\Event\ViewModels\ArchivedEventTable;
 use App\Domain\Admin\Event\ViewModels\EditViewModel;
-use App\Domain\Admin\Event\ViewModels\IndexViewModel;
+use App\Domain\Admin\Event\ViewModels\EventTable;
 use Src\Response\Redirect;
 use Src\Translation\Translation;
 use Src\View\DomainView;
@@ -37,13 +37,17 @@ final class EventController
 
     public function index(): DomainView
     {
-        $events = new IndexViewModel($this->event->getAll());
-        $archived_events = new ArchiveViewModel($this->event->getAllArchived());
+        $eventTable = new EventTable(
+            $this->event->getAll()
+        );
+        $archivedEventTable = new ArchivedEventTable(
+            $this->event->getAllArchived()
+        );
 
         return new DomainView($this->baseViewPath . 'index', [
             'title' => Translation::get('admin_event_title'),
-            'events' => $events->table(),
-            'archived_events' => $archived_events->table(),
+            'events' => $eventTable->get(),
+            'archived_events' => $archivedEventTable->get('archive-table'),
         ]);
     }
 

@@ -1,38 +1,31 @@
 <?php
-declare(strict_types=1);
 
 
-namespace Domain\Admin\Debug\Models;
+namespace App\Domain\Admin\Debug\Src;
+
 
 use Cake\Chronos\Chronos;
 use Defuse\Crypto\Exception\WrongKeyOrModifiedCiphertextException;
 use Src\Core\Cookie;
-use Src\Core\Env;
-use Src\Log\Log;
 use Src\Session\Session;
-use stdClass;
+use Src\Translation\Translation;
 use Support\DataTable;
 use Support\DateTime;
 
-final class Debug
+final class SuperGlobals
 {
-    public function getEnv(): string
-    {
-        $env = new Env();
-
-        return $env->get();
-    }
-
     public function getHeadersInformation(): string
     {
         $table = new DataTable();
 
-        $table->addHead('Header');
+        $table->addHead(
+            Translation::get('table_row_header')
+        );
         foreach (headers_list() as $value) {
             $table->addRow($value);
         }
 
-        return $table->get();
+        return $table->get('undefined');
     }
 
     public function getSessionSettingsInformation(): string
@@ -40,7 +33,10 @@ final class Debug
         $table = new DataTable();
         $session = new Session();
 
-        $table->addHead('Sleutel', 'Waarde');
+        $table->addHead(
+            Translation::get('table_row_key'),
+            Translation::get('table_row_value')
+        );
         foreach (session_get_cookie_params() as $key => $data) {
             if ($key === 'lifetime' && $session->exists('createdAt')) {
                 $createdAt = new Chronos($session->get('createdAt'));
@@ -61,7 +57,7 @@ final class Debug
             }
         }
 
-        return $table->get();
+        return $table->get('undefined');
     }
 
     public function getSessionInformation(): string
@@ -69,7 +65,10 @@ final class Debug
         $session = new Session();
         $table = new DataTable();
 
-        $table->addHead('Sleutel', 'Waarde');
+        $table->addHead(
+            Translation::get('table_row_key'),
+            Translation::get('table_row_value')
+        );
         foreach (array_keys($_SESSION) as $key) {
             if ($key === 'CSRF') {
                 continue;
@@ -90,7 +89,7 @@ final class Debug
             }
         }
 
-        return $table->get();
+        return $table->get('undefined');
     }
 
     public function getCookieInformation(): string
@@ -98,7 +97,10 @@ final class Debug
         $cookie = new Cookie();
         $table = new DataTable();
 
-        $table->addHead('Sleutel', 'Waarde');
+        $table->addHead(
+            Translation::get('table_row_key'),
+            Translation::get('table_row_value')
+        );
         foreach (array_keys($_COOKIE) as $key) {
             if ($key === $cookie->get('sessionName')
                 && $cookie->exists($cookie->get('sessionName'))
@@ -122,66 +124,6 @@ final class Debug
             }
         }
 
-        return $table->get();
-    }
-
-    /**
-     * Get information from the logs.
-     *
-     * @param string $date
-     *
-     * @return string[]
-     */
-    public function getLogInformation(string $date): array
-    {
-        $chronos = new Chronos($date);
-        $logs = (array)preg_split(
-            '/(?=\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}])/',
-            Log::get($chronos->toDateString())
-        );
-        unset($logs[array_key_first($logs)]);
-
-        array_walk($logs, static function (&$value) {
-            if (preg_match_all(
-                '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}|(?<=]).*(?={)|{.*}/',
-                $value,
-                $matches,
-                PREG_PATTERN_ORDER
-            ) !== false) {
-                $matches = $matches[0] ?? [];
-                $matches[2] = isJson($matches[2] ?? '') ? json_decode(
-                    $matches[2],
-                    false,
-                    512,
-                    JSON_THROW_ON_ERROR
-                ) : [];
-            }
-
-            $date = new DateTime(new Chronos($matches[0] ?? ''));
-            $title = explode('on line', $matches[1] ?? '');
-            $value = [
-                'date' => ucfirst($date->toDateTime()),
-                'title' => $title[0] ?? 'undefined',
-                'message' => $matches[1] ?? 'undefined',
-                'meta' => $matches[2] ?? new stdClass()
-            ];
-        });
-
-        return array_reverse($logs);
-    }
-
-    public function getPhpInfo(): string
-    {
-        ob_start();
-
-        phpinfo();
-
-        $phpinfo = (string)ob_get_clean();
-
-        return preg_replace(
-            '%^.*<body>(.*)</body>.*$%ms',
-            '$1',
-            $phpinfo
-        );
+        return $table->get('undefined');
     }
 }
