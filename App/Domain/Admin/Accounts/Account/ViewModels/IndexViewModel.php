@@ -45,16 +45,27 @@ final class IndexViewModel
                 $this->dataTable->addClasses('row-warning');
             }
 
+            $actions = '<div class="table-edit-row flex">';
+            $actions .= Resource::addTableLinkActionColumn(
+                '/admin/account/edit/' . $account->getId(),
+                Translation::get('table_row_edit'),
+                'fas fa-edit'
+            );
+            $actions .= Resource::addTableButtonActionColumn(
+                '/admin/account/delete/' . $account->getId(),
+                Translation::get('table_row_delete'),
+                'fas fa-trash-alt',
+                'btn-danger',
+                Translation::get('admin_delete_account_warning_message'),
+                $this->user->getId() === $account->getId()
+            );
+            $actions .= '</div>';
+
             $this->dataTable->addRow(
                 ucfirst($account->getName()) . $blockState->toReadable(),
                 lcfirst($account->getEmail()),
                 $rights->toReadable(),
-                Resource::addTableEditColumn(
-                    '/admin/account/edit/' . $account->getId(),
-                    '/admin/account/delete/' . $account->getId(),
-                    Translation::get('admin_delete_account_warning_message'),
-                    $this->user->getId() === $account->getId()
-                )
+                $actions
             );
         }
 

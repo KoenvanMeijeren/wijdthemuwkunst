@@ -68,11 +68,8 @@ final class Resource
         string $actionWarningMessage = '',
         bool $disableAction = false
     ): string {
-        $disabledActionButton = '';
-        $removeBorder = '';
         if ($disableAction) {
-            $removeBorder = 'border-0';
-            $disabledActionButton = 'disabled';
+            return '';
         }
 
         $message = '';
@@ -83,11 +80,10 @@ final class Resource
         return '<form method="post"
                           action="' . $action . '">
                           ' . CSRF::insertToken($action) . '
-                        <button class="btn '.$classes.' flex-child edit-button ' . $removeBorder . '"
+                        <button class="btn '.$classes.' flex-child edit-button"
                                 type="submit"
                                 data-toggle="tooltip"
                                 data-placement="top"
-                                ' . $disabledActionButton . '
                                 title="' . $actionTitle . '"
                                 '.$message.'>
                             <i class="'.$icon.'"></i>
