@@ -11,9 +11,10 @@ $setting = new SettingRepository($setting ?? null);
 $request = new Request();
 $user = new User();
 
+$createSetting = $createSetting ?? false;
 $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
 ?>
-<?php if ($user->getRights() === User::DEVELOPER && $setting->get() === null) : ?>
+<?php if ($createSetting && $user->getRights() === User::DEVELOPER && $setting->get() === null) : ?>
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
@@ -23,8 +24,8 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                     </h4>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="/admin/setting/create/store">
-                        <?= CSRF::insertToken('/admin/setting/create/store') ?>
+                    <form method="post" action="/admin/configuration/settings/setting/create/store">
+                        <?= CSRF::insertToken('/admin/configuration/settings/setting/create/store') ?>
 
                         <div class="row">
                             <div class="col-sm-6">
@@ -53,7 +54,7 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                             </div>
                         </div>
 
-                        <a href="/admin/settings"
+                        <a href="/admin/configuration/settings"
                            class="btn btn-default-small float-left"
                            data-toggle="tooltip"
                            data-placement="top"
@@ -87,8 +88,8 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                 </div>
                 <div class="card-body">
                     <form method="post"
-                          action="/admin/setting/edit/<?= $setting->getId() ?>/update">
-                        <?= CSRF::insertToken("/admin/setting/edit/{$setting->getId()}/update") ?>
+                          action="/admin/configuration/settings/setting/edit/<?= $setting->getId() ?>/update">
+                        <?= CSRF::insertToken("/admin/configuration/settings/setting/edit/{$setting->getId()}/update") ?>
 
                         <div class="row">
                             <div class="col-sm-6">
@@ -124,7 +125,7 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                             </div>
                         </div>
 
-                        <a href="/admin/settings"
+                        <a href="/admin/configuration/settings"
                            class="btn btn-default-small float-left"
                            data-toggle="tooltip"
                            data-placement="top"
@@ -153,9 +154,17 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">
+                <h4 class="card-title float-left">
                     Instellingen overzicht
                 </h4>
+
+                <a href="/admin/configuration/settings/setting/create"
+                   class="btn btn-default-small float-right"
+                   data-toggle="tooltip"
+                   data-placement="top"
+                   title="Toevoegen">
+                    <i class="fas fa-plus"></i>
+                </a>
             </div>
             <div class="card-body">
                 <?= $settings ?? '' ?>

@@ -46,8 +46,8 @@ final class TextTable extends DataTableBuilder
         $user = new User();
 
         return Resource::addTableEditColumn(
-            '/admin/text/edit/' . $text->getId(),
-            '/admin/text/delete/' . $text->getId(),
+            '/admin/configuration/texts/text/edit/' . $text->getId(),
+            '/admin/configuration/texts/text/delete/' . $text->getId(),
             sprintf(
                 Translation::get('delete_text_confirmation_message'),
                 $text->getKey()

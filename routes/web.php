@@ -153,43 +153,49 @@ Router::prefix('admin')->group(static function () {
     /**
      * Settings routes.
      */
-    Router::get('settings', SettingsControllers::class,
+    Router::get('configuration/settings', SettingsControllers::class,
         'index', User::ADMIN);
-    Router::post('setting/create/store', SettingsControllers::class,
+    Router::get('configuration/settings/setting/create', SettingsControllers::class,
+        'create', User::ADMIN);
+    Router::post('configuration/settings/setting/create/store', SettingsControllers::class,
         'store', User::ADMIN);
-    Router::get('setting/edit/{slug}', SettingsControllers::class,
+    Router::get('configuration/settings/setting/edit/{slug}', SettingsControllers::class,
         'edit', User::ADMIN);
-    Router::post('setting/edit/{slug}/update', SettingsControllers::class,
+    Router::post('configuration/settings/setting/edit/{slug}/update', SettingsControllers::class,
         'update', User::ADMIN);
-    Router::post('setting/delete/{slug}', SettingsControllers::class,
+    Router::post('configuration/settings/setting/delete/{slug}', SettingsControllers::class,
         'destroy', User::ADMIN);
 
     /**
      * Texts routes.
      */
-    Router::get('texts', TextController::class,
+    Router::get('configuration/texts', TextController::class,
         'index', User::ADMIN);
-    Router::post('text/create/store', TextController::class,
+    Router::get('configuration/texts/text/create', TextController::class,
+        'create', User::ADMIN);
+    Router::post('configuration/texts/text/create/store', TextController::class,
         'store', User::ADMIN);
-    Router::get('text/edit/{slug}', TextController::class,
+    Router::get('configuration/texts/text/edit/{slug}', TextController::class,
         'edit', User::ADMIN);
-    Router::post('text/edit/{slug}/update', TextController::class,
+    Router::post('configuration/texts/text/edit/{slug}/update', TextController::class,
         'update', User::ADMIN);
-    Router::post('text/delete/{slug}', TextController::class,
+    Router::post('configuration/texts/text/delete/{slug}', TextController::class,
         'destroy', User::ADMIN);
 
     /**
      * Menu routes.
      */
-    Router::get('menu', MenuController::class,
+    Router::get('structure/menu', MenuController::class,
         'index', User::ADMIN);
-    Router::post('menu/item/create/store', MenuController::class,
+    Router::get('structure/menu/item/create', MenuController::class,
+        'create', User::ADMIN);
+    Router::post('structure/menu/item/create/store', MenuController::class,
         'store', User::ADMIN);
-    Router::get('menu/item/edit/{slug}', MenuController::class,
+    Router::get('structure/menu/item/edit/{slug}', MenuController::class,
         'edit', User::ADMIN);
-    Router::post('menu/item/edit/{slug}/update', MenuController::class,
+    Router::post('structure/menu/item/edit/{slug}/update', MenuController::class,
         'update', User::ADMIN);
-    Router::post('menu/item/delete/{slug}', MenuController::class,
+    Router::post('structure/menu/item/delete/{slug}', MenuController::class,
         'destroy', User::ADMIN);
 
     /**

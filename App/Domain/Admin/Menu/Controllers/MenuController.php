@@ -19,7 +19,7 @@ final class MenuController
     private Menu $menu;
 
     private string $baseViewPath = 'Admin/Menu/Views/';
-    private string $redirectBack = '/admin/menu';
+    private string $redirectBack = '/admin/structure/menu';
 
     public function __construct()
     {
@@ -33,6 +33,17 @@ final class MenuController
         return new DomainView($this->baseViewPath . 'index', [
             'title' => Translation::get('menu_title'),
             'menu_items' => $menuTable->get()
+        ]);
+    }
+
+    public function create(): DomainView
+    {
+        $menuTable = new MenuTable($this->menu->getAll());
+
+        return new DomainView($this->baseViewPath . 'index', [
+            'title' => Translation::get('menu_title'),
+            'menu_items' => $menuTable->get(),
+            'create_menu_item' => true,
         ]);
     }
 

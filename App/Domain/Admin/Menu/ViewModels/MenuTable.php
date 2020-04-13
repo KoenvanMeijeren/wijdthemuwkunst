@@ -49,12 +49,12 @@ final class MenuTable extends DataTableBuilder
 
         $actions = '<div class="table-edit-row flex">';
         $actions .= Resource::addTableLinkActionColumn(
-            '/admin/menu/item/edit/' . $menuItem->getId(),
+            '/admin/structure/menu/item/edit/' . $menuItem->getId(),
             Translation::get('table_row_edit'),
             'fas fa-edit'
         );
         $actions .= Resource::addTableButtonActionColumn(
-            '/admin/menu/item/delete/' . $menuItem->getId(),
+            '/admin/structure/menu/item/delete/' . $menuItem->getId(),
             Translation::get('table_row_delete'),
             'fas fa-trash-alt',
             'btn-danger',

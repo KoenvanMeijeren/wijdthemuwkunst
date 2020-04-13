@@ -11,9 +11,10 @@ $text = new TextRepository($text ?? null);
 $request = new Request();
 $user = new User();
 
+$createText = $createText ?? false;
 $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
 ?>
-<?php if ($user->getRights() === User::DEVELOPER && $text->get() === null) : ?>
+<?php if ($createText && $user->getRights() === User::DEVELOPER && $text->get() === null) : ?>
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
@@ -23,8 +24,8 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                     </h4>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="/admin/text/create/store">
-                        <?= CSRF::insertToken('/admin/text/create/store') ?>
+                    <form method="post" action="/admin/configuration/texts/text/create/store">
+                        <?= CSRF::insertToken('/admin/configuration/texts/text/create/store') ?>
 
                         <div class="row">
                             <div class="col-sm-6">
@@ -53,7 +54,7 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                             </div>
                         </div>
 
-                        <a href="/admin/texts"
+                        <a href="/admin/configuration/texts"
                            class="btn btn-default-small float-left"
                            data-toggle="tooltip"
                            data-placement="top"
@@ -87,8 +88,8 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                 </div>
                 <div class="card-body">
                     <form method="post"
-                          action="/admin/text/edit/<?= $text->getId() ?>/update">
-                        <?= CSRF::insertToken("/admin/text/edit/{$text->getId()}/update") ?>
+                          action="/admin/configuration/texts/text/edit/<?= $text->getId() ?>/update">
+                        <?= CSRF::insertToken("/admin/configuration/texts/text/edit/{$text->getId()}/update") ?>
 
                         <div class="row">
                             <div class="col-sm-6">
@@ -124,7 +125,7 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                             </div>
                         </div>
 
-                        <a href="/admin/texts"
+                        <a href="/admin/configuration/texts"
                            class="btn btn-default-small float-left"
                            data-toggle="tooltip"
                            data-placement="top"
@@ -153,9 +154,17 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">
+                <h4 class="card-title float-left">
                     Teksten overzicht
                 </h4>
+
+                <a href="/admin/configuration/texts/text/create"
+                   class="btn btn-default-small float-right"
+                   data-toggle="tooltip"
+                   data-placement="top"
+                   title="Toevoegen">
+                    <i class="fas fa-plus"></i>
+                </a>
             </div>
             <div class="card-body">
                 <?= $texts ?? '' ?>

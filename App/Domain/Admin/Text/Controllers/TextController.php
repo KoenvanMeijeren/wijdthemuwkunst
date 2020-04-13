@@ -19,7 +19,7 @@ final class TextController
     private Text $text;
 
     private string $baseViewPath = 'Admin/Text/Views/';
-    private string $redirectBack = '/admin/texts';
+    private string $redirectBack = '/admin/configuration/texts';
 
     public function __construct()
     {
@@ -33,6 +33,17 @@ final class TextController
         return new DomainView($this->baseViewPath . 'index', [
             'title' => Translation::get('texts_title'),
             'texts' => $textTable->get()
+        ]);
+    }
+
+    public function create(): DomainView
+    {
+        $textTable = new TextTable($this->text->all());
+
+        return new DomainView($this->baseViewPath . 'index', [
+            'title' => Translation::get('texts_title'),
+            'texts' => $textTable->get(),
+            'createText' => true,
         ]);
     }
 

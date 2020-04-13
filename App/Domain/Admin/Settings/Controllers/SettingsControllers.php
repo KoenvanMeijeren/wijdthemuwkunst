@@ -17,7 +17,7 @@ use Src\View\DomainView;
 final class SettingsControllers
 {
     private string $baseViewPath = 'Admin/Settings/Views/';
-    private string $redirectBack = '/admin/settings';
+    private string $redirectBack = '/admin/configuration/settings';
 
     public function index(): DomainView
     {
@@ -27,6 +27,18 @@ final class SettingsControllers
         return new DomainView($this->baseViewPath . 'index', [
             'title' => Translation::get('settings_title'),
             'settings' => $settingTable->get()
+        ]);
+    }
+
+    public function create(): DomainView
+    {
+        $setting = new Setting();
+        $settingTable = new SettingTable($setting->all());
+
+        return new DomainView($this->baseViewPath . 'index', [
+            'title' => Translation::get('settings_title'),
+            'settings' => $settingTable->get(),
+            'createSetting' => true,
         ]);
     }
 
