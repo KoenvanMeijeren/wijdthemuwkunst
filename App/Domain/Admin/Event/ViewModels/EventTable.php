@@ -62,19 +62,19 @@ final class EventTable extends DataTableBuilder
 
         $actions = '<div class="table-edit-row flex">';
         $actions .= Resource::addTableLinkActionColumn(
-            '/admin/concert/edit/' . $event->getId(),
+            '/admin/content/events/event/edit/' . $event->getId(),
             Translation::get('table_row_edit'),
             'fas fa-edit'
         );
         $actions .= Resource::addTableButtonActionColumn(
-            '/admin/concert/archive/' . $event->getId(),
+            '/admin/content/events/event/archive/' . $event->getId(),
             'Archiveren',
             'fas fa-archive',
             'btn-warning',
             Translation::get('archive_event_confirmation_message')
         );
         $actions .= Resource::addTableButtonActionColumn(
-            '/admin/concert/delete/' . $event->getId(),
+            '/admin/content/events/event/delete/' . $event->getId(),
             Translation::get('table_row_delete'),
             'fas fa-trash-alt',
             'btn-danger',

@@ -64,17 +64,17 @@ final class StructureController
             'pages' => [
                 'icon' => 'far fa-file-alt',
                 'title' => Translation::get('admin_menu_pages'),
-                'link' => '/admin/pages',
+                'link' => '/admin/content/pages',
             ],
             'events' => [
                 'icon' => 'fas fa-church',
                 'title' => Translation::get('admin_menu_events'),
-                'link' => '/admin/concerten',
+                'link' => '/admin/content/events',
             ],
             'contact-form' => [
                 'icon' => 'far fa-envelope',
                 'title' => Translation::get('admin_menu_contact_form'),
-                'link' => '/admin/contact-form',
+                'link' => '/admin/content/contact-form',
             ],
         ];
 

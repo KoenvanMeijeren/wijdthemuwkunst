@@ -19,15 +19,15 @@ if ($user->getRights() !== User::DEVELOPER
     $disabled = 'disabled';
 }
 
-$action = '/admin/page/create/store';
+$action = '/admin/content/pages/page/create/store';
 $removeBannerAction = '';
 $removeThumbnailAction = '';
 $visible = false;
 if ($page->getId() !== 0) {
     $visible = true;
-    $action = '/admin/page/edit/' . $page->getId() . '/store';
-    $removeThumbnailAction = '/admin/page/edit/' . $page->getId() . '/remove/thumbnail';
-    $removeBannerAction = '/admin/page/edit/' . $page->getId() . '/remove/banner';
+    $action = '/admin/content/pages/page/edit/' . $page->getId() . '/store';
+    $removeThumbnailAction = '/admin/content/pages/page/edit/' . $page->getId() . '/remove/thumbnail';
+    $removeBannerAction = '/admin/content/pages/page/edit/' . $page->getId() . '/remove/banner';
 }
 $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
 ?>
@@ -43,8 +43,8 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                     <div class="float-right">
                         <?php if ($disabled === '' && $page->isPublished()) : ?>
                             <form method="post"
-                                  action="/admin/page/unpublish/<?= $page->getId() ?>">
-                                <?= CSRF::insertToken('/admin/page/unpublish/' . $page->getId()) ?>
+                                  action="/admin/content/pages/page/unpublish/<?= $page->getId() ?>">
+                                <?= CSRF::insertToken('/admin/content/pages/page/unpublish/' . $page->getId()) ?>
 
                                 <button type="submit" class="btn btn-danger">
                                     <?= Translation::get('unpublish_button') ?>
@@ -52,8 +52,8 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                             </form>
                         <?php elseif ($disabled === '') : ?>
                             <form method="post"
-                                  action="/admin/page/publish/<?= $page->getId() ?>">
-                                <?= CSRF::insertToken('/admin/page/publish/' . $page->getId()) ?>
+                                  action="/admin/content/pages/page/publish/<?= $page->getId() ?>">
+                                <?= CSRF::insertToken('/admin/content/pages/page/publish/' . $page->getId()) ?>
 
                                 <button type="submit" class="btn btn-success">
                                     <?= Translation::get('publish_button') ?>
@@ -325,7 +325,7 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                         </div>
                     </div>
 
-                    <a href="/admin/pages"
+                    <a href="/admin/content/pages"
                        class="btn btn-default-small float-left"
                        data-toggle="tooltip"
                        data-placement="top"
@@ -344,15 +344,17 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                             <i class="far fa-save"></i>
                         </button>
 
-                        <button type="submit"
-                                data-toggle="tooltip"
-                                data-placement="top"
-                                name="save-and-publish"
-                                title="<?= Translation::get('save_and_publish_button') ?>"
-                                class="btn btn-success">
-                            <?= Translation::get('save_and_publish_button') ?>
-                            <i class="far fa-save"></i>
-                        </button>
+                        <?php if (!$page->isPublished()) : ?>
+                            <button type="submit"
+                                    data-toggle="tooltip"
+                                    data-placement="top"
+                                    name="save-and-publish"
+                                    title="<?= Translation::get('save_and_publish_button') ?>"
+                                    class="btn btn-success">
+                                <?= Translation::get('save_and_publish_button') ?>
+                                <i class="far fa-save"></i>
+                            </button>
+                        <?php endif; ?>
                     </div>
 
                     <div class="clearfix"></div>

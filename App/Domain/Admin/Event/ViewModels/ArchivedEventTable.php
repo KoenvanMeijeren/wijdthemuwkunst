@@ -53,13 +53,13 @@ final class ArchivedEventTable extends DataTableBuilder
 
         $actions = '<div class="table-edit-row flex">';
         $actions .= Resource::addTableButtonActionColumn(
-            '/admin/concert/activate/' . $event->getId(),
+            '/admin/content/events/event/activate/' . $event->getId(),
             'Activeren',
             'fas fa-history',
             'btn-success'
         );
         $actions .= Resource::addTableButtonActionColumn(
-            '/admin/concert/delete/' . $event->getId(),
+            '/admin/content/events/event/delete/' . $event->getId(),
             Translation::get('table_row_delete'),
             'fas fa-trash-alt',
             'btn-danger',

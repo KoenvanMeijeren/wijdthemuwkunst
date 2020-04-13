@@ -81,53 +81,53 @@ Router::prefix('admin')->group(static function () {
     /**
      * Pages routes.
      */
-    Router::get('pages', AdminPageController::class,
+    Router::get('content/pages', AdminPageController::class,
         'index', User::ADMIN);
-    Router::get('page/create', AdminPageController::class,
+    Router::get('content/pages/page/create', AdminPageController::class,
         'create', User::ADMIN);
-    Router::post('page/create/store', AdminPageController::class,
+    Router::post('content/pages/page/create/store', AdminPageController::class,
         'store', User::ADMIN);
-    Router::get('page/edit/{slug}', AdminPageController::class,
+    Router::get('content/pages/page/edit/{slug}', AdminPageController::class,
         'edit', User::ADMIN);
-    Router::post('page/edit/{slug}/remove/banner', AdminPageController::class,
+    Router::post('content/pages/page/edit/{slug}/remove/banner', AdminPageController::class,
         'removeBanner', User::ADMIN);
-    Router::post('page/edit/{slug}/remove/thumbnail', AdminPageController::class,
+    Router::post('content/pages/page/edit/{slug}/remove/thumbnail', AdminPageController::class,
         'removeThumbnail', User::ADMIN);
-    Router::post('page/edit/{slug}/store', AdminPageController::class,
+    Router::post('content/pages/page/edit/{slug}/store', AdminPageController::class,
         'update', User::ADMIN);
-    Router::post('page/publish/{slug}', AdminPageController::class,
+    Router::post('content/pages/page/publish/{slug}', AdminPageController::class,
         'publish', User::ADMIN);
-    Router::post('page/unpublish/{slug}', AdminPageController::class,
+    Router::post('content/pages/page/unpublish/{slug}', AdminPageController::class,
         'unPublish', User::ADMIN);
-    Router::post('page/delete/{slug}', AdminPageController::class,
+    Router::post('content/pages/page/delete/{slug}', AdminPageController::class,
         'destroy', User::ADMIN);
 
     /**
      * Events routes.
      */
-    Router::get('concerten', AdminEventController::class,
+    Router::get('content/events', AdminEventController::class,
         'index', User::ADMIN);
-    Router::get('concert/create', AdminEventController::class,
+    Router::get('content/events/event/create', AdminEventController::class,
         'create', User::ADMIN);
-    Router::post('concert/create/store', AdminEventController::class,
+    Router::post('content/events/event/create/store', AdminEventController::class,
         'store', User::ADMIN);
-    Router::get('concert/edit/{slug}', AdminEventController::class,
+    Router::get('content/events/event/edit/{slug}', AdminEventController::class,
         'edit', User::ADMIN);
-    Router::post('concert/edit/{slug}/remove/banner', AdminEventController::class,
+    Router::post('content/events/event/edit/{slug}/remove/banner', AdminEventController::class,
         'removeBanner', User::ADMIN);
-    Router::post('concert/edit/{slug}/remove/thumbnail', AdminEventController::class,
+    Router::post('content/events/event/edit/{slug}/remove/thumbnail', AdminEventController::class,
         'removeThumbnail', User::ADMIN);
-    Router::post('concert/edit/{slug}/store', AdminEventController::class,
+    Router::post('content/events/event/edit/{slug}/store', AdminEventController::class,
         'update', User::ADMIN);
-    Router::post('concert/publish/{slug}', AdminEventController::class,
+    Router::post('content/events/event/publish/{slug}', AdminEventController::class,
         'publish', User::ADMIN);
-    Router::post('concert/unpublish/{slug}', AdminEventController::class,
+    Router::post('content/events/event/unpublish/{slug}', AdminEventController::class,
         'unPublish', User::ADMIN);
-    Router::post('concert/archive/{slug}', AdminEventController::class,
+    Router::post('content/events/event/archive/{slug}', AdminEventController::class,
         'archive', User::ADMIN);
-    Router::post('concert/activate/{slug}', AdminEventController::class,
+    Router::post('content/events/event/activate/{slug}', AdminEventController::class,
         'activate', User::ADMIN);
-    Router::post('concert/delete/{slug}', AdminEventController::class,
+    Router::post('content/events/event/delete/{slug}', AdminEventController::class,
         'destroy', User::ADMIN);
 
     /**
@@ -143,11 +143,11 @@ Router::prefix('admin')->group(static function () {
     /**
      * Contact form routes.
      */
-    Router::get('contact-form', ContactFormController::class,
+    Router::get('content/contact-form', ContactFormController::class,
         'index', User::ADMIN);
-    Router::get('contact-form/filter', ContactFormController::class,
+    Router::get('content/contact-form/filter', ContactFormController::class,
         'showByDate', User::ADMIN);
-    Router::post('contact-form/delete/{slug}', ContactFormController::class,
+    Router::post('content/contact-form/delete/{slug}', ContactFormController::class,
         'destroy', User::ADMIN);
 
     /**

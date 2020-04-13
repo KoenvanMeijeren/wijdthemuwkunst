@@ -47,6 +47,6 @@ final class ContactFormController
         $delete = new DeleteContactFormMessageAction();
         $delete->execute();
 
-        return new Redirect('/admin/contact-form');
+        return new Redirect('/admin/content/contact-form');
     }
 }

@@ -21,7 +21,7 @@ $amountMessages = count($messages ?? []);
                 </h4>
 
                 <form class="form-inline float-right" method="get"
-                      action="/admin/contact-form/filter">
+                      action="/admin/content/contact-form/filter">
                     <div class="form-group mr-2">
                         <label for="datepicker"></label>
                         <input type="text" name="date"
@@ -36,7 +36,7 @@ $amountMessages = count($messages ?? []);
                     </button>
 
                     <?php if (isset($_GET['date'])) : ?>
-                        <a href="/admin/contact-form"
+                        <a href="/admin/content/contact-form"
                            class="btn btn-success ml-3 border-0">
                             Reset
                         </a>
@@ -112,8 +112,8 @@ $amountMessages = count($messages ?? []);
                                             </div>
                                             <div class="col-md-1">
                                                 <form method="post"
-                                                      action="/admin/contact-form/delete/<?= $message->getId() ?>">
-                                                    <?= CSRF::insertToken('/admin/contact-form/delete/' . $message->getId()) ?>
+                                                      action="/admin/content/contact-form/delete/<?= $message->getId() ?>">
+                                                    <?= CSRF::insertToken('/admin/content/contact-form/delete/' . $message->getId()) ?>
 
                                                     <button type="submit"
                                                             class="btn border-0 btn-danger"

@@ -9,7 +9,7 @@ declare(strict_types=1);
                     Pagina's bewerken
                 </h4>
 
-                <a href="/admin/page/create"
+                <a href="/admin/content/pages/page/create"
                    class="btn btn-default-small float-right"
                    data-toggle="tooltip"
                    data-placement="top"

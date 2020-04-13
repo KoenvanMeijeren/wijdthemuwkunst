@@ -66,12 +66,12 @@ final class PageTable extends DataTableBuilder
 
         $actions = '<div class="table-edit-row flex">';
         $actions .= Resource::addTableLinkActionColumn(
-            '/admin/page/edit/' . $page->getId(),
+            '/admin/content/pages/page/edit/' . $page->getId(),
             Translation::get('table_row_edit'),
             'fas fa-edit'
         );
         $actions .= Resource::addTableButtonActionColumn(
-            '/admin/page/delete/' . $page->getId(),
+            '/admin/content/pages/page/delete/' . $page->getId(),
             Translation::get('table_row_delete'),
             'fas fa-trash-alt',
             'btn-danger',
