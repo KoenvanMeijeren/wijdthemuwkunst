@@ -30,6 +30,11 @@ return [
     'admin_menu_accounts' => 'Accounts',
     'admin_menu_debug' => 'Debuggen',
     'admin_menu_logout' => 'Uitloggen',
+    'admin_content_title' => 'Content',
+    'admin_structure_title' => 'Structuur',
+    'admin_configuration_title' => 'Configuratie',
+    'admin_accounts_title' => 'Accounts',
+    'admin_reports_title' => 'Rapporten',
 
     /**
      * Admin login page translations.
@@ -192,6 +197,13 @@ return [
     'admin_invalid_rights_message' => 'Ongeldige rechten opgegeven.',
     'user_cannot_delete_his_own_account' => 'Je kan niet je eigen account verwijderen.',
     'admin_delete_account_warning_message' => 'Weet je zeker dat je dit account wil verwijderen?',
+
+    /**
+     * Reports
+     */
+    'admin_reports_application_title' => 'Applicatie',
+    'admin_reports_logs_title' => 'Logs',
+    'admin_reports_storage_title' => 'Opslag',
 
     /**
      * Account rights

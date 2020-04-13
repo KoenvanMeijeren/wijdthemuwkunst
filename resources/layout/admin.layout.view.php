@@ -86,59 +86,33 @@ $request = new Request();
                             </a>
                         </li>
                         <li class="nav-item <?= strpos(URI::getUrl(),
-                            'menu') !== false ? 'active' : '' ?>">
-                            <a class="nav-link" href="/admin/menu">
-                                <i class="fas fa-bars"></i>
+                            'content') !== false ? 'active' : '' ?>">
+                            <a class="nav-link" href="/admin/content">
+                                <i class="far fa-file-alt"></i>
                                 <p>
-                                    <?= Translation::get('admin_menu_menu') ?>
+                                    <?= Translation::get('admin_content_title') ?>
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item <?= strpos(URI::getUrl(),
-                            'page') !== false ? 'active' : '' ?>">
-                            <a class="nav-link" href="/admin/pages">
+                            'structure') !== false ? 'active' : '' ?>">
+                            <a class="nav-link" href="/admin/structure">
                                 <i class="fas fa-sitemap"></i>
                                 <p>
-                                    <?= Translation::get('admin_menu_pages') ?>
+                                    <?= Translation::get('admin_structure_title') ?>
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item <?= strpos(URI::getUrl(),
-                            'concerten') !== false ? 'active' : '' ?>">
-                            <a class="nav-link" href="/admin/concerten">
-                                <i class="fas fa-church"></i>
-                                <p>
-                                    <?= Translation::get('admin_menu_events') ?>
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item <?= strpos(URI::getUrl(),
-                            'contact-form') !== false ? 'active' : '' ?>">
-                            <a class="nav-link" href="/admin/contact-form">
-                                <i class="far fa-envelope"></i>
-                                <p>
-                                    <?= Translation::get('admin_menu_contact_form') ?>
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item <?= strpos(URI::getUrl(),
-                            'text') !== false ? 'active' : '' ?>">
-                            <a class="nav-link" href="/admin/texts">
-                                <i class="fas fa-language"></i>
-                                <p>
-                                    <?= Translation::get('admin_menu_texts') ?>
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item <?= strpos(URI::getUrl(),
-                            'setting') !== false ? 'active' : '' ?>">
-                            <a class="nav-link" href="/admin/settings">
+                            'configuration') !== false ? 'active' : '' ?>">
+                            <a class="nav-link" href="/admin/configuration">
                                 <i class="fas fa-cogs"></i>
                                 <p>
-                                    <?= Translation::get('admin_menu_settings') ?>
+                                    <?= Translation::get('admin_configuration_title') ?>
                                 </p>
                             </a>
                         </li>
+
                     <?php endif;
                     if ($user->getRights() >= User::SUPER_ADMIN) : ?>
                         <li class="nav-item <?= strpos(URI::getUrl(),
@@ -147,18 +121,18 @@ $request = new Request();
                             <a class="nav-link" href="/admin/account">
                                 <i class="fas fa-users"></i>
                                 <p>
-                                    <?= Translation::get('admin_menu_accounts') ?>
+                                    <?= Translation::get('admin_accounts_title') ?>
                                 </p>
                             </a>
                         </li>
                     <?php endif;
                     if ($user->getRights() >= User::DEVELOPER) : ?>
                         <li class="nav-item <?= strpos(URI::getUrl(),
-                            'debug') !== false ? 'active' : '' ?>">
-                            <a class="nav-link" href="/admin/debug">
-                                <i class="fas fa-code"></i>
+                            'reports') !== false ? 'active' : '' ?>">
+                            <a class="nav-link" href="/admin/reports">
+                                <i class="fas fa-chart-bar"></i>
                                 <p>
-                                    <?= Translation::get('admin_menu_debug') ?>
+                                    <?= Translation::get('admin_reports_title') ?>
                                 </p>
                             </a>
                         </li>
