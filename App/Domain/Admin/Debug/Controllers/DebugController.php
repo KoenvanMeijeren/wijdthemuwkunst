@@ -17,13 +17,24 @@ final class DebugController
 {
     private string $baseViewPath = 'Admin/Debug/Views/';
 
-    public function index(): DomainView
+    public function application(): DomainView
     {
-        $request = new Request();
         $env = new Env();
-        $logs = new Logs();
         $phpInfo = new PhpInfo();
         $superGlobals = new SuperGlobals();
+
+        return new DomainView($this->baseViewPath . 'application', [
+            'title' => Translation::get('admin_reports_application_title'),
+            'env' => $env->get(),
+            'headerDataTable' => $superGlobals->getHeadersInformation(),
+            'phpinfo' => $phpInfo->get(),
+        ]);
+    }
+
+    public function logs(): DomainView
+    {
+        $request = new Request();
+        $logs = new Logs();
 
         $date = $request->get('logDate');
         $arrayDate = explode('-', $date);
@@ -36,18 +47,21 @@ final class DebugController
             $date = $date->toDateString();
         }
 
-        return new DomainView(
-            $this->baseViewPath . 'index',
-            [
-                'title' => Translation::get('admin_debug_title'),
-                'env' => $env->get(),
-                'headerDataTable' => $superGlobals->getHeadersInformation(),
-                'sessionSettingsTable' => $superGlobals->getSessionSettingsInformation(),
-                'sessionDataTable' => $superGlobals->getSessionInformation(),
-                'cookieDataTable' => $superGlobals->getCookieInformation(),
-                'logs' => $logs->get($date),
-                'phpinfo' => $phpInfo->get(),
-            ]
-        );
+        return new DomainView($this->baseViewPath . 'logs', [
+            'title' => Translation::get('admin_reports_logs_title'),
+            'logs' => $logs->get($date),
+        ]);
+    }
+
+    public function storage(): DomainView
+    {
+        $superGlobals = new SuperGlobals();
+
+        return new DomainView($this->baseViewPath . 'storage', [
+            'title' => Translation::get('admin_reports_storage_title'),
+            'sessionSettingsTable' => $superGlobals->getSessionSettingsInformation(),
+            'sessionDataTable' => $superGlobals->getSessionInformation(),
+            'cookieDataTable' => $superGlobals->getCookieInformation(),
+        ]);
     }
 }

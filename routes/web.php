@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use App\Domain\Admin\Cms\Structure\Controllers\StructureController;
 use App\Domain\Admin\ContactForm\Controller\ContactFormController;
 use App\Domain\Admin\Menu\Controllers\MenuController;
 use App\Domain\Admin\Text\Controllers\TextController;
@@ -11,7 +12,6 @@ use Domain\Admin\Accounts\Account\Controllers\AccountController;
 use Domain\Admin\Accounts\User\Controllers\UserAccountController;
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Authentication\Controllers\AuthenticationController;
-use Domain\Admin\Dashboard\Controllers\DashboardController;
 use Domain\Admin\Debug\Controllers\DebugController;
 use Domain\Admin\Event\Controllers\EventController as AdminEventController;
 use Domain\Admin\File\Controllers\UploadFileController;
@@ -65,10 +65,18 @@ Router::prefix('admin')->group(static function () {
         'logout', User::ADMIN);
 
     /**
-     * Dashboard routes.
+     * System routes.
      */
-    Router::get('dashboard', DashboardController::class,
+    Router::get('dashboard', StructureController::class,
         'index', User::ADMIN);
+    Router::get('content', StructureController::class,
+        'content', User::ADMIN);
+    Router::get('structure', StructureController::class,
+        'structure', User::ADMIN);
+    Router::get('configuration', StructureController::class,
+        'configuration', User::ADMIN);
+    Router::get('reports', StructureController::class,
+        'reports', User::DEVELOPER);
 
     /**
      * Pages routes.
@@ -211,8 +219,12 @@ Router::prefix('admin')->group(static function () {
     /**
      * Debug routes.
      */
-    Router::get('debug', DebugController::class,
-        'index', User::DEVELOPER);
+    Router::get('reports/application', DebugController::class,
+        'application', User::DEVELOPER);
+    Router::get('reports/logs', DebugController::class,
+        'logs', User::DEVELOPER);
+    Router::get('reports/storage', DebugController::class,
+        'storage', User::DEVELOPER);
 
     /**
      * User routes.

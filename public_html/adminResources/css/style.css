@@ -327,3 +327,8 @@ tr.shown td.details-control:before {
 .row-warning, .row-warning:hover {
     background-color: #f5c6cb !important;
 }
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
