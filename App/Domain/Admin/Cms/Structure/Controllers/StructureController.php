@@ -37,17 +37,23 @@ final class StructureController
                 'title' => Translation::get('admin_configuration_title'),
                 'link' => '/admin/configuration',
             ],
-            'accounts' => [
+        ];
+
+        if ($this->user->getRights() >= User::SUPER_ADMIN) {
+            $items['accounts'] = [
                 'icon' => 'fas fa-users',
                 'title' => Translation::get('admin_accounts_title'),
-                'link' => '/admin/accounts',
-            ],
-            'reports' => [
+                'link' => '/admin/account',
+            ];
+        }
+
+        if ($this->user->getRights() >= User::DEVELOPER) {
+            $items['reports'] = [
                 'icon' => 'fas fa-chart-bar',
                 'title' => Translation::get('admin_reports_title'),
                 'link' => '/admin/reports',
-            ],
-        ];
+            ];
+        }
 
         return $this->view(Translation::get('admin_dashboard_title'), $items);
     }
