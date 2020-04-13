@@ -33,7 +33,7 @@ $request = new Request();
                 </h4>
             </div>
             <div class="card-body scrollbox-horizontal">
-                <?= $headersInformation ?? 'Geen header informatie gevonden' ?>
+                <?= $headerDataTable ?? 'Geen header informatie gevonden' ?>
             </div>
         </div>
     </div>
@@ -48,7 +48,7 @@ $request = new Request();
                 </h4>
             </div>
             <div class="card-body scrollbox-horizontal">
-                <?= $sessionSettings ?? 'Geen sessie instellingen gevonden' ?>
+                <?= $sessionSettingsTable ?? 'Geen sessie instellingen gevonden' ?>
             </div>
         </div>
     </div>
@@ -63,7 +63,7 @@ $request = new Request();
                 </h4>
             </div>
             <div class="card-body scrollbox-horizontal">
-                <?= $sessionInformation ?? 'Geen sessie informatie gevonden' ?>
+                <?= $sessionDataTable ?? 'Geen sessie informatie gevonden' ?>
             </div>
         </div>
     </div>
@@ -78,7 +78,7 @@ $request = new Request();
                 </h4>
             </div>
             <div class="card-body scrollbox-horizontal">
-                <?= $cookieInformation ?? 'Geen cookie informatie gevonden' ?>
+                <?= $cookieDataTable ?? 'Geen cookie informatie gevonden' ?>
             </div>
         </div>
     </div>

@@ -4,26 +4,26 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Debug\Controllers;
 
+use App\Domain\Admin\Debug\Src\Logs;
+use App\Domain\Admin\Debug\Src\PhpInfo;
+use App\Domain\Admin\Debug\Src\SuperGlobals;
 use Cake\Chronos\Chronos;
-use Domain\Admin\Debug\Models\Debug;
+use Src\Core\Env;
 use Src\Core\Request;
 use Src\Translation\Translation;
 use Src\View\DomainView;
 
 final class DebugController
 {
-    private Debug $debug;
-
     private string $baseViewPath = 'Admin/Debug/Views/';
-
-    public function __construct()
-    {
-        $this->debug = new Debug();
-    }
 
     public function index(): DomainView
     {
         $request = new Request();
+        $env = new Env();
+        $logs = new Logs();
+        $phpInfo = new PhpInfo();
+        $superGlobals = new SuperGlobals();
 
         $date = $request->get('logDate');
         $arrayDate = explode('-', $date);
@@ -40,13 +40,13 @@ final class DebugController
             $this->baseViewPath . 'index',
             [
                 'title' => Translation::get('admin_debug_title'),
-                'env' => $this->debug->getEnv(),
-                'sessionSettings' => $this->debug->getSessionSettingsInformation(),
-                'sessionInformation' => $this->debug->getSessionInformation(),
-                'cookieInformation' => $this->debug->getCookieInformation(),
-                'logs' => $this->debug->getLogInformation($date),
-                'phpinfo' => $this->debug->getPhpInfo(),
-                'headersInformation' => $this->debug->getHeadersInformation()
+                'env' => $env->get(),
+                'headerDataTable' => $superGlobals->getHeadersInformation(),
+                'sessionSettingsTable' => $superGlobals->getSessionSettingsInformation(),
+                'sessionDataTable' => $superGlobals->getSessionInformation(),
+                'cookieDataTable' => $superGlobals->getCookieInformation(),
+                'logs' => $logs->get($date),
+                'phpinfo' => $phpInfo->get(),
             ]
         );
     }

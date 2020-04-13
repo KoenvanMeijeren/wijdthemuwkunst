@@ -15,7 +15,7 @@ use Domain\Admin\Pages\Actions\UpdatePageAction;
 use Domain\Admin\Pages\Models\Page;
 use Domain\Admin\Pages\Repositories\PageRepository;
 use Domain\Admin\Pages\ViewModels\EditViewModel;
-use Domain\Admin\Pages\ViewModels\IndexViewModel;
+use Domain\Admin\Pages\ViewModels\PageTable;
 use Src\Response\Redirect;
 use Src\Translation\Translation;
 use Src\View\DomainView;
@@ -35,11 +35,11 @@ final class PageController
 
     public function index(): DomainView
     {
-        $pages = new IndexViewModel($this->page->all());
+        $pageTable = new PageTable($this->page->all());
 
         return new DomainView($this->baseViewPath . 'index', [
             'title' => Translation::get('admin_page_title'),
-            'pages' => $pages->table()
+            'pages' => $pageTable->get()
         ]);
     }
 

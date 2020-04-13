@@ -12,8 +12,8 @@ use Domain\Admin\Accounts\Account\Actions\UpdateAccountDataAction;
 use Domain\Admin\Accounts\Account\Actions\UpdateAccountEmailAction;
 use Domain\Admin\Accounts\Account\Actions\UpdateAccountPasswordAction;
 use Domain\Admin\Accounts\Account\Models\Account;
+use Domain\Admin\Accounts\Account\ViewModels\AccountTable;
 use Domain\Admin\Accounts\Account\ViewModels\EditViewModel;
-use Domain\Admin\Accounts\Account\ViewModels\IndexViewModel;
 use Src\Exceptions\Basic\InvalidKeyException;
 use Src\Response\Redirect;
 use Src\Translation\Translation;
@@ -33,11 +33,11 @@ final class AccountController
 
     public function index(): DomainView
     {
-        $accounts = new IndexViewModel($this->account->all());
+        $accountTable = new AccountTable($this->account->all());
 
         return new DomainView($this->baseViewPath . 'index', [
             'title' => Translation::get('admin_account_title'),
-            'accounts' => $accounts->table()
+            'accounts' => $accountTable->get()
         ]);
     }
 

@@ -94,6 +94,7 @@ return [
     'event_thumbnail_successfully_removed' => 'De thumbnail van het concert \'%s\' is succesvol verwijderd',
     'event_successfully_unpublished' => 'De publicatie van het concert \'%s\' is succesvol ongedaan gemaakt.',
     'event_already_exists' => 'Het concert \'%s\' bestaat al.',
+    'archive_event_confirmation_message' => 'Weet je zeker dat je dit concert wilt archiveren?',
     'delete_event_confirmation_message' => 'Weet je zeker dat je dit concert wilt verwijderen?',
     'event_successfully_deleted' => 'Het concert \'%s\' is succesvol verwijderd',
     'event_unsuccessfully_deleted' => 'Het concert \'%s\' kon niet worden verwijderd',
@@ -206,6 +207,7 @@ return [
      * Regular table texts translations.
      */
     'table_row_identifier' => 'Nr',
+    'table_row_header' => 'Header',
     'table_row_name' => 'Naam',
     'table_row_location' => 'Locatie',
     'table_row_datetime' => 'Datum en tijdstip',
@@ -355,6 +357,7 @@ return [
      * Texts
      */
     'welcome_text' => 'Welkom',
+    'minutes' => 'minuten',
 
     /**
      * Uploader.
