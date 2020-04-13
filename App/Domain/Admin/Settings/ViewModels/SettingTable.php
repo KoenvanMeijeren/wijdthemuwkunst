@@ -46,8 +46,8 @@ final class SettingTable extends DataTableBuilder
         $user = new User();
 
         return Resource::addTableEditColumn(
-            '/admin/setting/edit/' . $setting->getId(),
-            '/admin/setting/delete/' . $setting->getId(),
+            '/admin/configuration/settings/setting/edit/' . $setting->getId(),
+            '/admin/configuration/settings/setting/delete/' . $setting->getId(),
             sprintf(
                 Translation::get('delete_setting_confirmation_message'),
                 $setting->getKey()

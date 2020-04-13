@@ -25,8 +25,8 @@ final class PageController
     private Page $page;
 
     private string $baseViewPath = 'Admin/Pages/Views/';
-    private string $redirectBack = '/admin/pages';
-    private string $redirectSame = '/admin/page/edit/';
+    private string $redirectBack = '/admin/content/pages';
+    private string $redirectSame = '/admin/content/pages/page/edit/';
 
     public function __construct()
     {

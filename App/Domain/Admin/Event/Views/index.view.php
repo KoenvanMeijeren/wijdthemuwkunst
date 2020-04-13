@@ -9,7 +9,7 @@ declare(strict_types=1);
                     Concerten bewerken
                 </h4>
 
-                <a href="/admin/concert/create"
+                <a href="/admin/content/events/event/create"
                    class="btn btn-default-small float-right"
                    data-toggle="tooltip"
                    data-placement="top"

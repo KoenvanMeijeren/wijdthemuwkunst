@@ -40,7 +40,7 @@ final class EditViewModel
                 )
             );
 
-            return new Redirect('/admin/pages');
+            return new Redirect('/admin/content/pages');
         }
 
         return $this->page;

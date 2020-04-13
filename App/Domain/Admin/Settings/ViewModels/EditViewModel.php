@@ -34,7 +34,7 @@ final class EditViewModel
                 Translation::get('setting_does_not_exists')
             );
 
-            return new Redirect('/admin/settings');
+            return new Redirect('/admin/configuration/settings');
         }
 
         return $this->setting;

@@ -9,15 +9,15 @@ use Src\Translation\Translation;
 $event = new EventRepository($event ?? null);
 $request = new Request();
 
-$action = '/admin/concert/create/store';
+$action = '/admin/content/events/event/create/store';
 $removeBannerAction = '';
 $removeThumbnailAction = '';
 $visible = false;
 if ($event->getId() !== 0) {
     $visible = true;
-    $action = '/admin/concert/edit/' . $event->getId() . '/store';
-    $removeThumbnailAction = '/admin/concert/edit/' . $event->getId() . '/remove/thumbnail';
-    $removeBannerAction = '/admin/concert/edit/' . $event->getId() . '/remove/banner';
+    $action = '/admin/content/events/event/edit/' . $event->getId() . '/store';
+    $removeThumbnailAction = '/admin/content/events/event/edit/' . $event->getId() . '/remove/thumbnail';
+    $removeBannerAction = '/admin/content/events/event/edit/' . $event->getId() . '/remove/banner';
 }
 ?>
 <div class="row">
@@ -32,8 +32,8 @@ if ($event->getId() !== 0) {
                     <div class="float-right">
                         <?php if ($event->isPublished()) : ?>
                             <form method="post"
-                                  action="/admin/concert/unpublish/<?= $event->getId() ?>">
-                                <?= CSRF::insertToken('/admin/concert/unpublish/' . $event->getId()) ?>
+                                  action="/admin/content/events/event/unpublish/<?= $event->getId() ?>">
+                                <?= CSRF::insertToken('/admin/content/events/event/unpublish/' . $event->getId()) ?>
 
                                 <button type="submit" class="btn btn-danger">
                                     <?= Translation::get('unpublish_button') ?>
@@ -41,8 +41,8 @@ if ($event->getId() !== 0) {
                             </form>
                         <?php else : ?>
                             <form method="post"
-                                  action="/admin/concert/publish/<?= $event->getId() ?>">
-                                <?= CSRF::insertToken('/admin/concert/publish/' . $event->getId()) ?>
+                                  action="/admin/content/events/event/publish/<?= $event->getId() ?>">
+                                <?= CSRF::insertToken('/admin/content/events/event/publish/' . $event->getId()) ?>
 
                                 <button type="submit" class="btn btn-success">
                                     <?= Translation::get('publish_button') ?>
@@ -314,7 +314,7 @@ if ($event->getId() !== 0) {
                         </div>
                     </div>
 
-                    <a href="/admin/concerten"
+                    <a href="/admin/content/events"
                        class="btn btn-default-small float-left"
                        data-toggle="tooltip"
                        data-placement="top"
@@ -333,15 +333,17 @@ if ($event->getId() !== 0) {
                             <i class="far fa-save"></i>
                         </button>
 
-                        <button type="submit"
-                                data-toggle="tooltip"
-                                data-placement="top"
-                                name="save-and-publish"
-                                title="<?= Translation::get('save_and_publish_button') ?>"
-                                class="btn btn-success">
-                            <?= Translation::get('save_and_publish_button') ?>
-                            <i class="far fa-save"></i>
-                        </button>
+                        <?php if (!$event->isPublished()) : ?>
+                            <button type="submit"
+                                    data-toggle="tooltip"
+                                    data-placement="top"
+                                    name="save-and-publish"
+                                    title="<?= Translation::get('save_and_publish_button') ?>"
+                                    class="btn btn-success">
+                                <?= Translation::get('save_and_publish_button') ?>
+                                <i class="far fa-save"></i>
+                            </button>
+                        <?php endif; ?>
                     </div>
 
                     <div class="clearfix"></div>

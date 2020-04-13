@@ -27,8 +27,8 @@ final class EventController
     private Event $event;
 
     private string $baseViewPath = 'Admin/Event/Views/';
-    private string $redirectBack = '/admin/concerten';
-    private string $redirectSame = '/admin/concert/edit/';
+    private string $redirectBack = '/admin/content/events';
+    private string $redirectSame = '/admin/content/events/event/edit/';
 
     public function __construct()
     {

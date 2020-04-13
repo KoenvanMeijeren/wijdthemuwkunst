@@ -8,8 +8,9 @@ use Src\Translation\Translation;
 
 $menuItem = new MenuRepository($menu_item ?? null);
 $request = new Request();
+$createMenuItem = $create_menu_item ?? false;
 ?>
-<?php if ($menuItem->get() === null) : ?>
+<?php if ($createMenuItem && $menuItem->get() === null) : ?>
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
@@ -19,8 +20,8 @@ $request = new Request();
                     </h4>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="/admin/menu/item/create/store">
-                        <?= CSRF::insertToken('/admin/menu/item/create/store') ?>
+                    <form method="post" action="/admin/structure/menu/item/create/store">
+                        <?= CSRF::insertToken('/admin/structure/menu/item/create/store') ?>
 
                         <div class="row">
                             <div class="col-sm-5">
@@ -61,7 +62,7 @@ $request = new Request();
                             </div>
                         </div>
 
-                        <a href="/admin/menu"
+                        <a href="/admin/structure/menu"
                            class="btn btn-default-small float-left"
                            data-toggle="tooltip"
                            data-placement="top"
@@ -95,8 +96,8 @@ $request = new Request();
                 </div>
                 <div class="card-body">
                     <form method="post"
-                          action="/admin/menu/item/edit/<?= $menuItem->getId() ?>/update">
-                        <?= CSRF::insertToken("/admin/menu/item/edit/{$menuItem->getId()}/update") ?>
+                          action="/admin/structure/menu/item/edit/<?= $menuItem->getId() ?>/update">
+                        <?= CSRF::insertToken("/admin/structure/menu/item/edit/{$menuItem->getId()}/update") ?>
 
                         <div class="row">
                             <div class="col-sm-5">
@@ -137,7 +138,7 @@ $request = new Request();
                             </div>
                         </div>
 
-                        <a href="/admin/menu"
+                        <a href="/admin/structure/menu"
                            class="btn btn-default-small float-left"
                            data-toggle="tooltip"
                            data-placement="top"
@@ -166,9 +167,17 @@ $request = new Request();
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">
+                <h4 class="card-title float-left">
                     Menu overzicht
                 </h4>
+
+                <a href="/admin/structure/menu/item/create"
+                   class="btn btn-default-small float-right"
+                   data-toggle="tooltip"
+                   data-placement="top"
+                   title="Toevoegen">
+                    <i class="fas fa-plus"></i>
+                </a>
             </div>
             <div class="card-body">
                 <?= $menu_items ?? '' ?>

@@ -34,7 +34,7 @@ final class EditViewModel
                 Translation::get('text_does_not_exists')
             );
 
-            return new Redirect('/admin/texts');
+            return new Redirect('/admin/configuration/texts');
         }
 
         return $this->text;

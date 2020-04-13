@@ -34,7 +34,7 @@ final class EditViewModel
                 Translation::get('menu_item_does_not_exists')
             );
 
-            return new Redirect('/admin/menu');
+            return new Redirect('/admin/structure/menu');
         }
 
         return $this->menuItem;

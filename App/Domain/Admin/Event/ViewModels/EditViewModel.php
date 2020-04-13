@@ -32,7 +32,7 @@ final class EditViewModel
                 Translation::get('admin_event_cannot_be_visited')
             );
 
-            return new Redirect('/admin/concerten');
+            return new Redirect('/admin/content/events');
         }
 
         return $this->event;

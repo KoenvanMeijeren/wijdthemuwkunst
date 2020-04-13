@@ -64,17 +64,17 @@ final class StructureController
             'pages' => [
                 'icon' => 'far fa-file-alt',
                 'title' => Translation::get('admin_menu_pages'),
-                'link' => '/admin/pages',
+                'link' => '/admin/content/pages',
             ],
             'events' => [
                 'icon' => 'fas fa-church',
                 'title' => Translation::get('admin_menu_events'),
-                'link' => '/admin/concerten',
+                'link' => '/admin/content/events',
             ],
             'contact-form' => [
                 'icon' => 'far fa-envelope',
                 'title' => Translation::get('admin_menu_contact_form'),
-                'link' => '/admin/contact-form',
+                'link' => '/admin/content/contact-form',
             ],
         ];
 
@@ -87,7 +87,7 @@ final class StructureController
             'menu' => [
                 'icon' => 'fas fa-bars',
                 'title' => Translation::get('admin_menu_menu'),
-                'link' => '/admin/menu',
+                'link' => '/admin/structure/menu',
             ],
         ];
 
@@ -100,12 +100,12 @@ final class StructureController
             'texts' => [
                 'icon' => 'fas fa-language',
                 'title' => Translation::get('admin_menu_texts'),
-                'link' => '/admin/texts',
+                'link' => '/admin/configuration/texts',
             ],
             'settings' => [
                 'icon' => 'fas fa-sliders-h',
                 'title' => Translation::get('admin_menu_settings'),
-                'link' => '/admin/settings',
+                'link' => '/admin/configuration/settings',
             ],
         ];
 
