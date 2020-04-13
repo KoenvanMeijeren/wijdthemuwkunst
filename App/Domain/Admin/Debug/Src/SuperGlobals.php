@@ -47,7 +47,7 @@ final class SuperGlobals
 
                 $table->addRow([
                     $key,
-                    $lifetime->diffInMinutes($expiredAt) . ' minuten'
+                    $lifetime->diffInMinutes($expiredAt) . ' ' . Translation::get('minutes')
                 ]);
             } elseif (is_bool($data)) {
                 $table->addRow([
@@ -86,12 +86,14 @@ final class SuperGlobals
                     $key,
                     $dateTime->toDateTime()
                 ]);
-            } else {
-                $table->addRow([
-                    $key,
-                    $session->get($key)
-                ]);
+
+                continue;
             }
+
+            $table->addRow([
+                $key,
+                $session->get($key)
+            ]);
         }
 
         return $table->get('undefined');
@@ -114,6 +116,8 @@ final class SuperGlobals
                     'sessie cookie',
                     $_COOKIE[$cookie->get('sessionName')]
                 ]);
+
+                continue;
             }
 
             try {

@@ -19,7 +19,9 @@ final class Logs
             '/(?=\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}])/',
             Log::get($chronos->toDateString())
         );
-        unset($logs[array_key_first($logs)]);
+
+        $firstKey = array_key_first($logs);
+        unset($logs[$firstKey]);
 
         array_walk($logs, static function (&$value) {
             if (preg_match_all(

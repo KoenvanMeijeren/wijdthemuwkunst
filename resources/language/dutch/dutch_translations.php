@@ -357,6 +357,7 @@ return [
      * Texts
      */
     'welcome_text' => 'Welkom',
+    'minutes' => 'minuten',
 
     /**
      * Uploader.
