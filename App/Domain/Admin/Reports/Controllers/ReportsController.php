@@ -2,20 +2,20 @@
 declare(strict_types=1);
 
 
-namespace Domain\Admin\Debug\Controllers;
+namespace Domain\Admin\Reports\Controllers;
 
-use App\Domain\Admin\Debug\Src\Logs;
-use App\Domain\Admin\Debug\Src\PhpInfo;
-use App\Domain\Admin\Debug\Src\SuperGlobals;
+use App\Domain\Admin\Reports\Src\Logs;
+use App\Domain\Admin\Reports\Src\PhpInfo;
+use App\Domain\Admin\Reports\Src\SuperGlobals;
 use Cake\Chronos\Chronos;
 use Src\Core\Env;
 use Src\Core\Request;
 use Src\Translation\Translation;
 use Src\View\DomainView;
 
-final class DebugController
+final class ReportsController
 {
-    private string $baseViewPath = 'Admin/Debug/Views/';
+    private string $baseViewPath = 'Admin/Reports/Views/';
 
     public function application(): DomainView
     {
@@ -27,6 +27,7 @@ final class DebugController
             'title' => Translation::get('admin_reports_application_title'),
             'env' => $env->get(),
             'headerDataTable' => $superGlobals->getHeadersInformation(),
+            'sessionSettingsTable' => $superGlobals->getSessionSettingsInformation(),
             'phpinfo' => $phpInfo->get(),
         ]);
     }
@@ -59,7 +60,6 @@ final class DebugController
 
         return new DomainView($this->baseViewPath . 'storage', [
             'title' => Translation::get('admin_reports_storage_title'),
-            'sessionSettingsTable' => $superGlobals->getSessionSettingsInformation(),
             'sessionDataTable' => $superGlobals->getSessionInformation(),
             'cookieDataTable' => $superGlobals->getCookieInformation(),
         ]);

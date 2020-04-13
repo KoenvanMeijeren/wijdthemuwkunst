@@ -12,10 +12,10 @@ use Domain\Admin\Accounts\Account\Controllers\AccountController;
 use Domain\Admin\Accounts\User\Controllers\UserAccountController;
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Authentication\Controllers\AuthenticationController;
-use Domain\Admin\Debug\Controllers\DebugController;
 use Domain\Admin\Event\Controllers\EventController as AdminEventController;
 use Domain\Admin\File\Controllers\UploadFileController;
 use Domain\Admin\Pages\Controllers\PageController as AdminPageController;
+use Domain\Admin\Reports\Controllers\ReportsController;
 use Domain\Admin\Settings\Controllers\SettingsControllers;
 use Domain\Pages\Controllers\PageController;
 use Src\Core\Router;
@@ -219,11 +219,11 @@ Router::prefix('admin')->group(static function () {
     /**
      * Debug routes.
      */
-    Router::get('reports/application', DebugController::class,
+    Router::get('reports/application', ReportsController::class,
         'application', User::DEVELOPER);
-    Router::get('reports/logs', DebugController::class,
+    Router::get('reports/logs', ReportsController::class,
         'logs', User::DEVELOPER);
-    Router::get('reports/storage', DebugController::class,
+    Router::get('reports/storage', ReportsController::class,
         'storage', User::DEVELOPER);
 
     /**

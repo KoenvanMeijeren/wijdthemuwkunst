@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Domain\Admin\Debug\Src;
+namespace App\Domain\Admin\Reports\Src;
 
 
 final class PhpInfo
