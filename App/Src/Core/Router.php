@@ -36,7 +36,19 @@ final class Router
      */
     private static array $availableRoutes = [];
 
+    /**
+     * The current used prefixes for the routes.
+     */
+    private static array $prefixes = [];
+
+    /**
+     * The prefix for the routes, converted from the prefixes.
+     */
     private static string $prefix = '';
+
+    /**
+     * The current used wildcard. Currently a maximum of 1 wildcard can be used.
+     */
     private static string $wildcard = '';
 
     /**
@@ -73,7 +85,7 @@ final class Router
         string $method = 'index',
         int $rights = User::GUEST
     ): void {
-        $route = self::addRoutePrefix($route);
+        $route = self::prefixRoute($route);
 
         self::$routes['GET'][$rights][$route] = [$controller, $method];
     }
@@ -94,13 +106,13 @@ final class Router
         string $method = 'index',
         int $rights = User::GUEST
     ): void {
-        $route = self::addRoutePrefix($route);
+        $route = self::prefixRoute($route);
 
         self::$routes['POST'][$rights][$route] = [$controller, $method];
     }
 
     /**
-     * Store the prefix.
+     * Prefix some routes.
      *
      * @param string $prefix
      *
@@ -108,9 +120,37 @@ final class Router
      */
     public static function prefix(string $prefix): Router
     {
-        self::$prefix = $prefix;
+        self::$prefixes[] = $prefix;
 
         return new static();
+    }
+
+    /**
+     * Add the prefixes to the given route.
+     *
+     * @param string $route
+     *
+     * @return string the prefixed route.
+     */
+    private static function prefixRoute(string $route): string
+    {
+        // If there are not available prefixes, return the route.
+        if (count(self::$prefixes) < 1) {
+            return $route;
+        }
+
+        // Convert the prefixes to one prefix and return the (prefixed) route.
+        $prefix = implode('/', self::$prefixes);
+        if ($prefix === '') {
+            return $route;
+        }
+
+        self::$prefix = $prefix;
+        if ($route !== '') {
+            return self::$prefix . '/' . $route;
+        }
+
+        return self::$prefix;
     }
 
     /**
@@ -122,17 +162,28 @@ final class Router
     {
         $routes($this);
 
-        self::$prefix = '';
+        self::$prefix = $this->updatePrefixes();
     }
 
     /**
-     * Return the current used wildcard.
+     * Update the prefixes.
      *
-     * @return string
+     * Remove the last prefix from the prefixes.
+     * This must be done in order to be able to group routes with a new prefix.
+     *
+     * @return string The updated prefix.
      */
-    public static function getWildcard(): string
+    private function updatePrefixes(): string
     {
-        return self::$wildcard;
+        $prefixes = explode('/', self::$prefix);
+        if (count($prefixes) === 0) {
+            return '';
+        }
+
+        $lastKey = array_key_last(self::$prefixes);
+        unset(self::$prefixes[$lastKey]);
+
+        return implode('/', self::$prefixes);
     }
 
     /**
@@ -153,6 +204,10 @@ final class Router
     {
         $this->setAvailableRoutes($requestType, $rights);
         $this->replaceWildcards($url);
+
+        dd(
+            self::$availableRoutes
+        );
         if (array_key_exists($url, self::$availableRoutes)) {
             return $this->executeRoute($url);
         }
@@ -291,22 +346,13 @@ final class Router
     }
 
     /**
-     * Add the prefix to the given route.
+     * Return the current used wildcard.
      *
-     * @param string $route
-     * @return string the prefixed route.
+     * @return string
      */
-    private static function addRoutePrefix(string $route): string
+    public static function getWildcard(): string
     {
-        if (self::$prefix !== '' && $route !== '') {
-            return self::$prefix . '/' . $route;
-        }
-
-        if (self::$prefix !== '') {
-            return self::$prefix;
-        }
-
-        return $route;
+        return self::$wildcard;
     }
 
     /**
