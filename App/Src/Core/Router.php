@@ -204,10 +204,6 @@ final class Router
     {
         $this->setAvailableRoutes($requestType, $rights);
         $this->replaceWildcards($url);
-
-        dd(
-            self::$availableRoutes
-        );
         if (array_key_exists($url, self::$availableRoutes)) {
             return $this->executeRoute($url);
         }
