@@ -79,170 +79,214 @@ Router::prefix('admin')->group(static function () {
         'reports', User::DEVELOPER);
 
     /**
-     * Pages routes.
-     */
-    Router::get('content/pages', AdminPageController::class,
-        'index', User::ADMIN);
-    Router::get('content/pages/page/create', AdminPageController::class,
-        'create', User::ADMIN);
-    Router::post('content/pages/page/create/store', AdminPageController::class,
-        'store', User::ADMIN);
-    Router::get('content/pages/page/edit/{slug}', AdminPageController::class,
-        'edit', User::ADMIN);
-    Router::post('content/pages/page/edit/{slug}/remove/banner', AdminPageController::class,
-        'removeBanner', User::ADMIN);
-    Router::post('content/pages/page/edit/{slug}/remove/thumbnail', AdminPageController::class,
-        'removeThumbnail', User::ADMIN);
-    Router::post('content/pages/page/edit/{slug}/store', AdminPageController::class,
-        'update', User::ADMIN);
-    Router::post('content/pages/page/publish/{slug}', AdminPageController::class,
-        'publish', User::ADMIN);
-    Router::post('content/pages/page/unpublish/{slug}', AdminPageController::class,
-        'unPublish', User::ADMIN);
-    Router::post('content/pages/page/delete/{slug}', AdminPageController::class,
-        'destroy', User::ADMIN);
-
-    /**
-     * Events routes.
-     */
-    Router::get('content/events', AdminEventController::class,
-        'index', User::ADMIN);
-    Router::get('content/events/event/create', AdminEventController::class,
-        'create', User::ADMIN);
-    Router::post('content/events/event/create/store', AdminEventController::class,
-        'store', User::ADMIN);
-    Router::get('content/events/event/edit/{slug}', AdminEventController::class,
-        'edit', User::ADMIN);
-    Router::post('content/events/event/edit/{slug}/remove/banner', AdminEventController::class,
-        'removeBanner', User::ADMIN);
-    Router::post('content/events/event/edit/{slug}/remove/thumbnail', AdminEventController::class,
-        'removeThumbnail', User::ADMIN);
-    Router::post('content/events/event/edit/{slug}/store', AdminEventController::class,
-        'update', User::ADMIN);
-    Router::post('content/events/event/publish/{slug}', AdminEventController::class,
-        'publish', User::ADMIN);
-    Router::post('content/events/event/unpublish/{slug}', AdminEventController::class,
-        'unPublish', User::ADMIN);
-    Router::post('content/events/event/archive/{slug}', AdminEventController::class,
-        'archive', User::ADMIN);
-    Router::post('content/events/event/activate/{slug}', AdminEventController::class,
-        'activate', User::ADMIN);
-    Router::post('content/events/event/delete/{slug}', AdminEventController::class,
-        'destroy', User::ADMIN);
-
-    /**
      * File upload routes.
      */
-    Router::post('upload/file', UploadFileController::class,
-        'store', User::ADMIN);
-    Router::post('upload/thumbnail', UploadFileController::class,
-        'thumbnail', User::ADMIN);
-    Router::post('upload/banner', UploadFileController::class,
-        'banner', User::ADMIN);
+    Router::prefix('upload')->group(function () {
+        Router::post('file', UploadFileController::class,
+            'store', User::ADMIN);
+        Router::post('thumbnail', UploadFileController::class,
+            'thumbnail', User::ADMIN);
+        Router::post('banner', UploadFileController::class,
+            'banner', User::ADMIN);
+    });
 
     /**
-     * Contact form routes.
+     * Content routes.
      */
-    Router::get('content/contact-form', ContactFormController::class,
-        'index', User::ADMIN);
-    Router::get('content/contact-form/filter', ContactFormController::class,
-        'showByDate', User::ADMIN);
-    Router::post('content/contact-form/delete/{slug}', ContactFormController::class,
-        'destroy', User::ADMIN);
+    Router::prefix('content')->group(function () {
+        /**
+         * Pages routes.
+         */
+        Router::prefix('pages')->group(function () {
+            Router::get('', AdminPageController::class,
+                'index', User::ADMIN);
+            Router::get('page/create', AdminPageController::class,
+                'create', User::ADMIN);
+            Router::post('page/create/store', AdminPageController::class,
+                'store', User::ADMIN);
+            Router::get('page/edit/{slug}', AdminPageController::class,
+                'edit', User::ADMIN);
+            Router::post('page/edit/{slug}/remove/banner', AdminPageController::class,
+                'removeBanner', User::ADMIN);
+            Router::post('page/edit/{slug}/remove/thumbnail', AdminPageController::class,
+                'removeThumbnail', User::ADMIN);
+            Router::post('page/edit/{slug}/store', AdminPageController::class,
+                'update', User::ADMIN);
+            Router::post('page/publish/{slug}', AdminPageController::class,
+                'publish', User::ADMIN);
+            Router::post('page/unpublish/{slug}', AdminPageController::class,
+                'unPublish', User::ADMIN);
+            Router::post('page/delete/{slug}', AdminPageController::class,
+                'destroy', User::ADMIN);
+        });
+
+        /**
+         * Events routes.
+         */
+        Router::prefix('events')->group(function () {
+            Router::get('', AdminEventController::class,
+                'index', User::ADMIN);
+            Router::get('event/create', AdminEventController::class,
+                'create', User::ADMIN);
+            Router::post('event/create/store', AdminEventController::class,
+                'store', User::ADMIN);
+            Router::get('event/edit/{slug}', AdminEventController::class,
+                'edit', User::ADMIN);
+            Router::post('event/edit/{slug}/remove/banner', AdminEventController::class,
+                'removeBanner', User::ADMIN);
+            Router::post('event/edit/{slug}/remove/thumbnail', AdminEventController::class,
+                'removeThumbnail', User::ADMIN);
+            Router::post('event/edit/{slug}/store', AdminEventController::class,
+                'update', User::ADMIN);
+            Router::post('event/publish/{slug}', AdminEventController::class,
+                'publish', User::ADMIN);
+            Router::post('event/unpublish/{slug}', AdminEventController::class,
+                'unPublish', User::ADMIN);
+            Router::post('event/archive/{slug}', AdminEventController::class,
+                'archive', User::ADMIN);
+            Router::post('event/activate/{slug}', AdminEventController::class,
+                'activate', User::ADMIN);
+            Router::post('event/delete/{slug}', AdminEventController::class,
+                'destroy', User::ADMIN);
+        });
+
+        /**
+         * Contact form routes.
+         */
+        Router::prefix('contact-form')->group(function () {
+            Router::get('', ContactFormController::class,
+                'index', User::ADMIN);
+            Router::get('filter', ContactFormController::class,
+                'showByDate', User::ADMIN);
+            Router::post('delete/{slug}', ContactFormController::class,
+                'destroy', User::ADMIN);
+        });
+    });
 
     /**
-     * Settings routes.
+     * Structure routes.
      */
-    Router::get('configuration/settings', SettingsControllers::class,
-        'index', User::ADMIN);
-    Router::get('configuration/settings/setting/create', SettingsControllers::class,
-        'create', User::ADMIN);
-    Router::post('configuration/settings/setting/create/store', SettingsControllers::class,
-        'store', User::ADMIN);
-    Router::get('configuration/settings/setting/edit/{slug}', SettingsControllers::class,
-        'edit', User::ADMIN);
-    Router::post('configuration/settings/setting/edit/{slug}/update', SettingsControllers::class,
-        'update', User::ADMIN);
-    Router::post('configuration/settings/setting/delete/{slug}', SettingsControllers::class,
-        'destroy', User::ADMIN);
+    Router::prefix('structure')->group(function () {
+        /**
+         * Menu routes.
+         */
+        Router::prefix('menu')->group(function () {
+            Router::get('', MenuController::class,
+                'index', User::ADMIN);
+            Router::get('item/create', MenuController::class,
+                'create', User::ADMIN);
+            Router::post('item/create/store', MenuController::class,
+                'store', User::ADMIN);
+            Router::get('item/edit/{slug}', MenuController::class,
+                'edit', User::ADMIN);
+            Router::post('item/edit/{slug}/update', MenuController::class,
+                'update', User::ADMIN);
+            Router::post('item/delete/{slug}', MenuController::class,
+                'destroy', User::ADMIN);
+        });
+    });
 
     /**
-     * Texts routes.
+     * Configuration routes.
      */
-    Router::get('configuration/texts', TextController::class,
-        'index', User::ADMIN);
-    Router::get('configuration/texts/text/create', TextController::class,
-        'create', User::ADMIN);
-    Router::post('configuration/texts/text/create/store', TextController::class,
-        'store', User::ADMIN);
-    Router::get('configuration/texts/text/edit/{slug}', TextController::class,
-        'edit', User::ADMIN);
-    Router::post('configuration/texts/text/edit/{slug}/update', TextController::class,
-        'update', User::ADMIN);
-    Router::post('configuration/texts/text/delete/{slug}', TextController::class,
-        'destroy', User::ADMIN);
+    Router::prefix('configuration')->group(function () {
+        /**
+         * Text routes.
+         */
+        Router::prefix('texts')->group(function () {
+            Router::get('', TextController::class,
+                'index', User::ADMIN);
+            Router::get('text/create', TextController::class,
+                'create', User::ADMIN);
+            Router::post('text/create/store', TextController::class,
+                'store', User::ADMIN);
+            Router::get('text/edit/{slug}', TextController::class,
+                'edit', User::ADMIN);
+            Router::post('text/edit/{slug}/update', TextController::class,
+                'update', User::ADMIN);
+            Router::post('text/delete/{slug}', TextController::class,
+                'destroy', User::ADMIN);
+        });
 
-    /**
-     * Menu routes.
-     */
-    Router::get('structure/menu', MenuController::class,
-        'index', User::ADMIN);
-    Router::get('structure/menu/item/create', MenuController::class,
-        'create', User::ADMIN);
-    Router::post('structure/menu/item/create/store', MenuController::class,
-        'store', User::ADMIN);
-    Router::get('structure/menu/item/edit/{slug}', MenuController::class,
-        'edit', User::ADMIN);
-    Router::post('structure/menu/item/edit/{slug}/update', MenuController::class,
-        'update', User::ADMIN);
-    Router::post('structure/menu/item/delete/{slug}', MenuController::class,
-        'destroy', User::ADMIN);
+        /**
+         * Settings routes.
+         */
+        Router::prefix('settings')->group(function () {
+            Router::get('', SettingsControllers::class,
+                'index', User::ADMIN);
+            Router::get('setting/create', SettingsControllers::class,
+                'create', User::ADMIN);
+            Router::post('setting/create/store', SettingsControllers::class,
+                'store', User::ADMIN);
+            Router::get('setting/edit/{slug}', SettingsControllers::class,
+                'edit', User::ADMIN);
+            Router::post('setting/edit/{slug}/update', SettingsControllers::class,
+                'update', User::ADMIN);
+            Router::post('setting/delete/{slug}', SettingsControllers::class,
+                'destroy', User::ADMIN);
+        });
+    });
 
     /**
      * Account routes.
      */
-    Router::get('account', AccountController::class,
-        'index', User::SUPER_ADMIN);
-    Router::get('account/create', AccountController::class,
-        'create', User::SUPER_ADMIN);
-    Router::post('account/create/store', AccountController::class,
-        'store', User::SUPER_ADMIN);
-    Router::get('account/edit/{slug}', AccountController::class,
-        'edit', User::SUPER_ADMIN);
-    Router::post('account/edit/{slug}/store/data', AccountController::class,
-        'storeData', User::SUPER_ADMIN);
-    Router::post('account/edit/{slug}/store/email', AccountController::class,
-        'storeEmail', User::SUPER_ADMIN);
-    Router::post('account/edit/{slug}/store/password', AccountController::class,
-        'storePassword', User::SUPER_ADMIN);
-    Router::post('account/block/{slug}', AccountController::class,
-        'block', User::SUPER_ADMIN);
-    Router::post('account/unblock/{slug}', AccountController::class,
-        'unblock', User::SUPER_ADMIN);
-    Router::post('account/delete/{slug}', AccountController::class,
-        'destroy', User::SUPER_ADMIN);
+    Router::prefix('account')->group(function () {
+        Router::get('', AccountController::class,
+            'index', User::SUPER_ADMIN);
+        Router::get('create', AccountController::class,
+            'create', User::SUPER_ADMIN);
+        Router::post('create/store', AccountController::class,
+            'store', User::SUPER_ADMIN);
+        Router::get('edit/{slug}', AccountController::class,
+            'edit', User::SUPER_ADMIN);
+        Router::post('edit/{slug}/store/data', AccountController::class,
+            'storeData', User::SUPER_ADMIN);
+        Router::post('edit/{slug}/store/email', AccountController::class,
+            'storeEmail', User::SUPER_ADMIN);
+        Router::post('edit/{slug}/store/password', AccountController::class,
+            'storePassword', User::SUPER_ADMIN);
+        Router::post('block/{slug}', AccountController::class,
+            'block', User::SUPER_ADMIN);
+        Router::post('unblock/{slug}', AccountController::class,
+            'unblock', User::SUPER_ADMIN);
+        Router::post('delete/{slug}', AccountController::class,
+            'destroy', User::SUPER_ADMIN);
+    });
 
     /**
-     * Debug routes.
+     * User account routes.
      */
-    Router::get('reports/application', ReportsController::class,
-        'application', User::DEVELOPER);
-    Router::get('reports/logs', ReportsController::class,
-        'logs', User::DEVELOPER);
-    Router::get('reports/storage', ReportsController::class,
-        'storage', User::DEVELOPER);
+    Router::prefix('user/account')->group(function () {
+        Router::get('', UserAccountController::class,
+            'index', User::ADMIN);
+        Router::post('store/data', UserAccountController::class,
+            'storeData', User::ADMIN);
+        Router::post('store/password', UserAccountController::class,
+            'storePassword', User::ADMIN);
+    });
 
     /**
-     * User routes.
+     * Reports routes.
      */
-    Router::get('user/account', UserAccountController::class,
-        'index', User::ADMIN);
-    Router::post('user/account/store/data',
-        UserAccountController::class,
-        'storeData', User::ADMIN);
-    Router::post('user/account/store/password',
-        UserAccountController::class,
-        'storePassword', User::ADMIN);
+    Router::prefix('reports')->group(function () {
+        /**
+         * Application routes.
+         */
+        Router::get('application', ReportsController::class,
+            'application', User::DEVELOPER);
+
+        /**
+         * Logs routes.
+         */
+        Router::get('logs', ReportsController::class,
+            'logs', User::DEVELOPER);
+
+        /**
+         * Storage routes.
+         */
+        Router::get('storage', ReportsController::class,
+            'storage', User::DEVELOPER);
+    });
 });
 
 /**
