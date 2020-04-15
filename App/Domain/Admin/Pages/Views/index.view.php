@@ -6,7 +6,7 @@ declare(strict_types=1);
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title float-left">
-                    Pagina's bewerken
+                    Pagina's overzicht
                 </h4>
 
                 <a href="/admin/content/pages/page/create"

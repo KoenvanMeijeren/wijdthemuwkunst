@@ -11,9 +11,9 @@ return [
     'internal_server_error_title' => '500 - Interne server error',
     'internal_server_error_description' => 'Deze pagina werkt niet meer, neem contact op met de website beheerder.',
     'admin_dashboard_title' => 'Dashboard',
-    'admin_page_title' => 'Pagina\'s overzicht',
-    'admin_event_title' => 'Concerten overzicht',
-    'admin_account_title' => 'Account overzicht',
+    'admin_page_title' => 'Pagina\'s',
+    'admin_event_title' => 'Concerten',
+    'admin_account_title' => 'Accounts',
     'admin_debug_title' => 'Debug informatie',
 
     /**
@@ -156,6 +156,10 @@ return [
      */
     'admin_contact_form_title' => 'Contact formulier',
     'admin_delete_contact_form_message' => 'Het bericht van %s is succesvol verwijderd.',
+    'contact_request' => 'contact aanvraag',
+    'contact_requests' => 'contact aanvragen',
+    'no_contact_requests_available' => 'Er zijn geen contact aanvragen gevonden.',
+    'delete_contact_request_confirmation_message' => 'Weet je zeker dat je deze contact aanvraag wilt verwijderen?',
 
     /**
      * Admin account user maintenance page translations.
@@ -170,7 +174,7 @@ return [
      * Admin account(s) maintenance page translations.
      */
     'admin_account_maintenance_title' => 'Account beheer',
-    'admin_accounts_maintenance_title' => 'Accounts beheren',
+    'admin_accounts_maintenance_title' => 'Accounts overzicht',
     'admin_create_account_title' => 'Account aanmaken',
     'admin_create_account_successful_message' => 'Account is succesvol aangemaakt.',
     'admin_create_account_unsuccessful_message' => 'Account kon niet worden aangemaakt.',

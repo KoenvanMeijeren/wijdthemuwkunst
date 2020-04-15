@@ -6,7 +6,7 @@ declare(strict_types=1);
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title float-left">
-                    Concerten bewerken
+                    Concerten overzicht
                 </h4>
 
                 <a href="/admin/content/events/event/create"
