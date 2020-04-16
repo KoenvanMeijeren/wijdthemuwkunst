@@ -22,7 +22,7 @@ $text = new Text();
                     ?>
                     <div class="col-md-4">
                         <div class="card">
-                            <a href="/concert/historie/<?= $singleEventRepository->getSlug() ?>"
+                            <a href="/concerten/historie/concert/<?= $singleEventRepository->getSlug() ?>"
                                 class="link-without-styling">
                                 <img class="card-img-top"
                                      alt="<?= $singleEventRepository->getTitle() ?> thumbnail"

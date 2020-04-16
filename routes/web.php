@@ -33,15 +33,15 @@ Router::get('index', PageController::class,
  */
 Router::get('concerten', EventController::class,
     'index', User::GUEST);
-Router::get('concert/{slug}', EventController::class,
+Router::get('concerten/concert/{slug}', EventController::class,
     'show', User::GUEST);
 
 /**
  * Event history routes.
  */
-Router::get('concerten-historie', EventArchiveController::class,
+Router::get('concerten/historie', EventArchiveController::class,
     'index', User::GUEST);
-Router::get('concert/historie/{slug}', EventArchiveController::class,
+Router::get('concerten/historie/concert/{slug}', EventArchiveController::class,
     'show', User::GUEST);
 
 /**

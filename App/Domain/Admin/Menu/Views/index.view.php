@@ -92,7 +92,7 @@ $createMenuItem = $create_menu_item ?? false;
                 <div class="card-header">
                     <h4 class="card-title">
                         <?= sprintf(
-                            Translation::get('delete_thumbnail_button'),
+                            Translation::get('edit_menu_item_title'),
                             $menuItem->getTitle()
                         ) ?>
                     </h4>
