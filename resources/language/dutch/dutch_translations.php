@@ -224,7 +224,7 @@ return [
     'admin_reports_storage_title' => 'Opslag',
     'session_data' => 'Sessie gegevens',
     'no_session_data_available' => 'Geen sessie informatie gevonden',
-    'cookie_data' => 'Opslag',
+    'cookie_data' => 'Cookie gegevens',
     'no_cookie_data_available' => 'Geen cookie informatie gevonden',
     'session_settings' => 'Sessie instellingen',
     'no_session_settings_data_available' => 'Geen sessie instellingen gevonden',
