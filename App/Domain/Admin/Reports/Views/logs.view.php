@@ -25,18 +25,27 @@ $request = new Request();
                     <?php endif; ?>
                 </div>
 
-                <form action="#logs" class="form-inline float-right" method="get">
+                <form class="form-inline float-right" method="get"
+                      action="#logs">
                     <div class="form-group mr-2">
                         <label for="datepicker"></label>
-                        <input type="text" name="logDate"
+                        <input type="text" name="date"
                                autocomplete="off"
+                               placeholder="<?= Translation::get('form_date') ?>"
                                class="form-control" id="datepicker"
-                               value="<?= $request->get('logDate') ?>">
+                               value="<?= $request->get('date') ?>">
                     </div>
 
                     <button class="btn btn-default-small border-0">
                         <?= Translation::get('filter_button') ?>
                     </button>
+
+                    <?php if (isset($_GET['date'])) : ?>
+                        <a href="/admin/reports/logs"
+                           class="btn btn-success ml-3 border-0">
+                            <?= Translation::get('reset_button') ?>
+                        </a>
+                    <?php endif; ?>
                 </form>
             </div>
             <div class="card-body">
