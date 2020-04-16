@@ -2,6 +2,7 @@
 
 use App\Domain\Admin\Event\Repositories\EventRepository;
 use App\Domain\Admin\Text\Models\Text;
+use Src\Translation\Translation;
 
 /** @var EventRepository $eventRepository */
 $eventRepository = $eventRepo ?? null;
@@ -50,7 +51,7 @@ $text = new Text();
                 <div class="col-md-12">
                     <?= $text->get(
                         'er_zijn_geen_gearchiveerde_concerten',
-                        'Er zijn momenteel geen gearchiveerde concerten.'
+                        Translation::get('no_archived_events_were_found_message')
                     ) ?>
                 </div>
             <?php endif; ?>

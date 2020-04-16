@@ -16,7 +16,7 @@ $createMenuItem = $create_menu_item ?? false;
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">
-                        Menu item toevoegen
+                        <?= Translation::get('add_menu_item_title') ?>
                     </h4>
                 </div>
                 <div class="card-body">
@@ -91,7 +91,10 @@ $createMenuItem = $create_menu_item ?? false;
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">
-                        Menu item '<?= $menuItem->getTitle() ?>' bewerken
+                        <?= sprintf(
+                            Translation::get('delete_thumbnail_button'),
+                            $menuItem->getTitle()
+                        ) ?>
                     </h4>
                 </div>
                 <div class="card-body">
@@ -168,7 +171,7 @@ $createMenuItem = $create_menu_item ?? false;
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title float-left">
-                    Menu overzicht
+                    <?= Translation::get('menu_items_overview') ?>
                 </h4>
 
                 <a href="/admin/structure/menu/item/create"

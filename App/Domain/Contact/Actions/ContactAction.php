@@ -8,6 +8,7 @@ use App\Domain\Admin\ContactForm\Actions\BaseContactFormAction;
 use App\Src\Mail\Mail;
 use Domain\Admin\Settings\Models\Setting;
 use Src\Security\Recaptcha;
+use Src\Translation\Translation;
 
 final class ContactAction extends BaseContactFormAction
 {
@@ -62,11 +63,11 @@ final class ContactAction extends BaseContactFormAction
     {
         $setting = new Setting();
 
-        $this->validator->input($setting->get('bedrijf_email'), 'Bedrijfsemail')
+        $this->validator->input($setting->get('bedrijf_email'), Translation::get('company_email'))
             ->settingIsRequired()
             ->isEmail();
 
-        $this->validator->input($setting->get('bedrijf_naam'), 'Bedrijfsnaam')
+        $this->validator->input($setting->get('bedrijf_naam'), Translation::get('company_name'))
             ->settingIsRequired();
 
         return parent::validate();

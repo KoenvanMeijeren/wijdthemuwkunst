@@ -10,6 +10,7 @@ use Cake\Chronos\Chronos;
 use Src\Action\FormAction;
 use Src\Core\Request;
 use Src\Session\Session;
+use Src\Translation\Translation;
 use Src\Validate\form\FormValidator;
 
 abstract class BaseContactFormAction extends FormAction
@@ -53,9 +54,9 @@ abstract class BaseContactFormAction extends FormAction
      */
     protected function validate(): bool
     {
-        $this->validator->input($this->name, 'Naam')->isRequired();
-        $this->validator->input($this->email, 'Email')->isRequired()->isEmail();
-        $this->validator->input($this->message, 'Bericht')->isRequired();
+        $this->validator->input($this->name, Translation::get('name'))->isRequired();
+        $this->validator->input($this->email, Translation::get('email'))->isRequired()->isEmail();
+        $this->validator->input($this->message, Translation::get('message'))->isRequired();
 
         return $this->validator->handleFormValidation();
     }

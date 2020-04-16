@@ -5,6 +5,7 @@ namespace App\Domain\Admin\Event\Support;
 
 use Cake\Chronos\Chronos;
 use Src\Converter\Converter;
+use Src\Translation\Translation;
 use Support\DateTime;
 
 final class EventDatetimeConverter extends Converter
@@ -14,9 +15,12 @@ final class EventDatetimeConverter extends Converter
         $datetime = new DateTime(new Chronos($this->var));
 
         $readableDatetime = $datetime->toDate();
-        $readableDatetime .= ' om ';
+        $readableDatetime .= ' ';
+        $readableDatetime .= Translation::get('at');
+        $readableDatetime .= ' ';
         $readableDatetime .= $datetime->toTime();
-        $readableDatetime .= ' uur';
+        $readableDatetime .= ' ';
+        $readableDatetime .= Translation::get('hour');
 
         return $readableDatetime;
     }

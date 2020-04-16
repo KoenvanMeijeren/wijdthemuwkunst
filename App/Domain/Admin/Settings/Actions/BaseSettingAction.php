@@ -67,8 +67,8 @@ abstract class BaseSettingAction extends FormAction
      */
     protected function validate(): bool
     {
-        $this->validator->input($this->key, 'Sleutel')->isRequired();
-        $this->validator->input($this->value, 'Waarde')->isRequired();
+        $this->validator->input($this->key, Translation::get('key'))->isRequired();
+        $this->validator->input($this->value, Translation::get('value'))->isRequired();
 
         if ($this->key !== $this->settingRepository->getKey()) {
             $this->validator->input($this->key)

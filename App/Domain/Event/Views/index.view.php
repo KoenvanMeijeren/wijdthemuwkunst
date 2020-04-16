@@ -2,6 +2,7 @@
 
 use App\Domain\Admin\Event\Repositories\EventRepository;
 use App\Domain\Admin\Text\Models\Text;
+use Src\Translation\Translation;
 
 /** @var EventRepository $eventRepository */
 $eventRepository = $eventRepo ?? null;
@@ -52,7 +53,7 @@ $text = new Text();
                 <div class="col-md-12">
                     <?= $text->get(
                         'er_zijn_geen_concerten',
-                        'Er zijn momenteel geen komende concerten.'
+                        Translation::get('no_events_were_found_message')
                     ) ?>
                 </div>
             <?php endif; ?>
@@ -101,7 +102,7 @@ $text = new Text();
                     <a class="button" href="/concerten-historie">
                         <?= $text->get(
                             'bekijk_alles_knop',
-                            'Bekijk alles'
+                            Translation::get('view_more_button')
                         ) ?>
                     </a>
                 </div>

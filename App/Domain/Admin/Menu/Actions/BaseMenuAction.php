@@ -11,6 +11,7 @@ use Domain\Admin\Pages\Repositories\SlugRepository;
 use Src\Action\FormAction;
 use Src\Core\Request;
 use Src\Session\Session;
+use Src\Translation\Translation;
 use Src\Validate\form\FormValidator;
 
 abstract class BaseMenuAction extends FormAction
@@ -65,9 +66,9 @@ abstract class BaseMenuAction extends FormAction
 
     protected function validate(): bool
     {
-        $this->validator->input($this->url, 'Url')->isRequired();
-        $this->validator->input($this->title, 'Titel')->isRequired();
-        $this->validator->input($this->weight, 'Gewicht')->isRequired();
+        $this->validator->input($this->url, Translation::get('url'))->isRequired();
+        $this->validator->input($this->title, Translation::get('title'))->isRequired();
+        $this->validator->input($this->weight, Translation::get('weight'))->isRequired();
 
         return $this->validator->handleFormValidation();
     }

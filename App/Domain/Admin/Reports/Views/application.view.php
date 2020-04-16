@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 use Src\Core\Env;
 use Src\Core\Request;
+use Src\Translation\Translation;
 
 $request = new Request();
 ?>
@@ -11,7 +12,7 @@ $request = new Request();
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">
-                    Applicatie status
+                    <?= Translation::get('app_status') ?>
                 </h4>
             </div>
             <div class="card-body">
@@ -28,11 +29,11 @@ $request = new Request();
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">
-                    Header gegevens
+                    <?= Translation::get('header_data') ?>
                 </h4>
             </div>
             <div class="card-body scrollbox-horizontal">
-                <?= $headerDataTable ?? 'Geen header informatie gevonden' ?>
+                <?= $headerDataTable ?? Translation::get('no_header_data_available') ?>
             </div>
         </div>
     </div>
@@ -43,11 +44,11 @@ $request = new Request();
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">
-                    Sessie instellingen
+                    <?= Translation::get('session_settings') ?>
                 </h4>
             </div>
             <div class="card-body scrollbox-horizontal">
-                <?= $sessionSettingsTable ?? 'Geen sessie instellingen gevonden' ?>
+                <?= $sessionSettingsTable ?? Translation::get('no_session_settings_data_available') ?>
             </div>
         </div>
     </div>

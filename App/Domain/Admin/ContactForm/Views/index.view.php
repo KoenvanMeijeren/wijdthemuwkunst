@@ -98,7 +98,6 @@ $amountMessages = count($messages ?? []);
                                 <?php $active = 'active';
                                 foreach (($messages ?? []) as $key => $singleMessage) :
                                     $message = new ContactFormRepository($singleMessage);
-                                    $date = $message->convertDateTime()->toFormattedDate();
                                     ?>
                                     <div
                                         class="tab-pane fade show <?= $active ?>"

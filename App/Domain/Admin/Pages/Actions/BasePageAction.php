@@ -128,11 +128,11 @@ abstract class BasePageAction extends FormAction
      */
     protected function validate(): bool
     {
-        $this->validator->input($this->title, 'Title')
+        $this->validator->input($this->title, Translation::get('title'))
             ->isRequired();
 
         if ($this->url !== $this->pageRepository->getSlug()) {
-            $this->validator->input($this->url, 'Slug')
+            $this->validator->input($this->url, Translation::get('slug'))
                 ->isRequired()
                 ->isUnique(
                     $this->page->getBySlug($this->url),
@@ -143,7 +143,7 @@ abstract class BasePageAction extends FormAction
                 );
         }
 
-        $this->validator->input((string)$this->inMenu, 'Zichtbaarheid van de pagina')
+        $this->validator->input((string)$this->inMenu, Translation::get('page_visibility'))
             ->isRequired()
             ->isInArray(
                 (string)$this->inMenu,
@@ -153,7 +153,7 @@ abstract class BasePageAction extends FormAction
                 ]
             );
 
-        $this->validator->input($this->content, 'Pagina content')
+        $this->validator->input($this->content, Translation::get('page_content'))
             ->isRequired();
 
         return $this->validator->handleFormValidation();
