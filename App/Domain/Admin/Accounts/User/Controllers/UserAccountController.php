@@ -21,7 +21,7 @@ final class UserAccountController
         $user = new User();
 
         return new DomainView($this->baseViewPath . 'index', [
-            'title' => Translation::get('admin_account_title'),
+            'title' => Translation::get('admin_account_maintenance_title'),
             'account' => $user->getAccount()
         ]);
     }

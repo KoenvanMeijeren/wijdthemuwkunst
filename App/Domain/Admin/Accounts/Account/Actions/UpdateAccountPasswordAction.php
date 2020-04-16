@@ -36,7 +36,7 @@ final class UpdateAccountPasswordAction extends BaseAccountAction
      */
     protected function validate(): bool
     {
-        $this->validator->input($this->password, 'Wachtwoord')
+        $this->validator->input($this->password, Translation::get('password'))
             ->isRequired()
             ->passwordIsEqual($this->confirmationPassword)
             ->passwordIsNotCurrentPassword($this->accountRepository->getPassword());

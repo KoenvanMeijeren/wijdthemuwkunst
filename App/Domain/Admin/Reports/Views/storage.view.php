@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use Src\Core\Request;
+use Src\Translation\Translation;
 
 $request = new Request();
 ?>
@@ -10,11 +11,11 @@ $request = new Request();
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">
-                    Sessie gegevens
+                    <?= Translation::get('session_data') ?>
                 </h4>
             </div>
             <div class="card-body scrollbox-horizontal">
-                <?= $sessionDataTable ?? 'Geen sessie informatie gevonden' ?>
+                <?= $sessionDataTable ?? Translation::get('no_session_data_available') ?>
             </div>
         </div>
     </div>
@@ -25,11 +26,11 @@ $request = new Request();
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">
-                    Cookie gegevens
+                    <?= Translation::get('cookie_data') ?>
                 </h4>
             </div>
             <div class="card-body scrollbox-horizontal">
-                <?= $cookieDataTable ?? 'Geen cookie informatie gevonden' ?>
+                <?= $cookieDataTable ?? Translation::get('no_cookie_data_available') ?>
             </div>
         </div>
     </div>

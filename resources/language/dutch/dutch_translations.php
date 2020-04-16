@@ -11,9 +11,9 @@ return [
     'internal_server_error_title' => '500 - Interne server error',
     'internal_server_error_description' => 'Deze pagina werkt niet meer, neem contact op met de website beheerder.',
     'admin_dashboard_title' => 'Dashboard',
-    'admin_page_title' => 'Pagina\'s overzicht',
-    'admin_event_title' => 'Concerten overzicht',
-    'admin_account_title' => 'Account overzicht',
+    'admin_page_title' => 'Pagina\'s',
+    'admin_event_title' => 'Concerten',
+    'admin_account_title' => 'Accounts',
     'admin_debug_title' => 'Debug informatie',
 
     /**
@@ -49,13 +49,14 @@ return [
     /**
      * Admin pages maintenance translations.
      */
+    'pages_overview_title' => 'Pagina\'s overzicht',
     'admin_pages_maintenance_title' => 'Pagina\'s beheren',
-    'admin_create_page_title' => 'Pagina aanmaken',
+    'admin_create_page_title' => 'Pagina toevoegen',
     'admin_edit_page_title' => 'Pagina "%s" bewerken',
     'admin_page_cannot_be_visited' => 'De pagina \'%s\' bestaat niet',
     'no_pages_were_found_message' => 'Er zijn geen pagina\'s gevonden.',
-    'page_successfully_created' => 'De pagina \'%s\' is succesvol aangemaakt',
-    'page_unsuccessfully_created' => 'De pagina kon niet worden aangemaakt',
+    'page_successfully_created' => 'De pagina \'%s\' is succesvol toegevoegd',
+    'page_unsuccessfully_created' => 'De pagina kon niet worden toegevoegd',
     'page_successfully_updated' => 'De pagina \'%s\' is succesvol bijgewerkt',
     'page_unsuccessfully_published' => 'De pagina \'%s\' kon niet worden gepubliceerd',
     'page_unsuccessfully_unpublished' => 'De publicatie van de pagina \'%s\' kon niet ongedaan worden gemaakt.',
@@ -77,17 +78,21 @@ return [
     'page_in_menu_state_unknown' => 'Onbekende zichtbaarheid',
     'admin_page_is_published' => 'Gepubliceerd',
     'admin_page_is_not_published' => 'Niet gepubliceerd',
+    'page_does_not_exists' => 'Deze pagina bestaat niet.',
 
     /**
      * Admin events maintenance translations.
      */
+    'event_overview_title' => 'Concerten overzicht',
+    'event_archive_overview_title' => 'Concerten archief',
     'admin_events_maintenance_title' => 'Concerten beheren',
-    'admin_create_event_title' => 'Concert aanmaken',
+    'admin_create_event_title' => 'Concert toevoegen',
     'admin_edit_event_title' => 'Concert "%s" bewerken',
     'admin_event_cannot_be_visited' => 'Het concert bestaat niet',
     'no_events_were_found_message' => 'Er zijn geen concerten gevonden.',
-    'event_successfully_created' => 'Het concert \'%s\' is succesvol aangemaakt',
-    'event_unsuccessfully_created' => 'Het concert kon niet worden aangemaakt',
+    'no_archived_events_were_found_message' => 'Er zijn geen gearchiveerde concerten gevonden.',
+    'event_successfully_created' => 'Het concert \'%s\' is succesvol toegevoegd',
+    'event_unsuccessfully_created' => 'Het concert kon niet worden toegevoegd',
     'event_successfully_updated' => 'Het concert \'%s\' is succesvol bijgewerkt',
     'event_unsuccessfully_published' => 'Het concert \'%s\' kon niet worden gepubliceerd',
     'event_unsuccessfully_unpublished' => 'De publicatie van het concert \'%s\' kon niet ongedaan worden gemaakt.',
@@ -110,13 +115,16 @@ return [
      * Admin settings page translations.
      */
     'settings_title' => 'Website instellingen',
+    'settings_overview_title' => 'Instellingen overzicht',
+    'add_setting_title' => 'Instelling toevoegen',
+    'edit_setting_title' => 'Instelling `%s` bewerken',
     'setting_does_not_exists' => 'Deze instelling bestaat niet.',
     'setting_already_exists' => 'De instelling \'%s\' bestaat al.',
     'setting_creation_not_allowed' => 'Instellingen mogen alleen worden toegevoegd door ontwikkelaars.',
     'setting_editing_key_not_allowed' => 'De instelling sleutel mogen alleen worden bijgewerkt door ontwikkelaars.',
     'setting_destroy_not_allowed' => 'Instellingen mogen alleen worden verwijderd door ontwikkelaars.',
-    'setting_successful_created' => 'De instelling \'%s\' is succesvol aangemaakt.',
-    'setting_unsuccessful_created' => 'De instelling \'%s\' kon niet worden aangemaakt.',
+    'setting_successful_created' => 'De instelling \'%s\' is succesvol toegevoegd.',
+    'setting_unsuccessful_created' => 'De instelling \'%s\' kon niet worden toegevoegd.',
     'setting_successful_updated' => 'De instelling \'%s\' is succesvol bijgewerkt.',
     'setting_successful_deleted' => 'De instelling \'%s\' is succesvol verwijderd',
     'setting_unsuccessful_deleted' => 'De instelling \'%s\' kon niet worden verwijderd',
@@ -126,13 +134,16 @@ return [
      * Admin texts page translations.
      */
     'texts_title' => 'Website teksten',
+    'texts_overview_title' => 'Instellingen overzicht',
+    'add_text_title' => 'Instelling toevoegen',
+    'edit_text_title' => 'Instelling `%s` bewerken',
     'text_does_not_exists' => 'Deze tekst bestaat niet.',
     'text_already_exists' => 'De tekst \'%s\' bestaat al.',
     'text_creation_not_allowed' => 'Teksten mogen alleen worden toegevoegd door ontwikkelaars.',
     'text_editing_key_not_allowed' => 'De tekst sleutel mag alleen worden bijgewerkt door ontwikkelaars.',
     'text_destroy_not_allowed' => 'Teksten mogen alleen worden verwijderd door ontwikkelaars.',
-    'text_successful_created' => 'De tekst \'%s\' is succesvol aangemaakt.',
-    'text_unsuccessful_created' => 'De tekst \'%s\' kon niet worden aangemaakt.',
+    'text_successful_created' => 'De tekst \'%s\' is succesvol toegevoegd.',
+    'text_unsuccessful_created' => 'De tekst \'%s\' kon niet worden toegevoegd.',
     'text_successful_updated' => 'De tekst \'%s\' is succesvol bijgewerkt.',
     'text_successful_deleted' => 'De tekst \'%s\' is succesvol verwijderd',
     'text_unsuccessful_deleted' => 'De tekst \'%s\' kon niet worden verwijderd',
@@ -142,10 +153,13 @@ return [
      * Admin menu page translations.
      */
     'menu_title' => 'Menu',
+    'add_menu_item_title' => 'Menu item toevoegen',
+    'edit_menu_item_title' => 'Menu item `%s` bewerken',
+    'menu_items_overview' => 'Menu items overzicht',
     'menu_item_does_not_exists' => 'Dit menu item bestaat niet.',
     'menu_item_already_exists' => 'Menu item \'%s\' bestaat al.',
-    'menu_item_successful_created' => 'Menu item \'%s\' is succesvol aangemaakt.',
-    'menu_item_unsuccessful_created' => 'Menu item \'%s\' kon niet worden aangemaakt.',
+    'menu_item_successful_created' => 'Menu item \'%s\' is succesvol toegevoegd.',
+    'menu_item_unsuccessful_created' => 'Menu item \'%s\' kon niet worden toegevoegd.',
     'menu_item_successful_updated' => 'Menu item \'%s\' is succesvol bijgewerkt.',
     'menu_item_successful_deleted' => 'Menu item \'%s\' is succesvol verwijderd',
     'menu_item_unsuccessful_deleted' => 'Menu item \'%s\' kon niet worden verwijderd',
@@ -156,6 +170,10 @@ return [
      */
     'admin_contact_form_title' => 'Contact formulier',
     'admin_delete_contact_form_message' => 'Het bericht van %s is succesvol verwijderd.',
+    'contact_request' => 'contact aanvraag',
+    'contact_requests' => 'contact aanvragen',
+    'no_contact_requests_available' => 'Er zijn geen contact aanvragen gevonden.',
+    'delete_contact_request_confirmation_message' => 'Weet je zeker dat je deze contact aanvraag wilt verwijderen?',
 
     /**
      * Admin account user maintenance page translations.
@@ -170,10 +188,10 @@ return [
      * Admin account(s) maintenance page translations.
      */
     'admin_account_maintenance_title' => 'Account beheer',
-    'admin_accounts_maintenance_title' => 'Accounts beheren',
-    'admin_create_account_title' => 'Account aanmaken',
-    'admin_create_account_successful_message' => 'Account is succesvol aangemaakt.',
-    'admin_create_account_unsuccessful_message' => 'Account kon niet worden aangemaakt.',
+    'admin_accounts_maintenance_title' => 'Accounts overzicht',
+    'admin_create_account_title' => 'Account toevoegen',
+    'admin_create_account_successful_message' => 'Account is succesvol toegevoegd.',
+    'admin_create_account_unsuccessful_message' => 'Account kon niet worden toegevoegd.',
     'admin_edit_account_title' => 'Account bewerken',
     'admin_edit_account_wrong_current_password_message' => 'Onjuist huidig wachtwoord gegeven. Wachtwoord is niet bijgewerkt.',
     'admin_edited_account_successful_message' => 'Account is succesvol bijgewerkt.',
@@ -204,6 +222,17 @@ return [
     'admin_reports_application_title' => 'Applicatie',
     'admin_reports_logs_title' => 'Logs',
     'admin_reports_storage_title' => 'Opslag',
+    'session_data' => 'Sessie gegevens',
+    'no_session_data_available' => 'Geen sessie informatie gevonden',
+    'cookie_data' => 'Cookie gegevens',
+    'no_cookie_data_available' => 'Geen cookie informatie gevonden',
+    'session_settings' => 'Sessie instellingen',
+    'no_session_settings_data_available' => 'Geen sessie instellingen gevonden',
+    'logs_data' => 'Logs informatie',
+    'no_log_data_found' => 'Er is geen log data gevonden op',
+    'app_status' => 'Applicatie status',
+    'header_data' => 'Header gegevens',
+    'no_header_data_available' => 'Geen header informatie gevonden',
 
     /**
      * Account rights
@@ -245,6 +274,9 @@ return [
     'form_rights_super_admin' => 'Super-beheerder',
     'form_rights_developer' => 'Developer',
     'form_login_title' => 'Inloggen',
+    'form_cut_image' => 'Foto bijsnijden',
+    'form_thumbnail_size' => 'Thumbnail - Aanbevolen grootte 350x300',
+    'form_banner_size' => 'Banner - Aanbevolen grootte 1500x400',
     'form_file_upload' => 'Bestand uploaden',
     'form_choose_file' => 'Bestand kiezen',
     'form_no_file__is_chosen' => 'Geen bestand gekozen',
@@ -343,6 +375,34 @@ return [
     'validator_form_passwords_is_not_verified' => 'Het huidige wachtwoord is onjuist.',
 
     /**
+     * Texts
+     */
+    'welcome_text' => 'Welkom',
+    'minutes' => 'minuten',
+    'at' => 'om',
+    'hour' => 'uur',
+    'company_email' => 'Bedrijfsemail',
+    'company_name' => 'Bedrijfsnaam',
+    'key' => 'Sleutel',
+    'value' => 'Waarde',
+    'name' => 'Naam',
+    'email' => 'Email',
+    'message' => 'Bericht',
+    'password' => 'Wachtwoord',
+    'rights' => 'Rechten',
+    'title' => 'Titel',
+    'url' => 'Url',
+    'weight' => 'Gewicht',
+    'slug' => 'Slug',
+    'page_visibility' => 'Pagina zichtbaarheid',
+    'page_content' => 'Pagina content',
+    'ip' => 'IP',
+    'server' => 'Server',
+    'referrer' => 'Referrer',
+    'process_id' => 'Process ID',
+    'http_method' => 'HTTP Methode',
+
+    /**
      * Buttons.
      */
     'edit' => 'Bewerken',
@@ -355,7 +415,11 @@ return [
     'save_button' => 'Opslaan',
     'reset_button' => 'Reset',
     'filter_button' => 'Filter',
+    'delete_thumbnail_button' => 'Verwijder thumbnail',
+    'delete_banner_button' => 'Verwijder banner',
     'edit_button' => 'Bewerken',
+    'cancel_button' => 'Annuleren',
+    'cut_image_button' => 'Bijsnijden',
     'upload_button' => 'Uploaden',
     'block_button' => 'Blokkeren',
     'unblock_button' => 'Deblokkeren',
@@ -364,12 +428,7 @@ return [
     'add_account_button' => 'Account toevoegen',
     'create_page_button' => 'Pagina toevoegen',
     'save_and_publish_button' => 'Opslaan & publiceren',
-
-    /**
-     * Texts
-     */
-    'welcome_text' => 'Welkom',
-    'minutes' => 'minuten',
+    'view_more_button' => 'Bekijk alles',
 
     /**
      * Uploader.

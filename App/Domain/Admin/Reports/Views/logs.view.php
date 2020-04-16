@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use Src\Core\Request;
+use Src\State\State;
 use Src\Translation\Translation;
 
 $request = new Request();
@@ -13,29 +14,38 @@ $request = new Request();
             <div class="card-header">
                 <div class="float-left">
                     <h4 class="card-title">
-                        Log informatie
+                        <?= Translation::get('logs_data') ?>
                     </h4>
 
                     <?php if (count($logs ?? []) < 1) : ?>
                         <p class="mt-2 font-weight-bold">
-                            Er is geen log data gevonden op
+                            <?= Translation::get('no_log_data_found') ?>
                             <?= $request->get('logDate') ?>.
                         </p>
                     <?php endif; ?>
                 </div>
 
-                <form action="#logs" class="form-inline float-right" method="get">
+                <form class="form-inline float-right" method="get"
+                      action="#logs">
                     <div class="form-group mr-2">
                         <label for="datepicker"></label>
-                        <input type="text" name="logDate"
+                        <input type="text" name="date"
                                autocomplete="off"
+                               placeholder="<?= Translation::get('form_date') ?>"
                                class="form-control" id="datepicker"
-                               value="<?= $request->get('logDate') ?>">
+                               value="<?= $request->get('date') ?>">
                     </div>
 
                     <button class="btn btn-default-small border-0">
-                        Filter
+                        <?= Translation::get('filter_button') ?>
                     </button>
+
+                    <?php if (isset($_GET['date'])) : ?>
+                        <a href="/admin/reports/logs"
+                           class="btn btn-success ml-3 border-0">
+                            <?= Translation::get('reset_button') ?>
+                        </a>
+                    <?php endif; ?>
                 </form>
             </div>
             <div class="card-body">
@@ -59,11 +69,11 @@ $request = new Request();
                                     foreach (($logs ?? []) as $key => $log) :
                                         if (strpos(
                                             $log['message'] ?? '',
-                                            'ERROR'
+                                            State::ERROR
                                         ) !== false
                                             || strpos(
                                                 $log['message'] ?? '',
-                                                'failed'
+                                                State::FAILED
                                             ) !== false) {
                                             $class = 'active-danger';
                                         } else {
@@ -111,7 +121,7 @@ $request = new Request();
                                             <li class="list-group-item <?= $class ?>">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        Bericht:
+                                                        <?= Translation::get('message') ?>:
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <?= $log['message'] ?? '' ?>
@@ -121,7 +131,7 @@ $request = new Request();
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        URL:
+                                                        <?= Translation::get('url') ?>:
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <?= $log['meta']->url ?? '' ?>
@@ -131,7 +141,7 @@ $request = new Request();
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        IP:
+                                                        <?= Translation::get('ip') ?>:
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <?= $log['meta']->ip ?? '' ?>
@@ -141,7 +151,7 @@ $request = new Request();
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        HTTP Method:
+                                                        <?= Translation::get('http_method') ?>:
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <?= $log['meta']->http_method ?? '' ?>
@@ -151,7 +161,7 @@ $request = new Request();
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        Server:
+                                                        <?= Translation::get('server') ?>:
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <?= $log['meta']->server ?? '' ?>
@@ -161,7 +171,7 @@ $request = new Request();
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        Referrer:
+                                                        <?= Translation::get('referrer') ?>:
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <?= $log['meta']->referrer ?? '' ?>
@@ -171,7 +181,7 @@ $request = new Request();
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        Process ID:
+                                                        <?= Translation::get('process_id') ?>:
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <?= $log['meta']->process_id ?? '' ?>

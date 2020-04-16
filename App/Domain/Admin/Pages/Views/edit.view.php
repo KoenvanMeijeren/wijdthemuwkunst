@@ -73,7 +73,7 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
 
                                 <button type="submit" name="remove-thumbnail"
                                         class="btn btn-danger mt-3">
-                                    Delete thumbnail
+                                    <?= Translation::get('delete_thumbnail_button') ?>
                                 </button>
                             </form>
                         <?php endif; ?>
@@ -87,7 +87,7 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                                 <button type="submit"
                                         name="delete-banner"
                                         class="btn btn-danger mt-3">
-                                    Delete banner
+                                    <?= Translation::get('delete_banner_button') ?>
                                 </button>
                             </form>
                         <?php endif; ?>
@@ -160,8 +160,7 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="inputThumbnail">
-                                    Thumbnail -
-                                    Aanbevolen grootte 350x300
+                                    <?= Translation::get('form_thumbnail_size') ?>
                                 </label>
                                 <input
                                     class="form-control form-control-file col-sm-10"
@@ -171,8 +170,7 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="inputBanner">
-                                    Banner - Aanbevolen
-                                    grootte 350x300
+                                    <?= Translation::get('form_banner_size') ?>
                                 </label>
                                 <input
                                     class="form-control form-control-file col-sm-10"
@@ -238,7 +236,7 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="modalLabel">
-                                        Foto bijsnijden
+                                        <?= Translation::get('form_cut_image') ?>
                                     </h5>
                                     <button type="button" class="close"
                                             data-dismiss="modal"
@@ -256,12 +254,12 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                                     <button type="button"
                                             class="btn btn-secondary"
                                             data-dismiss="modal">
-                                        Annuleren
+                                        <?= Translation::get('cancel_button') ?>
                                     </button>
                                     <button type="button"
                                             class="btn btn-primary"
                                             id="cropThumbnail">
-                                        Bijsnijden
+                                        <?= Translation::get('cut_image_button') ?>
                                     </button>
                                 </div>
                             </div>
@@ -275,7 +273,7 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="modalLabel">
-                                        Foto bijsnijden
+                                        <?= Translation::get('form_cut_image') ?>
                                     </h5>
                                     <button type="button" class="close"
                                             data-dismiss="modal"
@@ -293,12 +291,12 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                                     <button type="button"
                                             class="btn btn-secondary"
                                             data-dismiss="modal">
-                                        Annuleren
+                                        <?= Translation::get('cancel_button') ?>
                                     </button>
                                     <button type="button"
                                             class="btn btn-primary"
                                             id="cropBanner">
-                                        Bijsnijden
+                                        <?= Translation::get('cut_image_button') ?>
                                     </button>
                                 </div>
                             </div>

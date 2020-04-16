@@ -49,10 +49,10 @@ final class CreateAccountAction extends BaseAccountAction
      */
     protected function validate(): bool
     {
-        $this->validator->input($this->name, 'Naam')
+        $this->validator->input($this->name, Translation::get('name'))
             ->isRequired();
 
-        $this->validator->input($this->email, 'Email')
+        $this->validator->input($this->email, Translation::get('email'))
             ->isRequired()
             ->isEmail()
             ->isUnique(
@@ -63,11 +63,11 @@ final class CreateAccountAction extends BaseAccountAction
                 )
             );
 
-        $this->validator->input($this->password, 'Wachtwoord')
+        $this->validator->input($this->password, Translation::get('password'))
             ->isRequired()
             ->passwordIsEqual($this->confirmationPassword);
 
-        $this->validator->input((string)$this->rights, 'Rechten')
+        $this->validator->input((string)$this->rights, Translation::get('rights'))
             ->isRequired()
             ->isBetweenRange(
                 User::ADMIN,

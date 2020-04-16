@@ -53,10 +53,10 @@ final class UpdateAccountDataAction extends BaseAccountAction
      */
     protected function validate(): bool
     {
-        $this->validator->input($this->name, 'Naam')
+        $this->validator->input($this->name, Translation::get('name'))
             ->isRequired();
 
-        $this->validator->input((string)$this->rights, 'Rechten')
+        $this->validator->input((string)$this->rights, Translation::get('rights'))
             ->isRequired()
             ->isBetweenRange(User::ADMIN, User::DEVELOPER);
 

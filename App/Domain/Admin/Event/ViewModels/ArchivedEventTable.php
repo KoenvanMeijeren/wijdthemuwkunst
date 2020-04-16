@@ -34,7 +34,7 @@ final class ArchivedEventTable extends DataTableBuilder
         $event = new EventRepository($data);
 
         $dateTime = new EventDatetimeConverter($event->getDatetime());
-        $slug = "<a href='/concert/historie/{$event->getSlug()}' target='_blank'>{$event->getSlug()}</a>";
+        $slug = "<a href='/concerten/historie/concert/{$event->getSlug()}' target='_blank'>{$event->getSlug()}</a>";
 
         return [
             $slug,

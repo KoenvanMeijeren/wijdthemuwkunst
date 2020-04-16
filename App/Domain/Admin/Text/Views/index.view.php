@@ -20,7 +20,7 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">
-                        Tekst toevoegen
+                        <?= Translation::get('add_text_title') ?>
                     </h4>
                 </div>
                 <div class="card-body">
@@ -83,7 +83,10 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">
-                        Tekst '<?= $text->getReadableKey() ?>' bewerken
+                        <?= sprintf(
+                            Translation::get('edit_text_title'),
+                            $text->getReadableKey()
+                        ) ?>
                     </h4>
                 </div>
                 <div class="card-body">
@@ -155,7 +158,7 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title float-left">
-                    Teksten overzicht
+                    <?= Translation::get('texts_overview_title') ?>
                 </h4>
 
                 <a href="/admin/configuration/texts/text/create"

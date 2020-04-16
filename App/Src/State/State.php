@@ -12,6 +12,7 @@ abstract class State
      * @var string
      */
     public const SUCCESSFUL = 'successful';
+    public const ERROR = 'ERROR';
     public const FAILED = 'failed';
     public const FORM_VALIDATION_FAILED = 'form_validation_failed';
 }

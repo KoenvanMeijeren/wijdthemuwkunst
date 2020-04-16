@@ -1,12 +1,13 @@
 <?php
 declare(strict_types=1);
-?>
+
+use Src\Translation\Translation; ?>
 <div class="row">
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title float-left">
-                    Concerten bewerken
+                    <?= Translation::get('event_overview_title') ?>
                 </h4>
 
                 <a href="/admin/content/events/event/create"
@@ -29,7 +30,7 @@ declare(strict_types=1);
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title float-left">
-                    Concerten archief
+                    <?= Translation::get('event_archive_overview_title') ?>
                 </h4>
             </div>
             <div class="card-body">

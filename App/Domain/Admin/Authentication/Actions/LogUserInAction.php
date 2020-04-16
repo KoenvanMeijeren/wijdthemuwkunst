@@ -115,11 +115,11 @@ final class LogUserInAction extends FormAction
     {
         $validator = new FormValidator();
 
-        $validator->input($this->email, 'Email')
+        $validator->input($this->email, Translation::get('email'))
             ->isRequired()
             ->isEmail();
 
-        $validator->input($this->password, 'Wachtwoord')
+        $validator->input($this->password, Translation::get('password'))
             ->isRequired();
 
         return $validator->handleFormValidation();

@@ -70,8 +70,8 @@ abstract class BaseTextAction extends FormAction
     {
         $validator = new FormValidator();
 
-        $validator->input($this->key, 'Sleutel')->isRequired();
-        $validator->input($this->value, 'Waarde')->isRequired();
+        $validator->input($this->key, Translation::get('key'))->isRequired();
+        $validator->input($this->value, Translation::get('value'))->isRequired();
 
         // If the text already exists, and the key is not changed, allow it.
         $databaseKey = $this->textRepository->getKey();

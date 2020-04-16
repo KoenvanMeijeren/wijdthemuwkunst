@@ -14,9 +14,9 @@ $amountMessages = count($messages ?? []);
             <div class="card-header">
                 <h4 class="float-left card-title">
                     <?php if ($amountMessages === 1) : ?>
-                        <?= $amountMessages ?> contact aanvraag
+                        <?= $amountMessages . ' ' . Translation::get('contact_request') ?>
                     <?php else : ?>
-                        <?= $amountMessages ?> contact aanvragen
+                        <?= $amountMessages . ' ' . Translation::get('contact_requests') ?>
                     <?php endif; ?>
                 </h4>
 
@@ -26,19 +26,19 @@ $amountMessages = count($messages ?? []);
                         <label for="datepicker"></label>
                         <input type="text" name="date"
                                autocomplete="off"
-                               placeholder="Datum"
+                               placeholder="<?= Translation::get('form_date') ?>"
                                class="form-control" id="datepicker"
                                value="<?= $request->get('date') ?>">
                     </div>
 
                     <button class="btn btn-default-small border-0">
-                        Filter
+                        <?= Translation::get('filter_button') ?>
                     </button>
 
                     <?php if (isset($_GET['date'])) : ?>
                         <a href="/admin/content/contact-form"
                            class="btn btn-success ml-3 border-0">
-                            Reset
+                            <?= Translation::get('reset_button') ?>
                         </a>
                     <?php endif; ?>
                 </form>
@@ -48,7 +48,7 @@ $amountMessages = count($messages ?? []);
                     <?php if ($amountMessages < 1) : ?>
                         <div class="col-md-12">
                             <p class="mt-2 font-weight-bold">
-                                Er zijn geen contact aanvragen.
+                                <?= Translation::get('no_contact_requests_available') ?>
                             </p>
                         </div>
                     <?php endif; ?>
@@ -83,7 +83,7 @@ $amountMessages = count($messages ?? []);
                                                     <?= $message->getName() ?>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <?= $date ?> om
+                                                    <?= $date ?> -
                                                     <?= $message->convertDateTime()->toTime() ?>
                                                 </div>
                                             </div>
@@ -98,7 +98,6 @@ $amountMessages = count($messages ?? []);
                                 <?php $active = 'active';
                                 foreach (($messages ?? []) as $key => $singleMessage) :
                                     $message = new ContactFormRepository($singleMessage);
-                                    $date = $message->convertDateTime()->toFormattedDate();
                                     ?>
                                     <div
                                         class="tab-pane fade show <?= $active ?>"
@@ -117,7 +116,7 @@ $amountMessages = count($messages ?? []);
 
                                                     <button type="submit"
                                                             class="btn border-0 btn-danger"
-                                                            onclick="return confirm('Weet je zeker dat je deze contact aanvraag wilt verwijderen?')"
+                                                            onclick="return confirm('<?= Translation::get('delete_contact_request_confirmation_message') ?>')"
                                                     >
                                                         <i class="fas fa-trash-alt"
                                                            aria-hidden="true"></i>
@@ -130,7 +129,7 @@ $amountMessages = count($messages ?? []);
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        Naam:
+                                                        <?= Translation::get('form_name') ?>:
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <?= $message->getName() ?>
@@ -140,7 +139,7 @@ $amountMessages = count($messages ?? []);
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        Email:
+                                                        <?= Translation::get('form_email') ?>:
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <?= $message->getEmail() ?>
@@ -150,7 +149,7 @@ $amountMessages = count($messages ?? []);
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        Bericht:
+                                                        <?= Translation::get('form_message') ?>:
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <?= $message->getMessage() ?>

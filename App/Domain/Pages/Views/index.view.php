@@ -60,7 +60,7 @@ if ($home->getThumbnail() !== ''
                     ?>
                     <div class="col-md-4">
                         <div class="card">
-                            <a href="/concert/<?= $event->getSlug() ?>"
+                            <a href="/concerten/concert/<?= $event->getSlug() ?>"
                                class="link-without-styling">
                                 <img class="card-img-top"
                                      alt="<?= $event->getTitle() ?> thumbnail"

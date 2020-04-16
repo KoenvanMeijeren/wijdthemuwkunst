@@ -37,7 +37,7 @@ final class UpdateAccountEmailAction extends BaseAccountAction
             return true;
         }
 
-        $this->validator->input($this->email, 'Email')
+        $this->validator->input($this->email, Translation::get('email'))
             ->isEmail()
             ->isUnique(
                 $this->account->getByEmail($this->email),
