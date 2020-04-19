@@ -14,12 +14,32 @@ final class Breadcrumbs
     protected array $urlParts = [];
     protected array $breadCrumbs = [];
 
+    protected array $blacklist = [
+        'concert',
+        'setting',
+        'text',
+        'user',
+        'item',
+        'event',
+        'page',
+        'edit'
+    ];
+
     public function __construct()
     {
         $this->url = URI::getUrl();
         $this->urlParts = explode('/', $this->url);
-
         $this->setBreadcrumbs();
+
+        $breadcrumbsKeys = array_keys($this->breadCrumbs);
+        foreach ($this->blacklist as $item) {
+            $match = array_search($item, $breadcrumbsKeys, true);
+
+            if ($match !== false) {
+                $breadcrumbsKey = $breadcrumbsKeys[$match];
+                unset($this->breadCrumbs[$breadcrumbsKey]);
+            }
+        }
     }
 
     private function setBreadcrumbs(): void
@@ -60,8 +80,12 @@ final class Breadcrumbs
         return "<li><a class='mr-2' href='{$url}'>{$title}</a></li>";
     }
 
-    public function visible(): bool
+    public function visible(int $minimum = null): bool
     {
+        if ($minimum !== null) {
+            return count($this->urlParts) > $minimum;
+        }
+
         return count($this->urlParts) > self::MINIMUM_AMOUNT_OF_BREADCRUMBS;
     }
 }
