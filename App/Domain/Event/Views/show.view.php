@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use App\Domain\Admin\Event\Repositories\EventRepository;
+use App\System\Breadcrumbs\Breadcrumbs;
 use Src\Core\Request;
 
 $request = new Request();
@@ -10,6 +11,7 @@ $documentRoot = $request->server(Request::DOCUMENT_ROOT);
 
 /** @var EventRepository $event */
 $event = $eventRepo ?? null;
+$breadcrumbs = new Breadcrumbs();
 ?>
 
 <?php if ($event->getBanner() !== ''
@@ -34,6 +36,14 @@ $event = $eventRepo ?? null;
 
 <div class="container page">
     <div class="mt-5 mb-5">
+        <?php if ($breadcrumbs->visible(0)) : ?>
+            <div class="row breadcrumbs">
+                <div class="col-sm-12">
+                    <?= $breadcrumbs->generate() ?>
+                </div>
+            </div>
+        <?php endif; ?>
+
         <div class="row">
             <div class="col">
                 <h1>
