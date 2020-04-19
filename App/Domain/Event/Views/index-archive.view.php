@@ -2,15 +2,25 @@
 
 use App\Domain\Admin\Event\Repositories\EventRepository;
 use App\Domain\Admin\Text\Models\Text;
+use App\System\Breadcrumbs\Breadcrumbs;
 use Src\Translation\Translation;
 
 /** @var EventRepository $eventRepository */
 $eventRepository = $eventRepo ?? null;
 $text = new Text();
+$breadcrumbs = new Breadcrumbs();
 ?>
 
 <div class="container page">
     <div class="mt-5 mb-5">
+        <?php if ($breadcrumbs->visible(0)) : ?>
+            <div class="row breadcrumbs">
+                <div class="col-sm-12">
+                    <?= $breadcrumbs->generate() ?>
+                </div>
+            </div>
+        <?php endif; ?>
+
         <div class="events-content">
             <?= parseHtmlEntities($eventRepository->getContent()) ?>
         </div>

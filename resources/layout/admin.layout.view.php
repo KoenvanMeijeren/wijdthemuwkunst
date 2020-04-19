@@ -1,5 +1,6 @@
 <?php
 
+use App\System\Breadcrumbs\Breadcrumbs;
 use Domain\Admin\Accounts\Account\Support\AccountRightsConverter;
 use Domain\Admin\Accounts\User\Models\User;
 use Src\Core\Request;
@@ -10,6 +11,7 @@ use Support\Resource;
 $user = new User();
 $rights = new AccountRightsConverter($user->getRights());
 $request = new Request();
+$breadcrumbs = new Breadcrumbs();
 ?>
 <!DOCTYPE html>
 <html lang="<?= Translation::DUTCH_LANGUAGE_CODE ?>">
@@ -54,7 +56,8 @@ $request = new Request();
 
     <?php if (!$user->isLoggedIn()) : ?>
         <!-- Login CSS -->
-        <link rel="stylesheet" type="text/css" href="/adminResources/css/login.css">
+        <link rel="stylesheet" type="text/css"
+              href="/adminResources/css/login.css">
     <?php endif; ?>
 
     <!-- Customized theme css -->
@@ -66,7 +69,9 @@ $request = new Request();
         referrerpolicy="origin"></script>
 
     <!-- Cropper JS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.1/cropper.min.css" rel="stylesheet">
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.1/cropper.min.css"
+        rel="stylesheet">
 </head>
 <body>
 <?php if ($user->isLoggedIn()) : ?>
@@ -186,6 +191,14 @@ $request = new Request();
                     <div class="container-fluid">
                         <?php Resource::loadFlashMessage(); ?>
 
+                        <?php if ($breadcrumbs->visible()) : ?>
+                            <div class="row breadcrumbs">
+                                <div class="col-sm-12">
+                                    <?= $breadcrumbs->generate() ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
                         <?= $content ?? '' ?>
                     </div>
                 </div>
@@ -252,7 +265,8 @@ $request = new Request();
         src="/adminResources/js/progress-bar.js"></script>
 
 <!-- Cropper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.1/cropper.min.js"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.1/cropper.min.js"></script>
 
 <!-- Default JS -->
 <script type="text/javascript" charset="utf8"

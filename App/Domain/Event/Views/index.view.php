@@ -99,7 +99,7 @@ $text = new Text();
 
             <?php if (isset($amount_of_events) && (int) $amount_of_events > 3) : ?>
                 <div class="col-md-12 text-center">
-                    <a class="button" href="/concerten-historie">
+                    <a class="button" href="/concerten/historie">
                         <?= $text->get(
                             'bekijk_alles_knop',
                             Translation::get('view_more_button')
