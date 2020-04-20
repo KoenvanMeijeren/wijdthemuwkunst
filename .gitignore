@@ -9,4 +9,5 @@
 
 .php_cs.cache
 .env
-.env.*
+.env.development
+.env.production
