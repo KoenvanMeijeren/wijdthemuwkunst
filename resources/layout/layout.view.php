@@ -41,7 +41,7 @@ $menuItems = $menu->getAll();
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
     <!-- Font awesome -->
-    <script src="https://kit.fontawesome.com/ec953a682d.js"
+    <script src="https://kit.fontawesome.com/<?= $request->env('font_awesome_key') ?>.js"
             crossorigin="anonymous"></script>
 
     <!-- Font -->
