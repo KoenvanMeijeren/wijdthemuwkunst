@@ -8,6 +8,6 @@
 /public_html/storage
 
 .php_cs.cache
-
-# .env files
 .env
+.env.development
+.env.production
