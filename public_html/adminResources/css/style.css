@@ -335,9 +335,10 @@ tr.shown td.details-control:before {
 
 /* Style the list */
 ul.breadcrumb {
-    padding: 10px 16px;
     list-style: none;
-    background-color: #eee;
+    padding: 0;
+    background-color: unset;
+    margin-bottom: 0.5rem;
 }
 
 /* Display list items side by side */

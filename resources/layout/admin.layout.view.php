@@ -193,8 +193,12 @@ $breadcrumbs = new Breadcrumbs();
 
                         <?php if ($breadcrumbs->visible()) : ?>
                             <div class="row breadcrumbs">
-                                <div class="col-sm-12">
-                                    <?= $breadcrumbs->generate() ?>
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <?= $breadcrumbs->generate() ?>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         <?php endif; ?>
