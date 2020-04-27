@@ -26,58 +26,23 @@ $breadcrumbs = new Breadcrumbs();
 
     <!-- Fav icon -->
     <link rel="icon" type="image/png" sizes="96x96"
-          href="/adminResources/images/favicon/favicon-96x96.png">
-
-    <!-- Bootstrap -->
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-
-    <!-- Font awesome -->
-    <script src="https://kit.fontawesome.com/<?= $request->env('font_awesome_key') ?>.js"
-            crossorigin="anonymous"></script>
+          href="/themes/cms_theme/src/images/favicon/favicon-96x96.png">
 
     <!-- Theme css -->
     <link rel="stylesheet" type="text/css"
-          href="/vendor/cms-theme/css/light-bootstrap-dashboard.css">
-
-    <!-- Data tables -->
-    <link rel="stylesheet" type="text/css"
-          href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
-
-    <!-- Datepicker -->
-    <link rel="stylesheet" type="text/css"
-          href="/vendor/datepicker/css/datepicker.css">
-
-    <!-- Clockpicker -->
-    <link rel="stylesheet" type="text/css"
-          href="/vendor/clockpicker/css/clockpicker-bootstrap.css">
-    <link rel="stylesheet" type="text/css"
-          href="/vendor/clockpicker/css/clockpicker.css">
+          href="/themes/cms_theme/dist/css/toolkit.min.css">
 
     <?php if (!$user->isLoggedIn()) : ?>
         <!-- Login CSS -->
         <link rel="stylesheet" type="text/css"
-              href="/adminResources/css/login.css">
+              href="/themes/cms_theme/src/css/login.css">
     <?php endif; ?>
-
-    <!-- Customized theme css -->
-    <link rel="stylesheet" type="text/css" href="/adminResources/css/style.css">
-
-    <!-- Tiny MCE -->
-    <script
-        src="https://cdn.tiny.cloud/1/<?= $request->env('tiny_mce_key') ?>/tinymce/5/tinymce.min.js"
-        referrerpolicy="origin"></script>
-
-    <!-- Cropper JS -->
-    <link
-        href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.1/cropper.min.css"
-        rel="stylesheet">
 </head>
 <body>
 <?php if ($user->isLoggedIn()) : ?>
     <div class="wrapper">
         <div class="sidebar" data-color="orange"
-             data-image="/vendor/cms-theme/img/sidebar-5.jpg">
+             data-image="/themes/cms_theme/src/images/sidebar-5.jpg">
             <div class="sidebar-wrapper">
                 <ul class="nav">
                     <?php if ($user->getRights() >= User::ADMIN) : ?>
@@ -217,63 +182,13 @@ $breadcrumbs = new Breadcrumbs();
     </div>
 <?php endif; ?>
 
-<!-- Jquery -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-        crossorigin="anonymous"></script>
-
-<!-- Bootstrap -->
-<script
-    src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
-<!-- Data tables -->
-<script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-<script type="text/javascript" charset="utf8"
-        src="/adminResources/js/datatables.js"></script>
-
-<!-- Datepicker -->
-<script type="text/javascript" charset="utf8"
-        src="/vendor/datepicker/js/datepicker.js"></script>
-
-<!-- Clock picker -->
-<script type="text/javascript" charset="utf8"
-        src="/vendor/clockpicker/js/clockpicker-jquery.js"></script>
-<script type="text/javascript" charset="utf8"
-        src="/vendor/clockpicker/js/clockpicker.js"></script>
-
-<!-- Password strength indicator -->
-<script type="text/javascript" charset="utf8"
-        src="/vendor/password-strength-indicator/zxcvbn.js"></script>
-<script type="text/javascript" charset="utf8"
-        src="/adminResources/js/password-strength-indicator.js"></script>
-
-<!-- Progress bar -->
-<script type="text/css" charset="utf8"
-        src="/adminResources/css/progress-bar.css"></script>
-
-<!-- Theme js -->
-<script type="text/javascript" charset="utf8"
-        src="/vendor/cms-theme/js/light-bootstrap-dashboard.js"></script>
-<script type="text/javascript" charset="utf8"
-        src="/vendor/cms-theme/js/plugins/bootstrap-notify.js"></script>
-
-<!-- Initialize the Tiny Mce editor -->
-<script type="text/javascript" charset="utf8"
-        src="/js/tinymce/tinymce.js"></script>
-
-<!-- Progress bar -->
-<script type="text/javascript" charset="utf8"
-        src="/adminResources/js/progress-bar.js"></script>
-
-<!-- Cropper JS -->
-<script
-    src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.1/cropper.min.js"></script>
-
-<!-- Default JS -->
-<script type="text/javascript" charset="utf8"
-        src="/adminResources/js/default.js"></script>
+<script src="/themes/cms_theme/dist/js/main.min.js"></script>
+<script src="/themes/cms_theme/dist/js/fontawesome.min.js"></script>
+<script src="/themes/cms_theme/dist/js/datatables.min.js"></script>
+<script src="/themes/cms_theme/dist/js/datepicker.min.js"></script>
+<script src="/themes/cms_theme/dist/js/clockpicker.min.js"></script>
+<script src="/themes/cms_theme/dist/js/password-strength-indicator.min.js"></script>
+<script src="/themes/cms_theme/dist/js/tinymce.min.js"></script>
+<script src="/themes/cms_theme/dist/js/cropper.min.js"></script>
 </body>
 </html>
