@@ -6,25 +6,26 @@ namespace App\Domain\Admin\ContactForm\Controller;
 
 use App\Domain\Admin\ContactForm\Actions\DeleteContactFormMessageAction;
 use App\Domain\Admin\ContactForm\Model\ContactForm;
-use Src\Core\Request;
+use App\System\Controller\AdminControllerBase;
 use Src\Response\Redirect;
 use Src\Translation\Translation;
 use Src\View\DomainView;
 
-final class ContactFormController
+final class ContactFormController extends AdminControllerBase
 {
     private ContactForm $contactForm;
-
-    private string $baseViewPath = 'Admin/ContactForm/Views/';
+    protected string $baseViewPath = 'Admin/ContactForm/Views/';
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->contactForm = new ContactForm();
     }
 
     public function index(): DomainView
     {
-        return new DomainView($this->baseViewPath . 'index', [
+        return $this->view('index', [
             'title' => Translation::get('admin_contact_form_title'),
             'messages' => $this->contactForm->getAll(),
         ]);
@@ -32,12 +33,10 @@ final class ContactFormController
 
     public function showByDate(): DomainView
     {
-        $request = new Request();
-
-        return new DomainView($this->baseViewPath . 'index', [
+        return $this->view('index', [
             'title' => Translation::get('admin_contact_form_title'),
             'messages' => $this->contactForm->getByDate(
-                $request->get('date')
+                $this->request->get('date')
             ),
         ]);
     }

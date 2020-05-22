@@ -135,22 +135,38 @@ final class User extends Model
      */
     private function authorizeUser()
     {
-        $logout = new LogUserOutAction($this);
         $session = new Session();
         $idEncryption = new IDEncryption();
 
         $rights = $this->getRights();
-        if ($rights < self::GUEST
-            || $rights > self::DEVELOPER
-            || (int) ($this->account->account_is_blocked ?? '0') === 1
-            || !$idEncryption->validateHash(
-                $this->account->account_login_token ?? '',
-                $session->get('userID')
-            )
-        ) {
-            $logout->execute();
-
-            return new Redirect('/admin');
+        if ($rights > self::GUEST && $rights < self::DEVELOPER) {
+            return;
         }
+
+        if (! (bool) ($this->account->account_is_blocked ?? true)) {
+            return;
+        }
+
+        if ($idEncryption->validateHash(
+            $this->account->account_login_token ?? '',
+            $session->get('userID')
+        )) {
+            return;
+        }
+
+        return $this->logout();
+    }
+
+    /**
+     * Log the current user out and redirect to the log in page.
+     *
+     * @return Redirect
+     */
+    public function logout(): Redirect
+    {
+        $logout = new LogUserOutAction($this);
+        $logout->execute();
+
+        return new Redirect('/admin');
     }
 }

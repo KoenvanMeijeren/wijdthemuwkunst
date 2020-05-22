@@ -34,7 +34,7 @@ final class Resource
 
         return '<div class="table-edit-row flex">
                     <a href="' . $editAction . '"
-                       class="btn btn-success flex-child edit-button"
+                       class="btn btn-outline-success table-edit-button"
                        data-toggle="tooltip"
                        data-placement="top"
                        title="' . Translation::get('table_row_edit') . '">
@@ -44,7 +44,7 @@ final class Resource
                     <form method="post"
                           action="' . $destroyAction . '">
                           ' . CSRF::insertToken($destroyAction) . '
-                        <button class="btn btn-danger flex-child edit-button ' . $removeBorder . '"
+                        <button class="btn btn-outline-danger table-edit-button ' . $removeBorder . '"
                                 type="submit"
                                 data-toggle="tooltip"
                                 data-placement="top"
@@ -64,7 +64,7 @@ final class Resource
         string $action,
         string $actionTitle,
         string $icon,
-        string $classes = 'btn-primary',
+        string $classes = 'btn-outline-primary',
         string $actionWarningMessage = '',
         bool $disableAction = false
     ): string {
@@ -80,7 +80,7 @@ final class Resource
         return '<form method="post"
                           action="' . $action . '">
                           ' . CSRF::insertToken($action) . '
-                        <button class="btn '.$classes.' flex-child edit-button"
+                        <button class="btn '.$classes.' table-edit-button"
                                 type="submit"
                                 data-toggle="tooltip"
                                 data-placement="top"
@@ -100,7 +100,7 @@ final class Resource
         string $icon
     ): string {
         return '<a href="' . $action . '"
-                       class="btn btn-success flex-child edit-button"
+                       class="btn btn-outline-success table-edit-button"
                        data-toggle="tooltip"
                        data-placement="top"
                        title="' . $actionTitle . '">

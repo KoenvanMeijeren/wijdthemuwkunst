@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\Account\Controllers;
 
+use App\System\Controller\AdminControllerBase;
 use Domain\Admin\Accounts\Account\Actions\BlockAccountAction;
 use Domain\Admin\Accounts\Account\Actions\CreateAccountAction;
 use Domain\Admin\Accounts\Account\Actions\DeleteAccountAction;
@@ -19,15 +20,17 @@ use Src\Response\Redirect;
 use Src\Translation\Translation;
 use Src\View\DomainView;
 
-final class AccountController
+final class AccountController extends AdminControllerBase
 {
-    private Account $account;
+    protected string $baseViewPath = 'Admin/Accounts/Account/Views/';
 
-    private string $baseViewPath = 'Admin/Accounts/Account/Views/';
+    private Account $account;
     private string $redirectBack = '/admin/account';
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->account = new Account();
     }
 
@@ -35,7 +38,7 @@ final class AccountController
     {
         $accountTable = new AccountTable($this->account->all());
 
-        return new DomainView($this->baseViewPath . 'index', [
+        return $this->view('index', [
             'title' => Translation::get('admin_account_title'),
             'accounts' => $accountTable->get()
         ]);
@@ -43,7 +46,7 @@ final class AccountController
 
     public function create(): DomainView
     {
-        return new DomainView($this->baseViewPath . 'create', [
+        return $this->view('create', [
             'title' => Translation::get('admin_create_account_title')
         ]);
     }
@@ -72,7 +75,7 @@ final class AccountController
             $account->find($account->getId())
         );
 
-        return new DomainView($this->baseViewPath . 'edit', [
+        return $this->view('edit', [
             'title' => Translation::get('admin_edit_account_title'),
             'account' => $accountViewModel->get()
         ]);

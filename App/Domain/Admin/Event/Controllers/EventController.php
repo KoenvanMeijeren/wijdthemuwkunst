@@ -18,20 +18,23 @@ use App\Domain\Admin\Event\Repositories\EventRepository;
 use App\Domain\Admin\Event\ViewModels\ArchivedEventTable;
 use App\Domain\Admin\Event\ViewModels\EditViewModel;
 use App\Domain\Admin\Event\ViewModels\EventTable;
+use App\System\Controller\AdminControllerBase;
 use Src\Response\Redirect;
 use Src\Translation\Translation;
 use Src\View\DomainView;
 
-final class EventController
+final class EventController extends AdminControllerBase
 {
     private Event $event;
 
-    private string $baseViewPath = 'Admin/Event/Views/';
+    protected string $baseViewPath = 'Admin/Event/Views/';
     private string $redirectBack = '/admin/content/events';
     private string $redirectSame = '/admin/content/events/event/edit/';
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->event = new Event();
     }
 
@@ -44,7 +47,7 @@ final class EventController
             $this->event->getAllArchived()
         );
 
-        return new DomainView($this->baseViewPath . 'index', [
+        return $this->view('index', [
             'title' => Translation::get('admin_event_title'),
             'events' => $eventTable->get(),
             'archived_events' => $archivedEventTable->get('archive-table'),
@@ -53,7 +56,7 @@ final class EventController
 
     public function create(): DomainView
     {
-        return new DomainView($this->baseViewPath . 'edit', [
+        return $this->view('edit', [
             'title' => Translation::get('admin_create_event_title')
         ]);
     }
@@ -82,7 +85,7 @@ final class EventController
         );
         $eventRepository = new EventRepository($event->get());
 
-        return new DomainView($this->baseViewPath . 'edit', [
+        return $this->view('edit', [
             'title' => sprintf(
                 Translation::get('admin_edit_event_title'),
                 $eventRepository->getTitle()

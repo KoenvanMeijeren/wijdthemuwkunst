@@ -1,0 +1,17 @@
+.alert-top-right {
+    display: inline-block;
+    margin: 0 auto;
+    position: fixed;
+    transition: all 0.5s ease-in-out 0s;
+    z-index: 1031;
+    top: 90px;
+    right: 20px;
+}
+
+.alert-button-center-right {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -13px;
+    z-index: 1033;
+}

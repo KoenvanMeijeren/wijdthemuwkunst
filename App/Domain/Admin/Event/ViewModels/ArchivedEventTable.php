@@ -56,13 +56,13 @@ final class ArchivedEventTable extends DataTableBuilder
             '/admin/content/events/event/activate/' . $event->getId(),
             'Activeren',
             'fas fa-history',
-            'btn-success'
+            'btn-outline-success'
         );
         $actions .= Resource::addTableButtonActionColumn(
             '/admin/content/events/event/delete/' . $event->getId(),
             Translation::get('table_row_delete'),
             'fas fa-trash-alt',
-            'btn-danger',
+            'btn-outline-danger',
             Translation::get('delete_event_confirmation_message')
         );
         $actions .= '</div>';

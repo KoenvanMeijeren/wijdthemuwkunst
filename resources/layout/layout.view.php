@@ -131,7 +131,7 @@ $menuItems = $menu->getAll();
     </div>
 </section>
 
-<script type="text/javascript" src="/themes/whuk_theme/dist/js/fontawesome.min.js"></script>
 <script type="text/javascript" src="/themes/whuk_theme/dist/js/main.min.js"></script>
+<script type="text/javascript" src="/themes/whuk_theme/dist/js/fontawesome.min.js"></script>
 </body>
 </html>

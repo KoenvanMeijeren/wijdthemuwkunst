@@ -9,41 +9,44 @@ $request = new Request();
 $amountMessages = count($messages ?? []);
 ?>
 <div class="row">
-    <div class="col-sm-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="float-left card-title">
-                    <?php if ($amountMessages === 1) : ?>
-                        <?= $amountMessages . ' ' . Translation::get('contact_request') ?>
-                    <?php else : ?>
-                        <?= $amountMessages . ' ' . Translation::get('contact_requests') ?>
-                    <?php endif; ?>
-                </h4>
-
-                <form class="form-inline float-right" method="get"
-                      action="/admin/content/contact-form/filter">
-                    <div class="form-group mr-2">
-                        <label for="datepicker"></label>
-                        <input type="text" name="date"
-                               autocomplete="off"
-                               placeholder="<?= Translation::get('form_date') ?>"
-                               class="form-control" id="datepicker"
-                               value="<?= $request->get('date') ?>">
-                    </div>
-
-                    <button class="btn btn-default-small border-0">
-                        <?= Translation::get('filter_button') ?>
-                    </button>
-
-                    <?php if (isset($_GET['date'])) : ?>
-                        <a href="/admin/content/contact-form"
-                           class="btn btn-success ml-3 border-0">
-                            <?= Translation::get('reset_button') ?>
-                        </a>
-                    <?php endif; ?>
-                </form>
-            </div>
+    <div class="col-xl-12 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
             <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col-md-12 mr-2 mb-4">
+                        <div class="text-lg font-weight-bold text-primary text-uppercase mb-1 float-left">
+                            <?php if ($amountMessages === 1) : ?>
+                                <?= $amountMessages . ' ' . Translation::get('contact_request') ?>
+                            <?php else : ?>
+                                <?= $amountMessages . ' ' . Translation::get('contact_requests') ?>
+                            <?php endif; ?>
+                        </div>
+
+                        <form class="form-inline float-right" method="get"
+                              action="/admin/content/contact-form/filter">
+                            <div class="form-group mr-2">
+                                <label for="unlimited-datepicker"></label>
+                                <input type="text" name="date"
+                                       autocomplete="off"
+                                       placeholder="<?= Translation::get('form_date') ?>"
+                                       class="form-control" id="unlimited-datepicker"
+                                       value="<?= $request->get('date') ?>">
+                            </div>
+
+                            <button class="btn btn-outline-primary">
+                                <?= Translation::get('filter_button') ?>
+                            </button>
+
+                            <?php if (isset($_GET['date'])) : ?>
+                                <a href="/admin/content/contact-form"
+                                   class="btn btn-outline-danger ml-3">
+                                    <?= Translation::get('reset_button') ?>
+                                </a>
+                            <?php endif; ?>
+                        </form>
+                    </div>
+                </div>
+
                 <div class="row">
                     <?php if ($amountMessages < 1) : ?>
                         <div class="col-md-12">
@@ -56,13 +59,12 @@ $amountMessages = count($messages ?? []);
                     <?php if ($amountMessages > 0) : ?>
                         <div class="col-sm-4">
                             <div class="form-label-group">
-                                <input type="text" id="searchLog"
-                                       class="form-control"
-                                       autocomplete="off"
-                                       placeholder="Search">
-                                <label for="searchLog">
+                                <label for="searchLog" class="visually-hidden">
                                     <b><?= Translation::get('form_search') ?></b>
                                 </label>
+                                <input type="text" id="searchLog"
+                                       class="form-control mb-2"
+                                       autocomplete="off" placeholder="Zoeken">
                             </div>
 
                             <div class="scrollbox-vertical h-500">
@@ -115,7 +117,7 @@ $amountMessages = count($messages ?? []);
                                                     <?= CSRF::insertToken('/admin/content/contact-form/delete/' . $message->getId()) ?>
 
                                                     <button type="submit"
-                                                            class="btn border-0 btn-danger"
+                                                            class="btn border-0 btn-outline-danger"
                                                             onclick="return confirm('<?= Translation::get('delete_contact_request_confirmation_message') ?>')"
                                                     >
                                                         <i class="fas fa-trash-alt"

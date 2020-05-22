@@ -7,15 +7,16 @@ namespace Domain\Admin\Reports\Controllers;
 use App\Domain\Admin\Reports\Src\Logs;
 use App\Domain\Admin\Reports\Src\PhpInfo;
 use App\Domain\Admin\Reports\Src\SuperGlobals;
+use App\System\Controller\AdminControllerBase;
 use Cake\Chronos\Chronos;
 use Src\Core\Env;
 use Src\Core\Request;
 use Src\Translation\Translation;
 use Src\View\DomainView;
 
-final class ReportsController
+final class ReportsController extends AdminControllerBase
 {
-    private string $baseViewPath = 'Admin/Reports/Views/';
+    protected string $baseViewPath = 'Admin/Reports/Views/';
 
     public function application(): DomainView
     {
@@ -23,7 +24,7 @@ final class ReportsController
         $phpInfo = new PhpInfo();
         $superGlobals = new SuperGlobals();
 
-        return new DomainView($this->baseViewPath . 'application', [
+        return $this->view('application', [
             'title' => Translation::get('admin_reports_application_title'),
             'env' => $env->get(),
             'headerDataTable' => $superGlobals->getHeadersInformation(),
@@ -37,7 +38,7 @@ final class ReportsController
         $request = new Request();
         $logs = new Logs();
 
-        $date = $request->get('logDate');
+        $date = $request->get('date');
         $arrayDate = explode('-', $date);
         if (!checkdate(
             (int)($arrayDate[1] ?? 0),
@@ -48,7 +49,7 @@ final class ReportsController
             $date = $date->toDateString();
         }
 
-        return new DomainView($this->baseViewPath . 'logs', [
+        return $this->view('logs', [
             'title' => Translation::get('admin_reports_logs_title'),
             'logs' => $logs->get($date),
         ]);
@@ -58,7 +59,7 @@ final class ReportsController
     {
         $superGlobals = new SuperGlobals();
 
-        return new DomainView($this->baseViewPath . 'storage', [
+        return $this->view('storage', [
             'title' => Translation::get('admin_reports_storage_title'),
             'sessionDataTable' => $superGlobals->getSessionInformation(),
             'cookieDataTable' => $superGlobals->getCookieInformation(),

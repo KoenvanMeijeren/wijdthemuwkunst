@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use App\Domain\Admin\Cms\Structure\Controllers\StructureController;
+use App\Domain\Admin\Cms\Structure\Controllers\StructureControllerBase;
 use App\Domain\Admin\ContactForm\Controller\ContactFormController;
 use App\Domain\Admin\Menu\Controllers\MenuController;
 use App\Domain\Admin\Text\Controllers\TextController;
@@ -9,12 +9,12 @@ use App\Domain\Contact\Controllers\ContactController;
 use App\Domain\Event\Controllers\EventArchiveController;
 use App\Domain\Event\Controllers\EventController;
 use Domain\Admin\Accounts\Account\Controllers\AccountController;
-use Domain\Admin\Accounts\User\Controllers\UserAccountController;
+use Domain\Admin\Accounts\User\Controllers\UserAccountControllerBase;
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Authentication\Controllers\AuthenticationController;
 use Domain\Admin\Event\Controllers\EventController as AdminEventController;
 use Domain\Admin\File\Controllers\UploadFileController;
-use Domain\Admin\Pages\Controllers\PageController as AdminPageController;
+use Domain\Admin\Pages\Controllers\PageControllerBase as AdminPageController;
 use Domain\Admin\Reports\Controllers\ReportsController;
 use Domain\Admin\Settings\Controllers\SettingsControllers;
 use Domain\Pages\Controllers\PageController;
@@ -67,15 +67,15 @@ Router::prefix('admin')->group(static function () {
     /**
      * System routes.
      */
-    Router::get('dashboard', StructureController::class,
+    Router::get('dashboard', StructureControllerBase::class,
         'index', User::ADMIN);
-    Router::get('content', StructureController::class,
+    Router::get('content', StructureControllerBase::class,
         'content', User::ADMIN);
-    Router::get('structure', StructureController::class,
+    Router::get('structure', StructureControllerBase::class,
         'structure', User::ADMIN);
-    Router::get('configuration', StructureController::class,
+    Router::get('configuration', StructureControllerBase::class,
         'configuration', User::ADMIN);
-    Router::get('reports', StructureController::class,
+    Router::get('reports', StructureControllerBase::class,
         'reports', User::DEVELOPER);
 
     /**
@@ -257,11 +257,11 @@ Router::prefix('admin')->group(static function () {
      * User account routes.
      */
     Router::prefix('user/account')->group(function () {
-        Router::get('', UserAccountController::class,
+        Router::get('', UserAccountControllerBase::class,
             'index', User::ADMIN);
-        Router::post('store/data', UserAccountController::class,
+        Router::post('store/data', UserAccountControllerBase::class,
             'storeData', User::ADMIN);
-        Router::post('store/password', UserAccountController::class,
+        Router::post('store/password', UserAccountControllerBase::class,
             'storePassword', User::ADMIN);
     });
 

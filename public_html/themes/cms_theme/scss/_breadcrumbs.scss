@@ -1,0 +1,69 @@
+.breadcrumbs {
+    list-style: none;
+    overflow: hidden;
+    font-size: 18px;
+    padding: 0;
+
+    li {
+        float: left;
+
+        a {
+            color: $white;
+            text-decoration: none;
+            padding: 10px 0 10px 55px;
+            background: $warning;
+            background: hsla(45, 100%, 51%, 1);
+            position: relative;
+            display: block;
+            float: left;
+
+            &:hover {
+                color: $black;
+            }
+
+            &:before {
+                content: " ";
+                display: block;
+                width: 0;
+                height: 0;
+                border-top: 50px solid transparent; /* Go big on the size, and let overflow hide */
+                border-bottom: 50px solid transparent;
+                border-left: 30px solid $white;
+                position: absolute;
+                top: 50%;
+                margin-top: -50px;
+                margin-left: 1px;
+                left: 100%;
+                z-index: 1;
+            }
+
+            &:after {
+                content: " ";
+                display: block;
+                width: 0;
+                height: 0;
+                border-top: 50px solid transparent; /* Go big on the size, and let overflow hide */
+                border-bottom: 50px solid transparent;
+                border-left: 30px solid hsla(45, 100%, 51%, 1);
+                position: absolute;
+                top: 50%;
+                margin-top: -50px;
+                left: 100%;
+                z-index: 2;
+            }
+        }
+
+        &:first-child a {
+            padding-left: 10px;
+        }
+
+        &:last-child a {
+            background: darken($warning, 5%);
+            background: darken(hsla(45, 100%, 51%, 1), 5%);
+
+            &:after {
+                border-left: 30px solid darken(hsla(45, 100%, 51%, 1), 5%);
+            }
+        }
+    }
+}

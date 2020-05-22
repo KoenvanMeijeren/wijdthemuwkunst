@@ -1,0 +1,23 @@
+.table {
+    &-edit-row {
+        display: flex;
+        flex: 0 0 150px;
+    }
+
+    &-edit-button {
+        flex: 0 0 50px;
+        text-align: center;
+        margin-right: 5px;
+        width: 45px;
+    }
+
+    .row-warning, .row-warning:hover {
+        background-color: $danger !important;
+        color: $white !important;
+
+        .btn {
+            color: $white !important;
+            border-color: $white !important;
+        }
+    }
+}

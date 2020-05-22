@@ -8,58 +8,59 @@ use Src\Translation\Translation;
 $request = new Request();
 ?>
 
-<div class="row" id="logs">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <div class="float-left">
-                    <h4 class="card-title">
-                        <?= Translation::get('logs_data') ?>
-                    </h4>
+<div class="row">
+    <div class="col-md-12 mb-4">
+        <div class="card border-left-warning shadow py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col-md-12 mr-2 mb-4">
+                        <div
+                            class="text-lg font-weight-bold text-primary text-uppercase mb-1 float-left">
+                            <?= Translation::get('logs_data') ?>
+                        </div>
 
-                    <?php if (count($logs ?? []) < 1) : ?>
-                        <p class="mt-2 font-weight-bold">
-                            <?= Translation::get('no_log_data_found') ?>
-                            <?= $request->get('logDate') ?>.
-                        </p>
-                    <?php endif; ?>
+                        <form class="form-inline float-right" method="get">
+                            <div class="form-group mr-2">
+                                <label for="unlimited-datepicker"></label>
+                                <input type="text" name="date"
+                                       autocomplete="off"
+                                       placeholder="<?= Translation::get('form_date') ?>"
+                                       class="form-control"
+                                       id="unlimited-datepicker"
+                                       value="<?= $request->get('date') ?>">
+                            </div>
+
+                            <button class="btn btn-outline-primary">
+                                <?= Translation::get('filter_button') ?>
+                            </button>
+
+                            <?php if (isset($_GET['date'])) : ?>
+                                <a href="/admin/reports/logs"
+                                   class="btn btn-outline-danger ml-3">
+                                    <?= Translation::get('reset_button') ?>
+                                </a>
+                            <?php endif; ?>
+                        </form>
+                    </div>
                 </div>
 
-                <form class="form-inline float-right" method="get"
-                      action="#logs">
-                    <div class="form-group mr-2">
-                        <label for="datepicker"></label>
-                        <input type="text" name="date"
-                               autocomplete="off"
-                               placeholder="<?= Translation::get('form_date') ?>"
-                               class="form-control" id="datepicker"
-                               value="<?= $request->get('date') ?>">
-                    </div>
-
-                    <button class="btn btn-default-small border-0">
-                        <?= Translation::get('filter_button') ?>
-                    </button>
-
-                    <?php if (isset($_GET['date'])) : ?>
-                        <a href="/admin/reports/logs"
-                           class="btn btn-success ml-3 border-0">
-                            <?= Translation::get('reset_button') ?>
-                        </a>
-                    <?php endif; ?>
-                </form>
-            </div>
-            <div class="card-body">
                 <div class="row">
-                    <?php if (count($logs ?? []) > 0) : ?>
+                    <?php if (count($logs ?? []) < 1) : ?>
+                        <div class="col-md-12">
+                            <p class="mt-2 font-weight-bold">
+                                <?= Translation::get('no_log_data_found') ?>
+                                <?= $request->get('date') ?>.
+                            </p>
+                        </div>
+                    <?php else: ?>
                         <div class="col-sm-4">
-                            <div class="form-label-group">
-                                <input type="text" id="searchLog"
-                                       class="form-control"
-                                       autocomplete="off"
-                                       placeholder="Search">
-                                <label for="searchLog">
+                            <div class="form-label-group mb-2">
+                                <label for="searchLog" class="visually-hidden">
                                     <b><?= Translation::get('form_search') ?></b>
                                 </label>
+                                <input type="text" id="searchLog"
+                                       class="form-control" autocomplete="off"
+                                       placeholder="Zoeken">
                             </div>
 
                             <div class="scrollbox-vertical h-500">
@@ -68,9 +69,9 @@ $request = new Request();
                                     <?php $active = 'active';
                                     foreach (($logs ?? []) as $key => $log) :
                                         if (strpos(
-                                            $log['message'] ?? '',
-                                            State::ERROR
-                                        ) !== false
+                                                $log['message'] ?? '',
+                                                State::ERROR
+                                            ) !== false
                                             || strpos(
                                                 $log['message'] ?? '',
                                                 State::FAILED
@@ -105,9 +106,9 @@ $request = new Request();
                                         <ul class="list-group list-group-flush">
                                             <?php
                                             if (strpos(
-                                    $log['message'] ?? '',
-                                    'ERROR'
-                                ) !== false
+                                                    $log['message'] ?? '',
+                                                    'ERROR'
+                                                ) !== false
                                                 || strpos(
                                                     $log['message'] ?? '',
                                                     'failed'
@@ -121,7 +122,8 @@ $request = new Request();
                                             <li class="list-group-item <?= $class ?>">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <?= Translation::get('message') ?>:
+                                                        <?= Translation::get('message') ?>
+                                                        :
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <?= $log['message'] ?? '' ?>
@@ -131,7 +133,8 @@ $request = new Request();
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <?= Translation::get('url') ?>:
+                                                        <?= Translation::get('url') ?>
+                                                        :
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <?= $log['meta']->url ?? '' ?>
@@ -141,7 +144,8 @@ $request = new Request();
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <?= Translation::get('ip') ?>:
+                                                        <?= Translation::get('ip') ?>
+                                                        :
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <?= $log['meta']->ip ?? '' ?>
@@ -151,7 +155,8 @@ $request = new Request();
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <?= Translation::get('http_method') ?>:
+                                                        <?= Translation::get('http_method') ?>
+                                                        :
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <?= $log['meta']->http_method ?? '' ?>
@@ -161,7 +166,8 @@ $request = new Request();
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <?= Translation::get('server') ?>:
+                                                        <?= Translation::get('server') ?>
+                                                        :
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <?= $log['meta']->server ?? '' ?>
@@ -171,7 +177,8 @@ $request = new Request();
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <?= Translation::get('referrer') ?>:
+                                                        <?= Translation::get('referrer') ?>
+                                                        :
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <?= $log['meta']->referrer ?? '' ?>
@@ -181,7 +188,8 @@ $request = new Request();
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <?= Translation::get('process_id') ?>:
+                                                        <?= Translation::get('process_id') ?>
+                                                        :
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <?= $log['meta']->process_id ?? '' ?>
