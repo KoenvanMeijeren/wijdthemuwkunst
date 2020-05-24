@@ -111,7 +111,7 @@ $amountMessages = count($messages ?? []);
                                                     <?= ucfirst($message->convertDateTime()->toDateTime()) ?>
                                                 </h3>
                                             </div>
-                                            <div class="col-md-1">
+                                            <div class="col-md-1 text-right">
                                                 <form method="post"
                                                       action="/admin/content/contact-form/delete/<?= $message->getId() ?>">
                                                     <?= CSRF::insertToken('/admin/content/contact-form/delete/' . $message->getId()) ?>

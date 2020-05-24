@@ -49,7 +49,7 @@ $breadcrumbs = new Breadcrumbs();
 <div id="wrapper">
     <?php if ($user->isLoggedIn()) : ?>
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled"
             id="accordionSidebar">
 
             <li>
