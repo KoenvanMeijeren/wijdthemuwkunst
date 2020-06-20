@@ -73,7 +73,7 @@ final class DataTable extends DataTableHtmlBuilder
     {
         $this->var = 'table';
 
-        $this->addClasses('table table-hover customTableStyle');
+        $this->addClasses('table table-hover');
         $this->addId($id);
         $this->addTableStart();
 
@@ -91,6 +91,10 @@ final class DataTable extends DataTableHtmlBuilder
 
         $this->addTableEnd();
 
-        return $this->table;
+        $table = '<div class="table-responsive">';
+        $table .= $this->table;
+        $table .= '</div>';
+
+        return $table;
     }
 }

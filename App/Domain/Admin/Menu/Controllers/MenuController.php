@@ -10,19 +10,22 @@ use App\Domain\Admin\Menu\Actions\UpdateMenuAction;
 use App\Domain\Admin\Menu\Models\Menu;
 use App\Domain\Admin\Menu\ViewModels\EditViewModel;
 use App\Domain\Admin\Menu\ViewModels\MenuTable;
+use App\System\Controller\AdminControllerBase;
 use Src\Response\Redirect;
 use Src\Translation\Translation;
 use Src\View\DomainView;
 
-final class MenuController
+final class MenuController extends AdminControllerBase
 {
-    private Menu $menu;
+    protected string $baseViewPath = 'Admin/Menu/Views/';
 
-    private string $baseViewPath = 'Admin/Menu/Views/';
+    private Menu $menu;
     private string $redirectBack = '/admin/structure/menu';
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->menu = new Menu();
     }
 
@@ -30,7 +33,7 @@ final class MenuController
     {
         $menuTable = new MenuTable($this->menu->getAll());
 
-        return new DomainView($this->baseViewPath . 'index', [
+        return $this->view('index', [
             'title' => Translation::get('menu_title'),
             'menu_items' => $menuTable->get()
         ]);
@@ -40,7 +43,7 @@ final class MenuController
     {
         $menuTable = new MenuTable($this->menu->getAll());
 
-        return new DomainView($this->baseViewPath . 'index', [
+        return $this->view('index', [
             'title' => Translation::get('menu_title'),
             'menu_items' => $menuTable->get(),
             'create_menu_item' => true,
@@ -67,7 +70,7 @@ final class MenuController
         );
         $menuTable = new MenuTable($this->menu->getAll());
 
-        return new DomainView($this->baseViewPath . 'index', [
+        return $this->view('index', [
             'title' => Translation::get('menu_title'),
             'menu_items' => $menuTable->get(),
             'menu_item' => $menuItem->get()

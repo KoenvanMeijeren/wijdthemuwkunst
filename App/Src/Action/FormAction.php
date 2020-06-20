@@ -8,6 +8,9 @@ use Src\Security\CSRF;
 
 abstract class FormAction extends Action
 {
+    /**
+     * @inheritDoc
+     */
     protected function authorize(): bool
     {
         if (! CSRF::validate()) {

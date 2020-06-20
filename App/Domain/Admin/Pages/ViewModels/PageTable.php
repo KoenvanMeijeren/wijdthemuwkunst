@@ -64,7 +64,7 @@ final class PageTable extends DataTableBuilder
         $page = new PageRepository($data);
         $user = new User();
 
-        $actions = '<div class="table-edit-row flex">';
+        $actions = '<div class="table-edit-row">';
         $actions .= Resource::addTableLinkActionColumn(
             '/admin/content/pages/page/edit/' . $page->getId(),
             Translation::get('table_row_edit'),
@@ -74,7 +74,7 @@ final class PageTable extends DataTableBuilder
             '/admin/content/pages/page/delete/' . $page->getId(),
             Translation::get('table_row_delete'),
             'fas fa-trash-alt',
-            'btn-danger',
+            'btn-outline-danger',
             Translation::get('delete_page_confirmation_message'),
             $user->getRights() !== User::DEVELOPER
             && $page->getInMenu() !== Page::PAGE_STATIC

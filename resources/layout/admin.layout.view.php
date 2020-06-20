@@ -18,6 +18,7 @@ $breadcrumbs = new Breadcrumbs();
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -26,254 +27,274 @@ $breadcrumbs = new Breadcrumbs();
 
     <!-- Fav icon -->
     <link rel="icon" type="image/png" sizes="96x96"
-          href="/adminResources/images/favicon/favicon-96x96.png">
+          href="/themes/cms_theme/img/favicon/favicon-96x96.png">
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- Custom fonts for this template-->
+    <link href="/themes/cms_theme/vendor/fontawesome-free/css/all.min.css"
+          rel="stylesheet" type="text/css">
 
-    <!-- Font awesome -->
-    <script src="https://kit.fontawesome.com/<?= $request->env('font_awesome_key') ?>.js"
-            crossorigin="anonymous"></script>
-
-    <!-- Theme css -->
-    <link rel="stylesheet" type="text/css"
-          href="/vendor/cms-theme/css/light-bootstrap-dashboard.css">
-
-    <!-- Data tables -->
-    <link rel="stylesheet" type="text/css"
-          href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
-
-    <!-- Datepicker -->
-    <link rel="stylesheet" type="text/css"
-          href="/vendor/datepicker/css/datepicker.css">
-
-    <!-- Clockpicker -->
-    <link rel="stylesheet" type="text/css"
-          href="/vendor/clockpicker/css/clockpicker-bootstrap.css">
-    <link rel="stylesheet" type="text/css"
-          href="/vendor/clockpicker/css/clockpicker.css">
-
-    <?php if (!$user->isLoggedIn()) : ?>
-        <!-- Login CSS -->
-        <link rel="stylesheet" type="text/css"
-              href="/adminResources/css/login.css">
-    <?php endif; ?>
-
-    <!-- Customized theme css -->
-    <link rel="stylesheet" type="text/css" href="/adminResources/css/style.css">
+    <!-- Custom styles for this template-->
+    <link href="/themes/cms_theme/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/themes/cms_theme/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="/themes/cms_theme/vendor/cropperjs/cropper.min.css" rel="stylesheet">
+    <link href="/themes/cms_theme/vendor/datepicker/datepicker.min.css" rel="stylesheet">
+    <link href="/themes/cms_theme/vendor/clockpicker/bootstrap-clockpicker.min.css" rel="stylesheet">
+    <link href="/themes/cms_theme/vendor/password-strength-meter/password.min.css" rel="stylesheet">
 
     <!-- Tiny MCE -->
-    <script
-        src="https://cdn.tiny.cloud/1/<?= $request->env('tiny_mce_key') ?>/tinymce/5/tinymce.min.js"
+    <script src="https://cdn.tiny.cloud/1/<?= $request->env('tiny_mce_key') ?>/tinymce/5/tinymce.min.js"
         referrerpolicy="origin"></script>
-
-    <!-- Cropper JS -->
-    <link
-        href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.1/cropper.min.css"
-        rel="stylesheet">
 </head>
-<body>
-<?php if ($user->isLoggedIn()) : ?>
-    <div class="wrapper">
-        <div class="sidebar" data-color="orange"
-             data-image="/vendor/cms-theme/img/sidebar-5.jpg">
-            <div class="sidebar-wrapper">
-                <ul class="nav">
-                    <?php if ($user->getRights() >= User::ADMIN) : ?>
-                        <li class="nav-item <?= strpos(URI::getUrl(),
-                            'dashboard') !== false ? 'active' : '' ?>">
-                            <a class="nav-link" href="/admin/dashboard">
-                                <i class="fas fa-home"></i>
-                                <p>
-                                    <?= Translation::get('admin_menu_dashboard') ?>
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item <?= strpos(URI::getUrl(),
-                            'content') !== false ? 'active' : '' ?>">
-                            <a class="nav-link" href="/admin/content">
-                                <i class="far fa-file-alt"></i>
-                                <p>
-                                    <?= Translation::get('admin_content_title') ?>
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item <?= strpos(URI::getUrl(),
-                            'structure') !== false ? 'active' : '' ?>">
-                            <a class="nav-link" href="/admin/structure">
-                                <i class="fas fa-sitemap"></i>
-                                <p>
-                                    <?= Translation::get('admin_structure_title') ?>
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item <?= strpos(URI::getUrl(),
-                            'configuration') !== false ? 'active' : '' ?>">
-                            <a class="nav-link" href="/admin/configuration">
-                                <i class="fas fa-cogs"></i>
-                                <p>
-                                    <?= Translation::get('admin_configuration_title') ?>
-                                </p>
-                            </a>
-                        </li>
+<body id="page-top">
+<div id="wrapper">
+    <?php if ($user->isLoggedIn()) : ?>
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled"
+            id="accordionSidebar">
 
-                    <?php endif;
-                    if ($user->getRights() >= User::SUPER_ADMIN) : ?>
-                        <li class="nav-item <?= strpos(URI::getUrl(),
-                            'account') !== false && strpos(URI::getUrl(),
-                            'user') === false ? 'active' : '' ?>">
-                            <a class="nav-link" href="/admin/account">
-                                <i class="fas fa-users"></i>
-                                <p>
-                                    <?= Translation::get('admin_accounts_title') ?>
-                                </p>
-                            </a>
-                        </li>
-                    <?php endif;
-                    if ($user->getRights() >= User::DEVELOPER) : ?>
-                        <li class="nav-item <?= strpos(URI::getUrl(),
-                            'reports') !== false ? 'active' : '' ?>">
-                            <a class="nav-link" href="/admin/reports">
-                                <i class="fas fa-chart-bar"></i>
-                                <p>
-                                    <?= Translation::get('admin_reports_title') ?>
-                                </p>
-                            </a>
-                        </li>
-                    <?php endif; ?>
-                </ul>
+            <li>
+                <a class="sidebar-brand d-flex align-items-center justify-content-center"
+                   href="/admin">
+                    <div class="sidebar-brand-icon">
+                        <i class="fas fa-cross"></i>
+                    </div>
+                    <div class="sidebar-brand-text mx-3">
+                        Admin panel
+                    </div>
+                </a>
+
+                <hr class="sidebar-divider my-0">
+            </li>
+
+            <?php if ($user->getRights() >= User::ADMIN) : ?>
+                <li class="nav-item <?= strpos(URI::getUrl(),
+                    'dashboard') !== false ? 'active' : '' ?>">
+                    <a class="nav-link" href="/admin/dashboard">
+                        <i class="fas fa-home"></i>
+                        <span>
+                            <?= Translation::get('admin_menu_dashboard') ?>
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item <?= strpos(URI::getUrl(),
+                    'content') !== false ? 'active' : '' ?>">
+                    <a class="nav-link collapsed" href="#"
+                       data-toggle="collapse"
+                       data-target="#siteContent" aria-expanded="true"
+                       aria-controls="collapseTwo">
+                        <i class="fas fa-file-alt"></i>
+                        <span class="pl-1"> <?= Translation::get('admin_content_title') ?></span>
+                    </a>
+                    <div id="siteContent" class="collapse"
+                         aria-labelledby="siteContent"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <?php $menuItems = $data['menuItems']['content'] ?? [];
+                            foreach ($menuItems as $title => $item) : ?>
+                                <a class="collapse-item"
+                                   href="<?= $item['link'] ?? '#' ?>">
+                                    <?= $item['title'] ?? '' ?>
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item <?= strpos(URI::getUrl(),
+                    'structure') !== false ? 'active' : '' ?>">
+                    <a class="nav-link collapsed" href="#"
+                       data-toggle="collapse"
+                       data-target="#structure" aria-expanded="true"
+                       aria-controls="collapseTwo">
+                        <i class="fas fa-sitemap"></i>
+                        <span> <?= Translation::get('admin_structure_title') ?></span>
+                    </a>
+                    <div id="structure" class="collapse"
+                         aria-labelledby="structure"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <?php $menuItems = $data['menuItems']['structure'] ?? [];
+                            foreach ($menuItems as $title => $item) : ?>
+                                <a class="collapse-item"
+                                   href="<?= $item['link'] ?? '#' ?>">
+                                    <?= $item['title'] ?? '' ?>
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item <?= strpos(URI::getUrl(),
+                    'configuration') !== false ? 'active' : '' ?>">
+                    <a class="nav-link collapsed" href="#"
+                       data-toggle="collapse"
+                       data-target="#configuration" aria-expanded="true"
+                       aria-controls="collapseTwo">
+                        <i class="fas fa-cogs"></i>
+                        <span> <?= Translation::get('admin_configuration_title') ?></span>
+                    </a>
+                    <div id="configuration" class="collapse"
+                         aria-labelledby="configuration"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <?php $menuItems = $data['menuItems']['configuration'] ?? [];
+                            foreach ($menuItems as $title => $item) : ?>
+                                <a class="collapse-item"
+                                   href="<?= $item['link'] ?? '#' ?>">
+                                    <?= $item['title'] ?? '' ?>
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </li>
+
+            <?php endif;
+            if ($user->getRights() >= User::SUPER_ADMIN) : ?>
+                <li class="nav-item <?= strpos(URI::getUrl(),
+                    'account') !== false && strpos(URI::getUrl(),
+                    'user') === false ? 'active' : '' ?>">
+                    <a class="nav-link" href="/admin/account">
+                        <i class="fas fa-users"></i>
+                        <span>
+                            <?= Translation::get('admin_accounts_title') ?>
+                        </span>
+                    </a>
+                </li>
+            <?php endif;
+            if ($user->getRights() >= User::DEVELOPER) : ?>
+                <li class="nav-item <?= strpos(URI::getUrl(),
+                    'reports') !== false ? 'active' : '' ?>">
+                    <a class="nav-link collapsed" href="#"
+                       data-toggle="collapse"
+                       data-target="#reports" aria-expanded="true"
+                       aria-controls="collapseTwo">
+                        <i class="fas fa-chart-bar"></i>
+                        <span> <?= Translation::get('admin_reports_title') ?></span>
+                    </a>
+                    <div id="reports" class="collapse"
+                         aria-labelledby="reports"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <?php $menuItems = $data['menuItems']['reports'] ?? [];
+                            foreach ($menuItems as $title => $item) : ?>
+                                <a class="collapse-item"
+                                   href="<?= $item['link'] ?? '#' ?>">
+                                    <?= $item['title'] ?? '' ?>
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </li>
+            <?php endif; ?>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0"
+                        id="sidebarToggle"></button>
             </div>
-        </div>
-        <div class="main-panel">
-            <nav class="navbar navbar-expand-lg ">
-                <div class="container-fluid">
-                    <p class="navbar-brand font-weight-bold">
-                        <?= $data['title'] ?? '' ?>
-                    </p>
-                    <button class="navbar-toggler navbar-toggler-right mr-3"
-                            type="button" data-toggle="collapse"
-                            aria-controls="navigation-index"
-                            aria-expanded="false"
-                            aria-label="Toggle navigation">
-                        <i class="fas fa-bars"></i>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Topbar -->
+                <nav
+                    class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop"
+                            class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
                     </button>
 
-                    <div class="collapse navbar-collapse justify-content-end"
-                         id="navigation">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item">
-                                <a class="nav-link color-default <?= strpos(URI::getUrl(),
-                                    'user/account') !== false ? 'active-link' : '' ?>"
-                                   href="/admin/user/account">
-                                <span class="no-icon">
-                                    <?= Translation::get('welcome_text') ?>
-                                    <?= $user->getName() ?> -
-                                    <b><?= $rights->toReadable() ?></b>
-                                </span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link color-default"
-                                   href="/admin/logout">
-                                    <span class="no-icon">
-                                        <?= Translation::get('logout_button') ?>
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                    <ul class="navbar-nav">
+                        <li class="nav-item h3">
+                            <?= $data['title'] ?? '' ?>
+                        </li>
+                    </ul>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto navbar-desktop">
+                        <li class="nav-item">
+                            <a class="nav-link <?= strpos(URI::getUrl(),
+                                'user/account') !== false ? 'active-link' : '' ?>"
+                               href="/admin/user/account">
+                                <?= Translation::get('welcome_text') ?>
+                                <?= $user->getName() ?> -
+                                <b><?= $rights->toReadable() ?></b>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               href="/admin/logout">
+                                <?= Translation::get('logout_button') ?>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <?php Resource::loadFlashMessage(); ?>
+
+                    <?php if ($breadcrumbs->visible()) {
+                        echo $breadcrumbs->generate();
+                    } ?>
+
+                    <?= $content ?? '' ?>
                 </div>
-            </nav>
-
-            <div class="scrollbox-vertical">
-                <div class="content">
-                    <div class="container-fluid">
-                        <?php Resource::loadFlashMessage(); ?>
-
-                        <?php if ($breadcrumbs->visible()) : ?>
-                            <div class="row breadcrumbs">
-                                <div class="col-md-12">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <?= $breadcrumbs->generate() ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endif; ?>
-
-                        <?= $content ?? '' ?>
-                    </div>
-                </div>
+                <!-- /.container-fluid -->
             </div>
+            <!-- End of Main Content -->
         </div>
-    </div>
-<?php else : ?>
-    <div class="container-fluid">
-        <?php Resource::loadFlashMessage(); ?>
+        <!-- End of Content Wrapper -->
+    <?php else : ?>
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Begin Page Content -->
+                <div class="container">
+                    <?php Resource::loadFlashMessage(); ?>
 
-        <?= $content ?? '' ?>
-    </div>
-<?php endif; ?>
+                    <?= $content ?? '' ?>
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- End of Main Content -->
+        </div>
+        <!-- End of Content Wrapper -->
+    <?php endif; ?>
+</div>
 
-<!-- Jquery -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-        crossorigin="anonymous"></script>
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
 
-<!-- Bootstrap -->
-<script
-    src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<!-- Bootstrap core JavaScript-->
+<script src="/themes/cms_theme/vendor/jquery/jquery.min.js"></script>
+<script src="/themes/cms_theme/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<!-- Data tables -->
-<script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-<script type="text/javascript" charset="utf8"
-        src="/adminResources/js/datatables.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="/themes/cms_theme/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="/themes/cms_theme/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/themes/cms_theme/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="/themes/cms_theme/vendor/cropperjs/cropper.min.js"></script>
+<script src="/themes/cms_theme/vendor/datepicker/datepicker.min.js"></script>
+<script src="/themes/cms_theme/vendor/clockpicker/bootstrap-clockpicker.min.js"></script>
+<script src="/themes/cms_theme/vendor/password-strength-meter/password.min.js"></script>
+<script src="/themes/cms_theme/vendor/bootstrap-notify/bootstrap-notify.min.js"></script>
 
-<!-- Datepicker -->
-<script type="text/javascript" charset="utf8"
-        src="/vendor/datepicker/js/datepicker.js"></script>
-
-<!-- Clock picker -->
-<script type="text/javascript" charset="utf8"
-        src="/vendor/clockpicker/js/clockpicker-jquery.js"></script>
-<script type="text/javascript" charset="utf8"
-        src="/vendor/clockpicker/js/clockpicker.js"></script>
-
-<!-- Password strength indicator -->
-<script type="text/javascript" charset="utf8"
-        src="/vendor/password-strength-indicator/zxcvbn.js"></script>
-<script type="text/javascript" charset="utf8"
-        src="/adminResources/js/password-strength-indicator.js"></script>
-
-<!-- Progress bar -->
-<script type="text/css" charset="utf8"
-        src="/adminResources/css/progress-bar.css"></script>
-
-<!-- Theme js -->
-<script type="text/javascript" charset="utf8"
-        src="/vendor/cms-theme/js/light-bootstrap-dashboard.js"></script>
-<script type="text/javascript" charset="utf8"
-        src="/vendor/cms-theme/js/plugins/bootstrap-notify.js"></script>
-
-<!-- Initialize the Tiny Mce editor -->
-<script type="text/javascript" charset="utf8"
-        src="/js/tinymce/tinymce.js"></script>
-
-<!-- Progress bar -->
-<script type="text/javascript" charset="utf8"
-        src="/adminResources/js/progress-bar.js"></script>
-
-<!-- Cropper JS -->
-<script
-    src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.1/cropper.min.js"></script>
-
-<!-- Default JS -->
-<script type="text/javascript" charset="utf8"
-        src="/adminResources/js/default.js"></script>
+<!-- Custom scripts for all pages-->
+<script src="/themes/cms_theme/js/sb-admin-2.min.js"></script>
+<script src="/themes/cms_theme/js/datatables.min.js"></script>
+<script src="/themes/cms_theme/js/cropper.min.js"></script>
+<script src="/themes/cms_theme/js/tinymce.min.js"></script>
 </body>
 </html>

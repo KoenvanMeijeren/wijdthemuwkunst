@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Settings\Controllers;
 
+use App\System\Controller\AdminControllerBase;
 use Domain\Admin\Settings\Actions\CreateBaseSettingAction;
 use Domain\Admin\Settings\Actions\DestroySettingAction;
 use Domain\Admin\Settings\Actions\UpdateBaseSettingAction;
@@ -14,9 +15,10 @@ use Src\Response\Redirect;
 use Src\Translation\Translation;
 use Src\View\DomainView;
 
-final class SettingsControllers
+final class SettingsControllers extends AdminControllerBase
 {
-    private string $baseViewPath = 'Admin/Settings/Views/';
+    protected string $baseViewPath = 'Admin/Settings/Views/';
+
     private string $redirectBack = '/admin/configuration/settings';
 
     public function index(): DomainView
@@ -24,7 +26,7 @@ final class SettingsControllers
         $setting = new Setting();
         $settingTable = new SettingTable($setting->all());
 
-        return new DomainView($this->baseViewPath . 'index', [
+        return $this->view('index', [
             'title' => Translation::get('settings_title'),
             'settings' => $settingTable->get()
         ]);
@@ -35,7 +37,7 @@ final class SettingsControllers
         $setting = new Setting();
         $settingTable = new SettingTable($setting->all());
 
-        return new DomainView($this->baseViewPath . 'index', [
+        return $this->view('index', [
             'title' => Translation::get('settings_title'),
             'settings' => $settingTable->get(),
             'createSetting' => true,
@@ -61,7 +63,7 @@ final class SettingsControllers
         $settingTable = new SettingTable($setting->all());
         $editViewModel = new EditViewModel($setting->find($setting->getId()));
 
-        return new DomainView($this->baseViewPath . 'index', [
+        return $this->view('index', [
             'title' => Translation::get('settings_title'),
             'settings' => $settingTable->get(),
             'setting' => $editViewModel->get()

@@ -10,19 +10,22 @@ use App\Domain\Admin\Text\Actions\UpdateTextAction;
 use App\Domain\Admin\Text\Models\Text;
 use App\Domain\Admin\Text\ViewModels\EditViewModel;
 use App\Domain\Admin\Text\ViewModels\TextTable;
+use App\System\Controller\AdminControllerBase;
 use Src\Response\Redirect;
 use Src\Translation\Translation;
 use Src\View\DomainView;
 
-final class TextController
+final class TextController extends AdminControllerBase
 {
-    private Text $text;
+    protected string $baseViewPath = 'Admin/Text/Views/';
 
-    private string $baseViewPath = 'Admin/Text/Views/';
+    private Text $text;
     private string $redirectBack = '/admin/configuration/texts';
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->text = new Text();
     }
 
@@ -30,7 +33,7 @@ final class TextController
     {
         $textTable = new TextTable($this->text->all());
 
-        return new DomainView($this->baseViewPath . 'index', [
+        return $this->view('index', [
             'title' => Translation::get('texts_title'),
             'texts' => $textTable->get()
         ]);
@@ -40,7 +43,7 @@ final class TextController
     {
         $textTable = new TextTable($this->text->all());
 
-        return new DomainView($this->baseViewPath . 'index', [
+        return $this->view('index', [
             'title' => Translation::get('texts_title'),
             'texts' => $textTable->get(),
             'createText' => true,
@@ -67,7 +70,7 @@ final class TextController
             $this->text->find($this->text->getId())
         );
 
-        return new DomainView($this->baseViewPath . 'index', [
+        return $this->view('index', [
             'title' => Translation::get('texts_title'),
             'texts' => $textTable->get(),
             'text' => $text->get()

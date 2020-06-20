@@ -67,7 +67,7 @@ abstract class DataTableHtmlBuilder
 
     final protected function addTableStart(): void
     {
-        $this->add('<table>', $this->var);
+        $this->add('<table width="100%" cellspacing="0">', $this->var);
     }
 
     final protected function addTableEnd(): void

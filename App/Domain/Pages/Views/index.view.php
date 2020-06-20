@@ -25,7 +25,7 @@ $eventsRepository = $eventsRepo ?? null;
     </section>
 <?php else : ?>
     <section class="header">
-        <img class="banner" src="/images/banner.jpg"
+        <img class="banner" src="/themes/whuk_theme/src/images/banner.jpg"
              alt="<?= $home->getTitle() . ' image banner' ?>">
     </section>
 <?php endif;

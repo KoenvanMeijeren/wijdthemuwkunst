@@ -57,7 +57,7 @@ final class MenuTable extends DataTableBuilder
             '/admin/structure/menu/item/delete/' . $menuItem->getId(),
             Translation::get('table_row_delete'),
             'fas fa-trash-alt',
-            'btn-danger',
+            'btn-outline-danger',
             sprintf(
                 Translation::get('delete_menu_item_confirmation_message'),
                 $menuItem->getTitle()

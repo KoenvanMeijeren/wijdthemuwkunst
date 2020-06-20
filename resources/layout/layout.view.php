@@ -22,43 +22,21 @@ $menuItems = $menu->getAll();
 <!DOCTYPE html>
 <html lang="<?= Translation::DUTCH_LANGUAGE_CODE ?>">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1"/>
+    <title><?= $data['title'] ?? 'Undefined' ?></title>
 
-    <!-- SEO -->
+    <link rel="icon" type="image/png" sizes="96x96" href="/themes/whuk_theme/src/images/favicon/favicon.ico">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="description" content="Christelijk koor Wijdt Hem Uw Kunst">
     <meta name="keywords" content="Christelijk koor, Harderwijk">
     <meta name="author" content="Christelijk koor Wijdt Hem Uw Kunst">
 
-    <!-- Fav icon -->
-    <link rel="icon" type="image/png" sizes="96x96"
-          href="/images/favicon/favicon.ico">
-
-    <!-- Bootstrap -->
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-
-    <!-- Font awesome -->
-    <script src="https://kit.fontawesome.com/<?= $request->env('font_awesome_key') ?>.js"
-            crossorigin="anonymous"></script>
-
-    <!-- Font -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Pacifico">
-
-    <!-- Theme -->
-    <link rel="stylesheet" href="/css/main.css"/>
-
-    <!-- Recaptcha -->
+    <link rel="stylesheet" href="/themes/whuk_theme/dist/css/toolkit.min.css"/>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
-    <title><?= $data['title'] ?? 'Undefined' ?></title>
 </head>
 <body>
 
-<!-- Header -->
 <header id="header">
     <div class="inner">
         <a href="/" class="logo">
@@ -87,7 +65,6 @@ $menuItems = $menu->getAll();
     <?= $content ?? '' ?>
 </div>
 
-<!-- Footer -->
 <section id="footer">
     <div class="inner">
         <header>
@@ -154,19 +131,7 @@ $menuItems = $menu->getAll();
     </div>
 </section>
 
-<!-- Jquery -->
-<script type="text/javascript"
-        src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-        crossorigin="anonymous"></script>
-
-<!-- Bootstrap -->
-<script type="text/javascript"
-        src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
-<!-- Site JS -->
-<script type="text/javascript" src="/js/skel.min.js"></script>
-<script type="text/javascript" src="/js/util.js"></script>
-<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/themes/whuk_theme/dist/js/main.min.js"></script>
+<script type="text/javascript" src="/themes/whuk_theme/dist/js/fontawesome.min.js"></script>
 </body>
 </html>

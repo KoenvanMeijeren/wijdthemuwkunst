@@ -60,7 +60,7 @@ final class EventTable extends DataTableBuilder
     {
         $event = new EventRepository($data);
 
-        $actions = '<div class="table-edit-row flex">';
+        $actions = '<div class="table-edit-row">';
         $actions .= Resource::addTableLinkActionColumn(
             '/admin/content/events/event/edit/' . $event->getId(),
             Translation::get('table_row_edit'),
@@ -70,14 +70,14 @@ final class EventTable extends DataTableBuilder
             '/admin/content/events/event/archive/' . $event->getId(),
             'Archiveren',
             'fas fa-archive',
-            'btn-warning',
+            'btn-outline-warning',
             Translation::get('archive_event_confirmation_message')
         );
         $actions .= Resource::addTableButtonActionColumn(
             '/admin/content/events/event/delete/' . $event->getId(),
             Translation::get('table_row_delete'),
             'fas fa-trash-alt',
-            'btn-danger',
+            'btn-outline-danger',
             Translation::get('delete_event_confirmation_message')
         );
         $actions .= '</div>';

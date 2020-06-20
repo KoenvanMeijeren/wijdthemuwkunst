@@ -56,7 +56,7 @@ final class AccountTable extends DataTableBuilder
         $account = new AccountRepository($data);
         $user = new User();
 
-        $actions = '<div class="table-edit-row flex">';
+        $actions = '<div class="table-edit-row">';
         $actions .= Resource::addTableLinkActionColumn(
             '/admin/account/edit/' . $account->getId(),
             Translation::get('table_row_edit'),
@@ -66,7 +66,7 @@ final class AccountTable extends DataTableBuilder
             '/admin/account/delete/' . $account->getId(),
             Translation::get('table_row_delete'),
             'fas fa-trash-alt',
-            'btn-danger',
+            'btn-outline-danger',
             Translation::get('admin_delete_account_warning_message'),
             $user->getId() === $account->getId()
         );

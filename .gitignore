@@ -7,6 +7,12 @@
 /public_html/phpmd
 /public_html/storage
 
+/public_html/themes/whuk_theme/dist
+/public_html/themes/whuk_theme/node_modules
+
+/public_html/themes/cms_theme/vendor
+/public_html/themes/cms_theme/node_modules
+
 .php_cs.cache
 .env
 .env.development

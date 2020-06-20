@@ -63,12 +63,19 @@ final class Breadcrumbs
 
     public function generate(): string
     {
-        $breadcrumbs = '<ul class="breadcrumb">';
+        $breadcrumbs = '<nav>';
+        $breadcrumbs .= '<ol class="breadcrumbs">';
         foreach ($this->breadCrumbs as $title => $url) {
+            if ($title === 'admin') {
+                $title = 'Home';
+            }
+
             $breadcrumbs .= $this->buildLink($title, $url);
+            continue;
         }
 
-        $breadcrumbs .= '</ul>';
+        $breadcrumbs .= '</ol>';
+        $breadcrumbs .= '</nav>';
 
         return $breadcrumbs;
     }
@@ -77,7 +84,7 @@ final class Breadcrumbs
     {
         $title = ucfirst($title);
 
-        return "<li><a class='mr-2' href='{$url}'>{$title}</a></li>";
+        return "<li><a href='{$url}'>{$title}</a></li>";
     }
 
     public function visible(int $minimum = null): bool
