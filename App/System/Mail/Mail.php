@@ -67,51 +67,42 @@ final class Mail implements MailInterface {
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function addAddress(string $email, string $name): void {
     $this->mailer->addAddress($email, $name);
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function addReplyTo(string $email, string $name): void {
     $this->mailer->addReplyTo($email, $name);
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function addCc(string $email, string $name): void {
     $this->mailer->addCC($email, $name);
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function addBcc(string $email, string $name): void {
     $this->mailer->addBCC($email, $name);
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function setSubject(string $subject): void {
     $this->mailer->Subject = $subject;
   }
 
   /**
-   * Sets the body of the mail.
-   *
-   * @param string $baseViewPath
-   *   The path of to the view directory.
-   * @param string $mail
-   *   The default mail template.
-   * @param string $plainTextMail
-   *   The fallback mail template.
-   * @param string[] $content
-   *   The content of the mail.
+   * {@inheritDoc}
    */
   public function setBody(string $baseViewPath, string $mail, string $plainTextMail, array $content = []): void {
     $this->mailer->Body = (string) new MailView($baseViewPath, $mail, $content);
@@ -121,45 +112,46 @@ final class Mail implements MailInterface {
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function setAltBody(string $body): void {
     $this->mailer->AltBody = $this->mailer->html2text($body);
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function setHtmlMessage(string $message, string $baseDir): void {
     $this->mailer->msgHTML($message, $baseDir);
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function addAttachment(
-        string $path,
-        string $name = '',
-        string $encoding = PHPMailer::ENCODING_BASE64,
-        string $type = ''
-    ): void {
+    string $path,
+    string $name = '',
+    string $encoding = PHPMailer::ENCODING_BASE64,
+    string $type = ''
+  ): void {
     $this->mailer->addAttachment($path, $name, $encoding, $type);
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function addEmbeddedImage(
-        string $path,
-        string $name = '',
-        string $encoding = PHPMailer::ENCODING_BASE64,
-        string $type = ''
-    ): void {
-    $this->mailer->addEmbeddedImage($path, $name, $encoding, $type);
+    string $path,
+    string $cid,
+    string $name = '',
+    string $encoding = PHPMailer::ENCODING_BASE64,
+    string $type = ''
+  ): void {
+    $this->mailer->addEmbeddedImage($path, $cid, $name, $encoding, $type);
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function send(): bool {
     return $this->mailer->send();
