@@ -1,98 +1,66 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\System\Breadcrumbs;
 
+/**
+ * Provides a class for generating breadcrumbs.
+ *
+ * @package App\System\Breadcrumbs
+ */
+final class Breadcrumbs extends BreadcrumbBase {
 
-use Src\Core\URI;
+  /**
+   * {@inheritDoc}
+   */
+  protected array $blacklist = [
+    'concert',
+    'setting',
+    'text',
+    'user',
+    'item',
+    'event',
+    'page',
+    'edit',
+  ];
 
-final class Breadcrumbs
-{
-    public const MINIMUM_AMOUNT_OF_BREADCRUMBS = 2;
+  /**
+   * {@inheritDoc}
+   */
+  public function generate(): string {
+    $breadcrumbs = '<nav>';
+    $breadcrumbs .= '<ol class="breadcrumbs">';
+    foreach ($this->breadCrumbs as $title => $url) {
+      if ($title === 'admin') {
+        $title = 'Home';
+      }
 
-    protected string $url;
-    protected array $urlParts = [];
-    protected array $breadCrumbs = [];
-
-    protected array $blacklist = [
-        'concert',
-        'setting',
-        'text',
-        'user',
-        'item',
-        'event',
-        'page',
-        'edit'
-    ];
-
-    public function __construct()
-    {
-        $this->url = URI::getUrl();
-        $this->urlParts = explode('/', $this->url);
-        $this->setBreadcrumbs();
-
-        $breadcrumbsKeys = array_keys($this->breadCrumbs);
-        foreach ($this->blacklist as $item) {
-            $match = array_search($item, $breadcrumbsKeys, true);
-
-            if ($match !== false) {
-                $breadcrumbsKey = $breadcrumbsKeys[$match];
-                unset($this->breadCrumbs[$breadcrumbsKey]);
-            }
-        }
+      $breadcrumbs .= $this->buildLink((string) $title, $url);
+      continue;
     }
 
-    private function setBreadcrumbs(): void
-    {
-        // Convert the url parts into an array.
-        $urlParts = $this->urlParts;
-        foreach ($urlParts as $urlPart) {
-            $lastUrlPart = array_key_last($urlParts);
+    $breadcrumbs .= '</ol>';
+    $breadcrumbs .= '</nav>';
 
-            // Get the title for the current url.
-            $title = $urlParts[$lastUrlPart];
+    return $breadcrumbs;
+  }
 
-            $url = '/' . implode('/', $urlParts);
-            $this->breadCrumbs[$title] = $url;
+  /**
+   * Builds the breadcrumb link.
+   *
+   * @param string $title
+   *   The title.
+   * @param string $url
+   *   The url.
+   *
+   * @return string
+   *   The link.
+   */
+  protected function buildLink(string $title, string $url): string {
+    $title = ucfirst($title);
 
-            unset($urlParts[$lastUrlPart]);
-        }
+    return "<li><a href='{$url}'>{$title}</a></li>";
+  }
 
-        $this->breadCrumbs = array_reverse($this->breadCrumbs, true);
-    }
-
-    public function generate(): string
-    {
-        $breadcrumbs = '<nav>';
-        $breadcrumbs .= '<ol class="breadcrumbs">';
-        foreach ($this->breadCrumbs as $title => $url) {
-            if ($title === 'admin') {
-                $title = 'Home';
-            }
-
-            $breadcrumbs .= $this->buildLink($title, $url);
-            continue;
-        }
-
-        $breadcrumbs .= '</ol>';
-        $breadcrumbs .= '</nav>';
-
-        return $breadcrumbs;
-    }
-
-    private function buildLink($title, string $url): string
-    {
-        $title = ucfirst($title);
-
-        return "<li><a href='{$url}'>{$title}</a></li>";
-    }
-
-    public function visible(int $minimum = null): bool
-    {
-        if ($minimum !== null) {
-            return count($this->urlParts) > $minimum;
-        }
-
-        return count($this->urlParts) > self::MINIMUM_AMOUNT_OF_BREADCRUMBS;
-    }
 }

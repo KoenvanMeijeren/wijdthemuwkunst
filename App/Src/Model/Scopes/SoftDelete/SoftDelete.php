@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 
@@ -6,14 +7,28 @@ namespace Src\Model\Scopes\SoftDelete;
 
 use Src\Database\DB;
 
-trait SoftDelete
-{
-    abstract protected function addScope(DB $builder): void;
+/**
+ * Provides a trait for sub classes who uses soft delete.
+ *
+ * @package Src\Model\Scopes\SoftDelete
+ */
+trait SoftDelete {
 
-    public function initializeSoftDelete(): void
-    {
-        $this->addScope(
-            (new DB)->where($this->softDeletedKey, '=', '0')
-        );
-    }
+  /**
+   * Adds a scope to the query.
+   *
+   * @param \Src\Database\DB $builder
+   *   The query builder.
+   */
+  abstract protected function addScope(DB $builder): void;
+
+  /**
+   * Initializes the soft delete scope.
+   */
+  public function initializeSoftDelete(): void {
+    $this->addScope(
+          (new DB)->where($this->softDeletedKey, '=', '0')
+      );
+  }
+
 }

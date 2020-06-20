@@ -1,46 +1,64 @@
 <?php
+
 declare(strict_types=1);
 
 
 namespace Domain\Admin\Settings\Models;
 
-use Src\Core\Router;
 use Src\Model\Model;
 use Src\Model\Scopes\SoftDelete\SoftDelete;
 
-final class Setting extends Model
-{
-    use SoftDelete;
+/**
+ * Provides a model for the settings table to interact with the database.
+ *
+ * @package Domain\Admin\Settings\Models
+ */
+final class Setting extends Model {
+  use SoftDelete;
 
-    protected string $table = 'setting';
-    protected string $primaryKey = 'setting_ID';
-    public string $key = 'setting_key';
-    public string $valueKey = 'setting_value';
-    protected string $softDeletedKey = 'setting_is_deleted';
+  protected string $table = 'setting';
+  protected string $primaryKey = 'setting_ID';
+  public string $key = 'setting_key';
+  public string $valueKey = 'setting_value';
+  protected string $softDeletedKey = 'setting_is_deleted';
 
-    public function __construct()
-    {
-        $this->initializeSoftDelete();
-    }
+  /**
+   * Setting constructor.
+   */
+  public function __construct() {
+    $this->initializeSoftDelete();
+  }
 
-    public function getId(): int
-    {
-        return (int) Router::getWildcard();
-    }
+  /**
+   * Gets a setting by the given key.
+   *
+   * @param string $key
+   *   The key to search the setting for.
+   *
+   * @return string|null
+   *   The setting.
+   */
+  public function getByKey(string $key): ?string {
+    return $this->firstByAttributes([
+      $this->key => $key,
+    ]);
+  }
 
-    public function getByKey(string $key): ?string
-    {
-        return $this->firstByAttributes([
-            $this->key => $key
-        ]);
-    }
+  /**
+   * Gets a setting by the given key.
+   *
+   * @param string $key
+   *   The key to search the setting for.
+   *
+   * @return string|null
+   *   The setting.
+   */
+  public function get(string $key): string {
+    $setting = $this->firstByAttributes([
+      $this->key => $key,
+    ]);
 
-    public function get(string $key): ?string
-    {
-        $setting = $this->firstByAttributes([
-            $this->key => $key
-        ]);
+    return $setting !== NULL ? $setting->setting_value : '';
+  }
 
-        return $setting !== null ? $setting->setting_value : '';
-    }
 }

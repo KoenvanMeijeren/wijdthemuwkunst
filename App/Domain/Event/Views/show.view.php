@@ -1,17 +1,23 @@
 <?php
+
+/**
+ * @file
+ */
+
 declare(strict_types=1);
 
-use App\Domain\Admin\Event\Repositories\EventRepository;
 use App\System\Breadcrumbs\Breadcrumbs;
 use Src\Core\Request;
+use Src\Core\URI;
 
 $request = new Request();
 
 $documentRoot = $request->server(Request::DOCUMENT_ROOT);
 
-/** @var EventRepository $event */
-$event = $eventRepo ?? null;
-$breadcrumbs = new Breadcrumbs();
+/**
+ * @var \App\Domain\Admin\Event\Repositories\EventRepository $event */
+$event = $eventRepo ?? NULL;
+$breadcrumbs = new Breadcrumbs(URI::getUrl());
 ?>
 
 <?php if ($event->getBanner() !== ''
@@ -19,8 +25,8 @@ $breadcrumbs = new Breadcrumbs();
 ) : ?>
     <!-- Banner -->
     <section class="header">
-        <img class="banner" src="<?= $event->getBanner() ?>"
-             alt="<?= $event->getTitle() . ' image banner' ?>">
+        <img class="banner" src="<?php echo $event->getBanner() ?>"
+             alt="<?php echo $event->getTitle() . ' image banner' ?>">
     </section>
 <?php endif; ?>
 
@@ -29,17 +35,17 @@ $breadcrumbs = new Breadcrumbs();
 ) : ?>
     <!-- Thumbnail -->
     <section class="header">
-        <img class="thumbnail" src="<?= $event->getThumbnail() ?>"
-             alt="<?= $event->getTitle() . ' image thumbnail' ?>">
+        <img class="thumbnail" src="<?php echo $event->getThumbnail() ?>"
+             alt="<?php echo $event->getTitle() . ' image thumbnail' ?>">
     </section>
 <?php endif; ?>
 
 <div class="container page">
     <div class="mt-5 mb-5">
-        <?php if ($breadcrumbs->visible(0)) : ?>
+        <?php if ($breadcrumbs->visible()) : ?>
             <div class="row breadcrumbs">
                 <div class="col-sm-12">
-                    <?= $breadcrumbs->generate() ?>
+                    <?php echo $breadcrumbs->generate() ?>
                 </div>
             </div>
         <?php endif; ?>
@@ -47,20 +53,20 @@ $breadcrumbs = new Breadcrumbs();
         <div class="row">
             <div class="col">
                 <h1>
-                    <?= $event->getTitle() ?>
+                    <?php echo $event->getTitle() ?>
                 </h1>
                 <h4>
                     <i class="fas fa-calendar-alt"></i>
-                    <?= $event->getReadableDatetime() ?>
+                    <?php echo $event->getReadableDatetime() ?>
 
                     <span class="mr-5"></span>
 
                     <i class="fas fa-map-marker-alt"></i>
-                    <?= $event->getLocation() ?>
+                    <?php echo $event->getLocation() ?>
                 </h4>
             </div>
         </div>
 
-        <?= parseHtmlEntities($event->getContent()) ?>
+        <?php echo parseHtmlEntities($event->getContent()) ?>
     </div>
 </div>

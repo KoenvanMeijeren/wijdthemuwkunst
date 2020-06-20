@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 
@@ -10,71 +11,73 @@ use Domain\Admin\Accounts\User\Models\User;
 use Src\State\State;
 use Src\Translation\Translation;
 
-final class CreateAccountAction extends BaseAccountAction
-{
-    /**
-     * @inheritDoc
-     */
-    protected function handle(): bool
-    {
-        $account = $this->account->firstOrCreate([
-            'account_name' => $this->name,
-            'account_email' => $this->email,
-            'account_password' => (string)password_hash(
-                $this->password,
-                Account::PASSWORD_HASH_METHOD
-            ),
-            'account_rights' => (string)$this->rights,
-        ]);
+/**
+ *
+ */
+final class CreateAccountAction extends BaseAccountAction {
 
-        if ($account === null) {
-            $this->session->flash(
-                State::FAILED,
-                Translation::get('admin_create_account_unsuccessful_message')
-            );
+  /**
+   * @inheritDoc
+   */
+  protected function handle(): bool {
+    $account = $this->account->firstOrCreate([
+      'account_name' => $this->name,
+      'account_email' => $this->email,
+      'account_password' => (string) password_hash(
+              $this->password,
+              Account::PASSWORD_HASH_METHOD
+      ),
+      'account_rights' => (string) $this->rights,
+    ]);
 
-            return false;
-        }
-
-        $this->session->flash(
-            State::SUCCESSFUL,
-            Translation::get('admin_create_account_successful_message')
+    if ($account === NULL) {
+      $this->session->flash(
+            State::FAILED,
+            Translation::get('admin_create_account_unsuccessful_message')
         );
 
-        return true;
+      return FALSE;
     }
 
-    /**
-     * @inheritDoc
-     */
-    protected function validate(): bool
-    {
-        $this->validator->input($this->name, Translation::get('name'))
-            ->isRequired();
+    $this->session->flash(
+          State::SUCCESSFUL,
+          Translation::get('admin_create_account_successful_message')
+      );
 
-        $this->validator->input($this->email, Translation::get('email'))
-            ->isRequired()
-            ->isEmail()
-            ->isUnique(
-                $this->account->getByEmail($this->email),
-                sprintf(
-                    Translation::get('admin_email_already_exists_message'),
-                    $this->email
-                )
-            );
+    return TRUE;
+  }
 
-        $this->validator->input($this->password, Translation::get('password'))
-            ->isRequired()
-            ->passwordIsEqual($this->confirmationPassword);
+  /**
+   * @inheritDoc
+   */
+  protected function validate(): bool {
+    $this->validator->input($this->name, Translation::get('name'))
+      ->isRequired();
 
-        $this->validator->input((string)$this->rights, Translation::get('rights'))
-            ->isRequired()
-            ->isBetweenRange(
-                User::ADMIN,
-                User::DEVELOPER,
-                Translation::get('admin_invalid_rights_message')
-            );
+    $this->validator->input($this->email, Translation::get('email'))
+      ->isRequired()
+      ->isEmail()
+      ->isUnique(
+              $this->account->getByEmail($this->email),
+              sprintf(
+                  Translation::get('admin_email_already_exists_message'),
+                  $this->email
+              )
+          );
 
-        return $this->validator->handleFormValidation();
-    }
+    $this->validator->input($this->password, Translation::get('password'))
+      ->isRequired()
+      ->passwordIsEqual($this->confirmationPassword);
+
+    $this->validator->input((string) $this->rights, Translation::get('rights'))
+      ->isRequired()
+      ->isBetweenRange(
+              User::ADMIN,
+              User::DEVELOPER,
+              Translation::get('admin_invalid_rights_message')
+          );
+
+    return $this->validator->handleFormValidation();
+  }
+
 }

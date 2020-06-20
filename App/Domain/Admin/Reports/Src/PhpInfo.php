@@ -1,23 +1,27 @@
 <?php
 
-
 namespace App\Domain\Admin\Reports\Src;
 
+/**
+ *
+ */
+final class PhpInfo {
 
-final class PhpInfo
-{
-    public function get(): string
-    {
-        ob_start();
+  /**
+   *
+   */
+  public function get(): string {
+    ob_start();
 
-        phpinfo();
+    phpinfo();
 
-        $phpinfo = (string)ob_get_clean();
+    $phpinfo = (string) ob_get_clean();
 
-        return preg_replace(
-            '%^.*<body>(.*)</body>.*$%ms',
-            '$1',
-            $phpinfo
-        );
-    }
+    return preg_replace(
+          '%^.*<body>(.*)</body>.*$%ms',
+          '$1',
+          $phpinfo
+      );
+  }
+
 }

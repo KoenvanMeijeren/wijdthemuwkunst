@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 
@@ -7,33 +8,48 @@ namespace Src\Translation;
 use Src\Core\URI;
 use Src\Exceptions\Basic\InvalidKeyException;
 
-final class Translation extends Loader
-{
-    private static array $translations = [];
+/**
+ * Provides a class for translations.
+ *
+ * @package Src\Translation
+ */
+final class Translation extends Loader {
+  /**
+   * All the available translations.
+   *
+   * @var string[]
+   */
+  private static array $translations = [];
 
-    protected function __construct()
-    {
-        if (strpos(URI::getDomainExtension(), 'localhost') !== false
-            || strpos(URI::getDomainExtension(), 'nl') !== false
-        ) {
-            $this->language = self::DUTCH_LANGUAGE_ID;
-        } elseif (strpos(URI::getDomainExtension(), 'com') !== false) {
-            $this->language = self::ENGLISH_LANGUAGE_ID;
-        }
-
-        self::$translations = $this->loadTranslations();
+  /**
+   * @inheritDoc
+   */
+  protected function __construct() {
+    if (strpos(URI::getDomainExtension(), 'localhost') !== FALSE
+          || strpos(URI::getDomainExtension(), 'nl') !== FALSE
+      ) {
+      $this->language = self::DUTCH_LANGUAGE_ID;
+    }
+    elseif (strpos(URI::getDomainExtension(), 'com') !== FALSE) {
+      $this->language = self::ENGLISH_LANGUAGE_ID;
     }
 
-    public static function get(string $key): string
-    {
-        new self();
+    self::$translations = $this->loadTranslations();
+  }
 
-        if (array_key_exists($key, self::$translations)) {
-            return self::$translations[$key];
-        }
+  /**
+   * @inheritDoc
+   */
+  public static function get(string $key): string {
+    new self();
 
-        throw new InvalidKeyException(
-            "No translation was found with key: {$key}"
-        );
+    if (array_key_exists($key, self::$translations)) {
+      return self::$translations[$key];
     }
+
+    throw new InvalidKeyException(
+          "No translation was found with key: {$key}"
+      );
+  }
+
 }

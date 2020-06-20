@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 
@@ -9,63 +10,67 @@ use Domain\Admin\Pages\Models\Page;
 use Src\State\State;
 use Src\Translation\Translation;
 
-final class DeletePageAction extends BasePageAction
-{
-    /**
-     * @inheritDoc
-     */
-    protected function handle(): bool
-    {
-        $this->page->delete($this->page->getId());
+/**
+ *
+ */
+final class DeletePageAction extends BasePageAction {
 
-        if ($this->page->find($this->page->getId()) !== null) {
-            $this->session->flash(
-                State::FAILED,
-                sprintf(
-                    Translation::get('page_unsuccessfully_deleted'),
-                    $this->pageRepository->getSlug()
-                )
-            );
+  /**
+   * @inheritDoc
+   */
+  protected function handle(): bool {
+    $this->page->delete($this->page->getId());
 
-            return false;
-        }
-
-        $this->session->flash(
-            State::SUCCESSFUL,
+    if ($this->page->find($this->page->getId()) !== NULL) {
+      $this->session->flash(
+            State::FAILED,
             sprintf(
-                Translation::get('page_successfully_deleted'),
+                Translation::get('page_unsuccessfully_deleted'),
                 $this->pageRepository->getSlug()
             )
         );
 
-        return true;
+      return FALSE;
     }
 
-    protected function authorize(): bool
-    {
-        $user = new User();
+    $this->session->flash(
+          State::SUCCESSFUL,
+          sprintf(
+              Translation::get('page_successfully_deleted'),
+              $this->pageRepository->getSlug()
+          )
+      );
 
-        if ($user->getRights() !== User::DEVELOPER &&
-            $this->pageRepository->getInMenu() === Page::PAGE_STATIC
-        ) {
-            $this->session->flash(
-                State::FAILED,
-                sprintf(
-                    Translation::get('page_static_cannot_be_deleted'),
-                    $this->pageRepository->getSlug()
-                )
-            );
-            return false;
-        }
+    return TRUE;
+  }
 
-        return parent::authorize();
+  /**
+   *
+   */
+  protected function authorize(): bool {
+    $user = new User();
+
+    if ($user->getRights() !== User::DEVELOPER &&
+          $this->pageRepository->getInMenu() === Page::PAGE_STATIC
+      ) {
+      $this->session->flash(
+            State::FAILED,
+            sprintf(
+                Translation::get('page_static_cannot_be_deleted'),
+                $this->pageRepository->getSlug()
+            )
+        );
+      return FALSE;
     }
 
-    /**
-     * @inheritDoc
-     */
-    protected function validate(): bool
-    {
-        return true;
-    }
+    return parent::authorize();
+  }
+
+  /**
+   * @inheritDoc
+   */
+  protected function validate(): bool {
+    return TRUE;
+  }
+
 }

@@ -1,41 +1,42 @@
 <?php
 
-
 namespace App\Domain\Admin\Text\Actions;
-
 
 use Src\State\State;
 use Src\Translation\Translation;
 
-final class CreateTextAction extends BaseTextAction
-{
-    /**
-     * @inheritDoc
-     */
-    protected function handle(): bool
-    {
-        $text = $this->text->firstOrCreate($this->attributes);
+/**
+ *
+ */
+final class CreateTextAction extends BaseTextAction {
 
-        if ($text !== null) {
-            $this->session->flash(
-                State::SUCCESSFUL,
-                sprintf(
-                    Translation::get('text_successful_created'),
-                    $this->key
-                )
-            );
+  /**
+   * @inheritDoc
+   */
+  protected function handle(): bool {
+    $text = $this->text->firstOrCreate($this->attributes);
 
-            return true;
-        }
-
-        $this->session->flash(
-            State::FAILED,
+    if ($text !== NULL) {
+      $this->session->flash(
+            State::SUCCESSFUL,
             sprintf(
-                Translation::get('text_unsuccessful_created'),
+                Translation::get('text_successful_created'),
                 $this->key
             )
         );
 
-        return false;
+      return TRUE;
     }
+
+    $this->session->flash(
+          State::FAILED,
+          sprintf(
+              Translation::get('text_unsuccessful_created'),
+              $this->key
+          )
+      );
+
+    return FALSE;
+  }
+
 }

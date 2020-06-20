@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 
@@ -8,53 +9,58 @@ use Domain\Admin\Accounts\User\Models\User;
 use Src\State\State;
 use Src\Translation\Translation;
 
-final class CreateBaseSettingAction extends BaseSettingAction
-{
-    /**
-     * @inheritDoc
-     */
-    protected function handle(): bool
-    {
-        $setting = $this->setting->firstOrCreate([
-            $this->setting->key => $this->key,
-            $this->setting->valueKey => $this->value
-        ]);
+/**
+ *
+ */
+final class CreateBaseSettingAction extends BaseSettingAction {
 
-        if ($setting !== null) {
-            $this->session->flash(
-                State::SUCCESSFUL,
-                sprintf(
-                    Translation::get('setting_successful_created'),
-                    $this->key
-                )
-            );
+  /**
+   * @inheritDoc
+   */
+  protected function handle(): bool {
+    $setting = $this->setting->firstOrCreate([
+      $this->setting->key => $this->key,
+      $this->setting->valueKey => $this->value,
+    ]);
 
-            return true;
-        }
-
-        $this->session->flash(
-            State::FAILED,
+    if ($setting !== NULL) {
+      $this->session->flash(
+            State::SUCCESSFUL,
             sprintf(
-                Translation::get('setting_unsuccessful_created'),
+                Translation::get('setting_successful_created'),
                 $this->key
             )
         );
 
-        return false;
+      return TRUE;
     }
 
-    public function authorize(): bool
-    {
-        $user = new User();
-        if ($user->getRights() !== User::DEVELOPER) {
-            $this->session->flash(
-                State::FAILED,
-                Translation::get('setting_creation_not_allowed')
-            );
+    $this->session->flash(
+          State::FAILED,
+          sprintf(
+              Translation::get('setting_unsuccessful_created'),
+              $this->key
+          )
+      );
 
-            return false;
-        }
+    return FALSE;
+  }
 
-        return parent::authorize();
+  /**
+   *
+   */
+  public function authorize(): bool {
+    $user = new User();
+    if ($user->getRights() !== User::DEVELOPER) {
+      $this->session->flash(
+            State::FAILED,
+            Translation::get('setting_creation_not_allowed')
+        );
+
+      return FALSE;
     }
+
+    return parent::authorize();
+  }
+
 }

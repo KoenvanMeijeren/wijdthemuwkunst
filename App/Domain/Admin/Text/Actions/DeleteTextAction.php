@@ -1,63 +1,67 @@
 <?php
 
-
 namespace App\Domain\Admin\Text\Actions;
-
 
 use Domain\Admin\Accounts\User\Models\User;
 use Src\State\State;
 use Src\Translation\Translation;
 
-final class DeleteTextAction extends BaseTextAction
-{
-    /**
-     * @inheritDoc
-     */
-    protected function handle(): bool
-    {
-        $this->text->delete($this->text->getId());
+/**
+ *
+ */
+final class DeleteTextAction extends BaseTextAction {
 
-        if ($this->text->find($this->text->getId()) === null) {
-            $this->session->flash(State::SUCCESSFUL,
-                sprintf(
-                    Translation::get('text_successful_deleted'),
-                    $this->textRepository->getKey()
-                )
-            );
+  /**
+   * @inheritDoc
+   */
+  protected function handle(): bool {
+    $this->text->delete($this->text->getId());
 
-            return true;
-        }
-
-        $this->session->flash(State::SUCCESSFUL,
+    if ($this->text->find($this->text->getId()) === NULL) {
+      $this->session->flash(
+            State::SUCCESSFUL,
             sprintf(
-                Translation::get('text_unsuccessful_deleted'),
+                Translation::get('text_successful_deleted'),
                 $this->textRepository->getKey()
             )
         );
 
-        return false;
+      return TRUE;
     }
 
-    /**
-     * @inheritDoc
-     */
-    protected function authorize(): bool
-    {
-        $user = new User();
-        if ($user->getRights() !== User::DEVELOPER) {
-            $this->session->flash(
-                State::FAILED,
-                Translation::get('text_destroy_not_allowed')
-            );
+    $this->session->flash(
+          State::SUCCESSFUL,
+          sprintf(
+              Translation::get('text_unsuccessful_deleted'),
+              $this->textRepository->getKey()
+          )
+      );
 
-            return false;
-        }
+    return FALSE;
+  }
 
-        return parent::authorize();
+  /**
+   * @inheritDoc
+   */
+  protected function authorize(): bool {
+    $user = new User();
+    if ($user->getRights() !== User::DEVELOPER) {
+      $this->session->flash(
+            State::FAILED,
+            Translation::get('text_destroy_not_allowed')
+        );
+
+      return FALSE;
     }
 
-    protected function validate(): bool
-    {
-        return true;
-    }
+    return parent::authorize();
+  }
+
+  /**
+   *
+   */
+  protected function validate(): bool {
+    return TRUE;
+  }
+
 }

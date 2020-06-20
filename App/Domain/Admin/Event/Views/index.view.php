@@ -1,7 +1,14 @@
 <?php
+
+/**
+ * @file
+ */
+
 declare(strict_types=1);
 
-use Src\Translation\Translation; ?>
+use Src\Translation\Translation;
+
+?>
 <div class="row">
     <div class="col-xl-12 mb-4">
         <div class="card border-left-warning shadow h-100 py-2">
@@ -9,7 +16,7 @@ use Src\Translation\Translation; ?>
                 <div class="row no-gutters align-items-center">
                     <div class="col-md-12 mr-2 mb-4">
                         <div class="text-lg float-left font-weight-bold text-primary text-uppercase mb-1">
-                            <?= Translation::get('event_overview_title') ?>
+                            <?php echo Translation::get('event_overview_title') ?>
                         </div>
 
                         <a href="/admin/content/events/event/create"
@@ -24,7 +31,7 @@ use Src\Translation\Translation; ?>
 
                 <div class="row">
                     <div class="col-md-12">
-                        <?= $events ?? '' ?>
+                        <?php echo $events ?? '' ?>
                     </div>
                 </div>
             </div>
@@ -39,14 +46,14 @@ use Src\Translation\Translation; ?>
                 <div class="row no-gutters align-items-center">
                     <div class="col-md-12 mr-2 mb-4">
                         <div class="text-lg font-weight-bold text-primary text-uppercase mb-1">
-                            <?= Translation::get('event_archive_overview_title') ?>
+                            <?php echo Translation::get('event_archive_overview_title') ?>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-12">
-                        <?= $archived_events ?? '' ?>
+                        <?php echo $archived_events ?? '' ?>
                     </div>
                 </div>
             </div>

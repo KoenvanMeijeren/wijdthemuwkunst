@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 
@@ -13,74 +14,75 @@ use Domain\Admin\Pages\Support\PageIsPublishedStateConverter;
 use Src\Translation\Translation;
 use Support\Resource;
 
-final class PageTable extends DataTableBuilder
-{
-    /**
-     * @inheritDoc
-     */
-    protected function buildHead(): array
-    {
-        return [
-            Translation::get('table_row_slug'),
-            Translation::get('table_row_title'),
-            Translation::get('table_row_page_in_menu'),
-            Translation::get('table_row_publish_state'),
-            Translation::get('table_row_edit'),
-        ];
+/**
+ *
+ */
+final class PageTable extends DataTableBuilder {
+
+  /**
+   * @inheritDoc
+   */
+  protected function buildHead(): array {
+    return [
+      Translation::get('table_row_slug'),
+      Translation::get('table_row_title'),
+      Translation::get('table_row_page_in_menu'),
+      Translation::get('table_row_publish_state'),
+      Translation::get('table_row_edit'),
+    ];
+  }
+
+  /**
+   * @inheritDoc
+   */
+  protected function buildRow(object $data): array {
+    $page = new PageRepository($data);
+    $inMenuState = new PageInMenuStateConverter(
+          $page->getInMenu()
+      );
+    $isPublishedState = new PageIsPublishedStateConverter(
+          $page->isPublished()
+      );
+
+    if (!$page->isPublished()) {
+      $this->dataTable->addClasses('row-warning');
     }
 
-    /**
-     * @inheritDoc
-     */
-    protected function buildRow(object $data): array
-    {
-        $page = new PageRepository($data);
-        $inMenuState = new PageInMenuStateConverter(
-            $page->getInMenu()
-        );
-        $isPublishedState = new PageIsPublishedStateConverter(
-            $page->isPublished()
-        );
+    $slug = "<a href='/{$page->getSlug()}' target='_blank'>{$page->getSlug()}</a>";
 
-        if (!$page->isPublished()) {
-            $this->dataTable->addClasses('row-warning');
-        }
+    return [
+      $slug,
+      $page->getTitle(),
+      $inMenuState->toReadable(),
+      $isPublishedState->toReadable(),
+    ];
+  }
 
-        $slug = "<a href='/{$page->getSlug()}' target='_blank'>{$page->getSlug()}</a>";
+  /**
+   * @inheritDoc
+   */
+  protected function buildRowActions(object $data): string {
+    $page = new PageRepository($data);
+    $user = new User();
 
-        return [
-            $slug,
-            $page->getTitle(),
-            $inMenuState->toReadable(),
-            $isPublishedState->toReadable(),
-        ];
-    }
+    $actions = '<div class="table-edit-row">';
+    $actions .= Resource::addTableLinkActionColumn(
+          '/admin/content/pages/page/edit/' . $page->getId(),
+          Translation::get('table_row_edit'),
+          'fas fa-edit'
+      );
+    $actions .= Resource::addTableButtonActionColumn(
+          '/admin/content/pages/page/delete/' . $page->getId(),
+          Translation::get('table_row_delete'),
+          'fas fa-trash-alt',
+          'btn-outline-danger',
+          Translation::get('delete_page_confirmation_message'),
+          $user->getRights() !== User::DEVELOPER
+          && $page->getInMenu() !== Page::PAGE_STATIC
+      );
+    $actions .= '</div>';
 
-    /**
-     * @inheritDoc
-     */
-    protected function buildRowActions(object $data): string
-    {
-        $page = new PageRepository($data);
-        $user = new User();
+    return $actions;
+  }
 
-        $actions = '<div class="table-edit-row">';
-        $actions .= Resource::addTableLinkActionColumn(
-            '/admin/content/pages/page/edit/' . $page->getId(),
-            Translation::get('table_row_edit'),
-            'fas fa-edit'
-        );
-        $actions .= Resource::addTableButtonActionColumn(
-            '/admin/content/pages/page/delete/' . $page->getId(),
-            Translation::get('table_row_delete'),
-            'fas fa-trash-alt',
-            'btn-outline-danger',
-            Translation::get('delete_page_confirmation_message'),
-            $user->getRights() !== User::DEVELOPER
-            && $page->getInMenu() !== Page::PAGE_STATIC
-        );
-        $actions .= '</div>';
-
-        return $actions;
-    }
 }

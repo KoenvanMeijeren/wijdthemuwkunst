@@ -1,76 +1,104 @@
 <?php
+
 declare(strict_types=1);
 
 
 namespace Domain\Pages\Controllers;
 
 use App\Domain\Event\Models\Event;
+use App\System\Controller\ControllerBase;
 use Domain\Admin\Pages\Repositories\PageRepository;
 use Domain\Pages\Models\Page;
 use Src\Translation\Translation;
-use Src\View\DomainView;
+use Src\View\ViewInterface;
 
-final class PageController
-{
-    private string $baseViewPath = 'Pages/Views/';
-    private Page $page;
-    private Event $event;
+/**
+ * The page controller.
+ *
+ * @package Domain\Pages\Controllers
+ */
+final class PageController extends ControllerBase {
+  protected string $baseViewPath = 'Pages/Views/';
+  protected Page $page;
+  protected Event $event;
 
-    public function __construct()
-    {
-        $this->page = new Page();
-        $this->event = new Event();
+  /**
+   * PageController constructor.
+   */
+  public function __construct() {
+    parent::__construct();
+
+    $this->page = new Page();
+    $this->event = new Event();
+  }
+
+  /**
+   * Displays the index page of the website.
+   *
+   * @return \Src\View\ViewInterface
+   *   The view.
+   *
+   * @throws \Src\Exceptions\Basic\InvalidKeyException
+   */
+  public function index(): ViewInterface {
+    $home = new PageRepository($this->page->getBySlug('home'));
+    $events = new PageRepository($this->page->getBySlug('concerten'));
+
+    return $this->view('index', [
+      'title' => Translation::get('home_page_title'),
+      'homeRepo' => $home,
+      'eventsRepo' => $events,
+      'events' => $this->event->getLimited(3),
+    ]);
+  }
+
+  /**
+   * Try to find the dynamic 404 page or returns the default.
+   *
+   * @return \Src\View\ViewInterface
+   *   The view.
+   */
+  public function findOr404(): ViewInterface {
+    $page = $this->page->getBySlug($this->page->getSlug());
+    if ($page === NULL) {
+      $page = $this->page->getBySlug('pagina-niet-gevonden');
     }
 
-    public function index(): DomainView
-    {
-        $home = new PageRepository($this->page->getBySlug('home'));
-        $events = new PageRepository($this->page->getBySlug('concerten'));
-
-        return new DomainView(
-            $this->baseViewPath . 'index',
-            [
-                'title' => Translation::get('home_page_title'),
-                'homeRepo' => $home,
-                'eventsRepo' => $events,
-                'events' => $this->event->getLimited(3)
-            ]
-        );
+    if ($page !== NULL) {
+      return $this->show(new PageRepository($page));
     }
 
-    public function findOr404(): DomainView
-    {
-        $page = $this->page->getBySlug($this->page->getSlug());
-        if ($page === null) {
-            $page = $this->page->getBySlug('pagina-niet-gevonden');
-        }
+    return $this->notFound();
+  }
 
-        if ($page !== null) {
-            return $this->show(new PageRepository($page));
-        }
+  /**
+   * Shows a specific page.
+   *
+   * @param \Domain\Admin\Pages\Repositories\PageRepository $page
+   *   The page to show.
+   *
+   * @return \Src\View\ViewInterface
+   */
+  public function show(PageRepository $page): ViewInterface {
+    return $this->view('show', [
+      'title' => $page->getTitle(),
+      'pageRepo' => $page,
+    ]);
+  }
 
-        return $this->notFound();
-    }
+  /**
+   * Shows the default 404 page.
+   *
+   * @return \Src\View\ViewInterface
+   *   The view.
+   *
+   * @throws \Src\Exceptions\Basic\InvalidKeyException
+   */
+  public function notFound(): ViewInterface {
+    return $this->view('404', [
+      'title' => Translation::get('page_not_found_title'),
+      'content' => Translation::get('page_not_found_description'),
+    ]);
+  }
 
-    public function show(PageRepository $page): DomainView
-    {
-        return new DomainView(
-            $this->baseViewPath . 'show',
-            [
-                'title' => $page->getTitle(),
-                'pageRepo' => $page,
-            ]
-        );
-    }
-
-    public function notFound(): DomainView
-    {
-        return new DomainView(
-            $this->baseViewPath . '404',
-            [
-                'title' => Translation::get('page_not_found_title'),
-                'content' => Translation::get('page_not_found_description'),
-            ]
-        );
-    }
 }

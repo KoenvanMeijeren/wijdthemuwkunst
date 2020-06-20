@@ -1,7 +1,14 @@
 <?php
+
+/**
+ * @file
+ */
+
 declare(strict_types=1);
 
-use Src\Translation\Translation; ?>
+use Src\Translation\Translation;
+
+?>
 <div class="row">
     <div class="col-xl-12 mb-4">
         <div class="card border-left-warning shadow h-100 py-2">
@@ -9,7 +16,7 @@ use Src\Translation\Translation; ?>
                 <div class="row no-gutters align-items-center">
                     <div class="col-md-12 mr-2 mb-4">
                         <div class="text-lg float-left font-weight-bold text-primary text-uppercase mb-1">
-                            <?= Translation::get('pages_overview_title') ?>
+                            <?php echo Translation::get('pages_overview_title') ?>
                         </div>
 
                         <a href="/admin/content/pages/page/create"
@@ -24,7 +31,7 @@ use Src\Translation\Translation; ?>
 
                 <div class="row">
                     <div class="col-md-12">
-                        <?= $pages ?? '' ?>
+                        <?php echo $pages ?? '' ?>
                     </div>
                 </div>
             </div>

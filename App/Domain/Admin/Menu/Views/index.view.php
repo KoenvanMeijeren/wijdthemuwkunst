@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * @file
+ */
+
 declare(strict_types=1);
 
 use App\Domain\Admin\Menu\Repositories\MenuRepository;
@@ -6,11 +11,11 @@ use Src\Core\Request;
 use Src\Security\CSRF;
 use Src\Translation\Translation;
 
-$menuItem = new MenuRepository($menu_item ?? null);
+$menuItem = new MenuRepository($menu_item ?? NULL);
 $request = new Request();
-$createMenuItem = $create_menu_item ?? false;
+$createMenuItem = $create_menu_item ?? FALSE;
 ?>
-<?php if ($createMenuItem && $menuItem->get() === null) : ?>
+<?php if ($createMenuItem && $menuItem->get() === NULL) : ?>
     <div class="row">
         <div class="col-xl-12 mb-4">
             <div class="card border-left-warning shadow h-100 py-2">
@@ -18,7 +23,7 @@ $createMenuItem = $create_menu_item ?? false;
                     <div class="row no-gutters align-items-center">
                         <div class="col-md-12 mr-2 mb-4">
                             <div class="text-lg font-weight-bold text-primary text-uppercase mb-1">
-                                <?= Translation::get('add_menu_item_title') ?>
+                                <?php echo Translation::get('add_menu_item_title') ?>
                             </div>
                         </div>
                     </div>
@@ -26,43 +31,43 @@ $createMenuItem = $create_menu_item ?? false;
                     <div class="row">
                         <div class="col-md-12">
                             <form method="post" action="/admin/structure/menu/item/create/store">
-                                <?= CSRF::insertToken('/admin/structure/menu/item/create/store') ?>
+                                <?php echo CSRF::insertToken('/admin/structure/menu/item/create/store') ?>
 
                                 <div class="row">
                                     <div class="col-sm-5">
                                         <label for="slug">
-                                            <?= Translation::get('form_page_slug') ?>
+                                            <?php echo Translation::get('form_page_slug') ?>
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="text" name="slug"
                                                id="slug"
                                                class="form-control"
-                                               placeholder="<?= Translation::get('form_page_slug') ?>"
-                                               value="<?= $request->post('slug') ?>"
+                                               placeholder="<?php echo Translation::get('form_page_slug') ?>"
+                                               value="<?php echo $request->post('slug') ?>"
                                                required>
                                     </div>
                                     <div class="col-sm-5">
                                         <label for="title">
-                                            <?= Translation::get('form_title') ?>
+                                            <?php echo Translation::get('form_title') ?>
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="text" name="title"
                                                id="title"
                                                class="form-control"
-                                               placeholder="<?= Translation::get('form_title') ?>"
-                                               value="<?= $request->post('title') ?>"
+                                               placeholder="<?php echo Translation::get('form_title') ?>"
+                                               value="<?php echo $request->post('title') ?>"
                                                required>
                                     </div>
                                     <div class="col-sm-2">
                                         <label for="weight">
-                                            <?= Translation::get('form_weight') ?>
+                                            <?php echo Translation::get('form_weight') ?>
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="number" name="weight"
                                                id="weight"
                                                class="form-control"
-                                               placeholder="<?= Translation::get('form_weight') ?>"
-                                               value="<?= $request->post('weight') ?>"
+                                               placeholder="<?php echo Translation::get('form_weight') ?>"
+                                               value="<?php echo $request->post('weight') ?>"
                                                required>
                                     </div>
                                 </div>
@@ -72,16 +77,16 @@ $createMenuItem = $create_menu_item ?? false;
                                        class="btn btn-outline-danger float-left"
                                        data-toggle="tooltip"
                                        data-placement="top"
-                                       title="<?= Translation::get('reset_button') ?>">
-                                        <?= Translation::get('reset_button') ?>
+                                       title="<?php echo Translation::get('reset_button') ?>">
+                                        <?php echo Translation::get('reset_button') ?>
                                     </a>
 
                                     <button type="submit"
                                             data-toggle="tooltip"
                                             data-placement="top"
-                                            title="<?= Translation::get('save_button') ?>"
+                                            title="<?php echo Translation::get('save_button') ?>"
                                             class="btn btn-outline-success float-right">
-                                        <?= Translation::get('save_button') ?>
+                                        <?php echo Translation::get('save_button') ?>
                                         <i class="far fa-save"></i>
                                     </button>
                                 </div>
@@ -94,7 +99,7 @@ $createMenuItem = $create_menu_item ?? false;
             </div>
         </div>
     </div>
-<?php elseif ($menuItem->get() !== null) : ?>
+<?php elseif ($menuItem->get() !== NULL) : ?>
     <div class="row">
         <div class="col-xl-12 mb-4">
             <div class="card border-left-warning shadow h-100 py-2">
@@ -102,9 +107,9 @@ $createMenuItem = $create_menu_item ?? false;
                     <div class="row no-gutters align-items-center">
                         <div class="col-md-12 mr-2 mb-4">
                             <div class="text-lg font-weight-bold text-primary text-uppercase mb-1">
-                                <?= sprintf(
-                                    Translation::get('edit_menu_item_title'),
-                                    $menuItem->getTitle()
+                                <?php echo sprintf(
+                                Translation::get('edit_menu_item_title'),
+                                $menuItem->getTitle()
                                 ) ?>
                             </div>
                         </div>
@@ -113,44 +118,44 @@ $createMenuItem = $create_menu_item ?? false;
                     <div class="row">
                         <div class="col-md-12">
                             <form method="post"
-                                  action="/admin/structure/menu/item/edit/<?= $menuItem->getId() ?>/update">
-                                <?= CSRF::insertToken("/admin/structure/menu/item/edit/{$menuItem->getId()}/update") ?>
+                                  action="/admin/structure/menu/item/edit/<?php echo $menuItem->getId() ?>/update">
+                                <?php echo CSRF::insertToken("/admin/structure/menu/item/edit/{$menuItem->getId()}/update") ?>
 
                                 <div class="row">
                                     <div class="col-sm-5">
                                         <label for="slug">
-                                            <?= Translation::get('form_page_slug') ?>
+                                            <?php echo Translation::get('form_page_slug') ?>
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="text" name="slug"
                                                id="slug"
                                                class="form-control"
-                                               placeholder="<?= Translation::get('form_page_slug') ?>"
-                                               value="<?= $request->post('slug', $menuItem->getSlug()) ?>"
+                                               placeholder="<?php echo Translation::get('form_page_slug') ?>"
+                                               value="<?php echo $request->post('slug', $menuItem->getSlug()) ?>"
                                                required>
                                     </div>
                                     <div class="col-sm-5">
                                         <label for="title">
-                                            <?= Translation::get('form_title') ?>
+                                            <?php echo Translation::get('form_title') ?>
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="text" name="title"
                                                id="title"
                                                class="form-control"
-                                               placeholder="<?= Translation::get('form_title') ?>"
-                                               value="<?= $request->post('title', $menuItem->getTitle()) ?>"
+                                               placeholder="<?php echo Translation::get('form_title') ?>"
+                                               value="<?php echo $request->post('title', $menuItem->getTitle()) ?>"
                                                required>
                                     </div>
                                     <div class="col-sm-2">
                                         <label for="weight">
-                                            <?= Translation::get('form_weight') ?>
+                                            <?php echo Translation::get('form_weight') ?>
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="number" name="weight"
                                                id="weight"
                                                class="form-control"
-                                               placeholder="<?= Translation::get('form_weight') ?>"
-                                               value="<?= $request->post('weight', (string)$menuItem->getWeight()) ?>"
+                                               placeholder="<?php echo Translation::get('form_weight') ?>"
+                                               value="<?php echo $request->post('weight', (string) $menuItem->getWeight()) ?>"
                                                required>
                                     </div>
                                 </div>
@@ -160,16 +165,16 @@ $createMenuItem = $create_menu_item ?? false;
                                        class="btn btn-outline-danger float-left"
                                        data-toggle="tooltip"
                                        data-placement="top"
-                                       title="<?= Translation::get('reset_button') ?>">
-                                        <?= Translation::get('reset_button') ?>
+                                       title="<?php echo Translation::get('reset_button') ?>">
+                                        <?php echo Translation::get('reset_button') ?>
                                     </a>
 
                                     <button type="submit"
                                             data-toggle="tooltip"
                                             data-placement="top"
-                                            title="<?= Translation::get('save_button') ?>"
+                                            title="<?php echo Translation::get('save_button') ?>"
                                             class="btn btn-outline-success float-right">
-                                        <?= Translation::get('save_button') ?>
+                                        <?php echo Translation::get('save_button') ?>
                                         <i class="far fa-save"></i>
                                     </button>
                                 </div>
@@ -191,7 +196,7 @@ $createMenuItem = $create_menu_item ?? false;
                 <div class="row no-gutters align-items-center">
                     <div class="col-md-12 mr-2 mb-4">
                         <div class="text-lg font-weight-bold text-primary text-uppercase mb-1 float-left">
-                            <?= Translation::get('menu_items_overview') ?>
+                            <?php echo Translation::get('menu_items_overview') ?>
                         </div>
 
                         <a href="/admin/structure/menu/item/create"
@@ -206,7 +211,7 @@ $createMenuItem = $create_menu_item ?? false;
 
                 <div class="row">
                     <div class="col-md-12">
-                        <?= $menu_items ?? '' ?>
+                        <?php echo $menu_items ?? '' ?>
                     </div>
                 </div>
             </div>

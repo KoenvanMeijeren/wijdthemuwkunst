@@ -11,7 +11,7 @@ use Support\Resource;
 $user = new User();
 $rights = new AccountRightsConverter($user->getRights());
 $request = new Request();
-$breadcrumbs = new Breadcrumbs();
+$breadcrumbs = new Breadcrumbs(URI::getUrl());
 ?>
 <!DOCTYPE html>
 <html lang="<?= Translation::DUTCH_LANGUAGE_CODE ?>">
@@ -242,7 +242,7 @@ $breadcrumbs = new Breadcrumbs();
                 <div class="container-fluid">
                     <?php Resource::loadFlashMessage(); ?>
 
-                    <?php if ($breadcrumbs->visible()) {
+                    <?php if ($breadcrumbs->visible(2)) {
                         echo $breadcrumbs->generate();
                     } ?>
 

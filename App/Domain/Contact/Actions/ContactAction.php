@@ -1,75 +1,86 @@
 <?php
+
 declare(strict_types=1);
 
 
 namespace App\Domain\Contact\Actions;
 
 use App\Domain\Admin\ContactForm\Actions\BaseContactFormAction;
-use App\Src\Mail\Mail;
+use App\System\Mail\Mail;
 use Domain\Admin\Settings\Models\Setting;
 use Src\Security\Recaptcha;
 use Src\Translation\Translation;
 
-final class ContactAction extends BaseContactFormAction
-{
-    private string $baseViewPath = 'Contact/Views';
+/**
+ * Provides a contact action.
+ *
+ * @package App\Domain\Contact\Actions
+ */
+final class ContactAction extends BaseContactFormAction {
 
-    /**
-     * @inheritDoc
-     */
-    protected function handle(): bool
-    {
-        $mail = new Mail();
-        $setting = new Setting();
+  /**
+   * The base view path of the mail templates.
+   *
+   * @var string
+   */
+  protected string $baseViewPath = 'Contact/Views';
 
-        $mail->addAddress(
-            $setting->get('bedrijf_email'),
-            $setting->get('bedrijf_naam')
-        );
+  /**
+   * {@inheritDoc}
+   */
+  protected function handle(): bool {
+    $mail = new Mail();
+    $setting = new Setting();
 
-        $mail->setSubject($setting->get('contactformulier_onderwerp'));
+    $mail->addAddress(
+          $setting->get('bedrijf_email'),
+          $setting->get('bedrijf_naam')
+      );
 
-        $mail->setBody(
-            $this->baseViewPath,
-            'contact',
-            'plain-text-contact',
-            [
-                'company_name' => $setting->get('bedrijf_naam'),
-                'copyright' => $setting->get('copyright_tekst'),
-                'message' => $this->message,
-                'email' => $this->email,
-                'name' => $this->name,
-            ]
-        );
+    $mail->setSubject($setting->get('contactformulier_onderwerp'));
 
-        return $mail->send();
+    $mail->setBody(
+          $this->baseViewPath,
+          'contact',
+          'plain-text-contact',
+          [
+            'company_name' => $setting->get('bedrijf_naam'),
+            'copyright' => $setting->get('copyright_tekst'),
+            'message' => $this->message,
+            'email' => $this->email,
+            'name' => $this->name,
+          ]
+      );
+
+    return $mail->send();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  protected function authorize(): bool {
+    $recaptcha = new Recaptcha();
+    if (!$recaptcha->validate()) {
+      return FALSE;
     }
 
-    protected function authorize(): bool
-    {
-        $recaptcha = new Recaptcha();
+    return parent::authorize();
+  }
 
-        if (!$recaptcha->validate()) {
-            return false;
-        }
+  /**
+   * {@inheritDoc}
+   */
+  protected function validate(): bool {
+    $setting = new Setting();
 
-        return parent::authorize();
-    }
+    $this->validator->input($setting->get('bedrijf_email'), Translation::get('company_email'))
+      ->settingIsRequired()
+      ->isEmail();
 
-    /**
-     * @inheritDoc
-     */
-    protected function validate(): bool
-    {
-        $setting = new Setting();
+    $this->validator->input($setting->get('bedrijf_naam'), Translation::get('company_name'))
+      ->settingIsRequired();
 
-        $this->validator->input($setting->get('bedrijf_email'), Translation::get('company_email'))
-            ->settingIsRequired()
-            ->isEmail();
+    return parent::validate();
+  }
 
-        $this->validator->input($setting->get('bedrijf_naam'), Translation::get('company_name'))
-            ->settingIsRequired();
-
-        return parent::validate();
-    }
 }

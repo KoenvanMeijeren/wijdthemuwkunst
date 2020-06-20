@@ -1,20 +1,24 @@
 <?php
 
+/**
+ * @file
+ */
+
 declare(strict_types=1);
 
 use Src\Validate\Validate;
 
 $filenames = [
-    'default',
-    'csv',
-    'math',
-    'load_items',
+  'default',
+  'csv',
+  'math',
+  'load_items',
 ];
 
 foreach ($filenames as $filename) {
-    $filename = APP_PATH . '/Support/Functions/' . $filename . '.php';
+  $filename = APP_PATH . '/Support/Functions/' . $filename . '.php';
 
-    Validate::var($filename)->fileExists();
+  Validate::var($filename)->fileExists();
 
-    include_once $filename;
+  include_once $filename;
 }

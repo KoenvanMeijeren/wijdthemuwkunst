@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 
@@ -9,80 +10,82 @@ use Src\Action\FileAction;
 use Src\Core\Request;
 use Src\Core\Upload;
 
-final class UploadImageAction extends FileAction
-{
-    private array $file;
+/**
+ *
+ */
+final class UploadImageAction extends FileAction {
+  private array $file;
 
-    public function __construct(string $fileName)
-    {
-        $request = new Request();
+  /**
+   *
+   */
+  public function __construct(string $fileName) {
+    $request = new Request();
 
-        $this->file = $request->file($fileName);
+    $this->file = $request->file($fileName);
 
-        $uri = $request->env('app_uri');
-        $shortUri = replaceString('www.', '', $uri);
+    $uri = $request->env('app_uri');
+    $shortUri = replaceString('www.', '', $uri);
 
-        $this->acceptedOrigins[] = $uri;
-        $this->acceptedOrigins[] = $shortUri;
+    $this->acceptedOrigins[] = $uri;
+    $this->acceptedOrigins[] = $shortUri;
+  }
+
+  /**
+   * @inheritDoc
+   */
+  protected function handle(): void {
+    if (array_key_exists('name', $this->file)) {
+      $datetime = new Chronos();
+      $this->file['name'] .= $datetime->toDateTimeString();
     }
 
-    /**
-     * @inheritDoc
-     */
-    protected function handle(): void
-    {
-        if (array_key_exists('name', $this->file)) {
-            $datetime = new Chronos();
-            $this->file['name'] .= $datetime->toDateTimeString();
-        }
+    $uploader = new Upload($this->file);
 
-        $uploader = new Upload($this->file);
-
-        if (count($this->file) > 0
-            && $uploader->prepare()
-            && $uploader->getFileIfItExists() === ''
-        ) {
-            $uploader->execute();
-        }
-
-        echo json_encode(
-            array('location' => $uploader->getFileIfItExists()),
-            JSON_THROW_ON_ERROR,
-            512
-        );
+    if (count($this->file) > 0
+          && $uploader->prepare()
+          && $uploader->getFileIfItExists() === ''
+      ) {
+      $uploader->execute();
     }
 
-    /**
-     * @inheritDoc
-     */
-    protected function authorize(): bool
-    {
-        $request = new Request();
+    echo json_encode(
+          ['location' => $uploader->getFileIfItExists()],
+          JSON_THROW_ON_ERROR,
+          512
+      );
+  }
 
-        if (!in_array(
-            $request->server(Request::HTTP_ORIGIN),
-            $this->acceptedOrigins,
-            true
-        )
-        ) {
-            header('HTTP/1.1 403 Origin Denied');
+  /**
+   * @inheritDoc
+   */
+  protected function authorize(): bool {
+    $request = new Request();
 
-            return false;
-        }
+    if (!in_array(
+          $request->server(Request::HTTP_ORIGIN),
+          $this->acceptedOrigins,
+          TRUE
+      )
+      ) {
+      header('HTTP/1.1 403 Origin Denied');
 
-        header(
-            'Access-Control-Allow-Origin: ' .
-            $request->server(Request::HTTP_ORIGIN)
-        );
-
-        return true;
+      return FALSE;
     }
 
-    /**
-     * @inheritDoc
-     */
-    protected function validate(): bool
-    {
-        return true;
-    }
+    header(
+          'Access-Control-Allow-Origin: ' .
+          $request->server(Request::HTTP_ORIGIN)
+      );
+
+    return TRUE;
+  }
+
+  /**
+   * @inheritDoc
+   */
+  protected function validate(): bool {
+    return TRUE;
+  }
+
 }

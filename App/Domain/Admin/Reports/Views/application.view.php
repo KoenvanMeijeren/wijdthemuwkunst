@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * @file
+ */
+
 declare(strict_types=1);
 
 use Src\Core\Env;
@@ -14,14 +19,14 @@ $request = new Request();
                 <div class="row no-gutters align-items-center">
                     <div class="col-md-12 mr-2 mb-4">
                         <div class="text-lg font-weight-bold text-primary text-uppercase mb-1">
-                            <?= Translation::get('app_status') ?>
+                            <?php echo Translation::get('app_status') ?>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-12">
-                        <?= ucfirst($env ?? Env::DEVELOPMENT) ?>
+                        <?php echo ucfirst($env ?? Env::DEVELOPMENT) ?>
                     </div>
                 </div>
             </div>
@@ -34,14 +39,14 @@ $request = new Request();
                 <div class="row no-gutters align-items-center">
                     <div class="col-md-12 mr-2 mb-4">
                         <div class="text-lg font-weight-bold text-primary text-uppercase mb-1">
-                            <?= Translation::get('header_data') ?>
+                            <?php echo Translation::get('header_data') ?>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-12">
-                        <?= $headerDataTable ?? Translation::get('no_header_data_available') ?>
+                        <?php echo $headerDataTable ?? Translation::get('no_header_data_available') ?>
                     </div>
                 </div>
             </div>
@@ -54,14 +59,14 @@ $request = new Request();
                 <div class="row no-gutters align-items-center">
                     <div class="col-md-12 mr-2 mb-4">
                         <div class="text-lg font-weight-bold text-primary text-uppercase mb-1">
-                            <?= Translation::get('session_settings') ?>
+                            <?php echo Translation::get('session_settings') ?>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-12">
-                        <?= $sessionSettingsTable ?? Translation::get('no_session_settings_data_available') ?>
+                        <?php echo $sessionSettingsTable ?? Translation::get('no_session_settings_data_available') ?>
                     </div>
                 </div>
             </div>
@@ -84,7 +89,7 @@ $request = new Request();
                 <div class="row">
                     <div class="col-md-12">
                         <div class="scrollbox-vertical h-500">
-                            <?= $phpinfo ?? '' ?>
+                            <?php echo $phpinfo ?? '' ?>
                         </div>
                     </div>
                 </div>

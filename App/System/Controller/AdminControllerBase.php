@@ -1,47 +1,48 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Controller;
 
 use App\Domain\Admin\Cms\Structure\MenuTrait;
-use Domain\Admin\Accounts\User\Models\User;
-use Src\Core\Request;
-use Src\View\DomainView;
+use Src\View\ViewInterface;
 
-abstract class AdminControllerBase
-{
-    use MenuTrait;
+/**
+ * Provides a controller base for the admin controllers.
+ *
+ * @package App\System\Controller
+ */
+abstract class AdminControllerBase extends ControllerBase {
+  use MenuTrait;
 
-    protected string $baseViewPath = '';
-    protected array $menuItems = [];
+  /**
+   * Provides an array with sub menu items for the base menu items in sidebar.
+   *
+   * @var mixed[]
+   */
+  protected array $menuItems = [];
 
-    protected Request $request;
-    protected User $user;
+  /**
+   * AdminControllerBase constructor.
+   */
+  public function __construct() {
+    parent::__construct();
 
-    public function __construct()
-    {
-        $this->user = new User();
-        $this->request = new Request();
+    $this->menuItems['menuItems'] = [
+      'content' => $this->contentMenu(),
+      'structure' => $this->structureMenu(),
+      'configuration' => $this->configurationMenu(),
+      'reports' => $this->reportsMenu(),
+    ];
+  }
 
-        $this->menuItems['menuItems'] = [
-            'content' => $this->contentMenu(),
-            'structure' => $this->structureMenu(),
-            'configuration' => $this->configurationMenu(),
-            'reports' => $this->reportsMenu(),
-        ];
-    }
+  /**
+   * {@inheritDoc}
+   */
+  protected function view(string $name, array $content = []): ViewInterface {
+    $content = array_merge($content, $this->menuItems);
 
-    /**
-     * Returns a domain view.
-     *
-     * @param string $name
-     * @param array $content
-     *
-     * @return DomainView
-     */
-    protected function view(string $name, array $content = []): DomainView
-    {
-        $content = array_merge($content, $this->menuItems);
+    return parent::view($name, $content);
+  }
 
-        return new DomainView($this->baseViewPath . $name, $content);
-    }
 }

@@ -34,8 +34,4 @@
             <property name="minimum" value="2"/>
         </properties>
     </rule>
-    <rule ref="rulesets/naming.xml/ConstructorWithNameAsEnclosingClass"/>
-    <rule ref="rulesets/naming.xml/ConstantNamingConventions"/>
-    <rule ref="rulesets/naming.xml/BooleanGetMethodName"/>
-    <rule ref="rulesets/unusedcode.xml"/>
 </ruleset>

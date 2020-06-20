@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 
@@ -8,37 +9,52 @@ use Symfony\Component\Templating\Loader\FilesystemLoader;
 use Symfony\Component\Templating\PhpEngine;
 use Symfony\Component\Templating\TemplateNameParser;
 
-abstract class BaseView
-{
-    protected string $layoutPath = RESOURCES_PATH . '/layout/%name%';
+/**
+ * Provides a base view for views.
+ *
+ * @package Src\View
+ */
+abstract class BaseView implements ViewInterface {
 
-    /**
-     * @param string    $layout    the layout of the whole view.
-     * @param string    $name      the name of the partial view.
-     * @param mixed[]   $content   the content of the partial view.
-     */
-    protected function __construct(string $layout, string $name, array $content)
-    {
-        $filesystemLoader = new FilesystemLoader($this->layoutPath);
+  /**
+   * The path to the layout template.
+   *
+   * @var string
+   */
+  protected string $layoutPath = RESOURCES_PATH . '/layout/%name%';
 
-        $templating = new PhpEngine(
-            new TemplateNameParser(),
-            $filesystemLoader
-        );
+  /**
+   * @param string $layout
+   *   the layout of the whole view.
+   * @param string $name
+   *   the name of the partial view.
+   * @param mixed[] $content
+   *   the content of the partial view.
+   */
+  protected function __construct(string $layout, string $name, array $content) {
+    $filesystemLoader = new FilesystemLoader($this->layoutPath);
 
-        echo $templating->render($layout, [
-            'content' => $this->renderContent($name, $content),
-            'data' => $content
-        ]);
-    }
+    $templating = new PhpEngine(
+          new TemplateNameParser(),
+          $filesystemLoader
+      );
 
-    /**
-     * Render a partial view into the layout view.
-     *
-     * @param string    $name      the name of the partial view
-     * @param mixed[]   $content   the content of the partial view
-     *
-     * @return string
-     */
-    abstract protected function renderContent(string $name, array $content = []): string;
+    echo $templating->render($layout, [
+      'content' => $this->renderContent($name, $content),
+      'data' => $content,
+    ]);
+  }
+
+  /**
+   * Render a partial view into the layout view.
+   *
+   * @param string $name
+   *   the name of the partial view.
+   * @param mixed[] $content
+   *   the content of the partial view.
+   *
+   * @return string
+   */
+  abstract protected function renderContent(string $name, array $content = []): string;
+
 }

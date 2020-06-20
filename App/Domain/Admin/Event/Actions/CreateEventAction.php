@@ -1,37 +1,39 @@
 <?php
 
-
 namespace App\Domain\Admin\Event\Actions;
 
 use Src\State\State;
 use Src\Translation\Translation;
 
-final class CreateEventAction extends BaseEventAction
-{
-    /**
-     * @inheritDoc
-     */
-    protected function handle(): bool
-    {
-        $event = $this->event->firstOrCreate($this->attributes);
+/**
+ *
+ */
+final class CreateEventAction extends BaseEventAction {
 
-        if ($event === null) {
-            $this->session->flash(
-                State::FAILED,
-                Translation::get('event_unsuccessfully_created')
-            );
+  /**
+   * @inheritDoc
+   */
+  protected function handle(): bool {
+    $event = $this->event->firstOrCreate($this->attributes);
 
-            return false;
-        }
-
-        $this->session->flash(
-            State::SUCCESSFUL,
-            sprintf(
-                Translation::get('event_successfully_created'),
-                $this->title
-            )
+    if ($event === NULL) {
+      $this->session->flash(
+            State::FAILED,
+            Translation::get('event_unsuccessfully_created')
         );
 
-        return true;
+      return FALSE;
     }
+
+    $this->session->flash(
+          State::SUCCESSFUL,
+          sprintf(
+              Translation::get('event_successfully_created'),
+              $this->title
+          )
+      );
+
+    return TRUE;
+  }
+
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 
@@ -6,6 +7,8 @@ namespace Src\Exceptions\Basic;
 
 use Exception;
 
-final class InvalidConfigException extends Exception
-{
+/**
+ *
+ */
+final class InvalidConfigException extends Exception {
 }

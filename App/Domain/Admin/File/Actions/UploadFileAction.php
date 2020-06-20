@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 
@@ -8,74 +9,77 @@ use Src\Action\FileAction;
 use Src\Core\Request;
 use Src\Core\Upload;
 
-final class UploadFileAction extends FileAction
-{
-    public function __construct()
-    {
-        $request = new Request();
+/**
+ *
+ */
+final class UploadFileAction extends FileAction {
 
-        $uri = $request->env('app_uri');
-        $shortUri = replaceString('www.', '', $uri);
+  /**
+   *
+   */
+  public function __construct() {
+    $request = new Request();
 
-        $this->acceptedOrigins[] = $uri;
-        $this->acceptedOrigins[] = $shortUri;
+    $uri = $request->env('app_uri');
+    $shortUri = replaceString('www.', '', $uri);
+
+    $this->acceptedOrigins[] = $uri;
+    $this->acceptedOrigins[] = $shortUri;
+  }
+
+  /**
+   * @inheritDoc
+   */
+  protected function handle(): void {
+    reset($_FILES);
+    $temp = current($_FILES);
+
+    $uploader = new Upload($temp);
+
+    if (sizeof($temp) > 0
+          && $uploader->prepare()
+          && $uploader->getFileIfItExists() === ''
+      ) {
+      $uploader->execute();
     }
 
-    /**
-     * @inheritDoc
-     */
-    protected function handle(): void
-    {
-        reset($_FILES);
-        $temp = current($_FILES);
+    echo json_encode(
+          ['location' => $uploader->getFileIfItExists()],
+          JSON_THROW_ON_ERROR,
+          512
+      );
+  }
 
-        $uploader = new Upload($temp);
+  /**
+   * @inheritDoc
+   */
+  protected function authorize(): bool {
+    $request = new Request();
 
-        if (sizeof($temp) > 0
-            && $uploader->prepare()
-            && $uploader->getFileIfItExists() === ''
-        ) {
-            $uploader->execute();
-        }
+    if (!in_array(
+          $request->server(Request::HTTP_ORIGIN),
+          $this->acceptedOrigins,
+          TRUE
+      )
+      ) {
+      header('HTTP/1.1 403 Origin Denied');
 
-        echo json_encode(
-            array('location' => $uploader->getFileIfItExists()),
-            JSON_THROW_ON_ERROR,
-            512
-        );
+      return FALSE;
     }
 
-    /**
-     * @inheritDoc
-     */
-    protected function authorize(): bool
-    {
-        $request = new Request();
+    header(
+          'Access-Control-Allow-Origin: ' .
+          $request->server(Request::HTTP_ORIGIN)
+      );
 
-        if (!in_array(
-            $request->server(Request::HTTP_ORIGIN),
-            $this->acceptedOrigins,
-            true
-        )
-        ) {
-            header('HTTP/1.1 403 Origin Denied');
+    return TRUE;
+  }
 
-            return false;
-        }
+  /**
+   * @inheritDoc
+   */
+  protected function validate(): bool {
+    return TRUE;
+  }
 
-        header(
-            'Access-Control-Allow-Origin: ' .
-            $request->server(Request::HTTP_ORIGIN)
-        );
-
-        return true;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected function validate(): bool
-    {
-        return true;
-    }
 }

@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * @file
+ */
+
 declare(strict_types=1);
 
 use Domain\Admin\Accounts\User\Models\User;
@@ -9,7 +14,7 @@ use Src\Translation\Translation;
 $request = new Request();
 ?>
 <form method="post" action="/admin/account/create/store">
-    <?= CSRF::insertToken('/admin/account/create/store') ?>
+    <?php echo CSRF::insertToken('/admin/account/create/store') ?>
 
     <div class="row">
         <div class="col-md-6">
@@ -27,31 +32,31 @@ $request = new Request();
                     <div class="card-body">
                         <div class="form-group">
                             <label for="name">
-                                <?= Translation::get('form_name') ?>
+                                <?php echo Translation::get('form_name') ?>
                                 <span class="text-danger">*</span>
                             </label>
 
                             <input type="text" name="name" id="name"
                                    class="form-control form-control-user"
-                                   placeholder="<?= Translation::get('form_name') ?>"
-                                   value="<?= $request->post('name') ?>"
+                                   placeholder="<?php echo Translation::get('form_name') ?>"
+                                   value="<?php echo $request->post('name') ?>"
                                    required>
                         </div>
 
                         <div class="form-group">
                             <label for="email">
-                                <?= Translation::get('form_email') ?>
+                                <?php echo Translation::get('form_email') ?>
                                 <span class="text-danger">*</span>
                             </label>
                             <input type="email" id="email" class="form-control"
-                                   placeholder="<?= Translation::get('form_email') ?>"
-                                   value="<?= $request->post('email') ?>"
+                                   placeholder="<?php echo Translation::get('form_email') ?>"
+                                   value="<?php echo $request->post('email') ?>"
                                    required name="email">
                         </div>
 
                         <div class="form-group">
                             <label for="rights">
-                                <?= Translation::get('form_rights') ?>
+                                <?php echo Translation::get('form_rights') ?>
                                 <span class="text-danger">*</span>
                             </label>
 
@@ -60,19 +65,19 @@ $request = new Request();
                                     name="rights"
                                     required>
                                 <option value="0">
-                                    <?= Translation::get('form_choose_rights') ?>
+                                    <?php echo Translation::get('form_choose_rights') ?>
                                 </option>
-                                <option value="<?= User::ADMIN ?>"
-                                    <?= (int)$request->post('rights') === User::ADMIN ? 'selected' : '' ?>>
-                                    <?= Translation::get('form_rights_admin') ?>
+                                <option value="<?php echo User::ADMIN ?>"
+                                    <?php echo (int) $request->post('rights') === User::ADMIN ? 'selected' : '' ?>>
+                                    <?php echo Translation::get('form_rights_admin') ?>
                                 </option>
-                                <option value="<?= User::SUPER_ADMIN ?>"
-                                    <?= (int)$request->post('rights') === User::SUPER_ADMIN ? 'selected' : '' ?>>
-                                    <?= Translation::get('form_rights_super_admin') ?>
+                                <option value="<?php echo User::SUPER_ADMIN ?>"
+                                    <?php echo (int) $request->post('rights') === User::SUPER_ADMIN ? 'selected' : '' ?>>
+                                    <?php echo Translation::get('form_rights_super_admin') ?>
                                 </option>
-                                <option value="<?= User::DEVELOPER ?>"
-                                    <?= (int)$request->post('rights') === User::DEVELOPER ? 'selected' : '' ?>>
-                                    <?= Translation::get('form_rights_developer') ?>
+                                <option value="<?php echo User::DEVELOPER ?>"
+                                    <?php echo (int) $request->post('rights') === User::DEVELOPER ? 'selected' : '' ?>>
+                                    <?php echo Translation::get('form_rights_developer') ?>
                                 </option>
                             </select>
                         </div>
@@ -96,27 +101,27 @@ $request = new Request();
                     <div class="card-body">
                         <div class="form-group">
                             <label for="newPassword">
-                                <?= Translation::get('form_new_password') ?>
+                                <?php echo Translation::get('form_new_password') ?>
                                 <span class="text-danger">*</span>
                             </label>
                             <input type="password"
                                    name="password"
                                    id="newPassword"
                                    class="form-control"
-                                   placeholder="<?= Translation::get('form_new_password') ?>"
+                                   placeholder="<?php echo Translation::get('form_new_password') ?>"
                                    required autocomplete="false">
                         </div>
 
                         <div class="form-group">
                             <label for="confirmationPassword">
-                                <?= Translation::get('form_confirmation_password') ?>
+                                <?php echo Translation::get('form_confirmation_password') ?>
                                 <span class="text-danger">*</span>
                             </label>
                             <input type="password"
                                    name="confirmationPassword"
                                    id="confirmationPassword"
                                    class="form-control"
-                                   placeholder="<?= Translation::get('form_confirmation_password') ?>"
+                                   placeholder="<?php echo Translation::get('form_confirmation_password') ?>"
                                    required autocomplete="false">
 
                             <div id="password-feedback"></div>
@@ -130,15 +135,15 @@ $request = new Request();
     <div class="form-actions-submit">
         <a href="/admin/account" class="btn btn-outline-primary float-left"
            data-toggle="tooltip" data-placement="top"
-           title="<?= Translation::get('back_button') ?>">
+           title="<?php echo Translation::get('back_button') ?>">
             <i class="fas fa-arrow-left"></i>
-            <?= Translation::get('back_button') ?>
+            <?php echo Translation::get('back_button') ?>
         </a>
 
         <button type="submit" data-toggle="tooltip" data-placement="top"
-                title="<?= Translation::get('save_button') ?>"
+                title="<?php echo Translation::get('save_button') ?>"
                 class="btn btn-outline-success float-right">
-            <?= Translation::get('save_button') ?>
+            <?php echo Translation::get('save_button') ?>
             <i class="far fa-save"></i>
         </button>
     </div>

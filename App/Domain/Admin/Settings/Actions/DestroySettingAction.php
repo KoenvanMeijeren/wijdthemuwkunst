@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 
@@ -8,57 +9,61 @@ use Domain\Admin\Accounts\User\Models\User;
 use Src\State\State;
 use Src\Translation\Translation;
 
-final class DestroySettingAction extends BaseSettingAction
-{
-    /**
-     * @inheritDoc
-     */
-    protected function handle(): bool
-    {
-        $this->setting->delete($this->setting->getId());
+/**
+ *
+ */
+final class DestroySettingAction extends BaseSettingAction {
 
-        if ($this->setting->find($this->setting->getId()) === null) {
-            $this->session->flash(
-                State::SUCCESSFUL,
-                sprintf(
-                    Translation::get('setting_successful_deleted'),
-                    $this->settingRepository->getKey()
-                )
-            );
+  /**
+   * @inheritDoc
+   */
+  protected function handle(): bool {
+    $this->setting->delete($this->setting->getId());
 
-            return true;
-        }
-
-        $this->session->flash(
+    if ($this->setting->find($this->setting->getId()) === NULL) {
+      $this->session->flash(
             State::SUCCESSFUL,
             sprintf(
-                Translation::get('setting_unsuccessful_deleted'),
+                Translation::get('setting_successful_deleted'),
                 $this->settingRepository->getKey()
             )
         );
-        return false;
+
+      return TRUE;
     }
 
-    protected function authorize(): bool
-    {
-        $user = new User();
-        if ($user->getRights() !== User::DEVELOPER) {
-            $this->session->flash(
-                State::FAILED,
-                Translation::get('setting_destroy_not_allowed')
-            );
+    $this->session->flash(
+          State::SUCCESSFUL,
+          sprintf(
+              Translation::get('setting_unsuccessful_deleted'),
+              $this->settingRepository->getKey()
+          )
+      );
+    return FALSE;
+  }
 
-            return false;
-        }
+  /**
+   *
+   */
+  protected function authorize(): bool {
+    $user = new User();
+    if ($user->getRights() !== User::DEVELOPER) {
+      $this->session->flash(
+            State::FAILED,
+            Translation::get('setting_destroy_not_allowed')
+        );
 
-        return parent::authorize();
+      return FALSE;
     }
 
-    /**
-     * @inheritDoc
-     */
-    protected function validate(): bool
-    {
-        return true;
-    }
+    return parent::authorize();
+  }
+
+  /**
+   * @inheritDoc
+   */
+  protected function validate(): bool {
+    return TRUE;
+  }
+
 }

@@ -1,41 +1,42 @@
 <?php
 
-
 namespace App\Domain\Admin\Menu\Actions;
-
 
 use Src\State\State;
 use Src\Translation\Translation;
 
-final class CreateMenuAction extends BaseMenuAction
-{
-    /**
-     * @inheritDoc
-     */
-    protected function handle(): bool
-    {
-        $menuItem = $this->menu->firstOrCreate($this->attributes);
+/**
+ *
+ */
+final class CreateMenuAction extends BaseMenuAction {
 
-        if ($menuItem === null) {
-            $this->session->flash(
-                State::FAILED,
-                sprintf(
-                    Translation::get('menu_item_unsuccessful_created'),
-                    $this->title
-                )
-            );
+  /**
+   * @inheritDoc
+   */
+  protected function handle(): bool {
+    $menuItem = $this->menu->firstOrCreate($this->attributes);
 
-            return false;
-        }
-
-        $this->session->flash(
-            State::SUCCESSFUL,
+    if ($menuItem === NULL) {
+      $this->session->flash(
+            State::FAILED,
             sprintf(
-                Translation::get('menu_item_successful_created'),
+                Translation::get('menu_item_unsuccessful_created'),
                 $this->title
             )
         );
 
-        return true;
+      return FALSE;
     }
+
+    $this->session->flash(
+          State::SUCCESSFUL,
+          sprintf(
+              Translation::get('menu_item_successful_created'),
+              $this->title
+          )
+      );
+
+    return TRUE;
+  }
+
 }

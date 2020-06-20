@@ -1,6 +1,6 @@
 {
     "name": "koenvanmeijeren/wijdthemuwkunst",
-    "license": "private",
+    "license": "proprietary",
     "authors": [
         {
             "name": "Koen van Meijeren",
@@ -16,7 +16,8 @@
             "App\\": "App/",
             "Domain\\": "App/Domain/",
             "Src\\": "App/Src/",
-            "Support\\": "App/Support/"
+            "Support\\": "App/Support/",
+            "System\\": "App/System/"
         }
     },
     "config": {
@@ -31,35 +32,35 @@
         }
     },
     "require": {
-        "cakephp/chronos": "^2.0.2",
-        "defuse/php-encryption": "^2.2.1",
-        "filp/whoops": "^2.7.1",
-        "google/recaptcha": "^1.2.3",
-        "kminek/email-obfuscator": "^1.0.1",
-        "monolog/monolog": "^2.0.2",
-        "paragonie/anti-csrf": "^2.2.1",
-        "phpmailer/phpmailer": "^6.1.4",
-        "siriusphp/upload": "^2.1.1",
-        "symfony/filesystem": "^4.4.4",
-        "symfony/templating": "^4.4.4",
-        "vlucas/phpdotenv": "^4.1.0",
+        "ext-json": "*",
         "ext-pdo": "*",
-        "ext-json": "*"
+        "ext-iconv": "*",
+        "ext-intl": "*",
+        "cakephp/chronos": "^2.0.5",
+        "defuse/php-encryption": "^2.2.1",
+        "filp/whoops": "^2.7.2",
+        "google/recaptcha": "^1.2.4",
+        "kminek/email-obfuscator": "^1.0.1",
+        "monolog/monolog": "^2.1.0",
+        "paragonie/anti-csrf": "^2.2.1",
+        "phpmailer/phpmailer": "^6.1.6",
+        "siriusphp/upload": "^2.1.1",
+        "symfony/filesystem": "^4.4.9",
+        "symfony/templating": "^4.4.9",
+        "vlucas/phpdotenv": "^4.1.6"
     },
     "require-dev": {
         "bmitch/churn-php": "^1.0.3",
-        "daniel-werner/php-quality-tools": "^1.1.0",
-        "ergebnis/phpstan-rules": "^0.13.0",
-        "php-coveralls/php-coveralls": "^2.2.0",
+        "daniel-werner/php-quality-tools": "^1.2.0",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.6.2",
+        "drupal/coder": "^8.3",
         "phploc/phploc": "^5.0.0",
-        "phpmd/phpmd": "^2.8.1",
-        "phpmetrics/phpmetrics": "^2.5.0",
-        "phpstan/phpstan-deprecation-rules": "^0.11.2",
-        "phpstan/phpstan-strict-rules": "^0.11.1",
+        "phpmd/phpmd": "^2.8.2",
+        "phpmetrics/phpmetrics": "^2.6.2",
+        "phpstan/phpstan": "^0.12.25",
         "roave/security-advisories": "dev-master",
         "sebastian/phpcpd": "^4.1.0",
-        "symfony/var-dumper": "^4.4",
-        "thecodingmachine/phpstan-strict-rules": "^0.11.2"
+        "symfony/var-dumper": "^4.4.9"
     },
     "prefer-stable": true,
     "minimum-stability": "stable",
@@ -71,26 +72,17 @@
             "docker-compose -f docker-compose.yml -f docker-compose.dev.yml stop"
         ],
         "inspect": [
-            "phpcs app",
-            "phpcpd app"
+            "vendor/bin/phpcs --standard=Drupal --extensions=php App",
+            "phpcpd app",
+            "phpmd app text phpmd.xml",
+            "phpstan analyse -c phpstan.neon"
         ],
         "inspect-fix": [
-            "php-cs-fixer fix app",
-            "phpcbf app"
-        ],
-        "phpcs": [
-            "phpcs app"
-        ],
-        "phpmd": [
-            "phpmd app html phpmd.xml --reportfile public_html/phpmd/index.html"
-        ],
-        "phpstan": [
-            "phpstan analyse -c phpstan.neon"
+            "vendor/bin/phpcbf --standard=Drupal --extensions=php App"
         ],
         "insights": [
             "phploc app",
-            "phpmetrics --report-html=public_html/phpmetrics app",
-            "phpmd app html phpmd.xml --reportfile public_html/phpmd/index.html"
+            "phpmetrics --report-html=public_html/phpmetrics app"
         ]
     }
 }

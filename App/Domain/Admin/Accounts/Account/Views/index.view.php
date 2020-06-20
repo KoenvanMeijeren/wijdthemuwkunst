@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * @file
+ */
+
 declare(strict_types=1);
 
 use Src\Translation\Translation;
@@ -11,7 +16,7 @@ use Src\Translation\Translation;
                 <div class="row no-gutters align-items-center">
                     <div class="col-md-12 mr-2 mb-4">
                         <div class="text-lg font-weight-bold text-primary text-uppercase mb-1 float-left">
-                            <?= Translation::get('admin_accounts_maintenance_title') ?>
+                            <?php echo Translation::get('admin_accounts_maintenance_title') ?>
                         </div>
 
                         <a href="/admin/account/create"
@@ -26,7 +31,7 @@ use Src\Translation\Translation;
 
                 <div class="row">
                     <div class="col-md-12">
-                        <?= $accounts ?? Translation::get('no_accounts_were_found_message') ?>
+                        <?php echo $accounts ?? Translation::get('no_accounts_were_found_message') ?>
                     </div>
                 </div>
             </div>

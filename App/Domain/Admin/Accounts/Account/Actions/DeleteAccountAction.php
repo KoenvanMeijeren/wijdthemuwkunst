@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 
@@ -8,53 +9,54 @@ use App\Domain\Admin\Accounts\Account\Actions\BaseAccountAction;
 use Src\State\State;
 use Src\Translation\Translation;
 
-final class DeleteAccountAction extends BaseAccountAction
-{
-    /**
-     * @inheritDoc
-     */
-    protected function handle(): bool
-    {
-        $this->account->delete($this->account->getId());
+/**
+ *
+ */
+final class DeleteAccountAction extends BaseAccountAction {
 
-        if ($this->account->find($this->account->getId()) !== null) {
-            $this->session->flash(
-                State::FAILED,
-                Translation::get('admin_deleted_account_failed_message')
-            );
+  /**
+   * @inheritDoc
+   */
+  protected function handle(): bool {
+    $this->account->delete($this->account->getId());
 
-            return false;
-        }
-
-        $this->session->flash(
-            State::SUCCESSFUL,
-            Translation::get('admin_deleted_account_successful_message')
+    if ($this->account->find($this->account->getId()) !== NULL) {
+      $this->session->flash(
+            State::FAILED,
+            Translation::get('admin_deleted_account_failed_message')
         );
 
-        return true;
+      return FALSE;
     }
 
-    /**
-     * @inheritDoc
-     */
-    protected function authorize(): bool
-    {
-        if ($this->user->getId() === $this->account->getId()) {
-            $this->session->flash(
-                State::FAILED,
-                Translation::get('cannot_delete_own_account_message')
-            );
-            return false;
-        }
+    $this->session->flash(
+          State::SUCCESSFUL,
+          Translation::get('admin_deleted_account_successful_message')
+      );
 
-        return parent::authorize();
+    return TRUE;
+  }
+
+  /**
+   * @inheritDoc
+   */
+  protected function authorize(): bool {
+    if ($this->user->getId() === $this->account->getId()) {
+      $this->session->flash(
+            State::FAILED,
+            Translation::get('cannot_delete_own_account_message')
+        );
+      return FALSE;
     }
 
-    /**
-     * @inheritDoc
-     */
-    protected function validate(): bool
-    {
-        return true;
-    }
+    return parent::authorize();
+  }
+
+  /**
+   * @inheritDoc
+   */
+  protected function validate(): bool {
+    return TRUE;
+  }
+
 }

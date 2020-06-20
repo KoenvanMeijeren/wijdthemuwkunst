@@ -1,15 +1,20 @@
 <?php
+
+/**
+ * @file
+ */
+
 declare(strict_types=1);
 
-use Domain\Admin\Pages\Repositories\PageRepository;
 use Src\Core\Request;
 
 $request = new Request();
 
 $documentRoot = $request->server(Request::DOCUMENT_ROOT);
 
-/** @var PageRepository $page */
-$page = $pageRepo ?? null;
+/**
+ * @var \Domain\Admin\Pages\Repositories\PageRepository $page */
+$page = $pageRepo ?? NULL;
 ?>
 
 <?php if ($page->getBanner() !== ''
@@ -17,8 +22,8 @@ $page = $pageRepo ?? null;
 ) : ?>
     <!-- Banner -->
     <section class="header">
-        <img class="banner" src="<?= $page->getBanner() ?>"
-             alt="<?= $page->getTitle() . ' image banner' ?>">
+        <img class="banner" src="<?php echo $page->getBanner() ?>"
+             alt="<?php echo $page->getTitle() . ' image banner' ?>">
     </section>
 <?php endif;
 if ($page->getThumbnail() !== ''
@@ -26,13 +31,13 @@ if ($page->getThumbnail() !== ''
 ) : ?>
     <!-- Thumbnail -->
     <section class="header">
-        <img class="thumbnail" src="<?= $page->getThumbnail() ?>"
-             alt="<?= $page->getTitle() . ' image banner' ?>">
+        <img class="thumbnail" src="<?php echo $page->getThumbnail() ?>"
+             alt="<?php echo $page->getTitle() . ' image banner' ?>">
     </section>
 <?php endif; ?>
 
 <div class="container page">
     <div class="mt-5 mb-5">
-        <?= parseHtmlEntities($page->getContent()) ?>
+        <?php echo parseHtmlEntities($page->getContent()) ?>
     </div>
 </div>

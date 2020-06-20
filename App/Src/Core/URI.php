@@ -1,93 +1,95 @@
 <?php
+
 declare(strict_types=1);
 
 
 namespace Src\Core;
 
-final class URI
-{
-    /**
-     * Get the url.
-     *
-     * @return string
-     */
-    public static function getUrl(): string
-    {
-        $request = new Request();
+/**
+ *
+ */
+final class URI {
 
-        $sanitize = new Sanitize($request->server(Request::URI), 'url');
+  /**
+   * Get the url.
+   *
+   * @return string
+   */
+  public static function getUrl(): string {
+    $request = new Request();
 
-        return (string)$sanitize->data();
-    }
+    $sanitize = new Sanitize($request->server(Request::URI), 'url');
 
-    /**
-     * Get the used method for accessing the page.
-     *
-     * @return string
-     */
-    public static function getMethod(): string
-    {
-        $request = new Request();
+    return (string) $sanitize->data();
+  }
 
-        return $request->server(Request::METHOD);
-    }
+  /**
+   * Get the used method for accessing the page.
+   *
+   * @return string
+   */
+  public static function getMethod(): string {
+    $request = new Request();
 
-    /**
-     * Get the previous url.
-     *
-     * @return string
-     */
-    public static function getPreviousUrl(): string
-    {
-        $request = new Request();
+    return $request->server(Request::METHOD);
+  }
 
-        $sanitize = new Sanitize(
-            $request->server(Request::HTTP_REFERER),
-            'url'
-        );
+  /**
+   * Get the previous url.
+   *
+   * @return string
+   */
+  public static function getPreviousUrl(): string {
+    $request = new Request();
 
-        return (string)$sanitize->data();
-    }
+    $sanitize = new Sanitize(
+          $request->server(Request::HTTP_REFERER),
+          'url'
+      );
 
-    /**
-     * Get the domain extension.
-     *
-     * @return string
-     */
-    public static function getDomainExtension(): string
-    {
-        $request = new Request();
+    return (string) $sanitize->data();
+  }
 
-        $hostExploded = explode(
-            '.',
-            $request->server(Request::HTTP_HOST)
-        );
-        $arrayKeyLast = array_key_last($hostExploded);
+  /**
+   * Get the domain extension.
+   *
+   * @return string
+   */
+  public static function getDomainExtension(): string {
+    $request = new Request();
 
-        return $hostExploded[$arrayKeyLast] ?? 'nl';
-    }
+    $hostExploded = explode(
+          '.',
+          $request->server(Request::HTTP_HOST)
+      );
+    $arrayKeyLast = array_key_last($hostExploded);
 
-    /**
-     * Redirect to a specific url.
-     *
-     * @param string $url the url to redirect
-     */
-    public static function redirect(string $url): void
-    {
-        header('Location: ' . $url);
-        exit();
-    }
+    return $hostExploded[$arrayKeyLast] ?? 'nl';
+  }
 
-    /**
-     * Refresh the page.
-     *
-     * @param string $url the url to refresh
-     * @param int $refreshTime the refresh time
-     */
-    public static function refresh(string $url, int $refreshTime): void
-    {
-        $sanitize = new Sanitize($url, 'url');
+  /**
+   * Redirect to a specific url.
+   *
+   * @param string $url
+   *   the url to redirect.
+   */
+  public static function redirect(string $url): void {
+    header('Location: ' . $url);
+    exit();
+  }
 
-        header("Refresh: {$refreshTime}; URL=/" . $sanitize->data());
-    }
+  /**
+   * Refresh the page.
+   *
+   * @param string $url
+   *   the url to refresh.
+   * @param int $refreshTime
+   *   the refresh time.
+   */
+  public static function refresh(string $url, int $refreshTime): void {
+    $sanitize = new Sanitize($url, 'url');
+
+    header("Refresh: {$refreshTime}; URL=/" . $sanitize->data());
+  }
+
 }

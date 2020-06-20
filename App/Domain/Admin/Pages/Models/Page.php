@@ -1,76 +1,59 @@
 <?php
+
 declare(strict_types=1);
 
 
 namespace Domain\Admin\Pages\Models;
 
-use Src\Core\Router;
-use Src\Core\URI;
 use Src\Database\DB;
 use Src\Model\Model;
 use Src\Model\Scopes\SoftDelete\SoftDelete;
-use stdClass;
 
-final class Page extends Model
-{
-    use SoftDelete;
+/**
+ * Provides a model for the page table to interact with the database.
+ *
+ * @package Domain\Admin\Pages\Models
+ */
+final class Page extends Model {
+  use SoftDelete;
 
-    protected string $table = 'page';
-    protected string $foreignTable = 'slug';
-    protected string $primaryKey = 'page_ID';
-    protected string $foreignKey = 'page_slug_ID';
-    protected string $primarySlugKey = 'slug_ID';
-    protected string $slugKey = 'slug_name';
-    protected string $slugSoftDeletedKey = 'slug_is_deleted';
-    protected string $isPublishedKey = 'page_is_published';
-    protected string $softDeletedKey = 'page_is_deleted';
+  protected string $table = 'page';
+  protected string $foreignTable = 'slug';
+  protected string $primaryKey = 'page_ID';
+  protected string $foreignKey = 'page_slug_ID';
+  protected string $primarySlugKey = 'slug_ID';
+  protected string $slugKey = 'slug_name';
+  protected string $slugSoftDeletedKey = 'slug_is_deleted';
+  protected string $isPublishedKey = 'page_is_published';
+  protected string $softDeletedKey = 'page_is_deleted';
 
-    /**
-     * Possible page visibility options.
-     * - Page is normal
-     * - Page is static
-     *
-     * @var int
-     */
-    public const PAGE_NORMAL = 1;
-    public const PAGE_STATIC = 2;
+  /**
+   * Possible page visibility options.
+   * - Page is normal
+   * - Page is static.
+   *
+   * @var int
+   */
+  public const PAGE_NORMAL = 1;
+  public const PAGE_STATIC = 2;
 
-    public function __construct()
-    {
-        $this->addScope(
-            (new DB)->innerJoin(
-                $this->foreignTable,
-                $this->primarySlugKey,
-                $this->foreignKey
-            )->where(
-                $this->slugSoftDeletedKey,
-                '=',
-                '0'
-            )
-        );
+  /**
+   * Page constructor.
+   */
+  public function __construct() {
+    $this->addScope(
+          (new DB)->innerJoin(
+              $this->foreignTable,
+              $this->primarySlugKey,
+              $this->foreignKey
+          )->where(
+              $this->slugSoftDeletedKey,
+              '=',
+              '0'
+          )
+      );
 
-        $this->initializeSoftDelete();
-    }
+    $this->initializeSoftDelete();
+  }
 
-    public function getId(): int
-    {
-        return (int) Router::getWildcard();
-    }
-
-    public function getSlug(): string
-    {
-        $slug = Router::getWildcard();
-        if ($slug === '') {
-            $slug = URI::getUrl();
-        }
-
-        return $slug;
-    }
-
-    public function getBySlug(string $slug): ?stdClass
-    {
-        return $this->firstByAttributes([
-            $this->slugKey => $slug
-        ]);
-    }
 }

@@ -14,7 +14,7 @@ use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Authentication\Controllers\AuthenticationController;
 use Domain\Admin\Event\Controllers\EventController as AdminEventController;
 use Domain\Admin\File\Controllers\UploadFileController;
-use Domain\Admin\Pages\Controllers\PageControllerBase as AdminPageController;
+use Domain\Admin\Pages\Controllers\PageController as AdminPageController;
 use Domain\Admin\Reports\Controllers\ReportsController;
 use Domain\Admin\Settings\Controllers\SettingsControllers;
 use Domain\Pages\Controllers\PageController;

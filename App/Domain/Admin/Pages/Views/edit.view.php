@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * @file
+ */
+
 declare(strict_types=1);
 
 use Domain\Admin\Accounts\User\Models\User;
@@ -8,7 +13,7 @@ use Src\Core\Request;
 use Src\Security\CSRF;
 use Src\Translation\Translation;
 
-$page = new PageRepository($page ?? null);
+$page = new PageRepository($page ?? NULL);
 $user = new User();
 $request = new Request();
 
@@ -16,22 +21,22 @@ $disabled = '';
 if ($user->getRights() !== User::DEVELOPER
     && $page->getInMenu() === Page::PAGE_STATIC
 ) {
-    $disabled = 'disabled';
+  $disabled = 'disabled';
 }
 
 $action = '/admin/content/pages/page/create/store';
 $removeBannerAction = '';
 $removeThumbnailAction = '';
-$publishActionsVisible = false;
+$publishActionsVisible = FALSE;
 if ($page->getId() !== 0) {
-    $publishActionsVisible = true;
-    $action = '/admin/content/pages/page/edit/' . $page->getId() . '/store';
-    $removeThumbnailAction = '/admin/content/pages/page/edit/' . $page->getId() . '/remove/thumbnail';
-    $removeBannerAction = '/admin/content/pages/page/edit/' . $page->getId() . '/remove/banner';
+  $publishActionsVisible = TRUE;
+  $action = '/admin/content/pages/page/edit/' . $page->getId() . '/store';
+  $removeThumbnailAction = '/admin/content/pages/page/edit/' . $page->getId() . '/remove/thumbnail';
+  $removeBannerAction = '/admin/content/pages/page/edit/' . $page->getId() . '/remove/banner';
 }
 
 if ($page->getInMenu() === Page::PAGE_STATIC) {
-    $publishActionsVisible = false;
+  $publishActionsVisible = FALSE;
 }
 
 $collapsePageDetails = 'show';
@@ -39,36 +44,36 @@ if (!empty($page->getTitle())
     && !empty($page->getInMenu())
     && !empty($page->getSlug())
 ) {
-    $collapsePageDetails = '';
+  $collapsePageDetails = '';
 }
 
 $collapsePagePictures = 'show';
 if (!empty($page->getThumbnail())
     || !empty($page->getBanner())
 ) {
-    $collapsePagePictures = '';
+  $collapsePagePictures = '';
 }
 
-$pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
+$pageInMenu = (int) $request->post('pageInMenu', (string) $page->getInMenu());
 ?>
 <div class="form-actions-container">
     <?php if ($publishActionsVisible) : ?>
         <?php if ($disabled === '' && $page->isPublished()) : ?>
             <form method="post" class="form-actions"
-                  action="/admin/content/pages/page/unpublish/<?= $page->getId() ?>">
-                <?= CSRF::insertToken('/admin/content/pages/page/unpublish/' . $page->getId()) ?>
+                  action="/admin/content/pages/page/unpublish/<?php echo $page->getId() ?>">
+                <?php echo CSRF::insertToken('/admin/content/pages/page/unpublish/' . $page->getId()) ?>
 
                 <button type="submit" class="btn btn-outline-danger">
-                    <?= Translation::get('unpublish_button') ?>
+                    <?php echo Translation::get('unpublish_button') ?>
                 </button>
             </form>
         <?php elseif ($disabled === '') : ?>
             <form method="post" class="form-actions"
-                  action="/admin/content/pages/page/publish/<?= $page->getId() ?>">
-                <?= CSRF::insertToken('/admin/content/pages/page/publish/' . $page->getId()) ?>
+                  action="/admin/content/pages/page/publish/<?php echo $page->getId() ?>">
+                <?php echo CSRF::insertToken('/admin/content/pages/page/publish/' . $page->getId()) ?>
 
                 <button type="submit" class="btn btn-outline-success">
-                    <?= Translation::get('publish_button') ?>
+                    <?php echo Translation::get('publish_button') ?>
                 </button>
             </form>
         <?php endif; ?>
@@ -76,32 +81,32 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
 
     <?php if ($removeThumbnailAction !== '' && $page->getThumbnail() !== '') : ?>
         <form method="post" class="form-actions"
-              action="<?= $removeThumbnailAction ?>">
-            <?= CSRF::insertToken($removeThumbnailAction) ?>
+              action="<?php echo $removeThumbnailAction ?>">
+            <?php echo CSRF::insertToken($removeThumbnailAction) ?>
 
             <button type="submit"
                     name="remove-thumbnail"
                     class="btn btn-outline-danger">
-                <?= Translation::get('delete_thumbnail_button') ?>
+                <?php echo Translation::get('delete_thumbnail_button') ?>
             </button>
         </form>
     <?php endif; ?>
 
     <?php if ($removeBannerAction !== '' && $page->getBanner() !== '') : ?>
         <form method="post" class="form-actions"
-              action="<?= $removeBannerAction ?>">
-            <?= CSRF::insertToken($removeBannerAction) ?>
+              action="<?php echo $removeBannerAction ?>">
+            <?php echo CSRF::insertToken($removeBannerAction) ?>
             <button type="submit"
                     name="delete-banner"
                     class="btn btn-outline-danger">
-                <?= Translation::get('delete_banner_button') ?>
+                <?php echo Translation::get('delete_banner_button') ?>
             </button>
         </form>
     <?php endif; ?>
 </div>
 
-<form method="post" action="<?= $action ?>">
-    <?= CSRF::insertToken($action) ?>
+<form method="post" action="<?php echo $action ?>">
+    <?php echo CSRF::insertToken($action) ?>
 
     <div class="row">
         <div class="col-md-6">
@@ -113,32 +118,32 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                         Pagina gegevens
                     </h6>
                 </a>
-                <div class="collapse <?= $collapsePageDetails ?>"
+                <div class="collapse <?php echo $collapsePageDetails ?>"
                      id="collapsePageDetails">
                     <div class="card-body">
                         <div class="form-group">
                             <label for="slug">
-                                <?= Translation::get('form_page_slug') ?>
+                                <?php echo Translation::get('form_page_slug') ?>
                                 <span class="text-danger">*</span>
                             </label>
                             <input type="text" name="slug" id="slug"
                                    class="form-control"
-                                   placeholder="<?= Translation::get('form_page_slug') ?>"
-                                   value="<?= $request->post(
-                                       'slug',
-                                       $page->getSlug()
-                                   ) ?>" <?= $disabled ?> required>
+                                   placeholder="<?php echo Translation::get('form_page_slug') ?>"
+                                   value="<?php echo $request->post(
+                                    'slug',
+                                    $page->getSlug()
+) ?>" <?php echo $disabled ?> required>
                         </div>
 
                         <div class="form-group">
                             <label for="title">
-                                <?= Translation::get('form_title') ?>
+                                <?php echo Translation::get('form_title') ?>
                                 <span class="text-danger">*</span>
                             </label>
                             <input type="text" name="title" id="title"
                                    class="form-control"
-                                   placeholder="<?= Translation::get('form_title') ?>"
-                                   value="<?= $request->post(
+                                   placeholder="<?php echo Translation::get('form_title') ?>"
+                                   value="<?php echo $request->post(
                                        'title',
                                        $page->getTitle()
                                    ) ?>" required>
@@ -146,20 +151,20 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
 
                         <div class="form-group">
                             <label for="pageInMenu">
-                                <?= Translation::get('form_show_page_in_menu') ?>
+                                <?php echo Translation::get('form_show_page_in_menu') ?>
                                 <span class="text-danger">*</span>
                             </label>
 
                             <select id="pageInMenu" class="form-control"
-                                    name="pageInMenu" <?= $disabled ?>
+                                    name="pageInMenu" <?php echo $disabled ?>
                                     required>
-                                <option value="<?= Page::PAGE_NORMAL ?>"
-                                    <?= $pageInMenu === Page::PAGE_NORMAL ? 'selected' : '' ?>>
-                                    <?= Translation::get('page_normal') ?>
+                                <option value="<?php echo Page::PAGE_NORMAL ?>"
+                                    <?php echo $pageInMenu === Page::PAGE_NORMAL ? 'selected' : '' ?>>
+                                    <?php echo Translation::get('page_normal') ?>
                                 </option>
-                                <option value="<?= Page::PAGE_STATIC ?>"
-                                    <?= $pageInMenu === Page::PAGE_STATIC ? 'selected' : '' ?>>
-                                    <?= Translation::get('page_static') ?>
+                                <option value="<?php echo Page::PAGE_STATIC ?>"
+                                    <?php echo $pageInMenu === Page::PAGE_STATIC ? 'selected' : '' ?>>
+                                    <?php echo Translation::get('page_static') ?>
                                 </option>
                             </select>
                         </div>
@@ -177,14 +182,14 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                         Pagina foto's
                     </h6>
                 </a>
-                <div class="collapse <?= $collapsePagePictures ?>"
+                <div class="collapse <?php echo $collapsePagePictures ?>"
                      id="collapsePagePictures">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <div class="mb-2">
-                                        <?= Translation::get('form_thumbnail_size') ?>
+                                        <?php echo Translation::get('form_thumbnail_size') ?>
                                     </div>
                                     <div class="custom-file">
                                         <input type="file"
@@ -200,7 +205,7 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <img class="img-thumbnail"
-                                         src="<?= $page->getThumbnail() ?>"
+                                         src="<?php echo $page->getThumbnail() ?>"
                                          id="thumbnailOutput"
                                          alt="Thumbnail">
                                     <input type="hidden" name="thumbnail"
@@ -225,7 +230,7 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <div class="mb-2">
-                                        <?= Translation::get('form_banner_size') ?>
+                                        <?php echo Translation::get('form_banner_size') ?>
                                     </div>
 
                                     <div class="custom-file">
@@ -242,7 +247,7 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <img class="img-thumbnail"
-                                         src="<?= $page->getBanner() ?>"
+                                         src="<?php echo $page->getBanner() ?>"
                                          id="bannerOutput"
                                          alt="Banner">
                                     <input type="hidden" name="banner"
@@ -284,17 +289,17 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                     <div class="card-body">
                         <div class="form-group">
                             <label for="tinymce" class="visually-hidden">
-                                <?= Translation::get('form_page_content') ?>
+                                <?php echo Translation::get('form_page_content') ?>
                                 <span class="text-danger">*</span>
                             </label>
                             <textarea class="form-control" id="tinymce"
                                       rows="10" name="content">
-                                    <?= parseHtmlEntities(
-                                        $request->post(
+                                    <?php echo parseHtmlEntities(
+                                       $request->post(
                                             'content',
                                             $page->getContent()
                                         )
-                                    ) ?>
+                                   ) ?>
                                 </textarea>
                         </div>
                     </div>
@@ -308,17 +313,17 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
            class="btn btn-outline-primary"
            data-toggle="tooltip"
            data-placement="top"
-           title="<?= Translation::get('back_button') ?>">
+           title="<?php echo Translation::get('back_button') ?>">
             <i class="fas fa-arrow-left"></i>
-            <?= Translation::get('back_button') ?>
+            <?php echo Translation::get('back_button') ?>
         </a>
 
         <button type="submit"
                 data-toggle="tooltip"
                 data-placement="top"
-                title="<?= Translation::get('save_button') ?>"
+                title="<?php echo Translation::get('save_button') ?>"
                 class="btn btn-outline-success">
-            <?= Translation::get('save_button') ?>
+            <?php echo Translation::get('save_button') ?>
             <i class="far fa-save"></i>
         </button>
 
@@ -327,9 +332,9 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                     data-toggle="tooltip"
                     data-placement="top"
                     name="save-and-publish"
-                    title="<?= Translation::get('save_and_publish_button') ?>"
+                    title="<?php echo Translation::get('save_and_publish_button') ?>"
                     class="btn btn-outline-success">
-                <?= Translation::get('save_and_publish_button') ?>
+                <?php echo Translation::get('save_and_publish_button') ?>
                 <i class="far fa-save"></i>
             </button>
         <?php endif; ?>
@@ -345,7 +350,7 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalLabel">
-                    <?= Translation::get('form_cut_image') ?>
+                    <?php echo Translation::get('form_cut_image') ?>
                 </h5>
                 <button type="button" class="close"
                         data-dismiss="modal"
@@ -363,12 +368,12 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                 <button type="button"
                         class="btn btn-secondary"
                         data-dismiss="modal">
-                    <?= Translation::get('cancel_button') ?>
+                    <?php echo Translation::get('cancel_button') ?>
                 </button>
                 <button type="button"
                         class="btn btn-primary"
                         id="cropThumbnail">
-                    <?= Translation::get('cut_image_button') ?>
+                    <?php echo Translation::get('cut_image_button') ?>
                 </button>
             </div>
         </div>
@@ -382,7 +387,7 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalLabel">
-                    <?= Translation::get('form_cut_image') ?>
+                    <?php echo Translation::get('form_cut_image') ?>
                 </h5>
                 <button type="button" class="close"
                         data-dismiss="modal"
@@ -400,12 +405,12 @@ $pageInMenu = (int)$request->post('pageInMenu', (string)$page->getInMenu());
                 <button type="button"
                         class="btn btn-secondary"
                         data-dismiss="modal">
-                    <?= Translation::get('cancel_button') ?>
+                    <?php echo Translation::get('cancel_button') ?>
                 </button>
                 <button type="button"
                         class="btn btn-primary"
                         id="cropBanner">
-                    <?= Translation::get('cut_image_button') ?>
+                    <?php echo Translation::get('cut_image_button') ?>
                 </button>
             </div>
         </div>
