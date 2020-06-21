@@ -29,7 +29,7 @@ abstract class DataTableBuilder implements DataTableBuilderInterface {
    * DataTableBuilder constructor.
    *
    * @param string[] $data
-   *   the data of the table.
+   *   The table data.
    */
   public function __construct(array $data) {
     $this->dataTable = new DataTable();
@@ -41,6 +41,7 @@ abstract class DataTableBuilder implements DataTableBuilderInterface {
    * Build the head of the table.
    *
    * @return string[]
+   *   The head items.
    */
   abstract protected function buildHead(): array;
 
@@ -48,8 +49,10 @@ abstract class DataTableBuilder implements DataTableBuilderInterface {
    * Build one row with data.
    *
    * @param object $data
+   *   The table data.
    *
    * @return string[]
+   *   The rows with data.
    */
   abstract protected function buildRow(object $data): array;
 
@@ -57,8 +60,10 @@ abstract class DataTableBuilder implements DataTableBuilderInterface {
    * Build the actions for one row.
    *
    * @param object $data
+   *   The table data.
    *
    * @return string
+   *   The renderable actions.
    */
   abstract protected function buildRowActions(object $data): string;
 

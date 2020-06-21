@@ -16,11 +16,12 @@ final class MailView extends BaseMailView {
    * Render a partial view into the layout view.
    *
    * @param string $name
-   *   the name of the partial view.
+   *   The name of the partial view.
    * @param mixed[] $content
-   *   the content of the partial view.
+   *   The content of the partial view.
    *
    * @return string
+   *   The renderable mail view.
    */
   protected function render(string $name, array $content = []): string {
     ob_start();

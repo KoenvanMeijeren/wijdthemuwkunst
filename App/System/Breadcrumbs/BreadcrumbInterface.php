@@ -13,16 +13,18 @@ interface BreadcrumbInterface {
    * Checks if the breadcrumbs are visible.
    *
    * @param int $minimum
-   *   the minimum amount of breadcrumbs.
+   *   The minimum amount of breadcrumbs.
    *
    * @return bool
+   *   If the breadcrumbs are visible.
    */
   public function visible(int $minimum = 0): bool;
 
   /**
-   * Generate the markup for the breadcrumbs.
+   * Generates the markup for the breadcrumbs.
    *
    * @return string
+   *   The renderable breadcrumbs.
    */
   public function generate(): string;
 

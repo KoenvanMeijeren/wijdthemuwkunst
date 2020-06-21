@@ -16,10 +16,12 @@ use Src\View\BaseView;
 final class DomainView extends BaseView {
 
   /**
+   * DomainView constructor.
+   *
    * @param string $name
-   *   the name of the partial view.
+   *   The name of the partial view.
    * @param mixed[] $content
-   *   the content of the partial view.
+   *   The content of the partial view.
    */
   public function __construct(string $name, array $content = []) {
     $layout = 'layout.view.php';
@@ -31,14 +33,15 @@ final class DomainView extends BaseView {
   }
 
   /**
-   * Render a partial view into the layout view.
+   * Renders a partial view into the layout view.
    *
    * @param string $name
-   *   the name of the partial view.
+   *   The name of the partial view.
    * @param mixed[] $content
-   *   the content of the partial view.
+   *   The content of the partial view.
    *
    * @return string
+   *   The renderable content.
    */
   protected function renderContent(string $name, array $content = []): string {
     ob_start();

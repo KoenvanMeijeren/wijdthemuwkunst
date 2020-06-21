@@ -7,8 +7,7 @@ namespace System\DataTable;
  *
  * @package System\DataTable
  */
-interface DataTableBuilderInterface
-{
+interface DataTableBuilderInterface {
 
   /**
    * Gets the build table.

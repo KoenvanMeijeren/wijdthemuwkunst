@@ -50,7 +50,8 @@ abstract class BreadcrumbBase implements BreadcrumbInterface {
    * @param string $delimiter
    *   The boundary string.
    *
-   * @return string[] The breadcrumbs.
+   * @return string[]
+   *   The breadcrumbs.
    */
   protected function convertStringIntoBreadcrumbs(string $string, string $delimiter = '/'): array {
     $stringParts = (array) explode($delimiter, $string);
@@ -75,12 +76,12 @@ abstract class BreadcrumbBase implements BreadcrumbInterface {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   abstract public function generate(): string;
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function visible(int $minimum = 0): bool {
     return count($this->breadCrumbs) > $minimum;

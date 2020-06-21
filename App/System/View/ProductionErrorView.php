@@ -20,8 +20,8 @@ final class ProductionErrorView extends Handler {
   /**
    * Show the error page when the app is in production mode.
    *
-   * @return int A handler may return nothing,
-   *   or a Handler::HANDLE_* constant
+   * @return int
+   *   A handler may return nothing or a Handler::HANDLE_* constant.
    *
    * @throws \Src\Exceptions\Basic\InvalidKeyException
    */

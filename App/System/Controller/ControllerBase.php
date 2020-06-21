@@ -16,6 +16,7 @@ use System\View\DomainView;
  * @package System\Controller
  */
 abstract class ControllerBase implements ControllerInterface {
+
   /**
    * The base path to the views directory.
    *
@@ -57,9 +58,12 @@ abstract class ControllerBase implements ControllerInterface {
    * Returns a domain view.
    *
    * @param string $name
+   *   The name of the domain view.
    * @param string[] $content
+   *   The content of the domain view.
    *
    * @return \Src\View\ViewInterface
+   *   The renderable domain view.
    */
   protected function view(string $name, array $content = []): ViewInterface {
     return new DomainView($this->baseViewPath . $name, $content);
@@ -69,6 +73,7 @@ abstract class ControllerBase implements ControllerInterface {
    * Gets the current user.
    *
    * @return \Domain\Admin\Accounts\User\Models\User
+   *   The current user of the app.
    */
   protected function getCurrentUser(): User {
     return new User();

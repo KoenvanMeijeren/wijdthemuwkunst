@@ -23,28 +23,28 @@ abstract class BaseContactFormAction extends FormAction {
   /**
    * The contact form definition.
    *
-   * @var ContactForm
+   * @var \Domain\Admin\ContactForm\Model\ContactForm
    */
   protected ContactForm $contactForm;
 
   /**
    * The contact form repository.
    *
-   * @var ContactFormRepository
+   * @var \Domain\Admin\ContactForm\Model\ContactFormRepository
    */
   protected ContactFormRepository $repository;
 
   /**
    * The form validator.
    *
-   * @var FormValidator
+   * @var \Src\Validate\form\FormValidator
    */
   protected FormValidator $validator;
 
   /**
    * The session definition.
    *
-   * @var Session
+   * @var \Src\Session\Session
    */
   protected Session $session;
 

@@ -7,32 +7,31 @@ namespace System\DataTable;
  *
  * @package System\DataTable
  */
-interface DataTableInterface
-{
+interface DataTableInterface {
 
   /**
-   * Add a head to the table.
+   * Adds a head to the table.
    *
    * @param string[] $ths
-   *   each item represents a title for a column.
+   *   Each item represents a title for a column.
    */
   public function addHead(array $ths): void;
 
   /**
-   * Add a row to the table.
+   * Adds a row to the table.
    *
    * @param string[] $tds
-   *   each item represent a piece of data in a row.
+   *   Each item represent a piece of data in a row.
    * @param string $actions
-   *   the actions for this row.
+   *   The renderable actions.
    */
   public function addRow(array $tds, string $actions = ''): void;
 
   /**
-   * Add a footer to the table.
+   * Adds a footer to the table.
    *
    * @param string[] $ths
-   *   each item represent a head for a column.
+   *   Each item represent a head for a column.
    */
   public function addFooter(array $ths): void;
 
@@ -50,7 +49,7 @@ interface DataTableInterface
   /**
    * Add (multiple) ids to a piece of html.
    *
-   * @param string ...$ids
+   * @param string $ids
    *   The IDs of the HTML piece.
    */
   public function addId(...$ids): void;
@@ -58,7 +57,7 @@ interface DataTableInterface
   /**
    * Add (multiple) classes to a piece of html.
    *
-   * @param string ...$classes
+   * @param string $classes
    *   The HTML classes.
    */
   public function addClasses(...$classes): void;

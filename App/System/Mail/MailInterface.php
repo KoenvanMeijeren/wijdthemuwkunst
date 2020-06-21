@@ -1,6 +1,5 @@
 <?php
 
-
 namespace System\Mail;
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -10,8 +9,7 @@ use PHPMailer\PHPMailer\PHPMailer;
  *
  * @package System\Mail
  */
-interface MailInterface
-{
+interface MailInterface {
 
   /**
    * Sets the mail from address.
@@ -61,7 +59,7 @@ interface MailInterface
    * @param string $name
    *   The name of the person.
    */
-  public function addBCC(string $email, string $name): void;
+  public function addBcc(string $email, string $name): void;
 
   /**
    * Sets the subject of the mail.
@@ -95,14 +93,16 @@ interface MailInterface
 
   /**
    * Create a message body from an HTML string.
-   * Automatically inlines images and creates a plain-text version by converting the HTML,
-   * overwriting any existing values in Body and AltBody.
-   * Do not source $message content from user input!
-   * $basedir is prepended when handling relative URLs, e.g. <img src="/images/a.png"> and must not be empty
-   * will look for an image file in $basedir/images/a.png and convert it to inline.
-   * If you don't provide a $basedir, relative paths will be left untouched (and thus probably break in email)
-   * Converts data-uri images into embedded attachments.
-   * If you don't want to apply these transformations to your HTML, just set Body and AltBody directly.
+   *
+   * Automatically inlines images and creates a plain-text version by converting
+   * the HTML, overwriting any existing values in Body and AltBody. Do not
+   * source $message content from user input! $basedir is prepended when
+   * handling relative URLs, e.g. <img src="/images/a.png"> and must not be
+   * empty will look for an image file in $basedir/images/a.png and convert it
+   * to inline. If you don't provide a $basedir, relative paths will be left
+   * untouched (and thus probably break in email) Converts data-uri images into
+   * embedded attachments. If you don't want to apply these transformations to
+   * your HTML, just set Body and AltBody directly.
    *
    * @param string $message
    *   HTML message string.
@@ -113,10 +113,10 @@ interface MailInterface
 
   /**
    * Add an attachment from a path on the filesystem.
-   * Never use a user-supplied path to a file!
-   * Returns false if the file could not be found or read.
-   * Explicitly *does not* support passing URLs; PHPMailer is not an
-   * HTTP client. If you need to do that, fetch the resource yourself
+   *
+   * Never use a user-supplied path to a file! Returns false if the file could
+   * not be found or read. Explicitly *does not* support passing URLs; PHPMailer
+   * is not an HTTP client. If you need to do that, fetch the resource yourself
    * and pass it in via a local file or string.
    *
    * @param string $path
@@ -131,6 +131,8 @@ interface MailInterface
   public function addAttachment(string $path, string $name = '', string $encoding = PHPMailer::ENCODING_BASE64, string $type = ''): void;
 
   /**
+   * Adds an embedded image from a path on the filesystem to the mail.
+   *
    * @param string $path
    *   Path to the attachment.
    * @param string $cid
@@ -149,7 +151,8 @@ interface MailInterface
    * Sends the mail to the specified addresses.
    *
    * @return bool
-   *   Wheter the mail was send successfully.
+   *   Whether the mail was send successfully.
    */
   public function send(): bool;
+
 }

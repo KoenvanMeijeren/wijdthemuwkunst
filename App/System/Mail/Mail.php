@@ -22,7 +22,7 @@ final class Mail implements MailInterface {
   /**
    * The PHPMailer definition.
    *
-   * @var PHPMailer
+   * @var \PHPMailer\PHPMailer\PHPMailer
    */
   protected PHPMailer $mailer;
 

@@ -13,6 +13,7 @@ use Src\View\ViewInterface;
  * @package System\Controller
  */
 abstract class AdminControllerBase extends ControllerBase {
+
   use MenuTrait;
 
   /**
