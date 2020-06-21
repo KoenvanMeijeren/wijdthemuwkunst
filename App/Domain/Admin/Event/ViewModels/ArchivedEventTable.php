@@ -4,9 +4,9 @@ namespace Domain\Admin\Event\ViewModels;
 
 use Domain\Admin\Event\Repositories\EventRepository;
 use Domain\Admin\Event\Support\EventDatetimeConverter;
-use Src\DataTable\DataTableBuilder;
 use Src\Translation\Translation;
 use Support\Resource;
+use System\DataTable\DataTableBuilder;
 
 /**
  *

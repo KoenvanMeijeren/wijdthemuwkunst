@@ -11,7 +11,7 @@ use Domain\Admin\Settings\Actions\UpdateBaseSettingAction;
 use Domain\Admin\Settings\Models\Setting;
 use Domain\Admin\Settings\ViewModels\EditViewModel;
 use Domain\Admin\Settings\ViewModels\SettingTable;
-use Src\Response\Redirect;
+use Src\Core\Redirect;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;
@@ -52,7 +52,7 @@ final class SettingsControllers extends AdminControllerBase {
   }
 
   /**
-   * @return \Src\Response\Redirect|DomainView
+   * @return \Src\Core|DomainView
    */
   public function store() {
     $create = new CreateBaseSettingAction();
@@ -79,7 +79,7 @@ final class SettingsControllers extends AdminControllerBase {
   }
 
   /**
-   * @return \Src\Response\Redirect|DomainView
+   * @return \Src\Core|DomainView
    */
   public function update() {
     $update = new UpdateBaseSettingAction();

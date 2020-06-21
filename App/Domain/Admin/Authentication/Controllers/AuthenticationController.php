@@ -7,7 +7,7 @@ namespace Domain\Admin\Authentication\Controllers;
 
 use Domain\Admin\Authentication\Actions\LogUserInAction;
 use Domain\Admin\Authentication\Actions\LogUserOutAction;
-use Src\Response\Redirect;
+use Src\Core\Redirect;
 use Src\Translation\Translation;
 use System\Controller\AdminControllerBase;
 
@@ -26,7 +26,7 @@ final class AuthenticationController extends AdminControllerBase {
    * Load the login page.
    * If the user is already logged in redirect him to the dashboard.
    *
-   * @return \Src\Response\Redirect|\Src\View\ViewInterface
+   * @return \Src\Core|\Src\View\ViewInterface
    *
    * @throws \Src\Exceptions\Basic\InvalidKeyException
    */
@@ -43,7 +43,7 @@ final class AuthenticationController extends AdminControllerBase {
   /**
    * Tries to log the user in and redirect back or to the specified page.
    *
-   * @return \Src\Response\Redirect
+   * @return \Src\Core
    *   The redirect response.
    */
   public function login(): Redirect {
@@ -58,7 +58,7 @@ final class AuthenticationController extends AdminControllerBase {
   /**
    * Logs the current user out and redirect back to specified page.
    *
-   * @return \Src\Response\Redirect
+   * @return \Src\Core
    *   The redirect response.
    */
   public function logout(): Redirect {

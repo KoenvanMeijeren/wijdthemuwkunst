@@ -8,7 +8,7 @@ use Domain\Admin\Text\Actions\UpdateTextAction;
 use Domain\Admin\Text\Models\Text;
 use Domain\Admin\Text\ViewModels\EditViewModel;
 use Domain\Admin\Text\ViewModels\TextTable;
-use Src\Response\Redirect;
+use Src\Core\Redirect;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;
@@ -57,7 +57,7 @@ final class TextController extends AdminControllerBase {
   }
 
   /**
-   * @return \Src\Response\Redirect|DomainView
+   * @return \Src\Core|DomainView
    */
   public function store() {
     $create = new CreateTextAction();
@@ -85,7 +85,7 @@ final class TextController extends AdminControllerBase {
   }
 
   /**
-   * @return \Src\Response\Redirect|DomainView
+   * @return \Src\Core|DomainView
    */
   public function update() {
     $update = new UpdateTextAction();

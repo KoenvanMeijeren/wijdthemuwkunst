@@ -17,7 +17,7 @@ use Domain\Admin\Event\Repositories\EventRepository;
 use Domain\Admin\Event\ViewModels\ArchivedEventTable;
 use Domain\Admin\Event\ViewModels\EditViewModel;
 use Domain\Admin\Event\ViewModels\EventTable;
-use Src\Response\Redirect;
+use Src\Core\Redirect;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;
@@ -74,7 +74,7 @@ final class EventController extends AdminControllerBase {
   }
 
   /**
-   * @return \Src\Response\Redirect|\Src\View\ViewInterface
+   * @return \Src\Core|\Src\View\ViewInterface
    */
   public function store() {
     $create = new CreateEventAction();
@@ -108,7 +108,7 @@ final class EventController extends AdminControllerBase {
   }
 
   /**
-   * @return \Src\Response\Redirect|\Src\View\ViewInterface
+   * @return \Src\Core|\Src\View\ViewInterface
    */
   public function update() {
     $update = new UpdateEventAction();

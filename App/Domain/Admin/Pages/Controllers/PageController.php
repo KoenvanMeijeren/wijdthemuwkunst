@@ -17,7 +17,7 @@ use Domain\Admin\Pages\Models\Page;
 use Domain\Admin\Pages\Repositories\PageRepository;
 use Domain\Admin\Pages\ViewModels\EditViewModel;
 use Domain\Admin\Pages\ViewModels\PageTable;
-use Src\Response\Redirect;
+use Src\Core\Redirect;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;
@@ -68,7 +68,7 @@ final class PageController extends AdminControllerBase {
   }
 
   /**
-   * @return \Src\Response\Redirect|DomainView
+   * @return \Src\Core|DomainView
    */
   public function store() {
     $create = new CreatePageAction();
@@ -102,7 +102,7 @@ final class PageController extends AdminControllerBase {
   }
 
   /**
-   * @return \Src\Response\Redirect|DomainView
+   * @return \Src\Core|DomainView
    */
   public function update() {
     $update = new UpdatePageAction();

@@ -8,7 +8,7 @@ use Domain\Admin\Menu\Actions\UpdateMenuAction;
 use Domain\Admin\Menu\Models\Menu;
 use Domain\Admin\Menu\ViewModels\EditViewModel;
 use Domain\Admin\Menu\ViewModels\MenuTable;
-use Src\Response\Redirect;
+use Src\Core\Redirect;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;
@@ -57,7 +57,7 @@ final class MenuController extends AdminControllerBase {
   }
 
   /**
-   * @return \Src\Response\Redirect|DomainView
+   * @return \Src\Core|DomainView
    */
   public function store() {
     $create = new CreateMenuAction();
@@ -85,7 +85,7 @@ final class MenuController extends AdminControllerBase {
   }
 
   /**
-   * @return \Src\Response\Redirect|DomainView
+   * @return \Src\Core|DomainView
    */
   public function update() {
     $update = new UpdateMenuAction();

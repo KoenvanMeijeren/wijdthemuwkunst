@@ -7,7 +7,7 @@ namespace Domain\Admin\Accounts\User\Controllers;
 
 use Domain\Admin\Accounts\User\Actions\UpdateUserDataAction;
 use Domain\Admin\Accounts\User\Actions\UpdateUserPasswordAction;
-use Src\Response\Redirect;
+use Src\Core\Redirect;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;
@@ -30,7 +30,7 @@ final class UserAccountControllerBase extends AdminControllerBase {
   }
 
   /**
-   * @return \Src\Response\Redirect|DomainView
+   * @return \Src\Core|DomainView
    */
   public function storeData() {
     $updateUser = new UpdateUserDataAction();
@@ -42,7 +42,7 @@ final class UserAccountControllerBase extends AdminControllerBase {
   }
 
   /**
-   * @return \Src\Response\Redirect|DomainView
+   * @return \Src\Core|DomainView
    */
   public function storePassword() {
     $updateUser = new UpdateUserPasswordAction();

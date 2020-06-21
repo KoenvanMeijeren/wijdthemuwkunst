@@ -4,9 +4,9 @@ namespace Domain\Admin\Text\ViewModels;
 
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Text\Repositories\TextRepository;
-use Src\DataTable\DataTableBuilder;
 use Src\Translation\Translation;
 use Support\Resource;
+use System\DataTable\DataTableBuilder;
 
 /**
  *

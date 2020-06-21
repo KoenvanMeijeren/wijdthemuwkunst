@@ -6,7 +6,7 @@ declare(strict_types=1);
 namespace Domain\Admin\Pages\ViewModels;
 
 use Domain\Admin\Pages\Models\Page;
-use Src\Response\Redirect;
+use Src\Core\Redirect;
 use Src\Session\Session;
 use Src\State\State;
 use Src\Translation\Translation;
@@ -28,7 +28,7 @@ final class EditViewModel {
   }
 
   /**
-   * @return \Src\Response\Redirect|object
+   * @return \Src\Core|object
    * @throws \Src\Exceptions\Basic\InvalidKeyException
    */
   public function get() {

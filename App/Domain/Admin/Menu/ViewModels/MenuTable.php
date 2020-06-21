@@ -3,9 +3,9 @@
 namespace Domain\Admin\Menu\ViewModels;
 
 use Domain\Admin\Menu\Repositories\MenuRepository;
-use Src\DataTable\DataTableBuilder;
 use Src\Translation\Translation;
 use Support\Resource;
+use System\DataTable\DataTableBuilder;
 
 /**
  *

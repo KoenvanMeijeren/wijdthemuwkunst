@@ -4,7 +4,7 @@ namespace Domain\Admin\ContactForm\Controller;
 
 use Domain\Admin\ContactForm\Actions\DeleteContactFormMessageAction;
 use Domain\Admin\ContactForm\Model\ContactForm;
-use Src\Response\Redirect;
+use Src\Core\Redirect;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;
@@ -62,7 +62,7 @@ final class ContactFormController extends AdminControllerBase {
   /**
    * Destroys one contact request.
    *
-   * @return \Src\Response\Redirect
+   * @return \Src\Core
    *   The redirect response.
    */
   public function destroy(): Redirect {

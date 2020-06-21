@@ -7,9 +7,9 @@ namespace Domain\Admin\Settings\ViewModels;
 
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Settings\Repositories\SettingRepository;
-use Src\DataTable\DataTableBuilder;
 use Src\Translation\Translation;
 use Support\Resource;
+use System\DataTable\DataTableBuilder;
 
 /**
  *

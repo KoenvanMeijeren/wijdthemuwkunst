@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Src\DataTable;
+namespace System\DataTable;
 
 /**
  * Provides a class for building data tables.
  *
  * @package Src\DataTable
  */
-abstract class DataTableBuilder {
+abstract class DataTableBuilder implements DataTableBuilderInterface {
+
   /**
    * The datatable definition.
    *
@@ -62,12 +63,7 @@ abstract class DataTableBuilder {
   abstract protected function buildRowActions(object $data): string;
 
   /**
-   * Get the build table.
-   *
-   * @param string $id
- *   the id of the table.
-   *
-   * @return string
+   * {@inheritDoc}
    */
   final public function get(string $id = 'table'): string {
     $this->dataTable->addHead(

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Src\DataTable;
+namespace System\DataTable;
 
 /**
  * Provides a wrapper class for generating HTML output for data tables.
@@ -12,7 +12,7 @@ namespace Src\DataTable;
 final class DataTable extends DataTableHtmlBuilder {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function addHead(array $ths): void {
     $this->var = 'head';
@@ -29,7 +29,7 @@ final class DataTable extends DataTableHtmlBuilder {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function addRow(array $tds, string $actions = ''): void {
     $this->var = 'rows';
@@ -52,7 +52,7 @@ final class DataTable extends DataTableHtmlBuilder {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function addFooter(array $ths): void {
     $this->var = 'footer';
@@ -69,7 +69,7 @@ final class DataTable extends DataTableHtmlBuilder {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function get(string $id = 'table'): string {
     $this->var = 'table';

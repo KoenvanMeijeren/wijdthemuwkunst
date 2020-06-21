@@ -15,7 +15,7 @@ use Domain\Admin\Accounts\Account\Actions\UpdateAccountPasswordAction;
 use Domain\Admin\Accounts\Account\Models\Account;
 use Domain\Admin\Accounts\Account\ViewModels\AccountTable;
 use Domain\Admin\Accounts\Account\ViewModels\EditViewModel;
-use Src\Response\Redirect;
+use Src\Core\Redirect;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;
@@ -65,7 +65,7 @@ final class AccountController extends AdminControllerBase {
   }
 
   /**
-   * @return \Src\Response\Redirect|DomainView
+   * @return \Src\Core|DomainView
    */
   public function store() {
     $create = new CreateAccountAction();
@@ -77,7 +77,7 @@ final class AccountController extends AdminControllerBase {
   }
 
   /**
-   * @return \Src\Response\Redirect|DomainView
+   * @return \Src\Core|DomainView
    * @throws \Src\Exceptions\Basic\InvalidKeyException
    */
   public function edit() {
@@ -92,7 +92,7 @@ final class AccountController extends AdminControllerBase {
   }
 
   /**
-   * @return \Src\Response\Redirect|DomainView
+   * @return \Src\Core|DomainView
    * @throws \Src\Exceptions\Basic\InvalidKeyException
    */
   public function storeData() {
@@ -107,7 +107,7 @@ final class AccountController extends AdminControllerBase {
   }
 
   /**
-   * @return \Src\Response\Redirect|DomainView
+   * @return \Src\Core|DomainView
    * @throws \Src\Exceptions\Basic\InvalidKeyException
    */
   public function storeEmail() {
@@ -122,7 +122,7 @@ final class AccountController extends AdminControllerBase {
   }
 
   /**
-   * @return \Src\Response\Redirect|DomainView
+   * @return \Src\Core|DomainView
    * @throws \Src\Exceptions\Basic\InvalidKeyException
    */
   public function storePassword() {
