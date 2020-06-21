@@ -71,7 +71,7 @@
             "docker-compose -f docker-compose.yml -f docker-compose.dev.yml stop"
         ],
         "inspect": [
-            "vendor/bin/phpcs --standard=Drupal --extensions=php App/System",
+            "vendor/bin/phpcs --standard=Drupal --extensions=php App",
             "vendor/bin/phpcpd app",
             "vendor/bin/phpmd app text phpmd.xml"
         ],
