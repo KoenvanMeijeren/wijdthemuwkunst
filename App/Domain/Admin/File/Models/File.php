@@ -3,14 +3,14 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\File\Models;
+namespace Domain\Admin\File\Models;
 
 use Src\Model\Model;
 
 /**
  * Provides a model for the file table to interact with the database.
  *
- * @package App\Domain\Admin\File\Models
+ * @package Domain\Admin\File\Models
  */
 final class File extends Model {
   protected string $table = 'file';

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\System\Breadcrumbs;
+namespace System\Breadcrumbs;
 
 /**
  * Provides a base class for breadcrumbs.
  *
- * @package App\System\Breadcrumbs
+ * @package System\Breadcrumbs
  */
 abstract class BreadcrumbBase implements BreadcrumbInterface {
 

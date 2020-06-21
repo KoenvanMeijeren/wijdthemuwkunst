@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Admin\Event\Actions;
+namespace Domain\Admin\Event\Actions;
 
 use Src\State\State;
 use Src\Translation\Translation;

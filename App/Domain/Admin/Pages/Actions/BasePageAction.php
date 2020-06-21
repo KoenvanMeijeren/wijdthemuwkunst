@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Pages\Actions;
 
-use App\Domain\Admin\File\Actions\SaveFileAction;
+use Domain\Admin\File\Actions\SaveFileAction;
 use Domain\Admin\Pages\Models\Page;
 use Domain\Admin\Pages\Models\Slug;
 use Domain\Admin\Pages\Repositories\PageRepository;

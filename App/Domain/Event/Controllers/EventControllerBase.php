@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Domain\Event\Controllers;
+namespace Domain\Event\Controllers;
 
-use App\Domain\Event\Models\Event;
-use App\Domain\Event\Models\EventArchive;
-use App\System\Controller\ControllerBase;
 use Domain\Admin\Pages\Repositories\PageRepository;
+use Domain\Event\Models\Event;
+use Domain\Event\Models\EventArchive;
 use Domain\Pages\Models\Page;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
+use System\Controller\ControllerBase;
 
 /**
  *

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Admin\Menu\Actions;
+namespace Domain\Admin\Menu\Actions;
 
-use App\Domain\Admin\Menu\Models\Menu;
-use App\Domain\Admin\Menu\Repositories\MenuRepository;
+use Domain\Admin\Menu\Models\Menu;
+use Domain\Admin\Menu\Repositories\MenuRepository;
 use Domain\Admin\Pages\Models\Slug;
 use Domain\Admin\Pages\Repositories\SlugRepository;
 use Src\Action\FormAction;

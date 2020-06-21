@@ -4,14 +4,14 @@
  * @file
  */
 
-use App\Domain\Admin\Event\Repositories\EventRepository;
-use App\Domain\Admin\Text\Models\Text;
-use App\System\Breadcrumbs\Breadcrumbs;
+use Domain\Admin\Event\Repositories\EventRepository;
+use Domain\Admin\Text\Models\Text;
 use Src\Core\URI;
 use Src\Translation\Translation;
+use System\Breadcrumbs\Breadcrumbs;
 
 /**
- * @var \App\Domain\Admin\Event\Repositories\EventRepository $eventRepository */
+ * @var \Domain\Admin\Event\Repositories\EventRepository $eventRepository */
 $eventRepository = $eventRepo ?? NULL;
 $text = new Text();
 $breadcrumbs = new Breadcrumbs(URI::getUrl());

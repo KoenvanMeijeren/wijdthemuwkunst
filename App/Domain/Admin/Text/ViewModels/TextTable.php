@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domain\Admin\Text\ViewModels;
+namespace Domain\Admin\Text\ViewModels;
 
-use App\Domain\Admin\Text\Repositories\TextRepository;
-use App\Src\DataTable\DataTableBuilder;
 use Domain\Admin\Accounts\User\Models\User;
+use Domain\Admin\Text\Repositories\TextRepository;
+use Src\DataTable\DataTableBuilder;
 use Src\Translation\Translation;
 use Support\Resource;
 

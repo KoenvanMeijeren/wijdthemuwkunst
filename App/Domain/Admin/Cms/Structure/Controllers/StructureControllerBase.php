@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Admin\Cms\Structure\Controllers;
+namespace Domain\Admin\Cms\Structure\Controllers;
 
-use App\System\Controller\AdminControllerBase;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
+use System\Controller\AdminControllerBase;
 
 /**
  * The controller of the structure of the content managent system.
  *
- * @package App\Domain\Admin\Cms\Structure\Controllers
+ * @package Domain\Admin\Cms\Structure\Controllers
  */
 final class StructureControllerBase extends AdminControllerBase {
   protected string $baseViewPath = 'Admin/Cms/Structure/Views/';

@@ -5,11 +5,11 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\Account\ViewModels;
 
-use App\Src\DataTable\DataTableBuilder;
 use Domain\Admin\Accounts\Account\Support\AccountBlockStateConverter;
 use Domain\Admin\Accounts\Account\Support\AccountRightsConverter;
 use Domain\Admin\Accounts\Repositories\AccountRepository;
 use Domain\Admin\Accounts\User\Models\User;
+use Src\DataTable\DataTableBuilder;
 use Src\Translation\Translation;
 use Support\Resource;
 

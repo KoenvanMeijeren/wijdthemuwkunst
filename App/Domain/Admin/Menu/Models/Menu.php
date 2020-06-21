@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Admin\Menu\Models;
+namespace Domain\Admin\Menu\Models;
 
 use Src\Database\DB;
 use Src\Model\Model;
@@ -9,7 +9,7 @@ use Src\Model\Scopes\SoftDelete\SoftDelete;
 /**
  * Provides a model for the menu table to interact with the database.
  *
- * @package App\Domain\Admin\Menu\Models
+ * @package Domain\Admin\Menu\Models
  */
 final class Menu extends Model {
   use SoftDelete;

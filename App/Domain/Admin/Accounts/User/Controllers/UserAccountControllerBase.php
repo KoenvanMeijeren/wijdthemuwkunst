@@ -5,12 +5,12 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\User\Controllers;
 
-use App\System\Controller\AdminControllerBase;
 use Domain\Admin\Accounts\User\Actions\UpdateUserDataAction;
 use Domain\Admin\Accounts\User\Actions\UpdateUserPasswordAction;
 use Src\Response\Redirect;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
+use System\Controller\AdminControllerBase;
 
 /**
  *

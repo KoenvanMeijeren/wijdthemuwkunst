@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Admin\Menu\ViewModels;
+namespace Domain\Admin\Menu\ViewModels;
 
 use Src\Response\Redirect;
 use Src\Session\Session;

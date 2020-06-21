@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Admin\Accounts\Account\Actions;
+namespace Domain\Admin\Accounts\Account\Actions;
 
 use Domain\Admin\Accounts\Account\Models\Account;
 use Domain\Admin\Accounts\Repositories\AccountRepository;

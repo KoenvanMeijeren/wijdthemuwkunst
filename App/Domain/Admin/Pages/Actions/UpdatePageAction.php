@@ -5,7 +5,6 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Pages\Actions;
 
-use App\Domain\Admin\Pages\Actions\BasePageUpdateAction;
 use Domain\Admin\Accounts\User\Models\User;
 use Src\State\State;
 use Src\Translation\Translation;

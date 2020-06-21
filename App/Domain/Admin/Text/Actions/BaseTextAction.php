@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Domain\Admin\Text\Actions;
+namespace Domain\Admin\Text\Actions;
 
-use App\Domain\Admin\Text\Models\Text;
-use App\Domain\Admin\Text\Repositories\TextRepository;
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Pages\Models\Slug;
+use Domain\Admin\Text\Models\Text;
+use Domain\Admin\Text\Repositories\TextRepository;
 use Src\Action\FormAction;
 use Src\Core\Request;
 use Src\Session\Session;

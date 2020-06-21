@@ -4,7 +4,7 @@
  * @file
  */
 
-use App\Domain\Admin\ContactForm\Repository\ContactFormRepository;
+use Domain\Admin\ContactForm\Repository\ContactFormRepository;
 use Src\Core\Request;
 use Src\Security\CSRF;
 use Src\Translation\Translation;

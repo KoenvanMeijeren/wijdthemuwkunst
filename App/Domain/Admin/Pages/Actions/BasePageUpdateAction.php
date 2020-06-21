@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Domain\Admin\Pages\Actions;
+namespace Domain\Admin\Pages\Actions;
 
-use Domain\Admin\Pages\Actions\BasePageAction;
 use Domain\Admin\Pages\Models\Page;
 use Src\State\State;
 use Src\Translation\Translation;

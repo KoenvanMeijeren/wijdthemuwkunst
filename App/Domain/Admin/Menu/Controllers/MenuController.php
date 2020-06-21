@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Domain\Admin\Menu\Controllers;
+namespace Domain\Admin\Menu\Controllers;
 
-use App\Domain\Admin\Menu\Actions\CreateMenuAction;
-use App\Domain\Admin\Menu\Actions\DestroyMenuAction;
-use App\Domain\Admin\Menu\Actions\UpdateMenuAction;
-use App\Domain\Admin\Menu\Models\Menu;
-use App\Domain\Admin\Menu\ViewModels\EditViewModel;
-use App\Domain\Admin\Menu\ViewModels\MenuTable;
-use App\System\Controller\AdminControllerBase;
+use Domain\Admin\Menu\Actions\CreateMenuAction;
+use Domain\Admin\Menu\Actions\DestroyMenuAction;
+use Domain\Admin\Menu\Actions\UpdateMenuAction;
+use Domain\Admin\Menu\Models\Menu;
+use Domain\Admin\Menu\ViewModels\EditViewModel;
+use Domain\Admin\Menu\ViewModels\MenuTable;
 use Src\Response\Redirect;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
+use System\Controller\AdminControllerBase;
 
 /**
  *

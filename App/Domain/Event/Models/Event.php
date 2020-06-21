@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Event\Models;
+namespace Domain\Event\Models;
 
 use Cake\Chronos\Chronos;
 use Src\Database\DB;
@@ -10,7 +10,7 @@ use Src\Model\Scopes\SoftDelete\SoftDelete;
 /**
  * Provides a model for the event table to interact with the database.
  *
- * @package App\Domain\Event\Models
+ * @package Domain\Event\Models
  */
 class Event extends Model {
   use SoftDelete;

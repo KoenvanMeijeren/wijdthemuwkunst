@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Domain\Admin\Reports\Src;
+namespace Domain\Admin\Reports\Src;
 
-use App\Src\DataTable\DataTable;
 use Cake\Chronos\Chronos;
 use Defuse\Crypto\Exception\WrongKeyOrModifiedCiphertextException;
 use Src\Core\Cookie;
+use Src\DataTable\DataTable;
 use Src\Session\Session;
 use Src\Translation\Translation;
 use Support\DateTime;

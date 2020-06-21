@@ -5,7 +5,6 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Settings\Controllers;
 
-use App\System\Controller\AdminControllerBase;
 use Domain\Admin\Settings\Actions\CreateBaseSettingAction;
 use Domain\Admin\Settings\Actions\DestroySettingAction;
 use Domain\Admin\Settings\Actions\UpdateBaseSettingAction;
@@ -15,6 +14,7 @@ use Domain\Admin\Settings\ViewModels\SettingTable;
 use Src\Response\Redirect;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
+use System\Controller\AdminControllerBase;
 
 /**
  *

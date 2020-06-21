@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Domain\Event\Controllers;
+namespace Domain\Event\Controllers;
 
-use App\Domain\Admin\Event\Repositories\EventRepository;
+use Domain\Admin\Event\Repositories\EventRepository;
 use Domain\Admin\Pages\Repositories\PageRepository;
 use Src\View\ViewInterface;
 
 /**
  * The event archive controller.
  *
- * @package App\Domain\Event\Controllers
+ * @package Domain\Event\Controllers
  */
 class EventArchiveController extends EventControllerBase {
 

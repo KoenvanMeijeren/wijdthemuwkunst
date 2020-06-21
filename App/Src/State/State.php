@@ -9,6 +9,7 @@ namespace Src\State;
  *
  */
 abstract class State {
+
   /**
    * Define states to determine if an process was successfully executed.
    *

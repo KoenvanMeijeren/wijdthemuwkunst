@@ -1,12 +1,12 @@
 <?php
 
-use App\System\Breadcrumbs\Breadcrumbs;
 use Domain\Admin\Accounts\Account\Support\AccountRightsConverter;
 use Domain\Admin\Accounts\User\Models\User;
 use Src\Core\Request;
 use Src\Core\URI;
 use Src\Translation\Translation;
 use Support\Resource;
+use System\Breadcrumbs\Breadcrumbs;
 
 $user = new User();
 $rights = new AccountRightsConverter($user->getRights());

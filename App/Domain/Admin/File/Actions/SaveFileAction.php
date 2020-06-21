@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Admin\File\Actions;
+namespace Domain\Admin\File\Actions;
 
-use App\Domain\Admin\File\Models\File;
+use Domain\Admin\File\Models\File;
 use Src\Action\Action;
 
 /**

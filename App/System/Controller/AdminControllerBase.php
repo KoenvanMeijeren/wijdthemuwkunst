@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\System\Controller;
+namespace System\Controller;
 
-use App\Domain\Admin\Cms\Structure\MenuTrait;
+use Domain\Admin\Cms\Structure\MenuTrait;
 use Src\View\ViewInterface;
 
 /**
  * Provides a controller base for the admin controllers.
  *
- * @package App\System\Controller
+ * @package System\Controller
  */
 abstract class AdminControllerBase extends ControllerBase {
   use MenuTrait;

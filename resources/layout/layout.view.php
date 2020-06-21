@@ -1,10 +1,10 @@
 <?php
 
-use App\Domain\Admin\Menu\Models\Menu;
-use App\Domain\Admin\Menu\Repositories\MenuRepository;
-use App\Domain\Admin\Text\Models\Text;
-use App\Domain\Event\Models\Event;
+use Domain\Admin\Menu\Models\Menu;
+use Domain\Admin\Menu\Repositories\MenuRepository;
 use Domain\Admin\Settings\Models\Setting;
+use Domain\Admin\Text\Models\Text;
+use Domain\Event\Models\Event;
 use Src\Core\Request;
 use Src\Security\CSRF;
 use Src\Session\Session;

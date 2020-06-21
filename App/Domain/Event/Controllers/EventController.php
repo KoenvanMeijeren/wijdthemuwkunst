@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\Event\Controllers;
+namespace Domain\Event\Controllers;
 
-use App\Domain\Admin\Event\Repositories\EventRepository;
+use Domain\Admin\Event\Repositories\EventRepository;
 use Domain\Admin\Pages\Repositories\PageRepository;
 use Src\View\ViewInterface;
 use System\View\DomainView;

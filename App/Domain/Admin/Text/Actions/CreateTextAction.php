@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Admin\Text\Actions;
+namespace Domain\Admin\Text\Actions;
 
 use Src\State\State;
 use Src\Translation\Translation;

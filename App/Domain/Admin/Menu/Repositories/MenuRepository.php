@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Admin\Menu\Repositories;
+namespace Domain\Admin\Menu\Repositories;
 
 /**
  *

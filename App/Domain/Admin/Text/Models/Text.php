@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Domain\Admin\Text\Models;
+namespace Domain\Admin\Text\Models;
 
-use App\Domain\Admin\Text\Repositories\TextRepository;
+use Domain\Admin\Text\Repositories\TextRepository;
 use Src\Model\Model;
 use Src\Model\Scopes\SoftDelete\SoftDelete;
 
 /**
  * Provides a model for the text table to interact with the database.
  *
- * @package App\Domain\Admin\Text\Models
+ * @package Domain\Admin\Text\Models
  */
 final class Text extends Model {
   use SoftDelete;

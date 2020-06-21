@@ -5,11 +5,11 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Authentication\Controllers;
 
-use App\System\Controller\AdminControllerBase;
 use Domain\Admin\Authentication\Actions\LogUserInAction;
 use Domain\Admin\Authentication\Actions\LogUserOutAction;
 use Src\Response\Redirect;
 use Src\Translation\Translation;
+use System\Controller\AdminControllerBase;
 
 /**
  * The authentication controller.

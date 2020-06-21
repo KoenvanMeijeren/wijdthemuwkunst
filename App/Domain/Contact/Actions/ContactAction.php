@@ -3,18 +3,18 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Contact\Actions;
+namespace Domain\Contact\Actions;
 
-use App\Domain\Admin\ContactForm\Actions\BaseContactFormAction;
-use App\System\Mail\Mail;
+use Domain\Admin\ContactForm\Actions\BaseContactFormAction;
 use Domain\Admin\Settings\Models\Setting;
 use Src\Security\Recaptcha;
 use Src\Translation\Translation;
+use System\Mail\Mail;
 
 /**
  * Provides a contact action.
  *
- * @package App\Domain\Contact\Actions
+ * @package Domain\Contact\Actions
  */
 final class ContactAction extends BaseContactFormAction {
 

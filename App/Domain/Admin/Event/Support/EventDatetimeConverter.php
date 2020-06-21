@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Admin\Event\Support;
+namespace Domain\Admin\Event\Support;
 
 use Cake\Chronos\Chronos;
 use Src\Converter\Converter;

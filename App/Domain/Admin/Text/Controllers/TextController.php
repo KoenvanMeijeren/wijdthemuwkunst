@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Domain\Admin\Text\Controllers;
+namespace Domain\Admin\Text\Controllers;
 
-use App\Domain\Admin\Text\Actions\CreateTextAction;
-use App\Domain\Admin\Text\Actions\DeleteTextAction;
-use App\Domain\Admin\Text\Actions\UpdateTextAction;
-use App\Domain\Admin\Text\Models\Text;
-use App\Domain\Admin\Text\ViewModels\EditViewModel;
-use App\Domain\Admin\Text\ViewModels\TextTable;
-use App\System\Controller\AdminControllerBase;
+use Domain\Admin\Text\Actions\CreateTextAction;
+use Domain\Admin\Text\Actions\DeleteTextAction;
+use Domain\Admin\Text\Actions\UpdateTextAction;
+use Domain\Admin\Text\Models\Text;
+use Domain\Admin\Text\ViewModels\EditViewModel;
+use Domain\Admin\Text\ViewModels\TextTable;
 use Src\Response\Redirect;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
+use System\Controller\AdminControllerBase;
 
 /**
  *

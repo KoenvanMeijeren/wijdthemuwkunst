@@ -5,12 +5,12 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Pages\ViewModels;
 
-use App\Src\DataTable\DataTableBuilder;
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Pages\Models\Page;
 use Domain\Admin\Pages\Repositories\PageRepository;
 use Domain\Admin\Pages\Support\PageInMenuStateConverter;
 use Domain\Admin\Pages\Support\PageIsPublishedStateConverter;
+use Src\DataTable\DataTableBuilder;
 use Src\Translation\Translation;
 use Support\Resource;
 

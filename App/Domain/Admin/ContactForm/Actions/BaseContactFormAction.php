@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Admin\ContactForm\Actions;
+namespace Domain\Admin\ContactForm\Actions;
 
-use App\Domain\Admin\ContactForm\Model\ContactForm;
-use App\Domain\Admin\ContactForm\Repository\ContactFormRepository;
 use Cake\Chronos\Chronos;
+use Domain\Admin\ContactForm\Model\ContactForm;
+use Domain\Admin\ContactForm\Repository\ContactFormRepository;
 use Src\Action\FormAction;
 use Src\Core\Request;
 use Src\Session\Session;
@@ -16,7 +16,7 @@ use Src\Validate\form\FormValidator;
 /**
  * Provides a base class for contact form actions.
  *
- * @package App\Domain\Admin\ContactForm\Actions
+ * @package Domain\Admin\ContactForm\Actions
  */
 abstract class BaseContactFormAction extends FormAction {
 

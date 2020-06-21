@@ -5,13 +5,12 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Pages\Controllers;
 
-use App\Domain\Admin\Pages\Actions\SaveAndPublishPageAction;
-use App\System\Controller\AdminControllerBase;
 use Domain\Admin\Pages\Actions\CreatePageAction;
 use Domain\Admin\Pages\Actions\DeletePageAction;
 use Domain\Admin\Pages\Actions\PublishPageAction;
 use Domain\Admin\Pages\Actions\RemovePageBannerAction;
 use Domain\Admin\Pages\Actions\RemovePageThumbnailAction;
+use Domain\Admin\Pages\Actions\SaveAndPublishPageAction;
 use Domain\Admin\Pages\Actions\UnPublishPageAction;
 use Domain\Admin\Pages\Actions\UpdatePageAction;
 use Domain\Admin\Pages\Models\Page;
@@ -21,6 +20,7 @@ use Domain\Admin\Pages\ViewModels\PageTable;
 use Src\Response\Redirect;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
+use System\Controller\AdminControllerBase;
 
 /**
  * Provides a class for page actions.

@@ -5,7 +5,6 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\Account\Actions;
 
-use App\Domain\Admin\Accounts\Account\Actions\BaseAccountAction;
 use Domain\Admin\Accounts\Account\Models\Account;
 use Src\State\State;
 use Src\Translation\Translation;

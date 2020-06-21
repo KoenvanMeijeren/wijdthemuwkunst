@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Domain\Admin\ContactForm\Controller;
+namespace Domain\Admin\ContactForm\Controller;
 
-use App\Domain\Admin\ContactForm\Actions\DeleteContactFormMessageAction;
-use App\Domain\Admin\ContactForm\Model\ContactForm;
-use App\System\Controller\AdminControllerBase;
+use Domain\Admin\ContactForm\Actions\DeleteContactFormMessageAction;
+use Domain\Admin\ContactForm\Model\ContactForm;
 use Src\Response\Redirect;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
+use System\Controller\AdminControllerBase;
 
 /**
  * The contact form controller.
  *
- * @package App\Domain\Admin\ContactForm\Controller
+ * @package Domain\Admin\ContactForm\Controller
  */
 final class ContactFormController extends AdminControllerBase {
   private ContactForm $contactForm;

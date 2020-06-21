@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domain\Admin\Event\Repositories;
+namespace Domain\Admin\Event\Repositories;
 
-use App\Domain\Admin\Event\Support\EventDatetimeConverter;
-use App\Domain\Admin\File\Models\File;
 use Cake\Chronos\Chronos;
+use Domain\Admin\Event\Support\EventDatetimeConverter;
+use Domain\Admin\File\Models\File;
 use Support\DateTime;
 
 /**

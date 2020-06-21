@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\System\Breadcrumbs;
+namespace System\Breadcrumbs;
 
 /**
  * Provides a class for generating breadcrumbs.
  *
- * @package App\System\Breadcrumbs
+ * @package System\Breadcrumbs
  */
 final class Breadcrumbs extends BreadcrumbBase {
 

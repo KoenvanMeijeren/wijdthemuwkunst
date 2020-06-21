@@ -1,11 +1,11 @@
 <?php
 
-namespace App\System\Controller;
+namespace System\Controller;
 
 /**
  * Provides an interface for controllers.
  *
- * @package App\System\Controller
+ * @package System\Controller
  */
 interface ControllerInterface {
 

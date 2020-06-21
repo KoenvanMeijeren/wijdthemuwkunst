@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-use App\Domain\Admin\Event\Repositories\EventRepository;
+use Domain\Admin\Event\Repositories\EventRepository;
 use Src\Core\Request;
 use Src\Security\CSRF;
 use Src\Translation\Translation;

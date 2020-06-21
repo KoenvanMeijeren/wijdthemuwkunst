@@ -2,25 +2,25 @@
 
 namespace Domain\Admin\Event\Controllers;
 
-use App\Domain\Admin\Event\Actions\ActivateEventAction;
-use App\Domain\Admin\Event\Actions\ArchiveEventAction;
-use App\Domain\Admin\Event\Actions\CreateEventAction;
-use App\Domain\Admin\Event\Actions\DeleteEventAction;
-use App\Domain\Admin\Event\Actions\PublishEventAction;
-use App\Domain\Admin\Event\Actions\RemoveEventBannerAction;
-use App\Domain\Admin\Event\Actions\RemoveEventThumbnailAction;
-use App\Domain\Admin\Event\Actions\SaveAndPublishEventAction;
-use App\Domain\Admin\Event\Actions\UnPublishEventAction;
-use App\Domain\Admin\Event\Actions\UpdateEventAction;
-use App\Domain\Admin\Event\Models\Event;
-use App\Domain\Admin\Event\Repositories\EventRepository;
-use App\Domain\Admin\Event\ViewModels\ArchivedEventTable;
-use App\Domain\Admin\Event\ViewModels\EditViewModel;
-use App\Domain\Admin\Event\ViewModels\EventTable;
-use App\System\Controller\AdminControllerBase;
+use Domain\Admin\Event\Actions\ActivateEventAction;
+use Domain\Admin\Event\Actions\ArchiveEventAction;
+use Domain\Admin\Event\Actions\CreateEventAction;
+use Domain\Admin\Event\Actions\DeleteEventAction;
+use Domain\Admin\Event\Actions\PublishEventAction;
+use Domain\Admin\Event\Actions\RemoveEventBannerAction;
+use Domain\Admin\Event\Actions\RemoveEventThumbnailAction;
+use Domain\Admin\Event\Actions\SaveAndPublishEventAction;
+use Domain\Admin\Event\Actions\UnPublishEventAction;
+use Domain\Admin\Event\Actions\UpdateEventAction;
+use Domain\Admin\Event\Models\Event;
+use Domain\Admin\Event\Repositories\EventRepository;
+use Domain\Admin\Event\ViewModels\ArchivedEventTable;
+use Domain\Admin\Event\ViewModels\EditViewModel;
+use Domain\Admin\Event\ViewModels\EventTable;
 use Src\Response\Redirect;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
+use System\Controller\AdminControllerBase;
 
 /**
  * Provides a class for event actions.

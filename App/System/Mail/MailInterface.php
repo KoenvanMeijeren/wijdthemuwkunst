@@ -1,14 +1,14 @@
 <?php
 
 
-namespace App\System\Mail;
+namespace System\Mail;
 
 use PHPMailer\PHPMailer\PHPMailer;
 
 /**
  * Provides a interface for subclasses of the mail.
  *
- * @package App\System\Mail
+ * @package System\Mail
  */
 interface MailInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Admin\Reports\Src;
+namespace Domain\Admin\Reports\Src;
 
 /**
  *

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Admin\Cms\Structure;
+namespace Domain\Admin\Cms\Structure;
 
 use Domain\Admin\Accounts\User\Models\User;
 use Src\Translation\Translation;
@@ -10,7 +10,7 @@ use Src\Translation\Translation;
 /**
  * Provides a trait for the admin menu.
  *
- * @package App\Domain\Admin\Cms\Structure
+ * @package Domain\Admin\Cms\Structure
  */
 trait MenuTrait {
 

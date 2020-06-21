@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Admin\Event\Actions;
+namespace Domain\Admin\Event\Actions;
 
-use App\Domain\Admin\Event\Models\Event;
-use App\Domain\Admin\Event\Repositories\EventRepository;
-use App\Domain\Admin\File\Actions\SaveFileAction;
 use Cake\Chronos\Chronos;
+use Domain\Admin\Event\Models\Event;
+use Domain\Admin\Event\Repositories\EventRepository;
+use Domain\Admin\File\Actions\SaveFileAction;
 use Domain\Admin\Pages\Models\Slug;
 use Domain\Admin\Pages\Repositories\SlugRepository;
 use Src\Action\FormAction;

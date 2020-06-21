@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Src\DataTable;
+namespace Src\DataTable;
 
 /**
  * Provides a class for building data tables.
  *
- * @package App\Src\DataTable
+ * @package Src\DataTable
  */
 abstract class DataTableBuilder {
   /**

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\System\Breadcrumbs;
+namespace System\Breadcrumbs;
 
 /**
  * Provides an interface for breadcrumbs.
  *
- * @package App\System\Breadcrumbs
+ * @package System\Breadcrumbs
  */
 interface BreadcrumbInterface {
 

@@ -5,15 +5,15 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Reports\Controllers;
 
-use App\Domain\Admin\Reports\Src\Logs;
-use App\Domain\Admin\Reports\Src\PhpInfo;
-use App\Domain\Admin\Reports\Src\SuperGlobals;
-use App\System\Controller\AdminControllerBase;
 use Cake\Chronos\Chronos;
+use Domain\Admin\Reports\Src\Logs;
+use Domain\Admin\Reports\Src\PhpInfo;
+use Domain\Admin\Reports\Src\SuperGlobals;
 use Src\Core\Env;
 use Src\Core\Request;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
+use System\Controller\AdminControllerBase;
 
 /**
  *

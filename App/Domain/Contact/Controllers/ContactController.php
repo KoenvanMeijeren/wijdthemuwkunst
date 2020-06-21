@@ -3,18 +3,18 @@
 declare(strict_types=1);
 
 
-namespace App\Domain\Contact\Controllers;
+namespace Domain\Contact\Controllers;
 
-use App\Domain\Admin\ContactForm\Actions\SaveContactFormMessageAction;
-use App\Domain\Contact\Actions\ContactAction;
-use App\System\Controller\ControllerBase;
+use Domain\Admin\ContactForm\Actions\SaveContactFormMessageAction;
+use Domain\Contact\Actions\ContactAction;
 use Src\Core\URI;
 use Src\Response\Redirect;
+use System\Controller\ControllerBase;
 
 /**
  * The contact controller.
  *
- * @package App\Domain\Contact\Controllers
+ * @package Domain\Contact\Controllers
  */
 final class ContactController extends ControllerBase {
 

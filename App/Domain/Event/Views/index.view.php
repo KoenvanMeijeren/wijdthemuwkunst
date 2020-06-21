@@ -4,15 +4,15 @@
  * @file
  */
 
-use App\Domain\Admin\Event\Repositories\EventRepository;
-use App\Domain\Admin\Text\Models\Text;
+use Domain\Admin\Event\Repositories\EventRepository;
+use Domain\Admin\Text\Models\Text;
 use Src\Translation\Translation;
 
 /**
- * @var \App\Domain\Admin\Event\Repositories\EventRepository $eventRepository */
+ * @var \Domain\Admin\Event\Repositories\EventRepository $eventRepository */
 $eventRepository = $eventRepo ?? NULL;
 /**
- * @var \App\Domain\Admin\Event\Repositories\EventRepository $eventArchiveRepository */
+ * @var \Domain\Admin\Event\Repositories\EventRepository $eventArchiveRepository */
 $eventArchiveRepository = $eventArchiveRepo ?? NULL;
 $text = new Text();
 ?>

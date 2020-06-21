@@ -1,22 +1,22 @@
 <?php
 declare(strict_types=1);
 
-use App\Domain\Admin\Cms\Structure\Controllers\StructureControllerBase;
-use App\Domain\Admin\ContactForm\Controller\ContactFormController;
-use App\Domain\Admin\Menu\Controllers\MenuController;
-use App\Domain\Admin\Text\Controllers\TextController;
-use App\Domain\Contact\Controllers\ContactController;
-use App\Domain\Event\Controllers\EventArchiveController;
-use App\Domain\Event\Controllers\EventController;
 use Domain\Admin\Accounts\Account\Controllers\AccountController;
 use Domain\Admin\Accounts\User\Controllers\UserAccountControllerBase;
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Authentication\Controllers\AuthenticationController;
+use Domain\Admin\Cms\Structure\Controllers\StructureControllerBase;
+use Domain\Admin\ContactForm\Controller\ContactFormController;
 use Domain\Admin\Event\Controllers\EventController as AdminEventController;
 use Domain\Admin\File\Controllers\UploadFileController;
+use Domain\Admin\Menu\Controllers\MenuController;
 use Domain\Admin\Pages\Controllers\PageController as AdminPageController;
 use Domain\Admin\Reports\Controllers\ReportsController;
 use Domain\Admin\Settings\Controllers\SettingsControllers;
+use Domain\Admin\Text\Controllers\TextController;
+use Domain\Contact\Controllers\ContactController;
+use Domain\Event\Controllers\EventArchiveController;
+use Domain\Event\Controllers\EventController;
 use Domain\Pages\Controllers\PageController;
 use Src\Core\Router;
 

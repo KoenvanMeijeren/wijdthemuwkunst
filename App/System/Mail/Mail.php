@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-namespace App\System\Mail;
+namespace System\Mail;
 
 use Domain\Admin\Settings\Models\Setting;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -15,7 +15,7 @@ use System\View\MailView;
 /**
  * Provides a class for sending emails.
  *
- * @package App\System\Mail
+ * @package System\Mail
  */
 final class Mail implements MailInterface {
 

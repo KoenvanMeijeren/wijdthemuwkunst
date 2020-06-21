@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\System\Controller;
+namespace System\Controller;
 
 use Domain\Admin\Accounts\User\Models\User;
 use Src\Core\Request;
@@ -13,7 +13,7 @@ use System\View\DomainView;
 /**
  * Provides a controller base for controllers.
  *
- * @package App\System\Controller
+ * @package System\Controller
  */
 abstract class ControllerBase implements ControllerInterface {
   /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Admin\ContactForm\Model;
+namespace Domain\Admin\ContactForm\Model;
 
 use Cake\Chronos\Chronos;
 use Src\Database\DB;
@@ -10,7 +10,7 @@ use Src\Model\Scopes\SoftDelete\SoftDelete;
 /**
  * Provides a model for the contact table to interact with the database.
  *
- * @package App\Domain\Admin\ContactForm\Model
+ * @package Domain\Admin\ContactForm\Model
  */
 final class ContactForm extends Model {
   use SoftDelete;

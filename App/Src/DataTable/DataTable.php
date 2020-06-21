@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Src\DataTable;
+namespace Src\DataTable;
 
 /**
  * Provides a wrapper class for generating HTML output for data tables.
  *
- * @package App\Src\DataTable
+ * @package Src\DataTable
  */
 final class DataTable extends DataTableHtmlBuilder {
 

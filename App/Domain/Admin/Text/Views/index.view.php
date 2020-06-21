@@ -6,8 +6,8 @@
 
 declare(strict_types=1);
 
-use App\Domain\Admin\Text\Repositories\TextRepository;
 use Domain\Admin\Accounts\User\Models\User;
+use Domain\Admin\Text\Repositories\TextRepository;
 use Src\Core\Request;
 use Src\Security\CSRF;
 use Src\Translation\Translation;

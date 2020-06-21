@@ -5,7 +5,6 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\Account\Controllers;
 
-use App\System\Controller\AdminControllerBase;
 use Domain\Admin\Accounts\Account\Actions\BlockAccountAction;
 use Domain\Admin\Accounts\Account\Actions\CreateAccountAction;
 use Domain\Admin\Accounts\Account\Actions\DeleteAccountAction;
@@ -19,6 +18,7 @@ use Domain\Admin\Accounts\Account\ViewModels\EditViewModel;
 use Src\Response\Redirect;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
+use System\Controller\AdminControllerBase;
 
 /**
  * Provides a controller for account actions.

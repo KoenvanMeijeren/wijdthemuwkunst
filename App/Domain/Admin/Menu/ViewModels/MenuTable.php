@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Domain\Admin\Menu\ViewModels;
+namespace Domain\Admin\Menu\ViewModels;
 
-use App\Domain\Admin\Menu\Repositories\MenuRepository;
-use App\Src\DataTable\DataTableBuilder;
+use Domain\Admin\Menu\Repositories\MenuRepository;
+use Src\DataTable\DataTableBuilder;
 use Src\Translation\Translation;
 use Support\Resource;
 

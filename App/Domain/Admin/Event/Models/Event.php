@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Admin\Event\Models;
+namespace Domain\Admin\Event\Models;
 
 use Src\Database\DB;
 use Src\Model\Model;
@@ -9,7 +9,7 @@ use Src\Model\Scopes\SoftDelete\SoftDelete;
 /**
  * Provides a model for the event table to interact with the database.
  *
- * @package App\Domain\Admin\Event\Models
+ * @package Domain\Admin\Event\Models
  */
 final class Event extends Model {
   use SoftDelete;

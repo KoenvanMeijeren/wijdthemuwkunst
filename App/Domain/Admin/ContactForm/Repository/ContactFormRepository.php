@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Admin\ContactForm\Repository;
+namespace Domain\Admin\ContactForm\Repository;
 
 use Cake\Chronos\Chronos;
 use Support\DateTime;

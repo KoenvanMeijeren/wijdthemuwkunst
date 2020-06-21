@@ -5,7 +5,6 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\User\Actions;
 
-use App\Domain\Admin\Accounts\User\Actions\BaseUserAction;
 use Src\Translation\Translation;
 
 /**

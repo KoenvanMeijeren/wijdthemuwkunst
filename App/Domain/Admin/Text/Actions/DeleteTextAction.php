@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Admin\Text\Actions;
+namespace Domain\Admin\Text\Actions;
 
 use Domain\Admin\Accounts\User\Models\User;
 use Src\State\State;

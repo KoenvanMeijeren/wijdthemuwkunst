@@ -5,12 +5,12 @@ declare(strict_types=1);
 
 namespace Domain\Pages\Controllers;
 
-use App\Domain\Event\Models\Event;
-use App\System\Controller\ControllerBase;
 use Domain\Admin\Pages\Repositories\PageRepository;
+use Domain\Event\Models\Event;
 use Domain\Pages\Models\Page;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
+use System\Controller\ControllerBase;
 
 /**
  * The page controller.

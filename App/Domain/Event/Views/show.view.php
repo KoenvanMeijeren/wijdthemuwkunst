@@ -6,16 +6,16 @@
 
 declare(strict_types=1);
 
-use App\System\Breadcrumbs\Breadcrumbs;
 use Src\Core\Request;
 use Src\Core\URI;
+use System\Breadcrumbs\Breadcrumbs;
 
 $request = new Request();
 
 $documentRoot = $request->server(Request::DOCUMENT_ROOT);
 
 /**
- * @var \App\Domain\Admin\Event\Repositories\EventRepository $event */
+ * @var \Domain\Admin\Event\Repositories\EventRepository $event */
 $event = $eventRepo ?? NULL;
 $breadcrumbs = new Breadcrumbs(URI::getUrl());
 ?>

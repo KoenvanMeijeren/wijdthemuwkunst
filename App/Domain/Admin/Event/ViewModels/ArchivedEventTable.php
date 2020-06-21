@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domain\Admin\Event\ViewModels;
+namespace Domain\Admin\Event\ViewModels;
 
-use App\Domain\Admin\Event\Repositories\EventRepository;
-use App\Domain\Admin\Event\Support\EventDatetimeConverter;
-use App\Src\DataTable\DataTableBuilder;
+use Domain\Admin\Event\Repositories\EventRepository;
+use Domain\Admin\Event\Support\EventDatetimeConverter;
+use Src\DataTable\DataTableBuilder;
 use Src\Translation\Translation;
 use Support\Resource;
 

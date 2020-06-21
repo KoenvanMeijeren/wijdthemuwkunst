@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Pages\Repositories;
 
-use App\Domain\Admin\File\Models\File;
+use Domain\Admin\File\Models\File;
 
 /**
  *
