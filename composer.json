@@ -64,24 +64,24 @@
     "prefer-stable": true,
     "minimum-stability": "stable",
     "scripts": {
-        "app-up": [
+        "start": [
             "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d"
         ],
-        "app-stop": [
+        "stop": [
             "docker-compose -f docker-compose.yml -f docker-compose.dev.yml stop"
         ],
         "inspect": [
-            "vendor/bin/phpcs --standard=Drupal --extensions=php App",
-            "phpcpd app",
-            "phpmd app text phpmd.xml",
-            "phpstan analyse -c phpstan.neon"
+            "vendor/bin/phpcs --standard=Drupal --extensions=php App/System",
+            "vendor/bin/phpcpd app",
+            "vendor/bin/phpmd app text phpmd.xml"
         ],
         "inspect-fix": [
             "vendor/bin/phpcbf --standard=Drupal --extensions=php App"
         ],
         "insights": [
-            "phploc app",
-            "phpmetrics --report-html=public_html/phpmetrics app"
+            "vendor/bin/phploc app",
+            "vendor/bin/phpmetrics --report-html=public_html/phpmetrics app",
+            "vendor/bin/phpstan analyse -c phpstan.neon"
         ]
     }
 }

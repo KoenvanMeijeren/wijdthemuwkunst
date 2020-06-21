@@ -1,10 +1,6 @@
 parameters:
     fileExtensions:
         - php
-    ignoreErrors:
-        - "#Access to an undefined property .*#"
-        - "#Unreachable statement - code above always terminates.#"
-        - "#Result of && is always false.#"
     level: max
     paths:
     - App/
