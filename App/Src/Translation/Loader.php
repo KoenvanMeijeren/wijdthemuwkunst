@@ -51,13 +51,13 @@ abstract class Loader {
     if (self::DUTCH_LANGUAGE_ID === $this->language) {
       $filename = '/language/dutch/dutch_translations.php';
 
-      return (array) includeFile(RESOURCES_PATH . $filename);
+      return (array) include_file(RESOURCES_PATH . $filename);
     }
 
     if (self::ENGLISH_LANGUAGE_ID === $this->language) {
       $filename = '/language/english/english_translations.php';
 
-      return (array) includeFile(RESOURCES_PATH . $filename);
+      return (array) include_file(RESOURCES_PATH . $filename);
     }
 
     throw new NoTranslationsForGivenLanguageID(

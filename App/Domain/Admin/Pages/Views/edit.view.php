@@ -294,7 +294,7 @@ $pageInMenu = (int) $request->post('pageInMenu', (string) $page->getInMenu());
                             </label>
                             <textarea class="form-control" id="tinymce"
                                       rows="10" name="content">
-                                    <?php echo parseHtmlEntities(
+                                    <?php echo html_entities_decode(
                                        $request->post(
                                             'content',
                                             $page->getContent()

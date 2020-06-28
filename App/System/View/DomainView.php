@@ -46,7 +46,7 @@ final class DomainView extends BaseView {
   protected function renderContent(string $name, array $content = []): string {
     ob_start();
 
-    includeFile(DOMAIN_PATH . "/{$name}.view.php", $content);
+    include_file(DOMAIN_PATH . "/{$name}.view.php", $content);
 
     return (string) ob_get_clean();
   }

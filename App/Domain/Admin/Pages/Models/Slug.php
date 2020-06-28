@@ -39,7 +39,7 @@ final class Slug extends Model {
    *   The safely encoded url string.
    */
   public function parse(string $slug): string {
-    return encodeUrl($slug);
+    return encode_url($slug);
   }
 
 }

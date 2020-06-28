@@ -19,14 +19,14 @@ final class Resource {
    * Loads a message formatted as a string.
    */
   public static function loadStringMessage(): void {
-    includeFile(RESOURCES_PATH . '/partials/error.view.php');
+    include_file(RESOURCES_PATH . '/partials/error.view.php');
   }
 
   /**
    * Loads a message formatted as a one time visible string.
    */
   public static function loadFlashMessage(): void {
-    includeFile(RESOURCES_PATH . '/partials/flash.view.php');
+    include_file(RESOURCES_PATH . '/partials/flash.view.php');
   }
 
   /**

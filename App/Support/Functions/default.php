@@ -2,23 +2,26 @@
 
 /**
  * @file
+ * The default functions.
  */
 
 declare(strict_types=1);
 
-if (!function_exists('arrayReplaceKeys')) {
+if (!function_exists('array_replace_keys')) {
 
   /**
-   * This function replaces the keys of an associate array by those supplied in the keys array.
+   * Replace the keys of an associate array by those supplied in the keys array.
    *
    * @param mixed[] $array
-   *   target associative array in which the keys are intended to be replaced.
+   *   Target associative array in which the keys are intended to be replaced.
    * @param mixed[] $keys
-   *   associate array where search key => replace by key, for replacing respective keys.
+   *   Associate array where search key => replace by key, for replacing
+   *   respective keys.
    *
-   * @return mixed[] with replaced keys
+   * @return mixed[]
+   *   The array with replaced keys.
    */
-  function arrayReplaceKeys(array $array, array $keys) {
+  function array_replace_keys(array $array, array $keys) {
     foreach ($keys as $search => $replace) {
       if (array_key_exists($search, $array)) {
         $array[$replace] = $array[$search];
@@ -31,141 +34,106 @@ if (!function_exists('arrayReplaceKeys')) {
 
 }
 
-if (!function_exists('parseHtmlEntities')) {
+if (!function_exists('html_entities_decode')) {
 
   /**
-   * Parse the data into HTML entities.
+   * Decode the data into HTML entities.
    *
    * @param string $data
-   *   the data to be parsed.
+   *   The data to be decoded.
    *
    * @return string
+   *   The decoded html string.
    */
-  function parseHtmlEntities(string $data) {
+  function html_entities_decode(string $data) {
     return html_entity_decode(htmlspecialchars_decode($data));
   }
 
 }
 
-if (!function_exists('replaceString')) {
+if (!function_exists('replace_string')) {
 
   /**
-   * Replace all found strings in a string.
+   * Replace all found string parts in a string.
    *
    * @param string $toRemove
-   *   the string to be replaced.
+   *   The string part to be replaced.
    * @param string $toReplace
-   *   the new value of the string
-   *   which is going to be replaced.
+   *   The new value of the string part which is going to be replaced.
    * @param string $string
-   *   the string to search in.
+   *   The string to replace parts from.
    * @param int $limit
-   *   limit the number of matches.
+   *   Limit the number of matches.
    *
    * @return string
+   *   The updated string.
    */
-  function replaceString(
-        string $toRemove,
-        string $toReplace,
-        string $string,
-        int $limit = -1
-    ) {
-    return (string) preg_replace(
-          '/\b(' . $toRemove . ')\b/',
-          $toReplace,
-          $string,
-          $limit
-      );
+  function replace_string(string $toRemove, string $toReplace, string $string, int $limit = -1) {
+    return (string) preg_replace('/\b(' . $toRemove . ')\b/', $toReplace, $string, $limit);
   }
 
 }
 
-if (!function_exists('replaceDot')) {
+if (!function_exists('replace_dot')) {
 
   /**
-   * Replace all found strings in a string.
+   * Replace all found string parts in a string.
    *
    * @param string $toReplace
-   *   the new value of the string
-   *   which is going to be replaced.
+   *   The new value of the string part which is going to be replaced.
    * @param string $string
-   *   the string to search in.
+   *   The string to replace parts from.
    * @param int $limit
-   *   limit the number of matches.
+   *   Limit the number of matches.
    *
    * @return string
+   *   The updated string.
    */
-  function replaceDot(
-        string $toReplace,
-        string $string,
-        int $limit = -1
-    ) {
-    return (string) preg_replace(
-          '/\./',
-          $toReplace,
-          $string,
-          $limit
-      );
+  function replace_dot(string $toReplace, string $string, int $limit = -1) {
+    return (string) preg_replace('/\./', $toReplace, $string, $limit);
   }
 
 }
 
-if (!function_exists('replaceAllExceptFirstString')) {
+if (!function_exists('replace_all_except_first_string')) {
 
   /**
-   * Replace all found strings in a string.
+   * Replace all found string parts in a string.
    *
    * @param string $toRemove
-   *   the string to be replaced.
+   *   The string part to be replaced.
    * @param string $toReplace
-   *   the new value of the string
-   *   which is going to be replaced.
+   *   The new value of the string part.
    * @param string $string
-   *   the string to search in.
+   *   The string to replace values from.
    *
    * @return string
+   *   The updated string.
    */
-  function replaceAllExceptFirstString(
-        string $toRemove,
-        string $toReplace,
-        string $string
-    ) {
-    return replaceString(
-          $toReplace,
-          $toRemove,
-          replaceString(
-              $toRemove,
-              $toReplace,
-              $string
-          ),
-          1
-      );
+  function replace_all_except_first_string(string $toRemove, string $toReplace, string $string) {
+    return replace_string($toReplace, $toRemove, replace_string($toRemove, $toReplace, $string), 1);
   }
 
 }
 
-if (!function_exists('isJson')) {
+if (!function_exists('is_json')) {
 
   /**
    * Determine if the given data is of the type of json.
    *
    * @param string $data
-   *   the data to be checked.
+   *   The data to be validated.
    *
    * @return bool
+   *   If the string is JSON.
    */
-  function isJson(string $data) {
+  function is_json(string $data) {
     if ($data === '') {
       return FALSE;
     }
 
     try {
-      json_decode(
-            $data,
-            TRUE,
-            512,
-            JSON_THROW_ON_ERROR
-        );
+      json_decode($data, TRUE, 512, JSON_THROW_ON_ERROR);
     }
     catch (Exception $exception) {
       return FALSE;
@@ -176,32 +144,23 @@ if (!function_exists('isJson')) {
 
 }
 
-if (!function_exists('randomString')) {
+if (!function_exists('random_string')) {
 
   /**
-   * Generate a random string, using a cryptographically secure
-   * pseudorandom number generator (random_int)
+   * Generates securely a random string.
    *
-   * This function uses type hints now (PHP 7+ only), but it was originally
-   * written for PHP 5 as well.
-   *
-   * For PHP 7, random_int is a PHP core function
-   * For PHP 5.x, depends on https://github.com/paragonie/random_compat
+   * Using a cryptographically secure pseudorandom number generator
+   * (random_int).
    *
    * @param int $length
    *   How many characters do we want?
    * @param string $keyspace
-   *   A string of all possible characters
-   *   to select from.
+   *   A string of all possible characters to select from.
    *
    * @return string
-   *
-   * @throws Exception
+   *   The random string.
    */
-  function randomString(
-        int $length = 64,
-        string $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    ): string {
+  function random_string(int $length = 64, string $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'): string {
     if ($length < 1) {
       throw new RangeException('Length must be a positive integer');
     }
@@ -217,62 +176,58 @@ if (!function_exists('randomString')) {
 
 }
 
-if (!function_exists('stripWhitespace')) {
+if (!function_exists('strip_whitespaces')) {
 
   /**
    * Remove al the whitespaces from the string.
    *
    * @param string $string
+   *   The string to be stripped from whitespaces.
    *
    * @return string
+   *   The string without unnecessary whitespaces.
    */
-  function stripWhitespace(string $string) {
+  function strip_whitespaces(string $string) {
     return trim($string);
   }
 
 }
 
-if (!function_exists('encodeUrl')) {
+if (!function_exists('encode_url')) {
 
   /**
    * Encode a string into a url-save string.
    *
-   * Test string: Mess'd up --text-- just (to) stress /test/ ?our! `little` \\clean\\ url fun.ction!?-->
+   * Test string: "Mess'd up --text-- just (to) stress /test/ ?our! `little`
+   * \\clean\\ url fun.ction!?-->"
    *
    * @param string $string
+   *   The unsafe string.
    * @param string[] $replace
+   *   The replacement value that replaces found search values. An array may be
+   *   used to designate multiple replacements.
    * @param string $delimiter
+   *   The string or an array with strings to replace.
    *
    * @return string
+   *   The string encoded to an url.
    */
-  function encodeUrl(string $string, array $replace = [], string $delimiter = '-') {
+  function encode_url(string $string, array $replace = [], string $delimiter = '-') {
     if (count($replace) > 1) {
       $string = str_replace($replace, ' ', $string);
     }
 
-    $charset = (string) iconv(
-          'UTF-8',
-          'ASCII//TRANSLIT',
-          $string
-      );
-    $clean = (string) preg_replace(
-          "/[^a-zA-Z0-9\/_|+ -]/",
-          '',
-          $charset
-      );
+    $charset = (string) iconv('UTF-8', 'ASCII//TRANSLIT', $string);
+    $clean = (string) preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $charset);
     $trimmedString = strtolower(trim($clean, '-'));
-    $clean = (string) preg_replace(
-          "/[\/_|0-9+ -]+/",
-          $delimiter,
-          $trimmedString
-      );
+    $clean = (string) preg_replace("/[\/_|0-9+ -]+/", $delimiter, $trimmedString);
 
     return $clean;
   }
 
 }
 
-if (!function_exists('validateDate')) {
+if (!function_exists('validate_date')) {
 
   /**
    * Check if the given date is a correct type.
@@ -283,8 +238,9 @@ if (!function_exists('validateDate')) {
    *   The format of the date.
    *
    * @return bool
+   *   If the date is valid.
    */
-  function validateDate($date, $format = 'Y-m-d') {
+  function validate_date($date, $format = 'Y-m-d') {
     $datetime = DateTime::createFromFormat($format, $date);
     if ($datetime !== FALSE) {
       return $datetime->format($format) === $date;
@@ -295,7 +251,7 @@ if (!function_exists('validateDate')) {
 
 }
 
-if (!function_exists('getSubclassesOf')) {
+if (!function_exists('get_subclasses_of')) {
 
   /**
    * Gets all subclasses of the given parent.
@@ -306,7 +262,7 @@ if (!function_exists('getSubclassesOf')) {
    * @return array
    *   The list with subclasses of the parent.
    */
-  function getSubclassesOf(string $className) {
+  function get_subclasses_of(string $className) {
     $result = [];
 
     foreach (get_declared_classes() as $class) {

@@ -67,6 +67,6 @@ $breadcrumbs = new Breadcrumbs(URI::getUrl());
             </div>
         </div>
 
-        <?php echo parseHtmlEntities($event->getContent()) ?>
+        <?php echo html_entities_decode($event->getContent()) ?>
     </div>
 </div>

@@ -26,7 +26,7 @@ final class MailView extends BaseMailView {
   protected function render(string $name, array $content = []): string {
     ob_start();
 
-    includeFile("{$name}.view.php", $content);
+    include_file("{$name}.view.php", $content);
 
     return (string) ob_get_clean();
   }

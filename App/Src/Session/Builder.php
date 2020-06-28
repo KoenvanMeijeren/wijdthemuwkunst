@@ -97,7 +97,7 @@ final class Builder {
     bool $secure = FALSE,
     bool $httpOnly = TRUE
   ) {
-    $this->name = randomString(128);
+    $this->name = random_string(128);
     $this->expiringTime = $expiringTime;
     $this->path = $path;
     $this->domain = $domain;

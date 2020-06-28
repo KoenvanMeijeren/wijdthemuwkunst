@@ -54,7 +54,7 @@ final class ContactForm extends Model {
    *   The contact requests.
    */
   public function getByDate(string $date): array {
-    $date = validateDate($date, 'd-m-Y') ? $date : '';
+    $date = validate_date($date, 'd-m-Y') ? $date : '';
     $datetime = new Chronos($date);
 
     $this->addScope(

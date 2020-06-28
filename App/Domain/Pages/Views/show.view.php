@@ -38,6 +38,6 @@ if ($page->getThumbnail() !== ''
 
 <div class="container page">
     <div class="mt-5 mb-5">
-        <?php echo parseHtmlEntities($page->getContent()) ?>
+        <?php echo html_entities_decode($page->getContent()) ?>
     </div>
 </div>

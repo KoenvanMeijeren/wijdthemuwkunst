@@ -2,11 +2,12 @@
 
 /**
  * @file
+ * The csv functions.
  */
 
 declare(strict_types=1);
 
-if (!function_exists('arrayToCsv')) {
+if (!function_exists('array_to_csv')) {
 
   /**
    * Converts an array to csv.
@@ -15,11 +16,12 @@ if (!function_exists('arrayToCsv')) {
    *   The array to convert.
    *
    * @return string
+   *   The renderable csv.
    */
-  function arrayToCsv(array $inputArray) {
+  function array_to_csv(array $inputArray) {
     $csvFieldRow = [];
     foreach ($inputArray as $csbRow) {
-      $csvFieldRow[] = stringToCsv($csbRow);
+      $csvFieldRow[] = string_to_csv($csbRow);
     }
 
     return implode("\n", $csvFieldRow);
@@ -27,7 +29,7 @@ if (!function_exists('arrayToCsv')) {
 
 }
 
-if (!function_exists('stringToCsv')) {
+if (!function_exists('string_to_csv')) {
 
   /**
    * Converts a string to csv.
@@ -40,8 +42,9 @@ if (!function_exists('stringToCsv')) {
    *   The enclosure.
    *
    * @return string
+   *   The string formatted as csv.
    */
-  function stringToCsv(
+  function string_to_csv(
         array $input,
         string $delimiter = ',',
         string $enclosure = '"'
@@ -65,19 +68,17 @@ if (!function_exists('stringToCsv')) {
   }
 
 }
-if (!function_exists('outputCsv')) {
+if (!function_exists('output_csv')) {
 
   /**
-   * Takes in a filename and an array associative data array and outputs a csv file.
+   * Takes in a filename and an associative data array and outputs a csv file.
    *
    * @param string $fileName
    *   The filename.
    * @param array[] $assocDataArray
-   *   The assoc data array.
-   *
-   * @return void
+   *   The associative data array.
    */
-  function outputCsv(string $fileName, array $assocDataArray) {
+  function output_csv(string $fileName, array $assocDataArray) {
     ob_clean();
     header('Pragma: public');
     header('Expires: 0');

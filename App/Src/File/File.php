@@ -65,7 +65,7 @@ final class File {
 
     ob_start();
 
-    includeFile(
+    include_file(
           $this->system->readlink($this->path, TRUE),
           $vars
       );

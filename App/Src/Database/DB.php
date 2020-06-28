@@ -116,14 +116,14 @@ final class DB {
    */
   public function addStatementWithValues(string $statement, array $values): DB {
     if (strpos($this->query, 'WHERE') !== FALSE) {
-      $statement = replaceString(
+      $statement = replace_string(
             'WHERE',
             'AND',
             $statement
         );
     }
     elseif (preg_match_all('/\b(WHERE)\b/', $statement) !== FALSE) {
-      $statement = replaceAllExceptFirstString(
+      $statement = replace_all_except_first_string(
             'WHERE',
             'AND',
             $statement

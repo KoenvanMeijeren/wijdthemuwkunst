@@ -109,7 +109,7 @@ abstract class BasePageAction extends FormAction {
     }
 
     $fileLocation = json_decode(
-          parseHtmlEntities($fileLocation),
+          html_entities_decode($fileLocation),
           TRUE,
           512,
           JSON_THROW_ON_ERROR

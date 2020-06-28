@@ -22,8 +22,25 @@ final class DateTime {
    */
   protected Chronos $datetime;
 
+  /**
+   * The locale timezone.
+   *
+   * @var string
+   */
   protected string $locale;
+
+  /**
+   * Time zone ID, default is system default.
+   *
+   * @var string
+   */
   protected string $timezone;
+
+  /**
+   * Calendar to use for formatting or parsing; default is Gregorian.
+   *
+   * @var int
+   */
   protected int $calendar;
 
   /**
@@ -32,7 +49,7 @@ final class DateTime {
    * @param \Cake\Chronos\Chronos $datetime
    *   The datetime definition.
    * @param string $locale
-   *   The locale.
+   *   The locale timezone.
    * @param string $timezone
    *   Time zone ID, default is system default.
    * @param int $calendar
@@ -55,6 +72,7 @@ final class DateTime {
    * Convert the datetime to a number of a day.
    *
    * @return int
+   *   The day number.
    */
   public function toDayNumber(): int {
     return $this->datetime->day;
@@ -64,6 +82,7 @@ final class DateTime {
    * Convert the datetime to a readable date format.
    *
    * @return string
+   *   The readable date format.
    */
   public function toDateTime(): string {
     $fmt = new IntlDateFormatter(
@@ -79,6 +98,7 @@ final class DateTime {
    * Convert the datetime to a readable short date format.
    *
    * @return string
+   *   The formatted date.
    */
   public function toFormattedDate(): string {
     $fmt = new IntlDateFormatter(
@@ -94,6 +114,7 @@ final class DateTime {
    * Convert the datetime to date.
    *
    * @return string
+   *   The default date format.
    */
   public function toDate(): string {
     $fmt = new IntlDateFormatter(
@@ -109,6 +130,7 @@ final class DateTime {
    * Convert the datetime to time.
    *
    * @return string
+   *   The default time format.
    */
   public function toTime(): string {
     $fmt = new IntlDateFormatter(
@@ -124,6 +146,7 @@ final class DateTime {
    * Convert the datetime to a short month notation of 3 chars.
    *
    * @return string
+   *   The short month format.
    */
   public function toShortMonth(): string {
     $fmt = new IntlDateFormatter(
@@ -135,7 +158,7 @@ final class DateTime {
           'MMM'
       );
 
-    return replaceDot(
+    return replace_dot(
           '',
           $fmt->format(strtotime($this->datetime->toDateTimeString()))
       );

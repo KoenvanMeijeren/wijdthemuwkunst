@@ -72,7 +72,7 @@ final class Router {
         string $directoryPath = ROUTES_PATH . '/'
     ): Router {
     self::resetRoutes();
-    includeFile($directoryPath . $file);
+    include_file($directoryPath . $file);
 
     return new self();
   }
@@ -350,7 +350,7 @@ final class Router {
           );
         self::$wildcard = $urlExploded[$key];
         // @codeCoverageIgnoreStart
-        self::$availableRoutes = arrayReplaceKeys(
+        self::$availableRoutes = array_replace_keys(
               self::$availableRoutes,
               [$route => $newRoute]
           );

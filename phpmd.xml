@@ -13,7 +13,6 @@
     <rule ref="rulesets/controversial.xml/CamelCasePropertyName"/>
     <rule ref="rulesets/controversial.xml/CamelCaseMethodName"/>
     <rule ref="rulesets/controversial.xml/CamelCaseParameterName"/>
-    <rule ref="rulesets/controversial.xml/CamelCaseVariableName"/>
     <rule ref="rulesets/design.xml/EvalExpression"/>
     <rule ref="rulesets/design.xml/GotoStatement"/>
     <rule ref="rulesets/design.xml/NumberOfChildren"/>

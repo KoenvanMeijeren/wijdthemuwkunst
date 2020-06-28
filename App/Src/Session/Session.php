@@ -81,7 +81,7 @@ final class Session {
       return '';
     }
 
-    if (isJson($data)) {
+    if (is_json($data)) {
       return $data;
     }
 

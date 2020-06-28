@@ -28,7 +28,7 @@ $breadcrumbs = new Breadcrumbs(URI::getUrl());
         <?php endif; ?>
 
         <div class="events-content">
-            <?php echo parseHtmlEntities($eventRepository->getContent()) ?>
+            <?php echo html_entities_decode($eventRepository->getContent()) ?>
         </div>
 
         <div class="row">

@@ -22,5 +22,5 @@ if (!empty($message)) :
 $message = $session->get(State::FORM_VALIDATION_FAILED, true);
 if (!empty($message)) :
     ?>
-    <div class="field error-field"><?= parseHtmlEntities($message) ?></div>
+    <div class="field error-field"><?= html_entities_decode($message) ?></div>
 <?php endif; ?>

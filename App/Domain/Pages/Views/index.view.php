@@ -48,7 +48,7 @@ if ($home->getThumbnail() !== ''
 <div class="container page">
     <?php if ($home->getContent() !== '') : ?>
         <div class="mt-5 mb-5">
-            <?php echo parseHtmlEntities($home->getContent()) ?>
+            <?php echo html_entities_decode($home->getContent()) ?>
         </div>
     <?php endif; ?>
 
@@ -56,7 +56,7 @@ if ($home->getThumbnail() !== ''
         <div class="mt-5 mb-5">
             <div class="row">
                 <div class="events-content">
-                    <?php echo parseHtmlEntities($eventsRepository->getContent()) ?>
+                    <?php echo html_entities_decode($eventsRepository->getContent()) ?>
                 </div>
             </div>
 

@@ -42,7 +42,7 @@ final class View extends BaseView {
   protected function renderContent(string $name, array $content = []): string {
     ob_start();
 
-    includeFile(RESOURCES_PATH . "/partials/{$name}.view.php", $content);
+    include_file(RESOURCES_PATH . "/partials/{$name}.view.php", $content);
 
     return (string) ob_get_clean();
   }

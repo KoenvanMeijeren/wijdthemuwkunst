@@ -20,7 +20,7 @@ $text = new Text();
 <div class="container page">
     <div class="mt-5 mb-5">
         <div class="events-content">
-            <?php echo parseHtmlEntities($eventRepository->getContent()) ?>
+            <?php echo html_entities_decode($eventRepository->getContent()) ?>
         </div>
 
         <div class="row">
@@ -68,7 +68,7 @@ $text = new Text();
         <div class="row">
             <?php if (isset($event_archive) && count($event_archive) > 0) : ?>
                 <div class="col-md-12 events-content">
-                    <?php echo parseHtmlEntities($eventArchiveRepository->getContent()) ?>
+                    <?php echo html_entities_decode($eventArchiveRepository->getContent()) ?>
                 </div>
 
                 <?php foreach ($event_archive as $singleEvent) :

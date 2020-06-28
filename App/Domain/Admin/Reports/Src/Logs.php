@@ -34,7 +34,7 @@ final class Logs {
             PREG_PATTERN_ORDER
         ) !== FALSE) {
             $matches = $matches[0] ?? [];
-            $matches[2] = isJson($matches[2] ?? '') ? json_decode(
+            $matches[2] = is_json($matches[2] ?? '') ? json_decode(
                 $matches[2],
                 FALSE,
                 512,

@@ -52,7 +52,7 @@ if (!empty($message)) :
         </button>
 
         <span data-notify="message">
-            <?= parseHtmlEntities($message) ?>
+            <?= html_entities_decode($message) ?>
         </span>
     </div>
 <?php endif; ?>

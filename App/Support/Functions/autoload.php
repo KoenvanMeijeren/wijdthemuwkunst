@@ -2,6 +2,7 @@
 
 /**
  * @file
+ * Autoload the functions.
  */
 
 declare(strict_types=1);

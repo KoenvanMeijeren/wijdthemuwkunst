@@ -25,7 +25,7 @@ final class UploadImageAction extends FileAction {
     $this->file = $request->file($fileName);
 
     $uri = $request->env('app_uri');
-    $shortUri = replaceString('www.', '', $uri);
+    $shortUri = replace_string('www.', '', $uri);
 
     $this->acceptedOrigins[] = $uri;
     $this->acceptedOrigins[] = $shortUri;
