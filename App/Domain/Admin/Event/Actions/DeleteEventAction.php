@@ -2,7 +2,7 @@
 
 namespace Domain\Admin\Event\Actions;
 
-use Src\State\State;
+use Src\Core\StateInterface;
 use Src\Translation\Translation;
 
 /**
@@ -18,7 +18,7 @@ final class DeleteEventAction extends BaseEventAction {
 
     if ($this->event->find($this->event->getId()) !== NULL) {
       $this->session->flash(
-            State::FAILED,
+            StateInterface::FAILED,
             sprintf(
                 Translation::get('event_unsuccessfully_deleted'),
                 $this->eventRepository->getTitle()
@@ -29,7 +29,7 @@ final class DeleteEventAction extends BaseEventAction {
     }
 
     $this->session->flash(
-          State::SUCCESSFUL,
+          StateInterface::SUCCESSFUL,
           sprintf(
               Translation::get('event_successfully_deleted'),
               $this->eventRepository->getTitle()

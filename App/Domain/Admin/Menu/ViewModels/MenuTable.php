@@ -35,7 +35,7 @@ final class MenuTable extends DataTableBuilder {
     return [
       $slug,
       $menuItem->getTitle(),
-      $menuItem->getWeight(),
+      (string) $menuItem->getWeight(),
     ];
   }
 

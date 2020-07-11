@@ -71,12 +71,12 @@
             "docker-compose -f docker-compose.yml -f docker-compose.dev.yml stop"
         ],
         "inspect": [
-            "vendor/bin/phpcs --standard=Drupal --extensions=php App",
+            "vendor/bin/phpcs --standard=Drupal --extensions=php --ignore=view.php App/Domain/Event",
             "vendor/bin/phpcpd app",
             "vendor/bin/phpmd app text phpmd.xml"
         ],
         "inspect-fix": [
-            "vendor/bin/phpcbf --standard=Drupal --extensions=php App"
+            "vendor/bin/phpcbf --standard=Drupal --extensions=php --ignore=view.php app"
         ],
         "insights": [
             "vendor/bin/phploc app",

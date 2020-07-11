@@ -5,12 +5,10 @@ declare(strict_types=1);
 
 namespace System\Mail;
 
-use Domain\Admin\Settings\Models\Setting;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use Src\Core\Env;
 use Src\Core\Request;
-use System\View\MailView;
 
 /**
  * Provides a class for sending emails.
@@ -29,13 +27,13 @@ final class Mail implements MailInterface {
   /**
    * Mail constructor.
    */
-  public function __construct() {
+  public function __construct(string $companyName) {
     $this->mailer = new PHPMailer(TRUE);
     $env = new Env();
     $request = new Request();
 
     // Set mail credentials.
-    if ($env->get() === Env::PRODUCTION) {
+    if ($env->isProduction()) {
       $this->mailer->SMTPDebug = SMTP::DEBUG_SERVER;
       $this->mailer->Host = $request->env('mail_host');
       $this->mailer->SMTPAuth = TRUE;
@@ -46,17 +44,7 @@ final class Mail implements MailInterface {
     }
 
     $this->mailer->isHTML(TRUE);
-
-    $setting = new Setting();
-    $this->mailer->setFrom(
-          $request->env('mail_username'),
-          $setting->get('bedrijf_naam')
-      );
-
-    $this->mailer->addAddress(
-          $request->env('mail_username'),
-          $setting->get('bedrijf_naam')
-      );
+    $this->mailer->setFrom($request->env('mail_username'), $companyName);
   }
 
   /**

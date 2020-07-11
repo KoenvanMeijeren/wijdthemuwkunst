@@ -2,7 +2,7 @@
 
 namespace Domain\Admin\Event\Actions;
 
-use Src\State\State;
+use Src\Core\StateInterface;
 use Src\Translation\Translation;
 
 /**
@@ -19,7 +19,7 @@ final class SaveAndPublishEventAction extends BaseEventAction {
     $this->event->updateOrCreate($this->event->getId(), $this->attributes);
 
     $this->session->flash(
-          State::SUCCESSFUL,
+          StateInterface::SUCCESSFUL,
           sprintf(
               Translation::get('event_successfully_updated'),
               $this->eventRepository->getTitle()

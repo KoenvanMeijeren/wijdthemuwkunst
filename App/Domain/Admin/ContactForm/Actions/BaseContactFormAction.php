@@ -8,10 +8,7 @@ use Cake\Chronos\Chronos;
 use Domain\Admin\ContactForm\Model\ContactForm;
 use Domain\Admin\ContactForm\Repository\ContactFormRepository;
 use Src\Action\FormAction;
-use Src\Core\Request;
-use Src\Session\Session;
 use Src\Translation\Translation;
-use Src\Validate\form\FormValidator;
 
 /**
  * Provides a base class for contact form actions.
@@ -30,23 +27,9 @@ abstract class BaseContactFormAction extends FormAction {
   /**
    * The contact form repository.
    *
-   * @var \Domain\Admin\ContactForm\Model\ContactFormRepository
+   * @var \Domain\Admin\ContactForm\Repository\ContactFormRepository
    */
   protected ContactFormRepository $repository;
-
-  /**
-   * The form validator.
-   *
-   * @var \Src\Validate\form\FormValidator
-   */
-  protected FormValidator $validator;
-
-  /**
-   * The session definition.
-   *
-   * @var \Src\Session\Session
-   */
-  protected Session $session;
 
   /**
    * The id of the contact form message.
@@ -87,17 +70,16 @@ abstract class BaseContactFormAction extends FormAction {
    * BaseContactFormAction constructor.
    */
   public function __construct() {
-    $request = new Request();
+    parent::__construct();
+
     $this->contactForm = new ContactForm();
     $this->repository = new ContactFormRepository(
           $this->contactForm->find($this->contactForm->getId())
       );
-    $this->validator = new FormValidator();
-    $this->session = new Session();
 
-    $this->name = $request->post('name');
-    $this->email = $request->post('email');
-    $this->message = $request->post('message');
+    $this->name = $this->request->post('name');
+    $this->email = $this->request->post('email');
+    $this->message = $this->request->post('message');
 
     $this->attributes = [
       'contact_form_name' => $this->name,

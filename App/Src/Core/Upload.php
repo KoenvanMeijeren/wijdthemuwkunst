@@ -10,7 +10,6 @@ use Sirius\Upload\Handler as UploadHandler;
 use Src\Exceptions\File\ErrorWhileUploadingFileException;
 use Src\Log\Log;
 use Src\Session\Session;
-use Src\State\State;
 use Src\Translation\Translation;
 
 /**
@@ -150,7 +149,7 @@ final class Upload {
     }
 
     $this->session->flash(
-          State::FAILED,
+          StateInterface::FAILED,
           Translation::get('error_while_uploading_file')
       );
     return FALSE;
@@ -175,7 +174,7 @@ final class Upload {
 
     if (!array_key_exists($type, self::ALLOWED_FILE_TYPES)) {
       $this->session->flash(
-            State::FAILED,
+            StateInterface::FAILED,
             Translation::get('not_allowed_file_upload')
         );
       return FALSE;

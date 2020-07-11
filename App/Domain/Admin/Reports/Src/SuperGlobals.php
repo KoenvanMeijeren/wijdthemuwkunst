@@ -64,7 +64,7 @@ final class SuperGlobals {
       else {
         $table->addRow([
           $key,
-          $data,
+          (string) $data,
         ]);
       }
     }

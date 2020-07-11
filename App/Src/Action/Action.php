@@ -10,12 +10,13 @@ namespace Src\Action;
  *
  * @package Src\Action
  */
-abstract class Action {
+abstract class Action implements ActionInterface {
 
   /**
    * Handle the request and execute the action.
    *
    * @return bool
+   *   If the action is handled successfully.
    */
   abstract protected function handle(): bool;
 
@@ -23,6 +24,7 @@ abstract class Action {
    * Authorize the request for the action.
    *
    * @return bool
+   *   If the action is authorized successfully.
    */
   abstract protected function authorize(): bool;
 
@@ -30,13 +32,12 @@ abstract class Action {
    * Validate the given input.
    *
    * @return bool
+   *   If the action is validated successfully.
    */
   abstract protected function validate(): bool;
 
   /**
-   * Execute the validation and handle the request.
-   *
-   * @return bool
+   * {@inheritDoc}
    */
   final public function execute(): bool {
     if ($this->authorize() && $this->validate()) {

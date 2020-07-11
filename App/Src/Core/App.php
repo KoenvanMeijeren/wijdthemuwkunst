@@ -8,9 +8,8 @@ namespace Src\Core;
 use Domain\Admin\Accounts\User\Models\User;
 use Src\Header\Header;
 use Src\Log\Log;
-use Src\Session\Builder as SessionBuilder;
 use Src\Session\Session;
-use Src\State\State;
+use Src\Session\SessionBuilder as SessionBuilder;
 
 /**
  *
@@ -57,12 +56,12 @@ final class App {
       ->direct(URI::getUrl(), URI::getMethod(), $user->getRights());
 
     $session = new Session();
-    if (!$session->exists(State::FAILED) &&
-          !$session->exists(State::SUCCESSFUL)
+    if (!$session->exists(StateInterface::FAILED) &&
+          !$session->exists(StateInterface::SUCCESSFUL)
       ) {
       Log::appRequest(
             '',
-            State::SUCCESSFUL,
+            StateInterface::SUCCESSFUL,
             URI::getUrl(),
             URI::getMethod()
         );

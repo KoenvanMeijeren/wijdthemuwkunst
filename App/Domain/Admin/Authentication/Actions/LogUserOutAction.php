@@ -7,9 +7,9 @@ namespace Domain\Admin\Authentication\Actions;
 
 use Domain\Admin\Accounts\User\Models\User;
 use Src\Action\Action;
-use Src\Session\Builder;
+use Src\Core\StateInterface;
 use Src\Session\Session;
-use Src\State\State;
+use Src\Session\SessionBuilder;
 use Src\Translation\Translation;
 
 /**
@@ -29,16 +29,13 @@ final class LogUserOutAction extends Action {
    * @inheritDoc
    */
   protected function handle(): bool {
-    $builder = new Builder();
+    $builder = new SessionBuilder();
     $builder->destroy();
     $builder->startSession();
     $builder->setSessionSecurity();
 
     $session = new Session();
-    $session->flash(
-          State::SUCCESSFUL,
-          Translation::get('admin_logout_message')
-      );
+    $session->flash(StateInterface::SUCCESSFUL, Translation::get('admin_logout_message'));
 
     return TRUE;
   }

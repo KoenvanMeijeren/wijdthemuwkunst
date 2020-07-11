@@ -6,7 +6,7 @@ declare(strict_types=1);
 namespace Domain\Admin\Settings\Actions;
 
 use Domain\Admin\Accounts\User\Models\User;
-use Src\State\State;
+use Src\Core\StateInterface;
 use Src\Translation\Translation;
 
 /**
@@ -22,7 +22,7 @@ final class DestroySettingAction extends BaseSettingAction {
 
     if ($this->setting->find($this->setting->getId()) === NULL) {
       $this->session->flash(
-            State::SUCCESSFUL,
+            StateInterface::SUCCESSFUL,
             sprintf(
                 Translation::get('setting_successful_deleted'),
                 $this->settingRepository->getKey()
@@ -33,7 +33,7 @@ final class DestroySettingAction extends BaseSettingAction {
     }
 
     $this->session->flash(
-          State::SUCCESSFUL,
+          StateInterface::SUCCESSFUL,
           sprintf(
               Translation::get('setting_unsuccessful_deleted'),
               $this->settingRepository->getKey()
@@ -49,7 +49,7 @@ final class DestroySettingAction extends BaseSettingAction {
     $user = new User();
     if ($user->getRights() !== User::DEVELOPER) {
       $this->session->flash(
-            State::FAILED,
+            StateInterface::FAILED,
             Translation::get('setting_destroy_not_allowed')
         );
 

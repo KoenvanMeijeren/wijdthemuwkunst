@@ -26,31 +26,35 @@ final class ContactAction extends BaseContactFormAction {
   protected string $baseViewPath = 'Contact/Views';
 
   /**
+   * The setting definition.
+   *
+   * @var \Domain\Admin\Settings\Models\Setting
+   */
+  protected Setting $setting;
+
+  /**
+   * {@inheritDoc}
+   */
+  public function __construct() {
+    parent::__construct();
+
+    $this->setting = new Setting();
+  }
+
+  /**
    * {@inheritDoc}
    */
   protected function handle(): bool {
-    $mail = new Mail();
-    $setting = new Setting();
-
-    $mail->addAddress(
-          $setting->get('bedrijf_email'),
-          $setting->get('bedrijf_naam')
-      );
-
-    $mail->setSubject($setting->get('contactformulier_onderwerp'));
-
-    $mail->setBody(
-          $this->baseViewPath,
-          'contact',
-          'plain-text-contact',
-          [
-            'company_name' => $setting->get('bedrijf_naam'),
-            'copyright' => $setting->get('copyright_tekst'),
-            'message' => $this->message,
-            'email' => $this->email,
-            'name' => $this->name,
-          ]
-      );
+    $mail = new Mail($this->setting->get('bedrijf_naam'));
+    $mail->addAddress($this->setting->get('bedrijf_email'), $this->setting->get('bedrijf_naam'));
+    $mail->setSubject($this->setting->get('contactformulier_onderwerp'));
+    $mail->setBody($this->baseViewPath, 'contact', 'plain-text-contact', [
+      'company_name' => $this->setting->get('bedrijf_naam'),
+      'copyright' => $this->setting->get('copyright_tekst'),
+      'message' => $this->message,
+      'email' => $this->email,
+      'name' => $this->name,
+    ]);
 
     return $mail->send();
   }
@@ -71,13 +75,11 @@ final class ContactAction extends BaseContactFormAction {
    * {@inheritDoc}
    */
   protected function validate(): bool {
-    $setting = new Setting();
-
-    $this->validator->input($setting->get('bedrijf_email'), Translation::get('company_email'))
+    $this->validator->input($this->setting->get('bedrijf_email'), Translation::get('company_email'))
       ->settingIsRequired()
       ->isEmail();
 
-    $this->validator->input($setting->get('bedrijf_naam'), Translation::get('company_name'))
+    $this->validator->input($this->setting->get('bedrijf_naam'), Translation::get('company_name'))
       ->settingIsRequired();
 
     return parent::validate();

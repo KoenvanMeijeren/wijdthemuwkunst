@@ -18,8 +18,26 @@ use System\Controller\ControllerBase;
  * @package Domain\Pages\Controllers
  */
 final class PageController extends ControllerBase {
+
+  /**
+   * The base path to the views directory.
+   *
+   * @var string
+   */
   protected string $baseViewPath = 'Pages/Views/';
+
+  /**
+   * The page model definition.
+   *
+   * @var \Domain\Pages\Models\Page
+   */
   protected Page $page;
+
+  /**
+   * The event model definition.
+   *
+   * @var \Domain\Event\Models\Event
+   */
   protected Event $event;
 
   /**
@@ -78,6 +96,7 @@ final class PageController extends ControllerBase {
    *   The page to show.
    *
    * @return \Src\View\ViewInterface
+   *   The view.
    */
   public function show(PageRepository $page): ViewInterface {
     return $this->view('show', [

@@ -3,8 +3,8 @@
 namespace Domain\Admin\Text\ViewModels;
 
 use Src\Core\Redirect;
+use Src\Core\StateInterface;
 use Src\Session\Session;
-use Src\State\State;
 use Src\Translation\Translation;
 
 /**
@@ -29,7 +29,7 @@ final class EditViewModel {
   public function get() {
     if ($this->text === NULL) {
       $this->session->flash(
-            State::FAILED,
+            StateInterface::FAILED,
             Translation::get('text_does_not_exists')
         );
 

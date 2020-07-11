@@ -147,10 +147,11 @@ final class User extends Model {
       return;
     }
 
-    if ($idEncryption->validateHash(
-          $this->account->account_login_token ?? '',
-          $session->get('userID')
-      )) {
+    if ($idEncryption->validateHash($this->account->account_login_token ?? '', $session->get('userID'))) {
+      return;
+    }
+
+    if (!$this->isLoggedIn()) {
       return;
     }
 
@@ -160,7 +161,7 @@ final class User extends Model {
   /**
    * Log the current user out and redirect to the log in page.
    *
-   * @return \Src\Core
+   * @return \Src\Core\Redirect
    */
   public function logout(): Redirect {
     $logout = new LogUserOutAction($this);

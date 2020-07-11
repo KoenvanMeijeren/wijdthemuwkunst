@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Src\Security;
 
 use ParagonIE\AntiCSRF\AntiCSRF;
+use Src\Core\StateInterface;
 use Src\Session\Session;
-use Src\State\State;
 use Src\Translation\Translation;
 
 /**
@@ -60,7 +60,7 @@ final class CSRF {
     }
 
     $session->flash(
-          State::FAILED,
+          StateInterface::FAILED,
           Translation::get('failed_csrf_check_message')
       );
     return FALSE;

@@ -3,7 +3,7 @@
 namespace Domain\Admin\Text\Actions;
 
 use Domain\Admin\Accounts\User\Models\User;
-use Src\State\State;
+use Src\Core\StateInterface;
 use Src\Translation\Translation;
 
 /**
@@ -19,7 +19,7 @@ final class DeleteTextAction extends BaseTextAction {
 
     if ($this->text->find($this->text->getId()) === NULL) {
       $this->session->flash(
-            State::SUCCESSFUL,
+            StateInterface::SUCCESSFUL,
             sprintf(
                 Translation::get('text_successful_deleted'),
                 $this->textRepository->getKey()
@@ -30,7 +30,7 @@ final class DeleteTextAction extends BaseTextAction {
     }
 
     $this->session->flash(
-          State::SUCCESSFUL,
+          StateInterface::SUCCESSFUL,
           sprintf(
               Translation::get('text_unsuccessful_deleted'),
               $this->textRepository->getKey()
@@ -47,7 +47,7 @@ final class DeleteTextAction extends BaseTextAction {
     $user = new User();
     if ($user->getRights() !== User::DEVELOPER) {
       $this->session->flash(
-            State::FAILED,
+            StateInterface::FAILED,
             Translation::get('text_destroy_not_allowed')
         );
 

@@ -8,8 +8,8 @@ use Domain\Admin\Text\Models\Text;
 use Domain\Admin\Text\Repositories\TextRepository;
 use Src\Action\FormAction;
 use Src\Core\Request;
+use Src\Core\StateInterface;
 use Src\Session\Session;
-use Src\State\State;
 use Src\Translation\Translation;
 use Src\Validate\form\FormValidator;
 
@@ -57,7 +57,7 @@ abstract class BaseTextAction extends FormAction {
           && $user->getRights() !== User::DEVELOPER
       ) {
       $this->session->flash(
-            State::FAILED,
+            StateInterface::FAILED,
             Translation::get('text_editing_key_not_allowed')
         );
 

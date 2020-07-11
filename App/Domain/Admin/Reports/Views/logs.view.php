@@ -7,7 +7,7 @@
 declare(strict_types=1);
 
 use Src\Core\Request;
-use Src\State\State;
+use Src\Core\StateInterface;
 use Src\Translation\Translation;
 
 $request = new Request();
@@ -75,11 +75,11 @@ $request = new Request();
                                     foreach (($logs ?? []) as $key => $log) :
                                       if (strpos(
                                             $log['message'] ?? '',
-                                            State::ERROR
+                                            StateInterface::ERROR
                                         ) !== FALSE
                                             || strpos(
                                                 $log['message'] ?? '',
-                                                State::FAILED
+                                                StateInterface::FAILED
                                             ) !== FALSE) {
                                         $class = 'active-danger';
                                       }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\Account\Actions;
 
-use Src\State\State;
+use Src\Core\StateInterface;
 use Src\Translation\Translation;
 
 /**
@@ -21,7 +21,7 @@ final class BlockAccountAction extends BaseAccountAction {
     ]);
 
     $this->session->flash(
-          State::SUCCESSFUL,
+          StateInterface::SUCCESSFUL,
           Translation::get('admin_account_successful_blocked_message')
       );
 
@@ -34,7 +34,7 @@ final class BlockAccountAction extends BaseAccountAction {
   protected function authorize(): bool {
     if ($this->user->getId() === $this->account->getId()) {
       $this->session->flash(
-            State::FAILED,
+            StateInterface::FAILED,
             Translation::get('cannot_block_own_account_message')
         );
 

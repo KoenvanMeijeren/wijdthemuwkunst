@@ -1,11 +1,11 @@
 <?php
 
+use Src\Core\StateInterface;
 use Src\Session\Session;
-use Src\State\State;
 
 $session = new Session();
 
-$error = $session->get(State::FAILED, true);
+$error = $session->get(StateInterface::FAILED, true);
 if (!empty($error)) :
     ?>
     <div data-notify="container" role="alert"
@@ -22,7 +22,7 @@ if (!empty($error)) :
 <?php endif; ?>
 
 <?php
-$message = $session->get(State::SUCCESSFUL, true);
+$message = $session->get(StateInterface::SUCCESSFUL, true);
 if (!empty($message)) :
     ?>
     <div data-notify="container" role="alert"
@@ -39,7 +39,7 @@ if (!empty($message)) :
 <?php endif; ?>
 
 <?php
-$message = $session->get(State::FORM_VALIDATION_FAILED, true);
+$message = $session->get(StateInterface::FORM_VALIDATION_FAILED, true);
 if (!empty($message)) :
     ?>
     <div data-notify="container" role="alert"

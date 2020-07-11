@@ -7,7 +7,7 @@ namespace Domain\Admin\Pages\Actions;
 
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Pages\Models\Page;
-use Src\State\State;
+use Src\Core\StateInterface;
 use Src\Translation\Translation;
 
 /**
@@ -23,7 +23,7 @@ final class DeletePageAction extends BasePageAction {
 
     if ($this->page->find($this->page->getId()) !== NULL) {
       $this->session->flash(
-            State::FAILED,
+            StateInterface::FAILED,
             sprintf(
                 Translation::get('page_unsuccessfully_deleted'),
                 $this->pageRepository->getSlug()
@@ -34,7 +34,7 @@ final class DeletePageAction extends BasePageAction {
     }
 
     $this->session->flash(
-          State::SUCCESSFUL,
+          StateInterface::SUCCESSFUL,
           sprintf(
               Translation::get('page_successfully_deleted'),
               $this->pageRepository->getSlug()
@@ -54,7 +54,7 @@ final class DeletePageAction extends BasePageAction {
           $this->pageRepository->getInMenu() === Page::PAGE_STATIC
       ) {
       $this->session->flash(
-            State::FAILED,
+            StateInterface::FAILED,
             sprintf(
                 Translation::get('page_static_cannot_be_deleted'),
                 $this->pageRepository->getSlug()

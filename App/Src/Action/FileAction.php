@@ -5,14 +5,25 @@ declare(strict_types=1);
 
 namespace Src\Action;
 
+use Src\Core\Request;
+use Src\Core\Upload;
+
 /**
  * Provides a base class for file actions.
  *
  * @package Src\Action
  */
-abstract class FileAction {
+abstract class FileAction extends Action {
+
   /**
-   * The accepted origins to uplaod files from.
+   * The request definition.
+   *
+   * @var \Src\Core\Request
+   */
+  protected Request $request;
+
+  /**
+   * The accepted origins to uploaded files from.
    *
    * @var string[]
    */
@@ -21,37 +32,80 @@ abstract class FileAction {
   ];
 
   /**
-   * Handle the request and execute the action.
+   * The application host origin.
    *
-   * @return void
+   * @var string
    */
-  abstract protected function handle(): void;
+  private string $origin;
 
   /**
-   * Authorize the request for the action.
+   * Gets the location of the uploaded file.
    *
-   * @return bool
+   * @var string
    */
-  abstract protected function authorize(): bool;
+  protected string $fileLocation;
 
   /**
-   * Validate the given input.
-   *
-   * @return bool
+   * File action constructor.
    */
-  abstract protected function validate(): bool;
+  public function __construct() {
+    $this->request = new Request();
+
+    $uri = $this->request->env('app_uri');
+    $shortUri = replace_string('www.', '', $uri);
+
+    $this->acceptedOrigins[] = $uri;
+    $this->acceptedOrigins[] = $shortUri;
+
+    $this->origin = $this->request->server(Request::HTTP_ORIGIN);
+  }
 
   /**
-   * Execute the validation and handle the request.
+   * Gets the uploaded file.
    *
-   * @return void
+   * @return array
+   *   The file.
    */
-  final public function execute(): void {
-    if ($this->authorize() && $this->validate()) {
-      $this->handle();
+  abstract protected function getFile(): array;
 
-      return;
+  /**
+   * {@inheritDoc}
+   */
+  protected function handle(): bool {
+    if (count($this->getFile()) === 0) {
+      return FALSE;
     }
+
+    $uploader = new Upload($this->getFile());
+    if ($uploader->prepare() && $uploader->getFileIfItExists() === '') {
+      $uploader->execute();
+    }
+
+    $this->fileLocation = $uploader->getFileIfItExists();
+
+    return TRUE;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  protected function authorize(): bool {
+    if (!in_array($this->origin, $this->acceptedOrigins, TRUE)) {
+      header('HTTP/1.1 403 Origin Denied');
+
+      return FALSE;
+    }
+
+    header('Access-Control-Allow-Origin: ' . $this->origin);
+
+    return TRUE;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  protected function validate(): bool {
+    return TRUE;
   }
 
 }

@@ -21,7 +21,7 @@ final class ContactController extends ControllerBase {
   /**
    * Sends the contact request to the specified contact persons.
    *
-   * @return \Src\Core
+   * @return \Src\Core\Redirect
    *   The page to redirect to.
    */
   public function send(): Redirect {

@@ -17,11 +17,12 @@ class EventArchiveController extends EventControllerBase {
    * Returns the archive of the events.
    *
    * @return \Src\View\ViewInterface
+   *   The view.
    */
   public function index(): ViewInterface {
     $eventRepo = new PageRepository(
-          $this->page->getBySlug('concerten-historie')
-      );
+      $this->page->getBySlug('concerten-historie')
+    );
 
     return $this->view('index-archive', [
       'title' => $eventRepo->getTitle(),
@@ -34,10 +35,10 @@ class EventArchiveController extends EventControllerBase {
    * Displays one event.
    *
    * @return \Src\View\ViewInterface
+   *   The view.
    */
   public function show(): ViewInterface {
     $event = $this->eventArchive->getBySlug($this->eventArchive->getSlug());
-
     if ($event === NULL) {
       return $this->notFound();
     }

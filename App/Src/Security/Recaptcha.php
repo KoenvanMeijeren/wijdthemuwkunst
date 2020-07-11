@@ -6,8 +6,8 @@ namespace Src\Security;
 
 use ReCaptcha\ReCaptcha as GoogleRecaptcha;
 use Src\Core\Request;
+use Src\Core\StateInterface;
 use Src\Session\Session;
-use Src\State\State;
 use Src\Translation\Translation;
 
 /**
@@ -43,7 +43,7 @@ final class Recaptcha {
 
     $session = new Session();
     $session->flash(
-          State::FAILED,
+          StateInterface::FAILED,
           Translation::get('failed_recaptcha_check_message')
       );
 

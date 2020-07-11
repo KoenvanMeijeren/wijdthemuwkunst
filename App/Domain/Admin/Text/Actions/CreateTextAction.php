@@ -2,7 +2,7 @@
 
 namespace Domain\Admin\Text\Actions;
 
-use Src\State\State;
+use Src\Core\StateInterface;
 use Src\Translation\Translation;
 
 /**
@@ -18,7 +18,7 @@ final class CreateTextAction extends BaseTextAction {
 
     if ($text !== NULL) {
       $this->session->flash(
-            State::SUCCESSFUL,
+            StateInterface::SUCCESSFUL,
             sprintf(
                 Translation::get('text_successful_created'),
                 $this->key
@@ -29,7 +29,7 @@ final class CreateTextAction extends BaseTextAction {
     }
 
     $this->session->flash(
-          State::FAILED,
+          StateInterface::FAILED,
           sprintf(
               Translation::get('text_unsuccessful_created'),
               $this->key

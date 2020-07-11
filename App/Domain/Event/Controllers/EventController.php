@@ -8,12 +8,17 @@ use Src\View\ViewInterface;
 use System\View\DomainView;
 
 /**
+ * Provides a controller for events.
  *
+ * @package Domain\Event\Controllers
  */
 class EventController extends EventControllerBase {
 
   /**
+   * The index page of the events.
    *
+   * @return \Src\View\ViewInterface
+   *   The view.
    */
   public function index(): ViewInterface {
     $eventRepo = new PageRepository($this->page->getBySlug('concerten'));
@@ -30,11 +35,13 @@ class EventController extends EventControllerBase {
   }
 
   /**
+   * Displays one event.
    *
+   * @return \Src\View\ViewInterface
+   *   The view.
    */
   public function show(): ViewInterface {
     $event = $this->event->getBySlug($this->event->getSlug());
-
     if ($event === NULL) {
       return $this->notFound();
     }

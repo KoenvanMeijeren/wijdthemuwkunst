@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-namespace System\View;
+namespace System\Mail;
 
 /**
  * Provides a class for mail views.

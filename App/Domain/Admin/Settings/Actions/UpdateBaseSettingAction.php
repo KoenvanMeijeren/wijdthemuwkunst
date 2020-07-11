@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Settings\Actions;
 
-use Src\State\State;
+use Src\Core\StateInterface;
 use Src\Translation\Translation;
 
 /**
@@ -23,7 +23,7 @@ final class UpdateBaseSettingAction extends BaseSettingAction {
     ]);
 
     $this->session->flash(
-          State::SUCCESSFUL,
+          StateInterface::SUCCESSFUL,
           sprintf(
               Translation::get('setting_successful_updated'),
               $this->key

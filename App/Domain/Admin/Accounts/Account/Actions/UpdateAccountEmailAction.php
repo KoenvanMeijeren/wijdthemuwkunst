@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\Account\Actions;
 
-use Src\State\State;
+use Src\Core\StateInterface;
 use Src\Translation\Translation;
 
 /**
@@ -22,7 +22,7 @@ final class UpdateAccountEmailAction extends BaseAccountAction {
     ]);
 
     $this->session->flash(
-          State::SUCCESSFUL,
+          StateInterface::SUCCESSFUL,
           Translation::get('admin_edited_account_successful_message')
       );
 

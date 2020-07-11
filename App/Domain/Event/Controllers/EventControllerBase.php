@@ -11,17 +11,42 @@ use Src\View\ViewInterface;
 use System\Controller\ControllerBase;
 
 /**
+ * Provides a controller base for the event controllers.
  *
+ * @package Domain\Event\Controllers
  */
 abstract class EventControllerBase extends ControllerBase {
+
+  /**
+   * The base path to the views directory.
+   *
+   * @var string
+   */
   protected string $baseViewPath = 'Event/Views/';
 
+  /**
+   * The page model definition.
+   *
+   * @var \Domain\Pages\Models\Page
+   */
   protected Page $page;
-  protected EventArchive $eventArchive;
+
+  /**
+   * The event model definition.
+   *
+   * @var \Domain\Event\Models\Event
+   */
   protected Event $event;
 
   /**
+   * The event archive model definition.
    *
+   * @var \Domain\Event\Models\EventArchive
+   */
+  protected EventArchive $eventArchive;
+
+  /**
+   * EventControllerBase constructor.
    */
   public function __construct() {
     parent::__construct();
@@ -32,7 +57,10 @@ abstract class EventControllerBase extends ControllerBase {
   }
 
   /**
+   * Returns a page not found view.
    *
+   * @return \Src\View\ViewInterface
+   *   The view.
    */
   protected function notFound(): ViewInterface {
     // Overwrite the base view path in order to return page not found views.

@@ -7,8 +7,8 @@ namespace Domain\Admin\Pages\ViewModels;
 
 use Domain\Admin\Pages\Models\Page;
 use Src\Core\Redirect;
+use Src\Core\StateInterface;
 use Src\Session\Session;
-use Src\State\State;
 use Src\Translation\Translation;
 use stdClass;
 
@@ -36,7 +36,7 @@ final class EditViewModel {
       $page = new Page();
 
       $this->session->flash(
-            State::FAILED,
+            StateInterface::FAILED,
             sprintf(
                 Translation::get('admin_page_cannot_be_visited'),
                 $page->getSlug()

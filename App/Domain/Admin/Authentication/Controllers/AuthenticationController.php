@@ -26,9 +26,8 @@ final class AuthenticationController extends AdminControllerBase {
    * Load the login page.
    * If the user is already logged in redirect him to the dashboard.
    *
-   * @return \Src\Core|\Src\View\ViewInterface
-   *
-   * @throws \Src\Exceptions\Basic\InvalidKeyException
+   * @return \Src\Core\Redirect|\Src\View\ViewInterface
+   *   Either a redirect response or the login view.
    */
   public function index() {
     if ($this->user->isLoggedIn()) {
@@ -43,7 +42,7 @@ final class AuthenticationController extends AdminControllerBase {
   /**
    * Tries to log the user in and redirect back or to the specified page.
    *
-   * @return \Src\Core
+   * @return \Src\Core\Redirect
    *   The redirect response.
    */
   public function login(): Redirect {
@@ -58,7 +57,7 @@ final class AuthenticationController extends AdminControllerBase {
   /**
    * Logs the current user out and redirect back to specified page.
    *
-   * @return \Src\Core
+   * @return \Src\Core\Redirect
    *   The redirect response.
    */
   public function logout(): Redirect {

@@ -2,7 +2,7 @@
 
 namespace Domain\Admin\Event\Actions;
 
-use Src\State\State;
+use Src\Core\StateInterface;
 use Src\Translation\Translation;
 
 /**
@@ -19,7 +19,7 @@ final class PublishEventAction extends BaseEventAction {
     ]);
 
     $this->session->flash(
-          State::SUCCESSFUL,
+          StateInterface::SUCCESSFUL,
           sprintf(
               Translation::get('event_successfully_published'),
               $this->eventRepository->getTitle()

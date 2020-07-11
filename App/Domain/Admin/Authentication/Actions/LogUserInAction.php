@@ -11,8 +11,8 @@ use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Authentication\Support\IDEncryption;
 use Src\Action\FormAction;
 use Src\Core\Request;
+use Src\Core\StateInterface;
 use Src\Session\Session;
-use Src\State\State;
 use Src\Translation\Translation;
 use Src\Validate\form\FormValidator;
 
@@ -60,10 +60,7 @@ final class LogUserInAction extends FormAction {
       $idEncryption = new IDEncryption();
       $token = $idEncryption->generateToken();
 
-      $this->session->save(
-            'userID',
-            $idEncryption->encrypt($this->account->getId(), $token)
-        );
+      $this->session->save('userID', $idEncryption->encrypt($this->account->getId(), $token));
 
       // Always executed.
       $this->storeToken($token);
@@ -73,10 +70,7 @@ final class LogUserInAction extends FormAction {
 
       $this->store();
 
-      $this->session->flash(
-            State::SUCCESSFUL,
-            Translation::get('login_successful_message')
-        );
+      $this->session->flash(StateInterface::SUCCESSFUL, Translation::get('login_successful_message'));
 
       return TRUE;
     }
@@ -87,10 +81,7 @@ final class LogUserInAction extends FormAction {
 
     $this->store();
 
-    $this->session->flash(
-          State::FAILED,
-          Translation::get('login_failed_message')
-      );
+    $this->session->flash(StateInterface::FAILED, Translation::get('login_failed_message'));
 
     return FALSE;
   }
@@ -100,10 +91,7 @@ final class LogUserInAction extends FormAction {
    */
   protected function authorize(): bool {
     if ($this->account->isBlocked()) {
-      $this->session->flash(
-            State::FAILED,
-            Translation::get('login_failed_blocked_account_message')
-        );
+      $this->session->flash(StateInterface::FAILED, Translation::get('login_failed_blocked_account_message'));
 
       return FALSE;
     }
@@ -138,15 +126,10 @@ final class LogUserInAction extends FormAction {
    *
    */
   private function rehashPassword(): void {
-    if (password_needs_rehash(
-          $this->account->getPassword(),
-          Account::PASSWORD_HASH_METHOD
-      )
-      ) {
+    if (password_needs_rehash($this->account->getPassword(), Account::PASSWORD_HASH_METHOD)) {
       $this->attributes['account_password'] = (string) password_hash(
-            $this->account->getPassword(),
-            Account::PASSWORD_HASH_METHOD
-        );
+        $this->account->getPassword(), Account::PASSWORD_HASH_METHOD
+      );
     }
   }
 
@@ -179,7 +162,8 @@ final class LogUserInAction extends FormAction {
    */
   private function blockAccount(): void {
     if ($this->account->getRights() > User::ADMIN
-          || $this->account->getFailedLogInAttempts() < $this->maximumLoginAttempts) {
+      || $this->account->getFailedLogInAttempts() < $this->maximumLoginAttempts
+    ) {
       return;
     }
 
@@ -190,7 +174,7 @@ final class LogUserInAction extends FormAction {
    *
    */
   private function store(): void {
-    if (sizeof($this->attributes) === 0) {
+    if (count($this->attributes) === 0) {
       return;
     }
 

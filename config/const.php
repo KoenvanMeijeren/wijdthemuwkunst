@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Global constants.
+ */
+
 declare(strict_types=1);
 
 define('START_PATH', dirname(__DIR__) . '/');

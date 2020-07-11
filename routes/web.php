@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * @file
+ * Web routes.
+ */
+
 declare(strict_types=1);
 
 use Domain\Admin\Accounts\Account\Controllers\AccountController;
@@ -20,43 +26,31 @@ use Domain\Event\Controllers\EventController;
 use Domain\Pages\Controllers\PageController;
 use Src\Core\Router;
 
-/**
- * Index routes.
- */
+// Index routes.
 Router::get('', PageController::class,
     'index', User::GUEST);
 Router::get('index', PageController::class,
     'index', User::GUEST);
 
-/**
- * Event routes.
- */
+// Event routes.
 Router::get('concerten', EventController::class,
     'index', User::GUEST);
 Router::get('concerten/concert/{slug}', EventController::class,
     'show', User::GUEST);
 
-/**
- * Event history routes.
- */
+// Event history routes.
 Router::get('concerten/historie', EventArchiveController::class,
     'index', User::GUEST);
 Router::get('concerten/historie/concert/{slug}', EventArchiveController::class,
     'show', User::GUEST);
 
-/**
- * Contact routes.
- */
+// Contact routes.
 Router::post('contact', ContactController::class,
     'send', User::GUEST);
 
-/**
- * Admin routes.
- */
+// Admin routes.
 Router::prefix('admin')->group(static function () {
-    /**
-     * Authorization routes.
-     */
+    // Authorization routes.
     Router::get('', AuthenticationController::class,
         'index', User::GUEST);
     Router::post('login', AuthenticationController::class,
@@ -64,9 +58,7 @@ Router::prefix('admin')->group(static function () {
     Router::get('logout', AuthenticationController::class,
         'logout', User::ADMIN);
 
-    /**
-     * System routes.
-     */
+    // System routes.
     Router::get('dashboard', StructureControllerBase::class,
         'index', User::ADMIN);
     Router::get('content', StructureControllerBase::class,
@@ -78,10 +70,8 @@ Router::prefix('admin')->group(static function () {
     Router::get('reports', StructureControllerBase::class,
         'reports', User::DEVELOPER);
 
-    /**
-     * File upload routes.
-     */
-    Router::prefix('upload')->group(function () {
+    // File routes.
+    Router::prefix('upload')->group(static function () {
         Router::post('file', UploadFileController::class,
             'store', User::ADMIN);
         Router::post('thumbnail', UploadFileController::class,
@@ -90,14 +80,10 @@ Router::prefix('admin')->group(static function () {
             'banner', User::ADMIN);
     });
 
-    /**
-     * Content routes.
-     */
-    Router::prefix('content')->group(function () {
-        /**
-         * Pages routes.
-         */
-        Router::prefix('pages')->group(function () {
+    // Content routes.
+    Router::prefix('content')->group(static function () {
+        // Pages routes.
+        Router::prefix('pages')->group(static function () {
             Router::get('', AdminPageController::class,
                 'index', User::ADMIN);
             Router::get('page/create', AdminPageController::class,
@@ -120,10 +106,8 @@ Router::prefix('admin')->group(static function () {
                 'destroy', User::ADMIN);
         });
 
-        /**
-         * Events routes.
-         */
-        Router::prefix('events')->group(function () {
+        // Events routes.
+        Router::prefix('events')->group(static function () {
             Router::get('', AdminEventController::class,
                 'index', User::ADMIN);
             Router::get('event/create', AdminEventController::class,
@@ -150,10 +134,8 @@ Router::prefix('admin')->group(static function () {
                 'destroy', User::ADMIN);
         });
 
-        /**
-         * Contact form routes.
-         */
-        Router::prefix('contact-form')->group(function () {
+        // Contact form routes.
+        Router::prefix('contact-form')->group(static function () {
             Router::get('', ContactFormController::class,
                 'index', User::ADMIN);
             Router::get('filter', ContactFormController::class,
@@ -163,14 +145,10 @@ Router::prefix('admin')->group(static function () {
         });
     });
 
-    /**
-     * Structure routes.
-     */
-    Router::prefix('structure')->group(function () {
-        /**
-         * Menu routes.
-         */
-        Router::prefix('menu')->group(function () {
+    // Structure routes.
+    Router::prefix('structure')->group(static function () {
+        // Menu routes.
+        Router::prefix('menu')->group(static function () {
             Router::get('', MenuController::class,
                 'index', User::ADMIN);
             Router::get('item/create', MenuController::class,
@@ -186,14 +164,10 @@ Router::prefix('admin')->group(static function () {
         });
     });
 
-    /**
-     * Configuration routes.
-     */
-    Router::prefix('configuration')->group(function () {
-        /**
-         * Text routes.
-         */
-        Router::prefix('texts')->group(function () {
+    // Configuration routes.
+    Router::prefix('configuration')->group(static function () {
+        // Text routes.
+        Router::prefix('texts')->group(static function () {
             Router::get('', TextController::class,
                 'index', User::ADMIN);
             Router::get('text/create', TextController::class,
@@ -208,10 +182,8 @@ Router::prefix('admin')->group(static function () {
                 'destroy', User::ADMIN);
         });
 
-        /**
-         * Settings routes.
-         */
-        Router::prefix('settings')->group(function () {
+        // Settings routes.
+        Router::prefix('settings')->group(static function () {
             Router::get('', SettingsControllers::class,
                 'index', User::ADMIN);
             Router::get('setting/create', SettingsControllers::class,
@@ -227,10 +199,8 @@ Router::prefix('admin')->group(static function () {
         });
     });
 
-    /**
-     * Account routes.
-     */
-    Router::prefix('account')->group(function () {
+    // Account routes.
+    Router::prefix('account')->group(static function () {
         Router::get('', AccountController::class,
             'index', User::SUPER_ADMIN);
         Router::get('create', AccountController::class,
@@ -253,10 +223,8 @@ Router::prefix('admin')->group(static function () {
             'destroy', User::SUPER_ADMIN);
     });
 
-    /**
-     * User account routes.
-     */
-    Router::prefix('user/account')->group(function () {
+    // User account routes.
+    Router::prefix('user/account')->group(static function () {
         Router::get('', UserAccountControllerBase::class,
             'index', User::ADMIN);
         Router::post('store/data', UserAccountControllerBase::class,
@@ -265,32 +233,22 @@ Router::prefix('admin')->group(static function () {
             'storePassword', User::ADMIN);
     });
 
-    /**
-     * Reports routes.
-     */
-    Router::prefix('reports')->group(function () {
-        /**
-         * Application routes.
-         */
+    // Reports routes.
+    Router::prefix('reports')->group(static function () {
+        // Application routes.
         Router::get('application', ReportsController::class,
             'application', User::DEVELOPER);
 
-        /**
-         * Logs routes.
-         */
+        // Logs routes.
         Router::get('logs', ReportsController::class,
             'logs', User::DEVELOPER);
 
-        /**
-         * Storage routes.
-         */
+        // Storage routes.
         Router::get('storage', ReportsController::class,
             'storage', User::DEVELOPER);
     });
 });
 
-/**
- * Page not found route.
- */
+// Page not found route.
 Router::get('pageNotFound', PageController::class,
     'findOr404', User::GUEST);

@@ -71,15 +71,13 @@ abstract class DataTableBuilder implements DataTableBuilderInterface {
    * {@inheritDoc}
    */
   final public function get(string $id = 'table'): string {
-    $this->dataTable->addHead(
-          $this->buildHead()
-      );
+    $this->dataTable->addHead($this->buildHead());
 
     foreach ($this->data as $item) {
       $this->dataTable->addRow(
-            $this->buildRow($item),
-            $this->buildRowActions($item)
-        );
+        $this->buildRow($item),
+        $this->buildRowActions($item)
+      );
     }
 
     return $this->dataTable->get($id);

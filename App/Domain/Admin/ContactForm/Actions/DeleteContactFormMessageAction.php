@@ -2,11 +2,13 @@
 
 namespace Domain\Admin\ContactForm\Actions;
 
-use Src\State\State;
+use Src\Core\StateInterface;
 use Src\Translation\Translation;
 
 /**
+ * Provides a way to delete contact form messages.
  *
+ * @package Domain\Admin\ContactForm\Actions
  */
 final class DeleteContactFormMessageAction extends BaseContactFormAction {
 
@@ -16,13 +18,10 @@ final class DeleteContactFormMessageAction extends BaseContactFormAction {
   protected function handle(): bool {
     $this->contactForm->delete($this->contactForm->getId());
 
-    $this->session->flash(
-          State::SUCCESSFUL,
-          sprintf(
-              Translation::get('admin_delete_contact_form_message'),
-              $this->repository->getName()
-          )
-      );
+    $this->session->flash(StateInterface::SUCCESSFUL, sprintf(
+      Translation::get('admin_delete_contact_form_message'),
+      $this->repository->getName()
+    ));
 
     return TRUE;
   }

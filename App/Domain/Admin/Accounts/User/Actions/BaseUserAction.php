@@ -8,8 +8,8 @@ use Domain\Admin\Accounts\Repositories\AccountRepository;
 use Domain\Admin\Accounts\User\Models\User;
 use Src\Action\FormAction;
 use Src\Core\Request;
+use Src\Core\StateInterface;
 use Src\Session\Session;
-use Src\State\State;
 use Src\Translation\Translation;
 use Src\Validate\form\FormValidator;
 
@@ -60,7 +60,7 @@ abstract class BaseUserAction extends FormAction {
     $this->user->update($this->account->getId(), $this->attributes);
 
     $this->session->flash(
-          State::SUCCESSFUL,
+          StateInterface::SUCCESSFUL,
           Translation::get('admin_edited_account_successful_message')
       );
 

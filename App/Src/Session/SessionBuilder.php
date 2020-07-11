@@ -9,14 +9,14 @@ use Cake\Chronos\Chronos;
 use Src\Core\Cookie;
 use Src\Core\Env;
 use Src\Exceptions\Session\InvalidSessionException;
-use Src\Session\Security as SessionSecurity;
+use Src\Session\SessionSecurity as SessionSecurity;
 
 /**
  * Class Builder.
  *
  * @package Src\Session
  */
-final class Builder {
+final class SessionBuilder {
 
   /**
    * The session definition.
@@ -28,7 +28,7 @@ final class Builder {
   /**
    * The session security definition.
    *
-   * @var Security
+   * @var \Src\Session\SessionSecurity
    */
   private SessionSecurity $security;
 

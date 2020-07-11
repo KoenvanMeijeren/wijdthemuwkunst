@@ -2,7 +2,7 @@
 
 namespace Domain\Admin\Event\Actions;
 
-use Src\State\State;
+use Src\Core\StateInterface;
 use Src\Translation\Translation;
 
 /**
@@ -19,7 +19,7 @@ class ArchiveEventAction extends BaseEventAction {
     ]);
 
     $this->session->flash(
-          State::SUCCESSFUL,
+          StateInterface::SUCCESSFUL,
           sprintf(
               Translation::get('event_successfully_archived'),
               $this->eventRepository->getTitle()
@@ -35,7 +35,7 @@ class ArchiveEventAction extends BaseEventAction {
   protected function authorize(): bool {
     if (!$this->eventRepository->isPublished()) {
       $this->session->flash(
-            State::FAILED,
+            StateInterface::FAILED,
             sprintf(
                 Translation::get('event_cannot_archive_not_published'),
                 $this->eventRepository->getTitle()

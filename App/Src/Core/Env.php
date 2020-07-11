@@ -85,9 +85,9 @@ final class Env {
    */
   private function set(): void {
     $this->env = self::PRODUCTION;
-    if (strpos($this->host, 'localhost') !== FALSE ||
-          strpos($this->host, '127.0.0.1') !== FALSE
-      ) {
+    if (strpos($this->host, 'localhost') !== FALSE
+      || strpos($this->host, '127.0.0.1') !== FALSE
+    ) {
       $this->env = self::DEVELOPMENT;
     }
 
@@ -98,25 +98,38 @@ final class Env {
    * Gets the current env.
    *
    * @return string
+   *   The current environment.
    */
   public function get(): string {
     return $this->env;
   }
 
   /**
-   * Set the error handling.
+   * Determines if the env is in development.
    *
-   * @return void
+   * @return bool
+   *   If the env is development.
+   */
+  public function isDevelopment(): bool {
+    return $this->get() === Env::DEVELOPMENT;
+  }
+
+  /**
+   * Determines if the env is in production.
+   *
+   * @return bool
+   *   If the env is production.
+   */
+  public function isProduction(): bool {
+    return $this->get() === Env::PRODUCTION;
+  }
+
+  /**
+   * Set the error handling.
    */
   public function setErrorHandling(): void {
-    ini_set(
-          'display_errors',
-          (self::DEVELOPMENT === $this->env ? '1' : '0')
-      );
-    ini_set(
-          'display_startup_errors',
-          (self::DEVELOPMENT === $this->env ? '1' : '0')
-      );
+    ini_set('display_errors', (self::DEVELOPMENT === $this->env ? '1' : '0'));
+    ini_set('display_startup_errors', (self::DEVELOPMENT === $this->env ? '1' : '0'));
     error_reporting((self::DEVELOPMENT === $this->env ? E_ALL : -1));
 
     $this->initializeWhoops();

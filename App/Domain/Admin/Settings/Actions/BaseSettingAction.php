@@ -11,8 +11,8 @@ use Domain\Admin\Settings\Models\Setting;
 use Domain\Admin\Settings\Repositories\SettingRepository;
 use Src\Action\FormAction;
 use Src\Core\Request;
+use Src\Core\StateInterface;
 use Src\Session\Session;
-use Src\State\State;
 use Src\Translation\Translation;
 use Src\Validate\form\FormValidator;
 
@@ -59,7 +59,7 @@ abstract class BaseSettingAction extends FormAction {
           && $user->getRights() !== User::DEVELOPER
       ) {
       $this->session->flash(
-            State::FAILED,
+            StateInterface::FAILED,
             Translation::get('setting_editing_key_not_allowed')
         );
 

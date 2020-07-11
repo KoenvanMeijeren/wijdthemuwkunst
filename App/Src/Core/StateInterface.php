@@ -3,12 +3,14 @@
 declare(strict_types=1);
 
 
-namespace Src\State;
+namespace Src\Core;
 
 /**
+ * Defines states for the application.
  *
+ * @package Src\Core
  */
-abstract class State {
+interface StateInterface {
 
   /**
    * Define states to determine if an process was successfully executed.

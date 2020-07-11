@@ -6,7 +6,7 @@ declare(strict_types=1);
 namespace Domain\Admin\Settings\Actions;
 
 use Domain\Admin\Accounts\User\Models\User;
-use Src\State\State;
+use Src\Core\StateInterface;
 use Src\Translation\Translation;
 
 /**
@@ -25,7 +25,7 @@ final class CreateBaseSettingAction extends BaseSettingAction {
 
     if ($setting !== NULL) {
       $this->session->flash(
-            State::SUCCESSFUL,
+            StateInterface::SUCCESSFUL,
             sprintf(
                 Translation::get('setting_successful_created'),
                 $this->key
@@ -36,7 +36,7 @@ final class CreateBaseSettingAction extends BaseSettingAction {
     }
 
     $this->session->flash(
-          State::FAILED,
+          StateInterface::FAILED,
           sprintf(
               Translation::get('setting_unsuccessful_created'),
               $this->key
@@ -53,7 +53,7 @@ final class CreateBaseSettingAction extends BaseSettingAction {
     $user = new User();
     if ($user->getRights() !== User::DEVELOPER) {
       $this->session->flash(
-            State::FAILED,
+            StateInterface::FAILED,
             Translation::get('setting_creation_not_allowed')
         );
 

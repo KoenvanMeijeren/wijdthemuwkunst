@@ -7,23 +7,20 @@ namespace Src\Session;
 
 use Src\Core\Request;
 use Src\Core\Sanitize;
-use Src\Core\URI;
-use Src\Log\Log;
+use Src\Log\LoggerTrait;
 use Src\Security\Encrypt;
-use Src\State\State;
 
 /**
+ * Defines a class for interacting with the session.
  *
+ * @package Src\Session
  */
-final class Session {
+final class Session implements SessionInterface {
+
+  use LoggerTrait;
 
   /**
-   * Save data in the session.
-   *
-   * @param string $key
-   *   the key of the session item.
-   * @param string $value
-   *   the value of the key.
+   * {@inheritDoc}
    */
   public function save(string $key, string $value): void {
     if (array_key_exists($key, $_SESSION)) {
@@ -36,12 +33,7 @@ final class Session {
   }
 
   /**
-   * Forced save of data in the session.
-   *
-   * @param string $key
-   *   the key of the session item.
-   * @param string $value
-   *   the value of the key.
+   * {@inheritDoc}
    */
   public function saveForced(string $key, string $value): void {
     $sanitize = new Sanitize($value);
@@ -50,12 +42,7 @@ final class Session {
   }
 
   /**
-   * Flash data in the session.
-   *
-   * @param string $key
-   *   the key of the session item.
-   * @param string $value
-   *   the value of the key.
+   * {@inheritDoc}
    */
   public function flash(string $key, string $value): void {
     $this->saveForced($key, $value);
@@ -64,21 +51,13 @@ final class Session {
   }
 
   /**
-   * Get data from the session; unset the data if specified.
-   *
-   * @param string $key
-   *   the key for searching to the
-   *   corresponding session value.
-   * @param bool $unset
-   *   Must the session value be destroyed?
-   *
-   * @return string
+   * {@inheritDoc}
    */
-  public function get(string $key, bool $unset = FALSE): string {
+  public function get(string $key, bool $unset = FALSE): ?string {
     $request = new Request();
     $data = $request->session($key);
     if ($data === '') {
-      return '';
+      return NULL;
     }
 
     if (is_json($data)) {
@@ -96,30 +75,14 @@ final class Session {
   }
 
   /**
-   * Check if the given key exists in the super global array.
-   *
-   * @param string $key
-   *   the key to be checked for if it exists.
-   *
-   * @return bool
+   * {@inheritDoc}
    */
   public function exists(string $key): bool {
-    if (array_key_exists($key, $_SESSION)) {
-      return TRUE;
-    }
-
-    return FALSE;
+    return array_key_exists($key, $_SESSION);
   }
 
   /**
-   * Unset data from the session.
-   *
-   * @param string $key
-   *   the key for searching to the
-   *   corresponding session value
-   *                    to unset it.
-   *
-   * @return bool
+   * {@inheritDoc}
    */
   public function unset(string $key): bool {
     if (array_key_exists($key, $_SESSION)) {
@@ -129,29 +92,6 @@ final class Session {
     }
 
     return FALSE;
-  }
-
-  /**
-   * Log a session request when the key is of the type
-   * of state failed or state successful.
-   *
-   * @param string $key
-   * @param string $value
-   */
-  public function logRequest(string $key, string $value): void {
-    if ($key !== State::FAILED
-          && $key !== State::SUCCESSFUL
-          && $key !== State::FORM_VALIDATION_FAILED
-      ) {
-      return;
-    }
-
-    Log::appRequest(
-          $value,
-          $key,
-          URI::getUrl(),
-          URI::getMethod()
-      );
   }
 
 }

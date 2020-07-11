@@ -2,7 +2,7 @@
 
 namespace Domain\Admin\Pages\Actions;
 
-use Src\State\State;
+use Src\Core\StateInterface;
 use Src\Translation\Translation;
 
 /**
@@ -19,7 +19,7 @@ final class SaveAndPublishPageAction extends BasePageUpdateAction {
     $this->page->updateOrCreate($this->page->getId(), $this->attributes);
 
     $this->session->flash(
-          State::SUCCESSFUL,
+          StateInterface::SUCCESSFUL,
           sprintf(
               Translation::get('page_successfully_updated'),
               $this->url

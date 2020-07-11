@@ -7,34 +7,38 @@ namespace Domain\Admin\File\Actions;
 
 use Cake\Chronos\Chronos;
 use Src\Action\FileAction;
-use Src\Core\Request;
 use Src\Core\Upload;
 
 /**
+ * Provides an action class for uploading images.
  *
+ * @package Domain\Admin\File\Actions
  */
 final class UploadImageAction extends FileAction {
+
+  /**
+   * The uploaded file.
+   *
+   * @var array
+   */
   private array $file;
 
   /**
+   * UploadImageAction constructor.
    *
+   * @param string $name
+   *   The name of the image file.
    */
-  public function __construct(string $fileName) {
-    $request = new Request();
+  public function __construct(string $name) {
+    parent::__construct();
 
-    $this->file = $request->file($fileName);
-
-    $uri = $request->env('app_uri');
-    $shortUri = replace_string('www.', '', $uri);
-
-    $this->acceptedOrigins[] = $uri;
-    $this->acceptedOrigins[] = $shortUri;
+    $this->file = $this->request->file($name);
   }
 
   /**
    * @inheritDoc
    */
-  protected function handle(): void {
+  protected function handle(): bool {
     if (array_key_exists('name', $this->file)) {
       $datetime = new Chronos();
       $this->file['name'] .= $datetime->toDateTimeString();
@@ -42,49 +46,16 @@ final class UploadImageAction extends FileAction {
 
     $uploader = new Upload($this->file);
 
-    if (count($this->file) > 0
-          && $uploader->prepare()
-          && $uploader->getFileIfItExists() === ''
-      ) {
+    if (count($this->file) > 0 && $uploader->prepare() && $uploader->getFileIfItExists() === '') {
       $uploader->execute();
     }
 
-    echo json_encode(
-          ['location' => $uploader->getFileIfItExists()],
-          JSON_THROW_ON_ERROR,
-          512
-      );
-  }
+    $data = [
+      'location' => $uploader->getFileIfItExists(),
+    ];
 
-  /**
-   * @inheritDoc
-   */
-  protected function authorize(): bool {
-    $request = new Request();
+    echo json_encode($data, JSON_THROW_ON_ERROR, 512);
 
-    if (!in_array(
-          $request->server(Request::HTTP_ORIGIN),
-          $this->acceptedOrigins,
-          TRUE
-      )
-      ) {
-      header('HTTP/1.1 403 Origin Denied');
-
-      return FALSE;
-    }
-
-    header(
-          'Access-Control-Allow-Origin: ' .
-          $request->server(Request::HTTP_ORIGIN)
-      );
-
-    return TRUE;
-  }
-
-  /**
-   * @inheritDoc
-   */
-  protected function validate(): bool {
     return TRUE;
   }
 

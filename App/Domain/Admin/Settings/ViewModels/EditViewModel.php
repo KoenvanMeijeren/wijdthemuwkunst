@@ -6,8 +6,8 @@ declare(strict_types=1);
 namespace Domain\Admin\Settings\ViewModels;
 
 use Src\Core\Redirect;
+use Src\Core\StateInterface;
 use Src\Session\Session;
-use Src\State\State;
 use Src\Translation\Translation;
 
 /**
@@ -32,7 +32,7 @@ final class EditViewModel {
   public function get() {
     if ($this->setting === NULL) {
       $this->session->flash(
-            State::FAILED,
+            StateInterface::FAILED,
             Translation::get('setting_does_not_exists')
         );
 

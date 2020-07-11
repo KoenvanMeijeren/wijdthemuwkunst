@@ -6,8 +6,8 @@ declare(strict_types=1);
 namespace Src\Validate\form;
 
 use DateTime;
+use Src\Core\StateInterface;
 use Src\Session\Session;
-use Src\State\State;
 use Src\Translation\Translation;
 
 /**
@@ -247,7 +247,7 @@ final class FormValidator {
 
     $session = new Session();
     $session->flash(
-          State::FORM_VALIDATION_FAILED,
+          StateInterface::FORM_VALIDATION_FAILED,
           $this->getErrorsAsString()
       );
   }

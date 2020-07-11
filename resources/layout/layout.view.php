@@ -69,56 +69,36 @@ $menuItems = $menu->getAll();
     <div class="inner">
         <header>
             <h2>
-                <?= $text->get(
-                    'contact_formulier_titel',
-                    'Neem contact op'
-                ) ?>
+                <?= $text->get('contact_formulier_titel', 'Neem contact op') ?>
             </h2>
         </header>
-        <form id="form" method="post" action="/contact">
+        <form id="form" method="POST" action="/contact">
             <?php Resource::loadStringMessage(); ?>
             <?= CSRF::insertToken('/contact') ?>
 
             <div class="field half first">
                 <label for="name">
-                    <?= $text->get(
-                        'contact_formulier_naam_veld',
-                        'Naam'
-                    ) ?>
+                  <?= $text->get('contact_formulier_naam_veld', 'Naam') ?>
                 </label>
-                <input type="text" name="name" id="name"
-                       value="<?= $session->get('name', true) ?>" required/>
+                <input type="text" name="name" id="name" value="<?= $session->get('name', true) ?>" required/>
             </div>
             <div class="field half">
                 <label for="email">
-                    <?= $text->get(
-                        'contact_formulier_email_veld',
-                        'Email'
-                    ) ?>
+                  <?= $text->get('contact_formulier_email_veld', 'Email') ?>
                 </label>
-                <input type="text" name="email" id="email"
-                       value="<?= $session->get('email', true) ?>" required/>
+                <input type="text" name="email" id="email" value="<?= $session->get('email', true) ?>" required/>
             </div>
             <div class="field">
                 <label for="message">
-                    <?= $text->get(
-                        'contact_formulier_bericht_veld',
-                        'Bericht'
-                    ) ?>
+                  <?= $text->get('contact_formulier_bericht_veld', 'Bericht') ?>
                 </label>
-                <textarea name="message" id="message" rows="6"
-                          required><?= $session->get('message', true) ?></textarea>
+                <textarea name="message" id="message" rows="6" required><?= $session->get('message', true) ?></textarea>
             </div>
 
             <ul class="actions">
                 <li>
-                    <button type="submit" class="button g-recaptcha"
-                            data-sitekey="<?= $request->env('recaptcha_public_key') ?>"
-                            data-callback="onSubmit">
-                        <?= $text->get(
-                            'contact_formulier_verzenden_knop',
-                            'Bericht verzenden'
-                        ) ?>
+                    <button type="submit" class="button g-recaptcha" data-sitekey="<?= $request->env('recaptcha_public_key') ?>" data-callback="onSubmit">
+                        <?= $text->get('contact_formulier_verzenden_knop', 'Bericht verzenden') ?>
                     </button>
                 </li>
             </ul>

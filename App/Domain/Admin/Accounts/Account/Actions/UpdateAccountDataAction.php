@@ -6,7 +6,7 @@ declare(strict_types=1);
 namespace Domain\Admin\Accounts\Account\Actions;
 
 use Domain\Admin\Accounts\User\Models\User;
-use Src\State\State;
+use Src\Core\StateInterface;
 use Src\Translation\Translation;
 
 /**
@@ -24,7 +24,7 @@ final class UpdateAccountDataAction extends BaseAccountAction {
     ]);
 
     $this->session->flash(
-          State::SUCCESSFUL,
+          StateInterface::SUCCESSFUL,
           Translation::get('admin_edited_account_successful_message')
       );
 
@@ -39,7 +39,7 @@ final class UpdateAccountDataAction extends BaseAccountAction {
           && $this->account->getId() === $this->user->getId()
       ) {
       $this->session->flash(
-            State::FAILED,
+            StateInterface::FAILED,
             Translation::get('cannot_edit_own_account_rights_message')
         );
 

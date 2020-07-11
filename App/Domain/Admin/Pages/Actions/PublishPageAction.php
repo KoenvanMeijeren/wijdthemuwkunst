@@ -6,7 +6,7 @@ declare(strict_types=1);
 namespace Domain\Admin\Pages\Actions;
 
 use Domain\Admin\Pages\Models\Page;
-use Src\State\State;
+use Src\Core\StateInterface;
 use Src\Translation\Translation;
 
 /**
@@ -23,7 +23,7 @@ final class PublishPageAction extends BasePageAction {
     ]);
 
     $this->session->flash(
-          State::SUCCESSFUL,
+          StateInterface::SUCCESSFUL,
           sprintf(
               Translation::get('page_successfully_published'),
               $this->pageRepository->getSlug()
@@ -39,7 +39,7 @@ final class PublishPageAction extends BasePageAction {
   protected function authorize(): bool {
     if ($this->pageRepository->getInMenu() === Page::PAGE_STATIC) {
       $this->session->flash(
-            State::FAILED,
+            StateInterface::FAILED,
             Translation::get('page_static_cannot_be_published')
         );
 
