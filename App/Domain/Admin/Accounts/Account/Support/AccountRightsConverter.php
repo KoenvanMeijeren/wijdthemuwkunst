@@ -6,16 +6,18 @@ declare(strict_types=1);
 namespace Domain\Admin\Accounts\Account\Support;
 
 use Domain\Admin\Accounts\User\Models\User;
-use Src\Converter\Converter;
+use Src\Converter\ConverterBase;
 use Src\Translation\Translation;
 
 /**
+ * Provides a class for converting account rights.
  *
+ * @package Domain\Admin\Accounts\Account\Support
  */
-final class AccountRightsConverter extends Converter {
+final class AccountRightsConverter extends ConverterBase {
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function toReadable(): string {
     $rights = (int) $this->var;

@@ -9,7 +9,7 @@ use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Pages\Models\Page;
 use Domain\Admin\Pages\Repositories\PageRepository;
 use Domain\Admin\Pages\Support\PageInMenuStateConverter;
-use Domain\Admin\Pages\Support\PageIsPublishedStateConverter;
+use Domain\Admin\Pages\Support\PageIsPublishedStateConverterBase;
 use Src\Translation\Translation;
 use Support\Resource;
 use System\DataTable\DataTableBuilder;
@@ -40,7 +40,7 @@ final class PageTable extends DataTableBuilder {
     $inMenuState = new PageInMenuStateConverter(
           $page->getInMenu()
       );
-    $isPublishedState = new PageIsPublishedStateConverter(
+    $isPublishedState = new PageIsPublishedStateConverterBase(
           $page->isPublished()
       );
 

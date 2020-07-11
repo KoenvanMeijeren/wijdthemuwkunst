@@ -2,16 +2,18 @@
 
 namespace Domain\Admin\Event\Support;
 
-use Src\Converter\Converter;
+use Src\Converter\ConverterBase;
 use Src\Translation\Translation;
 
 /**
+ * Provides a class for converting the published state of an event.
  *
+ * @package Domain\Admin\Event\Support
  */
-final class EventIsPublishedStateConverter extends Converter {
+final class EventIsPublishedStateConverter extends ConverterBase {
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function toReadable(): string {
     if ((bool) $this->var) {

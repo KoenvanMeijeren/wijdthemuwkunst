@@ -5,16 +5,18 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Pages\Support;
 
-use Src\Converter\Converter;
+use Src\Converter\ConverterBase;
 use Src\Translation\Translation;
 
 /**
+ * Provides a class for converting the page is published state.
  *
+ * @package Domain\Admin\Pages\Support
  */
-final class PageIsPublishedStateConverter extends Converter {
+final class PageIsPublishedStateConverterBase extends ConverterBase {
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function toReadable(): string {
     if ((bool) $this->var) {
