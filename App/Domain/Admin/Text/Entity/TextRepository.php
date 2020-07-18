@@ -1,0 +1,14 @@
+<?php
+
+namespace Domain\Admin\Text\Entity;
+
+use System\Entity\EntityRepositoryBase;
+
+/**
+ * Defines a repository for text entities.
+ *
+ * @package Domain\Admin\Text\Entity
+ */
+final class TextRepository extends EntityRepositoryBase implements TextRepositoryInterface {
+
+}

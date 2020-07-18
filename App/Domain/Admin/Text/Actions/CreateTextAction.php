@@ -2,41 +2,40 @@
 
 namespace Domain\Admin\Text\Actions;
 
-use Src\Core\StateInterface;
+use Domain\Admin\Text\Entity\Text;
+use Domain\Admin\Text\Entity\TextInterface;
 use Src\Translation\Translation;
 
 /**
+ * Provides a class for the create text action.
  *
+ * @package Domain\Admin\Text\Actions
  */
 final class CreateTextAction extends BaseTextAction {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function handle(): bool {
-    $text = $this->text->firstOrCreate($this->attributes);
+    /** @var TextInterface $entity */
+    $entity = $this->entity;
 
-    if ($text !== NULL) {
-      $this->session->flash(
-            StateInterface::SUCCESSFUL,
-            sprintf(
-                Translation::get('text_successful_created'),
-                $this->key
-            )
-        );
+    $entity->setKey($this->request->post('key'));
+    $entity->setValue($this->request->post('value'));
 
-      return TRUE;
-    }
-
-    $this->session->flash(
-          StateInterface::FAILED,
-          sprintf(
-              Translation::get('text_unsuccessful_created'),
-              $this->key
-          )
-      );
-
-    return FALSE;
+    return $this->saveEntity();
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  protected function validate(): bool {
+    $storage = $this->entityManager->getStorage(Text::class);
+    $this->validator->input('key')->isUnique(
+      $storage->loadByAttributes(['translation_key' => $this->request->post('key')]),
+      sprintf(Translation::get('text_already_exists'), $this->request->post('key'))
+    );
+
+    return parent::validate();
+  }
 }

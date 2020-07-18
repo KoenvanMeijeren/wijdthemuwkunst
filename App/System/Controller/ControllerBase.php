@@ -8,6 +8,8 @@ use Domain\Admin\Accounts\User\Models\User;
 use Src\Core\Request;
 use Src\Session\Session;
 use Src\View\ViewInterface;
+use System\Entity\EntityManager;
+use System\Entity\EntityManagerInterface;
 use System\View\DomainView;
 
 /**
@@ -46,12 +48,20 @@ abstract class ControllerBase implements ControllerInterface {
   protected User $user;
 
   /**
+   * The entity manager definition.
+   *
+   * @var EntityManagerInterface
+   */
+  protected EntityManagerInterface $entityManager;
+
+  /**
    * ControllerBase constructor.
    */
   public function __construct() {
     $this->request = new Request();
     $this->session = new Session();
     $this->user = new User();
+    $this->entityManager = new EntityManager();
   }
 
   /**

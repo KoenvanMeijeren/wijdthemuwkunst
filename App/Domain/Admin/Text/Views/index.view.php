@@ -7,19 +7,19 @@
 declare(strict_types=1);
 
 use Domain\Admin\Accounts\User\Models\User;
-use Domain\Admin\Text\Repositories\TextRepository;
 use Src\Core\Request;
 use Src\Security\CSRF;
 use Src\Translation\Translation;
 
-$text = new TextRepository($text ?? NULL);
 $request = new Request();
 $user = new User();
 
+/** @var \Domain\Admin\Text\Entity\TextInterface $entity */
+$entity = $text ?? null;
 $createText = $createText ?? FALSE;
 $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
 ?>
-<?php if ($createText && $user->getRights() === User::DEVELOPER && $text->get() === NULL) : ?>
+<?php if ($createText && $user->getRights() === User::DEVELOPER && $entity === NULL) : ?>
     <div class="row">
         <div class="col-xl-12 mb-4">
             <div class="card border-left-warning shadow h-100 py-2">
@@ -27,7 +27,7 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                     <div class="row no-gutters align-items-center">
                         <div class="col-md-12 mr-2 mb-4">
                             <div class="text-lg font-weight-bold text-primary text-uppercase mb-1">
-                                <?php echo Translation::get('add_text_title') ?>
+                                <?= Translation::get('add_text_title') ?>
                             </div>
                         </div>
                     </div>
@@ -35,31 +35,31 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                     <div class="row">
                         <div class="col-md-12">
                             <form method="post" action="/admin/configuration/texts/text/create/store">
-                                <?php echo CSRF::insertToken('/admin/configuration/texts/text/create/store') ?>
+                                <?= CSRF::insertToken('/admin/configuration/texts/text/create/store') ?>
 
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label for="key">
-                                            <?php echo Translation::get('form_key') ?>
+                                            <?= Translation::get('form_key') ?>
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="text" name="key"
                                                id="key"
                                                class="form-control"
-                                               placeholder="<?php echo Translation::get('form_key') ?>"
-                                               value="<?php echo $request->post('key') ?>"
+                                               placeholder="<?= Translation::get('form_key') ?>"
+                                               value="<?= $request->post('key') ?>"
                                                required>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="value">
-                                            <?php echo Translation::get('form_value') ?>
+                                            <?= Translation::get('form_value') ?>
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="text" name="value"
                                                id="value"
                                                class="form-control"
-                                               placeholder="<?php echo Translation::get('form_value') ?>"
-                                               value="<?php echo $request->post('value') ?>"
+                                               placeholder="<?= Translation::get('form_value') ?>"
+                                               value="<?= $request->post('value') ?>"
                                                required>
                                     </div>
                                 </div>
@@ -69,16 +69,16 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                                        class="btn btn-outline-danger float-left"
                                        data-toggle="tooltip"
                                        data-placement="top"
-                                       title="<?php echo Translation::get('reset_button') ?>">
-                                        <?php echo Translation::get('reset_button') ?>
+                                       title="<?= Translation::get('reset_button') ?>">
+                                        <?= Translation::get('reset_button') ?>
                                     </a>
 
                                     <button type="submit"
                                             data-toggle="tooltip"
                                             data-placement="top"
-                                            title="<?php echo Translation::get('save_button') ?>"
+                                            title="<?= Translation::get('save_button') ?>"
                                             class="btn btn-outline-success float-right">
-                                        <?php echo Translation::get('save_button') ?>
+                                        <?= Translation::get('save_button') ?>
                                         <i class="far fa-save"></i>
                                     </button>
                                 </div>
@@ -91,7 +91,7 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
             </div>
         </div>
     </div>
-<?php elseif ($text->get() !== NULL) : ?>
+<?php elseif ($entity !== NULL) : ?>
     <div class="row">
         <div class="col-xl-12 mb-4">
             <div class="card border-left-warning shadow h-100 py-2">
@@ -99,10 +99,7 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                     <div class="row no-gutters align-items-center">
                         <div class="col-md-12 mr-2 mb-4">
                             <div class="text-lg font-weight-bold text-primary text-uppercase mb-1">
-                                <?php echo sprintf(
-                                Translation::get('edit_text_title'),
-                                $text->getReadableKey()
-                                ) ?>
+                                <?= sprintf(Translation::get('edit_text_title'), $entity->getKey()) ?>
                             </div>
                         </div>
                     </div>
@@ -110,39 +107,27 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                     <div class="row">
                         <div class="col-md-12">
                             <form method="post"
-                                  action="/admin/configuration/texts/text/edit/<?php echo $text->getId() ?>/update">
-                                <?php echo CSRF::insertToken("/admin/configuration/texts/text/edit/{$text->getId()}/update") ?>
+                                  action="/admin/configuration/texts/text/edit/<?= $entity->id() ?>/update">
+                                <?= CSRF::insertToken("/admin/configuration/texts/text/edit/{$entity->id()}/update") ?>
 
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label for="key">
-                                            <?php echo Translation::get('form_key') ?>
+                                            <?= Translation::get('form_key') ?>
                                             <span class="text-danger">*</span>
                                         </label>
-                                        <input type="text" name="key"
-                                               id="key"
-                                               class="form-control"
-                                            <?php echo $disabled ?>
-                                               placeholder="<?php echo Translation::get('form_key') ?>"
-                                               value="<?php echo $request->post(
-                                                'key',
-                                                $text->getReadableKey()
-                                                      ) ?>"
-                                               required>
+                                        <input type="text" name="key" id="key" class="form-control" <?= $disabled ?>
+                                               placeholder="<?= Translation::get('form_key') ?>"
+                                               value="<?= $request->post('key', $entity->id()) ?>" required>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="value">
-                                            <?php echo Translation::get('form_value') ?>
+                                            <?= Translation::get('form_value') ?>
                                             <span class="text-danger">*</span>
                                         </label>
-                                        <input type="text" name="value"
-                                               id="value"
-                                               class="form-control"
-                                               placeholder="<?php echo Translation::get('form_value') ?>"
-                                               value="<?php echo $request->post(
-                                                   'value',
-                                                   $text->getValue()
-                                                      ) ?>"
+                                        <input type="text" name="value" id="value" class="form-control"
+                                               placeholder="<?= Translation::get('form_value') ?>"
+                                               value="<?= $request->post('value', $entity->getValue()) ?>"
                                                required>
                                     </div>
                                 </div>
@@ -152,16 +137,16 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                                        class="btn btn-outline-danger float-left"
                                        data-toggle="tooltip"
                                        data-placement="top"
-                                       title="<?php echo Translation::get('reset_button') ?>">
-                                        <?php echo Translation::get('reset_button') ?>
+                                       title="<?= Translation::get('reset_button') ?>">
+                                        <?= Translation::get('reset_button') ?>
                                     </a>
 
                                     <button type="submit"
                                             data-toggle="tooltip"
                                             data-placement="top"
-                                            title="<?php echo Translation::get('save_button') ?>"
+                                            title="<?= Translation::get('save_button') ?>"
                                             class="btn btn-outline-success float-right">
-                                        <?php echo Translation::get('save_button') ?>
+                                        <?= Translation::get('save_button') ?>
                                         <i class="far fa-save"></i>
                                     </button>
                                 </div>
@@ -183,7 +168,7 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                 <div class="row no-gutters align-items-center">
                     <div class="col-md-12 mr-2 mb-4">
                         <div class="text-lg font-weight-bold text-primary text-uppercase mb-1 float-left">
-                            <?php echo Translation::get('texts_overview_title') ?>
+                            <?= Translation::get('texts_overview_title') ?>
                         </div>
 
                         <a href="/admin/configuration/texts/text/create"
@@ -198,7 +183,7 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
 
                 <div class="row">
                     <div class="col-md-12">
-                        <?php echo $texts ?? '' ?>
+                        <?= $texts ?? '' ?>
                     </div>
                 </div>
             </div>

@@ -5,37 +5,33 @@ namespace Domain\Admin\Text\Actions;
 use Domain\Admin\Accounts\User\Models\User;
 use Src\Core\StateInterface;
 use Src\Translation\Translation;
+use System\Entity\EntityInterface;
 
 /**
+ * Provides a class for the delete text action.
  *
+ * @package Domain\Admin\Text\Actions
  */
 final class DeleteTextAction extends BaseTextAction {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function handle(): bool {
-    $this->text->delete($this->text->getId());
-
-    if ($this->text->find($this->text->getId()) === NULL) {
+    $status = $this->entity->delete();
+    if ($status === EntityInterface::SAVED_DELETED) {
       $this->session->flash(
-            StateInterface::SUCCESSFUL,
-            sprintf(
-                Translation::get('text_successful_deleted'),
-                $this->textRepository->getKey()
-            )
-        );
+        StateInterface::SUCCESSFUL,
+        sprintf(Translation::get('text_successful_deleted'), $this->entity->getKey())
+      );
 
       return TRUE;
     }
 
     $this->session->flash(
-          StateInterface::SUCCESSFUL,
-          sprintf(
-              Translation::get('text_unsuccessful_deleted'),
-              $this->textRepository->getKey()
-          )
-      );
+      StateInterface::SUCCESSFUL,
+      sprintf(Translation::get('text_unsuccessful_deleted'), $this->entity->getKey())
+    );
 
     return FALSE;
   }
@@ -44,12 +40,8 @@ final class DeleteTextAction extends BaseTextAction {
    * @inheritDoc
    */
   protected function authorize(): bool {
-    $user = new User();
-    if ($user->getRights() !== User::DEVELOPER) {
-      $this->session->flash(
-            StateInterface::FAILED,
-            Translation::get('text_destroy_not_allowed')
-        );
+    if ($this->user->getRights() !== User::DEVELOPER) {
+      $this->session->flash(StateInterface::FAILED, Translation::get('text_destroy_not_allowed'));
 
       return FALSE;
     }
@@ -58,7 +50,7 @@ final class DeleteTextAction extends BaseTextAction {
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   protected function validate(): bool {
     return TRUE;

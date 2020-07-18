@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace System\DataTable;
 
+use System\Entity\EntityInterface;
+
 /**
  * Provides a class for building data tables.
  *
@@ -19,22 +21,22 @@ abstract class DataTableBuilder implements DataTableBuilderInterface {
   protected DataTable $dataTable;
 
   /**
-   * The data to be used in the table.
+   * The entities.
    *
    * @var mixed[]
    */
-  protected array $data = [];
+  protected array $entities = [];
 
   /**
    * DataTableBuilder constructor.
    *
-   * @param string[] $data
-   *   The table data.
+   * @param EntityInterface[] $entities
+   *   The entities.
    */
-  public function __construct(array $data) {
+  public function __construct(array $entities) {
     $this->dataTable = new DataTable();
 
-    $this->data = $data;
+    $this->entities = $entities;
   }
 
   /**
@@ -46,26 +48,26 @@ abstract class DataTableBuilder implements DataTableBuilderInterface {
   abstract protected function buildHead(): array;
 
   /**
-   * Build one row with data.
+   * Build one row for an entity.
    *
-   * @param object $data
-   *   The table data.
+   * @param EntityInterface $entity
+   *   The entity.
    *
    * @return string[]
    *   The rows with data.
    */
-  abstract protected function buildRow(object $data): array;
+  abstract protected function buildRow(EntityInterface $entity): array;
 
   /**
    * Build the actions for one row.
    *
-   * @param object $data
-   *   The table data.
+   * @param EntityInterface $entity
+   *   The entity.
    *
    * @return string
    *   The renderable actions.
    */
-  abstract protected function buildRowActions(object $data): string;
+  abstract protected function buildRowActions(EntityInterface $entity): string;
 
   /**
    * {@inheritDoc}
@@ -73,10 +75,10 @@ abstract class DataTableBuilder implements DataTableBuilderInterface {
   final public function get(string $id = 'table'): string {
     $this->dataTable->addHead($this->buildHead());
 
-    foreach ($this->data as $item) {
+    foreach ($this->entities as $entity) {
       $this->dataTable->addRow(
-        $this->buildRow($item),
-        $this->buildRowActions($item)
+        $this->buildRow($entity),
+        $this->buildRowActions($entity)
       );
     }
 

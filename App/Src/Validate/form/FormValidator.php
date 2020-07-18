@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace Src\Validate\form;
 
 use DateTime;
+use Src\Core\Request;
 use Src\Core\StateInterface;
 use Src\Session\Session;
 use Src\Translation\Translation;
@@ -14,7 +15,19 @@ use Src\Translation\Translation;
  *
  */
 final class FormValidator {
+
+  /**
+   * The input string to be validated.
+   *
+   * @var string
+   */
   private string $input;
+
+  /**
+   * The alias of the input.
+   *
+   * @var string
+   */
   private string $alias;
 
   /**
@@ -23,10 +36,28 @@ final class FormValidator {
   private array $errors = [];
 
   /**
+   * The request definition.
    *
+   * @var Request
    */
-  public function input(string $input, string $alias = ''): FormValidator {
-    $this->input = $input;
+  protected Request $request;
+
+  public function __construct() {
+    $this->request = new Request();
+  }
+
+  /**
+   * Sets the input which is going to be validated
+   *
+   * @param string $input_name
+   *   The name of the input field.
+   * @param string $alias
+   *   The alias of the input.
+   *
+   * @return $this
+   */
+  public function input(string $input_name, string $alias = ''): FormValidator {
+    $this->input = $this->request->get($input_name, $input_name);
     $this->alias = $alias;
 
     return $this;

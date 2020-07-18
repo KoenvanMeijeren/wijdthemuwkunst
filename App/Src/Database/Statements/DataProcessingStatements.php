@@ -63,8 +63,20 @@ trait DataProcessingStatements {
    *
    * @return string[]
    */
-  public function getToArray(): array {
+  public function fetchAllToArray(): array {
     return $this->execute()->allToArray();
+  }
+
+  /**
+   * Get every record from the table which matches with the given query.
+   *
+   * @param string $class
+   *   The name of the class to fetch the records into.
+   *
+   * @return string[]
+   */
+  public function fetchAllToClass(string $class): array {
+    return $this->execute()->allToClass($class);
   }
 
   /**
@@ -83,6 +95,18 @@ trait DataProcessingStatements {
    */
   public function firstToArray(): array {
     return $this->execute()->firstToArray();
+  }
+
+  /**
+   * Get the first record from the table which matches with the given query.
+   *
+   * @param string $class
+   *   The name of the class to fetch the records into.
+   *
+   * @return object|null
+   */
+  public function firstToClass(string $class): ?object {
+    return $this->execute()->firstToClass($class);
   }
 
 }

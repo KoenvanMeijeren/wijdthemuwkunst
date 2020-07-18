@@ -10,48 +10,43 @@ use Domain\Admin\Accounts\Repositories\AccountRepository;
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Authentication\Support\IDEncryption;
 use Src\Action\FormAction;
-use Src\Core\Request;
 use Src\Core\StateInterface;
-use Src\Session\Session;
 use Src\Translation\Translation;
-use Src\Validate\form\FormValidator;
 
 /**
  *
  */
 final class LogUserInAction extends FormAction {
-  private User $user;
-  private Session $session;
-  private AccountRepository $account;
+  protected User $user;
+  protected AccountRepository $account;
 
-  private string $email;
-  private string $password;
+  protected string $email;
+  protected string $password;
 
-  private int $maximumLoginAttempts;
+  protected int $maximumLoginAttempts;
 
-  private array $attributes = [];
+  protected array $attributes = [];
 
   /**
+   * LogUserInAction constructor.
    *
+   * @param User $user
+   *   The user to be logged in.
    */
   public function __construct(User $user) {
-    $request = new Request();
-    $this->session = new Session();
+    parent::__construct();
 
     $this->user = $user;
 
-    $this->email = $request->post('email');
-    $this->password = $request->post('password');
+    $this->email = $this->request->post('email');
+    $this->password = $this->request->post('password');
+    $this->maximumLoginAttempts = (int) $this->request->env('login_attempts');
 
-    $this->maximumLoginAttempts = (int) $request->env('login_attempts');
-
-    $this->account = new AccountRepository(
-          $this->user->getByEmail($this->email)
-      );
+    $this->account = new AccountRepository($this->user->getByEmail($this->email));
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function handle(): bool {
     if (password_verify($this->password, $this->account->getPassword())) {
@@ -103,16 +98,14 @@ final class LogUserInAction extends FormAction {
    * @inheritDoc
    */
   protected function validate(): bool {
-    $validator = new FormValidator();
-
-    $validator->input($this->email, Translation::get('email'))
+    $this->validator->input($this->email, Translation::get('email'))
       ->isRequired()
       ->isEmail();
 
-    $validator->input($this->password, Translation::get('password'))
+    $this->validator->input($this->password, Translation::get('password'))
       ->isRequired();
 
-    return $validator->handleFormValidation();
+    return $this->validator->handleFormValidation();
   }
 
   /**

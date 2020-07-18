@@ -3,95 +3,83 @@
 namespace Domain\Admin\Text\Actions;
 
 use Domain\Admin\Accounts\User\Models\User;
-use Domain\Admin\Pages\Models\Slug;
-use Domain\Admin\Text\Models\Text;
-use Domain\Admin\Text\Repositories\TextRepository;
-use Src\Action\FormAction;
-use Src\Core\Request;
+use Domain\Admin\Text\Entity\Text;
+use Domain\Admin\Text\Entity\TextInterface;
+use Src\Action\EntityFormActionBase;
 use Src\Core\StateInterface;
-use Src\Session\Session;
 use Src\Translation\Translation;
-use Src\Validate\form\FormValidator;
+use System\Entity\EntityInterface;
 
 /**
+ * Provides a base class for text actions.
  *
+ * @package Domain\Admin\Text\Actions
  */
-abstract class BaseTextAction extends FormAction {
-  protected Text $text;
-  protected TextRepository $textRepository;
-  protected Session $session;
-
-  protected string $key;
-  protected string $value;
-
-  protected array $attributes = [];
+abstract class BaseTextAction extends EntityFormActionBase {
 
   /**
+   * The current user definition.
    *
+   * @var User
+   */
+  protected User $user;
+
+  /**
+   * BaseTextAction constructor.
    */
   public function __construct() {
-    $this->text = new Text();
-    $this->textRepository = new TextRepository(
-          $this->text->find($this->text->getId())
-      );
-    $this->session = new Session();
-    $request = new Request();
+    parent::__construct();
 
-    $key = $request->post('key', $this->textRepository->getKey());
-    $slug = new Slug();
-    $this->key = str_replace('-', '_', $slug->parse($key));
-    $this->value = $request->post('value');
+    $this->user = new User();
 
-    $this->attributes = [
-      'translation_key' => $this->key,
-      'translation_value' => $this->value,
-    ];
+    $storage = $this->entityManager->getStorage(Text::class);
+    $this->entity = $storage->create();
+    if ($id = $this->request->getRouteParameter()) {
+      $this->entity = $storage->load((int) $id);
+    }
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
-  protected function authorize(): bool {
-    $user = new User();
-    if ($this->key !== $this->textRepository->getKey()
-          && $user->getRights() !== User::DEVELOPER
-      ) {
-      $this->session->flash(
-            StateInterface::FAILED,
-            Translation::get('text_editing_key_not_allowed')
+  protected function saveEntity(): bool {
+    /** @var TextInterface $entity */
+    $entity = $this->entity;
+
+    $status = $entity->save();
+    switch ($status) {
+      case EntityInterface::SAVED_NEW:
+        $this->session->flash(StateInterface::SUCCESSFUL,
+          sprintf(Translation::get('text_successful_created'), $entity->getKey())
         );
 
-      return FALSE;
-    }
+        return TRUE;
+        break;
+      case EntityInterface::SAVED_UPDATED:
+        $this->session->flash(StateInterface::SUCCESSFUL,
+          sprintf(Translation::get('text_successful_updated'), $entity->getKey())
+        );
 
-    return parent::authorize();
+        return TRUE;
+        break;
+      default:
+        $this->session->flash(StateInterface::FAILED,
+          sprintf(Translation::get('text_unsuccessful_updated'), $entity->getKey())
+        );
+
+        return FALSE;
+        break;
+    }
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc
    */
   protected function validate(): bool {
-    $validator = new FormValidator();
+    $this->validator->input('key', Translation::get('key'))->isRequired();
+    $this->validator->input('value', Translation::get('value'))->isRequired();
 
-    $validator->input($this->key, Translation::get('key'))->isRequired();
-    $validator->input($this->value, Translation::get('value'))->isRequired();
-
-    // If the text already exists, and the key is not changed, allow it.
-    $databaseKey = $this->textRepository->getKey();
-    if ($this->key === $databaseKey) {
-      return $validator->handleFormValidation();
-    }
-
-    $validator->input($this->key)
-      ->isUnique(
-              $this->text->getByKey($this->key),
-              sprintf(
-                  Translation::get('text_already_exists'),
-                  $this->key
-              )
-          );
-
-    return $validator->handleFormValidation();
+    return $this->validator->handleFormValidation();
   }
 
 }

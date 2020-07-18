@@ -198,7 +198,7 @@ abstract class Model {
    *
    * @return object|null
    */
-  final protected function firstByAttributes(array $attributes): ?stdClass {
+  protected function firstByAttributes(array $attributes): ?stdClass {
     return DB::table($this->table)
       ->select('*')
       ->addStatementWithValues(
@@ -217,7 +217,7 @@ abstract class Model {
    *
    * @return object|null
    */
-  final protected function firstById(int $id): ?stdClass {
+  protected function firstById(int $id): ?stdClass {
     return DB::table($this->table)
       ->select('*')
       ->addStatementWithValues(

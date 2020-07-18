@@ -45,6 +45,16 @@ final class Request {
   }
 
   /**
+   * Returns the parameter of the route.
+   *
+   * @return string
+   *   The route parameter.
+   */
+  public function getRouteParameter(): string {
+    return Router::getWildcard();
+  }
+
+  /**
    * Get a server item.
    *
    * @param string $key

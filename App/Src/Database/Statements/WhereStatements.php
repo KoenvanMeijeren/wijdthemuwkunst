@@ -36,8 +36,9 @@ trait WhereStatements {
 
   /**
    * The WHERE clause is used to filter records.
-   * The WHERE clause is used to extract only
-   * those records that fulfill a specified condition.
+   *
+   * The WHERE clause is used to extract only those records that fulfill a
+   * specified condition.
    *
    * @param string $column
    *   The column to specify the filter on.
@@ -48,16 +49,10 @@ trait WhereStatements {
    *
    * @return $this
    */
-  public function where(
-        string $column,
-        string $operator,
-        string $condition
-    ): self {
+  public function where(string $column, string $operator, string $condition): self {
     $bindColumn = str_replace('.', '', $column);
 
-    $this->addStatement(
-          "WHERE {$column} {$operator} :{$bindColumn} "
-      );
+    $this->addStatement("WHERE {$column} {$operator} :{$bindColumn} ");
     $this->addValues([$bindColumn => $condition]);
 
     return $this;
@@ -77,10 +72,7 @@ trait WhereStatements {
    * @return $this
    */
   public function whereExists(string $query, array $values): self {
-    $this->addStatement(
-          "WHERE EXISTS ({$query}) "
-      );
-
+    $this->addStatement("WHERE EXISTS ({$query}) ");
     foreach ($values as $column => $value) {
       $this->addValues([$column => $value]);
     }
@@ -453,5 +445,24 @@ trait WhereStatements {
 
     return $this;
   }
+
+  /**
+   * Search for values in the database for the given attributes.
+   *
+   * @param array $attributes
+   *   The attributes to filter on.
+   * @param string $operator
+   *   The operator.
+   *
+   * @return $this
+   */
+  public function whereAttributes(array $attributes, string $operator = '='): self {
+    foreach ($attributes as $column => $value) {
+      $this->where($column, $operator, $value);
+    }
+
+    return $this;
+  }
+
 
 }
