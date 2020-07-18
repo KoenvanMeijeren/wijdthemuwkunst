@@ -39,14 +39,14 @@
         "defuse/php-encryption": "^2.2.1",
         "filp/whoops": "^2.7.3",
         "google/recaptcha": "^1.2.4",
-        "kminek/email-obfuscator": "^1.0.1",
+        "kminek/email-obfuscator": "^1.1",
         "monolog/monolog": "^2.1.0",
         "paragonie/anti-csrf": "^2.2.1",
-        "phpmailer/phpmailer": "^6.1.6",
+        "phpmailer/phpmailer": "^6.1.7",
         "siriusphp/upload": "^2.1.1",
         "symfony/filesystem": "^4.4.10",
         "symfony/templating": "^4.4.10",
-        "vlucas/phpdotenv": "^4.1.7"
+        "vlucas/phpdotenv": "^4.1.8"
     },
     "require-dev": {
         "bmitch/churn-php": "^1.0.3",
@@ -55,8 +55,8 @@
         "drupal/coder": "^8.3.9",
         "phploc/phploc": "^5.0.0",
         "phpmd/phpmd": "^2.8.2",
-        "phpmetrics/phpmetrics": "^2.7.3",
-        "phpstan/phpstan": "^0.12.31",
+        "phpmetrics/phpmetrics": "^2.7.4",
+        "phpstan/phpstan": "^0.12.32",
         "roave/security-advisories": "dev-master",
         "sebastian/phpcpd": "^4.1.0",
         "symfony/var-dumper": "^4.4.10"
@@ -71,7 +71,7 @@
             "docker-compose -f docker-compose.yml -f docker-compose.dev.yml stop"
         ],
         "inspect": [
-            "vendor/bin/phpcs --standard=Drupal --extensions=php --ignore=view.php App/Domain/Event",
+            "vendor/bin/phpcs --standard=Drupal --extensions=php --ignore=view.php App/Domain/Admin/Text",
             "vendor/bin/phpcpd app",
             "vendor/bin/phpmd app text phpmd.xml"
         ],
