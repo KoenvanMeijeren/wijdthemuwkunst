@@ -16,7 +16,7 @@ use System\Entity\EntityInterface;
 final class TextTable extends DataTableBuilder {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function buildHead(): array {
     return [
@@ -27,7 +27,7 @@ final class TextTable extends DataTableBuilder {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function buildRow(EntityInterface $entity): array {
     return [
@@ -37,7 +37,7 @@ final class TextTable extends DataTableBuilder {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function buildRowActions(EntityInterface $entity): string {
     $user = new User();

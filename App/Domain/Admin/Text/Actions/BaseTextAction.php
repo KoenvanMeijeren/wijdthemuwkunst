@@ -54,7 +54,6 @@ abstract class BaseTextAction extends EntityFormActionBase {
 
         return TRUE;
 
-      break;
       case EntityInterface::SAVED_UPDATED:
         $this->session->flash(StateInterface::SUCCESSFUL,
           sprintf(Translation::get('text_successful_updated'), $entity->getKey())
@@ -62,19 +61,17 @@ abstract class BaseTextAction extends EntityFormActionBase {
 
         return TRUE;
 
-      break;
       default:
         $this->session->flash(StateInterface::FAILED,
           sprintf(Translation::get('text_unsuccessful_updated'), $entity->getKey())
         );
 
         return FALSE;
-      break;
     }
   }
 
   /**
-   * {@inheritDoc.
+   * {@inheritDoc}
    */
   protected function validate(): bool {
     $this->validator->input('key', Translation::get('key'))->isRequired();

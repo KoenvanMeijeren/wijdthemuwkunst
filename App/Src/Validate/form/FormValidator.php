@@ -52,15 +52,15 @@ final class FormValidator {
   /**
    * Sets the input which is going to be validated.
    *
-   * @param string $input_name
+   * @param string $inputName
    *   The name of the input field.
    * @param string $alias
    *   The alias of the input.
    *
    * @return $this
    */
-  public function input(string $input_name, string $alias = ''): FormValidator {
-    $this->input = $this->request->get($input_name, $input_name);
+  public function input(string $inputName, string $alias = ''): FormValidator {
+    $this->input = $this->request->get($inputName, $inputName);
     $this->alias = $alias;
 
     return $this;

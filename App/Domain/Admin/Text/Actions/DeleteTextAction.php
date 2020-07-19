@@ -35,7 +35,7 @@ final class DeleteTextAction extends BaseTextAction {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function authorize(): bool {
     if ($this->user->getRights() !== User::DEVELOPER) {
