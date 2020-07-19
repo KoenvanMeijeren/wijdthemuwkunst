@@ -28,8 +28,8 @@ trait SoftDelete {
    * @param string $softDeletedKey
    *   The name of the is deleted column.
    */
-  public function initializeSoftDelete(string $softDeletedKey = null): void {
-    if ($softDeletedKey === null) {
+  public function initializeSoftDelete(string $softDeletedKey = NULL): void {
+    if ($softDeletedKey === NULL) {
       $softDeletedKey = $this->softDeletedKey;
     }
 

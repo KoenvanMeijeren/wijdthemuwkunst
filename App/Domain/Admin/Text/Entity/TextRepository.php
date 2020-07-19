@@ -16,7 +16,7 @@ final class TextRepository extends EntityRepositoryBase implements TextRepositor
    */
   public function loadByText(string $text): ?TextInterface {
     return $this->firstByAttributes([
-      "{$this->entity->getTable()}_key" => $text
+      "{$this->entity->getTable()}_key" => $text,
     ]);
   }
 

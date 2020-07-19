@@ -4,7 +4,6 @@ namespace Domain\Admin\Text\Actions;
 
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Text\Entity\Text;
-use Domain\Admin\Text\Entity\TextInterface;
 use Src\Action\EntityFormActionBase;
 use Src\Core\StateInterface;
 use Src\Translation\Translation;
@@ -20,7 +19,7 @@ abstract class BaseTextAction extends EntityFormActionBase {
   /**
    * The current user definition.
    *
-   * @var User
+   * @var \Domain\Admin\Accounts\User\Models\User
    */
   protected User $user;
 
@@ -43,7 +42,7 @@ abstract class BaseTextAction extends EntityFormActionBase {
    * {@inheritDoc}
    */
   protected function saveEntity(): bool {
-    /** @var TextInterface $entity */
+    /** @var \Domain\Admin\Text\Entity\TextInterface $entity */
     $entity = $this->entity;
 
     $status = $entity->save();
@@ -54,26 +53,28 @@ abstract class BaseTextAction extends EntityFormActionBase {
         );
 
         return TRUE;
-        break;
+
+      break;
       case EntityInterface::SAVED_UPDATED:
         $this->session->flash(StateInterface::SUCCESSFUL,
           sprintf(Translation::get('text_successful_updated'), $entity->getKey())
         );
 
         return TRUE;
-        break;
+
+      break;
       default:
         $this->session->flash(StateInterface::FAILED,
           sprintf(Translation::get('text_unsuccessful_updated'), $entity->getKey())
         );
 
         return FALSE;
-        break;
+      break;
     }
   }
 
   /**
-   * {@inheritDoc
+   * {@inheritDoc.
    */
   protected function validate(): bool {
     $this->validator->input('key', Translation::get('key'))->isRequired();

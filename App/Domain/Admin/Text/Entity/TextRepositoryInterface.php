@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Domain\Admin\Text\Entity;
 
 use System\Entity\EntityRepositoryInterface;

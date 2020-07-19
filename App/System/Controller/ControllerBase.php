@@ -50,7 +50,7 @@ abstract class ControllerBase implements ControllerInterface {
   /**
    * The entity manager definition.
    *
-   * @var EntityManagerInterface
+   * @var \System\Entity\EntityManagerInterface
    */
   protected EntityManagerInterface $entityManager;
 

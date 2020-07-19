@@ -119,7 +119,7 @@ trait BasicStatements {
    * @return $this
    */
   public function delete(string $column): self {
-    $this->update([$column => true]);
+    $this->update([$column => TRUE]);
 
     return $this;
   }

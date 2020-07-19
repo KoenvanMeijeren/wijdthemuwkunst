@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace System\Entity;
 
@@ -13,7 +15,7 @@ final class EntityManager extends EntityRepositoryBase implements EntityManagerI
    * {@inheritDoc}
    */
   public function getStorage(string $entity) {
-    $this->entity = new $entity;
+    $this->entity = new $entity();
     return $this;
   }
 

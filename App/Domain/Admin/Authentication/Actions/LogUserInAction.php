@@ -30,7 +30,7 @@ final class LogUserInAction extends FormAction {
   /**
    * LogUserInAction constructor.
    *
-   * @param User $user
+   * @param \Domain\Admin\Accounts\User\Models\User $user
    *   The user to be logged in.
    */
   public function __construct(User $user) {

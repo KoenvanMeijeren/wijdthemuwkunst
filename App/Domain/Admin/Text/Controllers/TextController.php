@@ -31,7 +31,7 @@ final class TextController extends AdminControllerBase {
   /**
    * The text entity repository definition.
    *
-   * @var TextRepositoryInterface
+   * @var \Domain\Admin\Text\Entity\TextRepositoryInterface
    */
   protected TextRepositoryInterface $textRepository;
 
@@ -55,7 +55,7 @@ final class TextController extends AdminControllerBase {
   /**
    * Returns all texts.
    *
-   * @return ViewInterface
+   * @return \Src\View\ViewInterface
    *   The view.
    */
   public function index(): ViewInterface {
@@ -70,7 +70,7 @@ final class TextController extends AdminControllerBase {
   /**
    * Returns the view for creating texts.
    *
-   * @return ViewInterface
+   * @return \Src\View\ViewInterface
    *   The view.
    */
   public function create(): ViewInterface {
@@ -101,7 +101,7 @@ final class TextController extends AdminControllerBase {
   /**
    * Returns an edit view for texts.
    *
-   * @return Redirect|ViewInterface
+   * @return \Src\Core\Redirect|ViewInterface
    *   The view.
    */
   public function edit() {
@@ -138,7 +138,7 @@ final class TextController extends AdminControllerBase {
   /**
    * Destroys a text in the database.
    *
-   * @return Redirect
+   * @return \Src\Core\Redirect
    *   The redirect response.
    */
   public function destroy(): Redirect {

@@ -47,7 +47,7 @@ abstract class EntityBase extends EntityModel implements EntityInterface {
    */
   public function set(string $key, $value) {
     $attribute = "{$this->table}_{$key}";
-    if (strpos($key, $this->table) !== false) {
+    if (strpos($key, $this->table) !== FALSE) {
       $attribute = $key;
     }
 
@@ -72,7 +72,7 @@ abstract class EntityBase extends EntityModel implements EntityInterface {
    */
   public function get(string $key) {
     $attribute = "{$this->table}_{$key}";
-    if (strpos($key, $this->table) !== false) {
+    if (strpos($key, $this->table) !== FALSE) {
       $attribute = $key;
     }
 
@@ -91,7 +91,7 @@ abstract class EntityBase extends EntityModel implements EntityInterface {
    * {@inheritDoc}
    */
   public function save(): int {
-    if ($this->id() === null) {
+    if ($this->id() === NULL) {
       $this->create($this->attributes);
       return self::SAVED_NEW;
     }

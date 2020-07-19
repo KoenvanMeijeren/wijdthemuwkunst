@@ -1,6 +1,5 @@
 <?php
 
-
 namespace System\Entity;
 
 /**
@@ -41,7 +40,6 @@ interface EntityManagerInterface {
    *   The loaded entity.
    */
   public function load(int $id): ?EntityInterface;
-
 
   /**
    * Loads records for the given attributes.

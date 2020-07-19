@@ -32,7 +32,7 @@ final class DatabaseProcessor extends DatabaseConnection {
    * @param null $fetchArgument
    *   This argument have a different meaning depending on the value of the
    *   <i>fetch_style</i> parameter: <p><b>PDO::FETCH_COLUMN</b>: Returns the
-   *   indicated 0-indexed column. </p>
+   *   indicated 0-indexed column. </p>.
    * @param array $ctorArgs
    *   Arguments of custom class constructor when the <i>fetch_style</i>
    *   parameter is <b>PDO::FETCH_CLASS</b>.
@@ -40,10 +40,11 @@ final class DatabaseProcessor extends DatabaseConnection {
    * @return mixed[]|null
    *   The fetched records.
    */
-  public function fetchAll(int $fetchMethod, $fetchArgument = null, array $ctorArgs = []): ?array {
-    if ($fetchArgument !== null) {
+  public function fetchAll(int $fetchMethod, $fetchArgument = NULL, array $ctorArgs = []): ?array {
+    if ($fetchArgument !== NULL) {
       $data = $this->statement->fetchAll($fetchMethod, $fetchArgument, $ctorArgs);
-    } else {
+    }
+    else {
       $data = $this->statement->fetchAll($fetchMethod);
     }
 
@@ -61,7 +62,7 @@ final class DatabaseProcessor extends DatabaseConnection {
    *   one of the PDO::FETCH_ORI_* constants, defaulting to PDO::FETCH_ORI_NEXT.
    *   To request a scrollable cursor for your PDOStatement object, you must set
    *   the PDO::ATTR_CURSOR attribute to PDO::CURSOR_SCROLL when you prepare the
-   *   SQL statement with <b>PDO::prepare</b>. </p>
+   *   SQL statement with <b>PDO::prepare</b>. </p>.
    * @param int $cursorOffset
    *   The offset of the cursor.
    *
@@ -135,7 +136,7 @@ final class DatabaseProcessor extends DatabaseConnection {
    */
   public function firstToClass(string $class): ?object {
     $data = $this->fetchAll(PDO::FETCH_CLASS, $class);
-    return $data[array_key_first($data)] ?? null;
+    return $data[array_key_first($data)] ?? NULL;
   }
 
   /**

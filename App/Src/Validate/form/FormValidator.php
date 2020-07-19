@@ -38,16 +38,19 @@ final class FormValidator {
   /**
    * The request definition.
    *
-   * @var Request
+   * @var \Src\Core\Request
    */
   protected Request $request;
 
+  /**
+   *
+   */
   public function __construct() {
     $this->request = new Request();
   }
 
   /**
-   * Sets the input which is going to be validated
+   * Sets the input which is going to be validated.
    *
    * @param string $input_name
    *   The name of the input field.

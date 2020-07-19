@@ -16,14 +16,14 @@ abstract class EntityFormActionBase extends FormAction {
   /**
    * The entity manager definition.
    *
-   * @var EntityManagerInterface
+   * @var \System\Entity\EntityManagerInterface
    */
   protected EntityManagerInterface $entityManager;
 
   /**
    * The entity definition.
    *
-   * @var EntityInterface
+   * @var \System\Entity\EntityInterface
    */
   protected EntityInterface $entity;
 

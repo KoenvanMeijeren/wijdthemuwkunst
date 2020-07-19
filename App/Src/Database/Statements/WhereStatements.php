@@ -464,5 +464,4 @@ trait WhereStatements {
     return $this;
   }
 
-
 }

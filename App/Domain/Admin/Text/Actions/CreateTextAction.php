@@ -3,7 +3,6 @@
 namespace Domain\Admin\Text\Actions;
 
 use Domain\Admin\Text\Entity\Text;
-use Domain\Admin\Text\Entity\TextInterface;
 use Src\Translation\Translation;
 
 /**
@@ -17,7 +16,7 @@ final class CreateTextAction extends BaseTextAction {
    * {@inheritDoc}
    */
   protected function handle(): bool {
-    /** @var TextInterface $entity */
+    /** @var \Domain\Admin\Text\Entity\TextInterface $entity */
     $entity = $this->entity;
 
     $entity->setKey($this->request->post('key'));
@@ -38,4 +37,5 @@ final class CreateTextAction extends BaseTextAction {
 
     return parent::validate();
   }
+
 }

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace System\Entity;
 
 use System\Entity\Model\EntityModelInterface;

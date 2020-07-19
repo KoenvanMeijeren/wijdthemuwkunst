@@ -30,7 +30,7 @@ abstract class DataTableBuilder implements DataTableBuilderInterface {
   /**
    * DataTableBuilder constructor.
    *
-   * @param EntityInterface[] $entities
+   * @param \System\Entity\EntityInterface[] $entities
    *   The entities.
    */
   public function __construct(array $entities) {
@@ -50,7 +50,7 @@ abstract class DataTableBuilder implements DataTableBuilderInterface {
   /**
    * Build one row for an entity.
    *
-   * @param EntityInterface $entity
+   * @param \System\Entity\EntityInterface $entity
    *   The entity.
    *
    * @return string[]
@@ -61,7 +61,7 @@ abstract class DataTableBuilder implements DataTableBuilderInterface {
   /**
    * Build the actions for one row.
    *
-   * @param EntityInterface $entity
+   * @param \System\Entity\EntityInterface $entity
    *   The entity.
    *
    * @return string
