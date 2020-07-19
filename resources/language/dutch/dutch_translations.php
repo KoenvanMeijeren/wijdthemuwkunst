@@ -133,10 +133,10 @@ return [
     /**
      * Admin texts page translations.
      */
-    'texts_title' => 'Website teksten',
-    'texts_overview_title' => 'Instellingen overzicht',
-    'add_text_title' => 'Instelling toevoegen',
-    'edit_text_title' => 'Instelling `%s` bewerken',
+    'texts_title' => 'Teksten',
+    'texts_overview_title' => 'Teksten overzicht',
+    'add_text_title' => 'Tekst toevoegen',
+    'edit_text_title' => 'Tekst `%s` bewerken',
     'text_does_not_exists' => 'Deze tekst bestaat niet.',
     'text_already_exists' => 'De tekst \'%s\' bestaat al.',
     'text_creation_not_allowed' => 'Teksten mogen alleen worden toegevoegd door ontwikkelaars.',
