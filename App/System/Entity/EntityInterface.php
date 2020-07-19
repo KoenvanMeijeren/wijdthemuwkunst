@@ -3,7 +3,7 @@
 
 namespace System\Entity;
 
-use Src\Model\EntityModelInterface;
+use System\Entity\Model\EntityModelInterface;
 
 /**
  * Provides an interface for entities.

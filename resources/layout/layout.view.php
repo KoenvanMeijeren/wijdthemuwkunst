@@ -3,7 +3,6 @@
 use Domain\Admin\Menu\Models\Menu;
 use Domain\Admin\Menu\Repositories\MenuRepository;
 use Domain\Admin\Settings\Models\Setting;
-use Domain\Admin\Text\Models\Text;
 use Domain\Event\Models\Event;
 use Src\Core\Request;
 use Src\Security\CSRF;
@@ -12,7 +11,6 @@ use Src\Translation\Translation;
 use Support\Resource;
 
 $setting = new Setting();
-$text = new Text();
 $session = new Session();
 $request = new Request();
 $event = new Event();
@@ -68,45 +66,35 @@ $menuItems = $menu->getAll();
 <section id="footer">
     <div class="inner">
         <header>
-            <h2>
-                <?= $text->get('contact_formulier_titel', 'Neem contact op') ?>
-            </h2>
+            <h2><?= t('Please contact us') ?></h2>
         </header>
         <form id="form" method="POST" action="/contact">
             <?php Resource::loadStringMessage(); ?>
             <?= CSRF::insertToken('/contact') ?>
 
             <div class="field half first">
-                <label for="name">
-                  <?= $text->get('contact_formulier_naam_veld', 'Naam') ?>
-                </label>
+                <label for="name"><?= t('Name') ?></label>
                 <input type="text" name="name" id="name" value="<?= $session->get('name', true) ?>" required/>
             </div>
             <div class="field half">
-                <label for="email">
-                  <?= $text->get('contact_formulier_email_veld', 'Email') ?>
-                </label>
+                <label for="email"><?= t('Email') ?></label>
                 <input type="text" name="email" id="email" value="<?= $session->get('email', true) ?>" required/>
             </div>
             <div class="field">
-                <label for="message">
-                  <?= $text->get('contact_formulier_bericht_veld', 'Bericht') ?>
-                </label>
+                <label for="message"><?= t('Message') ?></label>
                 <textarea name="message" id="message" rows="6" required><?= $session->get('message', true) ?></textarea>
             </div>
 
             <ul class="actions">
                 <li>
                     <button type="submit" class="button g-recaptcha" data-sitekey="<?= $request->env('recaptcha_public_key') ?>" data-callback="onSubmit">
-                        <?= $text->get('contact_formulier_verzenden_knop', 'Bericht verzenden') ?>
+                      <?= t('Send message') ?>
                     </button>
                 </li>
             </ul>
         </form>
         <div class="copyright">
-            <p>
-                &copy; <?= $setting->get('copyright_tekst') ?>
-            </p>
+            <p>&copy; <?= $setting->get('copyright_tekst') ?></p>
         </div>
     </div>
 </section>

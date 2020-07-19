@@ -1,9 +1,9 @@
-<?php
-
+<?php declare(strict_types=1);
 
 namespace System\Entity;
 
 use Src\Database\DB;
+use Src\Model\Scopes\SoftDelete\SoftDelete;
 
 /**
  * Defines a base for entity repositories.
@@ -11,6 +11,8 @@ use Src\Database\DB;
  * @package System\Entity
  */
 abstract class EntityRepositoryBase implements EntityRepositoryInterface {
+
+  use SoftDelete;
 
   /**
    * The entity definition.
@@ -34,6 +36,8 @@ abstract class EntityRepositoryBase implements EntityRepositoryInterface {
    */
   public function setEntity(EntityInterface $entity): void {
     $this->entity = $entity;
+
+    $this->globalFilters();
   }
 
   /**
@@ -44,7 +48,7 @@ abstract class EntityRepositoryBase implements EntityRepositoryInterface {
    * @param array $columns
    *   The columns to be selected.
    *
-   * @return object|null
+   * @return EntityInterface|null
    *   The entity.
    */
   protected function firstByAttributes(array $attributes, array $columns = ['*']): ?EntityInterface {
@@ -74,6 +78,13 @@ abstract class EntityRepositoryBase implements EntityRepositoryInterface {
       ->select(implode(',', $columns))
       ->addStatementWithValues($this->scopes['query'], $this->scopes['values'])
       ->fetchAllToClass(get_class($this->entity));
+  }
+
+  /**
+   * Adds global filters for the queries.
+   */
+  protected function globalFilters(): void {
+    $this->initializeSoftDelete($this->entity->getSoftDeletedKey());
   }
 
   /**

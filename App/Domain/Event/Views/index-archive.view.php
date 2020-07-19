@@ -5,15 +5,12 @@
  */
 
 use Domain\Admin\Event\Repositories\EventRepository;
-use Domain\Admin\Text\Models\Text;
 use Src\Core\URI;
-use Src\Translation\Translation;
 use System\Breadcrumbs\Breadcrumbs;
 
 /**
  * @var \Domain\Admin\Event\Repositories\EventRepository $eventRepository */
 $eventRepository = $eventRepo ?? NULL;
-$text = new Text();
 $breadcrumbs = new Breadcrumbs(URI::getUrl());
 ?>
 
@@ -65,10 +62,7 @@ $breadcrumbs = new Breadcrumbs(URI::getUrl());
               <?php endforeach;
             else : ?>
                 <div class="col-md-12">
-                    <?php echo $text->get(
-                    'er_zijn_geen_gearchiveerde_concerten',
-                    Translation::get('no_archived_events_were_found_message')
-                    ) ?>
+                  <?= t('Er zijn geen gearchiveerde concerten gevonden.') ?>
                 </div>
             <?php endif; ?>
         </div>

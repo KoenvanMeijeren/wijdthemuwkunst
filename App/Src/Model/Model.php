@@ -234,7 +234,7 @@ abstract class Model {
    * @param \Src\Database\DB $builder
    *   The query builder.
    */
-  final protected function addScope(DB $builder): void {
+  protected function addScope(DB $builder): void {
     if (strpos($this->scopes['query'], $builder->getQuery()) !== FALSE
           || in_array($builder->getValues(), $this->scopes['values'], TRUE)
       ) {

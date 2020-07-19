@@ -2,7 +2,6 @@
 
 namespace Domain\Admin\Text\Entity;
 
-use Domain\Admin\Pages\Models\Slug;
 use System\Entity\EntityBase;
 
 /**
@@ -30,8 +29,7 @@ final class Text extends EntityBase implements TextInterface {
    * {@inheritDoc}
    */
   public function setKey(string $key) {
-    $slug = new Slug();
-    $this->set('key', str_replace('-', '_', $slug->parse($key)));
+    $this->set('key', $key);
     return $this;
   }
 

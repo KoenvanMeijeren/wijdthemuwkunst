@@ -2,7 +2,7 @@
 
 namespace System\Entity;
 
-use Src\Model\EntityModel;
+use System\Entity\Model\EntityModel;
 
 /**
  * Provides a base class for entities.
@@ -104,6 +104,8 @@ abstract class EntityBase extends EntityModel implements EntityInterface {
    * {@inheritDoc}
    */
   public function delete(): int {
+    $this->softDelete($this->id());
+
     return self::SAVED_DELETED;
   }
 

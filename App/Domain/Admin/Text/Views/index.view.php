@@ -118,7 +118,7 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                                         </label>
                                         <input type="text" name="key" id="key" class="form-control" <?= $disabled ?>
                                                placeholder="<?= Translation::get('form_key') ?>"
-                                               value="<?= $request->post('key', $entity->id()) ?>" required>
+                                               value="<?= $request->post('key', $entity->getKey()) ?>" required>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="value">
@@ -135,15 +135,12 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                                 <div class="mt-4">
                                     <a href="/admin/configuration/texts"
                                        class="btn btn-outline-danger float-left"
-                                       data-toggle="tooltip"
-                                       data-placement="top"
+                                       data-toggle="tooltip" data-placement="top"
                                        title="<?= Translation::get('reset_button') ?>">
                                         <?= Translation::get('reset_button') ?>
                                     </a>
 
-                                    <button type="submit"
-                                            data-toggle="tooltip"
-                                            data-placement="top"
+                                    <button type="submit" data-toggle="tooltip" data-placement="top"
                                             title="<?= Translation::get('save_button') ?>"
                                             class="btn btn-outline-success float-right">
                                         <?= Translation::get('save_button') ?>
@@ -173,9 +170,7 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
 
                         <a href="/admin/configuration/texts/text/create"
                            class="btn btn-outline-primary float-right"
-                           data-toggle="tooltip"
-                           data-placement="top"
-                           title="Toevoegen">
+                           data-toggle="tooltip" data-placement="top" title="Toevoegen">
                             <i class="fas fa-plus"></i>
                         </a>
                     </div>

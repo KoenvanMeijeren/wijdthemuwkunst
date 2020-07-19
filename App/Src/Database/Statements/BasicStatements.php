@@ -110,19 +110,16 @@ trait BasicStatements {
   }
 
   /**
-   * Soft delete records from the database.
+   * Soft delete a record from the database.
    *
    * @param string $column
-   *   The column to be updated.
-   *   This value will be used to determine
-   *                       if the record has been deleted.
-   * @param string $value
-   *   The value -> 1 is deleted 0 -> is available.
+   *   The column to be updated. This value will be used to determine if the
+   *   record has been deleted.
    *
    * @return $this
    */
-  public function delete(string $column, string $value = '1'): self {
-    $this->update([$column => $value]);
+  public function delete(string $column): self {
+    $this->update([$column => true]);
 
     return $this;
   }
@@ -133,9 +130,7 @@ trait BasicStatements {
    * @return $this
    */
   public function permanentDelete(): self {
-    $this->addStatement(
-          'DELETE FROM ' . self::$table . ' '
-      );
+    $this->addStatement('DELETE FROM ' . self::$table . ' ');
 
     return $this;
   }

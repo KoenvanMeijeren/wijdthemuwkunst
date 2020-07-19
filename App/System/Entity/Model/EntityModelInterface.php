@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Model;
+namespace System\Entity\Model;
 
 /**
  * Defines an interface for entity models.
@@ -24,5 +24,13 @@ interface EntityModelInterface {
    *   The name of the primary key.
    */
   public function getPrimaryKey(): string;
+
+  /**
+   * Returns the name of the is deleted column of the table.
+   *
+   * @return string
+   *   The name of the is deleted column.
+   */
+  public function getSoftDeletedKey(): string;
 
 }

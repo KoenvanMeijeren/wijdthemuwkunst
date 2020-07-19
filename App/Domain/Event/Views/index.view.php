@@ -5,8 +5,6 @@
  */
 
 use Domain\Admin\Event\Repositories\EventRepository;
-use Domain\Admin\Text\Models\Text;
-use Src\Translation\Translation;
 
 /**
  * @var \Domain\Admin\Event\Repositories\EventRepository $eventRepository */
@@ -14,7 +12,6 @@ $eventRepository = $eventRepo ?? NULL;
 /**
  * @var \Domain\Admin\Event\Repositories\EventRepository $eventArchiveRepository */
 $eventArchiveRepository = $eventArchiveRepo ?? NULL;
-$text = new Text();
 ?>
 
 <div class="container page">
@@ -57,10 +54,7 @@ $text = new Text();
               <?php endforeach;
             else : ?>
                 <div class="col-md-12">
-                    <?php echo $text->get(
-                    'er_zijn_geen_concerten',
-                    Translation::get('no_events_were_found_message')
-                    ) ?>
+                  <?= t('No events were found.') ?>
                 </div>
             <?php endif; ?>
         </div>
@@ -106,10 +100,7 @@ $text = new Text();
             <?php if (isset($amount_of_events) && (int) $amount_of_events > 3) : ?>
                 <div class="col-md-12 text-center">
                     <a class="button" href="/concerten/historie">
-                        <?php echo $text->get(
-                        'bekijk_alles_knop',
-                        Translation::get('view_more_button')
-                        ) ?>
+                      <?= t('View more') ?>
                     </a>
                 </div>
             <?php endif; ?>

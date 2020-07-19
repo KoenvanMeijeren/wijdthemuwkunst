@@ -20,16 +20,14 @@ final class DeleteTextAction extends BaseTextAction {
   protected function handle(): bool {
     $status = $this->entity->delete();
     if ($status === EntityInterface::SAVED_DELETED) {
-      $this->session->flash(
-        StateInterface::SUCCESSFUL,
+      $this->session->flash(StateInterface::SUCCESSFUL,
         sprintf(Translation::get('text_successful_deleted'), $this->entity->getKey())
       );
 
       return TRUE;
     }
 
-    $this->session->flash(
-      StateInterface::SUCCESSFUL,
+    $this->session->flash(StateInterface::SUCCESSFUL,
       sprintf(Translation::get('text_unsuccessful_deleted'), $this->entity->getKey())
     );
 

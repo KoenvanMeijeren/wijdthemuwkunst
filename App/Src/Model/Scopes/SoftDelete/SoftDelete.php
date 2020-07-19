@@ -24,11 +24,18 @@ trait SoftDelete {
 
   /**
    * Initializes the soft delete scope.
+   *
+   * @param string $softDeletedKey
+   *   The name of the is deleted column.
    */
-  public function initializeSoftDelete(): void {
+  public function initializeSoftDelete(string $softDeletedKey = null): void {
+    if ($softDeletedKey === null) {
+      $softDeletedKey = $this->softDeletedKey;
+    }
+
     $this->addScope(
-          (new DB)->where($this->softDeletedKey, '=', '0')
-      );
+      (new DB)->where($softDeletedKey, '=', '0')
+    );
   }
 
 }

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Src\Model;
+namespace System\Entity\Model;
 
 use Src\Database\DB;
 
@@ -33,6 +33,13 @@ abstract class EntityModel implements EntityModelInterface {
   }
 
   /**
+   * {@inheritDoc}
+   */
+  public function getSoftDeletedKey(): string {
+    return "{$this->getTable()}_is_deleted";
+  }
+
+  /**
    * Creates a new record.
    *
    * @param string[] $attributes
@@ -42,7 +49,7 @@ abstract class EntityModel implements EntityModelInterface {
   }
 
   /**
-   * Update a record.
+   * Updates a record.
    *
    * @param int $id
    * @param string[] $attributes
@@ -50,6 +57,32 @@ abstract class EntityModel implements EntityModelInterface {
   protected function update(int $id, array $attributes): void {
     DB::table($this->table)
       ->update($attributes)
+      ->where($this->getPrimaryKey(), '=', (string) $id)
+      ->execute();
+  }
+
+  /**
+   * Deletes a record without deleting it.
+   *
+   * @param int $id
+   *   The id of the record to be deleted.
+   */
+  protected function softDelete(int $id): void {
+    DB::table($this->table)
+      ->delete($this->getSoftDeletedKey())
+      ->where($this->getPrimaryKey(), '=', (string) $id)
+      ->execute();
+  }
+
+  /**
+   * Permanently deletes a record.
+   *
+   * @param int $id
+   *   The id of the record to be deleted.
+   */
+  protected function permanentDelete(int $id): void {
+    DB::table($this->table)
+      ->permanentDelete()
       ->where($this->getPrimaryKey(), '=', (string) $id)
       ->execute();
   }

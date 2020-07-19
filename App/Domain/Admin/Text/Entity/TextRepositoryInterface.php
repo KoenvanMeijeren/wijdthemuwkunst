@@ -12,4 +12,15 @@ use System\Entity\EntityRepositoryInterface;
  */
 interface TextRepositoryInterface extends EntityRepositoryInterface {
 
+  /**
+   * Loads a translation for a given text.
+   *
+   * @param string $text
+   *   The text to search for.
+   *
+   * @return TextInterface|null
+   *   The text entity or null.
+   */
+  public function loadByText(string $text): ?TextInterface;
+
 }

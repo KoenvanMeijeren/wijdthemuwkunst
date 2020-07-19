@@ -1,11 +1,12 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * @file
  * The default functions.
  */
 
-declare(strict_types=1);
+use Domain\Admin\Text\Entity\Text;
+use System\Entity\EntityManager;
 
 if (!function_exists('array_replace_keys')) {
 
@@ -272,6 +273,30 @@ if (!function_exists('get_subclasses_of')) {
     }
 
     return $result;
+  }
+
+}
+
+if (!function_exists('t')) {
+
+  /**
+   * Translates texts.
+   *
+   * @param string $text
+   *   The text to be translated.
+   */
+  function t(string $text) {
+    $entityManager = new EntityManager();
+
+    /** @var \Domain\Admin\Text\Entity\TextRepositoryInterface $repository */
+    $repository = $entityManager->getStorage(Text::class)->getRepository();
+    if ($entity = $repository->loadByText($text)) {
+      $entity = $repository->loadByText($text);
+
+      return $entity->getValue();
+    }
+
+    return $text;
   }
 
 }
