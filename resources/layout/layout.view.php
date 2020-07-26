@@ -1,9 +1,7 @@
 <?php
 
-use Domain\Admin\Menu\Models\Menu;
 use Domain\Admin\Menu\Repositories\MenuRepository;
 use Domain\Admin\Settings\Models\Setting;
-use Domain\Event\Models\Event;
 use Src\Core\Request;
 use Src\Security\CSRF;
 use Src\Session\Session;
@@ -13,9 +11,6 @@ use Support\Resource;
 $setting = new Setting();
 $session = new Session();
 $request = new Request();
-$event = new Event();
-$menu = new Menu();
-$menuItems = $menu->getAll();
 ?>
 <!DOCTYPE html>
 <html lang="<?= Translation::DUTCH_LANGUAGE_CODE ?>">
@@ -40,9 +35,9 @@ $menuItems = $menu->getAll();
         <a href="/" class="logo">
             <?= $setting->get('website_naam') ?>
         </a>
-        <?php if (count($menuItems) > 0) : ?>
+        <?php if (isset($data['menuItems']) && count($data['menuItems']) > 0) : ?>
             <nav id="nav">
-                <?php foreach ($menuItems as $menuItem) :
+                <?php foreach ($data['menuItems'] as $menuItem) :
                     $menu = new MenuRepository($menuItem);
                     if ($menu->getSlug() === 'index') : ?>
                         <a href="/"><?= $menu->getTitle() ?></a>

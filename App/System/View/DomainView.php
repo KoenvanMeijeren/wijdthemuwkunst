@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 namespace System\View;
 
+use Domain\Admin\Menu\Models\Menu;
 use Src\Core\URI;
 use Src\View\BaseView;
 
@@ -16,6 +17,13 @@ use Src\View\BaseView;
 final class DomainView extends BaseView {
 
   /**
+   * Determines if the current view must be displayed for admins.
+   *
+   * @var bool
+   */
+  protected bool $isAdminView = false;
+
+  /**
    * DomainView constructor.
    *
    * @param string $name
@@ -24,12 +32,26 @@ final class DomainView extends BaseView {
    *   The content of the partial view.
    */
   public function __construct(string $name, array $content = []) {
-    $layout = 'layout.view.php';
-    if (strpos(URI::getUrl(), 'admin') !== FALSE) {
-      $layout = 'admin.layout.view.php';
-    }
+    $this->isAdminView = strpos(URI::getUrl(), 'admin') !== false;
+
+    $layout = $this->isAdminView ? 'admin.layout.view.php' : 'layout.view.php';
+    $content = array_merge($content, $this->globalContent());
 
     parent::__construct($layout, $name, $content);
+  }
+
+  /**
+   * Provides global content for domain views.
+   *
+   * @return array
+   *   The global content.
+   */
+  protected function globalContent(): array {
+    $menu = new Menu();
+
+    return [
+      'menuItems' => $menu->getAll(),
+    ];
   }
 
   /**
