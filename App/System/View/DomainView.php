@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 namespace System\View;
 
+use Domain\Admin\Cms\Structure\MenuAdminTrait;
 use Domain\Admin\Menu\Models\Menu;
 use Src\Core\URI;
 use Src\View\BaseView;
@@ -15,6 +16,8 @@ use Src\View\BaseView;
  * @package Src\View
  */
 final class DomainView extends BaseView {
+
+  use MenuAdminTrait;
 
   /**
    * Determines if the current view must be displayed for admins.
@@ -35,7 +38,8 @@ final class DomainView extends BaseView {
     $this->isAdminView = strpos(URI::getUrl(), 'admin') !== false;
 
     $layout = $this->isAdminView ? 'admin.layout.view.php' : 'layout.view.php';
-    $content = array_merge($content, $this->globalContent());
+    $globalContent = $this->isAdminView ? $this->globalAdminContent() : $this->globalContent();
+    $content = array_merge($content, $globalContent);
 
     parent::__construct($layout, $name, $content);
   }
@@ -51,6 +55,23 @@ final class DomainView extends BaseView {
 
     return [
       'menuItems' => $menu->getAll(),
+    ];
+  }
+
+  /**
+   * Provides global content for domain views for admins.
+   *
+   * @return array
+   *   The global content.
+   */
+  protected function globalAdminContent(): array {
+    return [
+      'menuItems' => [
+        'content' => $this->contentMenu(),
+        'structure' => $this->structureMenu(),
+        'configuration' => $this->configurationMenu(),
+        'reports' => $this->reportsMenu(),
+      ],
     ];
   }
 

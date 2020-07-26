@@ -12,7 +12,7 @@ use Src\Translation\Translation;
  *
  * @package Domain\Admin\Cms\Structure
  */
-trait MenuTrait {
+trait MenuAdminTrait {
 
   /**
    *
