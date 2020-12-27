@@ -22,7 +22,7 @@
     "config": {
         "sort-packages": true,
         "platform": {
-            "php": "7.4",
+            "php": "8.0",
             "ext-iconv": "1.16",
             "ext-intl": "65.1"
         },
