@@ -60,19 +60,18 @@ final class Router {
   /**
    * Load the routes.
    *
-   * @param string $file
-   *   the file location of the routes.
-   * @param string $directoryPath
-   *   the directory location of the routes.
+   * @param array $routes
+   *   The routes of the application.
    *
    * @return Router
+   *   The router object.
    */
-  public static function load(
-        string $file = 'web.php',
-        string $directoryPath = ROUTES_PATH . '/'
-    ): Router {
+  public static function load(array $routes): Router {
     self::resetRoutes();
-    include_file($directoryPath . $file);
+
+    foreach ($routes as $route) {
+      include_file($route);
+    }
 
     return new self();
   }
@@ -209,7 +208,7 @@ final class Router {
    * @param int $rights
    *   the rights of the user.
    *
-   * @return \Src\View\DomainView|string
+   * @return \System\View\DomainView|string
    *
    * @throws \Src\Exceptions\Object\InvalidObjectException
    * @throws \Src\Exceptions\Object\InvalidMethodCalledException
@@ -227,9 +226,7 @@ final class Router {
       return $this->executeRoute('pageNotFound');
     }
 
-    throw new UndefinedRouteException(
-          'No route defined for this request'
-      );
+    throw new UndefinedRouteException();
   }
 
   /**

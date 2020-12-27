@@ -19,7 +19,6 @@ use Domain\Admin\Menu\Controllers\MenuController;
 use Domain\Admin\Pages\Controllers\PageController as AdminPageController;
 use Domain\Admin\Reports\Controllers\ReportsController;
 use Domain\Admin\Settings\Controllers\SettingsControllers;
-use Domain\Admin\Text\Controllers\TextController;
 use Domain\Contact\Controllers\ContactController;
 use Domain\Event\Controllers\EventArchiveController;
 use Domain\Event\Controllers\EventController;
@@ -166,22 +165,6 @@ Router::prefix('admin')->group(static function () {
 
     // Configuration routes.
     Router::prefix('configuration')->group(static function () {
-        // Text routes.
-        Router::prefix('texts')->group(static function () {
-            Router::get('', TextController::class,
-                'index', User::ADMIN);
-            Router::get('text/create', TextController::class,
-                'create', User::ADMIN);
-            Router::post('text/create/store', TextController::class,
-                'store', User::ADMIN);
-            Router::get('text/edit/{slug}', TextController::class,
-                'edit', User::ADMIN);
-            Router::post('text/edit/{slug}/update', TextController::class,
-                'update', User::ADMIN);
-            Router::post('text/delete/{slug}', TextController::class,
-                'destroy', User::ADMIN);
-        });
-
         // Settings routes.
         Router::prefix('settings')->group(static function () {
             Router::get('', SettingsControllers::class,

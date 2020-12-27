@@ -143,12 +143,7 @@ final class Log {
    * @param string $method
    *   the used method to access the uri.
    */
-  public static function appRequest(
-        string $value,
-        string $state,
-        string $url,
-        string $method
-    ): void {
+  public static function appRequest(string $value, string $state, string $url, string $method): void {
     new self();
 
     $message = "{$method} request for page {$url} with message {$value}";
@@ -156,7 +151,7 @@ final class Log {
       $message = "{$method} request for page {$url}";
     }
 
-    self::info($state . ' ' . $message);
+    self::info(message: $state . ' ' . $message);
   }
 
 }

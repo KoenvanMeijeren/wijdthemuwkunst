@@ -1,7 +1,5 @@
 <?php
-
 declare(strict_types=1);
-
 
 namespace Domain\Admin\Accounts\User\Models;
 
@@ -19,10 +17,22 @@ use stdClass;
  * @package Domain\Admin\Accounts\User\Models
  */
 final class User extends Model {
+
   use SoftDelete;
 
+  /**
+   * {@inheritdoc}
+   */
   protected string $table = 'account';
+
+  /**
+   * {@inheritdoc}
+   */
   protected string $primaryKey = 'account_ID';
+
+  /**
+   * {@inheritdoc}
+   */
   protected string $softDeletedKey = 'account_is_deleted';
 
   /**
