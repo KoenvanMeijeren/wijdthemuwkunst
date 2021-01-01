@@ -22,7 +22,7 @@ final class View extends BaseView {
    */
   public function __construct(string $name, array $content = []) {
     $layout = 'layout.view.php';
-    if (strpos(URI::getUrl(), 'admin') !== FALSE) {
+    if (str_contains(URI::getUrl(), 'admin')) {
       $layout = 'admin.layout.view.php';
     }
 

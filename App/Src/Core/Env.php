@@ -85,8 +85,8 @@ final class Env {
    */
   private function set(): void {
     $this->env = self::PRODUCTION;
-    if (strpos($this->host, 'localhost') !== FALSE
-      || strpos($this->host, '127.0.0.1') !== FALSE
+    if (str_contains($this->host, 'localhost')
+      || str_contains($this->host, '127.0.0.1')
     ) {
       $this->env = self::DEVELOPMENT;
     }
@@ -111,7 +111,7 @@ final class Env {
    *   If the env is development.
    */
   public function isDevelopment(): bool {
-    return $this->get() === Env::DEVELOPMENT;
+    return $this->get() === self::DEVELOPMENT;
   }
 
   /**
@@ -121,7 +121,7 @@ final class Env {
    *   If the env is production.
    */
   public function isProduction(): bool {
-    return $this->get() === Env::PRODUCTION;
+    return $this->get() === self::PRODUCTION;
   }
 
   /**

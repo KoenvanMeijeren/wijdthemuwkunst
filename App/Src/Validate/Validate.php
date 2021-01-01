@@ -31,7 +31,7 @@ final class Validate {
   public static function var($var): Validate {
     self::$var = $var;
 
-    return new static();
+    return new Validate();
   }
 
 }

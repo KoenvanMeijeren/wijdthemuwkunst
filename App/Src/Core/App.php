@@ -36,6 +36,15 @@ final class App {
    */
   public function __construct(string $routesLocation = 'web.php') {
     $this->routesLocations[] = ROUTES_PATH . '/' . $routesLocation;
+  }
+
+  /**
+   * Executes actions before running the app.
+   */
+  protected function preRun(): void {
+    $textModule = new TextModule();
+
+    $this->routesLocations[] = $textModule->getRoutesLocation();
 
     date_default_timezone_set('Europe/Amsterdam');
 
@@ -48,15 +57,6 @@ final class App {
     $sessionBuilder = new SessionBuilder();
     $sessionBuilder->startSession($env->get());
     $sessionBuilder->setSessionSecurity();
-  }
-
-  /**
-   * Executes actions before running the app.
-   */
-  protected function preRun(): void {
-    $textModule = new TextModule();
-
-    $this->routesLocations[] = $textModule->getRoutesLocation();
   }
 
   /**
@@ -83,7 +83,7 @@ final class App {
       return;
     }
 
-    Log::appRequest(value:'', state: StateInterface::SUCCESSFUL, url: URI::getUrl(), method: URI::getMethod());
+    Log::appRequest(value: '', state: StateInterface::SUCCESSFUL, url: URI::getUrl(), method: URI::getMethod());
   }
 
 }

@@ -9,7 +9,7 @@ use Cake\Chronos\Chronos;
 use Src\Core\Cookie;
 use Src\Core\Env;
 use Src\Exceptions\Session\InvalidSessionException;
-use Src\Session\SessionSecurity as SessionSecurity;
+use Src\Session\SessionSecurity;
 
 /**
  * Class Builder.

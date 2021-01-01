@@ -96,7 +96,7 @@ abstract class EntityRepositoryBase implements EntityRepositoryInterface {
    *   The query builder.
    */
   protected function addScope(DB $builder): void {
-    if (strpos($this->scopes['query'], $builder->getQuery()) !== FALSE
+    if (str_contains($this->scopes['query'], $builder->getQuery())
       || in_array($builder->getValues(), $this->scopes['values'], TRUE)
     ) {
       return;

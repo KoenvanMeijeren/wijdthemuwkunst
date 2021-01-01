@@ -25,12 +25,12 @@ final class Translation extends Loader {
    * @inheritDoc
    */
   protected function __construct() {
-    if (strpos(URI::getDomainExtension(), 'localhost') !== FALSE
-          || strpos(URI::getDomainExtension(), 'nl') !== FALSE
+    if (str_contains(URI::getDomainExtension(), 'localhost')
+          || str_contains(URI::getDomainExtension(), 'nl')
       ) {
       $this->language = self::DUTCH_LANGUAGE_ID;
     }
-    elseif (strpos(URI::getDomainExtension(), 'com') !== FALSE) {
+    elseif (str_contains(URI::getDomainExtension(), 'com')) {
       $this->language = self::ENGLISH_LANGUAGE_ID;
     }
 

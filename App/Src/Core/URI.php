@@ -5,6 +5,8 @@ declare(strict_types=1);
 
 namespace Src\Core;
 
+use JetBrains\PhpStorm\NoReturn;
+
 /**
  *
  */
@@ -73,7 +75,7 @@ final class URI {
    * @param string $url
    *   the url to redirect.
    */
-  public static function redirect(string $url): void {
+  #[NoReturn] public static function redirect(string $url): void {
     header('Location: ' . $url);
     exit();
   }

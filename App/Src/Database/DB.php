@@ -53,7 +53,7 @@ final class DB {
   public static function table(string $table): DB {
     self::$table = $table;
 
-    return new static();
+    return new DB();
   }
 
   /**
@@ -93,7 +93,7 @@ final class DB {
    * @return DB
    */
   public function addStatement(string $statement): DB {
-    if (strpos($this->query, 'WHERE') !== FALSE) {
+    if (str_contains($this->query, 'WHERE')) {
       $statement = preg_replace(
             '/\b(WHERE)\b/',
             'AND',
@@ -115,7 +115,7 @@ final class DB {
    * @return DB
    */
   public function addStatementWithValues(string $statement, array $values): DB {
-    if (strpos($this->query, 'WHERE') !== FALSE) {
+    if (str_contains($this->query, 'WHERE')) {
       $statement = replace_string(
             'WHERE',
             'AND',

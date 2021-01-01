@@ -54,7 +54,7 @@ final class UploadImageAction extends FileAction {
       'location' => $uploader->getFileIfItExists(),
     ];
 
-    echo json_encode($data, JSON_THROW_ON_ERROR, 512);
+    echo json_encode($data, JSON_THROW_ON_ERROR);
 
     return TRUE;
   }

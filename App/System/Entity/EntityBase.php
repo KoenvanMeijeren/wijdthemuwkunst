@@ -47,7 +47,7 @@ abstract class EntityBase extends EntityModel implements EntityInterface {
    */
   public function set(string $key, $value) {
     $attribute = "{$this->table}_{$key}";
-    if (strpos($key, $this->table) !== FALSE) {
+    if (str_contains($key, $this->table)) {
       $attribute = $key;
     }
 
@@ -72,7 +72,7 @@ abstract class EntityBase extends EntityModel implements EntityInterface {
    */
   public function get(string $key) {
     $attribute = "{$this->table}_{$key}";
-    if (strpos($key, $this->table) !== FALSE) {
+    if (str_contains($key, $this->table)) {
       $attribute = $key;
     }
 

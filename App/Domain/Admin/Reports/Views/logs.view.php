@@ -73,14 +73,8 @@ $request = new Request();
                                      id="list-tab" role="tablist">
                                     <?php $active = 'active';
                                     foreach (($logs ?? []) as $key => $log) :
-                                      if (strpos(
-                                            $log['message'] ?? '',
-                                            StateInterface::ERROR
-                                        ) !== FALSE
-                                            || strpos(
-                                                $log['message'] ?? '',
-                                                StateInterface::FAILED
-                                            ) !== FALSE) {
+                                      if (str_contains($log['message'] ?? '', StateInterface::ERROR)
+                                            || str_contains($log['message'] ?? '', StateInterface::FAILED)) {
                                         $class = 'active-danger';
                                       }
                                       else {
@@ -111,14 +105,8 @@ $request = new Request();
 
                                         <ul class="list-group list-group-flush">
                                             <?php
-                                            if (strpos(
-                                            $log['message'] ?? '',
-                                            'ERROR'
-                                            ) !== FALSE
-                                                || strpos(
-                                                    $log['message'] ?? '',
-                                                    'failed'
-                                                ) !== FALSE
+                                            if (str_contains($log['message'] ?? '', 'ERROR')
+                                                || str_contains($log['message'] ?? '', 'failed')
                                             ) {
                                               $class = 'list-group-item-danger';
                                             }

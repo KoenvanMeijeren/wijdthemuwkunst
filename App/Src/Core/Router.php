@@ -136,7 +136,7 @@ final class Router {
   public static function prefix(string $prefix): Router {
     self::$prefixes[] = $prefix;
 
-    return new static();
+    return new Router();
   }
 
   /**

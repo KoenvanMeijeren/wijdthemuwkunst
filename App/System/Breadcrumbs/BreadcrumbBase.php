@@ -10,13 +10,6 @@ namespace System\Breadcrumbs;
 abstract class BreadcrumbBase implements BreadcrumbInterface {
 
   /**
-   * The string to generate the breadcrumbs from.
-   *
-   * @var string
-   */
-  protected string $string;
-
-  /**
    * The array with breadcrumbs.
    *
    * @var string[]
@@ -38,7 +31,10 @@ abstract class BreadcrumbBase implements BreadcrumbInterface {
    * @param string $delimiter
    *   The boundary string.
    */
-  public function __construct(string $string, string $delimiter = '/') {
+  public function __construct(
+    protected string $string,
+    string $delimiter = '/'
+  ) {
     $this->breadCrumbs = $this->convertStringIntoBreadcrumbs($string, $delimiter);
   }
 
@@ -54,7 +50,7 @@ abstract class BreadcrumbBase implements BreadcrumbInterface {
    *   The breadcrumbs.
    */
   protected function convertStringIntoBreadcrumbs(string $string, string $delimiter = '/'): array {
-    $stringParts = (array) explode($delimiter, $string);
+    $stringParts = explode($delimiter, $string);
 
     $breadCrumbs = [];
     for ($x = 0, $xMax = count($stringParts); $x < $xMax; $x++) {
