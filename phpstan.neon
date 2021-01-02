@@ -3,6 +3,6 @@ parameters:
         - php
     level: max
     paths:
-    - App/
+    - src/
     - config/
     - routes/

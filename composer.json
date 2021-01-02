@@ -10,13 +10,13 @@
     "autoload": {
         "files": [
             "config/const.php",
-            "App/Support/Functions/autoload.php"
+            "src/Support/Functions/autoload.php"
         ],
         "psr-4": {
-            "Domain\\": "App/Domain/",
-            "Src\\": "App/Src/",
-            "Support\\": "App/Support/",
-            "System\\": "App/System/"
+            "Domain\\": "src/Domain/",
+            "Src\\": "src/Src/",
+            "Support\\": "src/Support/",
+            "System\\": "src/System/"
         }
     },
     "config": {
@@ -71,7 +71,7 @@
             "docker-compose -f docker-compose.yml -f docker-compose.dev.yml stop"
         ],
         "inspect": [
-            "vendor/bin/phpcs --standard=Drupal --extensions=php --ignore=view.php App/Domain/Admin/Text",
+            "vendor/bin/phpcs --standard=Drupal --extensions=php --ignore=view.php src/Domain/Admin/Text",
             "vendor/bin/phpcpd app",
             "vendor/bin/phpmd app text phpmd.xml"
         ],
