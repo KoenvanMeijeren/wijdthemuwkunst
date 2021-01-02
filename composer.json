@@ -14,6 +14,7 @@
         ],
         "psr-4": {
             "Domain\\": "src/Domain/",
+            "Components\\": "src/Components/",
             "Src\\": "src/Src/",
             "Support\\": "src/Support/",
             "System\\": "src/System/"

@@ -3,8 +3,8 @@
 namespace Domain\Admin\Reports\Src;
 
 use Cake\Chronos\Chronos;
+use Components\SuperGlobals\Cookie\Cookie;
 use Defuse\Crypto\Exception\WrongKeyOrModifiedCiphertextException;
-use Src\Core\Cookie;
 use Src\Session\Session;
 use Src\Translation\Translation;
 use Support\DateTime;

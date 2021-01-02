@@ -8,7 +8,7 @@ namespace Src\Exceptions\Basic;
 use Exception;
 
 /**
- *
+ * @deprecated
  */
 final class NoTranslationsForGivenLanguageID extends Exception {
 }

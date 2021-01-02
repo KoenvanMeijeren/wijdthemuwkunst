@@ -3,13 +3,13 @@
 declare(strict_types=1);
 
 
-namespace Src\Session;
+namespace Components\SuperGlobals\Session;
 
 use Cake\Chronos\Chronos;
-use Src\Core\Cookie;
+use Components\ComponentsTrait;
+use Components\SuperGlobals\Cookie\Cookie;
 use Src\Core\Env;
 use Src\Exceptions\Session\InvalidSessionException;
-use Src\Session\SessionSecurity;
 
 /**
  * Class Builder.
@@ -18,19 +18,14 @@ use Src\Session\SessionSecurity;
  */
 final class SessionBuilder {
 
-  /**
-   * The session definition.
-   *
-   * @var Session
-   */
-  private Session $session;
+  use ComponentsTrait;
 
   /**
    * The session security definition.
    *
-   * @var \Src\Session\SessionSecurity
+   * @var \Components\SuperGlobals\Session\SessionSecurityInterface
    */
-  private SessionSecurity $security;
+  private SessionSecurityInterface $security;
 
   /**
    * The name of the session.
@@ -40,42 +35,7 @@ final class SessionBuilder {
   private string $name;
 
   /**
-   * The path of the session.
-   *
-   * @var string
-   */
-  private string $path;
-
-  /**
-   * The domain of the session.
-   *
-   * @var string
-   */
-  private string $domain;
-
-  /**
-   * The expiring time of the session.
-   *
-   * @var float|int
-   */
-  private int $expiringTime;
-
-  /**
-   * Determine if the session must be secure.
-   *
-   * @var bool
-   */
-  private bool $secure;
-
-  /**
-   * Determine if the session must be http only.
-   *
-   * @var bool
-   */
-  private bool $httpOnly;
-
-  /**
-   * Construct the session.
+   * Constructs the session.
    *
    * @param int $expiringTime
    *   The expiring time of the session.
@@ -91,51 +51,48 @@ final class SessionBuilder {
    * @throws \Exception
    */
   public function __construct(
-    int $expiringTime = 1 * 4 * 60 * 60,
-    string $path = '/',
-    string $domain = '',
-    bool $secure = FALSE,
-    bool $httpOnly = TRUE
+    private int $expiringTime = 1 * 4 * 60 * 60,
+    private string $path = '/',
+    private string $domain = '',
+    private bool $secure = FALSE,
+    private bool $httpOnly = TRUE
   ) {
     $this->name = random_string(128);
-    $this->expiringTime = $expiringTime;
-    $this->path = $path;
-    $this->domain = $domain;
-    $this->secure = $secure;
-    $this->httpOnly = $httpOnly;
-
-    $this->session = new Session();
     $this->security = new SessionSecurity();
   }
 
   /**
    * Start the session.
+   *
+   * @param string $env
+   *   The environment of the application.
    */
   public function startSession(string $env = Env::PRODUCTION): void {
+    if (PHP_SESSION_NONE !== session_status() || headers_sent()) {
+      return;
+    }
+
     if ($env === Env::PRODUCTION) {
       $this->secure = TRUE;
     }
 
-    if (PHP_SESSION_NONE === session_status() && !headers_sent()) {
-      $this->setSessionName();
+    $this->setSessionName();
+    session_name($this->getSessionName());
 
-      session_name($this->getSessionName());
-
-      session_set_cookie_params(
+    session_set_cookie_params(
       // Lifetime -- 0 means erase when browser closes.
-        $this->expiringTime,
-        // Which paths are these cookies relevant?
-        $this->path,
-        // Only expose this to which domain?
-        $this->domain,
-        // Only send over the network when TLS is used.
-        $this->secure,
-        // Don't expose to Javascript.
-        $this->httpOnly
-      );
+      lifetime_or_options: $this->expiringTime,
+      // Which paths are these cookies relevant?
+      path: $this->path,
+      // Only expose this to which domain?
+      domain: $this->domain,
+      // Only send over the network when TLS is used.
+      secure: $this->secure,
+      // Don't expose to Javascript.
+      httponly: $this->httpOnly
+    );
 
-      session_start();
-    }
+    session_start();
   }
 
   /**
@@ -152,7 +109,7 @@ final class SessionBuilder {
    * Set an unique unreadable session name.
    */
   private function setSessionName(): void {
-    $cookie = new Cookie($this->expiringTime - 1);
+    $cookie = new Cookie(expiringTime: $this->expiringTime - 1);
     if ($cookie->exists('sessionName')) {
       return;
     }
@@ -174,9 +131,7 @@ final class SessionBuilder {
    *   The name of the session.
    */
   private function getSessionName(): string {
-    $cookie = new Cookie();
-
-    return $cookie->get('sessionName', $this->name);
+    return $this->request()->cookie('sessionName', $this->name);
   }
 
   /**
@@ -184,11 +139,11 @@ final class SessionBuilder {
    */
   private function setExpiringSession(): void {
     $now = new Chronos();
-    if ($this->session->get('createdAt') === '') {
-      $this->session->saveForced('createdAt', $now->toDateTimeString());
+    if ($this->session()->get('createdAt') === '') {
+      $this->session()->saveForced('createdAt', $now->toDateTimeString());
     }
 
-    $sessionCreatedAt = $this->session->get('createdAt');
+    $sessionCreatedAt = $this->session()->get('createdAt');
     $expired = new Chronos($sessionCreatedAt);
     $expired = $expired->addSeconds($this->expiringTime);
 
@@ -198,7 +153,7 @@ final class SessionBuilder {
   }
 
   /**
-   * Regenerate session ID every five minutes.
+   * Regenerates the session ID every five minutes.
    */
   private function setCanarySession(): void {
     // Check if the session is not active.
@@ -206,17 +161,17 @@ final class SessionBuilder {
       return;
     }
 
-    $canary = (int) $this->session->get('canary');
-    // If the canary must be initialized.
+    $canary = (int) $this->session()->get('canary');
+    // The canary must be initialized.
     if ($canary === 0) {
       session_regenerate_id(TRUE);
-      $this->session->saveForced('canary', (string) time());
+      $this->session()->saveForced('canary', (string) time());
     }
 
     // If the canary has been set earlier.
     if ($canary < (time() - 300)) {
       session_regenerate_id(TRUE);
-      $this->session->saveForced('canary', (string) time());
+      $this->session()->saveForced('canary', (string) time());
     }
   }
 

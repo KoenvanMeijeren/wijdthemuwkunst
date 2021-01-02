@@ -6,7 +6,7 @@ declare(strict_types=1);
 namespace Src\Header;
 
 /**
- *
+ * @deprecated
  */
 final class Header {
   /**

@@ -8,7 +8,7 @@ namespace Src\Translation;
 use Src\Exceptions\Basic\NoTranslationsForGivenLanguageID;
 
 /**
- *
+ * @deprecated
  */
 abstract class Loader {
   /**

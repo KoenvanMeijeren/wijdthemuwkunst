@@ -1,19 +1,21 @@
 <?php
 declare(strict_types=1);
 
-namespace Src\Core;
+namespace Components\SuperGlobals\Cookie;
 
-use Src\Security\Encrypt;
+use Components\Array\ArrayBase;
+use Components\Sanitize\Sanitize;
+use Components\Encrypt\Encrypt;
 
 /**
  * Provides a class for interacting with cookies.
  *
  * @package src\Core
  */
-final class Cookie {
+final class Cookie extends ArrayBase implements CookieInterface {
 
   /**
-   * Construct the cookie.
+   * Constructs the cookie.
    *
    * @param int $expiringTime
    *   The expiring time of the cookie.
@@ -32,15 +34,12 @@ final class Cookie {
     private string $domain = '',
     private bool $secure = FALSE,
     private bool $httpOnly = TRUE
-  ) {}
+  ) {
+    parent::__construct($_COOKIE ?? []);
+  }
 
   /**
-   * Save data in the cookie.
-   *
-   * @param string $key
-   *   The key of the cookie item.
-   * @param string $value
-   *   The value of the key.
+   * {@inheritDoc}
    */
   public function save(string $key, string $value): void {
     if ($this->exists($key)) {
@@ -54,55 +53,32 @@ final class Cookie {
   }
 
   /**
-   * Check if the given key exists in the super global array.
-   *
-   * @param string $key
-   *   The key to be checked for if it exists.
-   *
-   * @return bool
-   *   Whether the key exists or not.
-   */
-  public function exists(string $key): bool {
-    return isset($_COOKIE[$key]);
-  }
-
-  /**
-   * Get data from the cookie; unset it if specified.
-   *
-   * @param string $key
-   *   the key for searching to the
-   *   corresponding cookie value.
-   * @param string $default
-   *   the default value to be returned when
-   *   the given key does not exists.
-   *
-   * @return string
+   * {@inheritDoc}
    */
   public function get(string $key, string $default = ''): string {
-    $request = new Request();
-    if ($request->cookie($key) === '') {
+    $value = $_COOKIE[$key] ?? '';
+    if ($value === '') {
       return $default;
     }
 
-    $sanitize = new Sanitize($request->cookie($key));
+    $sanitize = new Sanitize($value);
     $data = new Encrypt((string) $sanitize->data());
 
     return $data->decrypt();
   }
 
   /**
-   * Unsets a cookie.
-   *
-   * @param string $key
-   *   The key of the cookie.
+   * {@inheritDoc}
    */
-  public function unset(string $key): void {
+  public function unset(string $key): bool {
     if (!$this->exists($key)) {
-      return;
+      return false;
     }
 
     setcookie($key, '', time() - $this->expiringTime, $this->path, $this->domain, $this->secure, $this->httpOnly);
     unset($_COOKIE[$key]);
+
+    return true;
   }
 
 }

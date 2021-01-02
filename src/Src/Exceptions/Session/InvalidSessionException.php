@@ -8,7 +8,7 @@ namespace Src\Exceptions\Session;
 use Exception;
 
 /**
- *
+ * @deprecated
  */
 final class InvalidSessionException extends Exception {
 }

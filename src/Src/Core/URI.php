@@ -8,7 +8,7 @@ namespace Src\Core;
 use JetBrains\PhpStorm\NoReturn;
 
 /**
- *
+ * @deprecated
  */
 final class URI {
 

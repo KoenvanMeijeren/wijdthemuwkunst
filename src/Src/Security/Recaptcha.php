@@ -11,7 +11,7 @@ use Src\Session\Session;
 use Src\Translation\Translation;
 
 /**
- *
+ * @deprecated
  */
 final class Recaptcha {
   private GoogleRecaptcha $recaptcha;

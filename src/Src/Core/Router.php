@@ -11,7 +11,7 @@ use Src\Exceptions\Basic\UndefinedRouteException;
 use Src\Validate\Validate;
 
 /**
- *
+ * @deprecated
  */
 final class Router {
   /**

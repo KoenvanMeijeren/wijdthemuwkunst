@@ -1,58 +1,55 @@
 <?php
-
 declare(strict_types=1);
 
+namespace Components\Encrypt;
 
-namespace Src\Security;
-
+use Components\ComponentsTrait;
 use Defuse\Crypto\Crypto;
 use Defuse\Crypto\Key;
-use Src\Core\Request;
 
 /**
- * @deprecated
+ * Provides a class for encrypting data.
+ *
+ * @package Components\Encrypt
  */
-final class Encrypt {
-  private string $data;
+final class Encrypt implements EncryptInterface {
+
+  use ComponentsTrait;
 
   /**
-   * Construct the data.
+   * Constructs the encrypt class.
    *
    * @param string $data
-   *   the data to be saved.
+   *   The data to be encrypted.
    */
-  public function __construct(string $data) {
-    $this->data = $data;
-  }
+  public function __construct(
+    private string $data
+  ) {}
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function encrypt(): string {
     return Crypto::encrypt($this->data, $this->loadKeyFromConfig());
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function decrypt(): string {
     return Crypto::decrypt($this->data, $this->loadKeyFromConfig());
   }
 
   /**
-   * Load the key from the config.
+   * Loads the key from the config.
    *
    * @return \Defuse\Crypto\Key
    *
    * @throws \Defuse\Crypto\Exception\BadFormatException
    * @throws \Defuse\Crypto\Exception\EnvironmentIsBrokenException
    */
-  private function loadKeyFromConfig(): Key {
-    $request = new Request();
-
-    return Key::loadFromAsciiSafeString(
-          $request->env('crypto_encryption_token')
-      );
+  protected function loadKeyFromConfig(): Key {
+    return Key::loadFromAsciiSafeString($this->request()->env('crypto_encryption_token'));
   }
 
 }

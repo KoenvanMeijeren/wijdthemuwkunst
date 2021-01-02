@@ -1,28 +1,36 @@
 <?php
 declare(strict_types=1);
 
-namespace Src\Session;
+namespace Components\SuperGlobals\Session;
 
-use Src\Core\Request;
-use Src\Core\Sanitize;
+use Components\Array\ArrayBase;
+use Components\ComponentsTrait;
+use Components\Sanitize\Sanitize;
 use Src\Log\LoggerTrait;
-use Src\Security\Encrypt;
+use Components\Encrypt\Encrypt;
 
 /**
  * Defines a class for interacting with the session.
  *
  * @package src\Session
- * @deprecated
  */
-final class Session {
+final class Session extends ArrayBase implements SessionInterface {
 
   use LoggerTrait;
+  use ComponentsTrait;
+
+  /**
+   * Session constructor.
+   */
+  public function __construct() {
+    parent::__construct($_SESSION ?? []);
+  }
 
   /**
    * {@inheritDoc}
    */
   public function save(string $key, string $value): void {
-    if (array_key_exists($key, $_SESSION)) {
+    if ($this->exists($key)) {
       return;
     }
 
@@ -53,8 +61,7 @@ final class Session {
    * {@inheritDoc}
    */
   public function get(string $key, bool $unset = FALSE): ?string {
-    $request = new Request();
-    $data = $request->session($key);
+    $data = $this->request()->session($key);
     if ($data === '') {
       return NULL;
     }
@@ -71,26 +78,6 @@ final class Session {
     $data = new Encrypt((string) $sanitize->data());
 
     return $data->decrypt();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function exists(string $key): bool {
-    return array_key_exists($key, $_SESSION);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function unset(string $key): bool {
-    if (array_key_exists($key, $_SESSION)) {
-      unset($_SESSION[$key]);
-
-      return TRUE;
-    }
-
-    return FALSE;
   }
 
 }

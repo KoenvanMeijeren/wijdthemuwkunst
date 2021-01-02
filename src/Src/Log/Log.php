@@ -18,7 +18,7 @@ use Src\Core\Request;
 use Src\File\File;
 
 /**
- *
+ * @deprecated
  */
 final class Log {
   private static Logger $logger;

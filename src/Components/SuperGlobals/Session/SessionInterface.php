@@ -1,13 +1,16 @@
 <?php
+declare(strict_types=1);
 
-namespace Src\Session;
+namespace Components\SuperGlobals\Session;
+
+use Components\Array\ArrayBaseInterface;
 
 /**
  * Provides an interfaces for classes which are interacting with the session.
  *
  * @package src\Session
  */
-interface SessionInterface {
+interface SessionInterface extends ArrayBaseInterface {
 
   /**
    * Saves data in the session.
@@ -51,27 +54,5 @@ interface SessionInterface {
    *   The value of the session item.
    */
   public function get(string $key, bool $unset = FALSE): ?string;
-
-  /**
-   * Check if the given key exists in the super global array.
-   *
-   * @param string $key
-   *   The key of the session item.
-   *
-   * @return bool
-   *   If the session item does exists.
-   */
-  public function exists(string $key): bool;
-
-  /**
-   * Unset data from the session.
-   *
-   * @param string $key
-   *   The key for searching to the corresponding session value to unset it.
-   *
-   * @return bool
-   *   If the data is unset from the session.
-   */
-  public function unset(string $key): bool;
 
 }

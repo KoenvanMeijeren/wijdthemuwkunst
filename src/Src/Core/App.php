@@ -7,8 +7,8 @@ use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Text\TextModule;
 use Src\Header\Header;
 use Src\Log\Log;
-use Src\Session\Session;
-use Src\Session\SessionBuilder;
+use Components\SuperGlobals\Session\Session;
+use Components\SuperGlobals\Session\SessionBuilder;
 
 /**
  * Provides the main entry point for the application.

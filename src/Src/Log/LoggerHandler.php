@@ -9,7 +9,7 @@ use Throwable;
 use Whoops\Handler\Handler;
 
 /**
- *
+ * @deprecated
  */
 final class LoggerHandler extends Handler {
   private string $error;

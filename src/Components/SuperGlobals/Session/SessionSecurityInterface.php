@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Session;
+namespace Components\SuperGlobals\Session;
 
 /**
  * Provides an interfaces for the security of the session.

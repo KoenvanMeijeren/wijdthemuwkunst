@@ -8,7 +8,7 @@ namespace Src\File;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
- *
+ * @deprecated
  */
 final class File {
   private Filesystem $system;

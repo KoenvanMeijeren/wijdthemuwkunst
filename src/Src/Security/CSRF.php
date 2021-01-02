@@ -10,7 +10,7 @@ use Src\Session\Session;
 use Src\Translation\Translation;
 
 /**
- *
+ * @deprecated
  */
 final class CSRF {
   /**

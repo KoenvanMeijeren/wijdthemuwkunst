@@ -8,7 +8,7 @@ namespace Src\Exceptions\File;
 use Exception;
 
 /**
- *
+ * @deprecated
  */
 final class FileNotWritableException extends Exception {
 }
