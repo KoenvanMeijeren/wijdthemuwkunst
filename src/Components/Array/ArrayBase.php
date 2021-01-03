@@ -21,7 +21,7 @@ abstract class ArrayBase implements ArrayBaseInterface {
    *   Whether the data must be encrypted or not.
    */
   protected function __construct(
-    private array $array,
+    private array &$array,
     private bool $sanitize = false,
     private bool $encrypt = false
   ) {}

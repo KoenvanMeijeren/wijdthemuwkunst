@@ -3,7 +3,7 @@
 namespace Domain\Admin\Pages\Actions;
 
 use Domain\Admin\Pages\Models\Page;
-use Src\Core\StateInterface;
+use System\StateInterface;
 use Src\Translation\Translation;
 
 /**

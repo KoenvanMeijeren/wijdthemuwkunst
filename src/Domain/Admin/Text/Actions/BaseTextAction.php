@@ -5,7 +5,7 @@ namespace Domain\Admin\Text\Actions;
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Text\Entity\Text;
 use Src\Action\EntityFormActionBase;
-use Src\Core\StateInterface;
+use System\StateInterface;
 use Src\Translation\Translation;
 use System\Entity\EntityInterface;
 

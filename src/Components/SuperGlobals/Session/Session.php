@@ -23,7 +23,7 @@ final class Session extends ArrayBase implements SessionInterface {
    * Session constructor.
    */
   public function __construct() {
-    parent::__construct($_SESSION ?? []);
+    parent::__construct($_SESSION);
   }
 
   /**

@@ -3,7 +3,7 @@
 namespace Domain\Admin\Text\Actions;
 
 use Domain\Admin\Accounts\User\Models\User;
-use Src\Core\StateInterface;
+use System\StateInterface;
 use Src\Translation\Translation;
 
 /**

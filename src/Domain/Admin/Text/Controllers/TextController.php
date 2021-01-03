@@ -8,8 +8,8 @@ use Domain\Admin\Text\Actions\UpdateTextAction;
 use Domain\Admin\Text\Entity\Text;
 use Domain\Admin\Text\Entity\TextRepositoryInterface;
 use Domain\Admin\Text\Entity\TextTable;
-use Src\Core\Redirect;
-use Src\Core\StateInterface;
+use Components\Header\Redirect;
+use System\StateInterface;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;
@@ -86,7 +86,7 @@ final class TextController extends AdminControllerBase {
   /**
    * Stores the text in the database.
    *
-   * @return \Src\View\ViewInterface|\Src\Core\Redirect
+   * @return \Src\View\ViewInterface|\Components\Header\Redirect
    *   Returns the view or a redirect response.
    */
   public function store() {
@@ -101,7 +101,7 @@ final class TextController extends AdminControllerBase {
   /**
    * Returns an edit view for texts.
    *
-   * @return \Src\Core\Redirect|ViewInterface
+   * @return \Components\Header\Redirect|ViewInterface
    *   The view.
    */
   public function edit() {
@@ -123,7 +123,7 @@ final class TextController extends AdminControllerBase {
   /**
    * Updates the text in the database.
    *
-   * @return \Src\View\ViewInterface|\Src\Core\Redirect
+   * @return \Src\View\ViewInterface|\Components\Header\Redirect
    *   Returns the view or a redirect response.
    */
   public function update() {
@@ -138,7 +138,7 @@ final class TextController extends AdminControllerBase {
   /**
    * Destroys a text in the database.
    *
-   * @return \Src\Core\Redirect
+   * @return \Components\Header\Redirect
    *   The redirect response.
    */
   public function destroy(): Redirect {

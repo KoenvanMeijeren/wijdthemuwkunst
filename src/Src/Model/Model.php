@@ -5,8 +5,8 @@ declare(strict_types=1);
 
 namespace Src\Model;
 
-use Src\Core\Router;
-use Src\Core\URI;
+use System\Router;
+use Components\SuperGlobals\Url\Uri;
 use Src\Database\DB;
 use stdClass;
 
@@ -14,6 +14,7 @@ use stdClass;
  * Provides a model to interact with the database.
  *
  * @package Src\Model
+ * @deprecated
  */
 abstract class Model {
   /**
@@ -70,7 +71,7 @@ abstract class Model {
    *   The slug.
    */
   public function getSlug(): string {
-    return Router::getWildcard() === '' ? URI::getUrl() : Router::getWildcard();
+    return Router::getWildcard() === '' ? Uri::getUrl() : Router::getWildcard();
   }
 
   /**

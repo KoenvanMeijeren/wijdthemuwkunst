@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace Src\Session;
 
-use Src\Core\Request;
-use Src\Core\Sanitize;
+use System\Request;
+use System\Sanitize;
 use Src\Log\LoggerTrait;
-use Src\Security\Encrypt;
+use Components\Encrypt\Encrypt;
 
 /**
  * Defines a class for interacting with the session.

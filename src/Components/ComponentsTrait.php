@@ -3,11 +3,14 @@ declare(strict_types=1);
 
 namespace Components;
 
+use Components\Env\Env;
+use Components\Env\EnvInterface;
+use Components\Header\Header;
+use Components\Header\HeaderInterface;
 use Components\SuperGlobals\Request;
 use Components\SuperGlobals\RequestInterface;
 use Components\SuperGlobals\Session\Session;
 use Components\SuperGlobals\Session\SessionInterface;
-use JetBrains\PhpStorm\Pure;
 
 /**
  * Provides a trait for interacting with the components.
@@ -22,9 +25,8 @@ trait ComponentsTrait {
    * @return RequestInterface
    *   The request object.
    */
-  #[Pure]
   protected function request(): RequestInterface {
-    return new Request();
+    return $this->request ??= new Request();
   }
 
   /**
@@ -34,7 +36,27 @@ trait ComponentsTrait {
    *   The session object.
    */
   protected function session(): SessionInterface {
-    return new Session();
+    return $this->session ??= new Session();
+  }
+
+  /**
+   * Gets the env object.
+   *
+   * @return EnvInterface
+   *   The env object.
+   */
+  protected function env(): EnvInterface {
+    return $this->env ??= new Env();
+  }
+
+  /**
+   * Gets the header object.
+   *
+   * @return HeaderInterface
+   *   The env object.
+   */
+  protected function header(): HeaderInterface {
+    return $this->header ??= new Header();
   }
 
 }

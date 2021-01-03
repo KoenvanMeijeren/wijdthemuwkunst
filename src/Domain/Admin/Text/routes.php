@@ -2,7 +2,7 @@
 
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Text\Controllers\TextController;
-use Src\Core\Router;
+use System\Router;
 
 Router::prefix('admin/configuration/texts')->group(static function () {
   Router::get('', TextController::class,

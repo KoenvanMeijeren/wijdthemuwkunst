@@ -8,7 +8,7 @@ use Domain\Admin\Menu\Actions\UpdateMenuAction;
 use Domain\Admin\Menu\Models\Menu;
 use Domain\Admin\Menu\ViewModels\EditViewModel;
 use Domain\Admin\Menu\ViewModels\MenuTable;
-use Src\Core\Redirect;
+use Components\Header\Redirect;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;

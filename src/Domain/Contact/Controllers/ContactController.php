@@ -7,8 +7,8 @@ namespace Domain\Contact\Controllers;
 
 use Domain\Admin\ContactForm\Actions\SaveContactFormMessageAction;
 use Domain\Contact\Actions\ContactAction;
-use Src\Core\Redirect;
-use Src\Core\URI;
+use Components\Header\Redirect;
+use Components\SuperGlobals\Url\Uri;
 use System\Controller\ControllerBase;
 
 /**
@@ -21,7 +21,7 @@ final class ContactController extends ControllerBase {
   /**
    * Sends the contact request to the specified contact persons.
    *
-   * @return \Src\Core\Redirect
+   * @return \Components\Header\Redirect
    *   The page to redirect to.
    */
   public function send(): Redirect {
@@ -36,7 +36,7 @@ final class ContactController extends ControllerBase {
     $this->session->save('email', $this->request->post('email'));
     $this->session->save('message', $this->request->post('message'));
 
-    $redirectUrl = URI::getPreviousUrl();
+    $redirectUrl = Uri::getPreviousUrl();
     if ($redirectUrl === '') {
       return new Redirect('/#footer');
     }

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-namespace Src\Core;
+namespace System;
 
 use Exception;
 use Sirius\Upload\Handler as UploadHandler;

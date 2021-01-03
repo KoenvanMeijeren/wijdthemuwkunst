@@ -17,7 +17,7 @@ use Domain\Admin\Pages\Models\Page;
 use Domain\Admin\Pages\Repositories\PageRepository;
 use Domain\Admin\Pages\ViewModels\EditViewModel;
 use Domain\Admin\Pages\ViewModels\PageTable;
-use Src\Core\Redirect;
+use Components\Header\Redirect;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;

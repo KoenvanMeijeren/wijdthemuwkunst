@@ -7,7 +7,7 @@
 declare(strict_types=1);
 
 use Domain\Admin\Event\Repositories\EventRepository;
-use Src\Core\Request;
+use System\Request;
 
 $request = new Request();
 

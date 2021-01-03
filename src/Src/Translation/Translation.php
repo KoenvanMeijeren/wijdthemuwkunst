@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace Src\Translation;
 
-use Src\Core\URI;
+use Components\SuperGlobals\Url\Uri;
 use Src\Exceptions\Basic\InvalidKeyException;
 
 /**
@@ -25,12 +25,12 @@ final class Translation extends Loader {
    * @inheritDoc
    */
   protected function __construct() {
-    if (str_contains(URI::getDomainExtension(), 'localhost')
-          || str_contains(URI::getDomainExtension(), 'nl')
+    if (str_contains(Uri::getDomainExtension(), 'localhost')
+          || str_contains(Uri::getDomainExtension(), 'nl')
       ) {
       $this->language = self::DUTCH_LANGUAGE_ID;
     }
-    elseif (str_contains(URI::getDomainExtension(), 'com')) {
+    elseif (str_contains(Uri::getDomainExtension(), 'com')) {
       $this->language = self::ENGLISH_LANGUAGE_ID;
     }
 

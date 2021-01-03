@@ -5,8 +5,8 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\Account\ViewModels;
 
-use Src\Core\Redirect;
-use Src\Core\StateInterface;
+use Components\Header\Redirect;
+use System\StateInterface;
 use Src\Session\Session;
 use Src\Translation\Translation;
 use stdClass;

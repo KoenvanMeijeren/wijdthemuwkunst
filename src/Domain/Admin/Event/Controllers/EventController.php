@@ -17,7 +17,7 @@ use Domain\Admin\Event\Repositories\EventRepository;
 use Domain\Admin\Event\ViewModels\ArchivedEventTable;
 use Domain\Admin\Event\ViewModels\EditViewModel;
 use Domain\Admin\Event\ViewModels\EventTable;
-use Src\Core\Redirect;
+use Components\Header\Redirect;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;

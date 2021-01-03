@@ -1,6 +1,6 @@
 <?php
 
-use Src\Core\StateInterface;
+use System\StateInterface;
 use Src\Session\Session;
 
 $session = new Session();

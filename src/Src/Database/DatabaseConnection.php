@@ -7,7 +7,7 @@ namespace Src\Database;
 
 use PDO;
 use PDOStatement;
-use Src\Core\Request;
+use System\Request;
 
 /**
  * Provides a class to receive a connection with the database.

@@ -7,7 +7,7 @@ namespace Domain\Admin\File\Actions;
 
 use Cake\Chronos\Chronos;
 use Src\Action\FileAction;
-use Src\Core\Upload;
+use System\Upload;
 
 /**
  * Provides an action class for uploading images.

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Src\Security;
 
 use ParagonIE\AntiCSRF\AntiCSRF;
-use Src\Core\StateInterface;
+use System\StateInterface;
 use Src\Session\Session;
 use Src\Translation\Translation;
 

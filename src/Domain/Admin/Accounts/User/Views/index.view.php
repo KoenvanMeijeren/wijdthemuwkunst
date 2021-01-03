@@ -7,7 +7,7 @@
 declare(strict_types=1);
 
 use Domain\Admin\Accounts\Repositories\AccountRepository;
-use Src\Core\Request;
+use System\Request;
 use Src\Security\CSRF;
 use Src\Translation\Translation;
 

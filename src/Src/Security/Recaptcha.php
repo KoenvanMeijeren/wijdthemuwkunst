@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Src\Security;
 
 use ReCaptcha\ReCaptcha as GoogleRecaptcha;
-use Src\Core\Request;
-use Src\Core\StateInterface;
+use System\Request;
+use System\StateInterface;
 use Src\Session\Session;
 use Src\Translation\Translation;
 

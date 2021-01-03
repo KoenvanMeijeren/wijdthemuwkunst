@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Src\Action;
 
-use Src\Core\Request;
+use System\Request;
 use Src\Security\CSRF;
 use Src\Session\Session;
 use Src\Validate\form\FormValidator;
@@ -18,7 +18,7 @@ abstract class FormAction extends Action {
   /**
    * The request definition.
    *
-   * @var \Src\Core\Request
+   * @var \System\Request
    */
   protected Request $request;
 

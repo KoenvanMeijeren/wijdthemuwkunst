@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-use Src\Core\Request;
+use System\Request;
 use Src\Translation\Translation;
 
 $request = new Request();

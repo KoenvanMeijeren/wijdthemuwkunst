@@ -6,7 +6,7 @@ namespace System\View;
 use Domain\Admin\Cms\Structure\MenuAdminTrait;
 use Domain\Admin\Menu\Models\Menu;
 use JetBrains\PhpStorm\ArrayShape;
-use Src\Core\URI;
+use Components\SuperGlobals\Url\Uri;
 use Src\View\BaseView;
 
 /**
@@ -34,7 +34,7 @@ final class DomainView extends BaseView {
    *   The content of the partial view.
    */
   public function __construct(string $name, array $content = []) {
-    $this->isAdminView = str_contains(URI::getUrl(), 'admin');
+    $this->isAdminView = str_contains(Uri::getUrl(), 'admin');
 
     $layout = $this->isAdminView ? 'admin.layout.view.php' : 'layout.view.php';
     $globalContent = $this->isAdminView ? $this->globalAdminContent() : $this->globalContent();

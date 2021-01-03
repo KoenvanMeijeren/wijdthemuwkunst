@@ -2,7 +2,7 @@
 
 use Domain\Admin\Menu\Repositories\MenuRepository;
 use Domain\Admin\Settings\Models\Setting;
-use Src\Core\Request;
+use System\Request;
 use Src\Security\CSRF;
 use Src\Session\Session;
 use Src\Translation\Translation;

@@ -7,7 +7,7 @@ namespace Domain\Admin\Accounts\Account\Actions;
 
 use Domain\Admin\Accounts\Account\Models\Account;
 use Domain\Admin\Accounts\User\Models\User;
-use Src\Core\StateInterface;
+use System\StateInterface;
 use Src\Translation\Translation;
 
 /**

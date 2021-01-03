@@ -4,7 +4,7 @@ namespace Domain\Admin\ContactForm\Controller;
 
 use Domain\Admin\ContactForm\Actions\DeleteContactFormMessageAction;
 use Domain\Admin\ContactForm\Model\ContactForm;
-use Src\Core\Redirect;
+use Components\Header\Redirect;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;

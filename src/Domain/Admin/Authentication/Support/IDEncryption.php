@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Authentication\Support;
 
-use Src\Core\Request;
+use System\Request;
 
 /**
  * Provides a class for encrypting identifiers.

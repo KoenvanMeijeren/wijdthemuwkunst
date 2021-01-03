@@ -1,19 +1,17 @@
 <?php
-
 declare(strict_types=1);
 
-
-namespace Src\Core;
+namespace System;
 
 /**
- * Defines states for the application.
+ * Provides an interfaces for the states of the application.
  *
- * @package src\Core
+ * @package System
  */
 interface StateInterface {
 
   /**
-   * Define states to determine if an process was successfully executed.
+   * Defines states to determine if an process was successfully executed.
    *
    * @var string
    */

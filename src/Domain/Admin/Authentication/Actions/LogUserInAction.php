@@ -10,7 +10,7 @@ use Domain\Admin\Accounts\Repositories\AccountRepository;
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Authentication\Support\IDEncryption;
 use Src\Action\FormAction;
-use Src\Core\StateInterface;
+use System\StateInterface;
 use Src\Translation\Translation;
 
 /**

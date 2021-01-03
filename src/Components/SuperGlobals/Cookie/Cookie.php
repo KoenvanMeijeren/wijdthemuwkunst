@@ -35,7 +35,7 @@ final class Cookie extends ArrayBase implements CookieInterface {
     private bool $secure = FALSE,
     private bool $httpOnly = TRUE
   ) {
-    parent::__construct($_COOKIE ?? []);
+    parent::__construct($_COOKIE);
   }
 
   /**

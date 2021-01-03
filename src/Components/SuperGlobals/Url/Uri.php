@@ -1,25 +1,28 @@
 <?php
-
 declare(strict_types=1);
 
+namespace Components\SuperGlobals\Url;
 
-namespace Src\Core;
-
-use JetBrains\PhpStorm\NoReturn;
+use Components\ComponentsTrait;
+use Components\SuperGlobals\Request;
+use Components\Sanitize\Sanitize;
 
 /**
- * @deprecated
+ * Provides an class for interacting with the url.
+ *
+ * @package Components\SuperGlobals\Url
  */
-final class URI {
+final class Uri {
+
+  use ComponentsTrait;
 
   /**
-   * Get the url.
+   * Gets the url.
    *
    * @return string
    */
   public static function getUrl(): string {
     $request = new Request();
-
     $sanitize = new Sanitize($request->server(Request::URI), 'url');
 
     return (string) $sanitize->data();
@@ -60,38 +63,10 @@ final class URI {
   public static function getDomainExtension(): string {
     $request = new Request();
 
-    $hostExploded = explode(
-          '.',
-          $request->server(Request::HTTP_HOST)
-      );
+    $hostExploded = explode('.', $request->server(Request::HTTP_HOST));
     $arrayKeyLast = array_key_last($hostExploded);
 
     return $hostExploded[$arrayKeyLast] ?? 'nl';
-  }
-
-  /**
-   * Redirect to a specific url.
-   *
-   * @param string $url
-   *   the url to redirect.
-   */
-  #[NoReturn] public static function redirect(string $url): void {
-    header('Location: ' . $url);
-    exit();
-  }
-
-  /**
-   * Refresh the page.
-   *
-   * @param string $url
-   *   the url to refresh.
-   * @param int $refreshTime
-   *   the refresh time.
-   */
-  public static function refresh(string $url, int $refreshTime): void {
-    $sanitize = new Sanitize($url, 'url');
-
-    header("Refresh: {$refreshTime}; URL=/" . $sanitize->data());
   }
 
 }

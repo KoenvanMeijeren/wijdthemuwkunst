@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace Src\Validate\form;
 
 use DateTime;
-use Src\Core\Request;
-use Src\Core\StateInterface;
+use System\Request;
+use System\StateInterface;
 use Src\Session\Session;
 use Src\Translation\Translation;
 
@@ -38,7 +38,7 @@ final class FormValidator implements FormValidatorInterface {
   /**
    * The request definition.
    *
-   * @var \Src\Core\Request
+   * @var \System\Request
    */
   protected Request $request;
 

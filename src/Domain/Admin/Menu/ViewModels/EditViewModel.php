@@ -2,8 +2,8 @@
 
 namespace Domain\Admin\Menu\ViewModels;
 
-use Src\Core\Redirect;
-use Src\Core\StateInterface;
+use Components\Header\Redirect;
+use System\StateInterface;
 use Src\Session\Session;
 use Src\Translation\Translation;
 

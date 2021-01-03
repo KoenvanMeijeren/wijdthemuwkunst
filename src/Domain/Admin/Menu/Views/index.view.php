@@ -7,7 +7,7 @@
 declare(strict_types=1);
 
 use Domain\Admin\Menu\Repositories\MenuRepository;
-use Src\Core\Request;
+use System\Request;
 use Src\Security\CSRF;
 use Src\Translation\Translation;
 

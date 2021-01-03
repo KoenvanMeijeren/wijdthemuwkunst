@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace System\Controller;
 
 use Domain\Admin\Accounts\User\Models\User;
-use Src\Core\Request;
+use System\Request;
 use Src\Session\Session;
 use Src\View\ViewInterface;
 use System\Entity\EntityManager;
@@ -29,7 +29,7 @@ abstract class ControllerBase implements ControllerInterface {
   /**
    * The request definition.
    *
-   * @var \Src\Core\Request
+   * @var \System\Request
    */
   protected Request $request;
 

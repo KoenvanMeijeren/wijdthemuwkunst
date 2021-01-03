@@ -6,11 +6,8 @@
 
 declare(strict_types=1);
 
-use Src\Core\Env;
-use Src\Core\Request;
+use Components\Env\Env;
 use Src\Translation\Translation;
-
-$request = new Request();
 ?>
 <div class="row">
     <div class="col-md-4 mb-4">

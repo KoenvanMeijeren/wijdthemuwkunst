@@ -5,13 +5,13 @@
  */
 
 use Domain\Admin\Event\Repositories\EventRepository;
-use Src\Core\URI;
+use Components\SuperGlobals\Url\Uri;
 use System\Breadcrumbs\Breadcrumbs;
 
 /**
  * @var \Domain\Admin\Event\Repositories\EventRepository $eventRepository */
 $eventRepository = $eventRepo ?? NULL;
-$breadcrumbs = new Breadcrumbs(URI::getUrl());
+$breadcrumbs = new Breadcrumbs(Uri::getUrl());
 ?>
 
 <div class="container page">

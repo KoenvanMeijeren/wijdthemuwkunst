@@ -2,7 +2,7 @@
 
 namespace Domain\Admin\Menu\Actions;
 
-use Src\Core\StateInterface;
+use System\StateInterface;
 use Src\Translation\Translation;
 
 /**

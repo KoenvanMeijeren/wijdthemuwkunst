@@ -7,7 +7,7 @@ namespace Domain\Admin\Authentication\Controllers;
 
 use Domain\Admin\Authentication\Actions\LogUserInAction;
 use Domain\Admin\Authentication\Actions\LogUserOutAction;
-use Src\Core\Redirect;
+use Components\Header\Redirect;
 use Src\Translation\Translation;
 use System\Controller\AdminControllerBase;
 
@@ -26,7 +26,7 @@ final class AuthenticationController extends AdminControllerBase {
    * Load the login page.
    * If the user is already logged in redirect him to the dashboard.
    *
-   * @return \Src\Core\Redirect|\Src\View\ViewInterface
+   * @return \Components\Header\Redirect|\Src\View\ViewInterface
    *   Either a redirect response or the login view.
    */
   public function index() {
@@ -42,7 +42,7 @@ final class AuthenticationController extends AdminControllerBase {
   /**
    * Tries to log the user in and redirect back or to the specified page.
    *
-   * @return \Src\Core\Redirect
+   * @return \Components\Header\Redirect
    *   The redirect response.
    */
   public function login(): Redirect {
@@ -57,7 +57,7 @@ final class AuthenticationController extends AdminControllerBase {
   /**
    * Logs the current user out and redirect back to specified page.
    *
-   * @return \Src\Core\Redirect
+   * @return \Components\Header\Redirect
    *   The redirect response.
    */
   public function logout(): Redirect {

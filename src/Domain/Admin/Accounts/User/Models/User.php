@@ -5,7 +5,7 @@ namespace Domain\Admin\Accounts\User\Models;
 
 use Domain\Admin\Authentication\Actions\LogUserOutAction;
 use Domain\Admin\Authentication\Support\IDEncryption;
-use Src\Core\Redirect;
+use Components\Header\Redirect;
 use Src\Model\Model;
 use Src\Model\Scopes\SoftDelete\SoftDelete;
 use Src\Session\Session;
@@ -171,7 +171,7 @@ final class User extends Model {
   /**
    * Log the current user out and redirect to the log in page.
    *
-   * @return \Src\Core\Redirect
+   * @return \Components\Header\Redirect
    */
   public function logout(): Redirect {
     $logout = new LogUserOutAction($this);

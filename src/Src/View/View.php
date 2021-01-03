@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Src\View;
 
-use Src\Core\URI;
+use Components\SuperGlobals\Url\Uri;
 
 /**
  * Provides a class for normal views.
@@ -17,7 +17,7 @@ final class View extends BaseView {
    */
   public function __construct(string $name, array $content = []) {
     $layout = 'layout.view.php';
-    if (str_contains(URI::getUrl(), 'admin')) {
+    if (str_contains(Uri::getUrl(), 'admin')) {
       $layout = 'admin.layout.view.php';
     }
 

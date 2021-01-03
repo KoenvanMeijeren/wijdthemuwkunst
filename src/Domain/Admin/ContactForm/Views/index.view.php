@@ -5,7 +5,7 @@
  */
 
 use Domain\Admin\ContactForm\Repository\ContactFormRepository;
-use Src\Core\Request;
+use System\Request;
 use Src\Security\CSRF;
 use Src\Translation\Translation;
 

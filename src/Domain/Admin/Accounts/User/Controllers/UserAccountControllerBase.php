@@ -7,7 +7,7 @@ namespace Domain\Admin\Accounts\User\Controllers;
 
 use Domain\Admin\Accounts\User\Actions\UpdateUserDataAction;
 use Domain\Admin\Accounts\User\Actions\UpdateUserPasswordAction;
-use Src\Core\Redirect;
+use Components\Header\Redirect;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;

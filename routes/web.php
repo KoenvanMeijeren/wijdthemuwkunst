@@ -23,7 +23,7 @@ use Domain\Contact\Controllers\ContactController;
 use Domain\Event\Controllers\EventArchiveController;
 use Domain\Event\Controllers\EventController;
 use Domain\Pages\Controllers\PageController;
-use Src\Core\Router;
+use System\Router;
 
 // Index routes.
 Router::get('', PageController::class,

@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 namespace Src\Log;
 
+use Components\ComponentsTrait;
 use DateTimeZone;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\FirePHPHandler;
@@ -13,28 +14,27 @@ use Monolog\Logger;
 use Monolog\Processor\IntrospectionProcessor;
 use Monolog\Processor\ProcessIdProcessor;
 use Monolog\Processor\WebProcessor;
-use Src\Core\Env;
-use Src\Core\Request;
+use Components\Env\Env;
 use Src\File\File;
 
 /**
  * @deprecated
  */
 final class Log {
+
+  use ComponentsTrait;
+
   private static Logger $logger;
 
   /**
    *
    */
   private function __construct() {
-    $request = new Request();
-    $env = new Env();
-
     $format = "[%datetime%] %level_name% %message% %context% %extra%\n";
     $timeFormat = 'Y-m-d H:i:s';
     $dateTimeZone = new DateTimeZone('Europe/Amsterdam');
 
-    self::$logger = new Logger($request->env('app_name'));
+    self::$logger = new Logger($this->request()->env('app_name'));
     self::$logger->setTimezone($dateTimeZone);
 
     self::$logger->pushProcessor(new IntrospectionProcessor());
@@ -44,11 +44,10 @@ final class Log {
     $formatter->ignoreEmptyContextAndExtra();
 
     $defaultHandler = new RotatingFileHandler(
-          START_PATH . '/storage/logs/app.log',
-          365,
-          $env->get() === Env::DEVELOPMENT ?
-              Logger::DEBUG : Logger::INFO
-      );
+      filename: START_PATH . '/storage/logs/app.log',
+      maxFiles: 365,
+      level: $this->env()->get() === Env::DEVELOPMENT ? Logger::DEBUG : Logger::INFO
+    );
     $defaultHandler->setFormatter($formatter);
 
     self::$logger->pushHandler($defaultHandler);

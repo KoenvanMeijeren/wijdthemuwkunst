@@ -1,11 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace Src\Core;
+namespace System;
 
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Text\TextModule;
-use Src\Header\Header;
+use Components\Env\Env;
+use System\Router;
+use System\StateInterface;
+use Components\SuperGlobals\Url\Uri;
+use Components\Header\Header;
 use Src\Log\Log;
 use Components\SuperGlobals\Session\Session;
 use Components\SuperGlobals\Session\SessionBuilder;
@@ -15,7 +19,7 @@ use Components\SuperGlobals\Session\SessionBuilder;
  *
  * @package src\Core
  */
-final class App {
+final class Application implements ApplicationInterface {
 
   /**
    * The location of the routes.
@@ -49,14 +53,14 @@ final class App {
     date_default_timezone_set('Europe/Amsterdam');
 
     $env = new Env();
-    $env->setErrorHandling();
+    $env->initializeErrorHandling();
 
     $header = new Header();
-    $header->set(Header::X_XSS_PROTECTION);
+    $header->send(Header::X_XSS_PROTECTION);
 
     $sessionBuilder = new SessionBuilder();
     $sessionBuilder->startSession($env->get());
-    $sessionBuilder->setSessionSecurity();
+    $sessionBuilder->secureSession();
   }
 
   /**
@@ -67,7 +71,7 @@ final class App {
 
     $user = new User();
     Router::load($this->routesLocations)
-      ->direct(URI::getUrl(), URI::getMethod(), $user->getRights());
+      ->direct(Uri::getUrl(), Uri::getMethod(), $user->getRights());
 
     $this->postRun();
   }
@@ -83,7 +87,7 @@ final class App {
       return;
     }
 
-    Log::appRequest(value: '', state: StateInterface::SUCCESSFUL, url: URI::getUrl(), method: URI::getMethod());
+    Log::appRequest(value: '', state: StateInterface::SUCCESSFUL, url: Uri::getUrl(), method: Uri::getMethod());
   }
 
 }

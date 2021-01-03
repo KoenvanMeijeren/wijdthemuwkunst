@@ -6,8 +6,8 @@
 
 declare(strict_types=1);
 
-use Src\Core\Request;
-use Src\Core\StateInterface;
+use System\Request;
+use System\StateInterface;
 use Src\Translation\Translation;
 
 $request = new Request();

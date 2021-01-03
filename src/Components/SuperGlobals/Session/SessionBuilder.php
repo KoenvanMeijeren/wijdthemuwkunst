@@ -8,7 +8,7 @@ namespace Components\SuperGlobals\Session;
 use Cake\Chronos\Chronos;
 use Components\ComponentsTrait;
 use Components\SuperGlobals\Cookie\Cookie;
-use Src\Core\Env;
+use Components\Env\Env;
 use Src\Exceptions\Session\InvalidSessionException;
 
 /**
@@ -25,14 +25,14 @@ final class SessionBuilder {
    *
    * @var \Components\SuperGlobals\Session\SessionSecurityInterface
    */
-  private SessionSecurityInterface $security;
+  protected SessionSecurityInterface $security;
 
   /**
    * The name of the session.
    *
    * @var string
    */
-  private string $name;
+  protected string $name;
 
   /**
    * Constructs the session.
@@ -98,7 +98,7 @@ final class SessionBuilder {
   /**
    * Set some security options for the session.
    */
-  public function setSessionSecurity(): void {
+  public function secureSession(): void {
     $this->security->userAgentProtection();
     $this->security->remoteIpProtection();
     $this->setExpiringSession();
@@ -108,7 +108,7 @@ final class SessionBuilder {
   /**
    * Set an unique unreadable session name.
    */
-  private function setSessionName(): void {
+  protected function setSessionName(): void {
     $cookie = new Cookie(expiringTime: $this->expiringTime - 1);
     if ($cookie->exists('sessionName')) {
       return;
@@ -130,14 +130,14 @@ final class SessionBuilder {
    * @return string
    *   The name of the session.
    */
-  private function getSessionName(): string {
+  protected function getSessionName(): string {
     return $this->request()->cookie('sessionName', $this->name);
   }
 
   /**
    * Set the expiring time for the session.
    */
-  private function setExpiringSession(): void {
+  protected function setExpiringSession(): void {
     $now = new Chronos();
     if ($this->session()->get('createdAt') === '') {
       $this->session()->saveForced('createdAt', $now->toDateTimeString());
@@ -155,7 +155,7 @@ final class SessionBuilder {
   /**
    * Regenerates the session ID every five minutes.
    */
-  private function setCanarySession(): void {
+  protected function setCanarySession(): void {
     // Check if the session is not active.
     if (session_status() === PHP_SESSION_NONE) {
       return;
@@ -180,19 +180,11 @@ final class SessionBuilder {
    */
   public function destroy(): void {
     if (PHP_SESSION_ACTIVE !== session_status()) {
-      throw new InvalidSessionException(
-        'Cannot destroy the session if the session does not exists'
-      );
+      throw new InvalidSessionException('Cannot destroy the session if the session does not exists');
     }
 
     $params = session_get_cookie_params();
-    $cookie = new Cookie(
-      42000,
-      $params['path'] ?? '',
-      $params['domain'] ?? '',
-      $params['secure'] ?? FALSE,
-      $params['httponly'] ?? TRUE
-    );
+    $cookie = new Cookie(42000, $params['path'] ?? '', $params['domain'] ?? '', $params['secure'] ?? FALSE, $params['httponly'] ?? TRUE);
 
     $cookie->unset(session_name());
     $cookie->unset('sessionName');

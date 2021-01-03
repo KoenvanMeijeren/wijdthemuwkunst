@@ -5,8 +5,8 @@ namespace System\Mail;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
-use Src\Core\Env;
-use Src\Core\Request;
+use Components\Env\Env;
+use System\Request;
 
 /**
  * Provides a class for sending emails.

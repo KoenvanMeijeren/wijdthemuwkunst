@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace System\View;
 
-use Src\Core\Env;
+use Components\Env\Env;
 use Src\Translation\Translation;
 use Src\View\View;
 use Whoops\Handler\Handler;

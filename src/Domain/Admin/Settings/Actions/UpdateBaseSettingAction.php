@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Settings\Actions;
 
-use Src\Core\StateInterface;
+use System\StateInterface;
 use Src\Translation\Translation;
 
 /**

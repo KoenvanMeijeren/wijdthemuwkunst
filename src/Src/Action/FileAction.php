@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Src\Action;
 
-use Src\Core\Request;
-use Src\Core\Upload;
+use System\Request;
+use System\Upload;
 
 /**
  * Provides a base class for file actions.
@@ -16,7 +16,7 @@ abstract class FileAction extends Action {
   /**
    * The request definition.
    *
-   * @var \Src\Core\Request
+   * @var \System\Request
    */
   protected Request $request;
 

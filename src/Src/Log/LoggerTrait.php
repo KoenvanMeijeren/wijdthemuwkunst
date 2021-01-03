@@ -2,8 +2,8 @@
 
 namespace Src\Log;
 
-use Src\Core\StateInterface;
-use Src\Core\URI;
+use System\StateInterface;
+use Components\SuperGlobals\Url\Uri;
 
 /**
  * Provides a trait for easy logging messages.
@@ -28,7 +28,7 @@ trait LoggerTrait {
       return;
     }
 
-    Log::appRequest($value, $state, URI::getUrl(), URI::getMethod());
+    Log::appRequest($value, $state, Uri::getUrl(), Uri::getMethod());
   }
 
 }

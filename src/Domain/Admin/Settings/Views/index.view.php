@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Settings\Repositories\SettingRepository;
-use Src\Core\Request;
+use System\Request;
 use Src\Security\CSRF;
 use Src\Translation\Translation;
 

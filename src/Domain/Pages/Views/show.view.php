@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-use Src\Core\Request;
+use System\Request;
 
 $request = new Request();
 

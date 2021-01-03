@@ -1,10 +1,11 @@
 <?php
-
 declare(strict_types=1);
 
+namespace Components\Env;
 
-namespace Src\Core;
-
+use Components\ComponentsTrait;
+use Components\SuperGlobals\Request;
+use JetBrains\PhpStorm\Pure;
 use Src\Log\LoggerHandler;
 use Src\Validate\Validate;
 use System\View\ProductionErrorView;
@@ -14,80 +15,56 @@ use Whoops\Run as Whoops;
 /**
  * The environment handler of the application.
  *
- * @package src\Core
+ * @package Components\Env
  */
-final class Env {
+final class Env implements EnvInterface {
 
-  /**
-   * The environment options.
-   *
-   * @var string
-   */
-  public const DEVELOPMENT = 'development';
-  public const PRODUCTION = 'production';
-
-  /**
-   * The default error page.
-   *
-   * @var string
-   */
-  public const ERROR_PAGE = 'http/500-error';
+  use ComponentsTrait;
 
   /**
    * The host of the app.
    *
    * @var string
    */
-  private string $host;
+  protected string $host;
 
   /**
    * The current environment of the app.
    *
    * @var string
    */
-  private string $env;
+  protected string $env;
 
   /**
    * Env constructor.
    */
   public function __construct() {
     $this->setHost();
-    $this->set();
+    $this->initialize();
   }
 
   /**
    * Defines the host of the app.
-   *
-   * @throws \Src\Exceptions\Uri\InvalidDomainException
    */
-  private function setHost(): void {
-    $request = new Request();
-
-    $host = $request->server(Request::HTTP_HOST);
+  protected function setHost(): void {
+    $host = $this->request()->server(Request::HTTP_HOST);
     $this->host = $host !== '' ? $host : 'localhost';
     Validate::var($this->host)->isDomain();
   }
 
   /**
-   * Returns the host of the app.
-   *
-   * @return string
-   *   The host name.
+   * {@inheritDoc}
    */
   public function getHost(): string {
     return $this->host;
   }
 
   /**
-   * Set the current env based on the uri.
-   *
-   * @throws \Src\Exceptions\Uri\InvalidEnvException
+   * Initializes the current env based on the current uri.
    */
-  private function set(): void {
+  protected function initialize(): void {
     $this->env = self::PRODUCTION;
-    if (str_contains($this->host, 'localhost')
-      || str_contains($this->host, '127.0.0.1')
-    ) {
+    if (str_contains($this->host, 'localhost') || str_contains($this->host, '127.0.0.1')) {
       $this->env = self::DEVELOPMENT;
     }
 
@@ -95,39 +72,30 @@ final class Env {
   }
 
   /**
-   * Gets the current env.
-   *
-   * @return string
-   *   The current environment.
+   * {@inheritDoc}
    */
   public function get(): string {
     return $this->env;
   }
 
   /**
-   * Determines if the env is in development.
-   *
-   * @return bool
-   *   If the env is development.
+   * {@inheritDoc}
    */
-  public function isDevelopment(): bool {
+  #[Pure] public function isDevelopment(): bool {
     return $this->get() === self::DEVELOPMENT;
   }
 
   /**
-   * Determines if the env is in production.
-   *
-   * @return bool
-   *   If the env is production.
+   * {@inheritDoc}
    */
-  public function isProduction(): bool {
+  #[Pure] public function isProduction(): bool {
     return $this->get() === self::PRODUCTION;
   }
 
   /**
-   * Set the error handling.
+   * {@inheritDoc}
    */
-  public function setErrorHandling(): void {
+  public function initializeErrorHandling(): void {
     ini_set('display_errors', (self::DEVELOPMENT === $this->env ? '1' : '0'));
     ini_set('display_startup_errors', (self::DEVELOPMENT === $this->env ? '1' : '0'));
     error_reporting((self::DEVELOPMENT === $this->env ? E_ALL : -1));
@@ -136,9 +104,9 @@ final class Env {
   }
 
   /**
-   * Initialize the whoops error and exception handler.
+   * Initializes the whoops error and exception handler.
    */
-  private function initializeWhoops(): void {
+  protected function initializeWhoops(): void {
     $whoops = new Whoops();
     if (self::DEVELOPMENT === $this->env) {
       $whoops->prependHandler(new PrettyPageHandler());

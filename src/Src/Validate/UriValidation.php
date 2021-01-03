@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Src\Validate;
 
-use Src\Core\Env;
+use Components\Env\Env;
 use Src\Exceptions\Uri\InvalidDomainException;
 use Src\Exceptions\Uri\InvalidEnvException;
 use Src\Exceptions\Uri\InvalidUriException;

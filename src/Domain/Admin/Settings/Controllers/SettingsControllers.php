@@ -11,7 +11,7 @@ use Domain\Admin\Settings\Actions\UpdateBaseSettingAction;
 use Domain\Admin\Settings\Models\Setting;
 use Domain\Admin\Settings\ViewModels\EditViewModel;
 use Domain\Admin\Settings\ViewModels\SettingTable;
-use Src\Core\Redirect;
+use Components\Header\Redirect;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;

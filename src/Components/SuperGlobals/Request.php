@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Components\SuperGlobals;
 
 use Components\Sanitize\Sanitize;
-use Src\Core\Router;
+use System\Router;
 
 /**
  * Provides a class for interacting with super globals.

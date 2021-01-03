@@ -2,8 +2,8 @@
 
 use Domain\Admin\Accounts\Account\Support\AccountRightsConverter;
 use Domain\Admin\Accounts\User\Models\User;
-use Src\Core\Request;
-use Src\Core\URI;
+use System\Request;
+use Components\SuperGlobals\Url\Uri;
 use Src\Translation\Translation;
 use Support\Resource;
 use System\Breadcrumbs\Breadcrumbs;
@@ -11,7 +11,7 @@ use System\Breadcrumbs\Breadcrumbs;
 $user = new User();
 $rights = new AccountRightsConverter($user->getRights());
 $request = new Request();
-$breadcrumbs = new Breadcrumbs(URI::getUrl());
+$breadcrumbs = new Breadcrumbs(Uri::getUrl());
 ?>
 <!DOCTYPE html>
 <html lang="<?= Translation::DUTCH_LANGUAGE_CODE ?>">
@@ -67,7 +67,7 @@ $breadcrumbs = new Breadcrumbs(URI::getUrl());
             </li>
 
             <?php if ($user->getRights() >= User::ADMIN) : ?>
-                <li class="nav-item <?= strpos(URI::getUrl(),
+                <li class="nav-item <?= strpos(Uri::getUrl(),
                     'dashboard') !== false ? 'active' : '' ?>">
                     <a class="nav-link" href="/admin/dashboard">
                         <i class="fas fa-home"></i>
@@ -76,7 +76,7 @@ $breadcrumbs = new Breadcrumbs(URI::getUrl());
                         </span>
                     </a>
                 </li>
-                <li class="nav-item <?= strpos(URI::getUrl(),
+                <li class="nav-item <?= strpos(Uri::getUrl(),
                     'content') !== false ? 'active' : '' ?>">
                     <a class="nav-link collapsed" href="#"
                        data-toggle="collapse"
@@ -99,7 +99,7 @@ $breadcrumbs = new Breadcrumbs(URI::getUrl());
                         </div>
                     </div>
                 </li>
-                <li class="nav-item <?= strpos(URI::getUrl(),
+                <li class="nav-item <?= strpos(Uri::getUrl(),
                     'structure') !== false ? 'active' : '' ?>">
                     <a class="nav-link collapsed" href="#"
                        data-toggle="collapse"
@@ -122,7 +122,7 @@ $breadcrumbs = new Breadcrumbs(URI::getUrl());
                         </div>
                     </div>
                 </li>
-                <li class="nav-item <?= strpos(URI::getUrl(),
+                <li class="nav-item <?= strpos(Uri::getUrl(),
                     'configuration') !== false ? 'active' : '' ?>">
                     <a class="nav-link collapsed" href="#"
                        data-toggle="collapse"
@@ -148,8 +148,8 @@ $breadcrumbs = new Breadcrumbs(URI::getUrl());
 
             <?php endif;
             if ($user->getRights() >= User::SUPER_ADMIN) : ?>
-                <li class="nav-item <?= strpos(URI::getUrl(),
-                    'account') !== false && strpos(URI::getUrl(),
+                <li class="nav-item <?= strpos(Uri::getUrl(),
+                    'account') !== false && strpos(Uri::getUrl(),
                     'user') === false ? 'active' : '' ?>">
                     <a class="nav-link" href="/admin/account">
                         <i class="fas fa-users"></i>
@@ -160,7 +160,7 @@ $breadcrumbs = new Breadcrumbs(URI::getUrl());
                 </li>
             <?php endif;
             if ($user->getRights() >= User::DEVELOPER) : ?>
-                <li class="nav-item <?= strpos(URI::getUrl(),
+                <li class="nav-item <?= strpos(Uri::getUrl(),
                     'reports') !== false ? 'active' : '' ?>">
                     <a class="nav-link collapsed" href="#"
                        data-toggle="collapse"
@@ -220,7 +220,7 @@ $breadcrumbs = new Breadcrumbs(URI::getUrl());
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto navbar-desktop">
                         <li class="nav-item">
-                            <a class="nav-link <?= strpos(URI::getUrl(),
+                            <a class="nav-link <?= strpos(Uri::getUrl(),
                                 'user/account') !== false ? 'active-link' : '' ?>"
                                href="/admin/user/account">
                                 <?= Translation::get('welcome_text') ?>

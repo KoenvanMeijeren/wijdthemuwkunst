@@ -9,7 +9,7 @@ use Domain\Admin\Menu\Repositories\MenuRepository;
 use Domain\Admin\Pages\Models\Slug;
 use Domain\Admin\Pages\Repositories\SlugRepository;
 use Src\Action\FormAction;
-use Src\Core\Request;
+use System\Request;
 use Src\Session\Session;
 use Src\Translation\Translation;
 use Src\Validate\form\FormValidator;

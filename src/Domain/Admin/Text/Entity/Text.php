@@ -2,6 +2,7 @@
 
 namespace Domain\Admin\Text\Entity;
 
+use DI\Annotation\Inject;
 use System\Entity\EntityBase;
 
 /**
@@ -12,16 +13,12 @@ use System\Entity\EntityBase;
 final class Text extends EntityBase implements TextInterface {
 
   /**
-   * The name of the table of the text entity.
-   *
-   * @var string
+   * {@inheritdoc}
    */
   protected string $table = 'translation';
 
   /**
-   * The name of the repository of the text entity.
-   *
-   * @var string
+   * {@inheritdoc}
    */
   protected string $repository = TextRepository::class;
 
