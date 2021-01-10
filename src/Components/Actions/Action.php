@@ -1,14 +1,18 @@
 <?php
 declare(strict_types=1);
 
-namespace Src\Action;
+namespace Components\Actions;
+
+use Components\ComponentsTrait;
 
 /**
  * Provides a base class for actions.
  *
- * @package src\Action
+ * @package Components\Actions
  */
 abstract class Action implements ActionInterface {
+
+  use ComponentsTrait;
 
   /**
    * Handles the action.

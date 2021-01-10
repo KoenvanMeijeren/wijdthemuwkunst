@@ -19,8 +19,8 @@ final class CreateTextAction extends BaseTextAction {
     /** @var \Domain\Admin\Text\Entity\TextInterface $entity */
     $entity = $this->entity;
 
-    $entity->setKey($this->request->post('key'));
-    $entity->setValue($this->request->post('value'));
+    $entity->setKey($this->request()->post('key'));
+    $entity->setValue($this->request()->post('value'));
 
     return $this->saveEntity();
   }
@@ -31,8 +31,8 @@ final class CreateTextAction extends BaseTextAction {
   protected function validate(): bool {
     $storage = $this->entityManager->getStorage(Text::class);
     $this->validator->input('key')->isUnique(
-      $storage->loadByAttributes(['translation_key' => $this->request->post('key')]),
-      sprintf(Translation::get('text_already_exists'), $this->request->post('key'))
+      $storage->loadByAttributes(['translation_key' => $this->request()->post('key')]),
+      sprintf(Translation::get('text_already_exists'), $this->request()->post('key'))
     );
 
     return parent::validate();

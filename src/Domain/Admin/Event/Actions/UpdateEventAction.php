@@ -2,8 +2,8 @@
 
 namespace Domain\Admin\Event\Actions;
 
-use System\StateInterface;
 use Src\Translation\Translation;
+use System\StateInterface;
 
 /**
  *
@@ -16,7 +16,7 @@ final class UpdateEventAction extends BaseEventAction {
   protected function handle(): bool {
     $this->event->update($this->event->getId(), $this->attributes);
 
-    $this->session->flash(
+    $this->session()->flash(
           StateInterface::SUCCESSFUL,
           sprintf(
               Translation::get('event_successfully_updated'),

@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\User\Actions;
 
+use Components\Actions\FormAction;
 use Domain\Admin\Accounts\Repositories\AccountRepository;
 use Domain\Admin\Accounts\User\Models\User;
-use Src\Action\FormAction;
-use System\Request;
-use System\StateInterface;
 use Src\Session\Session;
 use Src\Translation\Translation;
 use Src\Validate\form\FormValidator;
+use System\Request;
+use System\StateInterface;
 
 /**
  *
@@ -35,7 +35,7 @@ abstract class BaseUserAction extends FormAction {
   public function __construct() {
     $this->user = new User();
     $this->account = new AccountRepository($this->user->getAccount());
-    $this->session = new Session();
+    $this->session() = new Session();
     $this->validator = new FormValidator();
     $request = new Request();
 
@@ -59,7 +59,7 @@ abstract class BaseUserAction extends FormAction {
     $this->prepareAttributes();
     $this->user->update($this->account->getId(), $this->attributes);
 
-    $this->session->flash(
+    $this->session()->flash(
           StateInterface::SUCCESSFUL,
           Translation::get('admin_edited_account_successful_message')
       );

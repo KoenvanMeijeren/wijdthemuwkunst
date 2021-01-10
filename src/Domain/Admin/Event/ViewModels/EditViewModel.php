@@ -20,7 +20,7 @@ final class EditViewModel {
    */
   public function __construct(?stdClass $event) {
     $this->event = $event;
-    $this->session = new Session();
+    $this->session() = new Session();
   }
 
   /**
@@ -29,7 +29,7 @@ final class EditViewModel {
    */
   public function get() {
     if ($this->event === NULL) {
-      $this->session->flash(
+      $this->session()->flash(
             StateInterface::FAILED,
             Translation::get('admin_event_cannot_be_visited')
         );

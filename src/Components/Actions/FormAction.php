@@ -1,33 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace Src\Action;
+namespace Components\Actions;
 
-use System\Request;
 use Src\Security\CSRF;
-use Src\Session\Session;
 use Src\Validate\form\FormValidator;
 
 /**
  * Provides a base class for form actions.
  *
- * @package src\Action
+ * @package Components\Actions
  */
 abstract class FormAction extends Action {
-
-  /**
-   * The request definition.
-   *
-   * @var \System\Request
-   */
-  protected Request $request;
-
-  /**
-   * The session definition.
-   *
-   * @var \Src\Session\Session
-   */
-  protected Session $session;
 
   /**
    * The form validator.
@@ -40,8 +24,6 @@ abstract class FormAction extends Action {
    * FormAction constructor.
    */
   public function __construct() {
-    $this->request = new Request();
-    $this->session = new Session();
     $this->validator = new FormValidator();
   }
 

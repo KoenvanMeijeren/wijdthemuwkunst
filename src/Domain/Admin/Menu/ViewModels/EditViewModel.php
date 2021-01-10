@@ -3,9 +3,9 @@
 namespace Domain\Admin\Menu\ViewModels;
 
 use Components\Header\Redirect;
-use System\StateInterface;
 use Src\Session\Session;
 use Src\Translation\Translation;
+use System\StateInterface;
 
 /**
  *
@@ -19,7 +19,7 @@ final class EditViewModel {
    */
   public function __construct(?object $menuItem) {
     $this->menuItem = $menuItem;
-    $this->session = new Session();
+    $this->session() = new Session();
   }
 
   /**
@@ -28,7 +28,7 @@ final class EditViewModel {
    */
   public function get() {
     if ($this->menuItem === NULL) {
-      $this->session->flash(
+      $this->session()->flash(
             StateInterface::FAILED,
             Translation::get('menu_item_does_not_exists')
         );

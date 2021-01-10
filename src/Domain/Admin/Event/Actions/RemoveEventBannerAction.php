@@ -2,8 +2,8 @@
 
 namespace Domain\Admin\Event\Actions;
 
-use System\StateInterface;
 use Src\Translation\Translation;
+use System\StateInterface;
 
 /**
  *
@@ -18,7 +18,7 @@ final class RemoveEventBannerAction extends BaseEventAction {
       'event_banner_ID' => '0',
     ]);
 
-    $this->session->flash(
+    $this->session()->flash(
           StateInterface::SUCCESSFUL,
           sprintf(
               Translation::get('event_banner_successfully_removed'),

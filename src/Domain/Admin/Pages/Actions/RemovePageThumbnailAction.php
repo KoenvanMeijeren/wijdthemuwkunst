@@ -5,8 +5,8 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Pages\Actions;
 
-use System\StateInterface;
 use Src\Translation\Translation;
+use System\StateInterface;
 
 /**
  *
@@ -21,7 +21,7 @@ final class RemovePageThumbnailAction extends BasePageAction {
       'page_thumbnail_ID' => '0',
     ]);
 
-    $this->session->flash(
+    $this->session()->flash(
           StateInterface::SUCCESSFUL,
           sprintf(
               Translation::get('page_banner_successfully_removed'),

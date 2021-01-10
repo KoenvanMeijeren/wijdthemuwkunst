@@ -5,12 +5,12 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Pages\ViewModels;
 
-use Domain\Admin\Pages\Models\Page;
 use Components\Header\Redirect;
-use System\StateInterface;
+use Domain\Admin\Pages\Models\Page;
 use Src\Session\Session;
 use Src\Translation\Translation;
 use stdClass;
+use System\StateInterface;
 
 /**
  *
@@ -24,7 +24,7 @@ final class EditViewModel {
    */
   public function __construct(?stdClass $page) {
     $this->page = $page;
-    $this->session = new Session();
+    $this->session() = new Session();
   }
 
   /**
@@ -35,7 +35,7 @@ final class EditViewModel {
     if ($this->page === NULL) {
       $page = new Page();
 
-      $this->session->flash(
+      $this->session()->flash(
             StateInterface::FAILED,
             sprintf(
                 Translation::get('admin_page_cannot_be_visited'),

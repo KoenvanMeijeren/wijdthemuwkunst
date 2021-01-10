@@ -6,7 +6,7 @@ declare(strict_types=1);
 namespace Domain\Admin\File\Actions;
 
 use Cake\Chronos\Chronos;
-use Src\Action\FileAction;
+use Components\Actions\FileAction;
 use System\Upload;
 
 /**
@@ -32,14 +32,14 @@ final class UploadImageAction extends FileAction {
   public function __construct(string $name) {
     parent::__construct();
 
-    $this->file = $this->request->file($name);
+    $this->file = $this->request()()->file($name);
   }
 
   /**
    * @inheritDoc
    */
   protected function handle(): bool {
-    if (array_key_exists('name', $this->file)) {
+    if (isset($this->file['name'])) {
       $datetime = new Chronos();
       $this->file['name'] .= $datetime->toDateTimeString();
     }

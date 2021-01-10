@@ -2,17 +2,17 @@
 
 namespace Domain\Admin\Text\Controllers;
 
+use Components\Header\Redirect;
 use Domain\Admin\Text\Actions\CreateTextAction;
 use Domain\Admin\Text\Actions\DeleteTextAction;
 use Domain\Admin\Text\Actions\UpdateTextAction;
 use Domain\Admin\Text\Entity\Text;
 use Domain\Admin\Text\Entity\TextRepositoryInterface;
 use Domain\Admin\Text\Entity\TextTable;
-use Components\Header\Redirect;
-use System\StateInterface;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;
+use System\StateInterface;
 
 /**
  * Provides a controller for maintaining the texts.
@@ -106,9 +106,9 @@ final class TextController extends AdminControllerBase {
    */
   public function edit() {
     $textTable = new TextTable($this->textRepository->all());
-    $text = $this->textRepository->loadById((int) $this->request->getRouteParameter());
+    $text = $this->textRepository->loadById((int) $this->request()->getRouteParameter());
     if ($text === NULL) {
-      $this->session->flash(StateInterface::FAILED, Translation::get('text_does_not_exists'));
+      $this->session()->flash(StateInterface::FAILED, Translation::get('text_does_not_exists'));
 
       return new Redirect('/admin/configuration/texts');
     }

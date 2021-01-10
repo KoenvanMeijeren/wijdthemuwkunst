@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\Account\Actions;
 
+use Components\Actions\FormAction;
 use Domain\Admin\Accounts\Account\Models\Account;
 use Domain\Admin\Accounts\Repositories\AccountRepository;
 use Domain\Admin\Accounts\User\Models\User;
-use Src\Action\FormAction;
-use System\Request;
 use Src\Session\Session;
 use Src\Validate\form\FormValidator;
+use System\Request;
 
 /**
  *
@@ -37,7 +37,7 @@ abstract class BaseAccountAction extends FormAction {
     $this->accountRepository = new AccountRepository(
           $this->account->find($this->account->getId())
       );
-    $this->session = new Session();
+    $this->session() = new Session();
     $this->validator = new FormValidator();
     $request = new Request();
 

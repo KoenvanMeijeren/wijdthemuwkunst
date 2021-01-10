@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Domain\Admin\ContactForm\Actions;
 
 use Cake\Chronos\Chronos;
+use Components\Actions\FormAction;
 use Domain\Admin\ContactForm\Model\ContactForm;
 use Domain\Admin\ContactForm\Repository\ContactFormRepository;
-use Src\Action\FormAction;
 use Src\Translation\Translation;
 
 /**
@@ -77,9 +77,9 @@ abstract class BaseContactFormAction extends FormAction {
           $this->contactForm->find($this->contactForm->getId())
       );
 
-    $this->name = $this->request->post('name');
-    $this->email = $this->request->post('email');
-    $this->message = $this->request->post('message');
+    $this->name = $this->request()->post('name');
+    $this->email = $this->request()->post('email');
+    $this->message = $this->request()->post('message');
 
     $this->attributes = [
       'contact_form_name' => $this->name,

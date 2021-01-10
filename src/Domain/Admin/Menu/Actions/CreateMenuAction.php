@@ -2,8 +2,8 @@
 
 namespace Domain\Admin\Menu\Actions;
 
-use System\StateInterface;
 use Src\Translation\Translation;
+use System\StateInterface;
 
 /**
  *
@@ -17,7 +17,7 @@ final class CreateMenuAction extends BaseMenuAction {
     $menuItem = $this->menu->firstOrCreate($this->attributes);
 
     if ($menuItem === NULL) {
-      $this->session->flash(
+      $this->session()->flash(
             StateInterface::FAILED,
             sprintf(
                 Translation::get('menu_item_unsuccessful_created'),
@@ -28,7 +28,7 @@ final class CreateMenuAction extends BaseMenuAction {
       return FALSE;
     }
 
-    $this->session->flash(
+    $this->session()->flash(
           StateInterface::SUCCESSFUL,
           sprintf(
               Translation::get('menu_item_successful_created'),

@@ -6,10 +6,10 @@ declare(strict_types=1);
 namespace Domain\Admin\Accounts\Account\ViewModels;
 
 use Components\Header\Redirect;
-use System\StateInterface;
 use Src\Session\Session;
 use Src\Translation\Translation;
 use stdClass;
+use System\StateInterface;
 
 /**
  *
@@ -23,7 +23,7 @@ final class EditViewModel {
    */
   public function __construct(?stdClass $account) {
     $this->account = $account;
-    $this->session = new Session();
+    $this->session() = new Session();
   }
 
   /**
@@ -32,7 +32,7 @@ final class EditViewModel {
    */
   public function get() {
     if ($this->account === NULL) {
-      $this->session->flash(
+      $this->session()->flash(
             StateInterface::FAILED,
             Translation::get('admin_account_cannot_be_visited')
         );

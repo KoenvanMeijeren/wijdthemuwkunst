@@ -3,8 +3,8 @@
 namespace Domain\Admin\Text\Actions;
 
 use Domain\Admin\Accounts\User\Models\User;
-use System\StateInterface;
 use Src\Translation\Translation;
+use System\StateInterface;
 
 /**
  * Provides a class for the update text action.
@@ -17,11 +17,8 @@ final class UpdateTextAction extends BaseTextAction {
    * {@inheritDoc}
    */
   protected function handle(): bool {
-    /** @var \Domain\Admin\Text\Entity\TextInterface $entity */
-    $entity = $this->entity;
-
-    $entity->setKey($this->request->post('key'));
-    $entity->setValue($this->request->post('value'));
+    $this->entity->setKey($this->request()->post('key'));
+    $this->entity->setValue($this->request()->post('value'));
 
     return $this->saveEntity();
   }
@@ -30,15 +27,9 @@ final class UpdateTextAction extends BaseTextAction {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    /** @var \Domain\Admin\Text\Entity\TextInterface $entity */
-    $entity = $this->entity;
-
     if ($this->user->getRights() !== User::DEVELOPER
-      && $this->request->post('key') !== $entity->getKey()
-    ) {
-      $this->session->flash(StateInterface::FAILED,
-        Translation::get('text_editing_key_not_allowed')
-      );
+      && $this->request()->post('key') !== $this->entity->getKey()) {
+      $this->session()->flash(StateInterface::FAILED, Translation::get('text_editing_key_not_allowed'));
 
       return FALSE;
     }

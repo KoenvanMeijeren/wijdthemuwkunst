@@ -2,9 +2,9 @@
 
 namespace Domain\Admin\ContactForm\Controller;
 
+use Components\Header\Redirect;
 use Domain\Admin\ContactForm\Actions\DeleteContactFormMessageAction;
 use Domain\Admin\ContactForm\Model\ContactForm;
-use Components\Header\Redirect;
 use Src\Translation\Translation;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;
@@ -54,7 +54,7 @@ final class ContactFormController extends AdminControllerBase {
     return $this->view('index', [
       'title' => Translation::get('admin_contact_form_title'),
       'messages' => $this->contactForm->getByDate(
-              $this->request->get('date')
+              $this->request()->get('date')
       ),
     ]);
   }

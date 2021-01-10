@@ -5,8 +5,8 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\Account\Actions;
 
-use System\StateInterface;
 use Src\Translation\Translation;
+use System\StateInterface;
 
 /**
  *
@@ -21,7 +21,7 @@ final class UnblockAccountAction extends BaseAccountAction {
       'account_is_blocked' => '0',
     ]);
 
-    $this->session->flash(
+    $this->session()->flash(
           StateInterface::SUCCESSFUL,
           Translation::get('admin_account_successful_unblocked_message')
       );
@@ -34,7 +34,7 @@ final class UnblockAccountAction extends BaseAccountAction {
    */
   protected function authorize(): bool {
     if ($this->user->getId() === $this->account->getId()) {
-      $this->session->flash(
+      $this->session()->flash(
             StateInterface::FAILED,
             Translation::get('cannot_unblock_own_account_message')
         );

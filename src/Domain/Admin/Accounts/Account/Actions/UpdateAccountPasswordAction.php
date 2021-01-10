@@ -6,8 +6,8 @@ declare(strict_types=1);
 namespace Domain\Admin\Accounts\Account\Actions;
 
 use Domain\Admin\Accounts\Account\Models\Account;
-use System\StateInterface;
 use Src\Translation\Translation;
+use System\StateInterface;
 
 /**
  *
@@ -24,7 +24,7 @@ final class UpdateAccountPasswordAction extends BaseAccountAction {
       ),
     ]);
 
-    $this->session->flash(
+    $this->session()->flash(
       StateInterface::SUCCESSFUL,
       Translation::get('admin_edited_account_successful_message')
     );

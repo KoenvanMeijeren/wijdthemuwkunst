@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Action;
+namespace Components\Actions;
 
 use System\Entity\EntityInterface;
 use System\Entity\EntityManager;
@@ -9,7 +9,7 @@ use System\Entity\EntityManagerInterface;
 /**
  * Provides a base for entity form actions.
  *
- * @package src\Action
+ * @package Components\Actions
  */
 abstract class EntityFormActionBase extends FormAction {
 
@@ -34,7 +34,20 @@ abstract class EntityFormActionBase extends FormAction {
     parent::__construct();
 
     $this->entityManager = new EntityManager();
+    $storage = $this->entityManager->getStorage($this->getEntityType());
+    $this->entity = $storage->create();
+    if ($id = $this->request()->getRouteParameter()) {
+      $this->entity = $storage->load((int) $id);
+    }
   }
+
+  /**
+   * Gets the entity type.
+   *
+   * @return string
+   *   The entity type.
+   */
+  abstract protected function getEntityType(): string;
 
   /**
    * Saves the entity and flashes a message into the session.

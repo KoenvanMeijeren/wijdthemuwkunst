@@ -5,8 +5,8 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Pages\Actions;
 
-use System\StateInterface;
 use Src\Translation\Translation;
+use System\StateInterface;
 
 /**
  *
@@ -20,7 +20,7 @@ final class CreatePageAction extends BasePageAction {
     $page = $this->page->firstOrCreate($this->attributes);
 
     if ($page === NULL) {
-      $this->session->flash(
+      $this->session()->flash(
             StateInterface::FAILED,
             Translation::get('page_unsuccessfully_created')
         );
@@ -28,7 +28,7 @@ final class CreatePageAction extends BasePageAction {
       return FALSE;
     }
 
-    $this->session->flash(
+    $this->session()->flash(
           StateInterface::SUCCESSFUL,
           sprintf(
               Translation::get('page_successfully_created'),

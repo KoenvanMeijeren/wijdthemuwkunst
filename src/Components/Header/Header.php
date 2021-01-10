@@ -40,6 +40,20 @@ final class Header implements HeaderInterface {
   /**
    * {@inheritDoc}
    */
+  public function accessDenied(): void {
+    header('HTTP/1.1 403 Origin Denied');
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function allowOrigin(string $origin): void {
+    header("Access-Control-Allow-Origin: {$origin}");
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public function remove(string $name): void {
     header_remove($name);
   }

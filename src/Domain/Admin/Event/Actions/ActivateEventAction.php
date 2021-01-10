@@ -2,8 +2,8 @@
 
 namespace Domain\Admin\Event\Actions;
 
-use System\StateInterface;
 use Src\Translation\Translation;
+use System\StateInterface;
 
 /**
  *
@@ -18,7 +18,7 @@ class ActivateEventAction extends BaseEventAction {
       'event_is_archived' => '0',
     ]);
 
-    $this->session->flash(
+    $this->session()->flash(
           StateInterface::SUCCESSFUL,
           sprintf(
               Translation::get('event_successfully_activated'),

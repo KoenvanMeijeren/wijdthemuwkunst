@@ -7,8 +7,8 @@ namespace Domain\Admin\Accounts\Account\Actions;
 
 use Domain\Admin\Accounts\Account\Models\Account;
 use Domain\Admin\Accounts\User\Models\User;
-use System\StateInterface;
 use Src\Translation\Translation;
+use System\StateInterface;
 
 /**
  *
@@ -30,7 +30,7 @@ final class CreateAccountAction extends BaseAccountAction {
     ]);
 
     if ($account === NULL) {
-      $this->session->flash(
+      $this->session()->flash(
             StateInterface::FAILED,
             Translation::get('admin_create_account_unsuccessful_message')
         );
@@ -38,7 +38,7 @@ final class CreateAccountAction extends BaseAccountAction {
       return FALSE;
     }
 
-    $this->session->flash(
+    $this->session()->flash(
           StateInterface::SUCCESSFUL,
           Translation::get('admin_create_account_successful_message')
       );

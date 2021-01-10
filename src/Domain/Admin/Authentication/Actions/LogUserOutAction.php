@@ -5,12 +5,12 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Authentication\Actions;
 
+use Components\Actions\Action;
 use Domain\Admin\Accounts\User\Models\User;
-use Src\Action\Action;
-use System\StateInterface;
 use Src\Session\Session;
 use Src\Session\SessionBuilder;
 use Src\Translation\Translation;
+use System\StateInterface;
 
 /**
  *

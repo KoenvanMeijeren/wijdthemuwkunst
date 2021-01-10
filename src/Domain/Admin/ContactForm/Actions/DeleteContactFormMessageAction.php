@@ -2,8 +2,8 @@
 
 namespace Domain\Admin\ContactForm\Actions;
 
-use System\StateInterface;
 use Src\Translation\Translation;
+use System\StateInterface;
 
 /**
  * Provides a way to delete contact form messages.
@@ -18,7 +18,7 @@ final class DeleteContactFormMessageAction extends BaseContactFormAction {
   protected function handle(): bool {
     $this->contactForm->delete($this->contactForm->getId());
 
-    $this->session->flash(StateInterface::SUCCESSFUL, sprintf(
+    $this->session()->flash(StateInterface::SUCCESSFUL, sprintf(
       Translation::get('admin_delete_contact_form_message'),
       $this->repository->getName()
     ));

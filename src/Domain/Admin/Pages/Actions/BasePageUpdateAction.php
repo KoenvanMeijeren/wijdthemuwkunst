@@ -3,8 +3,8 @@
 namespace Domain\Admin\Pages\Actions;
 
 use Domain\Admin\Pages\Models\Page;
-use System\StateInterface;
 use Src\Translation\Translation;
+use System\StateInterface;
 
 /**
  *
@@ -20,7 +20,7 @@ abstract class BasePageUpdateAction extends BasePageAction {
     if ($inMenu === Page::PAGE_STATIC
           && $this->url !== $this->pageRepository->getSlug()
       ) {
-      $this->session->flash(
+      $this->session()->flash(
             StateInterface::FAILED,
             sprintf(
                 Translation::get('page_static_slug_cannot_be_edited'),
@@ -34,7 +34,7 @@ abstract class BasePageUpdateAction extends BasePageAction {
     if ($inMenu === Page::PAGE_STATIC
           && $this->inMenu !== $inMenu
       ) {
-      $this->session->flash(
+      $this->session()->flash(
             StateInterface::FAILED,
             sprintf(
                 Translation::get('page_static_cannot_be_edited'),

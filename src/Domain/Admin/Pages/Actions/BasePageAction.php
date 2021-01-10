@@ -5,16 +5,16 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Pages\Actions;
 
+use Components\Actions\FormAction;
 use Domain\Admin\File\Actions\SaveFileAction;
 use Domain\Admin\Pages\Models\Page;
 use Domain\Admin\Pages\Models\Slug;
 use Domain\Admin\Pages\Repositories\PageRepository;
 use Domain\Admin\Pages\Repositories\SlugRepository;
-use Src\Action\FormAction;
-use System\Request;
 use Src\Session\Session;
 use Src\Translation\Translation;
 use Src\Validate\form\FormValidator;
+use System\Request;
 
 /**
  *
@@ -44,7 +44,7 @@ abstract class BasePageAction extends FormAction {
     $this->pageRepository = new PageRepository(
           $this->page->find($this->page->getId())
       );
-    $this->session = new Session();
+    $this->session() = new Session();
     $this->validator = new FormValidator();
     $request = new Request();
 

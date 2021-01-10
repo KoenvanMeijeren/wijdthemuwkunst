@@ -1,24 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace Src\Action;
+namespace Components\Actions;
 
-use System\Request;
+use Components\SuperGlobals\Request;
 use System\Upload;
 
 /**
  * Provides a base class for file actions.
  *
- * @package src\Action
+ * @package Components\Actions
  */
 abstract class FileAction extends Action {
-
-  /**
-   * The request definition.
-   *
-   * @var \System\Request
-   */
-  protected Request $request;
 
   /**
    * The accepted origins to uploaded files from.
@@ -47,15 +40,13 @@ abstract class FileAction extends Action {
    * File action constructor.
    */
   public function __construct() {
-    $this->request = new Request();
-
-    $uri = $this->request->env('app_uri');
+    $uri = $this->request()->env('app_uri');
     $shortUri = replace_string('www.', '', $uri);
 
     $this->acceptedOrigins[] = $uri;
     $this->acceptedOrigins[] = $shortUri;
 
-    $this->origin = $this->request->server(Request::HTTP_ORIGIN);
+    $this->origin = $this->request()->server(Request::HTTP_ORIGIN);
   }
 
   /**
@@ -64,7 +55,11 @@ abstract class FileAction extends Action {
    * @return array
    *   The file.
    */
-  abstract protected function getFile(): array;
+  protected function getFile(): array {
+    reset($_FILES);
+
+    return current($_FILES);
+  }
 
   /**
    * {@inheritDoc}
@@ -89,12 +84,11 @@ abstract class FileAction extends Action {
    */
   protected function authorize(): bool {
     if (!in_array($this->origin, $this->acceptedOrigins, TRUE)) {
-      header('HTTP/1.1 403 Origin Denied');
-
+      $this->header()->accessDenied();
       return FALSE;
     }
 
-    header('Access-Control-Allow-Origin: ' . $this->origin);
+    $this->header()->allowOrigin($this->origin);
 
     return TRUE;
   }

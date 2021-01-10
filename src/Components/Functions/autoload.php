@@ -17,7 +17,7 @@ $filenames = [
 ];
 
 foreach ($filenames as $filename) {
-  $filename = APP_PATH . '/Support/Functions/' . $filename . '.php';
+  $filename = APP_PATH . '/Components/Functions/' . $filename . '.php';
 
   Validate::var($filename)->fileExists();
 

@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace Domain\Admin\File\Actions;
 
-use Src\Action\FileAction;
+use Components\Actions\FileAction;
 
 /**
  * Provides an action class for uploading files.
@@ -27,15 +27,6 @@ final class UploadFileAction extends FileAction {
     echo json_encode($data, JSON_THROW_ON_ERROR);
 
     return TRUE;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  protected function getFile(): array {
-    reset($_FILES);
-
-    return current($_FILES);
   }
 
 }

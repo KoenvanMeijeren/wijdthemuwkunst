@@ -10,7 +10,7 @@
     "autoload": {
         "files": [
             "config/const.php",
-            "src/Support/Functions/autoload.php"
+            "src/Components/Functions/autoload.php"
         ],
         "psr-4": {
             "Domain\\": "src/Domain/",

@@ -2,8 +2,8 @@
 
 namespace Domain\Admin\Menu\Actions;
 
-use System\StateInterface;
 use Src\Translation\Translation;
+use System\StateInterface;
 
 /**
  *
@@ -17,7 +17,7 @@ final class DestroyMenuAction extends BaseMenuAction {
     $this->menu->delete($this->menu->getId());
 
     if ($this->menu->find($this->menu->getId()) !== NULL) {
-      $this->session->flash(
+      $this->session()->flash(
             StateInterface::SUCCESSFUL,
             sprintf(
                 Translation::get('menu_item_unsuccessful_deleted'),
@@ -28,7 +28,7 @@ final class DestroyMenuAction extends BaseMenuAction {
       return FALSE;
     }
 
-    $this->session->flash(
+    $this->session()->flash(
           StateInterface::SUCCESSFUL,
           sprintf(
               Translation::get('menu_item_successful_deleted'),

@@ -63,6 +63,19 @@ interface HeaderInterface {
   public function refresh(string $url, int $refreshTime): void;
 
   /**
+   * Access denied, returns the HTTP 403 response.
+   */
+  public function accessDenied(): void;
+
+  /**
+   * Allows the given origin.
+   *
+   * @param string $origin
+   *   The allowed origin.
+   */
+  public function allowOrigin(string $origin): void;
+
+  /**
    * Removes previously send headers.
    *
    * @param string $name

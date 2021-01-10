@@ -5,16 +5,16 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Settings\Actions;
 
+use Components\Actions\FormAction;
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Pages\Models\Slug;
 use Domain\Admin\Settings\Models\Setting;
 use Domain\Admin\Settings\Repositories\SettingRepository;
-use Src\Action\FormAction;
-use System\Request;
-use System\StateInterface;
 use Src\Session\Session;
 use Src\Translation\Translation;
 use Src\Validate\form\FormValidator;
+use System\Request;
+use System\StateInterface;
 
 /**
  *
@@ -36,7 +36,7 @@ abstract class BaseSettingAction extends FormAction {
     $this->settingRepository = new SettingRepository(
           $this->setting->find($this->setting->getId())
       );
-    $this->session = new Session();
+    $this->session() = new Session();
     $this->validator = new FormValidator();
     $request = new Request();
 
@@ -58,7 +58,7 @@ abstract class BaseSettingAction extends FormAction {
     if ($this->key !== $this->settingRepository->getKey()
           && $user->getRights() !== User::DEVELOPER
       ) {
-      $this->session->flash(
+      $this->session()->flash(
             StateInterface::FAILED,
             Translation::get('setting_editing_key_not_allowed')
         );

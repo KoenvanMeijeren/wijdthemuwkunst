@@ -5,13 +5,13 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Authentication\Actions;
 
+use Components\Actions\FormAction;
 use Domain\Admin\Accounts\Account\Models\Account;
 use Domain\Admin\Accounts\Repositories\AccountRepository;
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Authentication\Support\IDEncryption;
-use Src\Action\FormAction;
-use System\StateInterface;
 use Src\Translation\Translation;
+use System\StateInterface;
 
 /**
  *
@@ -38,9 +38,9 @@ final class LogUserInAction extends FormAction {
 
     $this->user = $user;
 
-    $this->email = $this->request->post('email');
-    $this->password = $this->request->post('password');
-    $this->maximumLoginAttempts = (int) $this->request->env('login_attempts');
+    $this->email = $this->request()->post('email');
+    $this->password = $this->request()->post('password');
+    $this->maximumLoginAttempts = (int) $this->request()->env('login_attempts');
 
     $this->account = new AccountRepository($this->user->getByEmail($this->email));
   }
@@ -50,12 +50,12 @@ final class LogUserInAction extends FormAction {
    */
   protected function handle(): bool {
     if (password_verify($this->password, $this->account->getPassword())) {
-      $this->session->unset('userID');
+      $this->session()->unset('userID');
 
       $idEncryption = new IDEncryption();
       $token = $idEncryption->generateToken();
 
-      $this->session->save('userID', $idEncryption->encrypt($this->account->getId(), $token));
+      $this->session()->save('userID', $idEncryption->encrypt($this->account->getId(), $token));
 
       // Always executed.
       $this->storeToken($token);
@@ -65,7 +65,7 @@ final class LogUserInAction extends FormAction {
 
       $this->store();
 
-      $this->session->flash(StateInterface::SUCCESSFUL, Translation::get('login_successful_message'));
+      $this->session()->flash(StateInterface::SUCCESSFUL, Translation::get('login_successful_message'));
 
       return TRUE;
     }
@@ -76,7 +76,7 @@ final class LogUserInAction extends FormAction {
 
     $this->store();
 
-    $this->session->flash(StateInterface::FAILED, Translation::get('login_failed_message'));
+    $this->session()->flash(StateInterface::FAILED, Translation::get('login_failed_message'));
 
     return FALSE;
   }
@@ -86,7 +86,7 @@ final class LogUserInAction extends FormAction {
    */
   protected function authorize(): bool {
     if ($this->account->isBlocked()) {
-      $this->session->flash(StateInterface::FAILED, Translation::get('login_failed_blocked_account_message'));
+      $this->session()->flash(StateInterface::FAILED, Translation::get('login_failed_blocked_account_message'));
 
       return FALSE;
     }

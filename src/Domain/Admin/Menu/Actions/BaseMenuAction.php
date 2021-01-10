@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Menu\Actions;
 
+use Components\Actions\FormAction;
 use Domain\Admin\Menu\Models\Menu;
 use Domain\Admin\Menu\Repositories\MenuRepository;
 use Domain\Admin\Pages\Models\Slug;
 use Domain\Admin\Pages\Repositories\SlugRepository;
-use Src\Action\FormAction;
-use System\Request;
 use Src\Session\Session;
 use Src\Translation\Translation;
 use Src\Validate\form\FormValidator;
+use System\Request;
 
 /**
  *
@@ -37,7 +37,7 @@ abstract class BaseMenuAction extends FormAction {
   public function __construct() {
     $this->menu = new Menu();
     $this->slug = new Slug();
-    $this->session = new Session();
+    $this->session() = new Session();
     $this->validator = new FormValidator();
     $request = new Request();
 

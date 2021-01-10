@@ -5,10 +5,10 @@ declare(strict_types=1);
 
 namespace Domain\Contact\Controllers;
 
-use Domain\Admin\ContactForm\Actions\SaveContactFormMessageAction;
-use Domain\Contact\Actions\ContactAction;
 use Components\Header\Redirect;
 use Components\SuperGlobals\Url\Uri;
+use Domain\Admin\ContactForm\Actions\SaveContactFormMessageAction;
+use Domain\Contact\Actions\ContactAction;
 use System\Controller\ControllerBase;
 
 /**
@@ -32,9 +32,9 @@ final class ContactController extends ControllerBase {
       return new Redirect('/contact-aanvraag-verzonden');
     }
 
-    $this->session->save('name', $this->request->post('name'));
-    $this->session->save('email', $this->request->post('email'));
-    $this->session->save('message', $this->request->post('message'));
+    $this->session()->save('name', $this->request()->post('name'));
+    $this->session()->save('email', $this->request()->post('email'));
+    $this->session()->save('message', $this->request()->post('message'));
 
     $redirectUrl = Uri::getPreviousUrl();
     if ($redirectUrl === '') {

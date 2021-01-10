@@ -1,13 +1,14 @@
 <?php
+declare(strict_types=1);
 
 namespace Domain\Admin\Text\Actions;
 
+use Components\Actions\EntityFormActionBase;
 use Domain\Admin\Accounts\User\Models\User;
-use Domain\Admin\Text\Entity\Text;
-use Src\Action\EntityFormActionBase;
-use System\StateInterface;
+use Domain\Admin\Text\Entity\TextInterface;
 use Src\Translation\Translation;
 use System\Entity\EntityInterface;
+use System\StateInterface;
 
 /**
  * Provides a base class for text actions.
@@ -15,6 +16,13 @@ use System\Entity\EntityInterface;
  * @package Domain\Admin\Text\Actions
  */
 abstract class BaseTextAction extends EntityFormActionBase {
+
+  /**
+   * The text entity.
+   *
+   * @var TextInterface
+   */
+  protected EntityInterface $entity;
 
   /**
    * The current user definition.
@@ -30,40 +38,38 @@ abstract class BaseTextAction extends EntityFormActionBase {
     parent::__construct();
 
     $this->user = new User();
+  }
 
-    $storage = $this->entityManager->getStorage(Text::class);
-    $this->entity = $storage->create();
-    if ($id = $this->request->getRouteParameter()) {
-      $this->entity = $storage->load((int) $id);
-    }
+  /**
+   * {@inheritDoc}
+   */
+  protected function getEntityType(): string {
+    return self::class;
   }
 
   /**
    * {@inheritDoc}
    */
   protected function saveEntity(): bool {
-    /** @var \Domain\Admin\Text\Entity\TextInterface $entity */
-    $entity = $this->entity;
-
-    $status = $entity->save();
+    $status = $this->entity->save();
     switch ($status) {
       case EntityInterface::SAVED_NEW:
-        $this->session->flash(StateInterface::SUCCESSFUL,
-          sprintf(Translation::get('text_successful_created'), $entity->getKey())
+        $this->session()()->flash(StateInterface::SUCCESSFUL,
+          sprintf(Translation::get('text_successful_created'), $this->entity->getKey())
         );
 
         return TRUE;
 
       case EntityInterface::SAVED_UPDATED:
-        $this->session->flash(StateInterface::SUCCESSFUL,
-          sprintf(Translation::get('text_successful_updated'), $entity->getKey())
+        $this->session()()->flash(StateInterface::SUCCESSFUL,
+          sprintf(Translation::get('text_successful_updated'), $this->entity->getKey())
         );
 
         return TRUE;
 
       default:
-        $this->session->flash(StateInterface::FAILED,
-          sprintf(Translation::get('text_unsuccessful_updated'), $entity->getKey())
+        $this->session()()->flash(StateInterface::FAILED,
+          sprintf(Translation::get('text_unsuccessful_updated'), $this->entity->getKey())
         );
 
         return FALSE;

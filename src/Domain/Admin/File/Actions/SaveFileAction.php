@@ -5,8 +5,8 @@ declare(strict_types=1);
 
 namespace Domain\Admin\File\Actions;
 
+use Components\Actions\Action;
 use Domain\Admin\File\Models\File;
-use Src\Action\Action;
 
 /**
  *

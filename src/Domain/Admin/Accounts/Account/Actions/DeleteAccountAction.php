@@ -5,8 +5,8 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\Account\Actions;
 
-use System\StateInterface;
 use Src\Translation\Translation;
+use System\StateInterface;
 
 /**
  *
@@ -20,7 +20,7 @@ final class DeleteAccountAction extends BaseAccountAction {
     $this->account->delete($this->account->getId());
 
     if ($this->account->find($this->account->getId()) !== NULL) {
-      $this->session->flash(
+      $this->session()->flash(
             StateInterface::FAILED,
             Translation::get('admin_deleted_account_failed_message')
         );
@@ -28,7 +28,7 @@ final class DeleteAccountAction extends BaseAccountAction {
       return FALSE;
     }
 
-    $this->session->flash(
+    $this->session()->flash(
           StateInterface::SUCCESSFUL,
           Translation::get('admin_deleted_account_successful_message')
       );
@@ -41,7 +41,7 @@ final class DeleteAccountAction extends BaseAccountAction {
    */
   protected function authorize(): bool {
     if ($this->user->getId() === $this->account->getId()) {
-      $this->session->flash(
+      $this->session()->flash(
             StateInterface::FAILED,
             Translation::get('cannot_delete_own_account_message')
         );
