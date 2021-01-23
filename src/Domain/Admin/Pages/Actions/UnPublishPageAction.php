@@ -5,8 +5,8 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Pages\Actions;
 
+use Components\Translation\TranslationOld;
 use Domain\Admin\Pages\Models\Page;
-use Src\Translation\Translation;
 use System\StateInterface;
 
 /**
@@ -25,7 +25,7 @@ final class UnPublishPageAction extends BasePageAction {
     $this->session()->flash(
           StateInterface::SUCCESSFUL,
           sprintf(
-              Translation::get('page_successfully_unpublished'),
+              TranslationOld::get('page_successfully_unpublished'),
               $this->pageRepository->getSlug()
           )
       );
@@ -40,7 +40,7 @@ final class UnPublishPageAction extends BasePageAction {
     if ($this->pageRepository->getInMenu() === Page::PAGE_STATIC) {
       $this->session()->flash(
             StateInterface::FAILED,
-            Translation::get('page_static_cannot_be_unpublished')
+            TranslationOld::get('page_static_cannot_be_unpublished')
         );
 
       return FALSE;

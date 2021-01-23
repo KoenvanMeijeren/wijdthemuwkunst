@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Cms\Structure\Controllers;
 
-use Src\Translation\Translation;
+use Components\Translation\TranslationOld;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;
 
@@ -26,7 +26,7 @@ final class StructureControllerBase extends AdminControllerBase {
    */
   public function index(): ViewInterface {
     return $this->view('index', [
-      'title' => Translation::get('admin_dashboard_title'),
+      'title' => TranslationOld::get('admin_dashboard_title'),
       'items' => $this->indexMenu($this->getCurrentUser()),
     ]);
   }
@@ -41,7 +41,7 @@ final class StructureControllerBase extends AdminControllerBase {
    */
   public function content(): ViewInterface {
     return $this->view('index', [
-      'title' => Translation::get('admin_content_title'),
+      'title' => TranslationOld::get('admin_content_title'),
       'items' => $this->contentMenu(),
     ]);
   }
@@ -56,7 +56,7 @@ final class StructureControllerBase extends AdminControllerBase {
    */
   public function structure(): ViewInterface {
     return $this->view('index', [
-      'title' => Translation::get('admin_structure_title'),
+      'title' => TranslationOld::get('admin_structure_title'),
       'items' => $this->structureMenu(),
     ]);
   }
@@ -71,7 +71,7 @@ final class StructureControllerBase extends AdminControllerBase {
    */
   public function configuration(): ViewInterface {
     return $this->view('index', [
-      'title' => Translation::get('admin_configuration_title'),
+      'title' => TranslationOld::get('admin_configuration_title'),
       'items' => $this->configurationMenu(),
     ]);
   }
@@ -86,7 +86,7 @@ final class StructureControllerBase extends AdminControllerBase {
    */
   public function reports(): ViewInterface {
     return $this->view('index', [
-      'title' => Translation::get('admin_reports_title'),
+      'title' => TranslationOld::get('admin_reports_title'),
       'items' => $this->reportsMenu(),
     ]);
   }

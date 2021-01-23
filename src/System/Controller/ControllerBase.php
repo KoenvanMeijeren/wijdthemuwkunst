@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace System\Controller;
 
+use Components\ComponentsTrait;
 use Domain\Admin\Accounts\User\Models\User;
 use System\Request;
 use Src\Session\Session;
@@ -19,26 +20,14 @@ use System\View\DomainView;
  */
 abstract class ControllerBase implements ControllerInterface {
 
+  use ComponentsTrait;
+
   /**
    * The base path to the views directory.
    *
    * @var string
    */
   protected string $baseViewPath = '';
-
-  /**
-   * The request definition.
-   *
-   * @var \System\Request
-   */
-  protected Request $request;
-
-  /**
-   * The session definition.
-   *
-   * @var \Src\Session\Session
-   */
-  protected Session $session;
 
   /**
    * The user definition.
@@ -58,8 +47,6 @@ abstract class ControllerBase implements ControllerInterface {
    * ControllerBase constructor.
    */
   public function __construct() {
-    $this->request = new Request();
-    $this->session = new Session();
     $this->user = new User();
     $this->entityManager = new EntityManager();
   }
@@ -86,7 +73,7 @@ abstract class ControllerBase implements ControllerInterface {
    *   The current user of the app.
    */
   protected function getCurrentUser(): User {
-    return new User();
+    return $this->user;
   }
 
 }

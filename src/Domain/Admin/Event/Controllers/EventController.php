@@ -2,6 +2,8 @@
 
 namespace Domain\Admin\Event\Controllers;
 
+use Components\Header\Redirect;
+use Components\Translation\TranslationOld;
 use Domain\Admin\Event\Actions\ActivateEventAction;
 use Domain\Admin\Event\Actions\ArchiveEventAction;
 use Domain\Admin\Event\Actions\CreateEventAction;
@@ -17,8 +19,6 @@ use Domain\Admin\Event\Repositories\EventRepository;
 use Domain\Admin\Event\ViewModels\ArchivedEventTable;
 use Domain\Admin\Event\ViewModels\EditViewModel;
 use Domain\Admin\Event\ViewModels\EventTable;
-use Components\Header\Redirect;
-use Src\Translation\Translation;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;
 
@@ -58,7 +58,7 @@ final class EventController extends AdminControllerBase {
       );
 
     return $this->view('index', [
-      'title' => Translation::get('admin_event_title'),
+      'title' => TranslationOld::get('admin_event_title'),
       'events' => $eventTable->get(),
       'archived_events' => $archivedEventTable->get('archive-table'),
     ]);
@@ -69,7 +69,7 @@ final class EventController extends AdminControllerBase {
    */
   public function create(): ViewInterface {
     return $this->view('edit', [
-      'title' => Translation::get('admin_create_event_title'),
+      'title' => TranslationOld::get('admin_create_event_title'),
     ]);
   }
 
@@ -100,7 +100,7 @@ final class EventController extends AdminControllerBase {
 
     return $this->view('edit', [
       'title' => sprintf(
-              Translation::get('admin_edit_event_title'),
+              TranslationOld::get('admin_edit_event_title'),
               $eventRepository->getTitle()
       ),
       'event' => $event->get(),

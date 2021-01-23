@@ -28,16 +28,23 @@ abstract class EntityFormActionBase extends FormAction {
   protected EntityInterface $entity;
 
   /**
+   * The storage.
+   *
+   * @var EntityManagerInterface
+   */
+  protected EntityManagerInterface $storage;
+
+  /**
    * EntityFormActionBase constructor.
    */
   public function __construct() {
     parent::__construct();
 
     $this->entityManager = new EntityManager();
-    $storage = $this->entityManager->getStorage($this->getEntityType());
-    $this->entity = $storage->create();
+    $this->storage = $this->entityManager->getStorage($this->getEntityType());
+    $this->entity = $this->storage->create();
     if ($id = $this->request()->getRouteParameter()) {
-      $this->entity = $storage->load((int) $id);
+      $this->entity = $this->storage->load((int) $id);
     }
   }
 

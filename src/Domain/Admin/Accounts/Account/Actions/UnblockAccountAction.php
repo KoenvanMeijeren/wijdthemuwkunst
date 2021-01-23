@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\Account\Actions;
 
-use Src\Translation\Translation;
+use Components\Translation\TranslationOld;
 use System\StateInterface;
 
 /**
@@ -23,7 +23,7 @@ final class UnblockAccountAction extends BaseAccountAction {
 
     $this->session()->flash(
           StateInterface::SUCCESSFUL,
-          Translation::get('admin_account_successful_unblocked_message')
+          TranslationOld::get('admin_account_successful_unblocked_message')
       );
 
     return TRUE;
@@ -36,7 +36,7 @@ final class UnblockAccountAction extends BaseAccountAction {
     if ($this->user->getId() === $this->account->getId()) {
       $this->session()->flash(
             StateInterface::FAILED,
-            Translation::get('cannot_unblock_own_account_message')
+            TranslationOld::get('cannot_unblock_own_account_message')
         );
 
       return FALSE;

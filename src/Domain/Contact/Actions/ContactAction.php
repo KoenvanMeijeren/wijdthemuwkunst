@@ -8,7 +8,7 @@ namespace Domain\Contact\Actions;
 use Domain\Admin\ContactForm\Actions\BaseContactFormAction;
 use Domain\Admin\Settings\Models\Setting;
 use Src\Security\Recaptcha;
-use Src\Translation\Translation;
+use Components\Translation\TranslationOld;
 use System\Mail\Mail;
 
 /**
@@ -75,11 +75,11 @@ final class ContactAction extends BaseContactFormAction {
    * {@inheritDoc}
    */
   protected function validate(): bool {
-    $this->validator->input($this->setting->get('bedrijf_email'), Translation::get('company_email'))
+    $this->validator->input($this->setting->get('bedrijf_email'), TranslationOld::get('company_email'))
       ->settingIsRequired()
       ->isEmail();
 
-    $this->validator->input($this->setting->get('bedrijf_naam'), Translation::get('company_name'))
+    $this->validator->input($this->setting->get('bedrijf_naam'), TranslationOld::get('company_name'))
       ->settingIsRequired();
 
     return parent::validate();

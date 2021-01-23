@@ -2,8 +2,8 @@
 
 namespace Domain\Admin\Event\Support;
 
-use Src\Converter\ConverterBase;
-use Src\Translation\Translation;
+use Components\Converter\ConverterBase;
+use Components\Translation\TranslationOld;
 
 /**
  * Provides a class for converting the published state of an event.
@@ -17,10 +17,10 @@ final class EventIsPublishedStateConverter extends ConverterBase {
    */
   public function toReadable(): string {
     if ((bool) $this->var) {
-      return Translation::get('admin_event_is_published');
+      return TranslationOld::get('admin_event_is_published');
     }
 
-    return Translation::get('admin_event_is_not_published');
+    return TranslationOld::get('admin_event_is_not_published');
   }
 
 }

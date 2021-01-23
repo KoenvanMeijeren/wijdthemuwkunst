@@ -2,7 +2,7 @@
 
 namespace Domain\Admin\Event\Actions;
 
-use Src\Translation\Translation;
+use Components\Translation\TranslationOld;
 use System\StateInterface;
 
 /**
@@ -21,7 +21,7 @@ final class RemoveEventThumbnailAction extends BaseEventAction {
     $this->session()->flash(
           StateInterface::SUCCESSFUL,
           sprintf(
-              Translation::get('event_thumbnail_successfully_removed'),
+              TranslationOld::get('event_thumbnail_successfully_removed'),
               $this->eventRepository->getTitle()
           )
       );

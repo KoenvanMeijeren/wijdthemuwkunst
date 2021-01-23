@@ -8,7 +8,7 @@ use ReCaptcha\ReCaptcha as GoogleRecaptcha;
 use System\Request;
 use System\StateInterface;
 use Src\Session\Session;
-use Src\Translation\Translation;
+use Components\Translation\TranslationOld;
 
 /**
  * @deprecated
@@ -44,7 +44,7 @@ final class Recaptcha {
     $session = new Session();
     $session->flash(
           StateInterface::FAILED,
-          Translation::get('failed_recaptcha_check_message')
+          TranslationOld::get('failed_recaptcha_check_message')
       );
 
     return FALSE;

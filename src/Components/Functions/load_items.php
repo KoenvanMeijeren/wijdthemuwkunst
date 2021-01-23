@@ -21,8 +21,10 @@ if (!function_exists('include_file')) {
    *
    * @return mixed
    *   The included file.
+   *
+   * @throws \Src\Exceptions\File\FileNotFoundException
    */
-  function include_file(string $name, $variables = NULL) {
+  function include_file(string $name, $variables = NULL): mixed {
     if ($variables !== NULL) {
       extract($variables, EXTR_SKIP);
     }

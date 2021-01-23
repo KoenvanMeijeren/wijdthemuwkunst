@@ -1,12 +1,12 @@
 <?php
 
+use Components\SuperGlobals\Url\Uri;
+use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\Account\Support\AccountRightsConverter;
 use Domain\Admin\Accounts\User\Models\User;
-use System\Request;
-use Components\SuperGlobals\Url\Uri;
-use Src\Translation\Translation;
 use Support\Resource;
 use System\Breadcrumbs\Breadcrumbs;
+use System\Request;
 
 $user = new User();
 $rights = new AccountRightsConverter($user->getRights());
@@ -14,7 +14,7 @@ $request = new Request();
 $breadcrumbs = new Breadcrumbs(Uri::getUrl());
 ?>
 <!DOCTYPE html>
-<html lang="<?= Translation::DUTCH_LANGUAGE_CODE ?>">
+<html lang="<?= TranslationOld::DUTCH_LANGUAGE_CODE ?>">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -72,7 +72,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
                     <a class="nav-link" href="/admin/dashboard">
                         <i class="fas fa-home"></i>
                         <span>
-                            <?= Translation::get('admin_menu_dashboard') ?>
+                            <?= TranslationOld::get('admin_menu_dashboard') ?>
                         </span>
                     </a>
                 </li>
@@ -83,7 +83,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
                        data-target="#siteContent" aria-expanded="true"
                        aria-controls="collapseTwo">
                         <i class="fas fa-file-alt"></i>
-                        <span class="pl-1"> <?= Translation::get('admin_content_title') ?></span>
+                        <span class="pl-1"> <?= TranslationOld::get('admin_content_title') ?></span>
                     </a>
                     <div id="siteContent" class="collapse"
                          aria-labelledby="siteContent"
@@ -106,7 +106,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
                        data-target="#structure" aria-expanded="true"
                        aria-controls="collapseTwo">
                         <i class="fas fa-sitemap"></i>
-                        <span> <?= Translation::get('admin_structure_title') ?></span>
+                        <span> <?= TranslationOld::get('admin_structure_title') ?></span>
                     </a>
                     <div id="structure" class="collapse"
                          aria-labelledby="structure"
@@ -129,7 +129,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
                        data-target="#configuration" aria-expanded="true"
                        aria-controls="collapseTwo">
                         <i class="fas fa-cogs"></i>
-                        <span> <?= Translation::get('admin_configuration_title') ?></span>
+                        <span> <?= TranslationOld::get('admin_configuration_title') ?></span>
                     </a>
                     <div id="configuration" class="collapse"
                          aria-labelledby="configuration"
@@ -154,7 +154,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
                     <a class="nav-link" href="/admin/account">
                         <i class="fas fa-users"></i>
                         <span>
-                            <?= Translation::get('admin_accounts_title') ?>
+                            <?= TranslationOld::get('admin_accounts_title') ?>
                         </span>
                     </a>
                 </li>
@@ -167,7 +167,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
                        data-target="#reports" aria-expanded="true"
                        aria-controls="collapseTwo">
                         <i class="fas fa-chart-bar"></i>
-                        <span> <?= Translation::get('admin_reports_title') ?></span>
+                        <span> <?= TranslationOld::get('admin_reports_title') ?></span>
                     </a>
                     <div id="reports" class="collapse"
                          aria-labelledby="reports"
@@ -223,7 +223,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
                             <a class="nav-link <?= strpos(Uri::getUrl(),
                                 'user/account') !== false ? 'active-link' : '' ?>"
                                href="/admin/user/account">
-                                <?= Translation::get('welcome_text') ?>
+                                <?= TranslationOld::get('welcome_text') ?>
                                 <?= $user->getName() ?> -
                                 <b><?= $rights->toReadable() ?></b>
                             </a>
@@ -231,7 +231,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
                         <li class="nav-item">
                             <a class="nav-link"
                                href="/admin/logout">
-                                <?= Translation::get('logout_button') ?>
+                                <?= TranslationOld::get('logout_button') ?>
                             </a>
                         </li>
                     </ul>

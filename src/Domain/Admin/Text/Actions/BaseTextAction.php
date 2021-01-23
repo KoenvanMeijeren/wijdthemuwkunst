@@ -5,8 +5,8 @@ namespace Domain\Admin\Text\Actions;
 
 use Components\Actions\EntityFormActionBase;
 use Domain\Admin\Accounts\User\Models\User;
-use Domain\Admin\Text\Entity\TextInterface;
-use Src\Translation\Translation;
+use Domain\Admin\Text\Entity\Text;
+use Components\Translation\TranslationOld;
 use System\Entity\EntityInterface;
 use System\StateInterface;
 
@@ -20,7 +20,7 @@ abstract class BaseTextAction extends EntityFormActionBase {
   /**
    * The text entity.
    *
-   * @var TextInterface
+   * @var \Domain\Admin\Text\Entity\TextInterface
    */
   protected EntityInterface $entity;
 
@@ -44,7 +44,7 @@ abstract class BaseTextAction extends EntityFormActionBase {
    * {@inheritDoc}
    */
   protected function getEntityType(): string {
-    return self::class;
+    return Text::class;
   }
 
   /**
@@ -54,22 +54,22 @@ abstract class BaseTextAction extends EntityFormActionBase {
     $status = $this->entity->save();
     switch ($status) {
       case EntityInterface::SAVED_NEW:
-        $this->session()()->flash(StateInterface::SUCCESSFUL,
-          sprintf(Translation::get('text_successful_created'), $this->entity->getKey())
+        $this->session()->flash(StateInterface::SUCCESSFUL,
+          sprintf(TranslationOld::get('text_successful_created'), $this->entity->getKey())
         );
 
         return TRUE;
 
       case EntityInterface::SAVED_UPDATED:
-        $this->session()()->flash(StateInterface::SUCCESSFUL,
-          sprintf(Translation::get('text_successful_updated'), $this->entity->getKey())
+        $this->session()->flash(StateInterface::SUCCESSFUL,
+          sprintf(TranslationOld::get('text_successful_updated'), $this->entity->getKey())
         );
 
         return TRUE;
 
       default:
-        $this->session()()->flash(StateInterface::FAILED,
-          sprintf(Translation::get('text_unsuccessful_updated'), $this->entity->getKey())
+        $this->session()->flash(StateInterface::FAILED,
+          sprintf(TranslationOld::get('text_unsuccessful_updated'), $this->entity->getKey())
         );
 
         return FALSE;
@@ -80,8 +80,8 @@ abstract class BaseTextAction extends EntityFormActionBase {
    * {@inheritDoc}
    */
   protected function validate(): bool {
-    $this->validator->input('key', Translation::get('key'))->isRequired();
-    $this->validator->input('value', Translation::get('value'))->isRequired();
+    $this->validator->input('key', TranslationOld::get('key'))->isRequired();
+    $this->validator->input('value', TranslationOld::get('value'))->isRequired();
 
     return $this->validator->handleFormValidation();
   }

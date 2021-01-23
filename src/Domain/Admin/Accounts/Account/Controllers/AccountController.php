@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\Account\Controllers;
 
+use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\Account\Actions\BlockAccountAction;
 use Domain\Admin\Accounts\Account\Actions\CreateAccountAction;
 use Domain\Admin\Accounts\Account\Actions\DeleteAccountAction;
@@ -16,7 +17,6 @@ use Domain\Admin\Accounts\Account\Models\Account;
 use Domain\Admin\Accounts\Account\ViewModels\AccountTable;
 use Domain\Admin\Accounts\Account\ViewModels\EditViewModel;
 use Src\Core\Redirect;
-use Src\Translation\Translation;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;
 
@@ -50,7 +50,7 @@ final class AccountController extends AdminControllerBase {
     $accountTable = new AccountTable($this->account->all());
 
     return $this->view('index', [
-      'title' => Translation::get('admin_account_title'),
+      'title' => TranslationOld::get('admin_account_title'),
       'accounts' => $accountTable->get(),
     ]);
   }
@@ -60,7 +60,7 @@ final class AccountController extends AdminControllerBase {
    */
   public function create(): ViewInterface {
     return $this->view('create', [
-      'title' => Translation::get('admin_create_account_title'),
+      'title' => TranslationOld::get('admin_create_account_title'),
     ]);
   }
 
@@ -86,7 +86,7 @@ final class AccountController extends AdminControllerBase {
       );
 
     return $this->view('edit', [
-      'title' => Translation::get('admin_edit_account_title'),
+      'title' => TranslationOld::get('admin_edit_account_title'),
       'account' => $accountViewModel->get(),
     ]);
   }

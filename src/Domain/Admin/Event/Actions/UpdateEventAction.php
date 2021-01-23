@@ -2,7 +2,7 @@
 
 namespace Domain\Admin\Event\Actions;
 
-use Src\Translation\Translation;
+use Components\Translation\TranslationOld;
 use System\StateInterface;
 
 /**
@@ -19,7 +19,7 @@ final class UpdateEventAction extends BaseEventAction {
     $this->session()->flash(
           StateInterface::SUCCESSFUL,
           sprintf(
-              Translation::get('event_successfully_updated'),
+              TranslationOld::get('event_successfully_updated'),
               $this->eventRepository->getTitle()
           )
       );

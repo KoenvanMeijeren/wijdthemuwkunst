@@ -5,8 +5,8 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\Account\Support;
 
-use Src\Converter\ConverterBase;
-use Src\Translation\Translation;
+use Components\Converter\ConverterBase;
+use Components\Translation\TranslationOld;
 
 /**
  * Provides a class for converting account is blocked states.
@@ -23,7 +23,7 @@ final class AccountBlockStateConverter extends ConverterBase {
       return '';
     }
 
-    return ' - ' . Translation::get('account_is_blocked');
+    return ' - ' . TranslationOld::get('account_is_blocked');
   }
 
 }

@@ -2,14 +2,14 @@
 
 namespace Domain\Admin\Menu\Controllers;
 
+use Components\Header\Redirect;
+use Components\Translation\TranslationOld;
 use Domain\Admin\Menu\Actions\CreateMenuAction;
 use Domain\Admin\Menu\Actions\DestroyMenuAction;
 use Domain\Admin\Menu\Actions\UpdateMenuAction;
 use Domain\Admin\Menu\Models\Menu;
 use Domain\Admin\Menu\ViewModels\EditViewModel;
 use Domain\Admin\Menu\ViewModels\MenuTable;
-use Components\Header\Redirect;
-use Src\Translation\Translation;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;
 
@@ -38,7 +38,7 @@ final class MenuController extends AdminControllerBase {
     $menuTable = new MenuTable($this->menu->getAll());
 
     return $this->view('index', [
-      'title' => Translation::get('menu_title'),
+      'title' => TranslationOld::get('menu_title'),
       'menu_items' => $menuTable->get(),
     ]);
   }
@@ -50,7 +50,7 @@ final class MenuController extends AdminControllerBase {
     $menuTable = new MenuTable($this->menu->getAll());
 
     return $this->view('index', [
-      'title' => Translation::get('menu_title'),
+      'title' => TranslationOld::get('menu_title'),
       'menu_items' => $menuTable->get(),
       'create_menu_item' => TRUE,
     ]);
@@ -78,7 +78,7 @@ final class MenuController extends AdminControllerBase {
     $menuTable = new MenuTable($this->menu->getAll());
 
     return $this->view('index', [
-      'title' => Translation::get('menu_title'),
+      'title' => TranslationOld::get('menu_title'),
       'menu_items' => $menuTable->get(),
       'menu_item' => $menuItem->get(),
     ]);

@@ -3,8 +3,8 @@
 namespace Domain\Admin\Event\Support;
 
 use Cake\Chronos\Chronos;
-use Src\Converter\ConverterBase;
-use Src\Translation\Translation;
+use Components\Converter\ConverterBase;
+use Components\Translation\TranslationOld;
 use Support\DateTime;
 
 /**
@@ -22,11 +22,11 @@ final class EventDatetimeConverter extends ConverterBase {
 
     $readableDatetime = $datetime->toDate();
     $readableDatetime .= ' ';
-    $readableDatetime .= Translation::get('at');
+    $readableDatetime .= TranslationOld::get('at');
     $readableDatetime .= ' ';
     $readableDatetime .= $datetime->toTime();
     $readableDatetime .= ' ';
-    $readableDatetime .= Translation::get('hour');
+    $readableDatetime .= TranslationOld::get('hour');
 
     return $readableDatetime;
   }

@@ -14,6 +14,7 @@ use Src\Database\Statements\WhereStatements;
  * Provides a class to build queries and interact with the database.
  *
  * @package src\Database
+ * @deprecated
  */
 final class DB {
   use BasicStatements;

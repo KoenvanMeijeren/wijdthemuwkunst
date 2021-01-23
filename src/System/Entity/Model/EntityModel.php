@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace System\Entity\Model;
 
+use JetBrains\PhpStorm\Pure;
 use Src\Database\DB;
 
 /**
@@ -30,14 +31,14 @@ abstract class EntityModel implements EntityModelInterface {
   /**
    * {@inheritDoc}
    */
-  public function getPrimaryKey(): string {
+  #[Pure] public function getPrimaryKey(): string {
     return "{$this->getTable()}_ID";
   }
 
   /**
    * {@inheritDoc}
    */
-  public function getSoftDeletedKey(): string {
+  #[Pure] public function getSoftDeletedKey(): string {
     return "{$this->getTable()}_is_deleted";
   }
 

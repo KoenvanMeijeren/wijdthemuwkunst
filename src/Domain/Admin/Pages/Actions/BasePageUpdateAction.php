@@ -2,8 +2,8 @@
 
 namespace Domain\Admin\Pages\Actions;
 
+use Components\Translation\TranslationOld;
 use Domain\Admin\Pages\Models\Page;
-use Src\Translation\Translation;
 use System\StateInterface;
 
 /**
@@ -23,7 +23,7 @@ abstract class BasePageUpdateAction extends BasePageAction {
       $this->session()->flash(
             StateInterface::FAILED,
             sprintf(
-                Translation::get('page_static_slug_cannot_be_edited'),
+                TranslationOld::get('page_static_slug_cannot_be_edited'),
                 $this->pageRepository->getSlug()
             )
         );
@@ -37,7 +37,7 @@ abstract class BasePageUpdateAction extends BasePageAction {
       $this->session()->flash(
             StateInterface::FAILED,
             sprintf(
-                Translation::get('page_static_cannot_be_edited'),
+                TranslationOld::get('page_static_cannot_be_edited'),
                 $this->pageRepository->getSlug()
             )
         );

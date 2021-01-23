@@ -5,10 +5,10 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Authentication\Controllers;
 
+use Components\Header\Redirect;
+use Components\Translation\TranslationOld;
 use Domain\Admin\Authentication\Actions\LogUserInAction;
 use Domain\Admin\Authentication\Actions\LogUserOutAction;
-use Components\Header\Redirect;
-use Src\Translation\Translation;
 use System\Controller\AdminControllerBase;
 
 /**
@@ -35,7 +35,7 @@ final class AuthenticationController extends AdminControllerBase {
     }
 
     return $this->view('login', [
-      'title' => Translation::get('login_page_title'),
+      'title' => TranslationOld::get('login_page_title'),
     ]);
   }
 

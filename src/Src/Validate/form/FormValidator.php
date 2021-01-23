@@ -7,7 +7,7 @@ use DateTime;
 use System\Request;
 use System\StateInterface;
 use Src\Session\Session;
-use Src\Translation\Translation;
+use Components\Translation\TranslationOld;
 
 /**
  * Provides a class for form validation actions.
@@ -72,7 +72,7 @@ final class FormValidator implements FormValidatorInterface {
    */
   public function isRequired(): FormValidatorInterface {
     if ($this->input === '') {
-      $this->errors[] = sprintf(Translation::get('validator_form_field_is_required'), $this->alias);
+      $this->errors[] = sprintf(TranslationOld::get('validator_form_field_is_required'), $this->alias);
     }
 
     return $this;
@@ -83,7 +83,7 @@ final class FormValidator implements FormValidatorInterface {
    */
   public function intIsRequired(): FormValidatorInterface {
     if ((int) $this->input === 0) {
-      $this->errors[] = sprintf(Translation::get('validator_form_field_is_required'), $this->alias);
+      $this->errors[] = sprintf(TranslationOld::get('validator_form_field_is_required'), $this->alias);
     }
 
     return $this;
@@ -94,7 +94,7 @@ final class FormValidator implements FormValidatorInterface {
    */
   public function settingIsRequired(): FormValidatorInterface {
     if ($this->input === '') {
-      $this->errors[] = sprintf(Translation::get('validator_admin_setting_required'), $this->alias);
+      $this->errors[] = sprintf(TranslationOld::get('validator_admin_setting_required'), $this->alias);
     }
 
     return $this;
@@ -110,7 +110,7 @@ final class FormValidator implements FormValidatorInterface {
 
     $error = $errorMessage;
     if ($errorMessage === '') {
-      $error = sprintf(Translation::get('validator_form_field_value_is_not_in_array'), $this->alias, $value);
+      $error = sprintf(TranslationOld::get('validator_form_field_value_is_not_in_array'), $this->alias, $value);
     }
 
     $this->errors[] = $error;
@@ -125,7 +125,7 @@ final class FormValidator implements FormValidatorInterface {
       $error = $errorMessage;
       if ($errorMessage === '') {
         $error = sprintf(
-              Translation::get('validator_form_field_has_invalid_range'),
+              TranslationOld::get('validator_form_field_has_invalid_range'),
               $this->alias,
               $min,
               $max
@@ -145,7 +145,7 @@ final class FormValidator implements FormValidatorInterface {
     $dateTime = DateTime::createFromFormat('Y-m-d H:i:s', $this->input);
     $errors = DateTime::getLastErrors()['warning_count'] ?? 0;
     if ($dateTime === FALSE && $errors !== 0) {
-      $this->errors[] = Translation::get('validator_form_date_is_invalid');
+      $this->errors[] = TranslationOld::get('validator_form_date_is_invalid');
     }
 
     return $this;
@@ -156,7 +156,7 @@ final class FormValidator implements FormValidatorInterface {
    */
   public function isEmail(): FormValidatorInterface {
     if (!(bool) filter_var($this->input, FILTER_VALIDATE_EMAIL)) {
-      $this->errors[] = Translation::get('validator_form_email_is_invalid');
+      $this->errors[] = TranslationOld::get('validator_form_email_is_invalid');
     }
 
     return $this;
@@ -173,7 +173,7 @@ final class FormValidator implements FormValidatorInterface {
       $error = $errorMessage;
       if ($errorMessage === '') {
         $error = sprintf(
-              Translation::get('validator_form_field_is_unique'),
+              TranslationOld::get('validator_form_field_is_unique'),
               $this->alias
           );
       }
@@ -189,7 +189,7 @@ final class FormValidator implements FormValidatorInterface {
    */
   public function passwordIsEqual(string $password): FormValidatorInterface {
     if ($this->input !== $password) {
-      $this->errors[] = Translation::get('validator_form_passwords_are_not_equal');
+      $this->errors[] = TranslationOld::get('validator_form_passwords_are_not_equal');
     }
 
     return $this;
@@ -202,7 +202,7 @@ final class FormValidator implements FormValidatorInterface {
         string $currentHashedPassword
     ): FormValidatorInterface {
     if (password_verify($this->input, $currentHashedPassword)) {
-      $this->errors[] = Translation::get(
+      $this->errors[] = TranslationOld::get(
             'validator_form_new_password_cannot_be_the_same_as_the_current_password'
         );
     }
@@ -215,7 +215,7 @@ final class FormValidator implements FormValidatorInterface {
    */
   public function passwordIsVerified(string $hashedPassword): FormValidatorInterface {
     if (!password_verify($this->input, $hashedPassword)) {
-      $this->errors[] = Translation::get('validator_form_passwords_is_not_verified');
+      $this->errors[] = TranslationOld::get('validator_form_passwords_is_not_verified');
     }
 
     return $this;
@@ -232,7 +232,7 @@ final class FormValidator implements FormValidatorInterface {
    *
    */
   public function getErrorsAsString(): string {
-    $error = Translation::get('validator_form_base_error_message') . '<br><br>';
+    $error = TranslationOld::get('validator_form_base_error_message') . '<br><br>';
 
     foreach ($this->errors as $singleError) {
       $error .= '- ' . $singleError . '<br>';

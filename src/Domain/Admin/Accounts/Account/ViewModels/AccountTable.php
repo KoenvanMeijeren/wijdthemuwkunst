@@ -5,11 +5,11 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\Account\ViewModels;
 
+use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\Account\Support\AccountBlockStateConverter;
 use Domain\Admin\Accounts\Account\Support\AccountRightsConverter;
 use Domain\Admin\Accounts\Repositories\AccountRepository;
 use Domain\Admin\Accounts\User\Models\User;
-use Src\Translation\Translation;
 use Support\Resource;
 use System\DataTable\DataTableBuilder;
 
@@ -23,10 +23,10 @@ final class AccountTable extends DataTableBuilder {
    */
   protected function buildHead(): array {
     return [
-      Translation::get('table_row_name'),
-      Translation::get('table_row_email'),
-      Translation::get('table_row_rights'),
-      Translation::get('table_row_edit'),
+      TranslationOld::get('table_row_name'),
+      TranslationOld::get('table_row_email'),
+      TranslationOld::get('table_row_rights'),
+      TranslationOld::get('table_row_edit'),
     ];
   }
 
@@ -60,15 +60,15 @@ final class AccountTable extends DataTableBuilder {
     $actions = '<div class="table-edit-row">';
     $actions .= Resource::addTableLinkActionColumn(
           '/admin/account/edit/' . $account->getId(),
-          Translation::get('table_row_edit'),
+          TranslationOld::get('table_row_edit'),
           'fas fa-edit'
       );
     $actions .= Resource::addTableButtonActionColumn(
           '/admin/account/delete/' . $account->getId(),
-          Translation::get('table_row_delete'),
+          TranslationOld::get('table_row_delete'),
           'fas fa-trash-alt',
           'btn-outline-danger',
-          Translation::get('admin_delete_account_warning_message'),
+          TranslationOld::get('admin_delete_account_warning_message'),
           $user->getId() === $account->getId()
       );
     $actions .= '</div>';

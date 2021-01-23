@@ -6,12 +6,12 @@ declare(strict_types=1);
 namespace Domain\Admin\Settings\Actions;
 
 use Components\Actions\FormAction;
+use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Pages\Models\Slug;
 use Domain\Admin\Settings\Models\Setting;
 use Domain\Admin\Settings\Repositories\SettingRepository;
 use Src\Session\Session;
-use Src\Translation\Translation;
 use Src\Validate\form\FormValidator;
 use System\Request;
 use System\StateInterface;
@@ -60,7 +60,7 @@ abstract class BaseSettingAction extends FormAction {
       ) {
       $this->session()->flash(
             StateInterface::FAILED,
-            Translation::get('setting_editing_key_not_allowed')
+            TranslationOld::get('setting_editing_key_not_allowed')
         );
 
       return FALSE;
@@ -73,15 +73,15 @@ abstract class BaseSettingAction extends FormAction {
    * @inheritDoc
    */
   protected function validate(): bool {
-    $this->validator->input($this->key, Translation::get('key'))->isRequired();
-    $this->validator->input($this->value, Translation::get('value'))->isRequired();
+    $this->validator->input($this->key, TranslationOld::get('key'))->isRequired();
+    $this->validator->input($this->value, TranslationOld::get('value'))->isRequired();
 
     if ($this->key !== $this->settingRepository->getKey()) {
       $this->validator->input($this->key)
         ->isUnique(
                 $this->setting->getByKey($this->key),
                 sprintf(
-                    Translation::get('setting_already_exists'),
+                    TranslationOld::get('setting_already_exists'),
                     $this->key
                 )
             );

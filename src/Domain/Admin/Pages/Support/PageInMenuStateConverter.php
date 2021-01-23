@@ -5,9 +5,9 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Pages\Support;
 
+use Components\Converter\ConverterBase;
+use Components\Translation\TranslationOld;
 use Domain\Admin\Pages\Models\Page;
-use Src\Converter\ConverterBase;
-use Src\Translation\Translation;
 
 /**
  * Provides a class for converting the page in menu value.
@@ -22,14 +22,14 @@ final class PageInMenuStateConverter extends ConverterBase {
   public function toReadable(): string {
     $menuState = (int) $this->var;
     if ($menuState === Page::PAGE_NORMAL) {
-      return Translation::get('page_normal');
+      return TranslationOld::get('page_normal');
     }
 
     if ($menuState === Page::PAGE_STATIC) {
-      return Translation::get('page_static');
+      return TranslationOld::get('page_static');
     }
 
-    return Translation::get('page_in_menu_state_unknown');
+    return TranslationOld::get('page_in_menu_state_unknown');
   }
 
 }

@@ -1,9 +1,7 @@
 <?php
-
 declare(strict_types=1);
 
-
-namespace Src\Translation;
+namespace Components\Translation;
 
 use Components\SuperGlobals\Url\Uri;
 use Src\Exceptions\Basic\InvalidKeyException;
@@ -12,8 +10,10 @@ use Src\Exceptions\Basic\InvalidKeyException;
  * Provides a class for translations.
  *
  * @package src\Translation
+ * @deprecated
  */
-final class Translation extends Loader {
+final class TranslationOld extends LoaderOld {
+
   /**
    * All the available translations.
    *

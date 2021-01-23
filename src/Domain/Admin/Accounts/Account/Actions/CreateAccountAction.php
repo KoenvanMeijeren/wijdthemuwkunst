@@ -5,9 +5,9 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\Account\Actions;
 
+use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\Account\Models\Account;
 use Domain\Admin\Accounts\User\Models\User;
-use Src\Translation\Translation;
 use System\StateInterface;
 
 /**
@@ -32,7 +32,7 @@ final class CreateAccountAction extends BaseAccountAction {
     if ($account === NULL) {
       $this->session()->flash(
             StateInterface::FAILED,
-            Translation::get('admin_create_account_unsuccessful_message')
+            TranslationOld::get('admin_create_account_unsuccessful_message')
         );
 
       return FALSE;
@@ -40,7 +40,7 @@ final class CreateAccountAction extends BaseAccountAction {
 
     $this->session()->flash(
           StateInterface::SUCCESSFUL,
-          Translation::get('admin_create_account_successful_message')
+          TranslationOld::get('admin_create_account_successful_message')
       );
 
     return TRUE;
@@ -50,30 +50,30 @@ final class CreateAccountAction extends BaseAccountAction {
    * @inheritDoc
    */
   protected function validate(): bool {
-    $this->validator->input($this->name, Translation::get('name'))
+    $this->validator->input($this->name, TranslationOld::get('name'))
       ->isRequired();
 
-    $this->validator->input($this->email, Translation::get('email'))
+    $this->validator->input($this->email, TranslationOld::get('email'))
       ->isRequired()
       ->isEmail()
       ->isUnique(
               $this->account->getByEmail($this->email),
               sprintf(
-                  Translation::get('admin_email_already_exists_message'),
+                  TranslationOld::get('admin_email_already_exists_message'),
                   $this->email
               )
           );
 
-    $this->validator->input($this->password, Translation::get('password'))
+    $this->validator->input($this->password, TranslationOld::get('password'))
       ->isRequired()
       ->passwordIsEqual($this->confirmationPassword);
 
-    $this->validator->input((string) $this->rights, Translation::get('rights'))
+    $this->validator->input((string) $this->rights, TranslationOld::get('rights'))
       ->isRequired()
       ->isBetweenRange(
               User::ADMIN,
               User::DEVELOPER,
-              Translation::get('admin_invalid_rights_message')
+              TranslationOld::get('admin_invalid_rights_message')
           );
 
     return $this->validator->handleFormValidation();

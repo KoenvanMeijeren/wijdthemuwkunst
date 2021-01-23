@@ -2,7 +2,7 @@
 
 namespace Domain\Admin\Menu\Actions;
 
-use Src\Translation\Translation;
+use Components\Translation\TranslationOld;
 use System\StateInterface;
 
 /**
@@ -20,7 +20,7 @@ final class CreateMenuAction extends BaseMenuAction {
       $this->session()->flash(
             StateInterface::FAILED,
             sprintf(
-                Translation::get('menu_item_unsuccessful_created'),
+                TranslationOld::get('menu_item_unsuccessful_created'),
                 $this->title
             )
         );
@@ -31,7 +31,7 @@ final class CreateMenuAction extends BaseMenuAction {
     $this->session()->flash(
           StateInterface::SUCCESSFUL,
           sprintf(
-              Translation::get('menu_item_successful_created'),
+              TranslationOld::get('menu_item_successful_created'),
               $this->title
           )
       );

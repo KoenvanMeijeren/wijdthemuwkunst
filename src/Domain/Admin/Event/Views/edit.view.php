@@ -6,10 +6,10 @@
 
 declare(strict_types=1);
 
+use Components\Translation\TranslationOld;
 use Domain\Admin\Event\Repositories\EventRepository;
 use Src\Core\Request;
 use Src\Security\CSRF;
-use Src\Translation\Translation;
 
 $event = new EventRepository($event ?? NULL);
 $request = new Request();
@@ -49,7 +49,7 @@ if (!empty($event->getThumbnail())
                 <?php echo CSRF::insertToken('/admin/content/events/event/unpublish/' . $event->getId()) ?>
 
                 <button type="submit" class="btn btn-outline-danger">
-                    <?php echo Translation::get('unpublish_button') ?>
+                    <?php echo TranslationOld::get('unpublish_button') ?>
                 </button>
             </form>
         <?php else : ?>
@@ -58,7 +58,7 @@ if (!empty($event->getThumbnail())
                 <?php echo CSRF::insertToken('/admin/content/events/event/publish/' . $event->getId()) ?>
 
                 <button type="submit" class="btn btn-outline-success">
-                    <?php echo Translation::get('publish_button') ?>
+                    <?php echo TranslationOld::get('publish_button') ?>
                 </button>
             </form>
         <?php endif; ?>
@@ -72,7 +72,7 @@ if (!empty($event->getThumbnail())
             <button type="submit"
                     name="remove-thumbnail"
                     class="btn btn-outline-danger">
-                <?php echo Translation::get('delete_thumbnail_button') ?>
+                <?php echo TranslationOld::get('delete_thumbnail_button') ?>
             </button>
         </form>
     <?php endif; ?>
@@ -84,7 +84,7 @@ if (!empty($event->getThumbnail())
             <button type="submit"
                     name="delete-banner"
                     class="btn btn-outline-danger">
-                <?php echo Translation::get('delete_banner_button') ?>
+                <?php echo TranslationOld::get('delete_banner_button') ?>
             </button>
         </form>
     <?php endif; ?>
@@ -108,12 +108,12 @@ if (!empty($event->getThumbnail())
                     <div class="card-body">
                         <div class="form-group">
                             <label for="title">
-                                <?php echo Translation::get('form_title') ?>
+                                <?php echo TranslationOld::get('form_title') ?>
                                 <span class="text-danger">*</span>
                             </label>
                             <input type="text" name="title" id="title"
                                    class="form-control"
-                                   placeholder="<?php echo Translation::get('form_title') ?>"
+                                   placeholder="<?php echo TranslationOld::get('form_title') ?>"
                                    value="<?php echo $request->post(
                                     'title',
                                     $event->getTitle()
@@ -123,12 +123,12 @@ if (!empty($event->getThumbnail())
 
                         <div class="form-group">
                             <label for="location">
-                                <?php echo Translation::get('form_location') ?>
+                                <?php echo TranslationOld::get('form_location') ?>
                                 <span class="text-danger">*</span>
                             </label>
                             <input type="text" name="location" id="location"
                                    class="form-control"
-                                   placeholder="<?php echo Translation::get('form_location') ?>"
+                                   placeholder="<?php echo TranslationOld::get('form_location') ?>"
                                    value="<?php echo $request->post(
                                        'location',
                                        $event->getLocation()
@@ -138,7 +138,7 @@ if (!empty($event->getThumbnail())
 
                         <div class="form-group">
                             <label for="datepicker">
-                                <?php echo Translation::get('form_date') ?>
+                                <?php echo TranslationOld::get('form_date') ?>
                                 <span class="text-danger">*</span>
                             </label>
                             <input type="text" name="date" id="datepicker"
@@ -152,12 +152,12 @@ if (!empty($event->getThumbnail())
 
                         <div class="form-group">
                             <label for="timepicker">
-                                <?php echo Translation::get('form_time') ?>
+                                <?php echo TranslationOld::get('form_time') ?>
                                 <span class="text-danger">*</span>
                             </label>
                             <input type="text" name="time" id="timepicker"
                                    class="form-control"
-                                   placeholder="<?php echo Translation::get('form_time') ?>"
+                                   placeholder="<?php echo TranslationOld::get('form_time') ?>"
                                    value="<?php echo $request->post(
                                        'time',
                                        $event->getTime()
@@ -186,7 +186,7 @@ if (!empty($event->getThumbnail())
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <div class="mb-2">
-                                        <?php echo Translation::get('form_thumbnail_size') ?>
+                                        <?php echo TranslationOld::get('form_thumbnail_size') ?>
                                     </div>
                                     <div class="custom-file">
                                         <input type="file"
@@ -226,7 +226,7 @@ if (!empty($event->getThumbnail())
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <div class="mb-2">
-                                        <?php echo Translation::get('form_banner_size') ?>
+                                        <?php echo TranslationOld::get('form_banner_size') ?>
                                     </div>
 
                                     <div class="custom-file">
@@ -284,7 +284,7 @@ if (!empty($event->getThumbnail())
                     <div class="card-body">
                         <div class="form-group">
                             <label for="tinymce" class="visually-hidden">
-                                <?php echo Translation::get('form_event_content') ?>
+                                <?php echo TranslationOld::get('form_event_content') ?>
                                 <span class="text-danger">*</span>
                             </label>
                             <textarea class="form-control" id="tinymce"
@@ -308,17 +308,17 @@ if (!empty($event->getThumbnail())
            class="btn btn-outline-primary"
            data-toggle="tooltip"
            data-placement="top"
-           title="<?php echo Translation::get('back_button') ?>">
+           title="<?php echo TranslationOld::get('back_button') ?>">
             <i class="fas fa-arrow-left"></i>
-            <?php echo Translation::get('back_button') ?>
+            <?php echo TranslationOld::get('back_button') ?>
         </a>
 
         <button type="submit"
                 data-toggle="tooltip"
                 data-placement="top"
-                title="<?php echo Translation::get('save_button') ?>"
+                title="<?php echo TranslationOld::get('save_button') ?>"
                 class="btn btn-outline-success">
-            <?php echo Translation::get('save_button') ?>
+            <?php echo TranslationOld::get('save_button') ?>
             <i class="far fa-save"></i>
         </button>
 
@@ -327,9 +327,9 @@ if (!empty($event->getThumbnail())
                     data-toggle="tooltip"
                     data-placement="top"
                     name="save-and-publish"
-                    title="<?php echo Translation::get('save_and_publish_button') ?>"
+                    title="<?php echo TranslationOld::get('save_and_publish_button') ?>"
                     class="btn btn-outline-success">
-                <?php echo Translation::get('save_and_publish_button') ?>
+                <?php echo TranslationOld::get('save_and_publish_button') ?>
                 <i class="far fa-save"></i>
             </button>
         <?php endif; ?>
@@ -346,7 +346,7 @@ if (!empty($event->getThumbnail())
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalLabel">
-                    <?php echo Translation::get('form_cut_image') ?>
+                    <?php echo TranslationOld::get('form_cut_image') ?>
                 </h5>
                 <button type="button" class="close"
                         data-dismiss="modal"
@@ -364,12 +364,12 @@ if (!empty($event->getThumbnail())
                 <button type="button"
                         class="btn btn-secondary"
                         data-dismiss="modal">
-                    <?php echo Translation::get('cancel_button') ?>
+                    <?php echo TranslationOld::get('cancel_button') ?>
                 </button>
                 <button type="button"
                         class="btn btn-primary"
                         id="cropThumbnail">
-                    <?php echo Translation::get('cut_image_button') ?>
+                    <?php echo TranslationOld::get('cut_image_button') ?>
                 </button>
             </div>
         </div>
@@ -383,7 +383,7 @@ if (!empty($event->getThumbnail())
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalLabel">
-                    <?php echo Translation::get('form_cut_image') ?>
+                    <?php echo TranslationOld::get('form_cut_image') ?>
                 </h5>
                 <button type="button" class="close"
                         data-dismiss="modal"
@@ -401,12 +401,12 @@ if (!empty($event->getThumbnail())
                 <button type="button"
                         class="btn btn-secondary"
                         data-dismiss="modal">
-                    <?php echo Translation::get('cancel_button') ?>
+                    <?php echo TranslationOld::get('cancel_button') ?>
                 </button>
                 <button type="button"
                         class="btn btn-primary"
                         id="cropBanner">
-                    <?php echo Translation::get('cut_image_button') ?>
+                    <?php echo TranslationOld::get('cut_image_button') ?>
                 </button>
             </div>
         </div>

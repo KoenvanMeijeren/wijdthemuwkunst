@@ -6,10 +6,10 @@
 
 declare(strict_types=1);
 
+use Components\Translation\TranslationOld;
 use Domain\Admin\Menu\Repositories\MenuRepository;
-use System\Request;
 use Src\Security\CSRF;
-use Src\Translation\Translation;
+use System\Request;
 
 $menuItem = new MenuRepository($menu_item ?? NULL);
 $request = new Request();
@@ -23,7 +23,7 @@ $createMenuItem = $create_menu_item ?? FALSE;
                     <div class="row no-gutters align-items-center">
                         <div class="col-md-12 mr-2 mb-4">
                             <div class="text-lg font-weight-bold text-primary text-uppercase mb-1">
-                                <?php echo Translation::get('add_menu_item_title') ?>
+                                <?php echo TranslationOld::get('add_menu_item_title') ?>
                             </div>
                         </div>
                     </div>
@@ -36,37 +36,37 @@ $createMenuItem = $create_menu_item ?? FALSE;
                                 <div class="row">
                                     <div class="col-sm-5">
                                         <label for="slug">
-                                            <?php echo Translation::get('form_page_slug') ?>
+                                            <?php echo TranslationOld::get('form_page_slug') ?>
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="text" name="slug"
                                                id="slug"
                                                class="form-control"
-                                               placeholder="<?php echo Translation::get('form_page_slug') ?>"
+                                               placeholder="<?php echo TranslationOld::get('form_page_slug') ?>"
                                                value="<?php echo $request->post('slug') ?>"
                                                required>
                                     </div>
                                     <div class="col-sm-5">
                                         <label for="title">
-                                            <?php echo Translation::get('form_title') ?>
+                                            <?php echo TranslationOld::get('form_title') ?>
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="text" name="title"
                                                id="title"
                                                class="form-control"
-                                               placeholder="<?php echo Translation::get('form_title') ?>"
+                                               placeholder="<?php echo TranslationOld::get('form_title') ?>"
                                                value="<?php echo $request->post('title') ?>"
                                                required>
                                     </div>
                                     <div class="col-sm-2">
                                         <label for="weight">
-                                            <?php echo Translation::get('form_weight') ?>
+                                            <?php echo TranslationOld::get('form_weight') ?>
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="number" name="weight"
                                                id="weight"
                                                class="form-control"
-                                               placeholder="<?php echo Translation::get('form_weight') ?>"
+                                               placeholder="<?php echo TranslationOld::get('form_weight') ?>"
                                                value="<?php echo $request->post('weight') ?>"
                                                required>
                                     </div>
@@ -77,16 +77,16 @@ $createMenuItem = $create_menu_item ?? FALSE;
                                        class="btn btn-outline-danger float-left"
                                        data-toggle="tooltip"
                                        data-placement="top"
-                                       title="<?php echo Translation::get('reset_button') ?>">
-                                        <?php echo Translation::get('reset_button') ?>
+                                       title="<?php echo TranslationOld::get('reset_button') ?>">
+                                        <?php echo TranslationOld::get('reset_button') ?>
                                     </a>
 
                                     <button type="submit"
                                             data-toggle="tooltip"
                                             data-placement="top"
-                                            title="<?php echo Translation::get('save_button') ?>"
+                                            title="<?php echo TranslationOld::get('save_button') ?>"
                                             class="btn btn-outline-success float-right">
-                                        <?php echo Translation::get('save_button') ?>
+                                        <?php echo TranslationOld::get('save_button') ?>
                                         <i class="far fa-save"></i>
                                     </button>
                                 </div>
@@ -108,7 +108,7 @@ $createMenuItem = $create_menu_item ?? FALSE;
                         <div class="col-md-12 mr-2 mb-4">
                             <div class="text-lg font-weight-bold text-primary text-uppercase mb-1">
                                 <?php echo sprintf(
-                                Translation::get('edit_menu_item_title'),
+                                TranslationOld::get('edit_menu_item_title'),
                                 $menuItem->getTitle()
                                 ) ?>
                             </div>
@@ -124,37 +124,37 @@ $createMenuItem = $create_menu_item ?? FALSE;
                                 <div class="row">
                                     <div class="col-sm-5">
                                         <label for="slug">
-                                            <?php echo Translation::get('form_page_slug') ?>
+                                            <?php echo TranslationOld::get('form_page_slug') ?>
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="text" name="slug"
                                                id="slug"
                                                class="form-control"
-                                               placeholder="<?php echo Translation::get('form_page_slug') ?>"
+                                               placeholder="<?php echo TranslationOld::get('form_page_slug') ?>"
                                                value="<?php echo $request->post('slug', $menuItem->getSlug()) ?>"
                                                required>
                                     </div>
                                     <div class="col-sm-5">
                                         <label for="title">
-                                            <?php echo Translation::get('form_title') ?>
+                                            <?php echo TranslationOld::get('form_title') ?>
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="text" name="title"
                                                id="title"
                                                class="form-control"
-                                               placeholder="<?php echo Translation::get('form_title') ?>"
+                                               placeholder="<?php echo TranslationOld::get('form_title') ?>"
                                                value="<?php echo $request->post('title', $menuItem->getTitle()) ?>"
                                                required>
                                     </div>
                                     <div class="col-sm-2">
                                         <label for="weight">
-                                            <?php echo Translation::get('form_weight') ?>
+                                            <?php echo TranslationOld::get('form_weight') ?>
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="number" name="weight"
                                                id="weight"
                                                class="form-control"
-                                               placeholder="<?php echo Translation::get('form_weight') ?>"
+                                               placeholder="<?php echo TranslationOld::get('form_weight') ?>"
                                                value="<?php echo $request->post('weight', (string) $menuItem->getWeight()) ?>"
                                                required>
                                     </div>
@@ -165,16 +165,16 @@ $createMenuItem = $create_menu_item ?? FALSE;
                                        class="btn btn-outline-danger float-left"
                                        data-toggle="tooltip"
                                        data-placement="top"
-                                       title="<?php echo Translation::get('reset_button') ?>">
-                                        <?php echo Translation::get('reset_button') ?>
+                                       title="<?php echo TranslationOld::get('reset_button') ?>">
+                                        <?php echo TranslationOld::get('reset_button') ?>
                                     </a>
 
                                     <button type="submit"
                                             data-toggle="tooltip"
                                             data-placement="top"
-                                            title="<?php echo Translation::get('save_button') ?>"
+                                            title="<?php echo TranslationOld::get('save_button') ?>"
                                             class="btn btn-outline-success float-right">
-                                        <?php echo Translation::get('save_button') ?>
+                                        <?php echo TranslationOld::get('save_button') ?>
                                         <i class="far fa-save"></i>
                                     </button>
                                 </div>
@@ -196,7 +196,7 @@ $createMenuItem = $create_menu_item ?? FALSE;
                 <div class="row no-gutters align-items-center">
                     <div class="col-md-12 mr-2 mb-4">
                         <div class="text-lg font-weight-bold text-primary text-uppercase mb-1 float-left">
-                            <?php echo Translation::get('menu_items_overview') ?>
+                            <?php echo TranslationOld::get('menu_items_overview') ?>
                         </div>
 
                         <a href="/admin/structure/menu/item/create"

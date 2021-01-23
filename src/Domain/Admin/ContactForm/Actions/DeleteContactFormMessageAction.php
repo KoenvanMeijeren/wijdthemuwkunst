@@ -2,7 +2,7 @@
 
 namespace Domain\Admin\ContactForm\Actions;
 
-use Src\Translation\Translation;
+use Components\Translation\TranslationOld;
 use System\StateInterface;
 
 /**
@@ -19,7 +19,7 @@ final class DeleteContactFormMessageAction extends BaseContactFormAction {
     $this->contactForm->delete($this->contactForm->getId());
 
     $this->session()->flash(StateInterface::SUCCESSFUL, sprintf(
-      Translation::get('admin_delete_contact_form_message'),
+      TranslationOld::get('admin_delete_contact_form_message'),
       $this->repository->getName()
     ));
 

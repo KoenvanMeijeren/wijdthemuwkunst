@@ -5,9 +5,9 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Settings\ViewModels;
 
+use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Settings\Repositories\SettingRepository;
-use Src\Translation\Translation;
 use Support\Resource;
 use System\DataTable\DataTableBuilder;
 
@@ -21,9 +21,9 @@ final class SettingTable extends DataTableBuilder {
    */
   protected function buildHead(): array {
     return [
-      Translation::get('table_row_key'),
-      Translation::get('table_row_value'),
-      Translation::get('table_row_edit'),
+      TranslationOld::get('table_row_key'),
+      TranslationOld::get('table_row_value'),
+      TranslationOld::get('table_row_edit'),
     ];
   }
 
@@ -50,7 +50,7 @@ final class SettingTable extends DataTableBuilder {
           '/admin/configuration/settings/setting/edit/' . $setting->getId(),
           '/admin/configuration/settings/setting/delete/' . $setting->getId(),
           sprintf(
-              Translation::get('delete_setting_confirmation_message'),
+              TranslationOld::get('delete_setting_confirmation_message'),
               $setting->getKey()
           ),
           $user->getRights() !== User::DEVELOPER

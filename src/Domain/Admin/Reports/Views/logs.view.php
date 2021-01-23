@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
+use Components\Translation\TranslationOld;
 use System\Request;
 use System\StateInterface;
-use Src\Translation\Translation;
 
 $request = new Request();
 ?>
@@ -21,7 +21,7 @@ $request = new Request();
                     <div class="col-md-12 mr-2 mb-4">
                         <div
                             class="text-lg font-weight-bold text-primary text-uppercase mb-1 float-left">
-                            <?php echo Translation::get('logs_data') ?>
+                            <?php echo TranslationOld::get('logs_data') ?>
                         </div>
 
                         <form class="form-inline float-right" method="get">
@@ -29,20 +29,20 @@ $request = new Request();
                                 <label for="unlimited-datepicker"></label>
                                 <input type="text" name="date"
                                        autocomplete="off"
-                                       placeholder="<?php echo Translation::get('form_date') ?>"
+                                       placeholder="<?php echo TranslationOld::get('form_date') ?>"
                                        class="form-control"
                                        id="unlimited-datepicker"
                                        value="<?php echo $request->get('date') ?>">
                             </div>
 
                             <button class="btn btn-outline-primary">
-                                <?php echo Translation::get('filter_button') ?>
+                                <?php echo TranslationOld::get('filter_button') ?>
                             </button>
 
                             <?php if (isset($_GET['date'])) : ?>
                                 <a href="/admin/reports/logs"
                                    class="btn btn-outline-danger ml-3">
-                                    <?php echo Translation::get('reset_button') ?>
+                                    <?php echo TranslationOld::get('reset_button') ?>
                                 </a>
                             <?php endif; ?>
                         </form>
@@ -53,7 +53,7 @@ $request = new Request();
                     <?php if (count($logs ?? []) < 1) : ?>
                         <div class="col-md-12">
                             <p class="mt-2 font-weight-bold">
-                                <?php echo Translation::get('no_log_data_found') ?>
+                                <?php echo TranslationOld::get('no_log_data_found') ?>
                                 <?php echo $request->get('date') ?>.
                             </p>
                         </div>
@@ -61,7 +61,7 @@ $request = new Request();
                         <div class="col-sm-4">
                             <div class="form-label-group mb-2">
                                 <label for="searchLog" class="visually-hidden">
-                                    <b><?php echo Translation::get('form_search') ?></b>
+                                    <b><?php echo TranslationOld::get('form_search') ?></b>
                                 </label>
                                 <input type="text" id="searchLog"
                                        class="form-control" autocomplete="off"
@@ -117,7 +117,7 @@ $request = new Request();
                                             <li class="list-group-item <?php echo $class ?>">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <?php echo Translation::get('message') ?>
+                                                        <?php echo TranslationOld::get('message') ?>
                                                         :
                                                     </div>
                                                     <div class="col-sm-10">
@@ -128,7 +128,7 @@ $request = new Request();
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <?php echo Translation::get('url') ?>
+                                                        <?php echo TranslationOld::get('url') ?>
                                                         :
                                                     </div>
                                                     <div class="col-sm-10">
@@ -139,7 +139,7 @@ $request = new Request();
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <?php echo Translation::get('ip') ?>
+                                                        <?php echo TranslationOld::get('ip') ?>
                                                         :
                                                     </div>
                                                     <div class="col-sm-10">
@@ -150,7 +150,7 @@ $request = new Request();
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <?php echo Translation::get('http_method') ?>
+                                                        <?php echo TranslationOld::get('http_method') ?>
                                                         :
                                                     </div>
                                                     <div class="col-sm-10">
@@ -161,7 +161,7 @@ $request = new Request();
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <?php echo Translation::get('server') ?>
+                                                        <?php echo TranslationOld::get('server') ?>
                                                         :
                                                     </div>
                                                     <div class="col-sm-10">
@@ -172,7 +172,7 @@ $request = new Request();
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <?php echo Translation::get('referrer') ?>
+                                                        <?php echo TranslationOld::get('referrer') ?>
                                                         :
                                                     </div>
                                                     <div class="col-sm-10">
@@ -183,7 +183,7 @@ $request = new Request();
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <?php echo Translation::get('process_id') ?>
+                                                        <?php echo TranslationOld::get('process_id') ?>
                                                         :
                                                     </div>
                                                     <div class="col-sm-10">

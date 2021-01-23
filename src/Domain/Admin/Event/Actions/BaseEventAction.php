@@ -6,13 +6,13 @@ namespace Domain\Admin\Event\Actions;
 
 use Cake\Chronos\Chronos;
 use Components\Actions\FormAction;
+use Components\Translation\TranslationOld;
 use Domain\Admin\Event\Models\Event;
 use Domain\Admin\Event\Repositories\EventRepository;
 use Domain\Admin\File\Actions\SaveFileAction;
 use Domain\Admin\Pages\Models\Slug;
 use Domain\Admin\Pages\Repositories\SlugRepository;
 use Src\Session\Session;
-use Src\Translation\Translation;
 use Src\Validate\form\FormValidator;
 use System\Request;
 
@@ -143,7 +143,7 @@ abstract class BaseEventAction extends FormAction {
         ->isUnique(
                 $this->event->getBySlug($this->url),
                 sprintf(
-                    Translation::get('event_already_exists'),
+                    TranslationOld::get('event_already_exists'),
                     $this->url
                 )
             );

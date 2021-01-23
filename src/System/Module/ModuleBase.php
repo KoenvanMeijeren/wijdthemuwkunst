@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace System\Module;
 
+use Symfony\Component\Filesystem\Exception\FileNotFoundException;
+
 /**
  * Provides a base class for modules.
  *
@@ -28,6 +30,20 @@ abstract class ModuleBase implements ModuleInterface {
    */
   public function getTranslationsLocation(): string {
     return $this->getModuleLocation() . '/Translation';
+  }
+
+  /**
+   * Returns the translations.
+   *
+   * @return array
+   *   The translations.
+   */
+  public function getTranslations(): array {
+    try {
+      return (array) include_file($this->getModuleLocation() . '/Translation');
+    } catch (FileNotFoundException $exception) {
+      return [];
+    }
   }
 
   /**

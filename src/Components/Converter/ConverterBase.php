@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Src\Converter;
+namespace Components\Converter;
 
 /**
  * Provides a base class for classes who wants to convert variables.

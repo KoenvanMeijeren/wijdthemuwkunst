@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Converter;
+namespace Components\Converter;
 
 /**
  * Provides an interface for converter classes.

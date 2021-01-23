@@ -2,7 +2,7 @@
 
 namespace Domain\Admin\Event\Actions;
 
-use Src\Translation\Translation;
+use Components\Translation\TranslationOld;
 use System\StateInterface;
 
 /**
@@ -19,7 +19,7 @@ final class CreateEventAction extends BaseEventAction {
     if ($event === NULL) {
       $this->session()->flash(
             StateInterface::FAILED,
-            Translation::get('event_unsuccessfully_created')
+            TranslationOld::get('event_unsuccessfully_created')
         );
 
       return FALSE;
@@ -28,7 +28,7 @@ final class CreateEventAction extends BaseEventAction {
     $this->session()->flash(
           StateInterface::SUCCESSFUL,
           sprintf(
-              Translation::get('event_successfully_created'),
+              TranslationOld::get('event_successfully_created'),
               $this->title
           )
       );

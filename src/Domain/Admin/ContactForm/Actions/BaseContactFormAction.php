@@ -6,9 +6,9 @@ namespace Domain\Admin\ContactForm\Actions;
 
 use Cake\Chronos\Chronos;
 use Components\Actions\FormAction;
+use Components\Translation\TranslationOld;
 use Domain\Admin\ContactForm\Model\ContactForm;
 use Domain\Admin\ContactForm\Repository\ContactFormRepository;
-use Src\Translation\Translation;
 
 /**
  * Provides a base class for contact form actions.
@@ -93,9 +93,9 @@ abstract class BaseContactFormAction extends FormAction {
    * {@inheritDoc}
    */
   protected function validate(): bool {
-    $this->validator->input($this->name, Translation::get('name'))->isRequired();
-    $this->validator->input($this->email, Translation::get('email'))->isRequired()->isEmail();
-    $this->validator->input($this->message, Translation::get('message'))->isRequired();
+    $this->validator->input($this->name, TranslationOld::get('name'))->isRequired();
+    $this->validator->input($this->email, TranslationOld::get('email'))->isRequired()->isEmail();
+    $this->validator->input($this->message, TranslationOld::get('message'))->isRequired();
 
     return $this->validator->handleFormValidation();
   }

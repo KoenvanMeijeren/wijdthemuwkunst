@@ -8,7 +8,7 @@ namespace Domain\Pages\Controllers;
 use Domain\Admin\Pages\Repositories\PageRepository;
 use Domain\Event\Models\Event;
 use Domain\Pages\Models\Page;
-use Src\Translation\Translation;
+use Components\Translation\TranslationOld;
 use Src\View\ViewInterface;
 use System\Controller\ControllerBase;
 
@@ -63,7 +63,7 @@ final class PageController extends ControllerBase {
     $events = new PageRepository($this->page->getBySlug('concerten'));
 
     return $this->view('index', [
-      'title' => Translation::get('home_page_title'),
+      'title' => TranslationOld::get('home_page_title'),
       'homeRepo' => $home,
       'eventsRepo' => $events,
       'events' => $this->event->getLimited(3),
@@ -115,8 +115,8 @@ final class PageController extends ControllerBase {
    */
   public function notFound(): ViewInterface {
     return $this->view('404', [
-      'title' => Translation::get('page_not_found_title'),
-      'content' => Translation::get('page_not_found_description'),
+      'title' => TranslationOld::get('page_not_found_title'),
+      'content' => TranslationOld::get('page_not_found_description'),
     ]);
   }
 

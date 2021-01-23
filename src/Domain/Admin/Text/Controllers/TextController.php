@@ -9,7 +9,7 @@ use Domain\Admin\Text\Actions\UpdateTextAction;
 use Domain\Admin\Text\Entity\Text;
 use Domain\Admin\Text\Entity\TextRepositoryInterface;
 use Domain\Admin\Text\Entity\TextTable;
-use Src\Translation\Translation;
+use Components\Translation\TranslationOld;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;
 use System\StateInterface;
@@ -62,7 +62,7 @@ final class TextController extends AdminControllerBase {
     $textTable = new TextTable($this->textRepository->all());
 
     return $this->view('index', [
-      'title' => Translation::get('texts_title'),
+      'title' => TranslationOld::get('texts_title'),
       'texts' => $textTable->get(),
     ]);
   }
@@ -77,7 +77,7 @@ final class TextController extends AdminControllerBase {
     $textTable = new TextTable($this->textRepository->all());
 
     return $this->view('index', [
-      'title' => Translation::get('texts_title'),
+      'title' => TranslationOld::get('texts_title'),
       'texts' => $textTable->get(),
       'createText' => TRUE,
     ]);
@@ -108,13 +108,13 @@ final class TextController extends AdminControllerBase {
     $textTable = new TextTable($this->textRepository->all());
     $text = $this->textRepository->loadById((int) $this->request()->getRouteParameter());
     if ($text === NULL) {
-      $this->session()->flash(StateInterface::FAILED, Translation::get('text_does_not_exists'));
+      $this->session()->flash(StateInterface::FAILED, TranslationOld::get('text_does_not_exists'));
 
       return new Redirect('/admin/configuration/texts');
     }
 
     return $this->view('index', [
-      'title' => Translation::get('texts_title'),
+      'title' => TranslationOld::get('texts_title'),
       'texts' => $textTable->get(),
       'text' => $text,
     ]);

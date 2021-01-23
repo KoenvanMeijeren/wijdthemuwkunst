@@ -11,6 +11,8 @@ use Components\SuperGlobals\Request;
 use Components\SuperGlobals\RequestInterface;
 use Components\SuperGlobals\Session\Session;
 use Components\SuperGlobals\Session\SessionInterface;
+use Components\Translation\Translation;
+use Components\Translation\TranslationInterface;
 
 /**
  * Provides a trait for interacting with the components.
@@ -57,6 +59,16 @@ trait ComponentsTrait {
    */
   protected function header(): HeaderInterface {
     return $this->header ??= new Header();
+  }
+
+  /**
+   * Gets the translation object.
+   *
+   * @return TranslationInterface
+   *   The translator object.
+   */
+  protected function t(): TranslationInterface {
+    return $this->translation ??= new Translation();
   }
 
 }

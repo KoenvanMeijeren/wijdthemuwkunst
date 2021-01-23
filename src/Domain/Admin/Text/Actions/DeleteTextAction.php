@@ -3,7 +3,7 @@
 namespace Domain\Admin\Text\Actions;
 
 use Domain\Admin\Accounts\User\Models\User;
-use Src\Translation\Translation;
+use Components\Translation\TranslationOld;
 use System\Entity\EntityInterface;
 use System\StateInterface;
 
@@ -21,14 +21,14 @@ final class DeleteTextAction extends BaseTextAction {
     $status = $this->entity->delete();
     if ($status === EntityInterface::SAVED_DELETED) {
       $this->session()->flash(StateInterface::SUCCESSFUL,
-        sprintf(Translation::get('text_successful_deleted'), $this->entity->getKey())
+        sprintf(TranslationOld::get('text_successful_deleted'), $this->entity->getKey())
       );
 
       return TRUE;
     }
 
     $this->session()->flash(StateInterface::SUCCESSFUL,
-      sprintf(Translation::get('text_unsuccessful_deleted'), $this->entity->getKey())
+      sprintf(TranslationOld::get('text_unsuccessful_deleted'), $this->entity->getKey())
     );
 
     return FALSE;
@@ -39,7 +39,7 @@ final class DeleteTextAction extends BaseTextAction {
    */
   protected function authorize(): bool {
     if ($this->user->getRights() !== User::DEVELOPER) {
-      $this->session()->flash(StateInterface::FAILED, Translation::get('text_destroy_not_allowed'));
+      $this->session()->flash(StateInterface::FAILED, TranslationOld::get('text_destroy_not_allowed'));
 
       return FALSE;
     }

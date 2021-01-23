@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\User\Actions;
 
-use Src\Translation\Translation;
+use Components\Translation\TranslationOld;
 
 /**
  *
@@ -25,7 +25,7 @@ final class UpdateUserDataAction extends BaseUserAction {
    * @inheritDoc
    */
   protected function validate(): bool {
-    $this->validator->input($this->name, Translation::get('name'))->isRequired();
+    $this->validator->input($this->name, TranslationOld::get('name'))->isRequired();
 
     return $this->validator->handleFormValidation();
   }

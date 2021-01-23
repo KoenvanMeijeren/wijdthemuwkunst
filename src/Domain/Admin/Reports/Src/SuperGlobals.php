@@ -4,9 +4,9 @@ namespace Domain\Admin\Reports\Src;
 
 use Cake\Chronos\Chronos;
 use Components\SuperGlobals\Cookie\Cookie;
+use Components\Translation\TranslationOld;
 use Defuse\Crypto\Exception\WrongKeyOrModifiedCiphertextException;
 use Src\Session\Session;
-use Src\Translation\Translation;
 use Support\DateTime;
 use System\DataTable\DataTable;
 
@@ -22,7 +22,7 @@ final class SuperGlobals {
     $table = new DataTable();
 
     $table->addHead([
-      Translation::get('table_row_header'),
+      TranslationOld::get('table_row_header'),
     ]);
     foreach (headers_list() as $value) {
       $table->addRow([
@@ -41,8 +41,8 @@ final class SuperGlobals {
     $session = new Session();
 
     $table->addHead([
-      Translation::get('table_row_key'),
-      Translation::get('table_row_value'),
+      TranslationOld::get('table_row_key'),
+      TranslationOld::get('table_row_value'),
     ]);
     foreach (session_get_cookie_params() as $key => $data) {
       if ($key === 'lifetime' && $session->exists('createdAt')) {
@@ -52,7 +52,7 @@ final class SuperGlobals {
 
         $table->addRow([
           $key,
-          $lifetime->diffInMinutes($expiredAt) . ' ' . Translation::get('minutes'),
+          $lifetime->diffInMinutes($expiredAt) . ' ' . TranslationOld::get('minutes'),
         ]);
       }
       elseif (is_bool($data)) {
@@ -80,8 +80,8 @@ final class SuperGlobals {
     $table = new DataTable();
 
     $table->addHead([
-      Translation::get('table_row_key'),
-      Translation::get('table_row_value'),
+      TranslationOld::get('table_row_key'),
+      TranslationOld::get('table_row_value'),
     ]);
     foreach (array_keys($_SESSION) as $key) {
       if ($key === 'CSRF') {
@@ -116,8 +116,8 @@ final class SuperGlobals {
     $table = new DataTable();
 
     $table->addHead([
-      Translation::get('table_row_key'),
-      Translation::get('table_row_value'),
+      TranslationOld::get('table_row_key'),
+      TranslationOld::get('table_row_value'),
     ]);
     foreach (array_keys($_COOKIE) as $key) {
       if ($key === $cookie->get('sessionName')

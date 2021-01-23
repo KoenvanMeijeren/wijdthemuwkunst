@@ -1,16 +1,17 @@
 <?php
-
 declare(strict_types=1);
 
-
-namespace Src\Translation;
+namespace Components\Translation;
 
 use Src\Exceptions\Basic\NoTranslationsForGivenLanguageID;
 
 /**
+ * Provides a loader for the translations.
+ *
+ * @package Components\Translation
  * @deprecated
  */
-abstract class Loader {
+abstract class LoaderOld {
   /**
    * The language options.
    *
@@ -47,7 +48,7 @@ abstract class Loader {
    *
    * @return string[]
    */
-  final protected function loadTranslations(): array {
+  protected function loadTranslations(): array {
     if (self::DUTCH_LANGUAGE_ID === $this->language) {
       $filename = '/language/dutch/dutch_translations.php';
 

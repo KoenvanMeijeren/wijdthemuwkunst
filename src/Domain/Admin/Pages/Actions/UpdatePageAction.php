@@ -5,8 +5,8 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Pages\Actions;
 
+use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\User\Models\User;
-use Src\Translation\Translation;
 use System\StateInterface;
 
 /**
@@ -23,7 +23,7 @@ final class UpdatePageAction extends BasePageUpdateAction {
     $this->session()->flash(
           StateInterface::SUCCESSFUL,
           sprintf(
-              Translation::get('page_successfully_updated'),
+              TranslationOld::get('page_successfully_updated'),
               $this->url
           )
       );

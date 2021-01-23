@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Domain\Admin\Menu\Actions;
 
 use Components\Actions\FormAction;
+use Components\Translation\TranslationOld;
 use Domain\Admin\Menu\Models\Menu;
 use Domain\Admin\Menu\Repositories\MenuRepository;
 use Domain\Admin\Pages\Models\Slug;
 use Domain\Admin\Pages\Repositories\SlugRepository;
 use Src\Session\Session;
-use Src\Translation\Translation;
 use Src\Validate\form\FormValidator;
 use System\Request;
 
@@ -74,9 +74,9 @@ abstract class BaseMenuAction extends FormAction {
    *
    */
   protected function validate(): bool {
-    $this->validator->input($this->url, Translation::get('url'))->isRequired();
-    $this->validator->input($this->title, Translation::get('title'))->isRequired();
-    $this->validator->input($this->weight, Translation::get('weight'))->isRequired();
+    $this->validator->input($this->url, TranslationOld::get('url'))->isRequired();
+    $this->validator->input($this->title, TranslationOld::get('title'))->isRequired();
+    $this->validator->input($this->weight, TranslationOld::get('weight'))->isRequired();
 
     return $this->validator->handleFormValidation();
   }

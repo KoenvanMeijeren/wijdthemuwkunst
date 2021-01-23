@@ -6,7 +6,7 @@ use Domain\Admin\Pages\Repositories\PageRepository;
 use Domain\Event\Models\Event;
 use Domain\Event\Models\EventArchive;
 use Domain\Pages\Models\Page;
-use Src\Translation\Translation;
+use Components\Translation\TranslationOld;
 use Src\View\ViewInterface;
 use System\Controller\ControllerBase;
 
@@ -76,8 +76,8 @@ abstract class EventControllerBase extends ControllerBase {
     }
 
     return $this->view('404', [
-      'title' => Translation::get('page_not_found_title'),
-      'content' => Translation::get('page_not_found_description'),
+      'title' => TranslationOld::get('page_not_found_title'),
+      'content' => TranslationOld::get('page_not_found_description'),
     ]);
   }
 

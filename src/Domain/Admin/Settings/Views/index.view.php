@@ -10,7 +10,7 @@ use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Settings\Repositories\SettingRepository;
 use System\Request;
 use Src\Security\CSRF;
-use Src\Translation\Translation;
+use Components\Translation\TranslationOld;
 
 $setting = new SettingRepository($setting ?? NULL);
 $request = new Request();
@@ -27,7 +27,7 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                     <div class="row no-gutters align-items-center">
                         <div class="col-md-12 mr-2 mb-4">
                             <div class="text-lg font-weight-bold text-primary text-uppercase mb-1">
-                                <?php echo Translation::get('add_setting_title') ?>
+                                <?php echo TranslationOld::get('add_setting_title') ?>
                             </div>
                         </div>
                     </div>
@@ -40,25 +40,25 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label for="setting_key">
-                                            <?php echo Translation::get('form_key') ?>
+                                            <?php echo TranslationOld::get('form_key') ?>
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="text" name="setting_key"
                                                id="setting_key"
                                                class="form-control"
-                                               placeholder="<?php echo Translation::get('form_key') ?>"
+                                               placeholder="<?php echo TranslationOld::get('form_key') ?>"
                                                value="<?php echo $request->post('setting_key') ?>"
                                                required>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="setting_value">
-                                            <?php echo Translation::get('form_value') ?>
+                                            <?php echo TranslationOld::get('form_value') ?>
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="text" name="setting_value"
                                                id="setting_value"
                                                class="form-control"
-                                               placeholder="<?php echo Translation::get('form_value') ?>"
+                                               placeholder="<?php echo TranslationOld::get('form_value') ?>"
                                                value="<?php echo $request->post('setting_value') ?>"
                                                required>
                                     </div>
@@ -69,16 +69,16 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                                        class="btn btn-outline-danger float-left"
                                        data-toggle="tooltip"
                                        data-placement="top"
-                                       title="<?php echo Translation::get('reset_button') ?>">
-                                        <?php echo Translation::get('reset_button') ?>
+                                       title="<?php echo TranslationOld::get('reset_button') ?>">
+                                        <?php echo TranslationOld::get('reset_button') ?>
                                     </a>
 
                                     <button type="submit"
                                             data-toggle="tooltip"
                                             data-placement="top"
-                                            title="<?php echo Translation::get('save_button') ?>"
+                                            title="<?php echo TranslationOld::get('save_button') ?>"
                                             class="btn btn-outline-success float-right">
-                                        <?php echo Translation::get('save_button') ?>
+                                        <?php echo TranslationOld::get('save_button') ?>
                                         <i class="far fa-save"></i>
                                     </button>
                                 </div>
@@ -100,7 +100,7 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                         <div class="col-md-12 mr-2 mb-4">
                             <div class="text-lg font-weight-bold text-primary text-uppercase mb-1">
                                 <?php echo sprintf(
-                                Translation::get('edit_setting_title'),
+                                TranslationOld::get('edit_setting_title'),
                                 $setting->getReadableKey()
                                 ) ?>
                             </div>
@@ -116,14 +116,14 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label for="setting_key">
-                                            <?php echo Translation::get('form_key') ?>
+                                            <?php echo TranslationOld::get('form_key') ?>
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="text" name="setting_key"
                                                id="setting_key"
                                                class="form-control"
                                             <?php echo $disabled ?>
-                                               placeholder="<?php echo Translation::get('form_key') ?>"
+                                               placeholder="<?php echo TranslationOld::get('form_key') ?>"
                                                value="<?php echo $request->post(
                                                 'setting_key',
                                                 $setting->getReadableKey()
@@ -132,13 +132,13 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="setting_value">
-                                            <?php echo Translation::get('form_value') ?>
+                                            <?php echo TranslationOld::get('form_value') ?>
                                             <span class="text-danger">*</span>
                                         </label>
                                         <input type="text" name="setting_value"
                                                id="setting_value"
                                                class="form-control"
-                                               placeholder="<?php echo Translation::get('form_value') ?>"
+                                               placeholder="<?php echo TranslationOld::get('form_value') ?>"
                                                value="<?php echo $request->post(
                                                    'setting_value',
                                                    $setting->getValue()
@@ -152,16 +152,16 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                                        class="btn btn-outline-danger float-left"
                                        data-toggle="tooltip"
                                        data-placement="top"
-                                       title="<?php echo Translation::get('reset_button') ?>">
-                                        <?php echo Translation::get('reset_button') ?>
+                                       title="<?php echo TranslationOld::get('reset_button') ?>">
+                                        <?php echo TranslationOld::get('reset_button') ?>
                                     </a>
 
                                     <button type="submit"
                                             data-toggle="tooltip"
                                             data-placement="top"
-                                            title="<?php echo Translation::get('save_button') ?>"
+                                            title="<?php echo TranslationOld::get('save_button') ?>"
                                             class="btn btn-outline-success float-right">
-                                        <?php echo Translation::get('save_button') ?>
+                                        <?php echo TranslationOld::get('save_button') ?>
                                         <i class="far fa-save"></i>
                                     </button>
                                 </div>
@@ -183,7 +183,7 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                 <div class="row no-gutters align-items-center">
                     <div class="col-md-12 mr-2 mb-4">
                         <div class="text-lg font-weight-bold text-primary text-uppercase mb-1 float-left">
-                            <?php echo Translation::get('settings_overview_title') ?>
+                            <?php echo TranslationOld::get('settings_overview_title') ?>
                         </div>
 
                         <a href="/admin/configuration/settings/setting/create"

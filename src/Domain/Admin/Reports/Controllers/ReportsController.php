@@ -6,14 +6,14 @@ declare(strict_types=1);
 namespace Domain\Admin\Reports\Controllers;
 
 use Cake\Chronos\Chronos;
+use Components\Env\Env;
+use Components\Translation\TranslationOld;
 use Domain\Admin\Reports\Src\Logs;
 use Domain\Admin\Reports\Src\PhpInfo;
 use Domain\Admin\Reports\Src\SuperGlobals;
-use Components\Env\Env;
-use System\Request;
-use Src\Translation\Translation;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;
+use System\Request;
 
 /**
  *
@@ -30,7 +30,7 @@ final class ReportsController extends AdminControllerBase {
     $superGlobals = new SuperGlobals();
 
     return $this->view('application', [
-      'title' => Translation::get('admin_reports_application_title'),
+      'title' => TranslationOld::get('admin_reports_application_title'),
       'env' => $env->get(),
       'headerDataTable' => $superGlobals->getHeadersInformation(),
       'sessionSettingsTable' => $superGlobals->getSessionSettingsInformation(),
@@ -57,7 +57,7 @@ final class ReportsController extends AdminControllerBase {
     }
 
     return $this->view('logs', [
-      'title' => Translation::get('admin_reports_logs_title'),
+      'title' => TranslationOld::get('admin_reports_logs_title'),
       'logs' => $logs->get($date),
     ]);
   }
@@ -69,7 +69,7 @@ final class ReportsController extends AdminControllerBase {
     $superGlobals = new SuperGlobals();
 
     return $this->view('storage', [
-      'title' => Translation::get('admin_reports_storage_title'),
+      'title' => TranslationOld::get('admin_reports_storage_title'),
       'sessionDataTable' => $superGlobals->getSessionInformation(),
       'cookieDataTable' => $superGlobals->getCookieInformation(),
     ]);

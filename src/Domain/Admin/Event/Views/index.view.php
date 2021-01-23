@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-use Src\Translation\Translation;
+use Components\Translation\TranslationOld;
 
 ?>
 <div class="row">
@@ -16,7 +16,7 @@ use Src\Translation\Translation;
                 <div class="row no-gutters align-items-center">
                     <div class="col-md-12 mr-2 mb-4">
                         <div class="text-lg float-left font-weight-bold text-primary text-uppercase mb-1">
-                            <?php echo Translation::get('event_overview_title') ?>
+                            <?php echo TranslationOld::get('event_overview_title') ?>
                         </div>
 
                         <a href="/admin/content/events/event/create"
@@ -46,7 +46,7 @@ use Src\Translation\Translation;
                 <div class="row no-gutters align-items-center">
                     <div class="col-md-12 mr-2 mb-4">
                         <div class="text-lg font-weight-bold text-primary text-uppercase mb-1">
-                            <?php echo Translation::get('event_archive_overview_title') ?>
+                            <?php echo TranslationOld::get('event_archive_overview_title') ?>
                         </div>
                     </div>
                 </div>

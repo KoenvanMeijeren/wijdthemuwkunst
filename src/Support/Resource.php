@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Support;
 
 use Src\Security\CSRF;
-use Src\Translation\Translation;
+use Components\Translation\TranslationOld;
 
 /**
  * Provides a class for easy generating some HTML.
@@ -55,7 +55,7 @@ final class Resource {
                        class="btn btn-outline-success table-edit-button"
                        data-toggle="tooltip"
                        data-placement="top"
-                       title="' . Translation::get('table_row_edit') . '">
+                       title="' . TranslationOld::get('table_row_edit') . '">
                         <i class="fas fa-edit"></i>
                     </a>
 
@@ -67,7 +67,7 @@ final class Resource {
                                 data-toggle="tooltip"
                                 data-placement="top"
                                 ' . $disabledDestroyButton . '
-                                title="' . Translation::get('table_row_delete') . '"
+                                title="' . TranslationOld::get('table_row_delete') . '"
                                 onclick="return confirm(\'' . $destroyMessageWarning . '\')">
                             <i class="fas fa-trash-alt"></i>
                         </button>

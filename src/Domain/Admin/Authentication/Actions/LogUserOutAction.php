@@ -6,10 +6,10 @@ declare(strict_types=1);
 namespace Domain\Admin\Authentication\Actions;
 
 use Components\Actions\Action;
+use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\User\Models\User;
 use Src\Session\Session;
 use Src\Session\SessionBuilder;
-use Src\Translation\Translation;
 use System\StateInterface;
 
 /**
@@ -35,7 +35,7 @@ final class LogUserOutAction extends Action {
     $builder->setSessionSecurity();
 
     $session = new Session();
-    $session->flash(StateInterface::SUCCESSFUL, Translation::get('admin_logout_message'));
+    $session->flash(StateInterface::SUCCESSFUL, TranslationOld::get('admin_logout_message'));
 
     return TRUE;
   }

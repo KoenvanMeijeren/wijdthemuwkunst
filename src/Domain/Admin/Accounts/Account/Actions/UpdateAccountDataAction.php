@@ -5,8 +5,8 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\Account\Actions;
 
+use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\User\Models\User;
-use Src\Translation\Translation;
 use System\StateInterface;
 
 /**
@@ -25,7 +25,7 @@ final class UpdateAccountDataAction extends BaseAccountAction {
 
     $this->session()->flash(
           StateInterface::SUCCESSFUL,
-          Translation::get('admin_edited_account_successful_message')
+          TranslationOld::get('admin_edited_account_successful_message')
       );
 
     return TRUE;
@@ -40,7 +40,7 @@ final class UpdateAccountDataAction extends BaseAccountAction {
       ) {
       $this->session()->flash(
             StateInterface::FAILED,
-            Translation::get('cannot_edit_own_account_rights_message')
+            TranslationOld::get('cannot_edit_own_account_rights_message')
         );
 
       return FALSE;
@@ -53,10 +53,10 @@ final class UpdateAccountDataAction extends BaseAccountAction {
    * @inheritDoc
    */
   protected function validate(): bool {
-    $this->validator->input($this->name, Translation::get('name'))
+    $this->validator->input($this->name, TranslationOld::get('name'))
       ->isRequired();
 
-    $this->validator->input((string) $this->rights, Translation::get('rights'))
+    $this->validator->input((string) $this->rights, TranslationOld::get('rights'))
       ->isRequired()
       ->isBetweenRange(User::ADMIN, User::DEVELOPER);
 

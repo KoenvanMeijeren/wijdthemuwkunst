@@ -4,10 +4,10 @@
  * @file
  */
 
+use Components\Translation\TranslationOld;
 use Domain\Admin\ContactForm\Repository\ContactFormRepository;
-use System\Request;
 use Src\Security\CSRF;
-use Src\Translation\Translation;
+use System\Request;
 
 $request = new Request();
 $amountMessages = count($messages ?? []);
@@ -20,9 +20,9 @@ $amountMessages = count($messages ?? []);
                     <div class="col-md-12 mr-2 mb-4">
                         <div class="text-lg font-weight-bold text-primary text-uppercase mb-1 float-left">
                             <?php if ($amountMessages === 1) : ?>
-                                <?php echo $amountMessages . ' ' . Translation::get('contact_request') ?>
+                                <?php echo $amountMessages . ' ' . TranslationOld::get('contact_request') ?>
                             <?php else : ?>
-                                <?php echo $amountMessages . ' ' . Translation::get('contact_requests') ?>
+                                <?php echo $amountMessages . ' ' . TranslationOld::get('contact_requests') ?>
                             <?php endif; ?>
                         </div>
 
@@ -32,19 +32,19 @@ $amountMessages = count($messages ?? []);
                                 <label for="unlimited-datepicker"></label>
                                 <input type="text" name="date"
                                        autocomplete="off"
-                                       placeholder="<?php echo Translation::get('form_date') ?>"
+                                       placeholder="<?php echo TranslationOld::get('form_date') ?>"
                                        class="form-control" id="unlimited-datepicker"
                                        value="<?php echo $request->get('date') ?>">
                             </div>
 
                             <button class="btn btn-outline-primary">
-                                <?php echo Translation::get('filter_button') ?>
+                                <?php echo TranslationOld::get('filter_button') ?>
                             </button>
 
                             <?php if (isset($_GET['date'])) : ?>
                                 <a href="/admin/content/contact-form"
                                    class="btn btn-outline-danger ml-3">
-                                    <?php echo Translation::get('reset_button') ?>
+                                    <?php echo TranslationOld::get('reset_button') ?>
                                 </a>
                             <?php endif; ?>
                         </form>
@@ -55,7 +55,7 @@ $amountMessages = count($messages ?? []);
                     <?php if ($amountMessages < 1) : ?>
                         <div class="col-md-12">
                             <p class="mt-2 font-weight-bold">
-                                <?php echo Translation::get('no_contact_requests_available') ?>
+                                <?php echo TranslationOld::get('no_contact_requests_available') ?>
                             </p>
                         </div>
                     <?php endif; ?>
@@ -64,7 +64,7 @@ $amountMessages = count($messages ?? []);
                         <div class="col-sm-4">
                             <div class="form-label-group">
                                 <label for="searchLog" class="visually-hidden">
-                                    <b><?php echo Translation::get('form_search') ?></b>
+                                    <b><?php echo TranslationOld::get('form_search') ?></b>
                                 </label>
                                 <input type="text" id="searchLog"
                                        class="form-control mb-2"
@@ -122,7 +122,7 @@ $amountMessages = count($messages ?? []);
 
                                                     <button type="submit"
                                                             class="btn border-0 btn-outline-danger"
-                                                            onclick="return confirm('<?php echo Translation::get('delete_contact_request_confirmation_message') ?>')"
+                                                            onclick="return confirm('<?php echo TranslationOld::get('delete_contact_request_confirmation_message') ?>')"
                                                     >
                                                         <i class="fas fa-trash-alt"
                                                            aria-hidden="true"></i>
@@ -135,7 +135,7 @@ $amountMessages = count($messages ?? []);
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <?php echo Translation::get('form_name') ?>:
+                                                        <?php echo TranslationOld::get('form_name') ?>:
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <?php echo $message->getName() ?>
@@ -145,7 +145,7 @@ $amountMessages = count($messages ?? []);
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <?php echo Translation::get('form_email') ?>:
+                                                        <?php echo TranslationOld::get('form_email') ?>:
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <?php echo $message->getEmail() ?>
@@ -155,7 +155,7 @@ $amountMessages = count($messages ?? []);
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <?php echo Translation::get('form_message') ?>:
+                                                        <?php echo TranslationOld::get('form_message') ?>:
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <?php echo $message->getMessage() ?>

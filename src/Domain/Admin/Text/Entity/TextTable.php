@@ -3,7 +3,7 @@
 namespace Domain\Admin\Text\Entity;
 
 use Domain\Admin\Accounts\User\Models\User;
-use Src\Translation\Translation;
+use Components\Translation\TranslationOld;
 use Support\Resource;
 use System\DataTable\DataTableBuilder;
 use System\Entity\EntityInterface;
@@ -20,9 +20,9 @@ final class TextTable extends DataTableBuilder {
    */
   protected function buildHead(): array {
     return [
-      Translation::get('table_row_key'),
-      Translation::get('table_row_value'),
-      Translation::get('table_row_edit'),
+      TranslationOld::get('table_row_key'),
+      TranslationOld::get('table_row_value'),
+      TranslationOld::get('table_row_edit'),
     ];
   }
 
@@ -46,7 +46,7 @@ final class TextTable extends DataTableBuilder {
       '/admin/configuration/texts/text/edit/' . $entity->id(),
       '/admin/configuration/texts/text/delete/' . $entity->id(),
       sprintf(
-        Translation::get('delete_text_confirmation_message'),
+        TranslationOld::get('delete_text_confirmation_message'),
         $entity->getKey()
       ),
       $user->getRights() !== User::DEVELOPER

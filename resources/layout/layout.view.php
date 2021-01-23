@@ -1,19 +1,19 @@
 <?php
 
+use Components\Translation\TranslationOld;
 use Domain\Admin\Menu\Repositories\MenuRepository;
 use Domain\Admin\Settings\Models\Setting;
-use System\Request;
 use Src\Security\CSRF;
 use Src\Session\Session;
-use Src\Translation\Translation;
 use Support\Resource;
+use System\Request;
 
 $setting = new Setting();
 $session = new Session();
 $request = new Request();
 ?>
 <!DOCTYPE html>
-<html lang="<?= Translation::DUTCH_LANGUAGE_CODE ?>">
+<html lang="<?= TranslationOld::DUTCH_LANGUAGE_CODE ?>">
 <head>
     <title><?= $data['title'] ?? 'Undefined' ?></title>
 

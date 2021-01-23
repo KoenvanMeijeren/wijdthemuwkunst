@@ -6,11 +6,11 @@ declare(strict_types=1);
 namespace Domain\Admin\Authentication\Actions;
 
 use Components\Actions\FormAction;
+use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\Account\Models\Account;
 use Domain\Admin\Accounts\Repositories\AccountRepository;
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Authentication\Support\IDEncryption;
-use Src\Translation\Translation;
 use System\StateInterface;
 
 /**
@@ -65,7 +65,7 @@ final class LogUserInAction extends FormAction {
 
       $this->store();
 
-      $this->session()->flash(StateInterface::SUCCESSFUL, Translation::get('login_successful_message'));
+      $this->session()->flash(StateInterface::SUCCESSFUL, TranslationOld::get('login_successful_message'));
 
       return TRUE;
     }
@@ -76,7 +76,7 @@ final class LogUserInAction extends FormAction {
 
     $this->store();
 
-    $this->session()->flash(StateInterface::FAILED, Translation::get('login_failed_message'));
+    $this->session()->flash(StateInterface::FAILED, TranslationOld::get('login_failed_message'));
 
     return FALSE;
   }
@@ -86,7 +86,7 @@ final class LogUserInAction extends FormAction {
    */
   protected function authorize(): bool {
     if ($this->account->isBlocked()) {
-      $this->session()->flash(StateInterface::FAILED, Translation::get('login_failed_blocked_account_message'));
+      $this->session()->flash(StateInterface::FAILED, TranslationOld::get('login_failed_blocked_account_message'));
 
       return FALSE;
     }
@@ -98,11 +98,11 @@ final class LogUserInAction extends FormAction {
    * @inheritDoc
    */
   protected function validate(): bool {
-    $this->validator->input($this->email, Translation::get('email'))
+    $this->validator->input($this->email, TranslationOld::get('email'))
       ->isRequired()
       ->isEmail();
 
-    $this->validator->input($this->password, Translation::get('password'))
+    $this->validator->input($this->password, TranslationOld::get('password'))
       ->isRequired();
 
     return $this->validator->handleFormValidation();

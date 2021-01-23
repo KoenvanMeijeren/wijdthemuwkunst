@@ -5,6 +5,8 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Pages\Controllers;
 
+use Components\Header\Redirect;
+use Components\Translation\TranslationOld;
 use Domain\Admin\Pages\Actions\CreatePageAction;
 use Domain\Admin\Pages\Actions\DeletePageAction;
 use Domain\Admin\Pages\Actions\PublishPageAction;
@@ -17,8 +19,6 @@ use Domain\Admin\Pages\Models\Page;
 use Domain\Admin\Pages\Repositories\PageRepository;
 use Domain\Admin\Pages\ViewModels\EditViewModel;
 use Domain\Admin\Pages\ViewModels\PageTable;
-use Components\Header\Redirect;
-use Src\Translation\Translation;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;
 
@@ -53,7 +53,7 @@ final class PageController extends AdminControllerBase {
     $pageTable = new PageTable($this->page->all());
 
     return $this->view('index', [
-      'title' => Translation::get('admin_page_title'),
+      'title' => TranslationOld::get('admin_page_title'),
       'pages' => $pageTable->get(),
     ]);
   }
@@ -63,7 +63,7 @@ final class PageController extends AdminControllerBase {
    */
   public function create(): ViewInterface {
     return $this->view('edit', [
-      'title' => Translation::get('admin_create_page_title'),
+      'title' => TranslationOld::get('admin_create_page_title'),
     ]);
   }
 
@@ -94,7 +94,7 @@ final class PageController extends AdminControllerBase {
 
     return $this->view('edit', [
       'title' => sprintf(
-              Translation::get('admin_edit_page_title'),
+              TranslationOld::get('admin_edit_page_title'),
               $pageRepository->getSlug()
       ),
       'page' => $page->get(),

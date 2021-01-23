@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Domain\Admin\Accounts\User\Actions;
 
 use Components\Actions\FormAction;
+use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\Repositories\AccountRepository;
 use Domain\Admin\Accounts\User\Models\User;
 use Src\Session\Session;
-use Src\Translation\Translation;
 use Src\Validate\form\FormValidator;
 use System\Request;
 use System\StateInterface;
@@ -61,7 +61,7 @@ abstract class BaseUserAction extends FormAction {
 
     $this->session()->flash(
           StateInterface::SUCCESSFUL,
-          Translation::get('admin_edited_account_successful_message')
+          TranslationOld::get('admin_edited_account_successful_message')
       );
 
     return TRUE;

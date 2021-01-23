@@ -6,13 +6,13 @@ declare(strict_types=1);
 namespace Domain\Admin\Pages\Actions;
 
 use Components\Actions\FormAction;
+use Components\Translation\TranslationOld;
 use Domain\Admin\File\Actions\SaveFileAction;
 use Domain\Admin\Pages\Models\Page;
 use Domain\Admin\Pages\Models\Slug;
 use Domain\Admin\Pages\Repositories\PageRepository;
 use Domain\Admin\Pages\Repositories\SlugRepository;
 use Src\Session\Session;
-use Src\Translation\Translation;
 use Src\Validate\form\FormValidator;
 use System\Request;
 
@@ -129,22 +129,22 @@ abstract class BasePageAction extends FormAction {
    * @inheritDoc
    */
   protected function validate(): bool {
-    $this->validator->input($this->title, Translation::get('title'))
+    $this->validator->input($this->title, TranslationOld::get('title'))
       ->isRequired();
 
     if ($this->url !== $this->pageRepository->getSlug()) {
-      $this->validator->input($this->url, Translation::get('slug'))
+      $this->validator->input($this->url, TranslationOld::get('slug'))
         ->isRequired()
         ->isUnique(
                 $this->page->getBySlug($this->url),
                 sprintf(
-                    Translation::get('page_already_exists'),
+                    TranslationOld::get('page_already_exists'),
                     $this->url
                 )
             );
     }
 
-    $this->validator->input((string) $this->inMenu, Translation::get('page_visibility'))
+    $this->validator->input((string) $this->inMenu, TranslationOld::get('page_visibility'))
       ->isRequired()
       ->isInArray(
               (string) $this->inMenu,
@@ -154,7 +154,7 @@ abstract class BasePageAction extends FormAction {
               ]
           );
 
-    $this->validator->input($this->content, Translation::get('page_content'))
+    $this->validator->input($this->content, TranslationOld::get('page_content'))
       ->isRequired();
 
     return $this->validator->handleFormValidation();

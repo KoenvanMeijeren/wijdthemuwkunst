@@ -6,11 +6,11 @@
 
 declare(strict_types=1);
 
+use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\Repositories\AccountRepository;
 use Domain\Admin\Accounts\User\Models\User;
-use System\Request;
 use Src\Security\CSRF;
-use Src\Translation\Translation;
+use System\Request;
 
 $request = new Request();
 $user = new User();
@@ -40,19 +40,19 @@ $rights = $rights !== 0 ? $rights : $account->getRights();
 
                         <div class="form-group">
                             <label for="name">
-                                <?php echo Translation::get('form_name') ?>
+                                <?php echo TranslationOld::get('form_name') ?>
                                 <span class="text-danger">*</span>
                             </label>
                             <input type="text" name="name" id="name"
                                    class="form-control"
-                                   placeholder="<?php echo Translation::get('form_name') ?>"
+                                   placeholder="<?php echo TranslationOld::get('form_name') ?>"
                                    value="<?php echo $request->post('name', $account->getName()) ?>"
                                    required>
                         </div>
 
                         <div class="form-group">
                             <label for="rights">
-                                <?php echo Translation::get('form_rights') ?>
+                                <?php echo TranslationOld::get('form_rights') ?>
                                 <span class="text-danger">*</span>
                             </label>
 
@@ -60,19 +60,19 @@ $rights = $rights !== 0 ? $rights : $account->getRights();
                                     name="rights"
                                 <?php echo $disabled ?> required>
                                 <option value="0">
-                                    <?php echo Translation::get('form_choose_rights') ?>
+                                    <?php echo TranslationOld::get('form_choose_rights') ?>
                                 </option>
                                 <option value="<?php echo User::ADMIN ?>"
                                     <?php echo $rights === User::ADMIN ? 'selected' : '' ?>>
-                                    <?php echo Translation::get('form_rights_admin') ?>
+                                    <?php echo TranslationOld::get('form_rights_admin') ?>
                                 </option>
                                 <option value="<?php echo User::SUPER_ADMIN ?>"
                                     <?php echo $rights === User::SUPER_ADMIN ? 'selected' : '' ?>>
-                                    <?php echo Translation::get('form_rights_super_admin') ?>
+                                    <?php echo TranslationOld::get('form_rights_super_admin') ?>
                                 </option>
                                 <option value="<?php echo User::DEVELOPER ?>"
                                     <?php echo $rights === User::DEVELOPER ? 'selected' : '' ?>>
-                                    <?php echo Translation::get('form_rights_developer') ?>
+                                    <?php echo TranslationOld::get('form_rights_developer') ?>
                                 </option>
                             </select>
                         </div>
@@ -82,14 +82,14 @@ $rights = $rights !== 0 ? $rights : $account->getRights();
                                class="btn btn-outline-danger float-left"
                                data-toggle="tooltip"
                                data-placement="top"
-                               title="<?php echo Translation::get('back_button') ?>">
+                               title="<?php echo TranslationOld::get('back_button') ?>">
                                 <i class="fas fa-arrow-left"></i>
-                                <?php echo Translation::get('back_button') ?>
+                                <?php echo TranslationOld::get('back_button') ?>
                             </a>
 
                             <button type="submit"
                                     class="btn btn-outline-success float-right">
-                                <?php echo Translation::get('save_button') ?>
+                                <?php echo TranslationOld::get('save_button') ?>
                                 <i class="far fa-save"></i>
                             </button>
                         </div>
@@ -121,13 +121,13 @@ $rights = $rights !== 0 ? $rights : $account->getRights();
 
                             <div class="form-group">
                                 <label for="email">
-                                    <?php echo Translation::get('form_email') ?>
+                                    <?php echo TranslationOld::get('form_email') ?>
                                     <span class="text-danger">*</span>
                                 </label>
                                 <input type="email" id="email"
                                        name="email"
                                        class="form-control"
-                                       placeholder="<?php echo Translation::get('form_email') ?>"
+                                       placeholder="<?php echo TranslationOld::get('form_email') ?>"
                                        value="<?php echo $request->post('email') !== '' ?
                                            $request->post('email') : $account->getEmail() ?>"
                                        required>
@@ -138,14 +138,14 @@ $rights = $rights !== 0 ? $rights : $account->getRights();
                                    class="btn btn-outline-danger float-left"
                                    data-toggle="tooltip"
                                    data-placement="top"
-                                   title="<?php echo Translation::get('back_button') ?>">
+                                   title="<?php echo TranslationOld::get('back_button') ?>">
                                     <i class="fas fa-arrow-left"></i>
-                                    <?php echo Translation::get('back_button') ?>
+                                    <?php echo TranslationOld::get('back_button') ?>
                                 </a>
 
                                 <button type="submit"
                                         class="btn btn-outline-success float-right">
-                                    <?php echo Translation::get('save_button') ?>
+                                    <?php echo TranslationOld::get('save_button') ?>
                                     <i class="far fa-save"></i>
                                 </button>
                             </div>
@@ -177,27 +177,27 @@ $rights = $rights !== 0 ? $rights : $account->getRights();
 
                         <div class="form-group">
                             <label for="newPassword">
-                                <?php echo Translation::get('form_new_password') ?>
+                                <?php echo TranslationOld::get('form_new_password') ?>
                                 <span class="text-danger">*</span>
                             </label>
                             <input type="password"
                                    name="password"
                                    id="newPassword"
                                    class="form-control"
-                                   placeholder="<?php echo Translation::get('form_new_password') ?>"
+                                   placeholder="<?php echo TranslationOld::get('form_new_password') ?>"
                                    required autocomplete="false">
                         </div>
 
                         <div class="form-group">
                             <label for="confirmationPassword">
-                                <?php echo Translation::get('form_confirmation_password') ?>
+                                <?php echo TranslationOld::get('form_confirmation_password') ?>
                                 <span class="text-danger">*</span>
                             </label>
                             <input type="password"
                                    name="confirmationPassword"
                                    id="confirmationPassword"
                                    class="form-control"
-                                   placeholder="<?php echo Translation::get('form_confirmation_password') ?>"
+                                   placeholder="<?php echo TranslationOld::get('form_confirmation_password') ?>"
                                    required autocomplete="false">
 
                             <div id="password-feedback"></div>
@@ -208,14 +208,14 @@ $rights = $rights !== 0 ? $rights : $account->getRights();
                                class="btn btn-outline-danger float-left"
                                data-toggle="tooltip"
                                data-placement="top"
-                               title="<?php echo Translation::get('back_button') ?>">
+                               title="<?php echo TranslationOld::get('back_button') ?>">
                                 <i class="fas fa-arrow-left"></i>
-                                <?php echo Translation::get('back_button') ?>
+                                <?php echo TranslationOld::get('back_button') ?>
                             </a>
 
                             <button type="submit"
                                     class="btn btn-outline-success float-right">
-                                <?php echo Translation::get('save_button') ?>
+                                <?php echo TranslationOld::get('save_button') ?>
                                 <i class="far fa-save"></i>
                             </button>
                         </div>
@@ -253,7 +253,7 @@ $rights = $rights !== 0 ? $rights : $account->getRights();
                                 <?php echo CSRF::insertToken("/admin/account/unblock/{$account->getId()}") ?>
                                 <button type="submit"
                                         class="btn btn-outline-success">
-                                    <?php echo Translation::get('unblock_button') ?>
+                                    <?php echo TranslationOld::get('unblock_button') ?>
                                     <i class="far fa-save"></i>
                                 </button>
                                 <div class="clearfix"></div>
@@ -271,7 +271,7 @@ $rights = $rights !== 0 ? $rights : $account->getRights();
 
                                 <button type="submit"
                                         class="btn btn-outline-danger">
-                                    <?php echo Translation::get('block_button') ?>
+                                    <?php echo TranslationOld::get('block_button') ?>
                                     <i class="far fa-save"></i>
                                 </button>
                                 <div class="clearfix"></div>

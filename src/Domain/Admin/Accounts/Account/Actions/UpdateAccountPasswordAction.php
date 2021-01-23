@@ -5,8 +5,8 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\Account\Actions;
 
+use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\Account\Models\Account;
-use Src\Translation\Translation;
 use System\StateInterface;
 
 /**
@@ -26,7 +26,7 @@ final class UpdateAccountPasswordAction extends BaseAccountAction {
 
     $this->session()->flash(
       StateInterface::SUCCESSFUL,
-      Translation::get('admin_edited_account_successful_message')
+      TranslationOld::get('admin_edited_account_successful_message')
     );
 
     return TRUE;
@@ -36,7 +36,7 @@ final class UpdateAccountPasswordAction extends BaseAccountAction {
    * @inheritDoc
    */
   protected function validate(): bool {
-    $this->validator->input($this->password, Translation::get('password'))
+    $this->validator->input($this->password, TranslationOld::get('password'))
       ->isRequired()
       ->passwordIsEqual($this->confirmationPassword)
       ->passwordIsNotCurrentPassword($this->accountRepository->getPassword());

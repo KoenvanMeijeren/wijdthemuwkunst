@@ -14,7 +14,7 @@ final class EntityManager extends EntityRepositoryBase implements EntityManagerI
   /**
    * {@inheritDoc}
    */
-  public function getStorage(string $entity) {
+  public function getStorage(string $entity): EntityManagerInterface {
     $this->entity = new $entity();
     return $this;
   }

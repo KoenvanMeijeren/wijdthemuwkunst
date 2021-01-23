@@ -3,8 +3,8 @@
 namespace Domain\Admin\Menu\ViewModels;
 
 use Components\Header\Redirect;
+use Components\Translation\TranslationOld;
 use Src\Session\Session;
-use Src\Translation\Translation;
 use System\StateInterface;
 
 /**
@@ -30,7 +30,7 @@ final class EditViewModel {
     if ($this->menuItem === NULL) {
       $this->session()->flash(
             StateInterface::FAILED,
-            Translation::get('menu_item_does_not_exists')
+            TranslationOld::get('menu_item_does_not_exists')
         );
 
       return new Redirect('/admin/structure/menu');

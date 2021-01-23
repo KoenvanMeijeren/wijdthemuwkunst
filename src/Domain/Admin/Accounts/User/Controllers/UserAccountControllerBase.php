@@ -5,10 +5,10 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\User\Controllers;
 
+use Components\Header\Redirect;
+use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\User\Actions\UpdateUserDataAction;
 use Domain\Admin\Accounts\User\Actions\UpdateUserPasswordAction;
-use Components\Header\Redirect;
-use Src\Translation\Translation;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;
 
@@ -24,7 +24,7 @@ final class UserAccountControllerBase extends AdminControllerBase {
    */
   public function index(): ViewInterface {
     return $this->view('index', [
-      'title' => Translation::get('admin_account_maintenance_title'),
+      'title' => TranslationOld::get('admin_account_maintenance_title'),
       'account' => $this->getCurrentUser()->getAccount(),
     ]);
   }

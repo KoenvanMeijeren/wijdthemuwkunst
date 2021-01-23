@@ -17,7 +17,7 @@ interface EntityManagerInterface {
    *
    * @return $this
    */
-  public function getStorage(string $entity);
+  public function getStorage(string $entity): EntityManagerInterface;
 
   /**
    * Creates the entity.

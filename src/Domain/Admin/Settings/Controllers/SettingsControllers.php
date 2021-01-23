@@ -5,14 +5,14 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Settings\Controllers;
 
+use Components\Header\Redirect;
+use Components\Translation\TranslationOld;
 use Domain\Admin\Settings\Actions\CreateBaseSettingAction;
 use Domain\Admin\Settings\Actions\DestroySettingAction;
 use Domain\Admin\Settings\Actions\UpdateBaseSettingAction;
 use Domain\Admin\Settings\Models\Setting;
 use Domain\Admin\Settings\ViewModels\EditViewModel;
 use Domain\Admin\Settings\ViewModels\SettingTable;
-use Components\Header\Redirect;
-use Src\Translation\Translation;
 use Src\View\ViewInterface;
 use System\Controller\AdminControllerBase;
 
@@ -32,7 +32,7 @@ final class SettingsControllers extends AdminControllerBase {
     $settingTable = new SettingTable($setting->all());
 
     return $this->view('index', [
-      'title' => Translation::get('settings_title'),
+      'title' => TranslationOld::get('settings_title'),
       'settings' => $settingTable->get(),
     ]);
   }
@@ -45,7 +45,7 @@ final class SettingsControllers extends AdminControllerBase {
     $settingTable = new SettingTable($setting->all());
 
     return $this->view('index', [
-      'title' => Translation::get('settings_title'),
+      'title' => TranslationOld::get('settings_title'),
       'settings' => $settingTable->get(),
       'createSetting' => TRUE,
     ]);
@@ -72,7 +72,7 @@ final class SettingsControllers extends AdminControllerBase {
     $editViewModel = new EditViewModel($setting->find($setting->getId()));
 
     return $this->view('index', [
-      'title' => Translation::get('settings_title'),
+      'title' => TranslationOld::get('settings_title'),
       'settings' => $settingTable->get(),
       'setting' => $editViewModel->get(),
     ]);

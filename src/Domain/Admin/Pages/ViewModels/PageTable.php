@@ -5,12 +5,12 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Pages\ViewModels;
 
+use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Pages\Models\Page;
 use Domain\Admin\Pages\Repositories\PageRepository;
 use Domain\Admin\Pages\Support\PageInMenuStateConverter;
 use Domain\Admin\Pages\Support\PageIsPublishedStateConverterBase;
-use Src\Translation\Translation;
 use Support\Resource;
 use System\DataTable\DataTableBuilder;
 
@@ -24,11 +24,11 @@ final class PageTable extends DataTableBuilder {
    */
   protected function buildHead(): array {
     return [
-      Translation::get('table_row_slug'),
-      Translation::get('table_row_title'),
-      Translation::get('table_row_page_in_menu'),
-      Translation::get('table_row_publish_state'),
-      Translation::get('table_row_edit'),
+      TranslationOld::get('table_row_slug'),
+      TranslationOld::get('table_row_title'),
+      TranslationOld::get('table_row_page_in_menu'),
+      TranslationOld::get('table_row_publish_state'),
+      TranslationOld::get('table_row_edit'),
     ];
   }
 
@@ -68,15 +68,15 @@ final class PageTable extends DataTableBuilder {
     $actions = '<div class="table-edit-row">';
     $actions .= Resource::addTableLinkActionColumn(
           '/admin/content/pages/page/edit/' . $page->getId(),
-          Translation::get('table_row_edit'),
+          TranslationOld::get('table_row_edit'),
           'fas fa-edit'
       );
     $actions .= Resource::addTableButtonActionColumn(
           '/admin/content/pages/page/delete/' . $page->getId(),
-          Translation::get('table_row_delete'),
+          TranslationOld::get('table_row_delete'),
           'fas fa-trash-alt',
           'btn-outline-danger',
-          Translation::get('delete_page_confirmation_message'),
+          TranslationOld::get('delete_page_confirmation_message'),
           $user->getRights() !== User::DEVELOPER
           && $page->getInMenu() !== Page::PAGE_STATIC
       );

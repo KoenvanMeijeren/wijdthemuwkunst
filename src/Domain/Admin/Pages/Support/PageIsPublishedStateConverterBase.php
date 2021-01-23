@@ -5,8 +5,8 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Pages\Support;
 
-use Src\Converter\ConverterBase;
-use Src\Translation\Translation;
+use Components\Converter\ConverterBase;
+use Components\Translation\TranslationOld;
 
 /**
  * Provides a class for converting the page is published state.
@@ -20,10 +20,10 @@ final class PageIsPublishedStateConverterBase extends ConverterBase {
    */
   public function toReadable(): string {
     if ((bool) $this->var) {
-      return Translation::get('admin_page_is_published');
+      return TranslationOld::get('admin_page_is_published');
     }
 
-    return Translation::get('admin_page_is_not_published');
+    return TranslationOld::get('admin_page_is_not_published');
   }
 
 }

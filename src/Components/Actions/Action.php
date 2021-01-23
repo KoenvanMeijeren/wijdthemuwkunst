@@ -15,6 +15,17 @@ abstract class Action implements ActionInterface {
   use ComponentsTrait;
 
   /**
+   * {@inheritDoc}
+   */
+  final public function execute(): bool {
+    if (!$this->authorize() || !$this->validate()) {
+      return FALSE;
+    }
+
+    return $this->handle();
+  }
+
+  /**
    * Handles the action.
    *
    * @return bool
@@ -37,16 +48,5 @@ abstract class Action implements ActionInterface {
    *   Whether the action is valid or not.
    */
   abstract protected function validate(): bool;
-
-  /**
-   * {@inheritDoc}
-   */
-  final public function execute(): bool {
-    if (!$this->authorize() || !$this->validate()) {
-      return FALSE;
-    }
-
-    return $this->handle();
-  }
 
 }

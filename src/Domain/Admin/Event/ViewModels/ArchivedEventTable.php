@@ -2,9 +2,9 @@
 
 namespace Domain\Admin\Event\ViewModels;
 
+use Components\Translation\TranslationOld;
 use Domain\Admin\Event\Repositories\EventRepository;
 use Domain\Admin\Event\Support\EventDatetimeConverter;
-use Src\Translation\Translation;
 use Support\Resource;
 use System\DataTable\DataTableBuilder;
 
@@ -18,11 +18,11 @@ final class ArchivedEventTable extends DataTableBuilder {
    */
   protected function buildHead(): array {
     return [
-      Translation::get('table_row_slug'),
-      Translation::get('table_row_title'),
-      Translation::get('table_row_location'),
-      Translation::get('table_row_datetime'),
-      Translation::get('table_row_edit'),
+      TranslationOld::get('table_row_slug'),
+      TranslationOld::get('table_row_title'),
+      TranslationOld::get('table_row_location'),
+      TranslationOld::get('table_row_datetime'),
+      TranslationOld::get('table_row_edit'),
     ];
   }
 
@@ -58,10 +58,10 @@ final class ArchivedEventTable extends DataTableBuilder {
       );
     $actions .= Resource::addTableButtonActionColumn(
           '/admin/content/events/event/delete/' . $event->getId(),
-          Translation::get('table_row_delete'),
+          TranslationOld::get('table_row_delete'),
           'fas fa-trash-alt',
           'btn-outline-danger',
-          Translation::get('delete_event_confirmation_message')
+          TranslationOld::get('delete_event_confirmation_message')
       );
     $actions .= '</div>';
 

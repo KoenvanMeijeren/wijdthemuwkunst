@@ -2,10 +2,10 @@
 
 namespace Domain\Admin\Event\ViewModels;
 
+use Components\Translation\TranslationOld;
 use Src\Core\Redirect;
 use Src\Core\StateInterface;
 use Src\Session\Session;
-use Src\Translation\Translation;
 use stdClass;
 
 /**
@@ -31,7 +31,7 @@ final class EditViewModel {
     if ($this->event === NULL) {
       $this->session()->flash(
             StateInterface::FAILED,
-            Translation::get('admin_event_cannot_be_visited')
+            TranslationOld::get('admin_event_cannot_be_visited')
         );
 
       return new Redirect('/admin/content/events');

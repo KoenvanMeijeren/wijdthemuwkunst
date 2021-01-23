@@ -80,6 +80,16 @@ abstract class EntityBase extends EntityModel implements EntityInterface {
   }
 
   /**
+   * Stores an attribute of the entity.
+   *
+   * @param $name
+   *   The name of the attribute.
+   */
+  public function __get($name) {
+    $this->get($name);
+  }
+
+  /**
    * {@inheritDoc}
    */
   public function setValues(array $values) {

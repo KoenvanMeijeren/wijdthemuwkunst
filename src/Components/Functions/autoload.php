@@ -12,6 +12,7 @@ use Src\Validate\Validate;
 $filenames = [
   'default',
   'csv',
+  'components',
   'math',
   'load_items',
 ];

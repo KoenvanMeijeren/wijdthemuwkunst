@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\Account\Actions;
 
-use Src\Translation\Translation;
+use Components\Translation\TranslationOld;
 use System\StateInterface;
 
 /**
@@ -23,7 +23,7 @@ final class UpdateAccountEmailAction extends BaseAccountAction {
 
     $this->session()->flash(
           StateInterface::SUCCESSFUL,
-          Translation::get('admin_edited_account_successful_message')
+          TranslationOld::get('admin_edited_account_successful_message')
       );
 
     return TRUE;
@@ -38,12 +38,12 @@ final class UpdateAccountEmailAction extends BaseAccountAction {
       return TRUE;
     }
 
-    $this->validator->input($this->email, Translation::get('email'))
+    $this->validator->input($this->email, TranslationOld::get('email'))
       ->isEmail()
       ->isUnique(
               $this->account->getByEmail($this->email),
               sprintf(
-                  Translation::get('admin_email_already_exists_message'),
+                  TranslationOld::get('admin_email_already_exists_message'),
                   $this->email
               )
           );

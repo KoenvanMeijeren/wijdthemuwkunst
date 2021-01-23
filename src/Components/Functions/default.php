@@ -11,9 +11,6 @@ declare(strict_types=1);
  * The default functions.
  */
 
-use Domain\Admin\Text\Entity\Text;
-use System\Entity\EntityManager;
-
 if (!function_exists('array_replace_keys')) {
 
   /**
@@ -63,11 +60,11 @@ if (!function_exists('replace_string')) {
   /**
    * Replace all found string parts in a string.
    *
-   * @param string $toRemove
+   * @param string $remove
    *   The string part to be replaced.
-   * @param string $toReplace
+   * @param string $replace
    *   The new value of the string part which is going to be replaced.
-   * @param string $string
+   * @param string $subject
    *   The string to replace parts from.
    * @param int $limit
    *   Limit the number of matches.
@@ -75,8 +72,8 @@ if (!function_exists('replace_string')) {
    * @return string
    *   The updated string.
    */
-  function replace_string(string $toRemove, string $toReplace, string $string, int $limit = -1) {
-    return (string) preg_replace('/\b(' . $toRemove . ')\b/', $toReplace, $string, $limit);
+  function replace_string(string $remove, string $replace, string $subject, int $limit = -1): string {
+    return (string) preg_replace('/\b(' . $remove . ')\b/', $replace, $subject, $limit);
   }
 
 }
@@ -86,9 +83,9 @@ if (!function_exists('replace_dot')) {
   /**
    * Replace all found string parts in a string.
    *
-   * @param string $toReplace
+   * @param string $replace
    *   The new value of the string part which is going to be replaced.
-   * @param string $string
+   * @param string $subject
    *   The string to replace parts from.
    * @param int $limit
    *   Limit the number of matches.
@@ -96,8 +93,8 @@ if (!function_exists('replace_dot')) {
    * @return string
    *   The updated string.
    */
-  function replace_dot(string $toReplace, string $string, int $limit = -1) {
-    return (string) preg_replace('/\./', $toReplace, $string, $limit);
+  function replace_dot(string $replace, string $subject, int $limit = -1): string {
+    return (string) preg_replace('/\./', $replace, $subject, $limit);
   }
 
 }
@@ -107,18 +104,18 @@ if (!function_exists('replace_all_except_first_string')) {
   /**
    * Replace all found string parts in a string.
    *
-   * @param string $toRemove
+   * @param string $remove
    *   The string part to be replaced.
-   * @param string $toReplace
+   * @param string $replace
    *   The new value of the string part.
-   * @param string $string
+   * @param string $subject
    *   The string to replace values from.
    *
    * @return string
    *   The updated string.
    */
-  function replace_all_except_first_string(string $toRemove, string $toReplace, string $string) {
-    return replace_string($toReplace, $toRemove, replace_string($toRemove, $toReplace, $string), 1);
+  function replace_all_except_first_string(string $remove, string $replace, string $subject) {
+    return replace_string($replace, $remove, replace_string($remove, $replace, $subject), 1);
   }
 
 }
@@ -279,30 +276,6 @@ if (!function_exists('get_subclasses_of')) {
     }
 
     return $result;
-  }
-
-}
-
-if (!function_exists('t')) {
-
-  /**
-   * Translates texts.
-   *
-   * @param string $text
-   *   The text to be translated.
-   */
-  function t(string $text) {
-    $entityManager = new EntityManager();
-
-    /** @var \Domain\Admin\Text\Entity\TextRepositoryInterface $repository */
-    $repository = $entityManager->getStorage(Text::class)->getRepository();
-    if ($entity = $repository->loadByText($text)) {
-      $entity = $repository->loadByText($text);
-
-      return $entity->getValue();
-    }
-
-    return $text;
   }
 
 }

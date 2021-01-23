@@ -2,7 +2,7 @@
 
 namespace Domain\Admin\Menu\Actions;
 
-use Src\Translation\Translation;
+use Components\Translation\TranslationOld;
 use System\StateInterface;
 
 /**
@@ -19,7 +19,7 @@ final class UpdateMenuAction extends BaseMenuAction {
     $this->session()->flash(
           StateInterface::SUCCESSFUL,
           sprintf(
-              Translation::get('menu_item_successful_updated'),
+              TranslationOld::get('menu_item_successful_updated'),
               $this->title
           )
       );
