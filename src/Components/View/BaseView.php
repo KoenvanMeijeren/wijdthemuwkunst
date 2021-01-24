@@ -23,6 +23,13 @@ abstract class BaseView implements ViewInterface {
   protected string $layoutPath = RESOURCES_PATH . '/layout/%name%';
 
   /**
+   * The directory of the views.
+   *
+   * @var string
+   */
+  protected string $viewDirectory = '';
+
+  /**
    * Constructs the base view.
    *
    * @param string $layout
@@ -53,11 +60,8 @@ abstract class BaseView implements ViewInterface {
    * @return string
    *   The rendered content.
    */
-  /**
-   * {@inheritDoc}
-   */
   protected function renderContent(string $name, array $content = []): string {
-    $file = new File(directory: RESOURCES_PATH . "/partials/", file: "{$name}.view.php");
+    $file = new File(directory: $this->viewDirectory, file: "{$name}.view.php");
 
     return $file->get($content);
   }

@@ -31,6 +31,7 @@ final class DomainView extends BaseView {
    */
   public function __construct(string $name, array $content = []) {
     $this->isAdminView = str_contains(Uri::getUrl(), 'admin');
+    $this->viewDirectory = DOMAIN_PATH . '/';
 
     $layout = $this->isAdminView ? self::LAYOUT_ADMIN : self::LAYOUT_PUBLIC;
     $globalContent = $this->isAdminView ? $this->globalAdminContent() : $this->globalContent();

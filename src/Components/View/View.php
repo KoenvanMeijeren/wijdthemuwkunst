@@ -16,6 +16,8 @@ final class View extends BaseView {
    * {@inheritDoc}
    */
   public function __construct(string $name, array $content = []) {
+    $this->viewDirectory = RESOURCES_PATH . "/partials/";
+
     $layout = self::LAYOUT_PUBLIC;
     if (str_contains(Uri::getUrl(), 'admin')) {
       $layout = self::LAYOUT_ADMIN;
