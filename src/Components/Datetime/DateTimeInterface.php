@@ -3,12 +3,35 @@ declare(strict_types=1);
 
 namespace Components\Datetime;
 
+use IntlDateFormatter;
+
 /**
  * Provides an interface for the data time object and interacting with timestamps.
  *
  * @package Support
  */
 interface DateTimeInterface {
+
+  /**
+   * The default locale.
+   *
+   * @var int
+   */
+  public const DEFAULT_LOCALE = 'nl_NL';
+
+  /**
+   * The default timezone.
+   *
+   * @var int
+   */
+  public const DEFAULT_TIMEZONE = 'Europe/Amsterdam';
+
+  /**
+   * The default calendar.
+   *
+   * @var int
+   */
+  public const DEFAULT_CALENDAR = IntlDateFormatter::GREGORIAN;
 
   /**
    * Converts the datetime to a number of a day.

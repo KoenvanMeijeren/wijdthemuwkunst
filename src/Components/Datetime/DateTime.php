@@ -28,9 +28,9 @@ final class DateTime implements DateTimeInterface {
    */
   public function __construct(
     protected Chronos $datetime,
-    protected string $locale = 'nl_NL',
-    protected string $timezone = 'Europe/Amsterdam',
-    protected int $calendar = IntlDateFormatter::GREGORIAN
+    protected string $locale = self::DEFAULT_LOCALE,
+    protected string $timezone = self::DEFAULT_TIMEZONE,
+    protected int $calendar = self::DEFAULT_CALENDAR
   ) {
 
   }
@@ -47,9 +47,9 @@ final class DateTime implements DateTimeInterface {
    */
   public function toDateTime(): string {
     $fmt = new IntlDateFormatter(
-      locale: $this->locale,
-      datetype: IntlDateFormatter::FULL,
-      timetype: IntlDateFormatter::SHORT
+      $this->locale,
+      IntlDateFormatter::FULL,
+      IntlDateFormatter::SHORT
     );
 
     return $fmt->format(strtotime($this->datetime->toDateTimeString()));
@@ -60,9 +60,9 @@ final class DateTime implements DateTimeInterface {
    */
   public function toFormattedDate(): string {
     $fmt = new IntlDateFormatter(
-      locale: $this->locale,
-      datetype: IntlDateFormatter::SHORT,
-      timetype: IntlDateFormatter::NONE
+      $this->locale,
+      IntlDateFormatter::SHORT,
+      IntlDateFormatter::NONE
     );
 
     return $fmt->format(strtotime($this->datetime->toDateTimeString()));
@@ -73,9 +73,9 @@ final class DateTime implements DateTimeInterface {
    */
   public function toDate(): string {
     $fmt = new IntlDateFormatter(
-      locale: $this->locale,
-      datetype: IntlDateFormatter::FULL,
-      timetype: IntlDateFormatter::NONE
+      $this->locale,
+      IntlDateFormatter::FULL,
+      IntlDateFormatter::NONE
     );
 
     return $fmt->format(strtotime($this->datetime->toDateTimeString()));
@@ -86,9 +86,9 @@ final class DateTime implements DateTimeInterface {
    */
   public function toTime(): string {
     $fmt = new IntlDateFormatter(
-      locale: $this->locale,
-      datetype: IntlDateFormatter::NONE,
-      timetype: IntlDateFormatter::SHORT
+      $this->locale,
+      IntlDateFormatter::NONE,
+      IntlDateFormatter::SHORT
     );
 
     return $fmt->format(strtotime($this->datetime->toDateTimeString()));
@@ -99,12 +99,12 @@ final class DateTime implements DateTimeInterface {
    */
   public function toShortMonth(): string {
     $fmt = new IntlDateFormatter(
-      locale: $this->locale,
-      datetype: IntlDateFormatter::MEDIUM,
-      timetype: IntlDateFormatter::NONE,
-      timezone: $this->timezone,
-      calendar: $this->calendar,
-      pattern: 'MMM'
+      $this->locale,
+      IntlDateFormatter::MEDIUM,
+      IntlDateFormatter::NONE,
+      $this->timezone,
+      $this->calendar,
+      'MMM'
     );
 
     return replace_dot(
