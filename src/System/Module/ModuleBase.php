@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace System\Module;
 
-use Symfony\Component\Filesystem\Exception\FileNotFoundException;
+use Src\Exceptions\File\FileNotFoundException;
 
 /**
  * Provides a base class for modules.
