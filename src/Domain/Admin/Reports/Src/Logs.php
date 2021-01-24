@@ -5,7 +5,7 @@ namespace Domain\Admin\Reports\Src;
 use Cake\Chronos\Chronos;
 use Src\Log\Log;
 use stdClass;
-use Support\DateTime;
+use Components\Datetime\DateTime;
 
 /**
  *

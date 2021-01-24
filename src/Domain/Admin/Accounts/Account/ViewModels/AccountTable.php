@@ -10,7 +10,7 @@ use Domain\Admin\Accounts\Account\Support\AccountBlockStateConverter;
 use Domain\Admin\Accounts\Account\Support\AccountRightsConverter;
 use Domain\Admin\Accounts\Repositories\AccountRepository;
 use Domain\Admin\Accounts\User\Models\User;
-use Support\Resource;
+use Src\Resource\Resource;
 use System\DataTable\DataTableBuilder;
 
 /**

@@ -1,9 +1,7 @@
 <?php
-
 declare(strict_types=1);
 
-
-namespace Support;
+namespace Components\Datetime;
 
 use Cake\Chronos\Chronos;
 use IntlDateFormatter;
@@ -13,7 +11,7 @@ use IntlDateFormatter;
  *
  * @package Support
  */
-final class DateTime {
+final class DateTime implements DateTimeInterface {
 
   /**
    * DateTime constructor.
@@ -38,99 +36,81 @@ final class DateTime {
   }
 
   /**
-   * Convert the datetime to a number of a day.
-   *
-   * @return int
-   *   The day number.
+   * {@inheritDoc}
    */
   public function toDayNumber(): int {
     return $this->datetime->day;
   }
 
   /**
-   * Convert the datetime to a readable date format.
-   *
-   * @return string
-   *   The readable date format.
+   * {@inheritDoc}
    */
   public function toDateTime(): string {
     $fmt = new IntlDateFormatter(
-          $this->locale,
-          IntlDateFormatter::FULL,
-          IntlDateFormatter::SHORT
-      );
+      locale: $this->locale,
+      datetype: IntlDateFormatter::FULL,
+      timetype: IntlDateFormatter::SHORT
+    );
 
     return $fmt->format(strtotime($this->datetime->toDateTimeString()));
   }
 
   /**
-   * Convert the datetime to a readable short date format.
-   *
-   * @return string
-   *   The formatted date.
+   * {@inheritDoc}
    */
   public function toFormattedDate(): string {
     $fmt = new IntlDateFormatter(
-          $this->locale,
-          IntlDateFormatter::SHORT,
-          IntlDateFormatter::NONE
-      );
+      locale: $this->locale,
+      datetype: IntlDateFormatter::SHORT,
+      timetype: IntlDateFormatter::NONE
+    );
 
     return $fmt->format(strtotime($this->datetime->toDateTimeString()));
   }
 
   /**
-   * Convert the datetime to date.
-   *
-   * @return string
-   *   The default date format.
+   * {@inheritDoc}
    */
   public function toDate(): string {
     $fmt = new IntlDateFormatter(
-          $this->locale,
-          IntlDateFormatter::FULL,
-          IntlDateFormatter::NONE
-      );
+      locale: $this->locale,
+      datetype: IntlDateFormatter::FULL,
+      timetype: IntlDateFormatter::NONE
+    );
 
     return $fmt->format(strtotime($this->datetime->toDateTimeString()));
   }
 
   /**
-   * Convert the datetime to time.
-   *
-   * @return string
-   *   The default time format.
+   * {@inheritDoc}
    */
   public function toTime(): string {
     $fmt = new IntlDateFormatter(
-          $this->locale,
-          IntlDateFormatter::NONE,
-          IntlDateFormatter::SHORT
-      );
+      locale: $this->locale,
+      datetype: IntlDateFormatter::NONE,
+      timetype: IntlDateFormatter::SHORT
+    );
 
     return $fmt->format(strtotime($this->datetime->toDateTimeString()));
   }
 
   /**
-   * Convert the datetime to a short month notation of 3 chars.
-   *
-   * @return string
-   *   The short month format.
+   * {@inheritDoc}
    */
   public function toShortMonth(): string {
     $fmt = new IntlDateFormatter(
-          $this->locale,
-          IntlDateFormatter::MEDIUM,
-          IntlDateFormatter::NONE,
-          $this->timezone,
-          $this->calendar,
-          'MMM'
-      );
+      locale: $this->locale,
+      datetype: IntlDateFormatter::MEDIUM,
+      timetype: IntlDateFormatter::NONE,
+      timezone: $this->timezone,
+      calendar: $this->calendar,
+      pattern: 'MMM'
+    );
 
     return replace_dot(
-          '',
-          $fmt->format(strtotime($this->datetime->toDateTimeString()))
-      );
+      replace: '',
+      subject: $fmt->format(strtotime($this->datetime->toDateTimeString()))
+    );
   }
 
 }

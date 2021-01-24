@@ -4,7 +4,7 @@ namespace Domain\Admin\Menu\ViewModels;
 
 use Components\Translation\TranslationOld;
 use Domain\Admin\Menu\Repositories\MenuRepository;
-use Support\Resource;
+use Src\Resource\Resource;
 use System\DataTable\DataTableBuilder;
 
 /**

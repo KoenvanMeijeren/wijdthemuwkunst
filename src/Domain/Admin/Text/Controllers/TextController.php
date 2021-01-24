@@ -89,7 +89,7 @@ final class TextController extends AdminControllerBase {
    * @return \Src\View\ViewInterface|\Components\Header\Redirect
    *   Returns the view or a redirect response.
    */
-  public function store() {
+  public function store(): ViewInterface|Redirect {
     $create = new CreateTextAction();
     if ($create->execute()) {
       return new Redirect($this->redirectBack);
@@ -104,7 +104,7 @@ final class TextController extends AdminControllerBase {
    * @return \Components\Header\Redirect|ViewInterface
    *   The view.
    */
-  public function edit() {
+  public function edit(): ViewInterface|Redirect {
     $textTable = new TextTable($this->textRepository->all());
     $text = $this->textRepository->loadById((int) $this->request()->getRouteParameter());
     if ($text === NULL) {
@@ -126,7 +126,7 @@ final class TextController extends AdminControllerBase {
    * @return \Src\View\ViewInterface|\Components\Header\Redirect
    *   Returns the view or a redirect response.
    */
-  public function update() {
+  public function update(): ViewInterface|Redirect {
     $update = new UpdateTextAction();
     if ($update->execute()) {
       return new Redirect($this->redirectBack);

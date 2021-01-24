@@ -4,7 +4,7 @@ namespace Domain\Admin\Text\Entity;
 
 use Domain\Admin\Accounts\User\Models\User;
 use Components\Translation\TranslationOld;
-use Support\Resource;
+use Src\Resource\Resource;
 use System\DataTable\DataTableBuilder;
 use System\Entity\EntityInterface;
 

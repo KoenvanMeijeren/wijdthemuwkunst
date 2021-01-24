@@ -3,7 +3,7 @@
 namespace Domain\Admin\ContactForm\Repository;
 
 use Cake\Chronos\Chronos;
-use Support\DateTime;
+use Components\Datetime\DateTime;
 
 /**
  *

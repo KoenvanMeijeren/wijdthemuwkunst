@@ -1,0 +1,61 @@
+<?php
+declare(strict_types=1);
+
+namespace Components\Datetime;
+
+/**
+ * Provides an interface for the data time object and interacting with timestamps.
+ *
+ * @package Support
+ */
+interface DateTimeInterface {
+
+  /**
+   * Converts the datetime to a number of a day.
+   *
+   * @return int
+   *   The day number.
+   */
+  public function toDayNumber(): int;
+
+  /**
+   * Converts the datetime to a readable date format.
+   *
+   * @return string
+   *   The readable date format.
+   */
+  public function toDateTime(): string;
+
+  /**
+   * Converts the datetime to a readable short date format.
+   *
+   * @return string
+   *   The formatted date.
+   */
+  public function toFormattedDate(): string;
+
+  /**
+   * Converts the datetime to date.
+   *
+   * @return string
+   *   The default date format.
+   */
+  public function toDate(): string;
+
+  /**
+   * Converts the datetime to time.
+   *
+   * @return string
+   *   The default time format.
+   */
+  public function toTime(): string;
+
+  /**
+   * Converts the datetime to a short month notation of 3 chars.
+   *
+   * @return string
+   *   The short month format.
+   */
+  public function toShortMonth(): string;
+
+}

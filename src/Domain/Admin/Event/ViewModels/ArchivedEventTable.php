@@ -5,7 +5,7 @@ namespace Domain\Admin\Event\ViewModels;
 use Components\Translation\TranslationOld;
 use Domain\Admin\Event\Repositories\EventRepository;
 use Domain\Admin\Event\Support\EventDatetimeConverter;
-use Support\Resource;
+use Src\Resource\Resource;
 use System\DataTable\DataTableBuilder;
 
 /**

@@ -7,7 +7,7 @@ use Components\SuperGlobals\Cookie\Cookie;
 use Components\Translation\TranslationOld;
 use Defuse\Crypto\Exception\WrongKeyOrModifiedCiphertextException;
 use Src\Session\Session;
-use Support\DateTime;
+use Components\Datetime\DateTime;
 use System\DataTable\DataTable;
 
 /**

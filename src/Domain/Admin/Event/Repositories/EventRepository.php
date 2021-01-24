@@ -5,7 +5,7 @@ namespace Domain\Admin\Event\Repositories;
 use Cake\Chronos\Chronos;
 use Domain\Admin\Event\Support\EventDatetimeConverter;
 use Domain\Admin\File\Models\File;
-use Support\DateTime;
+use Components\Datetime\DateTime;
 
 /**
  *
