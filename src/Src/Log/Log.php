@@ -15,7 +15,7 @@ use Monolog\Processor\IntrospectionProcessor;
 use Monolog\Processor\ProcessIdProcessor;
 use Monolog\Processor\WebProcessor;
 use Components\Env\Env;
-use Src\File\File;
+use Components\File\File;
 
 /**
  * @deprecated
