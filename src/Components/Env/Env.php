@@ -6,7 +6,7 @@ namespace Components\Env;
 use Components\ComponentsTrait;
 use Components\SuperGlobals\Request;
 use JetBrains\PhpStorm\Pure;
-use Src\Log\LoggerHandler;
+use Components\Log\LoggerHandler;
 use Src\Validate\Validate;
 use System\View\ProductionErrorView;
 use Whoops\Handler\PrettyPageHandler;

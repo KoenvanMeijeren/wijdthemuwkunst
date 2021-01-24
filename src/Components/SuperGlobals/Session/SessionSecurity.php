@@ -5,7 +5,6 @@ namespace Components\SuperGlobals\Session;
 
 use Components\ComponentsTrait;
 use Components\SuperGlobals\RequestInterface;
-use Src\Log\Log;
 
 /**
  * Provides a class for securing the session.
@@ -30,7 +29,7 @@ final class SessionSecurity implements SessionSecurityInterface {
     }
 
 
-    Log::warning('Session hijacking attack has been declined');
+    $this->log()->warning('Session hijacking attack has been declined');
 
     $session = new SessionBuilder();
     $session->destroy();
@@ -51,7 +50,7 @@ final class SessionSecurity implements SessionSecurityInterface {
       return;
     }
 
-    log::warning('Session hijacking attack has been declined');
+    $this->log()->warning('Session hijacking attack has been declined');
 
     $session = new SessionBuilder();
     $session->destroy();

@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Src\Session;
 
+use Components\ComponentsTrait;
 use System\Request;
 use System\Sanitize;
-use Src\Log\LoggerTrait;
 use Components\Encrypt\Encrypt;
 
 /**
@@ -16,7 +16,7 @@ use Components\Encrypt\Encrypt;
  */
 final class Session {
 
-  use LoggerTrait;
+  use ComponentsTrait;
 
   /**
    * {@inheritDoc}
@@ -46,7 +46,7 @@ final class Session {
   public function flash(string $key, string $value): void {
     $this->saveForced($key, $value);
 
-    $this->logRequest($key, $value);
+    $this->logger()->logRequest($key, $value);
   }
 
   /**

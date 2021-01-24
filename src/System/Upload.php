@@ -5,11 +5,10 @@ declare(strict_types=1);
 
 namespace System;
 
+use Components\ComponentsTrait;
 use Exception;
 use Sirius\Upload\Handler as UploadHandler;
 use Src\Exceptions\File\ErrorWhileUploadingFileException;
-use Src\Log\Log;
-use Src\Session\Session;
 use Components\Translation\TranslationOld;
 
 /**
@@ -18,6 +17,9 @@ use Components\Translation\TranslationOld;
  * @package src\Core
  */
 final class Upload {
+
+  use ComponentsTrait;
+
   /**
    * The various allowed file options.
    *
@@ -29,13 +31,6 @@ final class Upload {
     'image/svg+xml' => 'svg',
     'image/png' => 'png',
   ];
-
-  /**
-   * The session definition.
-   *
-   * @var \Src\Session\Session
-   */
-  protected Session $session;
 
   /**
    * The file.
@@ -75,13 +70,7 @@ final class Upload {
    * @param string $stripedPath
    *   the striped path to store the file in.
    */
-  public function __construct(
-        array $file,
-        string $path = PUBLIC_PATH . '/storage/media/',
-        string $stripedPath = '/storage/media/'
-    ) {
-    $this->session = new Session();
-
+  public function __construct(array $file, string $path = PUBLIC_PATH . '/storage/media/', string $stripedPath = '/storage/media/') {
     $this->file = $file;
     $this->path = $path;
     $this->stripedPath = $stripedPath;
@@ -98,9 +87,7 @@ final class Upload {
    *
    */
   public function getFileIfItExists(): string {
-    $request = new Request();
-
-    $documentRoot = $request->server(Request::DOCUMENT_ROOT);
+    $documentRoot = $this->request()->server(Request::DOCUMENT_ROOT);
     $fileLocation = $this->stripedPath . $this->file['name'];
     $file = $documentRoot . $fileLocation;
 
@@ -139,7 +126,7 @@ final class Upload {
       catch (Exception $exception) {
         $result->clear();
 
-        Log::error($exception->getMessage());
+        $this->log()->error($exception->getMessage());
         throw new ErrorWhileUploadingFileException(
               'There was an error while uploading the file',
               114,
@@ -148,7 +135,7 @@ final class Upload {
       }
     }
 
-    $this->session->flash(
+    $this->session()->flash(
           StateInterface::FAILED,
           TranslationOld::get('error_while_uploading_file')
       );
@@ -173,7 +160,7 @@ final class Upload {
             $this->file['type'] : '';
 
     if (!array_key_exists($type, self::ALLOWED_FILE_TYPES)) {
-      $this->session->flash(
+      $this->session()->flash(
             StateInterface::FAILED,
             TranslationOld::get('not_allowed_file_upload')
         );

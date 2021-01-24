@@ -3,7 +3,8 @@
 namespace Domain\Admin\Reports\Src;
 
 use Cake\Chronos\Chronos;
-use Src\Log\Log;
+use Components\ComponentsTrait;
+use Components\Log\Logger;
 use stdClass;
 use Components\Datetime\DateTime;
 
@@ -11,6 +12,8 @@ use Components\Datetime\DateTime;
  *
  */
 final class Logs {
+
+  use ComponentsTrait;
 
   /**
    *
@@ -20,7 +23,7 @@ final class Logs {
 
     $logs = (array) preg_split(
           '/(?=\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}])/',
-          Log::get($chronos->toDateString())
+          $this->logger()->getFile($chronos->toDateString())
       );
 
     $firstKey = array_key_first($logs);

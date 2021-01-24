@@ -7,12 +7,15 @@ use Components\Env\Env;
 use Components\Env\EnvInterface;
 use Components\Header\Header;
 use Components\Header\HeaderInterface;
+use Components\Log\Logger;
+use Components\Log\LoggerInterface;
 use Components\SuperGlobals\Request;
 use Components\SuperGlobals\RequestInterface;
 use Components\SuperGlobals\Session\Session;
 use Components\SuperGlobals\Session\SessionInterface;
 use Components\Translation\Translation;
 use Components\Translation\TranslationInterface;
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
 
 /**
  * Provides a trait for interacting with the components.
@@ -69,6 +72,29 @@ trait ComponentsTrait {
    */
   protected function t(): TranslationInterface {
     return $this->translation ??= new Translation();
+  }
+
+  /**
+   * Gets the logger object.
+   *
+   * @return \Psr\Log\LoggerInterface
+   *   The logger object.
+   */
+  protected function log(): PsrLoggerInterface {
+    $this->logger ??= new Logger();
+
+    return $this->logger->getLogger();
+  }
+
+
+  /**
+   * Gets the logger object.
+   *
+   * @return LoggerInterface
+   *   The logger object.
+   */
+  protected function logger(): LoggerInterface {
+    return $this->logger ??= new Logger();
   }
 
 }

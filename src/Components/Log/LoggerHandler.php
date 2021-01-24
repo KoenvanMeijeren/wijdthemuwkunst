@@ -1,37 +1,46 @@
 <?php
-
 declare(strict_types=1);
 
+namespace Components\Log;
 
-namespace Src\Log;
-
+use Components\ComponentsTrait;
 use Throwable;
 use Whoops\Handler\Handler;
 
 /**
- * @deprecated
+ * Provides a custom handler for logging data.
+ *
+ * @package Components\Log
  */
 final class LoggerHandler extends Handler {
-  private string $error;
+
+  use ComponentsTrait;
 
   /**
+   * The error.
    *
+   * @var string
+   */
+  protected string $error;
+
+  /**
+   * {@inheritDoc}
    */
   public function handle(): ?int {
     $this->buildStringException($this->getException());
     $this->buildStackTrace($this->getException());
+    $this->log()->error($this->error);
 
-    Log::error($this->error);
     return Handler::DONE;
   }
 
   /**
-   * Convert the exception into html.
+   * Converts the exception into html.
    *
    * @param \Throwable $exception
    *   the exception to be prepared for the log.
    */
-  private function buildStringException(Throwable $exception): void {
+  protected function buildStringException(Throwable $exception): void {
     $this->error = "Exception: {$exception->getMessage()}";
     $this->error .= " on line {$exception->getLine()}";
     $this->error .= " in file {$exception->getFile()}";
@@ -39,26 +48,26 @@ final class LoggerHandler extends Handler {
   }
 
   /**
-   * Build the stack trace of the error.
+   * Builds the stack trace of the error.
    *
    * @param \Throwable $exception
-   *   this is going to be prepared for the log.
+   *   This is going to be prepared for the log.
    */
-  private function buildStackTrace(Throwable $exception): void {
+  protected function buildStackTrace(Throwable $exception): void {
     foreach ($exception->getTrace() as $trace) {
-      if (array_key_exists('line', $trace)) {
+      if (isset($trace['line'])) {
         $this->error .= " on line {$trace['line']}";
       }
 
-      if (array_key_exists('file', $trace)) {
+      if (isset($trace['file'])) {
         $this->error .= " in file {$trace['file']}";
       }
 
-      if (array_key_exists('function', $trace)) {
+      if (isset($trace['function'])) {
         $this->error .= " in function {$trace['function']} ";
       }
 
-      if (array_key_exists('class', $trace)) {
+      if (isset($trace['class'])) {
         $this->error .= " in class {$trace['class']} ";
       }
     }

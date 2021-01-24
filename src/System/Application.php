@@ -3,15 +3,12 @@ declare(strict_types=1);
 
 namespace System;
 
+use Components\ComponentsTrait;
+use Components\Datetime\DateTimeInterface;
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Text\TextModule;
-use Components\Env\Env;
-use System\Router;
-use System\StateInterface;
 use Components\SuperGlobals\Url\Uri;
 use Components\Header\Header;
-use Src\Log\Log;
-use Components\SuperGlobals\Session\Session;
 use Components\SuperGlobals\Session\SessionBuilder;
 
 /**
@@ -20,6 +17,8 @@ use Components\SuperGlobals\Session\SessionBuilder;
  * @package src\Core
  */
 final class Application implements ApplicationInterface {
+
+  use ComponentsTrait;
 
   /**
    * The location of the routes.
@@ -50,16 +49,13 @@ final class Application implements ApplicationInterface {
 
     $this->routesLocations[] = $textModule->getRoutesLocation();
 
-    date_default_timezone_set('Europe/Amsterdam');
+    date_default_timezone_set(DateTimeInterface::DEFAULT_TIMEZONE);
 
-    $env = new Env();
-    $env->initializeErrorHandling();
-
-    $header = new Header();
-    $header->send(Header::X_XSS_PROTECTION);
+    $this->env()->initializeErrorHandling();
+    $this->header()->send(Header::X_XSS_PROTECTION);
 
     $sessionBuilder = new SessionBuilder();
-    $sessionBuilder->startSession($env->get());
+    $sessionBuilder->startSession($this->env()->get());
     $sessionBuilder->secureSession();
   }
 
@@ -80,14 +76,13 @@ final class Application implements ApplicationInterface {
    * Executes actions after running the app.
    */
   protected function postRun(): void {
-    $session = new Session();
-    if ($session->exists(StateInterface::FAILED)
-      || $session->exists(StateInterface::FORM_VALIDATION_FAILED)
-      || $session->exists(StateInterface::SUCCESSFUL)) {
+    if ($this->session()->exists(StateInterface::FAILED)
+      || $this->session()->exists(StateInterface::FORM_VALIDATION_FAILED)
+      || $this->session()->exists(StateInterface::SUCCESSFUL)) {
       return;
     }
 
-    Log::appRequest(value: '', state: StateInterface::SUCCESSFUL, url: Uri::getUrl(), method: Uri::getMethod());
+    $this->logger()->appRequest(value: '', state: StateInterface::SUCCESSFUL, url: Uri::getUrl(), method: Uri::getMethod());
   }
 
 }

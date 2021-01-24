@@ -9,7 +9,7 @@ use Components\Actions\Action;
 use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\User\Models\User;
 use Src\Session\Session;
-use Src\Session\SessionBuilder;
+use Components\SuperGlobals\Session\SessionBuilder;
 use System\StateInterface;
 
 /**
@@ -32,7 +32,7 @@ final class LogUserOutAction extends Action {
     $builder = new SessionBuilder();
     $builder->destroy();
     $builder->startSession();
-    $builder->setSessionSecurity();
+    $builder->secureSession();
 
     $session = new Session();
     $session->flash(StateInterface::SUCCESSFUL, TranslationOld::get('admin_logout_message'));
