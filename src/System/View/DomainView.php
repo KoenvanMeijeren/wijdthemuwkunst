@@ -3,11 +3,12 @@ declare(strict_types=1);
 
 namespace System\View;
 
+use Components\File\File;
 use Domain\Admin\Cms\Structure\MenuAdminTrait;
 use Domain\Admin\Menu\Models\Menu;
 use JetBrains\PhpStorm\ArrayShape;
 use Components\SuperGlobals\Url\Uri;
-use Src\View\BaseView;
+use Components\View\BaseView;
 
 /**
  * Provides a base view for domain views.
@@ -26,17 +27,12 @@ final class DomainView extends BaseView {
   protected bool $isAdminView = false;
 
   /**
-   * DomainView constructor.
-   *
-   * @param string $name
-   *   The name of the partial view.
-   * @param mixed[] $content
-   *   The content of the partial view.
+   * {@inheritDoc}
    */
   public function __construct(string $name, array $content = []) {
     $this->isAdminView = str_contains(Uri::getUrl(), 'admin');
 
-    $layout = $this->isAdminView ? 'admin.layout.view.php' : 'layout.view.php';
+    $layout = $this->isAdminView ? self::LAYOUT_ADMIN : self::LAYOUT_PUBLIC;
     $globalContent = $this->isAdminView ? $this->globalAdminContent() : $this->globalContent();
     $content = array_merge($content, $globalContent);
 
@@ -74,25 +70,6 @@ final class DomainView extends BaseView {
         'reports' => $this->reportsMenu(),
       ],
     ];
-  }
-
-  /**
-   * Renders a partial view into the layout view.
-   *
-   * @param string $name
-   *   The name of the partial view.
-   * @param mixed[] $content
-   *   The content of the partial view.
-   *
-   * @return string
-   *   The renderable content.
-   */
-  protected function renderContent(string $name, array $content = []): string {
-    ob_start();
-
-    include_file(DOMAIN_PATH . "/{$name}.view.php", $content);
-
-    return (string) ob_get_clean();
   }
 
 }

@@ -10,7 +10,7 @@ use Domain\Admin\Menu\Actions\UpdateMenuAction;
 use Domain\Admin\Menu\Models\Menu;
 use Domain\Admin\Menu\ViewModels\EditViewModel;
 use Domain\Admin\Menu\ViewModels\MenuTable;
-use Src\View\ViewInterface;
+use Components\View\ViewInterface;
 use System\Controller\AdminControllerBase;
 
 /**

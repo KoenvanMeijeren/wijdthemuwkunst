@@ -7,7 +7,7 @@ use Domain\Event\Models\Event;
 use Domain\Event\Models\EventArchive;
 use Domain\Pages\Models\Page;
 use Components\Translation\TranslationOld;
-use Src\View\ViewInterface;
+use Components\View\ViewInterface;
 use System\Controller\ControllerBase;
 
 /**
@@ -59,7 +59,7 @@ abstract class EventControllerBase extends ControllerBase {
   /**
    * Returns a page not found view.
    *
-   * @return \Src\View\ViewInterface
+   * @return \Components\View\ViewInterface
    *   The view.
    */
   protected function notFound(): ViewInterface {

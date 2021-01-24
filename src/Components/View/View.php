@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Src\View;
+namespace Components\View;
 
 use Components\SuperGlobals\Url\Uri;
 
@@ -16,23 +16,12 @@ final class View extends BaseView {
    * {@inheritDoc}
    */
   public function __construct(string $name, array $content = []) {
-    $layout = 'layout.view.php';
+    $layout = self::LAYOUT_PUBLIC;
     if (str_contains(Uri::getUrl(), 'admin')) {
-      $layout = 'admin.layout.view.php';
+      $layout = self::LAYOUT_ADMIN;
     }
 
     parent::__construct($layout, $name, $content);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  protected function renderContent(string $name, array $content = []): string {
-    ob_start();
-
-    include_file(RESOURCES_PATH . "/partials/{$name}.view.php", $content);
-
-    return (string) ob_get_clean();
   }
 
 }

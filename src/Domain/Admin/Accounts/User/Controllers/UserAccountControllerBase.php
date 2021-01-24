@@ -9,7 +9,7 @@ use Components\Header\Redirect;
 use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\User\Actions\UpdateUserDataAction;
 use Domain\Admin\Accounts\User\Actions\UpdateUserPasswordAction;
-use Src\View\ViewInterface;
+use Components\View\ViewInterface;
 use System\Controller\AdminControllerBase;
 
 /**

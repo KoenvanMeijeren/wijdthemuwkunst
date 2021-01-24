@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace System\Mail;
 
+use Components\File\File;
+
 /**
  * Provides a class for mail views.
  *
@@ -11,22 +13,12 @@ namespace System\Mail;
 final class MailView extends BaseMailView {
 
   /**
-   * Render a partial view into the layout view.
-   *
-   * @param string $name
-   *   The name of the partial view.
-   * @param mixed[] $content
-   *   The content of the partial view.
-   *
-   * @return string
-   *   The renderable mail view.
+   * {@inheritDoc}
    */
   protected function render(string $name, array $content = []): string {
-    ob_start();
+    $file = new File(directory: '', file: "{$name}.view.php");
 
-    include_file("{$name}.view.php", $content);
-
-    return (string) ob_get_clean();
+    return $file->get($content);
   }
 
 }

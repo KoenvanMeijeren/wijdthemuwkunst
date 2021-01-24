@@ -4,7 +4,7 @@ namespace Domain\Event\Controllers;
 
 use Domain\Admin\Event\Repositories\EventRepository;
 use Domain\Admin\Pages\Repositories\PageRepository;
-use Src\View\ViewInterface;
+use Components\View\ViewInterface;
 use System\View\DomainView;
 
 /**
@@ -17,7 +17,7 @@ class EventController extends EventControllerBase {
   /**
    * The index page of the events.
    *
-   * @return \Src\View\ViewInterface
+   * @return \Components\View\ViewInterface
    *   The view.
    */
   public function index(): ViewInterface {
@@ -37,7 +37,7 @@ class EventController extends EventControllerBase {
   /**
    * Displays one event.
    *
-   * @return \Src\View\ViewInterface
+   * @return \Components\View\ViewInterface
    *   The view.
    */
   public function show(): ViewInterface {

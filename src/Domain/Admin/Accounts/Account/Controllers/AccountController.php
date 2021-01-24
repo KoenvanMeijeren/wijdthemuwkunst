@@ -17,7 +17,7 @@ use Domain\Admin\Accounts\Account\Models\Account;
 use Domain\Admin\Accounts\Account\ViewModels\AccountTable;
 use Domain\Admin\Accounts\Account\ViewModels\EditViewModel;
 use Src\Core\Redirect;
-use Src\View\ViewInterface;
+use Components\View\ViewInterface;
 use System\Controller\AdminControllerBase;
 
 /**

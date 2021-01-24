@@ -26,7 +26,7 @@ final class AuthenticationController extends AdminControllerBase {
    * Load the login page.
    * If the user is already logged in redirect him to the dashboard.
    *
-   * @return \Components\Header\Redirect|\Src\View\ViewInterface
+   * @return \Components\Header\Redirect|\Components\View\ViewInterface
    *   Either a redirect response or the login view.
    */
   public function index() {

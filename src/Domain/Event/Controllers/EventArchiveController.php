@@ -4,7 +4,7 @@ namespace Domain\Event\Controllers;
 
 use Domain\Admin\Event\Repositories\EventRepository;
 use Domain\Admin\Pages\Repositories\PageRepository;
-use Src\View\ViewInterface;
+use Components\View\ViewInterface;
 
 /**
  * The event archive controller.
@@ -16,7 +16,7 @@ class EventArchiveController extends EventControllerBase {
   /**
    * Returns the archive of the events.
    *
-   * @return \Src\View\ViewInterface
+   * @return \Components\View\ViewInterface
    *   The view.
    */
   public function index(): ViewInterface {
@@ -34,7 +34,7 @@ class EventArchiveController extends EventControllerBase {
   /**
    * Displays one event.
    *
-   * @return \Src\View\ViewInterface
+   * @return \Components\View\ViewInterface
    *   The view.
    */
   public function show(): ViewInterface {

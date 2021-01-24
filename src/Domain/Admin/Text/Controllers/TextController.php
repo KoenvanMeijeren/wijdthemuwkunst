@@ -10,7 +10,7 @@ use Domain\Admin\Text\Entity\Text;
 use Domain\Admin\Text\Entity\TextRepositoryInterface;
 use Domain\Admin\Text\Entity\TextTable;
 use Components\Translation\TranslationOld;
-use Src\View\ViewInterface;
+use Components\View\ViewInterface;
 use System\Controller\AdminControllerBase;
 use System\StateInterface;
 
@@ -55,7 +55,7 @@ final class TextController extends AdminControllerBase {
   /**
    * Returns all texts.
    *
-   * @return \Src\View\ViewInterface
+   * @return \Components\View\ViewInterface
    *   The view.
    */
   public function index(): ViewInterface {
@@ -70,7 +70,7 @@ final class TextController extends AdminControllerBase {
   /**
    * Returns the view for creating texts.
    *
-   * @return \Src\View\ViewInterface
+   * @return \Components\View\ViewInterface
    *   The view.
    */
   public function create(): ViewInterface {
@@ -86,7 +86,7 @@ final class TextController extends AdminControllerBase {
   /**
    * Stores the text in the database.
    *
-   * @return \Src\View\ViewInterface|\Components\Header\Redirect
+   * @return \Components\View\ViewInterface|\Components\Header\Redirect
    *   Returns the view or a redirect response.
    */
   public function store(): ViewInterface|Redirect {
@@ -123,7 +123,7 @@ final class TextController extends AdminControllerBase {
   /**
    * Updates the text in the database.
    *
-   * @return \Src\View\ViewInterface|\Components\Header\Redirect
+   * @return \Components\View\ViewInterface|\Components\Header\Redirect
    *   Returns the view or a redirect response.
    */
   public function update(): ViewInterface|Redirect {

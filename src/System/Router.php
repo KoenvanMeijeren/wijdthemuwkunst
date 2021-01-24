@@ -236,7 +236,7 @@ final class Router {
    *   the current url to search for the
    *   corresponding route in the routes.
    *
-   * @return \Src\View\DomainView|string
+   * @return \Components\View\DomainView|string
    *
    * @throws \Src\Exceptions\Object\InvalidObjectException
    * @throws \Src\Exceptions\Object\InvalidMethodCalledException

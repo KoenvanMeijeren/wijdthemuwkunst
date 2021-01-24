@@ -6,7 +6,7 @@ use Components\Header\Redirect;
 use Components\Translation\TranslationOld;
 use Domain\Admin\ContactForm\Actions\DeleteContactFormMessageAction;
 use Domain\Admin\ContactForm\Model\ContactForm;
-use Src\View\ViewInterface;
+use Components\View\ViewInterface;
 use System\Controller\AdminControllerBase;
 
 /**
@@ -30,7 +30,7 @@ final class ContactFormController extends AdminControllerBase {
   /**
    * Displays all contact requests.
    *
-   * @return \Src\View\ViewInterface
+   * @return \Components\View\ViewInterface
    *   The view.
    *
    * @throws \Src\Exceptions\Basic\InvalidKeyException
@@ -45,7 +45,7 @@ final class ContactFormController extends AdminControllerBase {
   /**
    * Displays all contact request for a given date.
    *
-   * @return \Src\View\ViewInterface
+   * @return \Components\View\ViewInterface
    *   The view.
    *
    * @throws \Src\Exceptions\Basic\InvalidKeyException

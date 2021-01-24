@@ -13,7 +13,7 @@ use Domain\Admin\Settings\Actions\UpdateBaseSettingAction;
 use Domain\Admin\Settings\Models\Setting;
 use Domain\Admin\Settings\ViewModels\EditViewModel;
 use Domain\Admin\Settings\ViewModels\SettingTable;
-use Src\View\ViewInterface;
+use Components\View\ViewInterface;
 use System\Controller\AdminControllerBase;
 
 /**

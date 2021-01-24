@@ -5,7 +5,7 @@ namespace System\View;
 
 use Components\Env\Env;
 use Components\Translation\TranslationOld;
-use Src\View\View;
+use Components\View\View;
 use Whoops\Handler\Handler;
 
 /**
@@ -16,12 +16,7 @@ use Whoops\Handler\Handler;
 final class ProductionErrorView extends Handler {
 
   /**
-   * Show the error page when the app is in production mode.
-   *
-   * @return int
-   *   A handler may return nothing or a Handler::HANDLE_* constant.
-   *
-   * @throws \Src\Exceptions\Basic\InvalidKeyException
+   * {@inheritDoc}
    */
   public function handle(): int {
     new View(Env::ERROR_PAGE, [

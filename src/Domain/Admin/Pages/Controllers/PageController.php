@@ -19,7 +19,7 @@ use Domain\Admin\Pages\Models\Page;
 use Domain\Admin\Pages\Repositories\PageRepository;
 use Domain\Admin\Pages\ViewModels\EditViewModel;
 use Domain\Admin\Pages\ViewModels\PageTable;
-use Src\View\ViewInterface;
+use Components\View\ViewInterface;
 use System\Controller\AdminControllerBase;
 
 /**

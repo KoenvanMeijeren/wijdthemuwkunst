@@ -11,7 +11,7 @@ use Components\Translation\TranslationOld;
 use Domain\Admin\Reports\Src\Logs;
 use Domain\Admin\Reports\Src\PhpInfo;
 use Domain\Admin\Reports\Src\SuperGlobals;
-use Src\View\ViewInterface;
+use Components\View\ViewInterface;
 use System\Controller\AdminControllerBase;
 use System\Request;
 

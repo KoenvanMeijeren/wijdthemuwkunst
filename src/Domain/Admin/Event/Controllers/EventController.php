@@ -19,7 +19,7 @@ use Domain\Admin\Event\Repositories\EventRepository;
 use Domain\Admin\Event\ViewModels\ArchivedEventTable;
 use Domain\Admin\Event\ViewModels\EditViewModel;
 use Domain\Admin\Event\ViewModels\EventTable;
-use Src\View\ViewInterface;
+use Components\View\ViewInterface;
 use System\Controller\AdminControllerBase;
 
 /**
@@ -74,7 +74,7 @@ final class EventController extends AdminControllerBase {
   }
 
   /**
-   * @return \Src\Core|\Src\View\ViewInterface
+   * @return \Src\Core|\Components\View\ViewInterface
    */
   public function store() {
     $create = new CreateEventAction();
@@ -108,7 +108,7 @@ final class EventController extends AdminControllerBase {
   }
 
   /**
-   * @return \Src\Core|\Src\View\ViewInterface
+   * @return \Src\Core|\Components\View\ViewInterface
    */
   public function update() {
     $update = new UpdateEventAction();

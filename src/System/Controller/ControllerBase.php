@@ -8,7 +8,7 @@ use Components\ComponentsTrait;
 use Domain\Admin\Accounts\User\Models\User;
 use System\Request;
 use Src\Session\Session;
-use Src\View\ViewInterface;
+use Components\View\ViewInterface;
 use System\Entity\EntityManager;
 use System\Entity\EntityManagerInterface;
 use System\View\DomainView;
@@ -59,7 +59,7 @@ abstract class ControllerBase implements ControllerInterface {
    * @param string[] $content
    *   The content of the domain view.
    *
-   * @return \Src\View\ViewInterface
+   * @return \Components\View\ViewInterface
    *   The renderable domain view.
    */
   protected function view(string $name, array $content = []): ViewInterface {

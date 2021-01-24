@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Src\View;
+namespace Components\View;
 
+use Components\File\File;
 use Symfony\Component\Templating\Loader\FilesystemLoader;
 use Symfony\Component\Templating\PhpEngine;
 use Symfony\Component\Templating\TemplateNameParser;
@@ -33,11 +34,7 @@ abstract class BaseView implements ViewInterface {
    */
   protected function __construct(string $layout, string $name, array $content) {
     $filesystemLoader = new FilesystemLoader($this->layoutPath);
-
-    $templating = new PhpEngine(
-          new TemplateNameParser(),
-          $filesystemLoader
-      );
+    $templating = new PhpEngine(new TemplateNameParser(), $filesystemLoader);
 
     echo $templating->render($layout, [
       'content' => $this->renderContent($name, $content),
@@ -46,7 +43,7 @@ abstract class BaseView implements ViewInterface {
   }
 
   /**
-   * Render a partial view into the layout view.
+   * Renders a partial view into the layout view.
    *
    * @param string $name
    *   The name of the partial view.
@@ -56,6 +53,13 @@ abstract class BaseView implements ViewInterface {
    * @return string
    *   The rendered content.
    */
-  abstract protected function renderContent(string $name, array $content = []): string;
+  /**
+   * {@inheritDoc}
+   */
+  protected function renderContent(string $name, array $content = []): string {
+    $file = new File(directory: RESOURCES_PATH . "/partials/", file: "{$name}.view.php");
+
+    return $file->get($content);
+  }
 
 }

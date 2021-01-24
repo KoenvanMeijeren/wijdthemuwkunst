@@ -9,7 +9,7 @@ use Domain\Admin\Pages\Repositories\PageRepository;
 use Domain\Event\Models\Event;
 use Domain\Pages\Models\Page;
 use Components\Translation\TranslationOld;
-use Src\View\ViewInterface;
+use Components\View\ViewInterface;
 use System\Controller\ControllerBase;
 
 /**
@@ -53,7 +53,7 @@ final class PageController extends ControllerBase {
   /**
    * Displays the index page of the website.
    *
-   * @return \Src\View\ViewInterface
+   * @return \Components\View\ViewInterface
    *   The view.
    *
    * @throws \Src\Exceptions\Basic\InvalidKeyException
@@ -73,7 +73,7 @@ final class PageController extends ControllerBase {
   /**
    * Try to find the dynamic 404 page or returns the default.
    *
-   * @return \Src\View\ViewInterface
+   * @return \Components\View\ViewInterface
    *   The view.
    */
   public function findOr404(): ViewInterface {
@@ -95,7 +95,7 @@ final class PageController extends ControllerBase {
    * @param \Domain\Admin\Pages\Repositories\PageRepository $page
    *   The page to show.
    *
-   * @return \Src\View\ViewInterface
+   * @return \Components\View\ViewInterface
    *   The view.
    */
   public function show(PageRepository $page): ViewInterface {
@@ -108,7 +108,7 @@ final class PageController extends ControllerBase {
   /**
    * Shows the default 404 page.
    *
-   * @return \Src\View\ViewInterface
+   * @return \Components\View\ViewInterface
    *   The view.
    *
    * @throws \Src\Exceptions\Basic\InvalidKeyException

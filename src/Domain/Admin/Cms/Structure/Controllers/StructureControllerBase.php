@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Domain\Admin\Cms\Structure\Controllers;
 
 use Components\Translation\TranslationOld;
-use Src\View\ViewInterface;
+use Components\View\ViewInterface;
 use System\Controller\AdminControllerBase;
 
 /**
@@ -19,7 +19,7 @@ final class StructureControllerBase extends AdminControllerBase {
   /**
    * Returns the index page of a category with items.
    *
-   * @return \Src\View\ViewInterface
+   * @return \Components\View\ViewInterface
    *   The view.
    *
    * @throws \Src\Exceptions\Basic\InvalidKeyException
@@ -34,7 +34,7 @@ final class StructureControllerBase extends AdminControllerBase {
   /**
    * Returns the index page of the content category with items.
    *
-   * @return \Src\View\ViewInterface
+   * @return \Components\View\ViewInterface
    *   The view.
    *
    * @throws \Src\Exceptions\Basic\InvalidKeyException
@@ -49,7 +49,7 @@ final class StructureControllerBase extends AdminControllerBase {
   /**
    * Returns the index page of the structure category with items.
    *
-   * @return \Src\View\ViewInterface
+   * @return \Components\View\ViewInterface
    *   The view.
    *
    * @throws \Src\Exceptions\Basic\InvalidKeyException
@@ -64,7 +64,7 @@ final class StructureControllerBase extends AdminControllerBase {
   /**
    * Returns the index page of the configuration category with items.
    *
-   * @return \Src\View\ViewInterface
+   * @return \Components\View\ViewInterface
    *   The view.
    *
    * @throws \Src\Exceptions\Basic\InvalidKeyException
@@ -79,7 +79,7 @@ final class StructureControllerBase extends AdminControllerBase {
   /**
    * Returns the index page of the reports category with items.
    *
-   * @return \Src\View\ViewInterface
+   * @return \Components\View\ViewInterface
    *   The view.
    *
    * @throws \Src\Exceptions\Basic\InvalidKeyException
