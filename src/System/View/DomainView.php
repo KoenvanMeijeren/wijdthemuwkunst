@@ -20,6 +20,11 @@ final class DomainView extends BaseView {
   use MenuAdminTrait;
 
   /**
+   * {@inheritDoc}
+   */
+  protected string $viewDirectory = DOMAIN_PATH . '/';
+
+  /**
    * Determines if the current view must be displayed for admins.
    *
    * @var bool
@@ -31,7 +36,6 @@ final class DomainView extends BaseView {
    */
   public function __construct(string $name, array $content = []) {
     $this->isAdminView = str_contains(Uri::getUrl(), 'admin');
-    $this->viewDirectory = DOMAIN_PATH . '/';
 
     $layout = $this->isAdminView ? self::LAYOUT_ADMIN : self::LAYOUT_PUBLIC;
     $globalContent = $this->isAdminView ? $this->globalAdminContent() : $this->globalContent();
