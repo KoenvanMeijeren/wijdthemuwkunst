@@ -9,7 +9,7 @@ use Domain\Admin\Accounts\Account\Models\Account;
 use Domain\Admin\Accounts\Repositories\AccountRepository;
 use Domain\Admin\Accounts\User\Models\User;
 use Src\Session\Session;
-use Src\Validate\form\FormValidator;
+use Components\Validate\form\FormValidator;
 use System\Request;
 
 /**

@@ -13,7 +13,7 @@ use Domain\Admin\File\Actions\SaveFileAction;
 use Domain\Admin\Pages\Models\Slug;
 use Domain\Admin\Pages\Repositories\SlugRepository;
 use Src\Session\Session;
-use Src\Validate\form\FormValidator;
+use Components\Validate\form\FormValidator;
 use System\Request;
 
 /**

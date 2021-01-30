@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Components\Translation;
 
-use Src\Exceptions\Basic\NoTranslationsForGivenLanguageID;
+use Components\Exceptions\Basic\NoTranslationsForGivenLanguageID;
 
 /**
  * Provides a loader for the translations.

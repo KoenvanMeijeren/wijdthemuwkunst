@@ -56,7 +56,7 @@ final class PageController extends ControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    *
-   * @throws \Src\Exceptions\Basic\InvalidKeyException
+   * @throws \Components\Exceptions\Basic\InvalidKeyException
    */
   public function index(): ViewInterface {
     $home = new PageRepository($this->page->getBySlug('home'));
@@ -111,7 +111,7 @@ final class PageController extends ControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    *
-   * @throws \Src\Exceptions\Basic\InvalidKeyException
+   * @throws \Components\Exceptions\Basic\InvalidKeyException
    */
   public function notFound(): ViewInterface {
     return $this->view('404', [

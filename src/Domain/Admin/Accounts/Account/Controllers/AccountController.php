@@ -78,7 +78,7 @@ final class AccountController extends AdminControllerBase {
 
   /**
    * @return \Src\Core|DomainView
-   * @throws \Src\Exceptions\Basic\InvalidKeyException
+   * @throws \Components\Exceptions\Basic\InvalidKeyException
    */
   public function edit() {
     $accountViewModel = new EditViewModel(
@@ -93,7 +93,7 @@ final class AccountController extends AdminControllerBase {
 
   /**
    * @return \Src\Core|DomainView
-   * @throws \Src\Exceptions\Basic\InvalidKeyException
+   * @throws \Components\Exceptions\Basic\InvalidKeyException
    */
   public function storeData() {
     $account = new UpdateAccountDataAction();
@@ -108,7 +108,7 @@ final class AccountController extends AdminControllerBase {
 
   /**
    * @return \Src\Core|DomainView
-   * @throws \Src\Exceptions\Basic\InvalidKeyException
+   * @throws \Components\Exceptions\Basic\InvalidKeyException
    */
   public function storeEmail() {
     $account = new UpdateAccountEmailAction();
@@ -123,7 +123,7 @@ final class AccountController extends AdminControllerBase {
 
   /**
    * @return \Src\Core|DomainView
-   * @throws \Src\Exceptions\Basic\InvalidKeyException
+   * @throws \Components\Exceptions\Basic\InvalidKeyException
    */
   public function storePassword() {
     $account = new UpdateAccountPasswordAction();

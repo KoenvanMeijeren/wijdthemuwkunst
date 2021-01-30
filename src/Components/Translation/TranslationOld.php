@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Components\Translation;
 
 use Components\SuperGlobals\Url\Uri;
-use Src\Exceptions\Basic\InvalidKeyException;
+use Components\Exceptions\Basic\InvalidKeyException;
 
 /**
  * Provides a class for translations.

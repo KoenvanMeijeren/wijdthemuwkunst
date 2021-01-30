@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace System\Module;
 
-use Src\Exceptions\File\FileNotFoundException;
+use Components\File\Exceptions\FileNotFoundException;
 
 /**
  * Provides a base class for modules.
