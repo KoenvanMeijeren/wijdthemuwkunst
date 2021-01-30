@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Components\Actions;
 
 use Src\Security\CSRF;
-use Components\Validate\form\FormValidator;
+use Components\Validate\FormValidator;
 
 /**
  * Provides a base class for form actions.
@@ -16,7 +16,7 @@ abstract class FormAction extends Action {
   /**
    * The form validator.
    *
-   * @var \Components\Validate\form\FormValidator
+   * @var \Components\Validate\FormValidator
    */
   protected FormValidator $validator;
 

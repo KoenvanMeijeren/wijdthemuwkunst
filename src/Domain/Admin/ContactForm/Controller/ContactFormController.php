@@ -33,7 +33,7 @@ final class ContactFormController extends AdminControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    *
-   * @throws \Components\Exceptions\Basic\InvalidKeyException
+   * @throws \Components\Validate\Exceptions\Basic\InvalidKeyException
    */
   public function index(): ViewInterface {
     return $this->view('index', [
@@ -48,7 +48,7 @@ final class ContactFormController extends AdminControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    *
-   * @throws \Components\Exceptions\Basic\InvalidKeyException
+   * @throws \Components\Validate\Exceptions\Basic\InvalidKeyException
    */
   public function showByDate(): ViewInterface {
     return $this->view('index', [

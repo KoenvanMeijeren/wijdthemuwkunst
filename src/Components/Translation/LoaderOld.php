@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Components\Translation;
 
-use Components\Exceptions\Basic\NoTranslationsForGivenLanguageID;
+use Components\Validate\Exceptions\Basic\NoTranslationsForGivenLanguageID;
 
 /**
  * Provides a loader for the translations.
@@ -61,10 +61,7 @@ abstract class LoaderOld {
       return (array) include_file(RESOURCES_PATH . $filename);
     }
 
-    throw new NoTranslationsForGivenLanguageID(
-          'No translations where found for the given language id: ' .
-          $this->language
-      );
+    throw new NoTranslationsForGivenLanguageID((string) $this->language);
   }
 
 }

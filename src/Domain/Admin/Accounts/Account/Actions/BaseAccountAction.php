@@ -9,7 +9,7 @@ use Domain\Admin\Accounts\Account\Models\Account;
 use Domain\Admin\Accounts\Repositories\AccountRepository;
 use Domain\Admin\Accounts\User\Models\User;
 use Src\Session\Session;
-use Components\Validate\form\FormValidator;
+use Components\Validate\FormValidator;
 use System\Request;
 
 /**
@@ -37,7 +37,7 @@ abstract class BaseAccountAction extends FormAction {
     $this->accountRepository = new AccountRepository(
           $this->account->find($this->account->getId())
       );
-    $this->session() = new Session();
+    $this->session = new Session();
     $this->validator = new FormValidator();
     $request = new Request();
 

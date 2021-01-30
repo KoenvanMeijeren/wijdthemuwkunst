@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Components\Validate\form;
+namespace Components\Validate;
 
 use Components\ComponentsTrait;
 use DateTime;
@@ -98,6 +98,9 @@ final class FormValidator implements FormValidatorInterface {
   }
 
 
+  /**
+   * {@inheritDoc}
+   */
   public function isBetweenRange(int $min, int $max, string $errorMessage = ''): FormValidatorInterface {
     $number = (int) $this->input;
     if ($number < $min || $number > $max) {
@@ -118,7 +121,7 @@ final class FormValidator implements FormValidatorInterface {
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function isDateTime(): FormValidatorInterface {
     $dateTime = DateTime::createFromFormat('Y-m-d H:i:s', $this->input);
@@ -131,7 +134,7 @@ final class FormValidator implements FormValidatorInterface {
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function isEmail(): FormValidatorInterface {
     if (!(bool) filter_var($this->input, FILTER_VALIDATE_EMAIL)) {
@@ -142,12 +145,9 @@ final class FormValidator implements FormValidatorInterface {
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
-  public function isUnique(
-        ?object $databaseRecord,
-        string $errorMessage = ''
-    ): FormValidatorInterface {
+  public function isUnique(?object $databaseRecord, string $errorMessage = ''): FormValidatorInterface {
     if ($databaseRecord !== NULL) {
       $error = $errorMessage;
       if ($errorMessage === '') {
@@ -164,7 +164,7 @@ final class FormValidator implements FormValidatorInterface {
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function passwordIsEqual(string $password): FormValidatorInterface {
     if ($this->input !== $password) {
@@ -175,11 +175,9 @@ final class FormValidator implements FormValidatorInterface {
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
-  public function passwordIsNotCurrentPassword(
-        string $currentHashedPassword
-    ): FormValidatorInterface {
+  public function passwordIsNotCurrentPassword(string $currentHashedPassword): FormValidatorInterface {
     if (password_verify($this->input, $currentHashedPassword)) {
       $this->errors[] = TranslationOld::get(
             'validator_form_new_password_cannot_be_the_same_as_the_current_password'
@@ -189,8 +187,8 @@ final class FormValidator implements FormValidatorInterface {
     return $this;
   }
 
-  /**
-   *
+   /**
+   * {@inheritDoc}
    */
   public function passwordIsVerified(string $hashedPassword): FormValidatorInterface {
     if (!password_verify($this->input, $hashedPassword)) {
@@ -201,14 +199,14 @@ final class FormValidator implements FormValidatorInterface {
   }
 
   /**
-   * @return string[]
+   * {@inheritDoc}
    */
   public function getErrors(): array {
     return $this->errors;
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function getErrorsAsString(): string {
     $error = TranslationOld::get('validator_form_base_error_message') . '<br><br>';
@@ -221,7 +219,7 @@ final class FormValidator implements FormValidatorInterface {
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function flashErrorsIntoSession(): void {
     if (count($this->errors) === 0) {
@@ -232,20 +230,14 @@ final class FormValidator implements FormValidatorInterface {
   }
 
   /**
-   * Determines whether the value was valid or not.
-   *
-   * @return bool
-   *   Whether the value was valid or not.
+   * {@inheritDoc}
    */
   public function validate(): bool {
     return count($this->errors) === 0;
   }
 
   /**
-   * Handles the form validation.
-   *
-   * @return bool
-   *   Whether the value was valid or not.
+   * {@inheritDoc}
    */
   public function handleFormValidation(): bool {
     $this->flashErrorsIntoSession();

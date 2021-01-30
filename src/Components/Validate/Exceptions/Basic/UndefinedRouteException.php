@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Components\Exceptions\Basic;
+namespace Components\Validate\Exceptions\Basic;
 
 use Exception;
 

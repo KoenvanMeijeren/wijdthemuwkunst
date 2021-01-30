@@ -7,7 +7,7 @@ namespace System;
 
 use Closure;
 use Domain\Admin\Accounts\User\Models\User;
-use Components\Exceptions\Basic\UndefinedRouteException;
+use Components\Validate\Exceptions\Basic\UndefinedRouteException;
 use Components\Validate\Validate;
 
 /**
@@ -210,9 +210,9 @@ final class Router {
    *
    * @return \System\View\DomainView|string
    *
-   * @throws \Components\Exceptions\Object\InvalidObjectException
-   * @throws \Components\Exceptions\Object\InvalidMethodCalledException
-   * @throws \Components\Exceptions\Basic\UndefinedRouteException
+   * @throws \Components\Validate\Exceptions\Object\InvalidObjectException
+   * @throws \Components\Validate\Exceptions\Object\InvalidMethodCalledException
+   * @throws \Components\Validate\Exceptions\Basic\UndefinedRouteException
    */
   public function direct(string $url, string $requestType, int $rights) {
     $this->setAvailableRoutes($requestType, $rights);
@@ -238,8 +238,8 @@ final class Router {
    *
    * @return \Components\View\DomainView|string
    *
-   * @throws \Components\Exceptions\Object\InvalidObjectException
-   * @throws \Components\Exceptions\Object\InvalidMethodCalledException
+   * @throws \Components\Validate\Exceptions\Object\InvalidObjectException
+   * @throws \Components\Validate\Exceptions\Object\InvalidMethodCalledException
    */
   private function executeRoute(string $url) {
     $route = self::$availableRoutes[$url];

@@ -12,7 +12,7 @@ use Domain\Admin\Pages\Models\Slug;
 use Domain\Admin\Settings\Models\Setting;
 use Domain\Admin\Settings\Repositories\SettingRepository;
 use Src\Session\Session;
-use Components\Validate\form\FormValidator;
+use Components\Validate\FormValidator;
 use System\Request;
 use System\StateInterface;
 

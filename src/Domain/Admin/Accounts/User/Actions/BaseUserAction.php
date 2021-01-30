@@ -9,7 +9,7 @@ use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\Repositories\AccountRepository;
 use Domain\Admin\Accounts\User\Models\User;
 use Src\Session\Session;
-use Components\Validate\form\FormValidator;
+use Components\Validate\FormValidator;
 use System\Request;
 use System\StateInterface;
 

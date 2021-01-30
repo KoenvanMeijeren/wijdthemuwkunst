@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Components\Translation;
 
 use Components\SuperGlobals\Url\Uri;
-use Components\Exceptions\Basic\InvalidKeyException;
+use Components\Validate\Exceptions\Basic\InvalidKeyException;
 
 /**
  * Provides a class for translations.
@@ -43,13 +43,7 @@ final class TranslationOld extends LoaderOld {
   public static function get(string $key): string {
     new self();
 
-    if (array_key_exists($key, self::$translations)) {
-      return self::$translations[$key];
-    }
-
-    throw new InvalidKeyException(
-          "No translation was found with key: {$key}"
-      );
+    return self::$translations[$key] ?? throw new InvalidKeyException($key);
   }
 
 }

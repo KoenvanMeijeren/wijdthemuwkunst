@@ -26,7 +26,7 @@ final class StructureControllerBase extends AdminControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    *
-   * @throws \Components\Exceptions\Basic\InvalidKeyException
+   * @throws \Components\Validate\Exceptions\Basic\InvalidKeyException
    */
   public function index(): ViewInterface {
     return $this->view('index', [
@@ -41,7 +41,7 @@ final class StructureControllerBase extends AdminControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    *
-   * @throws \Components\Exceptions\Basic\InvalidKeyException
+   * @throws \Components\Validate\Exceptions\Basic\InvalidKeyException
    */
   public function content(): ViewInterface {
     return $this->view('index', [
@@ -56,7 +56,7 @@ final class StructureControllerBase extends AdminControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    *
-   * @throws \Components\Exceptions\Basic\InvalidKeyException
+   * @throws \Components\Validate\Exceptions\Basic\InvalidKeyException
    */
   public function structure(): ViewInterface {
     return $this->view('index', [
@@ -71,7 +71,7 @@ final class StructureControllerBase extends AdminControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    *
-   * @throws \Components\Exceptions\Basic\InvalidKeyException
+   * @throws \Components\Validate\Exceptions\Basic\InvalidKeyException
    */
   public function configuration(): ViewInterface {
     return $this->view('index', [
@@ -86,7 +86,7 @@ final class StructureControllerBase extends AdminControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    *
-   * @throws \Components\Exceptions\Basic\InvalidKeyException
+   * @throws \Components\Validate\Exceptions\Basic\InvalidKeyException
    */
   public function reports(): ViewInterface {
     return $this->view('index', [

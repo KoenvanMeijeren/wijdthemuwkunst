@@ -4,14 +4,14 @@ declare(strict_types=1);
 namespace Components\Validate;
 
 use Components\Env\Env;
-use Components\Exceptions\Basic\InvalidTypeException;
+use Components\Validate\Exceptions\Basic\InvalidTypeException;
 use Components\File\Exceptions\FileNotFoundException;
 use Components\File\Exceptions\FileNotOfResourceTypeException;
 use Components\File\Exceptions\FileNotReadableException;
 use Components\File\Exceptions\FileNotWritableException;
-use Components\Exceptions\Object\InvalidMethodCalledException;
-use Components\Exceptions\Object\InvalidObjectException;
-use Components\Exceptions\Object\MethodNotCallableException;
+use Components\Validate\Exceptions\Object\InvalidMethodCalledException;
+use Components\Validate\Exceptions\Object\InvalidObjectException;
+use Components\Validate\Exceptions\Object\MethodNotCallableException;
 use Components\SuperGlobals\Url\Exceptions\InvalidDomainException;
 use Components\SuperGlobals\Url\Exceptions\InvalidEnvException;
 use Components\SuperGlobals\Url\Exceptions\InvalidUriException;
@@ -28,7 +28,7 @@ final class Validate implements ValidateInterface {
    *
    * @var mixed
    */
-  protected static $var;
+  protected static mixed $var;
 
   /**
    * Validate constructor.
@@ -45,131 +45,86 @@ final class Validate implements ValidateInterface {
   }
 
   /**
-   * Check the variable if it is a scalar type.
-   *
-   * @return Validate
-   *
-   * @throws \Components\Exceptions\Basic\InvalidTypeException
+   * {@inheritDoc}
    */
-  public function isScalar(): Validate {
+  public function isScalar(): ValidateInterface {
     if (!is_scalar(self::$var)) {
-      throw new InvalidTypeException(
-        gettype(self::$var) . ' given. The variable must be a scalar type.'
-      );
+      throw new InvalidTypeException(self::$var, 'scalar');
     }
 
     return $this;
   }
 
   /**
-   * Check the variable if it is a string.
-   *
-   * @return Validate
-   *
-   * @throws \Components\Exceptions\Basic\InvalidTypeException
+   * {@inheritDoc}
    */
-  public function isString(): Validate {
+  public function isString(): ValidateInterface {
     if (!is_string(self::$var)) {
-      throw new InvalidTypeException(
-        gettype(self::$var) . ' given. The variable must be a string.'
-      );
+      throw new InvalidTypeException(self::$var, 'string');
     }
 
     return $this;
   }
 
   /**
-   * Check the variable if it is an int.
-   *
-   * @return Validate
-   *
-   * @throws \Components\Exceptions\Basic\InvalidTypeException
+   * {@inheritDoc}
    */
-  public function isInt(): Validate {
+  public function isInt(): ValidateInterface {
     if (!is_int(self::$var)) {
-      throw new InvalidTypeException(
-        gettype(self::$var) . ' given. The variable must be an int.'
-      );
+      throw new InvalidTypeException(self::$var, 'integer');
     }
 
     return $this;
   }
 
   /**
-   * Check the variable if it is an int.
-   *
-   * @return Validate
-   *
-   * @throws \Components\Exceptions\Basic\InvalidTypeException
+   * {@inheritDoc}
    */
-  public function isFloat(): Validate {
+  public function isFloat(): ValidateInterface {
     if (!is_float(self::$var)) {
-      throw new InvalidTypeException(
-        gettype(self::$var) . ' given. The variable must be a float.'
-      );
+      throw new InvalidTypeException(self::$var, 'float');
     }
 
     return $this;
   }
 
   /**
-   * Check the variable if it is numeric.
-   *
-   * @return Validate
-   *
-   * @throws \Components\Exceptions\Basic\InvalidTypeException
+   * {@inheritDoc}
    */
-  public function isNumeric(): Validate {
+  public function isNumeric(): ValidateInterface {
     if (!is_numeric(self::$var)) {
-      throw new InvalidTypeException(
-        gettype(self::$var) . ' given. The variable must be numeric.'
-      );
+      throw new InvalidTypeException(self::$var, 'numeric');
     }
 
     return $this;
   }
 
   /**
-   * Check the variable if it is countable.
-   *
-   * @return Validate
-   *
-   * @throws \Components\Exceptions\Basic\InvalidTypeException
+   * {@inheritDoc}
    */
-  public function isCountable(): Validate {
+  public function isCountable(): ValidateInterface {
     if (!is_countable(self::$var)) {
-      throw new InvalidTypeException(
-        gettype(self::$var) . ' given. The variable must be countable.'
-      );
+      throw new InvalidTypeException(self::$var, 'countable');
     }
 
     return $this;
   }
 
   /**
-   * Check the variable if it is an array.
-   *
-   * @return Validate
-   *
-   * @throws \Components\Exceptions\Basic\InvalidTypeException
+   * {@inheritDoc}
    */
-  public function isArray(): Validate {
+  public function isArray(): ValidateInterface {
     if (!is_array(self::$var)) {
-      throw new InvalidTypeException(
-        gettype(self::$var) . ' given. The variable must be an array.'
-      );
+      throw new InvalidTypeException(self::$var, 'array');
     }
 
     return $this;
   }
 
   /**
-   * Checks the variable if it is an url.
-   *
-   * @return Validate
-   *   The validate object reference.
+   * {@inheritDoc}
    */
-  public function isUrl(): Validate {
+  public function isUrl(): ValidateInterface {
     if (filter_var(self::$var, FILTER_VALIDATE_URL) === FALSE) {
       throw new InvalidUriException(self::$var);
     }
@@ -178,12 +133,9 @@ final class Validate implements ValidateInterface {
   }
 
   /**
-   * Checks if the variable is a domain.
-   *
-   * @return Validate
-   *   The validate object reference.
+   * {@inheritDoc}
    */
-  public function isDomain(): Validate {
+  public function isDomain(): ValidateInterface {
     if (self::$var !== 'localhost'
       && preg_match('/[a-zA-Z]{0,9}+[:][\d]{0,4}/', self::$var) === 0
       && preg_match('/(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/', self::$var) === 0
@@ -195,12 +147,9 @@ final class Validate implements ValidateInterface {
   }
 
   /**
-   * Check if the variable is of the type of an env.
-   *
-   * @return Validate
-   *   The validate object reference.
+   * {@inheritDoc}
    */
-  public function isEnv(): Validate {
+  public function isEnv(): ValidateInterface {
     if (Env::DEVELOPMENT !== self::$var && Env::PRODUCTION !== self::$var) {
       throw new InvalidEnvException(self::$var);
     }
@@ -210,69 +159,42 @@ final class Validate implements ValidateInterface {
 
 
   /**
-   * Check the variable if it is an object.
-   *
-   * @return Validate
-   *
-   * @throws \Components\Exceptions\Object\InvalidObjectException
+   * {@inheritDoc}
    */
-  public function isObject(): Validate {
+  public function isObject(): ValidateInterface {
     if (!is_object(self::$var)) {
-      throw new InvalidObjectException(
-        gettype(self::$var) .
-        ' given. The variable must be an object.'
-      );
+      throw new InvalidObjectException(self::$var);
     }
 
     return $this;
   }
 
   /**
-   * Check if the method exists in the object.
-   *
-   * @param string $methodName
-   *   the method to check.
-   *
-   * @return Validate
-   *
-   * @throws \Components\Exceptions\Object\InvalidMethodCalledException
+   * {@inheritDoc}
    */
-  public function methodExists(string $methodName): Validate {
-    if (!method_exists(self::$var, $methodName)) {
-      throw new InvalidMethodCalledException(
-        "The called method {$methodName} does not exist in the object " . serialize(self::$var) . '.'
-      );
+  public function methodExists(string $method): ValidateInterface {
+    if (!method_exists(self::$var, $method)) {
+      throw new InvalidMethodCalledException($method, self::$var);
     }
 
     return $this;
   }
 
   /**
-   * Check if a function is callable.
-   *
-   * @return Validate
-   *
-   * @throws \Components\Exceptions\Object\MethodNotCallableException
+   * {@inheritDoc}
    */
-  public function isCallable(): Validate {
+  public function isCallable(): ValidateInterface {
     if (!is_callable(self::$var)) {
-      throw new MethodNotCallableException(
-        'The called method does not exist: ' .
-        serialize(self::$var) . '.'
-      );
+      throw new MethodNotCallableException(self::$var);
     }
 
     return $this;
   }
 
   /**
-   * Check if the file exists.
-   *
-   * @return Validate
-   *
-   * @throws \Components\File\Exceptions\FileNotFoundException
+   * {@inheritDoc}
    */
-  public function fileExists(): Validate {
+  public function fileExists(): ValidateInterface {
     if (file_exists(self::$var)) {
       return $this;
     }
@@ -281,13 +203,9 @@ final class Validate implements ValidateInterface {
   }
 
   /**
-   * Check if the file is a resource.
-   *
-   * @return Validate
-   *
-   * @throws \Components\File\Exceptions\FileNotOfResourceTypeException
+   * {@inheritDoc}
    */
-  public function isResource(): Validate {
+  public function isResource(): ValidateInterface {
     if (!is_resource(self::$var)) {
       throw new FileNotOfResourceTypeException(self::$var);
     }
@@ -296,34 +214,22 @@ final class Validate implements ValidateInterface {
   }
 
   /**
-   * Check if the file is readable.
-   *
-   * @return Validate
-   *
-   * @throws \Components\File\Exceptions\FileNotReadableException
+   * {@inheritDoc}
    */
-  public function isReadable(): Validate {
+  public function isReadable(): ValidateInterface {
     if (!is_readable(self::$var)) {
-      throw new FileNotReadableException(
-        'The file must be readable: ' . self::$var
-      );
+      throw new FileNotReadableException(self::$var);
     }
 
     return $this;
   }
 
   /**
-   * Check if the file is writable.
-   *
-   * @return Validate
-   *
-   * @throws \Components\File\Exceptions\FileNotWritableException
+   * {@inheritDoc}
    */
-  public function isWritable(): Validate {
+  public function isWritable(): ValidateInterface {
     if (!is_writable(self::$var)) {
-      throw new FileNotWritableException(
-        'The file must be writable: ' . self::$var
-      );
+      throw new FileNotWritableException(self::$var);
     }
 
     return $this;

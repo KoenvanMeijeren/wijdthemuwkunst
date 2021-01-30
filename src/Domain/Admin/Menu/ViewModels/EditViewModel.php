@@ -24,7 +24,7 @@ final class EditViewModel {
 
   /**
    * @return \Src\Core|object
-   * @throws \Components\Exceptions\Basic\InvalidKeyException
+   * @throws \Components\Validate\Exceptions\Basic\InvalidKeyException
    */
   public function get() {
     if ($this->menuItem === NULL) {

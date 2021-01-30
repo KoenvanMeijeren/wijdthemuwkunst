@@ -11,7 +11,7 @@ use Domain\Admin\Menu\Repositories\MenuRepository;
 use Domain\Admin\Pages\Models\Slug;
 use Domain\Admin\Pages\Repositories\SlugRepository;
 use Src\Session\Session;
-use Components\Validate\form\FormValidator;
+use Components\Validate\FormValidator;
 use System\Request;
 
 /**
