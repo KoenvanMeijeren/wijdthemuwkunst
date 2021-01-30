@@ -1,6 +1,6 @@
 <?php
 
-use Domain\Admin\Text\TextModule;
+use Modules\Text\TextModule;
 
 return [
   TextModule::class

@@ -1,8 +1,8 @@
 <?php
 
-namespace Domain\Admin\Text\Actions;
+namespace Modules\Text\Actions;
 
-use Domain\Admin\Text\Entity\Text;
+use Modules\Text\Entity\Text;
 use Components\Translation\TranslationOld;
 
 /**

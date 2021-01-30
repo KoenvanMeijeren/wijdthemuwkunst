@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Admin\Text\Entity;
+namespace Modules\Text\Entity;
 
 use Domain\Admin\Accounts\User\Models\User;
 use Components\Translation\TranslationOld;

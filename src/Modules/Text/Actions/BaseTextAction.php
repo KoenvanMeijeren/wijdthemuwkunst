@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Domain\Admin\Text\Actions;
+namespace Modules\Text\Actions;
 
 use Components\Actions\EntityFormActionBase;
 use Domain\Admin\Accounts\User\Models\User;
-use Domain\Admin\Text\Entity\Text;
+use Modules\Text\Entity\Text;
 use Components\Translation\TranslationOld;
 use System\Entity\EntityInterface;
 use System\StateInterface;
@@ -20,7 +20,7 @@ abstract class BaseTextAction extends EntityFormActionBase {
   /**
    * The text entity.
    *
-   * @var \Domain\Admin\Text\Entity\TextInterface
+   * @var \Modules\Text\Entity\TextInterface
    */
   protected EntityInterface $entity;
 

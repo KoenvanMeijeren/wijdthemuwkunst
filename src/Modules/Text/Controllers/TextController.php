@@ -1,14 +1,14 @@
 <?php
 
-namespace Domain\Admin\Text\Controllers;
+namespace Modules\Text\Controllers;
 
 use Components\Header\Redirect;
-use Domain\Admin\Text\Actions\CreateTextAction;
-use Domain\Admin\Text\Actions\DeleteTextAction;
-use Domain\Admin\Text\Actions\UpdateTextAction;
-use Domain\Admin\Text\Entity\Text;
-use Domain\Admin\Text\Entity\TextRepositoryInterface;
-use Domain\Admin\Text\Entity\TextTable;
+use Modules\Text\Actions\CreateTextAction;
+use Modules\Text\Actions\DeleteTextAction;
+use Modules\Text\Actions\UpdateTextAction;
+use Modules\Text\Entity\Text;
+use Modules\Text\Entity\TextRepositoryInterface;
+use Modules\Text\Entity\TextTable;
 use Components\Translation\TranslationOld;
 use Components\View\ViewInterface;
 use System\Controller\AdminControllerBase;
@@ -26,12 +26,12 @@ final class TextController extends AdminControllerBase {
    *
    * @var string
    */
-  protected string $baseViewPath = 'Admin/Text/Views/';
+  protected string $baseViewPath = 'Text/Views/';
 
   /**
    * The text entity repository definition.
    *
-   * @var \Domain\Admin\Text\Entity\TextRepositoryInterface
+   * @var \Modules\Text\Entity\TextRepositoryInterface
    */
   protected TextRepositoryInterface $textRepository;
 

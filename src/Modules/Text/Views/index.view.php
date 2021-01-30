@@ -12,7 +12,7 @@ use Components\Translation\TranslationOld;
 
 $user = new User();
 
-/** @var \Domain\Admin\Text\Entity\TextInterface $entity */
+/** @var \Modules\Text\Entity\TextInterface $entity */
 $entity = $text ?? null;
 $createText = $createText ?? FALSE;
 $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';

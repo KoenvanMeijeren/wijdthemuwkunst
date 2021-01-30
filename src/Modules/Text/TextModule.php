@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Admin\Text;
+namespace Modules\Text;
 
 use System\Module\ModuleBase;
 

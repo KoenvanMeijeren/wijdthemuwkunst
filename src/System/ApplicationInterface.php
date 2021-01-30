@@ -6,7 +6,7 @@ namespace System;
 /**
  * Provides an interface for the main entry point for the application.
  *
- * @package src\Core
+ * @package System
  */
 interface ApplicationInterface {
 

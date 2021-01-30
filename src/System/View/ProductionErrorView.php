@@ -11,7 +11,7 @@ use Whoops\Handler\Handler;
 /**
  * Provides a class for showing production error views.
  *
- * @package src\View
+ * @package System\View
  */
 final class ProductionErrorView extends Handler {
 

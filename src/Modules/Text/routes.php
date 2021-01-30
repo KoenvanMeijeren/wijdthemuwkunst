@@ -1,7 +1,7 @@
 <?php
 
 use Domain\Admin\Accounts\User\Models\User;
-use Domain\Admin\Text\Controllers\TextController;
+use Modules\Text\Controllers\TextController;
 use System\Router;
 
 Router::prefix('admin/configuration/texts')->group(static function () {

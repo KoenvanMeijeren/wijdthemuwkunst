@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Admin\Text\Entity;
+namespace Modules\Text\Entity;
 
 use System\Entity\EntityInterface;
 

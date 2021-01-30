@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace System\View;
 
-use Components\File\File;
+use Components\File\Exceptions\FileNotFoundException;
 use Domain\Admin\Cms\Structure\MenuAdminTrait;
 use Domain\Admin\Menu\Models\Menu;
 use JetBrains\PhpStorm\ArrayShape;
@@ -13,7 +13,7 @@ use Components\View\BaseView;
 /**
  * Provides a base view for domain views.
  *
- * @package src\View
+ * @package System\View
  */
 final class DomainView extends BaseView {
 
@@ -42,6 +42,15 @@ final class DomainView extends BaseView {
     $content = array_merge($content, $globalContent);
 
     parent::__construct($layout, $name, $content);
+  }
+
+  protected function renderContent(string $name, array $content = []): string {
+    try {
+      return parent::renderContent($name, $content);
+    } catch (FileNotFoundException $exception) {
+      $this->viewDirectory = MODULE_PATH . '/';
+      return parent::renderContent($name, $content);
+    }
   }
 
   /**

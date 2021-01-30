@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Components\File;
 
+use Components\File\Exceptions\FileNotFoundException;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -64,10 +65,17 @@ final class File implements FileInterface {
   /**
    * {@inheritDoc}
    */
+  public function exists(): bool {
+    return $this->system->readlink($this->path, TRUE) !== null;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public function get(array $variables = []): string {
     $file = $this->system->readlink($this->path, TRUE);
     if (!$file) {
-      return '';
+      throw new FileNotFoundException($this->path);
     }
 
     ob_start();

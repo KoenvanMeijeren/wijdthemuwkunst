@@ -1,8 +1,7 @@
 <?php
 
-namespace Domain\Admin\Text\Entity;
+namespace Modules\Text\Entity;
 
-use DI\Annotation\Inject;
 use System\Entity\EntityBase;
 
 /**

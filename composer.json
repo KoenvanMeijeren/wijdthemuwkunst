@@ -16,6 +16,7 @@
             "Domain\\": "src/Domain/",
             "Components\\": "src/Components/",
             "Src\\": "src/Src/",
+            "Modules\\": "src/Modules/",
             "System\\": "src/System/"
         }
     },
@@ -71,7 +72,7 @@
             "docker-compose -f docker-compose.yml -f docker-compose.dev.yml stop"
         ],
         "inspect": [
-            "vendor/bin/phpcs --standard=Drupal --extensions=php --ignore=view.php src/Domain/Admin/Text",
+          "vendor/bin/phpcs --standard=Drupal --extensions=php --ignore=view.php src/Modules/Text",
             "vendor/bin/phpcpd app",
             "vendor/bin/phpmd app text phpmd.xml"
         ],

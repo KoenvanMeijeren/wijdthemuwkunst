@@ -3,6 +3,7 @@
 namespace Components\File;
 
 
+use Components\File\Exceptions\FileNotFoundException;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -29,6 +30,14 @@ interface FileInterface {
   public function putContent(string $content): void;
 
   /**
+   * Determines if the file exists.
+   *
+   * @return bool
+   *   If the file exists.
+   */
+  public function exists(): bool;
+
+  /**
    * Gets the content of the file.
    *
    * @param string[] $variables
@@ -36,6 +45,8 @@ interface FileInterface {
    *
    * @return string
    *   The file.
+   *
+   * @throws FileNotFoundException
    */
   public function get(array $variables = []): string;
 

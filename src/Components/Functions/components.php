@@ -9,7 +9,7 @@ use Components\SuperGlobals\RequestInterface;
 use Components\SuperGlobals\Session\Session;
 use Components\SuperGlobals\Session\SessionInterface;
 use Components\Translation\Translation;
-use Domain\Admin\Text\Entity\Text;
+use Modules\Text\Entity\Text;
 use JetBrains\PhpStorm\Pure;
 use System\Entity\EntityManager;
 
@@ -63,7 +63,7 @@ function env(): EnvInterface {
 function t(string $text): string {
   $entityManager = new EntityManager();
 
-  /** @var \Domain\Admin\Text\Entity\TextRepositoryInterface $repository */
+  /** @var \Modules\Text\Entity\TextRepositoryInterface $repository */
   $repository = $entityManager->getStorage(Text::class)->getRepository();
   if ($entity = $repository->loadByText($text)) {
     return $entity->getValue();

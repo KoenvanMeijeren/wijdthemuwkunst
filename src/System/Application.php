@@ -6,7 +6,7 @@ namespace System;
 use Components\ComponentsTrait;
 use Components\Datetime\DateTimeInterface;
 use Domain\Admin\Accounts\User\Models\User;
-use Domain\Admin\Text\TextModule;
+use Modules\Text\TextModule;
 use Components\SuperGlobals\Url\Uri;
 use Components\Header\Header;
 use Components\SuperGlobals\Session\SessionBuilder;
@@ -14,7 +14,7 @@ use Components\SuperGlobals\Session\SessionBuilder;
 /**
  * Provides the main entry point for the application.
  *
- * @package src\Core
+ * @package System
  */
 final class Application implements ApplicationInterface {
 
@@ -60,7 +60,7 @@ final class Application implements ApplicationInterface {
   }
 
   /**
-   * Runs the app.
+   * {@inheritDoc}
    */
   public function run(): void {
     $this->preRun();

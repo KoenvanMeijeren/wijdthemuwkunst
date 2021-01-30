@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Components\Translation;
 
 use Components\Array\ArrayBase;
-use Domain\Admin\Text\TextModule;
+use Modules\Text\TextModule;
 
 /**
  * Provides a class for translating strings.
