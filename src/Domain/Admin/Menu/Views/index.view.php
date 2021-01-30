@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 use Components\Translation\TranslationOld;
 use Domain\Admin\Menu\Repositories\MenuRepository;
-use Src\Security\CSRF;
+use Components\Security\CSRF;
 use System\Request;
 
 $menuItem = new MenuRepository($menu_item ?? NULL);

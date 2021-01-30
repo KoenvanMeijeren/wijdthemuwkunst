@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Src\Resource;
 
-use Src\Security\CSRF;
+use Components\Security\CSRF;
 use Components\Translation\TranslationOld;
 
 /**

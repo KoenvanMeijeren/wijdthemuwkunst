@@ -9,7 +9,7 @@ declare(strict_types=1);
 use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\Repositories\AccountRepository;
 use Domain\Admin\Accounts\User\Models\User;
-use Src\Security\CSRF;
+use Components\Security\CSRF;
 use System\Request;
 
 $request = new Request();

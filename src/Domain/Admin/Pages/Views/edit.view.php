@@ -10,7 +10,7 @@ use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Pages\Models\Page;
 use Domain\Admin\Pages\Repositories\PageRepository;
-use Src\Security\CSRF;
+use Components\Security\CSRF;
 use System\Request;
 
 $page = new PageRepository($page ?? NULL);

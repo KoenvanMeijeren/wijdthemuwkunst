@@ -6,7 +6,7 @@
 
 use Components\Translation\TranslationOld;
 use Domain\Admin\ContactForm\Repository\ContactFormRepository;
-use Src\Security\CSRF;
+use Components\Security\CSRF;
 use System\Request;
 
 $request = new Request();

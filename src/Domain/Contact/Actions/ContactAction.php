@@ -7,7 +7,7 @@ namespace Domain\Contact\Actions;
 
 use Domain\Admin\ContactForm\Actions\BaseContactFormAction;
 use Domain\Admin\Settings\Models\Setting;
-use Src\Security\Recaptcha;
+use Components\Security\Recaptcha;
 use Components\Translation\TranslationOld;
 use System\Mail\Mail;
 

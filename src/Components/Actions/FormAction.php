@@ -3,8 +3,10 @@ declare(strict_types=1);
 
 namespace Components\Actions;
 
-use Src\Security\CSRF;
+use Components\Security\CSRF;
+use Components\Translation\TranslationOld;
 use Components\Validate\FormValidator;
+use System\StateInterface;
 
 /**
  * Provides a base class for form actions.
@@ -31,7 +33,15 @@ abstract class FormAction extends Action {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    return CSRF::validate();
+    $csrf_validation = CSRF::validate();
+    if (!$csrf_validation) {
+      $this->session()->flash(
+        StateInterface::FAILED,
+        TranslationOld::get('failed_csrf_check_message')
+      );
+    }
+
+    return $csrf_validation;
   }
 
 }

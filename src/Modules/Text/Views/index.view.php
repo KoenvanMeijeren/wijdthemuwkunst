@@ -7,7 +7,7 @@
 declare(strict_types=1);
 
 use Domain\Admin\Accounts\User\Models\User;
-use Src\Security\CSRF;
+use Components\Security\CSRF;
 use Components\Translation\TranslationOld;
 
 $user = new User();

@@ -3,7 +3,7 @@
 use Components\Translation\TranslationOld;
 use Domain\Admin\Menu\Repositories\MenuRepository;
 use Domain\Admin\Settings\Models\Setting;
-use Src\Security\CSRF;
+use Components\Security\CSRF;
 use Src\Session\Session;
 use Src\Resource\Resource;
 use System\Request;

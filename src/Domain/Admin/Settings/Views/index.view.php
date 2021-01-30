@@ -9,7 +9,7 @@ declare(strict_types=1);
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Settings\Repositories\SettingRepository;
 use System\Request;
-use Src\Security\CSRF;
+use Components\Security\CSRF;
 use Components\Translation\TranslationOld;
 
 $setting = new SettingRepository($setting ?? NULL);

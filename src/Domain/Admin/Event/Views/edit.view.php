@@ -9,7 +9,7 @@ declare(strict_types=1);
 use Components\Translation\TranslationOld;
 use Domain\Admin\Event\Repositories\EventRepository;
 use Src\Core\Request;
-use Src\Security\CSRF;
+use Components\Security\CSRF;
 
 $event = new EventRepository($event ?? NULL);
 $request = new Request();
