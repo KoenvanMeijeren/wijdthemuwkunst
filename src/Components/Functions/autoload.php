@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-use Src\Validate\Validate;
+use Components\Validate\Validate;
 
 $filenames = [
   'default',

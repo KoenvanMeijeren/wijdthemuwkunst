@@ -14,6 +14,10 @@ use System\Controller\AdminControllerBase;
  * @package Domain\Admin\Cms\Structure\Controllers
  */
 final class StructureControllerBase extends AdminControllerBase {
+
+  /**
+   * {@inheritdoc}
+   */
   protected string $baseViewPath = 'Admin/Cms/Structure/Views/';
 
   /**
@@ -22,7 +26,7 @@ final class StructureControllerBase extends AdminControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    *
-   * @throws \Src\Exceptions\Basic\InvalidKeyException
+   * @throws \Components\Exceptions\Basic\InvalidKeyException
    */
   public function index(): ViewInterface {
     return $this->view('index', [
@@ -37,7 +41,7 @@ final class StructureControllerBase extends AdminControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    *
-   * @throws \Src\Exceptions\Basic\InvalidKeyException
+   * @throws \Components\Exceptions\Basic\InvalidKeyException
    */
   public function content(): ViewInterface {
     return $this->view('index', [
@@ -52,7 +56,7 @@ final class StructureControllerBase extends AdminControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    *
-   * @throws \Src\Exceptions\Basic\InvalidKeyException
+   * @throws \Components\Exceptions\Basic\InvalidKeyException
    */
   public function structure(): ViewInterface {
     return $this->view('index', [
@@ -67,7 +71,7 @@ final class StructureControllerBase extends AdminControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    *
-   * @throws \Src\Exceptions\Basic\InvalidKeyException
+   * @throws \Components\Exceptions\Basic\InvalidKeyException
    */
   public function configuration(): ViewInterface {
     return $this->view('index', [
@@ -82,7 +86,7 @@ final class StructureControllerBase extends AdminControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    *
-   * @throws \Src\Exceptions\Basic\InvalidKeyException
+   * @throws \Components\Exceptions\Basic\InvalidKeyException
    */
   public function reports(): ViewInterface {
     return $this->view('index', [

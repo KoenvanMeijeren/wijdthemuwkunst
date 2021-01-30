@@ -29,7 +29,7 @@ final class EditViewModel {
 
   /**
    * @return \Src\Core|object
-   * @throws \Src\Exceptions\Basic\InvalidKeyException
+   * @throws \Components\Exceptions\Basic\InvalidKeyException
    */
   public function get() {
     if ($this->page === NULL) {

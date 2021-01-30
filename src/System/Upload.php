@@ -8,7 +8,7 @@ namespace System;
 use Components\ComponentsTrait;
 use Exception;
 use Sirius\Upload\Handler as UploadHandler;
-use Src\Exceptions\File\ErrorWhileUploadingFileException;
+use Components\File\Exceptions\ErrorWhileUploadingFileException;
 use Components\Translation\TranslationOld;
 
 /**
@@ -127,11 +127,7 @@ final class Upload {
         $result->clear();
 
         $this->log()->error($exception->getMessage());
-        throw new ErrorWhileUploadingFileException(
-              'There was an error while uploading the file',
-              114,
-              $exception
-                );
+        throw new ErrorWhileUploadingFileException($exception);
       }
     }
 

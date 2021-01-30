@@ -9,7 +9,7 @@ use Cake\Chronos\Chronos;
 use Components\ComponentsTrait;
 use Components\SuperGlobals\Cookie\Cookie;
 use Components\Env\Env;
-use Src\Exceptions\Session\InvalidSessionException;
+use Components\SuperGlobals\Session\Exceptions\InvalidSessionException;
 
 /**
  * Class Builder.
@@ -180,7 +180,7 @@ final class SessionBuilder {
    */
   public function destroy(): void {
     if (PHP_SESSION_ACTIVE !== session_status()) {
-      throw new InvalidSessionException('Cannot destroy the session if the session does not exists');
+      throw new InvalidSessionException();
     }
 
     $params = session_get_cookie_params();

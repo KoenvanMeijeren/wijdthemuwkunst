@@ -7,7 +7,7 @@ use Components\ComponentsTrait;
 use Components\SuperGlobals\Request;
 use JetBrains\PhpStorm\Pure;
 use Components\Log\LoggerHandler;
-use Src\Validate\Validate;
+use Components\Validate\Validate;
 use System\View\ProductionErrorView;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run as Whoops;

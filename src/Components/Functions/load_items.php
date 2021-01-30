@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-use Src\Validate\Validate;
+use Components\Validate\Validate;
 
 if (!function_exists('include_file')) {
 
@@ -22,7 +22,7 @@ if (!function_exists('include_file')) {
    * @return mixed
    *   The included file.
    *
-   * @throws \Src\Exceptions\File\FileNotFoundException
+   * @throws \Components\File\Exceptions\FileNotFoundException
    */
   function include_file(string $name, $variables = NULL): mixed {
     if ($variables !== NULL) {

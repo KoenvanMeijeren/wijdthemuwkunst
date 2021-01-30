@@ -3,7 +3,5 @@
 use Domain\Admin\Text\TextModule;
 
 return [
-  'configuration' => [
-    'text' => TextModule::class,
-  ],
+  TextModule::class
 ];
