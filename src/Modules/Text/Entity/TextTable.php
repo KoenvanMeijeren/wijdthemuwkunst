@@ -2,6 +2,7 @@
 
 namespace Modules\Text\Entity;
 
+use Components\ComponentsTrait;
 use Domain\Admin\Accounts\User\Models\User;
 use Components\Translation\TranslationOld;
 use Src\Resource\Resource;
@@ -14,6 +15,8 @@ use System\Entity\EntityInterface;
  * @package Domain\Admin\Text\Entity
  */
 final class TextTable extends DataTableBuilder {
+
+  use ComponentsTrait;
 
   /**
    * {@inheritDoc}
@@ -40,8 +43,6 @@ final class TextTable extends DataTableBuilder {
    * {@inheritDoc}
    */
   protected function buildRowActions(EntityInterface $entity): string {
-    $user = new User();
-
     return Resource::addTableEditColumn(
       '/admin/configuration/texts/text/edit/' . $entity->id(),
       '/admin/configuration/texts/text/delete/' . $entity->id(),
@@ -49,7 +50,7 @@ final class TextTable extends DataTableBuilder {
         TranslationOld::get('delete_text_confirmation_message'),
         $entity->getKey()
       ),
-      $user->getRights() !== User::DEVELOPER
+      $this->user()->getRights() !== User::DEVELOPER
     );
   }
 

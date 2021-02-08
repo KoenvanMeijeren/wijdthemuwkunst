@@ -15,6 +15,7 @@ use Components\SuperGlobals\Session\Session;
 use Components\SuperGlobals\Session\SessionInterface;
 use Components\Translation\Translation;
 use Components\Translation\TranslationInterface;
+use Domain\Admin\Accounts\User\Models\User;
 use Psr\Log\LoggerInterface as PsrLoggerInterface;
 
 /**
@@ -95,6 +96,16 @@ trait ComponentsTrait {
    */
   protected function logger(): LoggerInterface {
     return $this->logger ??= new Logger();
+  }
+
+  /**
+   * Gets the user object.
+   *
+   * @return User
+   *   The user object.
+   */
+  protected function user(): User {
+    return $this->user ??= new User();
   }
 
 }

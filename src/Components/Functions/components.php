@@ -9,6 +9,7 @@ use Components\SuperGlobals\RequestInterface;
 use Components\SuperGlobals\Session\Session;
 use Components\SuperGlobals\Session\SessionInterface;
 use Components\Translation\Translation;
+use Domain\Admin\Accounts\User\Models\User;
 use Modules\Text\Entity\Text;
 use JetBrains\PhpStorm\Pure;
 use System\Entity\EntityManager;
@@ -70,4 +71,14 @@ function t(string $text): string {
   }
 
   return new Translation();
+}
+
+/**
+ * Gets the user object.
+ *
+ * @return User
+ *   The user object.
+ */
+function user(): User {
+  return new User();
 }

@@ -25,19 +25,10 @@ abstract class BaseTextAction extends EntityFormActionBase {
   protected EntityInterface $entity;
 
   /**
-   * The current user definition.
-   *
-   * @var \Domain\Admin\Accounts\User\Models\User
-   */
-  protected User $user;
-
-  /**
    * BaseTextAction constructor.
    */
   public function __construct() {
     parent::__construct();
-
-    $this->user = new User();
   }
 
   /**

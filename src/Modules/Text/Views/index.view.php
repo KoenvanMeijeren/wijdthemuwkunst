@@ -10,14 +10,12 @@ use Domain\Admin\Accounts\User\Models\User;
 use Components\Security\CSRF;
 use Components\Translation\TranslationOld;
 
-$user = new User();
-
 /** @var \Modules\Text\Entity\TextInterface $entity */
 $entity = $text ?? null;
 $createText = $createText ?? FALSE;
-$disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
+$disabled = user()->getRights() === User::DEVELOPER ? '' : 'disabled';
 ?>
-<?php if ($createText && $user->getRights() === User::DEVELOPER && $entity === NULL) : ?>
+<?php if ($createText && user()->getRights() === User::DEVELOPER && $entity === NULL) : ?>
     <div class="row">
         <div class="col-xl-12 mb-4">
             <div class="card border-left-warning shadow h-100 py-2">

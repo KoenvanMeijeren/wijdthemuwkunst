@@ -27,7 +27,7 @@ final class UpdateTextAction extends BaseTextAction {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    if ($this->user->getRights() !== User::DEVELOPER
+    if ($this->user()->getRights() !== User::DEVELOPER
       && $this->request()->post('key') !== $this->entity->getKey()) {
       $this->session()->flash(StateInterface::FAILED, TranslationOld::get('text_editing_key_not_allowed'));
 
