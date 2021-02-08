@@ -187,7 +187,7 @@ final class Request {
         );
     }
 
-    return (string) (new Sanitize($superGlobal[$key]))->data();
+    return (string) (new \Components\Sanitize\Sanitize($superGlobal[$key]))->data();
   }
 
   /**
@@ -205,7 +205,7 @@ final class Request {
     $newArray = [];
     foreach ($superGlobal[$key] as $data) {
       if (is_scalar($data)) {
-        $newArray[] = (new Sanitize($data))->data();
+        $newArray[] = (new \Components\Sanitize\Sanitize($data))->data();
       }
 
       $newArray[] = $data;

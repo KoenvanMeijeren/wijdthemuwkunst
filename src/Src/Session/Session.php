@@ -4,8 +4,7 @@ declare(strict_types=1);
 namespace Src\Session;
 
 use Components\ComponentsTrait;
-use System\Request;
-use System\Sanitize;
+use Components\Sanitize\Sanitize;
 use Components\Encrypt\Encrypt;
 
 /**
@@ -53,8 +52,7 @@ final class Session {
    * {@inheritDoc}
    */
   public function get(string $key, bool $unset = FALSE): ?string {
-    $request = new Request();
-    $data = $request->session($key);
+    $data = $this->request()->session($key);
     if ($data === '') {
       return NULL;
     }
