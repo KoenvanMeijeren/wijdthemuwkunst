@@ -5,7 +5,7 @@ namespace Modules\Text\Entity;
 use Components\ComponentsTrait;
 use Domain\Admin\Accounts\User\Models\User;
 use Components\Translation\TranslationOld;
-use Src\Resource\Resource;
+use Components\Resource\Resource;
 use System\DataTable\DataTableBuilder;
 use System\Entity\EntityInterface;
 

@@ -4,7 +4,7 @@ use Components\Translation\TranslationOld;
 use Domain\Admin\Menu\Repositories\MenuRepository;
 use Domain\Admin\Settings\Models\Setting;
 use Components\Security\CSRF;
-use Src\Resource\Resource;
+use Components\Resource\Resource;
 
 $setting = new Setting();
 ?>

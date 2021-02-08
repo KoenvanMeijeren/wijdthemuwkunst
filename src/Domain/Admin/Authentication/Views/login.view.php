@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 use Components\Translation\TranslationOld;
 use Components\Security\CSRF;
-use Src\Resource\Resource;
+use Components\Resource\Resource;
 
 ?>
 <div class="row justify-content-center">

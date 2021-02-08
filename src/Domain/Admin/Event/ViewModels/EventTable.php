@@ -6,7 +6,7 @@ use Components\Translation\TranslationOld;
 use Domain\Admin\Event\Repositories\EventRepository;
 use Domain\Admin\Event\Support\EventDatetimeConverter;
 use Domain\Admin\Event\Support\EventIsPublishedStateConverter;
-use Src\Resource\Resource;
+use Components\Resource\Resource;
 use System\DataTable\DataTableBuilder;
 
 /**

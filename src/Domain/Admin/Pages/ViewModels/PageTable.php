@@ -11,7 +11,7 @@ use Domain\Admin\Pages\Models\Page;
 use Domain\Admin\Pages\Repositories\PageRepository;
 use Domain\Admin\Pages\Support\PageInMenuStateConverter;
 use Domain\Admin\Pages\Support\PageIsPublishedStateConverterBase;
-use Src\Resource\Resource;
+use Components\Resource\Resource;
 use System\DataTable\DataTableBuilder;
 
 /**

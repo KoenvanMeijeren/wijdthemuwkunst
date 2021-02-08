@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Src\Resource;
+namespace Components\Resource;
 
 use Components\Security\CSRF;
 use Components\Translation\TranslationOld;

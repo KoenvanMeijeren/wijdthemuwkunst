@@ -4,7 +4,7 @@ use Components\SuperGlobals\Url\Uri;
 use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\Account\Support\AccountRightsConverter;
 use Domain\Admin\Accounts\User\Models\User;
-use Src\Resource\Resource;
+use Components\Resource\Resource;
 use System\Breadcrumbs\Breadcrumbs;
 
 $user = new User();
