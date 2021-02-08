@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Src\Config;
+namespace Components\Config;
 
 /**
  * Provides a base for loading the config.

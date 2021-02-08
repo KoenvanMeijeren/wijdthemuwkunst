@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Src\Config;
+namespace Components\Config;
 
 
 interface ConfigLoaderInterface
