@@ -8,7 +8,6 @@ use Components\Actions\FormAction;
 use Domain\Admin\Accounts\Account\Models\Account;
 use Domain\Admin\Accounts\Repositories\AccountRepository;
 use Domain\Admin\Accounts\User\Models\User;
-use Components\Validate\FormValidator;
 
 /**
  *
@@ -18,7 +17,6 @@ abstract class BaseAccountAction extends FormAction {
   protected User $user;
   protected Account $account;
   protected AccountRepository $accountRepository;
-  protected FormValidator $validator;
 
   protected string $name;
   protected string $email;
@@ -35,7 +33,6 @@ abstract class BaseAccountAction extends FormAction {
     $this->accountRepository = new AccountRepository(
           $this->account->find($this->account->getId())
       );
-    $this->validator = new FormValidator();
 
     $this->name = $this->request()->post('name', $this->accountRepository->getName());
     $this->email = $this->request()->post('email', $this->accountRepository->getEmail());
