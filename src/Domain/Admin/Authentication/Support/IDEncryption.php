@@ -72,7 +72,7 @@ final class IDEncryption {
    *   The decrypted id.
    */
   #[Pure] public function decrypt(?string $encryptedId): int {
-    if ($encryptedId === NULL) {
+    if (empty($encryptedId)) {
       return 0;
     }
 
@@ -98,7 +98,7 @@ final class IDEncryption {
    *   If the hash is valid.
    */
   #[Pure] public function validateHash(string $userToken, ?string $encryptedId): bool {
-    if ($encryptedId === NULL) {
+    if (empty($encryptedId)) {
       return TRUE;
     }
 

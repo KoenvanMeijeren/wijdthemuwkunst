@@ -2,7 +2,7 @@
 
 use System\StateInterface;
 
-$error = session()->get(StateInterface::FAILED, true);
+$error = session()->get(StateInterface::FAILED, unset: true);
 if (!empty($error)) :
     ?>
     <div data-notify="container" role="alert"
@@ -19,7 +19,7 @@ if (!empty($error)) :
 <?php endif; ?>
 
 <?php
-$message = session()->get(StateInterface::SUCCESSFUL, true);
+$message = session()->get(StateInterface::SUCCESSFUL, unset: true);
 if (!empty($message)) :
     ?>
     <div data-notify="container" role="alert"
@@ -36,7 +36,7 @@ if (!empty($message)) :
 <?php endif; ?>
 
 <?php
-$message = session()->get(StateInterface::FORM_VALIDATION_FAILED, true);
+$message = session()->get(StateInterface::FORM_VALIDATION_FAILED, unset: true);
 if (!empty($message)) :
     ?>
     <div data-notify="container" role="alert"

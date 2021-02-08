@@ -65,15 +65,15 @@ $setting = new Setting();
 
             <div class="field half first">
                 <label for="name"><?= t('Name') ?></label>
-                <input type="text" name="name" id="name" value="<?= session()->get('name', true) ?>" required/>
+                <input type="text" name="name" id="name" value="<?= session()->get('name', unset: true) ?>" required/>
             </div>
             <div class="field half">
                 <label for="email"><?= t('Email') ?></label>
-                <input type="text" name="email" id="email" value="<?= session()->get('email', true) ?>" required/>
+                <input type="text" name="email" id="email" value="<?= session()->get('email', unset: true) ?>" required/>
             </div>
             <div class="field">
                 <label for="message"><?= t('Message') ?></label>
-                <textarea name="message" id="message" rows="6" required><?= session()->get('message', true) ?></textarea>
+                <textarea name="message" id="message" rows="6" required><?= session()->get('message', unset: true) ?></textarea>
             </div>
 
             <ul class="actions">

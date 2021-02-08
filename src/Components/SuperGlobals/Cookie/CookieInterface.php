@@ -22,18 +22,4 @@ interface CookieInterface extends ArrayBaseInterface {
    */
   public function save(string $key, string $value): void;
 
-  /**
-   * Get data from the cookie; unset it if specified.
-   *
-   * @param string $key
-   *   The key for searching to the
-   *   corresponding cookie value.
-   * @param string $default
-   *   The default value to be returned when
-   *   the given key does not exists.
-   *
-   * @return string
-   */
-  public function get(string $key, string $default = ''): string;
-
 }

@@ -35,7 +35,7 @@ final class Cookie extends ArrayBase implements CookieInterface {
     private bool $secure = FALSE,
     private bool $httpOnly = TRUE
   ) {
-    parent::__construct($_COOKIE);
+    parent::__construct($_COOKIE, true, true);
   }
 
   /**
@@ -50,21 +50,8 @@ final class Cookie extends ArrayBase implements CookieInterface {
     $data = new Encrypt((string) $sanitize->data());
 
     setcookie($key, $data->encrypt(), time() + $this->expiringTime, $this->path, $this->domain, $this->secure, $this->httpOnly);
-  }
 
-  /**
-   * {@inheritDoc}
-   */
-  public function get(string $key, string $default = ''): string {
-    $value = $_COOKIE[$key] ?? '';
-    if ($value === '') {
-      return $default;
-    }
-
-    $sanitize = new Sanitize($value);
-    $data = new Encrypt((string) $sanitize->data());
-
-    return $data->decrypt();
+    parent::save($key, $value);
   }
 
   /**
@@ -76,9 +63,8 @@ final class Cookie extends ArrayBase implements CookieInterface {
     }
 
     setcookie($key, '', time() - $this->expiringTime, $this->path, $this->domain, $this->secure, $this->httpOnly);
-    unset($_COOKIE[$key]);
 
-    return true;
+    return parent::unset($key);
   }
 
 }

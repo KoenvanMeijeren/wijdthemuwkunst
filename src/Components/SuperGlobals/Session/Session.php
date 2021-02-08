@@ -21,20 +21,7 @@ final class Session extends ArrayBase implements SessionInterface {
    * Session constructor.
    */
   public function __construct() {
-    parent::__construct($_SESSION);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function save(string $key, string $value): void {
-    if ($this->exists($key)) {
-      return;
-    }
-
-    $sanitize = new Sanitize($value);
-    $data = new Encrypt((string) $sanitize->data());
-    $_SESSION[$key] = $data->encrypt();
+    parent::__construct($_SESSION, true, true);
   }
 
   /**
@@ -53,29 +40,6 @@ final class Session extends ArrayBase implements SessionInterface {
     $this->saveForced($key, $value);
 
     $this->logger()->logRequest($key, $value);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function get(string $key, bool $unset = FALSE): ?string {
-    $data = $this->request()->session($key);
-    if ($data === '') {
-      return NULL;
-    }
-
-    if (is_json($data)) {
-      return $data;
-    }
-
-    if ($unset) {
-      $this->unset($key);
-    }
-
-    $sanitize = new Sanitize($data);
-    $data = new Encrypt((string) $sanitize->data());
-
-    return $data->decrypt();
   }
 
 }
