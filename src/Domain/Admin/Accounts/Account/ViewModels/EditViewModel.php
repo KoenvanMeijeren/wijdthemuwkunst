@@ -5,9 +5,9 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\Account\ViewModels;
 
+use Components\ComponentsTrait;
 use Components\Header\Redirect;
 use Components\Translation\TranslationOld;
-use Src\Session\Session;
 use stdClass;
 use System\StateInterface;
 
@@ -15,15 +15,14 @@ use System\StateInterface;
  *
  */
 final class EditViewModel {
-  private ?stdClass $account;
-  private Session $session;
+
+  use ComponentsTrait;
 
   /**
    *
    */
-  public function __construct(?stdClass $account) {
+  public function __construct(private ?stdClass $account) {
     $this->account = $account;
-    $this->session() = new Session();
   }
 
   /**

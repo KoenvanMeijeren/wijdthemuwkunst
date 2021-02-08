@@ -10,9 +10,7 @@ use Domain\Admin\Menu\Models\Menu;
 use Domain\Admin\Menu\Repositories\MenuRepository;
 use Domain\Admin\Pages\Models\Slug;
 use Domain\Admin\Pages\Repositories\SlugRepository;
-use Src\Session\Session;
 use Components\Validate\FormValidator;
-use System\Request;
 
 /**
  *
@@ -21,7 +19,6 @@ abstract class BaseMenuAction extends FormAction {
   protected Slug $slug;
   protected Menu $menu;
   protected MenuRepository $menuRepository;
-  protected Session $session;
   protected FormValidator $validator;
 
   protected int $id;
@@ -37,13 +34,11 @@ abstract class BaseMenuAction extends FormAction {
   public function __construct() {
     $this->menu = new Menu();
     $this->slug = new Slug();
-    $this->session() = new Session();
     $this->validator = new FormValidator();
-    $request = new Request();
 
-    $this->url = $this->slug->parse($request->post('slug'));
-    $this->title = $request->post('title');
-    $this->weight = (int) $request->post('weight');
+    $this->url = $this->slug->parse($this->request()->post('slug'));
+    $this->title = $this->request()->post('title');
+    $this->weight = (int) $this->request()->post('weight');
 
     $this->menuRepository = new MenuRepository(
           $this->menu->find($this->menu->getId())
@@ -76,7 +71,7 @@ abstract class BaseMenuAction extends FormAction {
   protected function validate(): bool {
     $this->validator->input($this->url, TranslationOld::get('url'))->isRequired();
     $this->validator->input($this->title, TranslationOld::get('title'))->isRequired();
-    $this->validator->input($this->weight, TranslationOld::get('weight'))->isRequired();
+    $this->validator->input((string)$this->weight, TranslationOld::get('weight'))->isRequired();
 
     return $this->validator->handleFormValidation();
   }

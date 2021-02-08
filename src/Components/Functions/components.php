@@ -17,7 +17,7 @@ use System\Entity\EntityManager;
 /**
  * Gets the request definition.
  *
- * @return Request
+ * @return RequestInterface
  *   The request object.
  */
 #[Pure] function request(): RequestInterface {
@@ -27,7 +27,7 @@ use System\Entity\EntityManager;
 /**
  * Gets the session definition.
  *
- * @return Session
+ * @return SessionInterface
  *   The session object.
  */
 function session(): SessionInterface {

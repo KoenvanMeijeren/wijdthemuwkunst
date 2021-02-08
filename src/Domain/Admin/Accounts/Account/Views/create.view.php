@@ -9,9 +9,7 @@ declare(strict_types=1);
 use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\User\Models\User;
 use Components\Security\CSRF;
-use System\Request;
 
-$request = new Request();
 ?>
 <form method="post" action="/admin/account/create/store">
     <?php echo CSRF::insertToken('/admin/account/create/store') ?>
@@ -39,7 +37,7 @@ $request = new Request();
                             <input type="text" name="name" id="name"
                                    class="form-control form-control-user"
                                    placeholder="<?php echo TranslationOld::get('form_name') ?>"
-                                   value="<?php echo $request->post('name') ?>"
+                                   value="<?php echo request()->post('name') ?>"
                                    required>
                         </div>
 
@@ -50,7 +48,7 @@ $request = new Request();
                             </label>
                             <input type="email" id="email" class="form-control"
                                    placeholder="<?php echo TranslationOld::get('form_email') ?>"
-                                   value="<?php echo $request->post('email') ?>"
+                                   value="<?php echo request()->post('email') ?>"
                                    required name="email">
                         </div>
 
@@ -68,15 +66,15 @@ $request = new Request();
                                     <?php echo TranslationOld::get('form_choose_rights') ?>
                                 </option>
                                 <option value="<?php echo User::ADMIN ?>"
-                                    <?php echo (int) $request->post('rights') === User::ADMIN ? 'selected' : '' ?>>
+                                    <?php echo (int) request()->post('rights') === User::ADMIN ? 'selected' : '' ?>>
                                     <?php echo TranslationOld::get('form_rights_admin') ?>
                                 </option>
                                 <option value="<?php echo User::SUPER_ADMIN ?>"
-                                    <?php echo (int) $request->post('rights') === User::SUPER_ADMIN ? 'selected' : '' ?>>
+                                    <?php echo (int) request()->post('rights') === User::SUPER_ADMIN ? 'selected' : '' ?>>
                                     <?php echo TranslationOld::get('form_rights_super_admin') ?>
                                 </option>
                                 <option value="<?php echo User::DEVELOPER ?>"
-                                    <?php echo (int) $request->post('rights') === User::DEVELOPER ? 'selected' : '' ?>>
+                                    <?php echo (int) request()->post('rights') === User::DEVELOPER ? 'selected' : '' ?>>
                                     <?php echo TranslationOld::get('form_rights_developer') ?>
                                 </option>
                             </select>

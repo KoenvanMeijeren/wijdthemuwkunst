@@ -2,30 +2,27 @@
 
 namespace Domain\Admin\Menu\ViewModels;
 
+use Components\ComponentsTrait;
 use Components\Header\Redirect;
 use Components\Translation\TranslationOld;
-use Src\Session\Session;
 use System\StateInterface;
 
 /**
  *
  */
 final class EditViewModel {
+
+  use ComponentsTrait;
+
   private ?object $menuItem;
-  private Session $session;
 
   /**
    *
    */
   public function __construct(?object $menuItem) {
     $this->menuItem = $menuItem;
-    $this->session() = new Session();
   }
 
-  /**
-   * @return \Src\Core|object
-   * @throws \Components\Validate\Exceptions\Basic\InvalidKeyException
-   */
   public function get() {
     if ($this->menuItem === NULL) {
       $this->session()->flash(

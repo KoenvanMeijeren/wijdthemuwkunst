@@ -5,9 +5,9 @@ declare(strict_types=1);
 
 namespace Src\Database;
 
+use Components\ComponentsTrait;
 use PDO;
 use PDOStatement;
-use System\Request;
 
 /**
  * Provides a class to receive a connection with the database.
@@ -15,6 +15,9 @@ use System\Request;
  * @package src\Database
  */
 abstract class DatabaseConnection {
+
+  use ComponentsTrait;
+
   /**
    * The PDO definition.
    *
@@ -71,21 +74,19 @@ abstract class DatabaseConnection {
    * @return \PDO
    */
   protected function getConnection(): PDO {
-    $request = new Request();
-
-    $dsn = $request->env('database_server') . ';';
-    $dbName = 'dbname=' . $request->env('database_name') . ';';
-    $charset = 'charset=' . $request->env('database_charset') . ';';
-    $port = 'port=' . $request->env('database_port') . ';';
+    $dsn = $this->request()->env('database_server') . ';';
+    $dbName = 'dbname=' . $this->request()->env('database_name') . ';';
+    $charset = 'charset=' . $this->request()->env('database_charset') . ';';
+    $port = 'port=' . $this->request()->env('database_port') . ';';
 
     return new PDO(
           $dsn . $dbName . $charset . $port,
-          $request->env('database_username'),
-          $request->env('database_password'),
+      $this->request()->env('database_username'),
+      $this->request()->env('database_password'),
           [
             PDO::ATTR_EMULATE_PREPARES,
-            $request->env('PDO_ATTR_EMULATE_PREPARES'),
-            PDO::ATTR_ERRMODE => $request->env('PDO_ATTR_ERROR_MODE'),
+            $this->request()->env('PDO_ATTR_EMULATE_PREPARES'),
+            PDO::ATTR_ERRMODE => $this->request()->env('PDO_ATTR_ERROR_MODE'),
           ]
       );
   }

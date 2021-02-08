@@ -5,10 +5,10 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Pages\ViewModels;
 
+use Components\ComponentsTrait;
 use Components\Header\Redirect;
 use Components\Translation\TranslationOld;
 use Domain\Admin\Pages\Models\Page;
-use Src\Session\Session;
 use stdClass;
 use System\StateInterface;
 
@@ -16,15 +16,16 @@ use System\StateInterface;
  *
  */
 final class EditViewModel {
+
+  use ComponentsTrait;
+
   private ?stdClass $page;
-  private Session $session;
 
   /**
    *
    */
   public function __construct(?stdClass $page) {
     $this->page = $page;
-    $this->session() = new Session();
   }
 
   /**

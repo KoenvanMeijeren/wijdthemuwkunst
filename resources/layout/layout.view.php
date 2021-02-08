@@ -4,13 +4,9 @@ use Components\Translation\TranslationOld;
 use Domain\Admin\Menu\Repositories\MenuRepository;
 use Domain\Admin\Settings\Models\Setting;
 use Components\Security\CSRF;
-use Src\Session\Session;
 use Src\Resource\Resource;
-use System\Request;
 
 $setting = new Setting();
-$session = new Session();
-$request = new Request();
 ?>
 <!DOCTYPE html>
 <html lang="<?= TranslationOld::DUTCH_LANGUAGE_CODE ?>">
@@ -69,20 +65,20 @@ $request = new Request();
 
             <div class="field half first">
                 <label for="name"><?= t('Name') ?></label>
-                <input type="text" name="name" id="name" value="<?= $session->get('name', true) ?>" required/>
+                <input type="text" name="name" id="name" value="<?= session()->get('name', true) ?>" required/>
             </div>
             <div class="field half">
                 <label for="email"><?= t('Email') ?></label>
-                <input type="text" name="email" id="email" value="<?= $session->get('email', true) ?>" required/>
+                <input type="text" name="email" id="email" value="<?= session()->get('email', true) ?>" required/>
             </div>
             <div class="field">
                 <label for="message"><?= t('Message') ?></label>
-                <textarea name="message" id="message" rows="6" required><?= $session->get('message', true) ?></textarea>
+                <textarea name="message" id="message" rows="6" required><?= session()->get('message', true) ?></textarea>
             </div>
 
             <ul class="actions">
                 <li>
-                    <button type="submit" class="button g-recaptcha" data-sitekey="<?= $request->env('recaptcha_public_key') ?>" data-callback="onSubmit">
+                    <button type="submit" class="button g-recaptcha" data-sitekey="<?= request()->env('recaptcha_public_key') ?>" data-callback="onSubmit">
                       <?= t('Send message') ?>
                     </button>
                 </li>

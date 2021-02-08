@@ -5,7 +5,8 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Authentication\Support;
 
-use System\Request;
+use Components\ComponentsTrait;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * Provides a class for encrypting identifiers.
@@ -13,6 +14,8 @@ use System\Request;
  * @package Domain\Admin\Authentication\Support
  */
 final class IDEncryption {
+
+  use ComponentsTrait;
 
   /**
    * The secret token.
@@ -25,9 +28,7 @@ final class IDEncryption {
    * IDEncryption constructor.
    */
   public function __construct() {
-    $request = new Request();
-
-    $this->secretToken = $request->env('id_encryption_secret_key');
+    $this->secretToken = $this->request()->env('id_encryption_secret_key');
   }
 
   /**
@@ -54,7 +55,7 @@ final class IDEncryption {
    * @return string
    *   The encrypted string.
    */
-  public function encrypt(int $id, string $token): string {
+  #[Pure] public function encrypt(int $id, string $token): string {
     $string = "{$id}:{$token}";
     $string .= ':' . hash_hmac('sha256', $string, $this->secretToken);
 
@@ -70,7 +71,7 @@ final class IDEncryption {
    * @return int
    *   The decrypted id.
    */
-  public function decrypt(?string $encryptedId): int {
+  #[Pure] public function decrypt(?string $encryptedId): int {
     if ($encryptedId === NULL) {
       return 0;
     }
@@ -96,7 +97,7 @@ final class IDEncryption {
    * @return bool
    *   If the hash is valid.
    */
-  public function validateHash(string $userToken, ?string $encryptedId): bool {
+  #[Pure] public function validateHash(string $userToken, ?string $encryptedId): bool {
     if ($encryptedId === NULL) {
       return TRUE;
     }

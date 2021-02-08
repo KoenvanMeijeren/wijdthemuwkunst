@@ -12,18 +12,16 @@ use Domain\Admin\Pages\Models\Page;
 use Domain\Admin\Pages\Models\Slug;
 use Domain\Admin\Pages\Repositories\PageRepository;
 use Domain\Admin\Pages\Repositories\SlugRepository;
-use Src\Session\Session;
 use Components\Validate\FormValidator;
-use System\Request;
 
 /**
  *
  */
 abstract class BasePageAction extends FormAction {
+
   protected Slug $slug;
   protected Page $page;
   protected PageRepository $pageRepository;
-  protected Session $session;
   protected FormValidator $validator;
 
   protected int $bannerID = 0;
@@ -44,21 +42,19 @@ abstract class BasePageAction extends FormAction {
     $this->pageRepository = new PageRepository(
           $this->page->find($this->page->getId())
       );
-    $this->session() = new Session();
     $this->validator = new FormValidator();
-    $request = new Request();
 
-    $this->thumbnailID = $this->getFileId($request->post('thumbnail'));
-    $this->bannerID = $this->getFileId($request->post('banner'));
-    $this->title = $request->post('title');
+    $this->thumbnailID = $this->getFileId($this->request()->post('thumbnail'));
+    $this->bannerID = $this->getFileId($this->request()->post('banner'));
+    $this->title = $this->request()->post('title');
     $this->url = $this->slug->parse(
-          $request->post('slug', $this->pageRepository->getSlug())
+      $this->request()->post('slug', $this->pageRepository->getSlug())
       );
-    $this->inMenu = (int) $request->post(
+    $this->inMenu = (int) $this->request()->post(
           'pageInMenu',
           (string) $this->pageRepository->getInMenu()
       );
-    $this->content = $request->post('content');
+    $this->content = $this->request()->post('content');
 
     $this->prepareAttributes();
   }

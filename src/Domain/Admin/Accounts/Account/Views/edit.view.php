@@ -10,13 +10,11 @@ use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\Repositories\AccountRepository;
 use Domain\Admin\Accounts\User\Models\User;
 use Components\Security\CSRF;
-use System\Request;
 
-$request = new Request();
 $user = new User();
 $account = new AccountRepository($account ?? NULL);
 $disabled = $user->getId() === $account->getId() ? 'disabled' : '';
-$rights = (int) $request->post('rights');
+$rights = (int) request()->post('rights');
 $rights = $rights !== 0 ? $rights : $account->getRights();
 ?>
 
@@ -46,7 +44,7 @@ $rights = $rights !== 0 ? $rights : $account->getRights();
                             <input type="text" name="name" id="name"
                                    class="form-control"
                                    placeholder="<?php echo TranslationOld::get('form_name') ?>"
-                                   value="<?php echo $request->post('name', $account->getName()) ?>"
+                                   value="<?php echo request()->post('name', $account->getName()) ?>"
                                    required>
                         </div>
 
@@ -128,8 +126,8 @@ $rights = $rights !== 0 ? $rights : $account->getRights();
                                        name="email"
                                        class="form-control"
                                        placeholder="<?php echo TranslationOld::get('form_email') ?>"
-                                       value="<?php echo $request->post('email') !== '' ?
-                                           $request->post('email') : $account->getEmail() ?>"
+                                       value="<?php echo request()->post('email') !== '' ?
+                                           request()->post('email') : $account->getEmail() ?>"
                                        required>
                             </div>
 

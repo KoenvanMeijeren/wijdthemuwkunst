@@ -3,10 +3,10 @@
 namespace Domain\Admin\Reports\Src;
 
 use Cake\Chronos\Chronos;
+use Components\ComponentsTrait;
 use Components\SuperGlobals\Cookie\Cookie;
 use Components\Translation\TranslationOld;
 use Defuse\Crypto\Exception\WrongKeyOrModifiedCiphertextException;
-use Src\Session\Session;
 use Components\Datetime\DateTime;
 use System\DataTable\DataTable;
 
@@ -14,6 +14,9 @@ use System\DataTable\DataTable;
  *
  */
 final class SuperGlobals {
+
+  use ComponentsTrait;
+
 
   /**
    *
@@ -38,15 +41,14 @@ final class SuperGlobals {
    */
   public function getSessionSettingsInformation(): string {
     $table = new DataTable();
-    $session = new Session();
 
     $table->addHead([
       TranslationOld::get('table_row_key'),
       TranslationOld::get('table_row_value'),
     ]);
     foreach (session_get_cookie_params() as $key => $data) {
-      if ($key === 'lifetime' && $session->exists('createdAt')) {
-        $createdAt = new Chronos($session->get('createdAt'));
+      if ($key === 'lifetime' && $this->session()->exists('createdAt')) {
+        $createdAt = new Chronos($this->session()->get('createdAt'));
         $expiredAt = $createdAt->addSeconds($data);
         $lifetime = new Chronos();
 
@@ -76,7 +78,6 @@ final class SuperGlobals {
    *
    */
   public function getSessionInformation(): string {
-    $session = new Session();
     $table = new DataTable();
 
     $table->addHead([
@@ -89,7 +90,7 @@ final class SuperGlobals {
       }
 
       if ($key === 'createdAt') {
-        $dateTime = new DateTime(new Chronos($session->get($key)));
+        $dateTime = new DateTime(new Chronos($this->session()->get($key)));
 
         $table->addRow([
           $key,
@@ -101,7 +102,7 @@ final class SuperGlobals {
 
       $table->addRow([
         $key,
-        $session->get($key),
+        $this->session()->get($key),
       ]);
     }
 

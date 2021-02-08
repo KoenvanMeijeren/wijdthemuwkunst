@@ -11,9 +11,7 @@ use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Pages\Models\Slug;
 use Domain\Admin\Settings\Models\Setting;
 use Domain\Admin\Settings\Repositories\SettingRepository;
-use Src\Session\Session;
 use Components\Validate\FormValidator;
-use System\Request;
 use System\StateInterface;
 
 /**
@@ -22,7 +20,6 @@ use System\StateInterface;
 abstract class BaseSettingAction extends FormAction {
   protected Setting $setting;
   protected SettingRepository $settingRepository;
-  protected Session $session;
   protected FormValidator $validator;
 
   protected string $key;
@@ -36,18 +33,16 @@ abstract class BaseSettingAction extends FormAction {
     $this->settingRepository = new SettingRepository(
           $this->setting->find($this->setting->getId())
       );
-    $this->session() = new Session();
     $this->validator = new FormValidator();
-    $request = new Request();
 
-    $key = $request->post(
+    $key = $this->request()->post(
           'setting_key',
           $this->settingRepository->getKey()
       );
 
     $slug = new Slug();
     $this->key = str_replace('-', '_', $slug->parse($key));
-    $this->value = $request->post('setting_value');
+    $this->value = $this->request()->post('setting_value');
   }
 
   /**

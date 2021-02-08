@@ -7,9 +7,7 @@
 use Components\Translation\TranslationOld;
 use Domain\Admin\ContactForm\Repository\ContactFormRepository;
 use Components\Security\CSRF;
-use System\Request;
 
-$request = new Request();
 $amountMessages = count($messages ?? []);
 ?>
 <div class="row">
@@ -34,7 +32,7 @@ $amountMessages = count($messages ?? []);
                                        autocomplete="off"
                                        placeholder="<?php echo TranslationOld::get('form_date') ?>"
                                        class="form-control" id="unlimited-datepicker"
-                                       value="<?php echo $request->get('date') ?>">
+                                       value="<?php echo request()->get('date') ?>">
                             </div>
 
                             <button class="btn btn-outline-primary">

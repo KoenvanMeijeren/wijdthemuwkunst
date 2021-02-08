@@ -8,12 +8,10 @@ declare(strict_types=1);
 
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Settings\Repositories\SettingRepository;
-use System\Request;
 use Components\Security\CSRF;
 use Components\Translation\TranslationOld;
 
 $setting = new SettingRepository($setting ?? NULL);
-$request = new Request();
 $user = new User();
 
 $createSetting = $createSetting ?? FALSE;
@@ -47,7 +45,7 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                                                id="setting_key"
                                                class="form-control"
                                                placeholder="<?php echo TranslationOld::get('form_key') ?>"
-                                               value="<?php echo $request->post('setting_key') ?>"
+                                               value="<?php echo request()->post('setting_key') ?>"
                                                required>
                                     </div>
                                     <div class="col-sm-6">
@@ -59,7 +57,7 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                                                id="setting_value"
                                                class="form-control"
                                                placeholder="<?php echo TranslationOld::get('form_value') ?>"
-                                               value="<?php echo $request->post('setting_value') ?>"
+                                               value="<?php echo request()->post('setting_value') ?>"
                                                required>
                                     </div>
                                 </div>
@@ -124,7 +122,7 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                                                class="form-control"
                                             <?php echo $disabled ?>
                                                placeholder="<?php echo TranslationOld::get('form_key') ?>"
-                                               value="<?php echo $request->post(
+                                               value="<?php echo request()->post(
                                                 'setting_key',
                                                 $setting->getReadableKey()
                                                       ) ?>"
@@ -139,7 +137,7 @@ $disabled = $user->getRights() === User::DEVELOPER ? '' : 'disabled';
                                                id="setting_value"
                                                class="form-control"
                                                placeholder="<?php echo TranslationOld::get('form_value') ?>"
-                                               value="<?php echo $request->post(
+                                               value="<?php echo request()->post(
                                                    'setting_value',
                                                    $setting->getValue()
                                                       ) ?>"

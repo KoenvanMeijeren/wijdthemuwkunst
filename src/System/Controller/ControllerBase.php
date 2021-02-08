@@ -6,8 +6,6 @@ namespace System\Controller;
 
 use Components\ComponentsTrait;
 use Domain\Admin\Accounts\User\Models\User;
-use System\Request;
-use Src\Session\Session;
 use Components\View\ViewInterface;
 use System\Entity\EntityManager;
 use System\Entity\EntityManagerInterface;

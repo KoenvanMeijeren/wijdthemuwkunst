@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace System\Mail;
 
+use Components\ComponentsTrait;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use Components\Env\Env;
-use System\Request;
 
 /**
  * Provides a class for sending emails.
@@ -14,6 +14,8 @@ use System\Request;
  * @package System\Mail
  */
 final class Mail implements MailInterface {
+
+  use ComponentsTrait;
 
   /**
    * The PHPMailer definition.
@@ -31,21 +33,20 @@ final class Mail implements MailInterface {
   public function __construct(string $companyName) {
     $this->mailer = new PHPMailer(TRUE);
     $env = new Env();
-    $request = new Request();
 
     // Set mail credentials.
     if ($env->isProduction()) {
       $this->mailer->SMTPDebug = SMTP::DEBUG_SERVER;
-      $this->mailer->Host = $request->env('mail_host');
+      $this->mailer->Host = $this->request()->env('mail_host');
       $this->mailer->SMTPAuth = TRUE;
-      $this->mailer->Username = $request->env('mail_username');
-      $this->mailer->Password = $request->env('mail_password');
+      $this->mailer->Username = $this->request()->env('mail_username');
+      $this->mailer->Password = $this->request()->env('mail_password');
       $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-      $this->mailer->Port = (int) $request->env('mail_port');
+      $this->mailer->Port = (int) $this->request()->env('mail_port');
     }
 
     $this->mailer->isHTML(TRUE);
-    $this->mailer->setFrom($request->env('mail_username'), $companyName);
+    $this->mailer->setFrom($this->request()->env('mail_username'), $companyName);
   }
 
   /**

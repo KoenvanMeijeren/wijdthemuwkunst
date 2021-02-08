@@ -6,16 +6,13 @@
 
 declare(strict_types=1);
 
-use System\Request;
+use Components\SuperGlobals\Request;
 use Components\SuperGlobals\Url\Uri;
 use System\Breadcrumbs\Breadcrumbs;
 
-$request = new Request();
+$documentRoot = request()->server(Request::DOCUMENT_ROOT);
 
-$documentRoot = $request->server(Request::DOCUMENT_ROOT);
-
-/**
- * @var \Domain\Admin\Event\Repositories\EventRepository $event */
+/** @var \Domain\Admin\Event\Repositories\EventRepository $event */
 $event = $eventRepo ?? NULL;
 $breadcrumbs = new Breadcrumbs(Uri::getUrl());
 ?>

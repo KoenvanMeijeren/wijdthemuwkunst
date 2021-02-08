@@ -9,9 +9,7 @@ declare(strict_types=1);
 use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\Repositories\AccountRepository;
 use Components\Security\CSRF;
-use System\Request;
 
-$request = new Request();
 $account = new AccountRepository($account ?? NULL);
 ?>
 <div class="row">
@@ -40,8 +38,8 @@ $account = new AccountRepository($account ?? NULL);
                             <input type="text" name="name" id="name"
                                    class="form-control form-control-user"
                                    placeholder="<?php echo TranslationOld::get('form_name') ?>"
-                                   value="<?php echo $request->post('name') !== '' ?
-                                       $request->post('name') : $account->getName() ?>"
+                                   value="<?php echo request()->post('name') !== '' ?
+                                       request()->post('name') : $account->getName() ?>"
                                    required>
                         </div>
 

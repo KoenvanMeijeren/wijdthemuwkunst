@@ -13,7 +13,6 @@ use Domain\Admin\Reports\Src\PhpInfo;
 use Domain\Admin\Reports\Src\SuperGlobals;
 use Components\View\ViewInterface;
 use System\Controller\AdminControllerBase;
-use System\Request;
 
 /**
  *
@@ -42,10 +41,9 @@ final class ReportsController extends AdminControllerBase {
    *
    */
   public function logs(): ViewInterface {
-    $request = new Request();
     $logs = new Logs();
 
-    $date = $request->get('date');
+    $date = $this->request()->get('date');
     $arrayDate = explode('-', $date);
     if (!checkdate(
           (int) ($arrayDate[1] ?? 0),

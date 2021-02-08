@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 namespace Src\Model;
 
+use Components\ComponentsTrait;
 use System\Router;
 use Components\SuperGlobals\Url\Uri;
 use Src\Database\DB;
@@ -17,6 +18,9 @@ use stdClass;
  * @deprecated
  */
 abstract class Model {
+
+  use ComponentsTrait;
+
   /**
    * The table to interact with.
    *
@@ -61,7 +65,7 @@ abstract class Model {
    * @return int
    */
   public function getId(): int {
-    return (int) Router::getWildcard();
+    return (int) $this->request()->getRouteParameter();
   }
 
   /**

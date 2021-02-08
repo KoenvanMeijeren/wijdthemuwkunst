@@ -9,10 +9,8 @@ declare(strict_types=1);
 use Components\Translation\TranslationOld;
 use Domain\Admin\Menu\Repositories\MenuRepository;
 use Components\Security\CSRF;
-use System\Request;
 
 $menuItem = new MenuRepository($menu_item ?? NULL);
-$request = new Request();
 $createMenuItem = $create_menu_item ?? FALSE;
 ?>
 <?php if ($createMenuItem && $menuItem->get() === NULL) : ?>
@@ -43,7 +41,7 @@ $createMenuItem = $create_menu_item ?? FALSE;
                                                id="slug"
                                                class="form-control"
                                                placeholder="<?php echo TranslationOld::get('form_page_slug') ?>"
-                                               value="<?php echo $request->post('slug') ?>"
+                                               value="<?php echo request()->post('slug') ?>"
                                                required>
                                     </div>
                                     <div class="col-sm-5">
@@ -55,7 +53,7 @@ $createMenuItem = $create_menu_item ?? FALSE;
                                                id="title"
                                                class="form-control"
                                                placeholder="<?php echo TranslationOld::get('form_title') ?>"
-                                               value="<?php echo $request->post('title') ?>"
+                                               value="<?php echo request()->post('title') ?>"
                                                required>
                                     </div>
                                     <div class="col-sm-2">
@@ -67,7 +65,7 @@ $createMenuItem = $create_menu_item ?? FALSE;
                                                id="weight"
                                                class="form-control"
                                                placeholder="<?php echo TranslationOld::get('form_weight') ?>"
-                                               value="<?php echo $request->post('weight') ?>"
+                                               value="<?php echo request()->post('weight') ?>"
                                                required>
                                     </div>
                                 </div>
@@ -131,7 +129,7 @@ $createMenuItem = $create_menu_item ?? FALSE;
                                                id="slug"
                                                class="form-control"
                                                placeholder="<?php echo TranslationOld::get('form_page_slug') ?>"
-                                               value="<?php echo $request->post('slug', $menuItem->getSlug()) ?>"
+                                               value="<?php echo request()->post('slug', $menuItem->getSlug()) ?>"
                                                required>
                                     </div>
                                     <div class="col-sm-5">
@@ -143,7 +141,7 @@ $createMenuItem = $create_menu_item ?? FALSE;
                                                id="title"
                                                class="form-control"
                                                placeholder="<?php echo TranslationOld::get('form_title') ?>"
-                                               value="<?php echo $request->post('title', $menuItem->getTitle()) ?>"
+                                               value="<?php echo request()->post('title', $menuItem->getTitle()) ?>"
                                                required>
                                     </div>
                                     <div class="col-sm-2">
@@ -155,7 +153,7 @@ $createMenuItem = $create_menu_item ?? FALSE;
                                                id="weight"
                                                class="form-control"
                                                placeholder="<?php echo TranslationOld::get('form_weight') ?>"
-                                               value="<?php echo $request->post('weight', (string) $menuItem->getWeight()) ?>"
+                                               value="<?php echo request()->post('weight', (string) $menuItem->getWeight()) ?>"
                                                required>
                                     </div>
                                 </div>

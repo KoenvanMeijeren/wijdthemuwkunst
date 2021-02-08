@@ -6,14 +6,11 @@
 
 declare(strict_types=1);
 
-use System\Request;
+use Components\SuperGlobals\Request;
 
-$request = new Request();
+$documentRoot = request()->server(Request::DOCUMENT_ROOT);
 
-$documentRoot = $request->server(Request::DOCUMENT_ROOT);
-
-/**
- * @var \Domain\Admin\Pages\Repositories\PageRepository $page */
+/** @var \Domain\Admin\Pages\Repositories\PageRepository $page */
 $page = $pageRepo ?? NULL;
 ?>
 

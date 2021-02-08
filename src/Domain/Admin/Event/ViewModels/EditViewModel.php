@@ -2,31 +2,28 @@
 
 namespace Domain\Admin\Event\ViewModels;
 
+use Components\ComponentsTrait;
+use Components\Header\Redirect;
 use Components\Translation\TranslationOld;
-use Src\Core\Redirect;
-use Src\Core\StateInterface;
-use Src\Session\Session;
 use stdClass;
+use System\StateInterface;
 
 /**
  *
  */
 final class EditViewModel {
+
+  use ComponentsTrait;
+
   private ?stdClass $event;
-  private Session $session;
 
   /**
    *
    */
   public function __construct(?stdClass $event) {
     $this->event = $event;
-    $this->session() = new Session();
   }
 
-  /**
-   * @return \Src\Core|object
-   * @throws \Components\Validate\Exceptions\Basic\InvalidKeyException
-   */
   public function get() {
     if ($this->event === NULL) {
       $this->session()->flash(

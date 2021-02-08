@@ -7,10 +7,8 @@
 declare(strict_types=1);
 
 use Components\Translation\TranslationOld;
-use System\Request;
 use System\StateInterface;
 
-$request = new Request();
 ?>
 
 <div class="row">
@@ -32,7 +30,7 @@ $request = new Request();
                                        placeholder="<?php echo TranslationOld::get('form_date') ?>"
                                        class="form-control"
                                        id="unlimited-datepicker"
-                                       value="<?php echo $request->get('date') ?>">
+                                       value="<?php echo request()->get('date') ?>">
                             </div>
 
                             <button class="btn btn-outline-primary">
@@ -54,7 +52,7 @@ $request = new Request();
                         <div class="col-md-12">
                             <p class="mt-2 font-weight-bold">
                                 <?php echo TranslationOld::get('no_log_data_found') ?>
-                                <?php echo $request->get('date') ?>.
+                                <?php echo request()->get('date') ?>.
                             </p>
                         </div>
                     <?php else : ?>

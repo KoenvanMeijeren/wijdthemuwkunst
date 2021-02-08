@@ -6,11 +6,9 @@ use Domain\Admin\Accounts\Account\Support\AccountRightsConverter;
 use Domain\Admin\Accounts\User\Models\User;
 use Src\Resource\Resource;
 use System\Breadcrumbs\Breadcrumbs;
-use System\Request;
 
 $user = new User();
 $rights = new AccountRightsConverter($user->getRights());
-$request = new Request();
 $breadcrumbs = new Breadcrumbs(Uri::getUrl());
 ?>
 <!DOCTYPE html>
@@ -23,7 +21,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
           content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title -->
-    <title><?= $data['title'] ?? $request->env('app_name') ?></title>
+    <title><?= $data['title'] ?? request()->env('app_name') ?></title>
 
     <!-- Fav icon -->
     <link rel="icon" type="image/png" sizes="96x96"
@@ -42,7 +40,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
     <link href="/themes/cms_theme/vendor/password-strength-meter/password.min.css" rel="stylesheet">
 
     <!-- Tiny MCE -->
-    <script src="https://cdn.tiny.cloud/1/<?= $request->env('tiny_mce_key') ?>/tinymce/5/tinymce.min.js"
+    <script src="https://cdn.tiny.cloud/1/<?= request()->env('tiny_mce_key') ?>/tinymce/5/tinymce.min.js"
         referrerpolicy="origin"></script>
 </head>
 <body id="page-top">
@@ -67,8 +65,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
             </li>
 
             <?php if ($user->getRights() >= User::ADMIN) : ?>
-                <li class="nav-item <?= strpos(Uri::getUrl(),
-                    'dashboard') !== false ? 'active' : '' ?>">
+                <li class="nav-item <?= str_contains(Uri::getUrl(), 'dashboard') ? 'active' : '' ?>">
                     <a class="nav-link" href="/admin/dashboard">
                         <i class="fas fa-home"></i>
                         <span>
@@ -76,8 +73,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
                         </span>
                     </a>
                 </li>
-                <li class="nav-item <?= strpos(Uri::getUrl(),
-                    'content') !== false ? 'active' : '' ?>">
+                <li class="nav-item <?= str_contains(Uri::getUrl(), 'content') ? 'active' : '' ?>">
                     <a class="nav-link collapsed" href="#"
                        data-toggle="collapse"
                        data-target="#siteContent" aria-expanded="true"
@@ -99,8 +95,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
                         </div>
                     </div>
                 </li>
-                <li class="nav-item <?= strpos(Uri::getUrl(),
-                    'structure') !== false ? 'active' : '' ?>">
+                <li class="nav-item <?= str_contains(Uri::getUrl(), 'structure') ? 'active' : '' ?>">
                     <a class="nav-link collapsed" href="#"
                        data-toggle="collapse"
                        data-target="#structure" aria-expanded="true"
@@ -122,8 +117,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
                         </div>
                     </div>
                 </li>
-                <li class="nav-item <?= strpos(Uri::getUrl(),
-                    'configuration') !== false ? 'active' : '' ?>">
+                <li class="nav-item <?= str_contains(Uri::getUrl(), 'configuration') ? 'active' : '' ?>">
                     <a class="nav-link collapsed" href="#"
                        data-toggle="collapse"
                        data-target="#configuration" aria-expanded="true"
@@ -148,9 +142,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
 
             <?php endif;
             if ($user->getRights() >= User::SUPER_ADMIN) : ?>
-                <li class="nav-item <?= strpos(Uri::getUrl(),
-                    'account') !== false && strpos(Uri::getUrl(),
-                    'user') === false ? 'active' : '' ?>">
+                <li class="nav-item <?= str_contains(Uri::getUrl(), 'account') && !str_contains(Uri::getUrl(), 'user') ? 'active' : '' ?>">
                     <a class="nav-link" href="/admin/account">
                         <i class="fas fa-users"></i>
                         <span>
@@ -160,8 +152,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
                 </li>
             <?php endif;
             if ($user->getRights() >= User::DEVELOPER) : ?>
-                <li class="nav-item <?= strpos(Uri::getUrl(),
-                    'reports') !== false ? 'active' : '' ?>">
+                <li class="nav-item <?= str_contains(Uri::getUrl(), 'reports') ? 'active' : '' ?>">
                     <a class="nav-link collapsed" href="#"
                        data-toggle="collapse"
                        data-target="#reports" aria-expanded="true"
@@ -220,8 +211,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto navbar-desktop">
                         <li class="nav-item">
-                            <a class="nav-link <?= strpos(Uri::getUrl(),
-                                'user/account') !== false ? 'active-link' : '' ?>"
+                            <a class="nav-link <?= str_contains(Uri::getUrl(), 'user/account') ? 'active-link' : '' ?>"
                                href="/admin/user/account">
                                 <?= TranslationOld::get('welcome_text') ?>
                                 <?= $user->getName() ?> -

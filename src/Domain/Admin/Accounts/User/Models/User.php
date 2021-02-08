@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\User\Models;
 
+use Components\ComponentsTrait;
 use Domain\Admin\Authentication\Actions\LogUserOutAction;
 use Domain\Admin\Authentication\Support\IDEncryption;
 use Components\Header\Redirect;
 use Src\Model\Model;
 use Src\Model\Scopes\SoftDelete\SoftDelete;
-use Src\Session\Session;
 use stdClass;
 
 /**
@@ -18,6 +18,7 @@ use stdClass;
  */
 final class User extends Model {
 
+  use ComponentsTrait;
   use SoftDelete;
 
   /**
@@ -89,10 +90,9 @@ final class User extends Model {
    * @return int the id of the user
    */
   public function getId(): int {
-    $session = new Session();
     $idEncryption = new IDEncryption();
 
-    return $idEncryption->decrypt($session->get('userID'));
+    return $idEncryption->decrypt($this->session()->get('userID'));
   }
 
   /**
@@ -145,7 +145,6 @@ final class User extends Model {
    * @return void|Redirect
    */
   private function authorizeUser() {
-    $session = new Session();
     $idEncryption = new IDEncryption();
 
     $rights = $this->getRights();
@@ -157,7 +156,7 @@ final class User extends Model {
       return;
     }
 
-    if ($idEncryption->validateHash($this->account->account_login_token ?? '', $session->get('userID'))) {
+    if ($idEncryption->validateHash($this->account->account_login_token ?? '', $this->session()->get('userID'))) {
       return;
     }
 

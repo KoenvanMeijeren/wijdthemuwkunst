@@ -7,9 +7,7 @@
 declare(strict_types=1);
 
 use Components\Translation\TranslationOld;
-use System\Request;
 
-$request = new Request();
 ?>
 <div class="row">
     <div class="col-md-12 mb-4">

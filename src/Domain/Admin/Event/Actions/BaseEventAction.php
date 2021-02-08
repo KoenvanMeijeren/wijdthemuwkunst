@@ -12,9 +12,7 @@ use Domain\Admin\Event\Repositories\EventRepository;
 use Domain\Admin\File\Actions\SaveFileAction;
 use Domain\Admin\Pages\Models\Slug;
 use Domain\Admin\Pages\Repositories\SlugRepository;
-use Src\Session\Session;
 use Components\Validate\FormValidator;
-use System\Request;
 
 /**
  *
@@ -23,7 +21,6 @@ abstract class BaseEventAction extends FormAction {
   protected Slug $slug;
   protected Event $event;
   protected EventRepository $eventRepository;
-  protected Session $session;
   protected FormValidator $validator;
 
   protected int $bannerID = 0;
@@ -47,20 +44,18 @@ abstract class BaseEventAction extends FormAction {
     $this->eventRepository = new EventRepository(
           $this->event->find($this->event->getId())
       );
-    $this->session() = new Session();
     $this->validator = new FormValidator();
-    $request = new Request();
 
-    $this->thumbnailID = $this->getFileId($request->post('thumbnail'));
-    $this->bannerID = $this->getFileId($request->post('banner'));
-    $this->title = $request->post('title');
+    $this->thumbnailID = $this->getFileId($this->request()->post('thumbnail'));
+    $this->bannerID = $this->getFileId($this->request()->post('banner'));
+    $this->title = $this->request()->post('title');
     $this->url = $this->slug->parse($this->title);
-    $this->content = $request->post('content');
-    $this->date = $request->post('date');
-    $this->time = $request->post('time');
+    $this->content = $this->request()->post('content');
+    $this->date = $this->request()->post('date');
+    $this->time = $this->request()->post('time');
     $datetime = new Chronos($this->date . $this->time);
     $this->datetime = $datetime->toDateTimeString();
-    $this->location = $request->post('location');
+    $this->location = $this->request()->post('location');
 
     $this->prepareAttributes();
   }
@@ -129,7 +124,7 @@ abstract class BaseEventAction extends FormAction {
    */
   protected function validate(): bool {
     if ($this->eventRepository->getId() === 0) {
-      $this->validator->input($this->thumbnailID, 'Concert thumbnail')->intIsRequired();
+      $this->validator->input((string) $this->thumbnailID, 'Concert thumbnail')->intIsRequired();
     }
 
     $this->validator->input($this->title, 'Concert titel')->isRequired();

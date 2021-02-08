@@ -5,24 +5,25 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Settings\ViewModels;
 
+use Components\ComponentsTrait;
 use Components\Header\Redirect;
 use Components\Translation\TranslationOld;
-use Src\Session\Session;
 use System\StateInterface;
 
 /**
  *
  */
 final class EditViewModel {
+
+  use ComponentsTrait;
+
   private ?object $setting;
-  private Session $session;
 
   /**
    *
    */
   public function __construct(?object $setting) {
     $this->setting = $setting;
-    $this->session() = new Session();
   }
 
   /**

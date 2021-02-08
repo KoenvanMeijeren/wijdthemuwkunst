@@ -6,18 +6,14 @@
 
 declare(strict_types=1);
 
+use Components\SuperGlobals\Request;
 use Domain\Admin\Event\Repositories\EventRepository;
-use System\Request;
 
-$request = new Request();
+$documentRoot = request()->server(Request::DOCUMENT_ROOT);
 
-$documentRoot = $request->server(Request::DOCUMENT_ROOT);
-
-/**
- * @var \Domain\Admin\Pages\Repositories\PageRepository $home */
+/** @var \Domain\Admin\Pages\Repositories\PageRepository $home */
 $home = $homeRepo ?? NULL;
-/**
- * @var \Domain\Admin\Pages\Repositories\PageRepository $eventsRepository */
+/** @var \Domain\Admin\Pages\Repositories\PageRepository $eventsRepository */
 $eventsRepository = $eventsRepo ?? NULL;
 ?>
 

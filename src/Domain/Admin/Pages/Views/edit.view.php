@@ -11,11 +11,9 @@ use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Pages\Models\Page;
 use Domain\Admin\Pages\Repositories\PageRepository;
 use Components\Security\CSRF;
-use System\Request;
 
 $page = new PageRepository($page ?? NULL);
 $user = new User();
-$request = new Request();
 
 $disabled = '';
 if ($user->getRights() !== User::DEVELOPER
@@ -54,7 +52,7 @@ if (!empty($page->getThumbnail())
   $collapsePagePictures = '';
 }
 
-$pageInMenu = (int) $request->post('pageInMenu', (string) $page->getInMenu());
+$pageInMenu = (int) request()->post('pageInMenu', (string) $page->getInMenu());
 ?>
 <div class="form-actions-container">
     <?php if ($publishActionsVisible) : ?>
@@ -129,7 +127,7 @@ $pageInMenu = (int) $request->post('pageInMenu', (string) $page->getInMenu());
                             <input type="text" name="slug" id="slug"
                                    class="form-control"
                                    placeholder="<?php echo TranslationOld::get('form_page_slug') ?>"
-                                   value="<?php echo $request->post(
+                                   value="<?php echo request()->post(
                                     'slug',
                                     $page->getSlug()
 ) ?>" <?php echo $disabled ?> required>
@@ -143,7 +141,7 @@ $pageInMenu = (int) $request->post('pageInMenu', (string) $page->getInMenu());
                             <input type="text" name="title" id="title"
                                    class="form-control"
                                    placeholder="<?php echo TranslationOld::get('form_title') ?>"
-                                   value="<?php echo $request->post(
+                                   value="<?php echo request()->post(
                                        'title',
                                        $page->getTitle()
                                    ) ?>" required>
@@ -295,7 +293,7 @@ $pageInMenu = (int) $request->post('pageInMenu', (string) $page->getInMenu());
                             <textarea class="form-control" id="tinymce"
                                       rows="10" name="content">
                                     <?php echo html_entities_decode(
-                                       $request->post(
+                                       request()->post(
                                             'content',
                                             $page->getContent()
                                         )
