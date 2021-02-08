@@ -6,7 +6,7 @@ declare(strict_types=1);
 namespace Src\Model;
 
 use Components\ComponentsTrait;
-use System\Router;
+use Components\Route\Router;
 use Components\SuperGlobals\Url\Uri;
 use Src\Database\DB;
 use stdClass;

@@ -7,6 +7,7 @@
 
 declare(strict_types=1);
 
+use Components\Route\RouterInterface;
 use Domain\Admin\Accounts\Account\Controllers\AccountController;
 use Domain\Admin\Accounts\User\Controllers\UserAccountControllerBase;
 use Domain\Admin\Accounts\User\Models\User;
@@ -23,37 +24,37 @@ use Domain\Contact\Controllers\ContactController;
 use Domain\Event\Controllers\EventArchiveController;
 use Domain\Event\Controllers\EventController;
 use Domain\Pages\Controllers\PageController;
-use System\Router;
+use Components\Route\Router;
 
 // Index routes.
 Router::get('', PageController::class,
-    'index', User::GUEST);
+    'index');
 Router::get('index', PageController::class,
-    'index', User::GUEST);
+    'index');
 
 // Event routes.
 Router::get('concerten', EventController::class,
-    'index', User::GUEST);
+    'index');
 Router::get('concerten/concert/{slug}', EventController::class,
-    'show', User::GUEST);
+    'show');
 
 // Event history routes.
 Router::get('concerten/historie', EventArchiveController::class,
-    'index', User::GUEST);
+    'index');
 Router::get('concerten/historie/concert/{slug}', EventArchiveController::class,
-    'show', User::GUEST);
+    'show');
 
 // Contact routes.
 Router::post('contact', ContactController::class,
-    'send', User::GUEST);
+    'send');
 
 // Admin routes.
 Router::prefix('admin')->group(static function () {
     // Authorization routes.
     Router::get('', AuthenticationController::class,
-        'index', User::GUEST);
+        'index');
     Router::post('login', AuthenticationController::class,
-        'login', User::GUEST);
+        'login');
     Router::get('logout', AuthenticationController::class,
         'logout', User::ADMIN);
 
@@ -233,5 +234,5 @@ Router::prefix('admin')->group(static function () {
 });
 
 // Page not found route.
-Router::get('pageNotFound', PageController::class,
-    'findOr404', User::GUEST);
+Router::get(RouterInterface::URL_PAGE_NOT_FOUND, PageController::class,
+    'findOr404');
