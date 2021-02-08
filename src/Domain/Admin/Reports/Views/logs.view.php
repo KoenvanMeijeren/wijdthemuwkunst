@@ -73,12 +73,10 @@ $request = new Request();
                                      id="list-tab" role="tablist">
                                     <?php $active = 'active';
                                     foreach (($logs ?? []) as $key => $log) :
+                                      $class = 'active-success';
                                       if (str_contains($log['message'] ?? '', StateInterface::ERROR)
                                             || str_contains($log['message'] ?? '', StateInterface::FAILED)) {
                                         $class = 'active-danger';
-                                      }
-                                      else {
-                                        $class = 'active-success';
                                       }
                                       ?>
                                         <a class="list-group-item list-group-item-action <?php echo $active . ' ' . $class ?>"

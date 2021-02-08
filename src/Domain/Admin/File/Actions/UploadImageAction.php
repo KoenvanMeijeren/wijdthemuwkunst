@@ -1,13 +1,11 @@
 <?php
-
 declare(strict_types=1);
-
 
 namespace Domain\Admin\File\Actions;
 
 use Cake\Chronos\Chronos;
 use Components\Actions\FileAction;
-use System\Upload;
+use Components\File\Upload;
 
 /**
  * Provides an action class for uploading images.
@@ -32,7 +30,7 @@ final class UploadImageAction extends FileAction {
   public function __construct(string $name) {
     parent::__construct();
 
-    $this->file = $this->request()()->file($name);
+    $this->file = $this->request()->file($name);
   }
 
   /**

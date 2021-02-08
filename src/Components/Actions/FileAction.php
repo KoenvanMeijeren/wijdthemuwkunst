@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Components\Actions;
 
 use Components\SuperGlobals\Request;
-use System\Upload;
+use Components\File\Upload;
 
 /**
  * Provides a base class for file actions.
@@ -32,9 +32,9 @@ abstract class FileAction extends Action {
   /**
    * Gets the location of the uploaded file.
    *
-   * @var string
+   * @var string|null
    */
-  protected string $fileLocation;
+  protected ?string $fileLocation;
 
   /**
    * File action constructor.
@@ -70,7 +70,7 @@ abstract class FileAction extends Action {
     }
 
     $uploader = new Upload($this->getFile());
-    if ($uploader->prepare() && $uploader->getFileIfItExists() === '') {
+    if ($uploader->prepare() && $uploader->getFileIfItExists() === null) {
       $uploader->execute();
     }
 
