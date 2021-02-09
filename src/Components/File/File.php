@@ -72,7 +72,7 @@ final class File implements FileInterface {
   /**
    * {@inheritDoc}
    */
-  public function get(array $variables = []): string {
+  public function getContent(array $variables = []): string {
     $file = $this->system->readlink($this->path, TRUE);
     if (!$file) {
       throw new FileNotFoundException($this->path);
@@ -83,6 +83,18 @@ final class File implements FileInterface {
     include_file($file, $variables);
 
     return (string) ob_get_clean();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function get(array $variables = []): mixed {
+    $file = $this->system->readlink($this->path, TRUE);
+    if (!$file) {
+      throw new FileNotFoundException($this->path);
+    }
+
+    return include_file($file, $variables);
   }
 
   /**

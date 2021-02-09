@@ -13,30 +13,21 @@ use Components\File\Exceptions\FileNotFoundException;
 abstract class ModuleBase implements ModuleInterface {
 
   /**
-   * Returns the location of the routes.
-   *
-   * @return string
-   *   The routes file location.
+   * {@inheritDoc}
    */
   public function getRoutesLocation(): string {
     return $this->getModuleLocation() . '/routes.php';
   }
 
   /**
-   * Returns the location of the translations.
-   *
-   * @return string
-   *   The translations file location.
+   * {@inheritDoc}
    */
   public function getTranslationsLocation(): string {
     return $this->getModuleLocation() . '/Translation';
   }
 
   /**
-   * Returns the translations.
-   *
-   * @return array
-   *   The translations.
+   * {@inheritDoc}
    */
   public function getTranslations(): array {
     try {

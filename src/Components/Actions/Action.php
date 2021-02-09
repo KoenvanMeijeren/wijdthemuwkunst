@@ -18,11 +18,7 @@ abstract class Action implements ActionInterface {
    * {@inheritDoc}
    */
   final public function execute(): bool {
-    if (!$this->authorize() || !$this->validate()) {
-      return FALSE;
-    }
-
-    return $this->handle();
+    return $this->authorize() && $this->validate() && $this->handle();
   }
 
   /**

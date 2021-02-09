@@ -44,11 +44,24 @@ interface FileInterface {
    *   The variables of the file.
    *
    * @return string
-   *   The file.
+   *   The file content.
    *
    * @throws FileNotFoundException
    */
-  public function get(array $variables = []): string;
+  public function getContent(array $variables = []): string;
+
+  /**
+   * Gets the content of the file.
+   *
+   * @param string[] $variables
+   *   The variables of the file.
+   *
+   * @return mixed
+   *   The file content.
+   *
+   * @throws FileNotFoundException
+   */
+  public function get(array $variables = []): mixed;
 
   /**
    * Gets the file system.

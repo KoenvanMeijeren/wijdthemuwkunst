@@ -44,6 +44,9 @@ final class DomainView extends BaseView {
     parent::__construct($layout, $name, $content);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   protected function renderContent(string $name, array $content = []): string {
     try {
       return parent::renderContent($name, $content);

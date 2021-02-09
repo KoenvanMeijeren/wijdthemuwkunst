@@ -11,6 +11,7 @@ use Modules\Text\TextModule;
 use Components\SuperGlobals\Url\Uri;
 use Components\Header\Header;
 use Components\SuperGlobals\Session\SessionBuilder;
+use System\Module\ModuleHandler;
 
 /**
  * Provides the main entry point for the application.
@@ -46,9 +47,12 @@ final class Application implements ApplicationInterface {
    * Executes actions before running the app.
    */
   protected function preRun(): void {
-    $textModule = new TextModule();
+    $moduleHandler = new ModuleHandler();
 
-    $this->routesLocations[] = $textModule->getRoutesLocation();
+    $modules = $moduleHandler->getModules();
+    foreach ($modules as $module) {
+      $this->routesLocations[] = $module->getRoutesLocation();
+    }
 
     date_default_timezone_set(DateTimeInterface::DEFAULT_TIMEZONE);
 

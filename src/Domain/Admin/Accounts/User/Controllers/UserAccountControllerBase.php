@@ -25,7 +25,7 @@ final class UserAccountControllerBase extends AdminControllerBase {
   public function index(): ViewInterface {
     return $this->view('index', [
       'title' => TranslationOld::get('admin_account_maintenance_title'),
-      'account' => $this->getCurrentUser()->getAccount(),
+      'account' => $this->currentUser()->getAccount(),
     ]);
   }
 

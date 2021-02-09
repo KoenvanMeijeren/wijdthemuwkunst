@@ -89,6 +89,13 @@ abstract class ArrayBase implements ArrayBaseInterface {
   /**
    * {@inheritDoc}
    */
+  public function all(): array {
+    return $this->array;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public function exists(string $key): bool {
     return isset($this->array[$key]);
   }

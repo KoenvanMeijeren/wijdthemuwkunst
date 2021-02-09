@@ -13,6 +13,4 @@ use Domain\Admin\Cms\Structure\MenuAdminTrait;
  */
 abstract class AdminControllerBase extends ControllerBase {
 
-  use MenuAdminTrait;
-
 }

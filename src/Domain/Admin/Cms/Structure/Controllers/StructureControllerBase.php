@@ -7,18 +7,21 @@ namespace Domain\Admin\Cms\Structure\Controllers;
 use Components\Translation\TranslationOld;
 use Components\View\ViewInterface;
 use System\Controller\AdminControllerBase;
+use System\Controller\ControllerBase;
 
 /**
  * The controller of the structure of the content managent system.
  *
  * @package Domain\Admin\Cms\Structure\Controllers
  */
-final class StructureControllerBase extends AdminControllerBase {
+final class StructureControllerBase extends ControllerBase {
 
   /**
    * {@inheritdoc}
    */
-  protected string $baseViewPath = 'Admin/Cms/Structure/Views/';
+  public function __construct() {
+    parent::__construct('Admin/Cms/Structure/Views/');
+  }
 
   /**
    * Returns the index page of a category with items.
@@ -31,7 +34,7 @@ final class StructureControllerBase extends AdminControllerBase {
   public function index(): ViewInterface {
     return $this->view('index', [
       'title' => TranslationOld::get('admin_dashboard_title'),
-      'items' => $this->indexMenu($this->getCurrentUser()),
+      'items' => $this->indexMenu($this->currentUser()),
     ]);
   }
 

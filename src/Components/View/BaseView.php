@@ -63,7 +63,7 @@ abstract class BaseView implements ViewInterface {
   protected function renderContent(string $name, array $content = []): string {
     $file = new File(directory: $this->viewDirectory, file: "{$name}.view.php");
 
-    return $file->get($content);
+    return $file->getContent($content);
   }
 
 }

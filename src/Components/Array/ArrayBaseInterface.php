@@ -36,6 +36,14 @@ interface ArrayBaseInterface {
   public function get(string $key, string $default = '', bool $unset = FALSE): ?string;
 
   /**
+   * Returns all items of the array.
+   *
+   * @return array
+   *   The items of the array.
+   */
+  public function all(): array;
+
+  /**
    * Check if the given key exists in the array.
    *
    * @param string $key
