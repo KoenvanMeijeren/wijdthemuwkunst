@@ -30,7 +30,7 @@ final class AuthenticationController extends AdminControllerBase {
    *   Either a redirect response or the login view.
    */
   public function index() {
-    if ($this->user->isLoggedIn()) {
+    if ($this->currentUser()->isLoggedIn()) {
       return new Redirect($this->redirectTo);
     }
 
@@ -46,7 +46,7 @@ final class AuthenticationController extends AdminControllerBase {
    *   The redirect response.
    */
   public function login(): Redirect {
-    $login = new LogUserInAction($this->user);
+    $login = new LogUserInAction($this->currentUser());
     if ($login->execute()) {
       return new Redirect($this->redirectTo);
     }
@@ -61,7 +61,7 @@ final class AuthenticationController extends AdminControllerBase {
    *   The redirect response.
    */
   public function logout(): Redirect {
-    $logout = new LogUserOutAction($this->user);
+    $logout = new LogUserOutAction($this->currentUser());
     $logout->execute();
 
     return new Redirect($this->redirectBack);

@@ -50,7 +50,7 @@ final class TextTable extends DataTableBuilder {
         TranslationOld::get('delete_text_confirmation_message'),
         $entity->getKey()
       ),
-      $this->user()->getRights() !== User::DEVELOPER
+      $this->currentUser()->getRights() !== User::DEVELOPER
     );
   }
 

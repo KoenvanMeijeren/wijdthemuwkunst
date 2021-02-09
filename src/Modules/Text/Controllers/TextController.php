@@ -7,11 +7,10 @@ use Modules\Text\Actions\CreateTextAction;
 use Modules\Text\Actions\DeleteTextAction;
 use Modules\Text\Actions\UpdateTextAction;
 use Modules\Text\Entity\Text;
-use Modules\Text\Entity\TextRepositoryInterface;
 use Modules\Text\Entity\TextTable;
 use Components\Translation\TranslationOld;
 use Components\View\ViewInterface;
-use System\Controller\AdminControllerBase;
+use System\Entity\EntityControllerBase;
 use System\StateInterface;
 
 /**
@@ -19,21 +18,7 @@ use System\StateInterface;
  *
  * @package Domain\Admin\Text\Controllers
  */
-final class TextController extends AdminControllerBase {
-
-  /**
-   * The base path to the views directory.
-   *
-   * @var string
-   */
-  protected string $baseViewPath = 'Text/Views/';
-
-  /**
-   * The text entity repository definition.
-   *
-   * @var \Modules\Text\Entity\TextRepositoryInterface
-   */
-  protected TextRepositoryInterface $textRepository;
+final class TextController extends EntityControllerBase {
 
   /**
    * The path to redirect to if the users must go back.
@@ -45,11 +30,8 @@ final class TextController extends AdminControllerBase {
   /**
    * TextController constructor.
    */
-  public function __construct() {
-    parent::__construct();
-
-    $storage = $this->entityManager->getStorage(Text::class);
-    $this->textRepository = $storage->getRepository();
+  public function __construct(){
+    parent::__construct(entityClass: Text::class, baseViewPath: 'Text/Views/');
   }
 
   /**
@@ -59,7 +41,7 @@ final class TextController extends AdminControllerBase {
    *   The view.
    */
   public function index(): ViewInterface {
-    $textTable = new TextTable($this->textRepository->all());
+    $textTable = new TextTable($this->repository->all());
 
     return $this->view('index', [
       'title' => TranslationOld::get('texts_title'),
@@ -74,7 +56,7 @@ final class TextController extends AdminControllerBase {
    *   The view.
    */
   public function create(): ViewInterface {
-    $textTable = new TextTable($this->textRepository->all());
+    $textTable = new TextTable($this->repository->all());
 
     return $this->view('index', [
       'title' => TranslationOld::get('texts_title'),
@@ -105,8 +87,8 @@ final class TextController extends AdminControllerBase {
    *   The view.
    */
   public function edit(): ViewInterface|Redirect {
-    $textTable = new TextTable($this->textRepository->all());
-    $text = $this->textRepository->loadById((int) $this->request()->getRouteParameter());
+    $textTable = new TextTable($this->repository->all());
+    $text = $this->repository->loadById((int) $this->request()->getRouteParameter());
     if ($text === NULL) {
       $this->session()->flash(StateInterface::FAILED, TranslationOld::get('text_does_not_exists'));
 

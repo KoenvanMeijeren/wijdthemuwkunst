@@ -38,7 +38,7 @@ final class DeleteTextAction extends BaseTextAction {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    if ($this->user()->getRights() !== User::DEVELOPER) {
+    if ($this->currentUser()->getRights() !== User::DEVELOPER) {
       $this->session()->flash(StateInterface::FAILED, TranslationOld::get('text_destroy_not_allowed'));
 
       return FALSE;

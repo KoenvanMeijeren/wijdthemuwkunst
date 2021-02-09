@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace System\Controller;
 
 use Components\ComponentsTrait;
-use Domain\Admin\Accounts\User\Models\User;
 use Components\View\ViewInterface;
-use System\Entity\EntityManager;
-use System\Entity\EntityManagerInterface;
+use Domain\Admin\Cms\Structure\MenuAdminTrait;
 use System\View\DomainView;
 
 /**
@@ -19,35 +17,17 @@ use System\View\DomainView;
 abstract class ControllerBase implements ControllerInterface {
 
   use ComponentsTrait;
-
-  /**
-   * The base path to the views directory.
-   *
-   * @var string
-   */
-  protected string $baseViewPath = '';
-
-  /**
-   * The user definition.
-   *
-   * @var \Domain\Admin\Accounts\User\Models\User
-   */
-  protected User $user;
-
-  /**
-   * The entity manager definition.
-   *
-   * @var \System\Entity\EntityManagerInterface
-   */
-  protected EntityManagerInterface $entityManager;
+  use MenuAdminTrait;
 
   /**
    * ControllerBase constructor.
+   *
+   * @param string $baseViewPath
+   *   The base path to the views directory.
    */
-  public function __construct() {
-    $this->user = new User();
-    $this->entityManager = new EntityManager();
-  }
+  public function __construct(
+    protected string $baseViewPath = ''
+  ) {}
 
   /**
    * Returns a domain view.
@@ -62,16 +42,6 @@ abstract class ControllerBase implements ControllerInterface {
    */
   protected function view(string $name, array $content = []): ViewInterface {
     return new DomainView($this->baseViewPath . $name, $content);
-  }
-
-  /**
-   * Gets the current user.
-   *
-   * @return \Domain\Admin\Accounts\User\Models\User
-   *   The current user of the app.
-   */
-  protected function getCurrentUser(): User {
-    return $this->user;
   }
 
 }

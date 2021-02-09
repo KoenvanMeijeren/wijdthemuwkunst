@@ -104,7 +104,7 @@ trait ComponentsTrait {
    * @return User
    *   The user object.
    */
-  protected function user(): User {
+  protected function currentUser(): User {
     return $this->user ??= new User();
   }
 
