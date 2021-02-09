@@ -15,10 +15,10 @@ final class MailView extends BaseMailView {
   /**
    * {@inheritDoc}
    */
-  protected function render(string $name, array $content = []): string {
-    $file = new File(directory: '', file: "{$name}.view.php");
+  protected function render(string $directory, string $name, array $content = []): string {
+    $file = new File(directory: $directory, file: "{$name}.view.php");
 
-    return $file->get($content);
+    return $file->getContent($content);
   }
 
 }

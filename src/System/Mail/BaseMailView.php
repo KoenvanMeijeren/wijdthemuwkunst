@@ -28,7 +28,7 @@ abstract class BaseMailView {
    *   The content of the partial view.
    */
   public function __construct(string $baseViewPath, string $name, array $content) {
-    $this->mail = $this->render(DOMAIN_PATH . '/' . $baseViewPath . '/' . $name, $content);
+    $this->mail = $this->render(DOMAIN_PATH . '/' . $baseViewPath, $name, $content);
   }
 
   /**
@@ -44,6 +44,8 @@ abstract class BaseMailView {
   /**
    * Render a partial view into the layout view.
    *
+   * @param string $directory
+   *   The directory of the mail view.
    * @param string $name
    *   The name of the partial view.
    * @param mixed[] $content
@@ -52,6 +54,6 @@ abstract class BaseMailView {
    * @return string
    *   The renderable mail view.
    */
-  abstract protected function render(string $name, array $content = []): string;
+  abstract protected function render(string $directory, string $name, array $content = []): string;
 
 }
