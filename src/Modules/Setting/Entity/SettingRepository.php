@@ -14,9 +14,9 @@ final class SettingRepository extends EntityRepositoryBase implements SettingRep
   /**
    * {@inheritDoc}
    */
-  public function loadBySetting(string $text): ?SettingInterface {
+  public function loadBySetting(string $setting): ?SettingInterface {
     return $this->firstByAttributes([
-      "{$this->entity->getTable()}_key" => $text,
+      "{$this->entity->getTable()}_key" => $setting,
     ]);
   }
 

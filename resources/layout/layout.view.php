@@ -2,11 +2,9 @@
 
 use Components\Translation\TranslationOld;
 use Domain\Admin\Menu\Repositories\MenuRepository;
-use Domain\Admin\Settings\Models\Setting;
 use Components\Security\CSRF;
 use Components\Resource\Resource;
 
-$setting = new Setting();
 ?>
 <!DOCTYPE html>
 <html lang="<?= TranslationOld::DUTCH_LANGUAGE_CODE ?>">
@@ -29,7 +27,7 @@ $setting = new Setting();
 <header id="header">
     <div class="inner">
         <a href="/" class="logo">
-            <?= $setting->get('website_naam') ?>
+            <?= setting('website_naam') ?>
         </a>
         <?php if (isset($data['menuItems']) && count($data['menuItems']) > 0) : ?>
             <nav id="nav">
@@ -85,7 +83,7 @@ $setting = new Setting();
             </ul>
         </form>
         <div class="copyright">
-            <p>&copy; <?= $setting->get('copyright_tekst') ?></p>
+            <p>&copy; <?= setting('copyright_tekst') ?></p>
         </div>
     </div>
 </section>

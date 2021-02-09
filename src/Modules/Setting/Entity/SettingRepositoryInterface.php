@@ -12,14 +12,14 @@ use System\Entity\EntityRepositoryInterface;
 interface SettingRepositoryInterface extends EntityRepositoryInterface {
 
   /**
-   * Loads a translation for a given text.
+   * Loads a setting for a given name.
    *
-   * @param string $text
-   *   The text to search for.
+   * @param string $setting
+   *   The setting to search for.
    *
    * @return SettingInterface|null
-   *   The text entity or null.
+   *   The setting entity or null.
    */
-  public function loadBySetting(string $text): ?SettingInterface;
+  public function loadBySetting(string $setting): ?SettingInterface;
 
 }

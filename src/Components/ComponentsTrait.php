@@ -16,7 +16,10 @@ use Components\SuperGlobals\Session\SessionInterface;
 use Components\Translation\Translation;
 use Components\Translation\TranslationInterface;
 use Domain\Admin\Accounts\User\Models\User;
+use Modules\Setting\Entity\Setting;
 use Psr\Log\LoggerInterface as PsrLoggerInterface;
+use System\Entity\EntityManager;
+use System\Entity\EntityManagerInterface;
 
 /**
  * Provides a trait for interacting with the components.
@@ -106,6 +109,37 @@ trait ComponentsTrait {
    */
   protected function currentUser(): User {
     return $this->user ??= new User();
+  }
+
+  /**
+   * Gets a setting.
+   *
+   * @param string $setting
+   *   The setting.
+   *
+   * @return string
+   *   The setting.
+   */
+  protected function setting(string $setting): string {
+    $entityManager = $this->getEntityManager();
+
+    /** @var \Modules\Setting\Entity\SettingRepositoryInterface $repository */
+    $repository = $entityManager->getStorage(Setting::class)->getRepository();
+    if ($entity = $repository->loadBySetting($setting)) {
+      return $entity->getValue();
+    }
+
+    return '';
+  }
+
+  /**
+   * Gets the entity manager.
+   *
+   * @return EntityManagerInterface
+   *   The entity manager definition.
+   */
+  protected function getEntityManager(): EntityManagerInterface {
+    return $this->entityManager ??= new EntityManager();
   }
 
 }
