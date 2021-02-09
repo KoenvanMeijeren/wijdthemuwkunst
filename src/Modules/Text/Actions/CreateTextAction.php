@@ -2,7 +2,6 @@
 
 namespace Modules\Text\Actions;
 
-use Modules\Text\Entity\Text;
 use Components\Translation\TranslationOld;
 
 /**

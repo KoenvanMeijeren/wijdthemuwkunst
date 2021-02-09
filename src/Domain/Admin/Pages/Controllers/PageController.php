@@ -33,7 +33,6 @@ use System\Controller\AdminControllerBase;
 final class PageController extends AdminControllerBase {
   protected Page $page;
 
-  protected string $baseViewPath = 'Admin/Pages/Views/';
   protected string $redirectBack = '/admin/content/pages';
   protected string $redirectSame = '/admin/content/pages/page/edit/';
 
@@ -41,7 +40,7 @@ final class PageController extends AdminControllerBase {
    *
    */
   public function __construct() {
-    parent::__construct();
+    parent::__construct('Admin/Pages/Views/');
 
     $this->page = new Page();
   }

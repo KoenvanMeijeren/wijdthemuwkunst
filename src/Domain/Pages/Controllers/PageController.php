@@ -20,13 +20,6 @@ use System\Controller\ControllerBase;
 final class PageController extends ControllerBase {
 
   /**
-   * The base path to the views directory.
-   *
-   * @var string
-   */
-  protected string $baseViewPath = 'Pages/Views/';
-
-  /**
    * The page model definition.
    *
    * @var \Domain\Pages\Models\Page
@@ -44,7 +37,7 @@ final class PageController extends ControllerBase {
    * PageController constructor.
    */
   public function __construct() {
-    parent::__construct();
+    parent::__construct('Pages/Views/');
 
     $this->page = new Page();
     $this->event = new Event();

@@ -8,12 +8,8 @@ use Components\SuperGlobals\Request;
 use Components\SuperGlobals\RequestInterface;
 use Components\SuperGlobals\Session\Session;
 use Components\SuperGlobals\Session\SessionInterface;
-use Components\Translation\Translation;
 use Domain\Admin\Accounts\User\Models\User;
-use Modules\Text\Entity\Text;
 use JetBrains\PhpStorm\Pure;
-use System\Entity\EntityManager;
-
 
 /**
  * Gets the request definition.
@@ -53,24 +49,6 @@ function env(): EnvInterface {
  */
 #[Pure] function headerSend(): HeaderInterface {
   return new Header();
-}
-
-/**
- * Translates texts.
- *
- * @param string $text
- *   The text to be translated.
- */
-function t(string $text): string {
-  $entityManager = new EntityManager();
-
-  /** @var \Modules\Text\Entity\TextRepositoryInterface $repository */
-  $repository = $entityManager->getStorage(Text::class)->getRepository();
-  if ($entity = $repository->loadByText($text)) {
-    return $entity->getValue();
-  }
-
-  return new Translation();
 }
 
 /**

@@ -40,7 +40,7 @@ final class FormValidator implements FormValidatorInterface {
    * {@inheritDoc}
    */
   public function input(string $inputName, string $alias = ''): FormValidatorInterface {
-    $this->input = $this->request()->get($inputName, $inputName);
+    $this->input = $this->request()->post($inputName, $inputName);
     $this->alias = $alias;
 
     return $this;

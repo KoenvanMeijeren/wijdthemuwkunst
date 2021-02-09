@@ -33,7 +33,6 @@ use System\Controller\AdminControllerBase;
 final class EventController extends AdminControllerBase {
   private Event $event;
 
-  protected string $baseViewPath = 'Admin/Event/Views/';
   private string $redirectBack = '/admin/content/events';
   private string $redirectSame = '/admin/content/events/event/edit/';
 
@@ -41,7 +40,7 @@ final class EventController extends AdminControllerBase {
    * EventController constructor.
    */
   public function __construct() {
-    parent::__construct();
+    parent::__construct('Admin/Event/Views/');
 
     $this->event = new Event();
   }

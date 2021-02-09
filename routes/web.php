@@ -164,25 +164,6 @@ Router::prefix('admin')->group(static function () {
         });
     });
 
-    // Configuration routes.
-    Router::prefix('configuration')->group(static function () {
-        // Settings routes.
-        Router::prefix('settings')->group(static function () {
-            Router::get('', SettingsControllers::class,
-                'index', User::ADMIN);
-            Router::get('setting/create', SettingsControllers::class,
-                'create', User::ADMIN);
-            Router::post('setting/create/store', SettingsControllers::class,
-                'store', User::ADMIN);
-            Router::get('setting/edit/{slug}', SettingsControllers::class,
-                'edit', User::ADMIN);
-            Router::post('setting/edit/{slug}/update', SettingsControllers::class,
-                'update', User::ADMIN);
-            Router::post('setting/delete/{slug}', SettingsControllers::class,
-                'destroy', User::ADMIN);
-        });
-    });
-
     // Account routes.
     Router::prefix('account')->group(static function () {
         Router::get('', AccountController::class,

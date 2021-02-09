@@ -7,7 +7,7 @@ namespace Domain\Admin\Settings\Controllers;
 
 use Components\Header\Redirect;
 use Components\Translation\TranslationOld;
-use Domain\Admin\Settings\Actions\CreateBaseSettingAction;
+use Domain\Admin\Settings\Actions\CreateSettingAction;
 use Domain\Admin\Settings\Actions\DestroySettingAction;
 use Domain\Admin\Settings\Actions\UpdateBaseSettingAction;
 use Domain\Admin\Settings\Models\Setting;
@@ -55,7 +55,7 @@ final class SettingsControllers extends AdminControllerBase {
    * @return \Src\Core|DomainView
    */
   public function store() {
-    $create = new CreateBaseSettingAction();
+    $create = new CreateSettingAction();
     if ($create->execute()) {
       return new Redirect($this->redirectBack);
     }

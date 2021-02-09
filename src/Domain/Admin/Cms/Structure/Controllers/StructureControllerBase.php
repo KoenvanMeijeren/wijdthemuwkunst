@@ -6,7 +6,7 @@ namespace Domain\Admin\Cms\Structure\Controllers;
 
 use Components\Translation\TranslationOld;
 use Components\View\ViewInterface;
-use System\Controller\AdminControllerBase;
+use JetBrains\PhpStorm\Pure;
 use System\Controller\ControllerBase;
 
 /**
@@ -19,7 +19,7 @@ final class StructureControllerBase extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct() {
+  #[Pure] public function __construct() {
     parent::__construct('Admin/Cms/Structure/Views/');
   }
 

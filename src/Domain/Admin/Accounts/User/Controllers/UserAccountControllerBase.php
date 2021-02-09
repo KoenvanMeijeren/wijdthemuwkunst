@@ -16,8 +16,11 @@ use System\Controller\AdminControllerBase;
  *
  */
 final class UserAccountControllerBase extends AdminControllerBase {
-  protected string $baseViewPath = 'Admin/Accounts/User/Views/';
   protected string $redirectBack = '/admin/user/account';
+
+  public function __construct(){
+    parent::__construct('Admin/Accounts/User/Views/');
+  }
 
   /**
    *

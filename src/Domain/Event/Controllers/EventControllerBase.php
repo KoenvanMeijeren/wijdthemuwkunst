@@ -18,13 +18,6 @@ use System\Controller\ControllerBase;
 abstract class EventControllerBase extends ControllerBase {
 
   /**
-   * The base path to the views directory.
-   *
-   * @var string
-   */
-  protected string $baseViewPath = 'Event/Views/';
-
-  /**
    * The page model definition.
    *
    * @var \Domain\Pages\Models\Page
@@ -49,7 +42,7 @@ abstract class EventControllerBase extends ControllerBase {
    * EventControllerBase constructor.
    */
   public function __construct() {
-    parent::__construct();
+    parent::__construct('Event/Views/');
 
     $this->page = new Page();
     $this->event = new Event();

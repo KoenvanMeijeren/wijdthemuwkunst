@@ -70,7 +70,7 @@ final class Logger implements LoggerInterface {
   public function getFile(string $date): string {
     $file = new File(directory: STORAGE_PATH . '/logs/', file: "app-{$date}.log");
 
-    return $file->get();
+    return $file->getContent();
   }
 
   /**

@@ -29,7 +29,6 @@ use System\Controller\AdminControllerBase;
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 final class AccountController extends AdminControllerBase {
-  protected string $baseViewPath = 'Admin/Accounts/Account/Views/';
 
   protected Account $account;
   protected string $redirectBack = '/admin/account';
@@ -38,7 +37,7 @@ final class AccountController extends AdminControllerBase {
    *
    */
   public function __construct() {
-    parent::__construct();
+    parent::__construct('Admin/Accounts/Account/Views/');
 
     $this->account = new Account();
   }

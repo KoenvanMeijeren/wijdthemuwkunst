@@ -18,9 +18,12 @@ use System\Controller\AdminControllerBase;
  */
 final class AuthenticationController extends AdminControllerBase {
 
-  protected string $baseViewPath = 'Admin/Authentication/Views/';
   private string $redirectTo = '/admin/dashboard';
   private string $redirectBack = '/admin';
+
+  public function __construct(){
+    parent::__construct('Admin/Authentication/Views/');
+  }
 
   /**
    * Load the login page.

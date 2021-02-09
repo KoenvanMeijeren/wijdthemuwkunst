@@ -22,6 +22,13 @@ abstract class ModuleBase implements ModuleInterface {
   /**
    * {@inheritDoc}
    */
+  public function getFunctionsLocation(): string {
+    return $this->getModuleLocation() . '/functions.php';
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public function getTranslationsLocation(): string {
     return $this->getModuleLocation() . '/Translation';
   }

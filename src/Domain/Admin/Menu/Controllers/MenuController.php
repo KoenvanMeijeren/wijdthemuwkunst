@@ -17,7 +17,6 @@ use System\Controller\AdminControllerBase;
  *
  */
 final class MenuController extends AdminControllerBase {
-  protected string $baseViewPath = 'Admin/Menu/Views/';
 
   private Menu $menu;
   private string $redirectBack = '/admin/structure/menu';
@@ -26,7 +25,7 @@ final class MenuController extends AdminControllerBase {
    *
    */
   public function __construct() {
-    parent::__construct();
+    parent::__construct('Admin/Menu/Views/');
 
     $this->menu = new Menu();
   }

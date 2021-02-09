@@ -27,6 +27,14 @@ interface ModuleInterface {
   public function getRoutesLocation(): string;
 
   /**
+   * Returns the location of the functions file.
+   *
+   * @return string
+   *   The functions file location.
+   */
+  public function getFunctionsLocation(): string;
+
+  /**
    * Returns the location of the translations.
    *
    * @return string

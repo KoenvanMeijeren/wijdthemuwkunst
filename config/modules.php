@@ -1,7 +1,9 @@
 <?php
 
+use Modules\Setting\SettingModule;
 use Modules\Text\TextModule;
 
 return [
-  TextModule::class
+  TextModule::class,
+  SettingModule::class,
 ];

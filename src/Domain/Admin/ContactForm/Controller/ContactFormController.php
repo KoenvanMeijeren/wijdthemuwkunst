@@ -16,13 +16,12 @@ use System\Controller\AdminControllerBase;
  */
 final class ContactFormController extends AdminControllerBase {
   private ContactForm $contactForm;
-  protected string $baseViewPath = 'Admin/ContactForm/Views/';
 
   /**
    * ContactFormController constructor.
    */
   public function __construct() {
-    parent::__construct();
+    parent::__construct('Admin/ContactForm/Views/');
 
     $this->contactForm = new ContactForm();
   }

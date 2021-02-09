@@ -18,7 +18,10 @@ use System\Controller\AdminControllerBase;
  *
  */
 final class ReportsController extends AdminControllerBase {
-  protected string $baseViewPath = 'Admin/Reports/Views/';
+
+  public function __construct() {
+    parent::__construct('Admin/Reports/Views/');
+  }
 
   /**
    *

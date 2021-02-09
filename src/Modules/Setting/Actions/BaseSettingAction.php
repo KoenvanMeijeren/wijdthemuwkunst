@@ -1,25 +1,25 @@
 <?php
 declare(strict_types=1);
 
-namespace Modules\Text\Actions;
+namespace Modules\Setting\Actions;
 
 use Components\Actions\EntityFormActionBase;
-use Modules\Text\Entity\Text;
 use Components\Translation\TranslationOld;
+use Modules\Setting\Entity\Setting;
 use System\Entity\EntityInterface;
 use System\StateInterface;
 
 /**
- * Provides a base class for text actions.
+ * Provides a base class for setting actions.
  *
- * @package Domain\Admin\Text\Actions
+ * @package Modules\Setting\Actions
  */
-abstract class BaseTextAction extends EntityFormActionBase {
+abstract class BaseSettingAction extends EntityFormActionBase {
 
   /**
-   * The text entity.
+   * The setting entity.
    *
-   * @var \Modules\Text\Entity\TextInterface
+   * @var \Modules\Setting\Entity\SettingInterface
    */
   protected EntityInterface $entity;
 
@@ -27,7 +27,7 @@ abstract class BaseTextAction extends EntityFormActionBase {
    * {@inheritDoc}
    */
   protected function getEntityType(): string {
-    return Text::class;
+    return Setting::class;
   }
 
   /**
@@ -38,21 +38,21 @@ abstract class BaseTextAction extends EntityFormActionBase {
     switch ($status) {
       case EntityInterface::SAVED_NEW:
         $this->session()->flash(StateInterface::SUCCESSFUL,
-          sprintf(TranslationOld::get('text_successful_created'), $this->entity->getKey())
+          sprintf(TranslationOld::get('setting_successful_created'), $this->entity->getKey())
         );
 
         return TRUE;
 
       case EntityInterface::SAVED_UPDATED:
         $this->session()->flash(StateInterface::SUCCESSFUL,
-          sprintf(TranslationOld::get('text_successful_updated'), $this->entity->getKey())
+          sprintf(TranslationOld::get('setting_successful_updated'), $this->entity->getKey())
         );
 
         return TRUE;
 
       default:
         $this->session()->flash(StateInterface::FAILED,
-          sprintf(TranslationOld::get('text_unsuccessful_updated'), $this->entity->getKey())
+          sprintf(TranslationOld::get('setting_unsuccessful_updated'), $this->entity->getKey())
         );
 
         return FALSE;
