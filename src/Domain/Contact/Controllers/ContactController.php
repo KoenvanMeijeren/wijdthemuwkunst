@@ -7,7 +7,7 @@ namespace Domain\Contact\Controllers;
 
 use Components\Header\Redirect;
 use Components\SuperGlobals\Url\Uri;
-use Domain\Admin\ContactForm\Actions\SaveContactFormMessageAction;
+use Modules\ContactForm\Actions\SaveContactFormMessageAction;
 use Domain\Contact\Actions\ContactAction;
 use System\Controller\ControllerBase;
 

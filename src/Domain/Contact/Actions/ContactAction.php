@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace Domain\Contact\Actions;
 
-use Domain\Admin\ContactForm\Actions\BaseContactFormAction;
+use Modules\ContactForm\Actions\BaseContactFormAction;
 use Domain\Admin\Settings\Models\Setting;
 use Components\Security\Recaptcha;
 use Components\Translation\TranslationOld;

@@ -1,10 +1,10 @@
 <?php
 
-namespace Domain\Admin\ContactForm\Controller;
+namespace Modules\ContactForm\Controller;
 
 use Components\Header\Redirect;
 use Components\Translation\TranslationOld;
-use Domain\Admin\ContactForm\Actions\DeleteContactFormMessageAction;
+use Modules\ContactForm\Actions\DeleteContactFormMessageAction;
 use Domain\Admin\ContactForm\Model\ContactForm;
 use Components\View\ViewInterface;
 use System\Controller\AdminControllerBase;

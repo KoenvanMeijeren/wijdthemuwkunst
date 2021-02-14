@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Domain\Admin\ContactForm\Actions;
+namespace Modules\ContactForm\Actions;
 
 use Cake\Chronos\Chronos;
 use Components\Actions\FormAction;

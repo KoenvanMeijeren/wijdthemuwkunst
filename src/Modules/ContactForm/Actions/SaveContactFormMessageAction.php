@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Admin\ContactForm\Actions;
+namespace Modules\ContactForm\Actions;
 
 /**
  *

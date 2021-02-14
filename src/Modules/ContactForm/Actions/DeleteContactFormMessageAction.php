@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Admin\ContactForm\Actions;
+namespace Modules\ContactForm\Actions;
 
 use Components\Translation\TranslationOld;
 use System\StateInterface;

@@ -12,13 +12,10 @@ use Domain\Admin\Accounts\Account\Controllers\AccountController;
 use Domain\Admin\Accounts\User\Controllers\UserAccountControllerBase;
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Authentication\Controllers\AuthenticationController;
-use Modules\Cms\Structure\Controllers\StructureControllerBase;
-use Domain\Admin\ContactForm\Controller\ContactFormController;
 use Domain\Admin\Event\Controllers\EventController as AdminEventController;
 use Domain\Admin\File\Controllers\UploadFileController;
 use Domain\Admin\Menu\Controllers\MenuController;
 use Domain\Admin\Pages\Controllers\PageController as AdminPageController;
-use Domain\Admin\Reports\Controllers\ReportsController;
 use Domain\Contact\Controllers\ContactController;
 use Domain\Event\Controllers\EventArchiveController;
 use Domain\Event\Controllers\EventController;
@@ -118,16 +115,6 @@ Router::prefix('admin')->group(static function () {
             Router::post('event/activate/{slug}', AdminEventController::class,
                 'activate', User::ADMIN);
             Router::post('event/delete/{slug}', AdminEventController::class,
-                'destroy', User::ADMIN);
-        });
-
-        // Contact form routes.
-        Router::prefix('contact-form')->group(static function () {
-            Router::get('', ContactFormController::class,
-                'index', User::ADMIN);
-            Router::get('filter', ContactFormController::class,
-                'showByDate', User::ADMIN);
-            Router::post('delete/{slug}', ContactFormController::class,
                 'destroy', User::ADMIN);
         });
     });
