@@ -19,7 +19,6 @@ use Domain\Admin\File\Controllers\UploadFileController;
 use Domain\Admin\Menu\Controllers\MenuController;
 use Domain\Admin\Pages\Controllers\PageController as AdminPageController;
 use Domain\Admin\Reports\Controllers\ReportsController;
-use Domain\Admin\Settings\Controllers\SettingsControllers;
 use Domain\Contact\Controllers\ContactController;
 use Domain\Event\Controllers\EventArchiveController;
 use Domain\Event\Controllers\EventController;
@@ -198,20 +197,6 @@ Router::prefix('admin')->group(static function () {
             'storePassword', User::ADMIN);
     });
 
-    // Reports routes.
-    Router::prefix('reports')->group(static function () {
-        // Application routes.
-        Router::get('application', ReportsController::class,
-            'application', User::DEVELOPER);
-
-        // Logs routes.
-        Router::get('logs', ReportsController::class,
-            'logs', User::DEVELOPER);
-
-        // Storage routes.
-        Router::get('storage', ReportsController::class,
-            'storage', User::DEVELOPER);
-    });
 });
 
 // Page not found route.

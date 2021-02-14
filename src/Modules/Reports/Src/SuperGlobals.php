@@ -1,6 +1,7 @@
 <?php
+declare(strict_types=1);
 
-namespace Domain\Admin\Reports\Src;
+namespace Modules\Reports\Src;
 
 use Cake\Chronos\Chronos;
 use Components\ComponentsTrait;
@@ -11,33 +12,36 @@ use Components\Datetime\DateTime;
 use System\DataTable\DataTable;
 
 /**
+ * Provides a class to get data from the super globals.
  *
+ * @package Modules\Reports\Src
  */
 final class SuperGlobals {
 
   use ComponentsTrait;
 
-
   /**
+   * Gets data from the headers.
    *
+   * @return string
+   *   The headers data.
    */
   public function getHeadersInformation(): string {
     $table = new DataTable();
 
-    $table->addHead([
-      TranslationOld::get('table_row_header'),
-    ]);
+    $table->addHead([TranslationOld::get('table_row_header'),]);
     foreach (headers_list() as $value) {
-      $table->addRow([
-        $value,
-      ]);
+      $table->addRow([$value,]);
     }
 
     return $table->get('undefined');
   }
 
   /**
+   * Gets data from the session settings.
    *
+   * @return string
+   *   The session settings data.
    */
   public function getSessionSettingsInformation(): string {
     $table = new DataTable();
@@ -52,30 +56,30 @@ final class SuperGlobals {
         $expiredAt = $createdAt->addSeconds($data);
         $lifetime = new Chronos();
 
-        $table->addRow([
-          $key,
+        $table->addRow([$key,
           $lifetime->diffInMinutes($expiredAt) . ' ' . TranslationOld::get('minutes'),
         ]);
+
+        continue;
       }
-      elseif (is_bool($data)) {
-        $table->addRow([
-          $key,
-          $data ? 'true' : 'false',
-        ]);
+
+      if (is_bool($data)) {
+        $table->addRow([$key, $data ? 'true' : 'false',]);
+
+        continue;
       }
-      else {
-        $table->addRow([
-          $key,
-          (string) $data,
-        ]);
-      }
+
+      $table->addRow([$key, (string) $data,]);
     }
 
     return $table->get('undefined');
   }
 
   /**
+   * Gets data from the session.
    *
+   * @return string
+   *   The session data.
    */
   public function getSessionInformation(): string {
     $table = new DataTable();
@@ -91,26 +95,22 @@ final class SuperGlobals {
 
       if ($key === 'createdAt') {
         $dateTime = new DateTime(new Chronos($this->session()->get($key)));
-
-        $table->addRow([
-          $key,
-          $dateTime->toDateTime(),
-        ]);
+        $table->addRow([$key, $dateTime->toDateTime(),]);
 
         continue;
       }
 
-      $table->addRow([
-        $key,
-        $this->session()->get($key),
-      ]);
+      $table->addRow([$key, $this->session()->get($key),]);
     }
 
     return $table->get('undefined');
   }
 
   /**
+   * Gets data from the cookies.
    *
+   * @return string
+   *   The cookies data.
    */
   public function getCookieInformation(): string {
     $cookie = new Cookie();
@@ -122,8 +122,7 @@ final class SuperGlobals {
     ]);
     foreach (array_keys($_COOKIE) as $key) {
       if ($key === $cookie->get('sessionName')
-            && $cookie->exists($cookie->get('sessionName'))
-        ) {
+        && $cookie->exists($cookie->get('sessionName'))) {
         $table->addRow([
           'sessie cookie',
           $_COOKIE[$cookie->get('sessionName')],
@@ -133,16 +132,10 @@ final class SuperGlobals {
       }
 
       try {
-        $table->addRow([
-          $key,
-          $cookie->get($key),
-        ]);
+        $table->addRow([$key, $cookie->get($key),]);
       }
       catch (WrongKeyOrModifiedCiphertextException $e) {
-        $table->addRow([
-          $key,
-          $_COOKIE[$key],
-        ]);
+        $table->addRow([$key, $_COOKIE[$key],]);
       }
     }
 

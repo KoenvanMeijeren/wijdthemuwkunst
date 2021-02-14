@@ -1,39 +1,46 @@
 <?php
-
 declare(strict_types=1);
 
-
-namespace Domain\Admin\Reports\Controllers;
+namespace Modules\Reports\Controllers;
 
 use Cake\Chronos\Chronos;
-use Components\Env\Env;
 use Components\Translation\TranslationOld;
-use Domain\Admin\Reports\Src\Logs;
-use Domain\Admin\Reports\Src\PhpInfo;
-use Domain\Admin\Reports\Src\SuperGlobals;
+use Modules\Reports\Src\Logs;
+use Modules\Reports\Src\PhpInfo;
+use Modules\Reports\Src\SuperGlobals;
 use Components\View\ViewInterface;
-use System\Controller\AdminControllerBase;
+use JetBrains\PhpStorm\Pure;
+use System\Controller\ControllerBase;
 
 /**
+ * Provides a controller for reports.
  *
+ * @package Modules\Reports\Controllers
  */
-final class ReportsController extends AdminControllerBase {
+final class ReportsController extends ControllerBase {
 
-  public function __construct() {
-    parent::__construct('Admin/Reports/Views/');
+  /**
+   * ReportsController constructor.
+   *
+   * {@inheritDoc}
+   */
+  #[Pure] public function __construct() {
+    parent::__construct('Reports/Views/');
   }
 
   /**
+   * Returns the application data view.
    *
+   * @return ViewInterface
+   *   The view.
    */
   public function application(): ViewInterface {
-    $env = new Env();
     $phpInfo = new PhpInfo();
     $superGlobals = new SuperGlobals();
 
     return $this->view('application', [
       'title' => TranslationOld::get('admin_reports_application_title'),
-      'env' => $env->get(),
+      'env' => $this->env()->get(),
       'headerDataTable' => $superGlobals->getHeadersInformation(),
       'sessionSettingsTable' => $superGlobals->getSessionSettingsInformation(),
       'phpinfo' => $phpInfo->get(),
@@ -41,18 +48,20 @@ final class ReportsController extends AdminControllerBase {
   }
 
   /**
+   * Returns the log data view.
    *
+   * @return ViewInterface
+   *   The view.
    */
   public function logs(): ViewInterface {
     $logs = new Logs();
 
     $date = $this->request()->get('date');
     $arrayDate = explode('-', $date);
-    if (!checkdate(
-          (int) ($arrayDate[1] ?? 0),
-          (int) ($arrayDate[0] ?? 0),
-          (int) ($arrayDate[2] ?? 0)
-      )) {
+    $day = (int) ($arrayDate[0] ?? 0);
+    $month = (int) ($arrayDate[1] ?? 0);
+    $year = (int) ($arrayDate[2] ?? 0);
+    if (!checkdate($month, $day, $year)) {
       $date = new Chronos();
       $date = $date->toDateString();
     }
@@ -64,7 +73,10 @@ final class ReportsController extends AdminControllerBase {
   }
 
   /**
+   * Returns the storage data view.
    *
+   * @return ViewInterface
+   *   The view.
    */
   public function storage(): ViewInterface {
     $superGlobals = new SuperGlobals();
