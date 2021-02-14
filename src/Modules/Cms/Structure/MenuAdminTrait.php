@@ -1,22 +1,29 @@
 <?php
-
 declare(strict_types=1);
 
-namespace Domain\Admin\Cms\Structure;
+namespace Modules\Cms\Structure;
 
 use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\User\Models\User;
+use JetBrains\PhpStorm\ArrayShape;
 
 /**
  * Provides a trait for the admin menu.
  *
- * @package Domain\Admin\Cms\Structure
+ * @package Modules\Cms\Structure
  */
 trait MenuAdminTrait {
 
   /**
+   * The index menu.
    *
+   * @param User $user
+   *   The current user.
+   *
+   * @return array[]
+   *   The index menu items.
    */
+  #[ArrayShape(['content' => "array", 'structure' => "array", 'configuration' => "array", 'reports' => "array", 'accounts' => "array"])]
   protected function indexMenu(User $user): array {
     $items = [
       'content' => [
@@ -56,8 +63,12 @@ trait MenuAdminTrait {
   }
 
   /**
+   * The content menu.
    *
+   * @return array[]
+   *   The content menu items.
    */
+  #[ArrayShape(['pages' => "array", 'events' => "array", 'contact-form' => "array"])]
   protected function contentMenu(): array {
     return [
       'pages' => [
@@ -79,8 +90,12 @@ trait MenuAdminTrait {
   }
 
   /**
+   * The structure menu.
    *
+   * @return array[]
+   *   The structure menu items.
    */
+  #[ArrayShape(['menu' => "array"])]
   protected function structureMenu(): array {
     return [
       'menu' => [
@@ -92,8 +107,12 @@ trait MenuAdminTrait {
   }
 
   /**
+   * The configuration menu.
    *
+   * @return array[]
+   *   The configuration menu items.
    */
+  #[ArrayShape(['texts' => "array", 'settings' => "array"])]
   protected function configurationMenu(): array {
     return [
       'texts' => [
@@ -110,8 +129,12 @@ trait MenuAdminTrait {
   }
 
   /**
+   * The reports menu.
    *
+   * @return array[]
+   *   The reports menu items.
    */
+  #[ArrayShape(['application' => "array", 'logs' => "array", 'storage' => "array"])]
   protected function reportsMenu(): array {
     return [
       'application' => [

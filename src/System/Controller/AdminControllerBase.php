@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace System\Controller;
 
-use Domain\Admin\Cms\Structure\MenuAdminTrait;
+use Modules\Cms\Structure\MenuAdminTrait;
 
 /**
  * Provides a controller base for the admin controllers.

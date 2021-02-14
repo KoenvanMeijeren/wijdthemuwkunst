@@ -6,7 +6,7 @@ namespace System\Controller;
 
 use Components\ComponentsTrait;
 use Components\View\ViewInterface;
-use Domain\Admin\Cms\Structure\MenuAdminTrait;
+use Modules\Cms\Structure\MenuAdminTrait;
 use System\View\DomainView;
 
 /**

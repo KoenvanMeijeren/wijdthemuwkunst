@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace System\View;
 
 use Components\File\Exceptions\FileNotFoundException;
-use Domain\Admin\Cms\Structure\MenuAdminTrait;
+use Modules\Cms\Structure\MenuAdminTrait;
 use Domain\Admin\Menu\Models\Menu;
 use JetBrains\PhpStorm\ArrayShape;
 use Components\SuperGlobals\Url\Uri;

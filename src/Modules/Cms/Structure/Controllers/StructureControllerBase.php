@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Domain\Admin\Cms\Structure\Controllers;
+namespace Modules\Cms\Structure\Controllers;
 
 use Components\Translation\TranslationOld;
 use Components\View\ViewInterface;
@@ -10,9 +10,9 @@ use JetBrains\PhpStorm\Pure;
 use System\Controller\ControllerBase;
 
 /**
- * The controller of the structure of the content managent system.
+ * The controller of the structure of the content management system.
  *
- * @package Domain\Admin\Cms\Structure\Controllers
+ * @package Modules\Cms\Structure\Controllers
  */
 final class StructureControllerBase extends ControllerBase {
 
@@ -20,7 +20,7 @@ final class StructureControllerBase extends ControllerBase {
    * {@inheritdoc}
    */
   #[Pure] public function __construct() {
-    parent::__construct('Admin/Cms/Structure/Views/');
+    parent::__construct('Cms/Structure/Views/');
   }
 
   /**

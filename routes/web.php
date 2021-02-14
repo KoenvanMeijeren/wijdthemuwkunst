@@ -12,7 +12,7 @@ use Domain\Admin\Accounts\Account\Controllers\AccountController;
 use Domain\Admin\Accounts\User\Controllers\UserAccountControllerBase;
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Authentication\Controllers\AuthenticationController;
-use Domain\Admin\Cms\Structure\Controllers\StructureControllerBase;
+use Modules\Cms\Structure\Controllers\StructureControllerBase;
 use Domain\Admin\ContactForm\Controller\ContactFormController;
 use Domain\Admin\Event\Controllers\EventController as AdminEventController;
 use Domain\Admin\File\Controllers\UploadFileController;
@@ -56,18 +56,6 @@ Router::prefix('admin')->group(static function () {
         'login');
     Router::get('logout', AuthenticationController::class,
         'logout', User::ADMIN);
-
-    // System routes.
-    Router::get('dashboard', StructureControllerBase::class,
-        'index', User::ADMIN);
-    Router::get('content', StructureControllerBase::class,
-        'content', User::ADMIN);
-    Router::get('structure', StructureControllerBase::class,
-        'structure', User::ADMIN);
-    Router::get('configuration', StructureControllerBase::class,
-        'configuration', User::ADMIN);
-    Router::get('reports', StructureControllerBase::class,
-        'reports', User::DEVELOPER);
 
     // File routes.
     Router::prefix('upload')->group(static function () {
