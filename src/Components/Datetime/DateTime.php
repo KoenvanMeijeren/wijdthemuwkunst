@@ -31,8 +31,13 @@ final class DateTime implements DateTimeInterface {
     protected string $locale = self::DEFAULT_LOCALE,
     protected string $timezone = self::DEFAULT_TIMEZONE,
     protected int $calendar = self::DEFAULT_CALENDAR
-  ) {
+  ) {}
 
+  /**
+   * {@inheritDoc}
+   */
+  public function toTimestamp(): int {
+    return $this->datetime->getTimestamp();
   }
 
   /**

@@ -34,6 +34,14 @@ interface DateTimeInterface {
   public const DEFAULT_CALENDAR = IntlDateFormatter::GREGORIAN;
 
   /**
+   * Converts the datetime to a timestamp.
+   *
+   * @return int
+   *   The timestamp.
+   */
+  public function toTimestamp(): int;
+
+  /**
    * Converts the datetime to a number of a day.
    *
    * @return int
