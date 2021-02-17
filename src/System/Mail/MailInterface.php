@@ -76,20 +76,22 @@ interface MailInterface {
    *   The path of to the view directory.
    * @param string $mail
    *   The default mail template.
-   * @param string $plainTextMail
-   *   The fallback mail template.
    * @param string[] $content
    *   The content of the mail.
    */
-  public function setBody(string $baseViewPath, string $mail, string $plainTextMail, array $content = []): void;
+  public function setBody(string $baseViewPath, string $mail, array $content = []): void;
 
   /**
    * Sets the alt body of the mail.
    *
-   * @param string $body
-   *   The textual body.
+   * @param string $baseViewPath
+   *   The path of to the view directory.
+   * @param string $mail
+   *   The plain text mail template.
+   * @param string[] $content
+   *   The content of the mail.
    */
-  public function setAltBody(string $body): void;
+  public function setAltBody(string $baseViewPath, string $mail, array $content = []): void;
 
   /**
    * Create a message body from an HTML string.

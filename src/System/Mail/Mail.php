@@ -46,6 +46,7 @@ final class Mail implements MailInterface {
     }
 
     $this->mailer->isHTML(TRUE);
+    $this->mailer->CharSet = PHPMailer::CHARSET_UTF8;
     $this->mailer->setFrom($this->request()->env('mail_username'), $companyName);
   }
 
@@ -94,17 +95,16 @@ final class Mail implements MailInterface {
   /**
    * {@inheritDoc}
    */
-  public function setBody(string $baseViewPath, string $mail, string $plainTextMail, array $content = []): void {
+  public function setBody(string $baseViewPath, string $mail, array $content = []): void {
     $this->mailer->Body = (string) new MailView($baseViewPath, $mail, $content);
-    $this->setAltBody(
-          (string) new MailView($baseViewPath, $plainTextMail, $content)
-      );
   }
 
   /**
    * {@inheritDoc}
    */
-  public function setAltBody(string $body): void {
+  public function setAltBody(string $baseViewPath, string $mail, array $content = []): void {
+    $body = (string) new MailView($baseViewPath, $mail, $content);
+
     $this->mailer->AltBody = $this->mailer->html2text($body);
   }
 
@@ -118,25 +118,14 @@ final class Mail implements MailInterface {
   /**
    * {@inheritDoc}
    */
-  public function addAttachment(
-    string $path,
-    string $name = '',
-    string $encoding = PHPMailer::ENCODING_BASE64,
-    string $type = ''
-  ): void {
+  public function addAttachment(string $path, string $name = '', string $encoding = PHPMailer::ENCODING_BASE64, string $type = ''): void {
     $this->mailer->addAttachment($path, $name, $encoding, $type);
   }
 
   /**
    * {@inheritDoc}
    */
-  public function addEmbeddedImage(
-    string $path,
-    string $cid,
-    string $name = '',
-    string $encoding = PHPMailer::ENCODING_BASE64,
-    string $type = ''
-  ): void {
+  public function addEmbeddedImage(string $path, string $cid, string $name = '', string $encoding = PHPMailer::ENCODING_BASE64, string $type = ''): void {
     $this->mailer->addEmbeddedImage($path, $cid, $name, $encoding, $type);
   }
 
