@@ -84,7 +84,7 @@ trait MenuAdminTrait {
       'contact-form' => [
         'icon' => 'far fa-envelope',
         'title' => TranslationOld::get('admin_menu_contact_form'),
-        'link' => '/admin/content/contact-form',
+        'link' => '/admin/content/contact',
       ],
     ];
   }
