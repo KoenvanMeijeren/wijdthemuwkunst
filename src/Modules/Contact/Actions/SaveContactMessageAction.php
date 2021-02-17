@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Modules\Contact\Actions;
 
@@ -6,7 +7,9 @@ use Cake\Chronos\Chronos;
 use Components\Datetime\DateTime;
 
 /**
+ * Provides a save contact request action.
  *
+ * @package Modules\Contact\Actions
  */
 final class SaveContactMessageAction extends BaseContactAction {
 

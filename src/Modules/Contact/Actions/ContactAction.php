@@ -28,12 +28,12 @@ final class ContactAction extends BaseContactAction {
     $mail = new Mail($this->setting('bedrijf_naam'));
     $mail->addAddress($this->setting('bedrijf_email'), $this->setting('bedrijf_naam'));
     $mail->setSubject($this->setting('contactformulier_onderwerp'));
-    $mail->setBody($this->baseViewPath, 'contact', 'plain-text-contact', [
+    $mail->setBody($this->baseViewPath, 'contact', [
       'company_name' => $this->setting('bedrijf_naam'),
       'copyright' => $this->setting('copyright_tekst'),
-      'message' => $this->entity->getMessage(),
-      'email' => $this->entity->getEmail(),
-      'name' => $this->entity->getName(),
+      'message' => $this->request()->post('message'),
+      'email' => $this->request()->post('email'),
+      'name' => $this->request()->post('name'),
     ]);
 
     return $mail->send();

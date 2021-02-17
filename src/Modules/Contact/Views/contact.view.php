@@ -234,7 +234,7 @@
                                         <div
                                             style="font-size: 14px; line-height: 1.2; color: #555555; font-family: Lato, Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 17px;">
                                             <p style="font-size: 14px; line-height: 1.2; word-break: break-word; mso-line-height-alt: 17px; margin: 0;">
-                                                <b>Naam:</b> <?= $name ?? '' ?> <br>
+                                                <b>Naam:</b> <?= $contact_name ?? '' ?> <br>
                                                 <b>Email:</b> <?= $email ?? '' ?> <br><br>
                                                 <b>Bericht:</b> <?= $message ?? '' ?>
                                             </p>
