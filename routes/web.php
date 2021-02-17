@@ -16,7 +16,6 @@ use Domain\Admin\Event\Controllers\EventController as AdminEventController;
 use Domain\Admin\File\Controllers\UploadFileController;
 use Domain\Admin\Menu\Controllers\MenuController;
 use Domain\Admin\Pages\Controllers\PageController as AdminPageController;
-use Domain\Contact\Controllers\ContactController;
 use Domain\Event\Controllers\EventArchiveController;
 use Domain\Event\Controllers\EventController;
 use Domain\Pages\Controllers\PageController;
@@ -39,10 +38,6 @@ Router::get('concerten/historie', EventArchiveController::class,
     'index');
 Router::get('concerten/historie/concert/{slug}', EventArchiveController::class,
     'show');
-
-// Contact routes.
-Router::post('contact', ContactController::class,
-    'send');
 
 // Admin routes.
 Router::prefix('admin')->group(static function () {

@@ -1,21 +1,21 @@
 <?php
 
-namespace Modules\ContactForm;
+namespace Modules\Contact;
 
 use System\Module\ModuleBase;
 
 /**
  * Defines the contact form module.
  *
- * @package Modules\ContactForm
+ * @package Modules\Contact
  */
-class ContactFormModule extends ModuleBase {
+class ContactModule extends ModuleBase {
 
   /**
    * {@inheritDoc}
    */
   public function getName(): string {
-    return 'ContactForm';
+    return 'Contact';
   }
 
 }

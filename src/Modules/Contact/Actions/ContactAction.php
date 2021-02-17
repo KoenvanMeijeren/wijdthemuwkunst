@@ -1,12 +1,8 @@
 <?php
-
 declare(strict_types=1);
 
+namespace Modules\Contact\Actions;
 
-namespace Domain\Contact\Actions;
-
-use Modules\ContactForm\Actions\BaseContactFormAction;
-use Domain\Admin\Settings\Models\Setting;
 use Components\Security\Recaptcha;
 use Components\Translation\TranslationOld;
 use System\Mail\Mail;
@@ -16,7 +12,7 @@ use System\Mail\Mail;
  *
  * @package Domain\Contact\Actions
  */
-final class ContactAction extends BaseContactFormAction {
+final class ContactAction extends BaseContactAction {
 
   /**
    * The base view path of the mail templates.
@@ -28,13 +24,6 @@ final class ContactAction extends BaseContactFormAction {
   /**
    * {@inheritDoc}
    */
-  public function __construct() {
-    parent::__construct();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   protected function handle(): bool {
     $mail = new Mail($this->setting('bedrijf_naam'));
     $mail->addAddress($this->setting('bedrijf_email'), $this->setting('bedrijf_naam'));
@@ -42,9 +31,9 @@ final class ContactAction extends BaseContactFormAction {
     $mail->setBody($this->baseViewPath, 'contact', 'plain-text-contact', [
       'company_name' => $this->setting('bedrijf_naam'),
       'copyright' => $this->setting('copyright_tekst'),
-      'message' => $this->message,
-      'email' => $this->email,
-      'name' => $this->name,
+      'message' => $this->entity->getMessage(),
+      'email' => $this->entity->getEmail(),
+      'name' => $this->entity->getName(),
     ]);
 
     return $mail->send();

@@ -1,12 +1,4 @@
-<?php
-
-/**
- * @file
- */
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <!--[if gte mso 9]>
@@ -184,7 +176,7 @@
                                         <div
                                             style="font-size: 14px; line-height: 1.2; color: #e5474b; font-family: Lato, Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 17px;">
                                             <p style="font-size: 42px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 50px; margin: 0;">
-                                                <span style="color: #e5474b; font-size: 42px;"><?php echo $company_name ?? '' ?></span>
+                                                <span style="color: #e5474b; font-size: 42px;"><?= $company_name ?? '' ?></span>
                                             </p>
                                         </div>
                                     </div>
@@ -242,9 +234,9 @@
                                         <div
                                             style="font-size: 14px; line-height: 1.2; color: #555555; font-family: Lato, Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 17px;">
                                             <p style="font-size: 14px; line-height: 1.2; word-break: break-word; mso-line-height-alt: 17px; margin: 0;">
-                                                <b>Naam:</b> <?php echo $name ?? '' ?> <br>
-                                                <b>Email:</b> <?php echo $email ?? '' ?> <br><br>
-                                                <b>Bericht:</b> <?php echo $message ?? '' ?>
+                                                <b>Naam:</b> <?= $name ?? '' ?> <br>
+                                                <b>Email:</b> <?= $email ?? '' ?> <br><br>
+                                                <b>Bericht:</b> <?= $message ?? '' ?>
                                             </p>
                                         </div>
                                     </div>
@@ -302,7 +294,7 @@
                                         <div
                                             style="font-size: 14px; line-height: 1.2; color: #555555; font-family: Lato, Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 17px;">
                                             <p style="font-size: 14px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 17px; margin: 0;">
-                                                <span style="color: #ffffff;">© <?php echo $copyright ?? '' ?></span>
+                                                <span style="color: #ffffff;">© <?= $copyright ?? '' ?></span>
                                             </p>
                                         </div>
                                     </div>

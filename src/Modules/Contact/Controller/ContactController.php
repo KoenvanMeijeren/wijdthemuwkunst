@@ -1,14 +1,12 @@
 <?php
-
 declare(strict_types=1);
 
-
-namespace Domain\Contact\Controllers;
+namespace Modules\Contact\Controller;
 
 use Components\Header\Redirect;
 use Components\SuperGlobals\Url\Uri;
-use Modules\ContactForm\Actions\SaveContactFormMessageAction;
-use Domain\Contact\Actions\ContactAction;
+use Modules\Contact\Actions\ContactAction;
+use Modules\Contact\Actions\SaveContactMessageAction;
 use System\Controller\ControllerBase;
 
 /**
@@ -19,6 +17,15 @@ use System\Controller\ControllerBase;
 final class ContactController extends ControllerBase {
 
   /**
+   * ContactController constructor.
+   *
+   * {@inheritDoc}
+   */
+  public function __construct(){
+    parent::__construct('Contact/Views/');
+  }
+
+  /**
    * Sends the contact request to the specified contact persons.
    *
    * @return \Components\Header\Redirect
@@ -26,7 +33,7 @@ final class ContactController extends ControllerBase {
    */
   public function send(): Redirect {
     $contact = new ContactAction();
-    $saveContact = new SaveContactFormMessageAction();
+    $saveContact = new SaveContactMessageAction();
 
     if ($contact->execute() && $saveContact->execute()) {
       return new Redirect('/contact-aanvraag-verzonden');
@@ -41,7 +48,7 @@ final class ContactController extends ControllerBase {
       return new Redirect('/#footer');
     }
 
-    return new Redirect("$redirectUrl#footer");
+    return new Redirect("{$redirectUrl}#footer");
   }
 
 }

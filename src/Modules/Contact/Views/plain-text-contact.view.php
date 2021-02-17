@@ -1,0 +1,10 @@
+<?php
+
+/**
+ * @file
+ */
+?>
+Bedrijf: <?= $company_name ?? '' ?>
+Naam: <?= $name ?? '' ?>
+Email: <?= $email ?? '' ?>
+Bericht: <?= $message ?? '';
