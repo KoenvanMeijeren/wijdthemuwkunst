@@ -89,4 +89,15 @@ interface DateTimeInterface {
    */
   public function toShortMonth(): string;
 
+  /**
+   * Converts the datetime to the specified format.
+   *
+   * @param string $format
+   *   The format of the date.
+   *
+   * @return string
+   *   The formatted date.
+   */
+  public function format(string $format = 'd-m-Y'): string;
+
 }

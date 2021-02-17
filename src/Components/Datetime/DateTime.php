@@ -118,4 +118,11 @@ final class DateTime implements DateTimeInterface {
     );
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  public function format(string $format = 'd-m-Y'): string {
+    return $this->datetime->format($format);
+  }
+
 }
