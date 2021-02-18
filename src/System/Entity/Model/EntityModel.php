@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace System\Entity\Model;
 
+use Components\Database\Query;
+use Components\Database\QueryInterface;
 use JetBrains\PhpStorm\Pure;
-use Src\Database\DB;
 
 /**
  * Provides a model for entities to interact with the database.
@@ -20,6 +21,13 @@ abstract class EntityModel implements EntityModelInterface {
    * @var string
    */
   protected string $table;
+
+  /**
+   * The query definition.
+   *
+   * @var QueryInterface
+   */
+  private QueryInterface $query;
 
   /**
    * {@inheritDoc}
@@ -48,7 +56,8 @@ abstract class EntityModel implements EntityModelInterface {
    * @param string[] $attributes
    */
   protected function create(array $attributes): void {
-    DB::table($this->table)->insert($attributes);
+    $this->query = new Query($this->getTable());
+    $this->query->insert($attributes);
   }
 
   /**
@@ -58,8 +67,8 @@ abstract class EntityModel implements EntityModelInterface {
    * @param string[] $attributes
    */
   protected function update(int $id, array $attributes): void {
-    DB::table($this->table)
-      ->update($attributes)
+    $this->query = new Query($this->getTable());
+    $this->query->update($attributes)
       ->where($this->getPrimaryKey(), '=', (string) $id)
       ->execute();
   }
@@ -71,8 +80,8 @@ abstract class EntityModel implements EntityModelInterface {
    *   The id of the record to be deleted.
    */
   protected function softDelete(int $id): void {
-    DB::table($this->table)
-      ->delete($this->getSoftDeletedKey())
+    $this->query = new Query($this->getTable());
+    $this->query->delete($this->getSoftDeletedKey())
       ->where($this->getPrimaryKey(), '=', (string) $id)
       ->execute();
   }
@@ -84,8 +93,8 @@ abstract class EntityModel implements EntityModelInterface {
    *   The id of the record to be deleted.
    */
   protected function permanentDelete(int $id): void {
-    DB::table($this->table)
-      ->permanentDelete()
+    $this->query = new Query($this->getTable());
+    $this->query->permanentDelete()
       ->where($this->getPrimaryKey(), '=', (string) $id)
       ->execute();
   }
