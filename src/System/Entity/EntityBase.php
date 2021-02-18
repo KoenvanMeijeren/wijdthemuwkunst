@@ -16,7 +16,7 @@ abstract class EntityBase extends EntityModel implements EntityInterface {
    *
    * @var string
    */
-  protected string $repository;
+  protected string $repository = EntityRepository::class;
 
   /**
    * The attributes of the entity.
