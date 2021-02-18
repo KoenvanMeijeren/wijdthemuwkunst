@@ -32,10 +32,10 @@
         }
     },
     "require": {
-        "ext-json": "*",
-        "ext-pdo": "*",
         "ext-iconv": "*",
         "ext-intl": "*",
+        "ext-json": "*",
+        "ext-pdo": "*",
         "cakephp/chronos": "^2.1.1",
         "defuse/php-encryption": "^2.2.1",
         "filp/whoops": "^2.9.2",
@@ -44,7 +44,7 @@
         "monolog/monolog": "^2.2.0",
         "paragonie/anti-csrf": "^2.3.0",
         "phpmailer/phpmailer": "^6.2.0",
-        "siriusphp/upload": "^2.1.1",
+        "siriusphp/upload": "^3.0",
         "symfony/filesystem": "^4.4.19",
         "symfony/templating": "^4.4.19",
         "vlucas/phpdotenv": "^4.2.0"

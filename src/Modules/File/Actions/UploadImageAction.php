@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Domain\Admin\File\Actions;
+namespace Modules\File\Actions;
 
 use Cake\Chronos\Chronos;
 use Components\Actions\FileAction;
@@ -20,6 +20,13 @@ final class UploadImageAction extends FileAction {
    * @var array
    */
   private array $file;
+
+  /**
+   * The output of the file upload.
+   *
+   * @var string[]
+   */
+  protected array $data;
 
   /**
    * UploadImageAction constructor.
@@ -44,17 +51,22 @@ final class UploadImageAction extends FileAction {
 
     $uploader = new Upload($this->file);
 
-    if (count($this->file) > 0 && $uploader->prepare() && $uploader->getFileIfItExists() === '') {
+    if (count($this->file) > 0 && $uploader->prepare()) {
       $uploader->execute();
     }
 
-    $data = [
+    $this->data = [
       'location' => $uploader->getFileIfItExists(),
     ];
 
-    echo json_encode($data, JSON_THROW_ON_ERROR);
-
     return TRUE;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function getOutput(): string {
+    return json_encode($this->data, JSON_THROW_ON_ERROR);
   }
 
 }

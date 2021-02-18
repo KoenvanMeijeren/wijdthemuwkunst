@@ -2,6 +2,7 @@
 
 use Modules\Cms\Structure\StructureModule;
 use Modules\Contact\ContactModule;
+use Modules\File\FileModule;
 use Modules\Reports\ReportsModule;
 use Modules\Setting\SettingModule;
 use Modules\Text\TextModule;
@@ -12,4 +13,5 @@ return [
   ReportsModule::class,
   StructureModule::class,
   ContactModule::class,
+  FileModule::class,
 ];

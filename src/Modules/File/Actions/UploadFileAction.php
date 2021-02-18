@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-namespace Domain\Admin\File\Actions;
+namespace Modules\File\Actions;
 
 use Components\Actions\FileAction;
 
@@ -17,16 +17,12 @@ final class UploadFileAction extends FileAction {
   /**
    * {@inheritDoc}
    */
-  protected function handle(): bool {
-    parent::handle();
-
+  public function getOutput(): string {
     $data = [
       'location' => $this->fileLocation,
     ];
 
-    echo json_encode($data, JSON_THROW_ON_ERROR);
-
-    return TRUE;
+    return json_encode($data, JSON_THROW_ON_ERROR);
   }
 
 }

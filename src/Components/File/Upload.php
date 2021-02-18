@@ -47,7 +47,7 @@ final class Upload implements UploadInterface {
    * {@inheritDoc}
    */
   public function prepare(): bool {
-    return $this->convertFileName();
+    return $this->convertFileName() && empty($this->getFileIfItExists());
   }
 
   /**

@@ -13,7 +13,7 @@ use Domain\Admin\Accounts\User\Controllers\UserAccountControllerBase;
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Authentication\Controllers\AuthenticationController;
 use Domain\Admin\Event\Controllers\EventController as AdminEventController;
-use Domain\Admin\File\Controllers\UploadFileController;
+use Modules\File\Controllers\UploadFileController;
 use Domain\Admin\Menu\Controllers\MenuController;
 use Domain\Admin\Pages\Controllers\PageController as AdminPageController;
 use Domain\Event\Controllers\EventArchiveController;
@@ -48,16 +48,6 @@ Router::prefix('admin')->group(static function () {
         'login');
     Router::get('logout', AuthenticationController::class,
         'logout', User::ADMIN);
-
-    // File routes.
-    Router::prefix('upload')->group(static function () {
-        Router::post('file', UploadFileController::class,
-            'store', User::ADMIN);
-        Router::post('thumbnail', UploadFileController::class,
-            'thumbnail', User::ADMIN);
-        Router::post('banner', UploadFileController::class,
-            'banner', User::ADMIN);
-    });
 
     // Content routes.
     Router::prefix('content')->group(static function () {

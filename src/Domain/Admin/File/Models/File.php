@@ -11,6 +11,7 @@ use Src\Model\Model;
  * Provides a model for the file table to interact with the database.
  *
  * @package Domain\Admin\File\Models
+ * @deprecated
  */
 final class File extends Model {
   protected string $table = 'file';

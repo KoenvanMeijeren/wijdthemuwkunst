@@ -9,7 +9,7 @@ use Components\Actions\FormAction;
 use Components\Translation\TranslationOld;
 use Domain\Admin\Event\Models\Event;
 use Domain\Admin\Event\Repositories\EventRepository;
-use Domain\Admin\File\Actions\SaveFileAction;
+use Modules\File\Actions\SaveFileAction;
 use Domain\Admin\Pages\Models\Slug;
 use Domain\Admin\Pages\Repositories\SlugRepository;
 use Components\Validate\FormValidator;
@@ -116,7 +116,7 @@ abstract class BaseEventAction extends FormAction {
     $saveFile = new SaveFileAction($fileLocation['location']);
     $saveFile->execute();
 
-    return $saveFile->getId();
+    return $saveFile->getEntityId();
   }
 
   /**

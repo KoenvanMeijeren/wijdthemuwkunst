@@ -62,6 +62,14 @@ abstract class FileAction extends Action {
   }
 
   /**
+   * Gets the file upload output.
+   *
+   * @return string
+   *   The file upload output.
+   */
+  abstract public function getOutput(): string;
+
+  /**
    * {@inheritDoc}
    */
   protected function handle(): bool {
