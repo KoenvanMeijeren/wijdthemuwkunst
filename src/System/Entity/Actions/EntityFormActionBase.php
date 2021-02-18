@@ -1,7 +1,8 @@
 <?php
 
-namespace Components\Actions;
+namespace System\Entity\Actions;
 
+use Components\Actions\FormAction;
 use System\Entity\EntityInterface;
 use System\Entity\EntityManager;
 use System\Entity\EntityManagerInterface;

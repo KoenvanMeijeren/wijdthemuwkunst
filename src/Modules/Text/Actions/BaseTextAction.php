@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Modules\Text\Actions;
 
-use Components\Actions\EntityFormActionBase;
+use System\Entity\Actions\EntityFormActionBase;
 use Modules\Text\Entity\Text;
 use Components\Translation\TranslationOld;
 use System\Entity\EntityInterface;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Contact\Actions;
 
-use Components\Actions\EntityFormActionBase;
+use System\Entity\Actions\EntityFormActionBase;
 use Components\Translation\TranslationOld;
 use Modules\Contact\Entity\Contact;
 use System\Entity\EntityInterface;

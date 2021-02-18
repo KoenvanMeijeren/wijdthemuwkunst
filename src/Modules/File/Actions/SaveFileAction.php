@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Modules\File\Actions;
 
-use Components\Actions\EntityActionBase;
+use System\Entity\Actions\EntityActionBase;
 use Modules\File\Entity\File;
 use System\Entity\EntityInterface;
 
