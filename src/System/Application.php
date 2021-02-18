@@ -67,14 +67,16 @@ final class Application implements ApplicationInterface {
   /**
    * {@inheritDoc}
    */
-  public function run(): void {
+  public function run(): string {
     $this->preRun();
 
     $user = new User();
-    Router::load($this->routesLocations)
+    $output = Router::load($this->routesLocations)
       ->direct(Uri::getUrl(), Uri::getMethod(), $user->getRights());
 
     $this->postRun();
+
+    return (string) $output;
   }
 
   /**

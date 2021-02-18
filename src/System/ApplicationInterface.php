@@ -12,7 +12,10 @@ interface ApplicationInterface {
 
     /**
      * Runs the app.
+     *
+     * @return string
+     *   The output of running the app.
      */
-    public function run(): void;
+    public function run(): string;
 
 }

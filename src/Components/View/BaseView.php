@@ -30,6 +30,13 @@ abstract class BaseView implements ViewInterface {
   protected string $viewDirectory = '';
 
   /**
+   * The output of the view.
+   *
+   * @var string
+   */
+  protected string $output = '';
+
+  /**
    * Constructs the base view.
    *
    * @param string $layout
@@ -43,7 +50,7 @@ abstract class BaseView implements ViewInterface {
     $filesystemLoader = new FilesystemLoader($this->layoutPath);
     $templating = new PhpEngine(new TemplateNameParser(), $filesystemLoader);
 
-    echo $templating->render($layout, [
+    $this->output = $templating->render($layout, [
       'content' => $this->renderContent($name, $content),
       'data' => $content,
     ]);
@@ -64,6 +71,16 @@ abstract class BaseView implements ViewInterface {
     $file = new File(directory: $this->viewDirectory, file: "{$name}.view.php");
 
     return $file->getContent($content);
+  }
+
+  /**
+   * Renders the view to string.
+   *
+   * @return string
+   *   The view output.
+   */
+  public function __toString(): string {
+    return $this->output;
   }
 
 }
