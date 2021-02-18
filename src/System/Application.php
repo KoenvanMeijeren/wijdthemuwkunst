@@ -48,7 +48,7 @@ final class Application implements ApplicationInterface {
   protected function preRun(): void {
     $moduleHandler = new ModuleHandler();
 
-    $this->routesLocations += $moduleHandler->getRoutes();
+    $this->routesLocations = array_merge($moduleHandler->getRoutes(), $this->routesLocations);
 
     date_default_timezone_set(DateTimeInterface::DEFAULT_TIMEZONE);
 
