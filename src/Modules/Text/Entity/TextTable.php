@@ -31,6 +31,9 @@ final class TextTable extends DataTableBuilder {
 
   /**
    * {@inheritDoc}
+   *
+   * @param TextInterface $entity
+   *   The entity.
    */
   protected function buildRow(EntityInterface $entity): array {
     return [
@@ -41,6 +44,9 @@ final class TextTable extends DataTableBuilder {
 
   /**
    * {@inheritDoc}
+   *
+   * @param TextInterface $entity
+   *   The entity.
    */
   protected function buildRowActions(EntityInterface $entity): string {
     return Resource::addTableEditColumn(
