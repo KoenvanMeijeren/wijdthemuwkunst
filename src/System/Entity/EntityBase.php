@@ -38,7 +38,7 @@ abstract class EntityBase extends EntityModel implements EntityInterface {
   /**
    * {@inheritDoc}
    */
-  public function id(): ?int {
+  public function id(): int {
     return (int) $this->get($this->getPrimaryKey());
   }
 
@@ -102,7 +102,7 @@ abstract class EntityBase extends EntityModel implements EntityInterface {
    */
   public function save(): int {
     $entity_id = $this->id();
-    if ($entity_id === NULL) {
+    if ($entity_id === 0) {
       $this->create($this->attributes);
       return self::SAVED_NEW;
     }

@@ -20,6 +20,14 @@ interface EntityManagerInterface {
   public function getStorage(string $entity): EntityManagerInterface;
 
   /**
+   * Returns the repository for the entity.
+   *
+   * @return EntityRepositoryInterface
+   *   The repository.
+   */
+  public function getRepository(): EntityRepositoryInterface;
+
+  /**
    * Creates the entity.
    *
    * @param array $values

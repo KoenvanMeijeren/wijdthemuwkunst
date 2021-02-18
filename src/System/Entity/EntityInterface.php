@@ -46,7 +46,7 @@ interface EntityInterface extends EntityModelInterface {
    * @return int
    *   The id of the entity.
    */
-  public function id(): ?int;
+  public function id(): int;
 
   /**
    * Sets an attribute on the entity.

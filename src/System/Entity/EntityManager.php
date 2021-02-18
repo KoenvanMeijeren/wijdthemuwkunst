@@ -20,10 +20,7 @@ final class EntityManager extends EntityRepositoryBase implements EntityManagerI
   }
 
   /**
-   * Returns the repository for the entity.
-   *
-   * @return EntityRepositoryInterface
-   *   The repository.
+   * {@inheritDoc}
    */
   public function getRepository(): EntityRepositoryInterface {
     return $this->entity->getRepository();
