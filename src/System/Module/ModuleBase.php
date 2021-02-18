@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace System\Module;
 
 use Components\File\Exceptions\FileNotFoundException;
+use Components\Validate\Validate;
 
 /**
  * Provides a base class for modules.
@@ -16,7 +17,11 @@ abstract class ModuleBase implements ModuleInterface {
    * {@inheritDoc}
    */
   public function getRoutesLocation(): string {
-    return $this->getModuleLocation() . '/routes.php';
+    $file_location = $this->getModuleLocation() . '/routes.php';
+
+    Validate::var($file_location)->fileExists();
+
+    return $file_location;
   }
 
   /**

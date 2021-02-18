@@ -7,7 +7,6 @@ use Components\ComponentsTrait;
 use Components\Datetime\DateTimeInterface;
 use Components\Route\Router;
 use Domain\Admin\Accounts\User\Models\User;
-use Modules\Text\TextModule;
 use Components\SuperGlobals\Url\Uri;
 use Components\Header\Header;
 use Components\SuperGlobals\Session\SessionBuilder;
@@ -49,10 +48,7 @@ final class Application implements ApplicationInterface {
   protected function preRun(): void {
     $moduleHandler = new ModuleHandler();
 
-    $modules = $moduleHandler->getModules();
-    foreach ($modules as $module) {
-      $this->routesLocations[] = $module->getRoutesLocation();
-    }
+    $this->routesLocations += $moduleHandler->getRoutes();
 
     date_default_timezone_set(DateTimeInterface::DEFAULT_TIMEZONE);
 

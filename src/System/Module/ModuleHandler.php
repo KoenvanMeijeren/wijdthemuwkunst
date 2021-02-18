@@ -5,7 +5,7 @@ namespace System\Module;
 
 use Components\Config\Config;
 use Components\Config\ConfigInterface;
-use JetBrains\PhpStorm\Pure;
+use Components\File\Exceptions\FileNotFoundException;
 
 /**
  * Provides a class for interacting with the modules.
@@ -41,6 +41,25 @@ class ModuleHandler implements ModuleHandlerInterface {
     }
 
     return $modules;
+  }
+
+  /**
+   * Gets the modules.
+   *
+   * @return ModuleInterface[]
+   *   The loaded modules.
+   */
+  public function getRoutes(): array {
+    $routes = [];
+    foreach ($this->config->all() as $module) {
+      try {
+        $routes[] = $this->getModule($module)->getRoutesLocation();
+      } catch (FileNotFoundException $exception) {
+        continue;
+      }
+    }
+
+    return $routes;
   }
 
   /**

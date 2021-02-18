@@ -3,6 +3,8 @@
 
 namespace System\Module;
 
+use Components\File\Exceptions\FileNotFoundException;
+
 /**
  * Provides an interface for modules.
  *
@@ -23,6 +25,9 @@ interface ModuleInterface {
    *
    * @return string
    *   The routes file location.
+   *
+   * @throws FileNotFoundException
+   *   When the file does not exists.
    */
   public function getRoutesLocation(): string;
 
