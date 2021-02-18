@@ -21,14 +21,14 @@ final class DeleteMenuAction extends BaseMenuAction {
     $status = $this->entity->delete();
     if ($status === EntityInterface::SAVED_DELETED) {
       $this->session()->flash(StateInterface::SUCCESSFUL,
-        sprintf(TranslationOld::get('menu_item_successful_deleted'), $this->entity->getKey())
+        sprintf(TranslationOld::get('menu_item_successful_deleted'), $this->entity->getTitle())
       );
 
       return TRUE;
     }
 
     $this->session()->flash(StateInterface::SUCCESSFUL,
-      sprintf(TranslationOld::get('menu_item_unsuccessful_deleted'), $this->entity->getKey())
+      sprintf(TranslationOld::get('menu_item_unsuccessful_deleted'), $this->entity->getTitle())
     );
 
     return FALSE;
