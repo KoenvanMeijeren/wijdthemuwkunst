@@ -52,9 +52,10 @@ abstract class EntityRepositoryBase implements EntityRepositoryInterface {
   protected function firstByAttributes(array $attributes, array $columns = ['*']): ?EntityInterface {
     $this->query = new Query($this->entity->getTable());
     $this->query->select($this->query->columnsToString($columns));
-    $this->query->whereAttributes($attributes);
 
     $this->addGlobalFilters();
+    $this->query->whereAttributes($attributes);
+
     $entity = $this->query->firstToClass($this->entity::class);
 
     if ($entity instanceof EntityInterface) {
@@ -70,9 +71,10 @@ abstract class EntityRepositoryBase implements EntityRepositoryInterface {
   public function loadById(int $id, array $columns = ['*']): ?EntityInterface {
     $this->query = new Query($this->entity->getTable());
     $this->query->select($this->query->columnsToString($columns));
-    $this->query->where($this->entity->getPrimaryKey(), '=', (string) $id);
 
     $this->addGlobalFilters();
+    $this->query->where($this->entity->getPrimaryKey(), '=', (string) $id);
+
     $entity = $this->query->firstToClass($this->entity::class);
 
     if ($entity instanceof EntityInterface) {

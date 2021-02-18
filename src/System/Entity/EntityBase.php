@@ -39,7 +39,7 @@ abstract class EntityBase extends EntityModel implements EntityInterface {
    * {@inheritDoc}
    */
   public function id(): ?int {
-    return $this->get($this->getPrimaryKey());
+    return (int) $this->get($this->getPrimaryKey());
   }
 
   /**
@@ -101,12 +101,18 @@ abstract class EntityBase extends EntityModel implements EntityInterface {
    * {@inheritDoc}
    */
   public function save(): int {
-    if ($this->id() === NULL) {
+    $entity_id = $this->id();
+    if ($entity_id === NULL) {
       $this->create($this->attributes);
       return self::SAVED_NEW;
     }
 
-    $this->update($this->id(), $this->attributes);
+    // Primary keys cannot be updated because they are auto incremented.
+    if (isset($this->attributes[$this->getPrimaryKey()])) {
+      unset($this->attributes[$this->getPrimaryKey()]);
+    }
+
+    $this->update($entity_id, $this->attributes);
     return self::SAVED_UPDATED;
   }
 
