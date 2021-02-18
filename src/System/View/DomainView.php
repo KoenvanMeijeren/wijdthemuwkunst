@@ -5,10 +5,11 @@ namespace System\View;
 
 use Components\File\Exceptions\FileNotFoundException;
 use Modules\Cms\Structure\MenuAdminTrait;
-use Domain\Admin\Menu\Models\Menu;
 use JetBrains\PhpStorm\ArrayShape;
 use Components\SuperGlobals\Url\Uri;
 use Components\View\BaseView;
+use Modules\Menu\Entity\Menu;
+use System\Entity\EntityManager;
 
 /**
  * Provides a base view for domain views.
@@ -64,10 +65,11 @@ final class DomainView extends BaseView {
    */
   #[ArrayShape(['menuItems' => "object[]"])]
   protected function globalContent(): array {
-    $menu = new Menu();
+    $entityManager = new EntityManager();
+    $repository = $entityManager->getStorage(Menu::class)->getRepository();
 
     return [
-      'menuItems' => $menu->getAll(),
+      'menuItems' => $repository->all(),
     ];
   }
 

@@ -14,7 +14,7 @@ use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Authentication\Controllers\AuthenticationController;
 use Domain\Admin\Event\Controllers\EventController as AdminEventController;
 use Modules\File\Controllers\UploadFileController;
-use Domain\Admin\Menu\Controllers\MenuController;
+use Modules\Menu\Controller\MenuController;
 use Domain\Admin\Pages\Controllers\PageController as AdminPageController;
 use Domain\Event\Controllers\EventArchiveController;
 use Domain\Event\Controllers\EventController;
@@ -100,25 +100,6 @@ Router::prefix('admin')->group(static function () {
             Router::post('event/activate/{slug}', AdminEventController::class,
                 'activate', User::ADMIN);
             Router::post('event/delete/{slug}', AdminEventController::class,
-                'destroy', User::ADMIN);
-        });
-    });
-
-    // Structure routes.
-    Router::prefix('structure')->group(static function () {
-        // Menu routes.
-        Router::prefix('menu')->group(static function () {
-            Router::get('', MenuController::class,
-                'index', User::ADMIN);
-            Router::get('item/create', MenuController::class,
-                'create', User::ADMIN);
-            Router::post('item/create/store', MenuController::class,
-                'store', User::ADMIN);
-            Router::get('item/edit/{slug}', MenuController::class,
-                'edit', User::ADMIN);
-            Router::post('item/edit/{slug}/update', MenuController::class,
-                'update', User::ADMIN);
-            Router::post('item/delete/{slug}', MenuController::class,
                 'destroy', User::ADMIN);
         });
     });

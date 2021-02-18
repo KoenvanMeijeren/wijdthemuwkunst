@@ -1,7 +1,6 @@
 <?php
 
 use Components\Translation\TranslationOld;
-use Domain\Admin\Menu\Repositories\MenuRepository;
 use Components\Security\CSRF;
 use Components\Resource\Resource;
 
@@ -31,8 +30,8 @@ use Components\Resource\Resource;
         </a>
         <?php if (isset($data['menuItems']) && count($data['menuItems']) > 0) : ?>
             <nav id="nav">
-                <?php foreach ($data['menuItems'] as $menuItem) :
-                    $menu = new MenuRepository($menuItem);
+                <?php /** @var \Modules\Menu\Entity\MenuInterface $menu */
+                foreach ($data['menuItems'] as $menu) :
                     if ($menu->getSlug() === 'index') : ?>
                         <a href="/"><?= $menu->getTitle() ?></a>
                     <?php else : ?>
