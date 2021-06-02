@@ -26,7 +26,7 @@ abstract class EntityFormActionBase extends FormAction {
    *
    * @var \System\Entity\EntityInterface
    */
-  protected EntityInterface $entity;
+  protected ?EntityInterface $entity;
 
   /**
    * The storage.
@@ -55,7 +55,7 @@ abstract class EntityFormActionBase extends FormAction {
    * @return string
    *   The entity type.
    */
-  abstract protected function getEntityType(): string;
+  abstract public function getEntityType(): string;
 
   /**
    * Saves the entity and flashes a message into the session.

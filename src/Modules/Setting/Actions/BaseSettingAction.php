@@ -21,12 +21,12 @@ abstract class BaseSettingAction extends EntityFormActionBase {
    *
    * @var \Modules\Setting\Entity\SettingInterface
    */
-  protected EntityInterface $entity;
+  protected ?EntityInterface $entity;
 
   /**
    * {@inheritDoc}
    */
-  protected function getEntityType(): string {
+  final public function getEntityType(): string {
     return Setting::class;
   }
 

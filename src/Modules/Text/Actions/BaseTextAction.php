@@ -19,14 +19,14 @@ abstract class BaseTextAction extends EntityFormActionBase {
   /**
    * The text entity.
    *
-   * @var \Modules\Text\Entity\TextInterface
+   * @var \Modules\Text\Entity\TextInterface|null
    */
-  protected EntityInterface $entity;
+  protected ?EntityInterface $entity;
 
   /**
    * {@inheritDoc}
    */
-  protected function getEntityType(): string {
+  final public function getEntityType(): string {
     return Text::class;
   }
 

@@ -17,9 +17,9 @@ final class SaveFileAction extends EntityActionBase {
   /**
    * The file entity.
    *
-   * @var \Modules\File\Entity\FileInterface
+   * @var \Modules\File\Entity\FileInterface|null
    */
-  protected EntityInterface $entity;
+  protected ?EntityInterface $entity;
 
   /**
    * SaveFileAction constructor.
@@ -27,9 +27,7 @@ final class SaveFileAction extends EntityActionBase {
    * @param string $path
    *   The path of the file.
    */
-  public function __construct(
-    protected string $path
-  ) {
+  public function __construct(protected string $path) {
     parent::__construct();
 
     $entity = $this->storage->loadByAttributes([
@@ -43,7 +41,7 @@ final class SaveFileAction extends EntityActionBase {
   /**
    * {@inheritDoc}
    */
-  protected function getEntityType(): string {
+  public function getEntityType(): string {
     return File::class;
   }
 

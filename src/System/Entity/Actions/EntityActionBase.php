@@ -13,7 +13,7 @@ use System\Entity\EntityManagerInterface;
  *
  * @package Components\Actions
  */
-abstract class EntityActionBase extends Action {
+abstract class EntityActionBase extends Action implements EntityActionInterface {
 
   /**
    * The entity manager definition.
@@ -25,9 +25,9 @@ abstract class EntityActionBase extends Action {
   /**
    * The entity definition.
    *
-   * @var \System\Entity\EntityInterface
+   * @var \System\Entity\EntityInterface|null
    */
-  protected EntityInterface $entity;
+  protected ?EntityInterface $entity;
 
   /**
    * The storage.
@@ -49,22 +49,11 @@ abstract class EntityActionBase extends Action {
   }
 
   /**
-   * Gets the entity id.
-   *
-   * @return int
-   *   The entity id.
+   * {@inheritDoc}
    */
-  public function getEntityId(): int {
-    return (int) $this->entity->id();
+  public function getEntityId(): ?int {
+    return $this->entity?->id();
   }
-
-  /**
-   * Gets the entity type.
-   *
-   * @return string
-   *   The entity type.
-   */
-  abstract protected function getEntityType(): string;
 
   /**
    * Saves the entity and flashes a message into the session.

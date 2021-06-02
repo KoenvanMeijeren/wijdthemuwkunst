@@ -8,6 +8,6 @@ namespace System\Entity;
  *
  * @package System\Entity
  */
-class EntityRepository extends EntityRepositoryBase {
+final class EntityRepository extends EntityRepositoryBase {
 
 }

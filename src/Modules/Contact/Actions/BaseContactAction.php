@@ -21,12 +21,12 @@ abstract class BaseContactAction extends EntityFormActionBase {
    *
    * @var \Modules\Contact\Entity\ContactInterface
    */
-  protected EntityInterface $entity;
+  protected ?EntityInterface $entity;
 
   /**
    * {@inheritDoc}
    */
-  protected function getEntityType(): string {
+  final public function getEntityType(): string {
     return Contact::class;
   }
 

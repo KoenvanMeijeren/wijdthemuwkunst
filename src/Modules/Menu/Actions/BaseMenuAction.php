@@ -21,12 +21,12 @@ abstract class BaseMenuAction extends EntityFormActionBase {
    *
    * @var \Modules\Menu\Entity\MenuInterface
    */
-  protected EntityInterface $entity;
+  protected ?EntityInterface $entity;
 
   /**
    * {@inheritDoc}
    */
-  protected function getEntityType(): string {
+  final public function getEntityType(): string {
     return Menu::class;
   }
 
