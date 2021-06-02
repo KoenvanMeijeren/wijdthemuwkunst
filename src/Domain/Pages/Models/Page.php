@@ -5,14 +5,14 @@ declare(strict_types=1);
 
 namespace Domain\Pages\Models;
 
-use Src\Database\DB;
+use Components\Database\Query;
 use Src\Model\Model;
 use Src\Model\Scopes\SoftDelete\SoftDelete;
 
 /**
  * Provides a model for the page table to interact with the database.
  *
- * @package Domain\Pages\Models
+ * @package Domain\Page\Models
  */
 final class Page extends Model {
 
@@ -92,7 +92,7 @@ final class Page extends Model {
    * Page constructor.
    */
   public function __construct() {
-    $this->addScope((new DB)
+    $this->addScope((new Query($this->table))
       ->innerJoin($this->foreignTable, $this->primarySlugKey, $this->foreignKey)
       ->where($this->slugSoftDeletedKey, '=', '0')
       ->where($this->isPublishedKey, '=', '1')
@@ -112,7 +112,7 @@ final class Page extends Model {
    */
   public function getByVisibility(int $visibility): array {
     $this->addScope(
-      (new DB)->where($this->inMenu, '=', (string) $visibility)
+      (new Query($this->table))->where($this->inMenu, '=', (string) $visibility)
     );
 
     return $this->all(['*']);

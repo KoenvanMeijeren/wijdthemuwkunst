@@ -6,9 +6,10 @@ declare(strict_types=1);
 namespace Src\Model;
 
 use Components\ComponentsTrait;
+use Components\Database\Query;
+use Components\Database\QueryInterface;
 use Components\Route\Router;
 use Components\SuperGlobals\Url\Uri;
-use Src\Database\DB;
 use stdClass;
 
 /**
@@ -97,8 +98,8 @@ abstract class Model {
    * @param string[] $attributes
    */
   final public function create(array $attributes): void {
-    DB::table($this->table)
-      ->insert($attributes);
+    $query = new Query($this->table);
+    $query->insert($attributes);
   }
 
   /**
@@ -140,10 +141,9 @@ abstract class Model {
    * @param string[] $attributes
    */
   final public function update(int $id, array $attributes): void {
-    DB::table($this->table)
-      ->update($attributes)
-      ->where($this->primaryKey, '=', (string) $id)
-      ->execute();
+    $query = new Query($this->table);
+    $query->update($attributes)->where($this->primaryKey, '=', (string) $id);
+    $query->execute();
   }
 
   /**
@@ -154,12 +154,10 @@ abstract class Model {
    * @return object[]
    */
   final public function all(array $columns = ['*']): array {
-    return (array) DB::table($this->table)
-      ->select(implode(',', $columns))
-      ->addStatementWithValues(
-              $this->scopes['query'],
-              $this->scopes['values']
-          )
+    $query = new Query($this->table);
+
+    return $query->select(implode(',', $columns))
+      ->addStatementWithValues($this->scopes['query'], $this->scopes['values'])
       ->get();
   }
 
@@ -172,12 +170,10 @@ abstract class Model {
    * @return object|null
    */
   final public function find(int $id, array $columns = ['*']): ?stdClass {
-    return DB::table($this->table)
-      ->select(implode(',', $columns))
-      ->addStatementWithValues(
-              $this->scopes['query'],
-              $this->scopes['values']
-          )
+    $query = new Query($this->table);
+
+    return $query->select(implode(',', $columns))
+      ->addStatementWithValues($this->scopes['query'], $this->scopes['values'])
       ->where($this->primaryKey, '=', (string) $id)
       ->first();
   }
@@ -190,8 +186,9 @@ abstract class Model {
    * @return mixed|void
    */
   final public function delete(int $id) {
-    DB::table($this->table)
-      ->delete($this->softDeletedKey)
+    $query = new Query($this->table);
+
+    $query->delete($this->softDeletedKey)
       ->where($this->primaryKey, '=', (string) $id)
       ->execute();
   }
@@ -204,15 +201,14 @@ abstract class Model {
    * @return object|null
    */
   protected function firstByAttributes(array $attributes): ?stdClass {
-    return DB::table($this->table)
-      ->select('*')
+    $query = new Query($this->table);
+
+    return $query->select('*')
+      ->addStatementWithValues($this->scopes['query'], $this->scopes['values'])
       ->addStatementWithValues(
-              $this->scopes['query'],
-              $this->scopes['values']
-          )->addStatementWithValues(
-              $this->convertAttributesIntoWhereQuery($attributes),
-              $this->convertAttributesIntoWhereValues($attributes)
-          )->first();
+          $this->convertAttributesIntoWhereQuery($attributes),
+          $this->convertAttributesIntoWhereValues($attributes)
+      )->first();
   }
 
   /**
@@ -223,12 +219,10 @@ abstract class Model {
    * @return object|null
    */
   protected function firstById(int $id): ?stdClass {
-    return DB::table($this->table)
-      ->select('*')
-      ->addStatementWithValues(
-              $this->scopes['query'],
-              $this->scopes['values']
-          )
+    $query = new Query($this->table);
+
+    return $query->select('*')
+      ->addStatementWithValues($this->scopes['query'], $this->scopes['values'])
       ->where($this->primaryKey, '=', (string) $id)
       ->first();
   }
@@ -236,10 +230,10 @@ abstract class Model {
   /**
    * Adds a scope to the query.
    *
-   * @param \Src\Database\DB $builder
+   * @param \Components\Database\QueryInterface $builder
    *   The query builder.
    */
-  protected function addScope(DB $builder): void {
+  protected function addScope(QueryInterface $builder): void {
     if (str_contains($this->scopes['query'], $builder->getQuery())
           || in_array($builder->getValues(), $this->scopes['values'], TRUE)
       ) {
@@ -257,16 +251,13 @@ abstract class Model {
    *
    * @return string
    */
-  private function convertAttributesIntoWhereQuery(
-        array $attributes
-    ): string {
-    $query = '';
+  private function convertAttributesIntoWhereQuery(array $attributes): string {
+    $queryString = '';
     foreach ($attributes as $column => $attribute) {
-      $query .= DB::table($this->table)
-        ->where($column, '=', $attribute)
-        ->getQuery();
+      $query = new Query($this->table);
+      $queryString .= $query->where($column, '=', $attribute)->getQuery();
     }
-    return $query;
+    return $queryString;
   }
 
   /**
@@ -276,14 +267,11 @@ abstract class Model {
    *
    * @return string[]
    */
-  private function convertAttributesIntoWhereValues(
-        array $attributes
-    ): array {
+  private function convertAttributesIntoWhereValues(array $attributes): array {
     $values = [];
     foreach ($attributes as $column => $attribute) {
-      $values += DB::table($this->table)
-        ->where($column, '=', $attribute)
-        ->getValues();
+      $query = new Query($this->table);
+      $values += $query->where($column, '=', $attribute)->getValues();
     }
 
     return $values;

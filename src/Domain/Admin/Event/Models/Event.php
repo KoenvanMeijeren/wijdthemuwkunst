@@ -2,7 +2,7 @@
 
 namespace Domain\Admin\Event\Models;
 
-use Src\Database\DB;
+use Components\Database\Query;
 use Src\Model\Model;
 use Src\Model\Scopes\SoftDelete\SoftDelete;
 
@@ -30,15 +30,9 @@ final class Event extends Model {
    */
   public function __construct() {
     $this->addScope(
-          (new DB)->innerJoin(
-              $this->foreignTable,
-              $this->primarySlugKey,
-              $this->foreignKey
-          )->where(
-              $this->slugSoftDeletedKey,
-              '=',
-              '0'
-          )
+          (new Query($this->table))
+            ->innerJoin($this->foreignTable, $this->primarySlugKey, $this->foreignKey)
+            ->where($this->slugSoftDeletedKey, '=', '0')
       );
 
     $this->initializeSoftDelete();
@@ -52,11 +46,9 @@ final class Event extends Model {
    */
   public function getAll(): array {
     $this->addScope(
-          (new DB)->where(
-              $this->archivedKey,
-              '=',
-              '0'
-          )->orderBy('asc', $this->datetimeKey)
+          (new Query($this->table))
+            ->where($this->archivedKey, '=', '0')
+            ->orderBy('asc', $this->datetimeKey)
       );
 
     return $this->all();
@@ -74,11 +66,9 @@ final class Event extends Model {
     }
 
     $this->addScope(
-          (new DB)->where(
-              $this->archivedKey,
-              '=',
-              '1'
-          )->orderBy('asc', $this->datetimeKey)
+          (new Query($this->table))
+            ->where($this->archivedKey, '=', '1')
+            ->orderBy('asc', $this->datetimeKey)
       );
 
     return $this->all();

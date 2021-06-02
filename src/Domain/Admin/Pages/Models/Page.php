@@ -5,14 +5,14 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Pages\Models;
 
-use Src\Database\DB;
+use Components\Database\Query;
 use Src\Model\Model;
 use Src\Model\Scopes\SoftDelete\SoftDelete;
 
 /**
  * Provides a model for the page table to interact with the database.
  *
- * @package Domain\Admin\Pages\Models
+ * @package Domain\Admin\Page\Models
  */
 final class Page extends Model {
   use SoftDelete;
@@ -42,15 +42,9 @@ final class Page extends Model {
    */
   public function __construct() {
     $this->addScope(
-          (new DB)->innerJoin(
-              $this->foreignTable,
-              $this->primarySlugKey,
-              $this->foreignKey
-          )->where(
-              $this->slugSoftDeletedKey,
-              '=',
-              '0'
-          )
+          (new Query($this->table))
+            ->innerJoin($this->foreignTable, $this->primarySlugKey, $this->foreignKey)
+            ->where($this->slugSoftDeletedKey, '=', '0')
       );
 
     $this->initializeSoftDelete();

@@ -3,7 +3,7 @@
 namespace Domain\Event\Models;
 
 use Cake\Chronos\Chronos;
-use Src\Database\DB;
+use Components\Database\Query;
 use Src\Model\Model;
 use Src\Model\Scopes\SoftDelete\SoftDelete;
 
@@ -99,7 +99,7 @@ class Event extends Model {
   public function __construct() {
     $currentDate = new Chronos();
 
-    $this->addScope((new DB)
+    $this->addScope((new Query($this->table))
       ->innerJoin($this->foreignTable, $this->primarySlugKey, $this->foreignKey)
       ->where($this->slugSoftDeletedKey, '=', '0')
       ->where($this->isPublishedKey, '=', '1')
@@ -121,7 +121,7 @@ class Event extends Model {
    */
   public function getLimited(int $limit): array {
     $this->addScope(
-      (new DB)->orderBy('asc', 'event_date')->limit($limit)
+      (new Query($this->table))->orderBy('asc', 'event_date')->limit($limit)
     );
 
     return $this->all(['*']);

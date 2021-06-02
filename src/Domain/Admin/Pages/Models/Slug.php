@@ -11,7 +11,7 @@ use Src\Model\Scopes\SoftDelete\SoftDelete;
 /**
  * Provides a model for the slug table to interact with the database.
  *
- * @package Domain\Admin\Pages\Models
+ * @package Domain\Admin\Page\Models
  */
 final class Slug extends Model {
   use SoftDelete;
