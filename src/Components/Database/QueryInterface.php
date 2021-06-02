@@ -485,7 +485,7 @@ interface QueryInterface extends DatabaseProcessorInterface, DatabaseConnectionI
    *
    * @param string $filter
    *   The filter -> ascending (asc) or descending (desc).
-   * @param string[]  ...$columns
+   * @param string[]|string  ...$columns
    *   The columns to be ordered.
    *
    * @return $this
