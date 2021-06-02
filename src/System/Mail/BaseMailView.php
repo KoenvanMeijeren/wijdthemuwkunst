@@ -24,7 +24,7 @@ abstract class BaseMailView {
    *   The layout of the whole view.
    * @param string $name
    *   The name of the partial view.
-   * @param mixed[] $content
+   * @param array $content
    *   The content of the partial view.
    */
   public function __construct(string $baseViewPath, string $name, array $content) {
@@ -48,7 +48,7 @@ abstract class BaseMailView {
    *   The directory of the mail view.
    * @param string $name
    *   The name of the partial view.
-   * @param mixed[] $content
+   * @param array $content
    *   The content of the partial view.
    *
    * @return string

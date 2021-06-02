@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace System\Mail;
 
+use Components\ComponentsTrait;
 use Components\File\Exceptions\FileNotFoundException;
 use Components\File\File;
 
@@ -13,6 +14,8 @@ use Components\File\File;
  */
 final class MailView extends BaseMailView {
 
+  use ComponentsTrait;
+
   /**
    * {@inheritDoc}
    */
@@ -22,6 +25,7 @@ final class MailView extends BaseMailView {
 
       return $file->getContent($content);
     } catch (FileNotFoundException $exception) {
+      $this->log()->error($exception->getMessage());
       $file = new File(directory: MODULE_PATH . '/' . $directory, file: "{$name}.view.php");
 
       return $file->getContent($content);
