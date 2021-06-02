@@ -38,7 +38,7 @@ final class DataTable extends DataTableHtmlBuilder {
 
     foreach ($tds as $item) {
       $this->addTdStart();
-      $this->add($item, $this->var);
+      $this->add((string) $item, $this->var);
       $this->addTdEnd();
     }
 
