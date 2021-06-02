@@ -31,11 +31,8 @@ abstract class BreadcrumbBase implements BreadcrumbInterface {
    * @param string $delimiter
    *   The boundary string.
    */
-  public function __construct(
-    protected string $string,
-    string $delimiter = '/'
-  ) {
-    $this->breadCrumbs = $this->convertStringIntoBreadcrumbs($string, $delimiter);
+  public function __construct(protected string $string, string $delimiter = '/') {
+    $this->breadCrumbs = $this->stringToBreadcrumbs($string, $delimiter);
   }
 
   /**
@@ -49,11 +46,11 @@ abstract class BreadcrumbBase implements BreadcrumbInterface {
    * @return string[]
    *   The breadcrumbs.
    */
-  protected function convertStringIntoBreadcrumbs(string $string, string $delimiter = '/'): array {
+  protected function stringToBreadcrumbs(string $string, string $delimiter = '/'): array {
     $stringParts = explode($delimiter, $string);
 
     $breadCrumbs = [];
-    for ($x = 0, $xMax = count($stringParts); $x < $xMax; $x++) {
+    foreach ($stringParts as $stringPart) {
       $lastStringPart = array_key_last($stringParts);
 
       $title = $stringParts[$lastStringPart];
@@ -79,7 +76,7 @@ abstract class BreadcrumbBase implements BreadcrumbInterface {
   /**
    * {@inheritDoc}
    */
-  public function visible(int $minimum = 0): bool {
+  final public function visible(int $minimum = self::BREADCRUMBS_MINIMUM_DEFAULT): bool {
     return count($this->breadCrumbs) > $minimum;
   }
 

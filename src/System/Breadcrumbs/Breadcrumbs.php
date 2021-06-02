@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace System\Breadcrumbs;
 
+use JetBrains\PhpStorm\Pure;
+
 /**
  * Provides a class for generating breadcrumbs.
  *
@@ -28,7 +30,7 @@ final class Breadcrumbs extends BreadcrumbBase {
   /**
    * {@inheritDoc}
    */
-  public function generate(): string {
+  #[Pure] public function generate(): string {
     $breadcrumbs = '<nav>';
     $breadcrumbs .= '<ol class="breadcrumbs">';
     foreach ($this->breadCrumbs as $title => $url) {
@@ -36,8 +38,7 @@ final class Breadcrumbs extends BreadcrumbBase {
         $title = 'Home';
       }
 
-      $breadcrumbs .= $this->buildLink((string) $title, $url);
-      continue;
+      $breadcrumbs .= $this->buildLink($title, $url);
     }
 
     $breadcrumbs .= '</ol>';

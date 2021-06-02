@@ -10,6 +10,13 @@ namespace System\Breadcrumbs;
 interface BreadcrumbInterface {
 
   /**
+   * The default minimum amount of breadcrumbs to be visible.
+   *
+   * @var int
+   */
+  public const BREADCRUMBS_MINIMUM_DEFAULT = 0;
+
+  /**
    * Checks if the breadcrumbs are visible.
    *
    * @param int $minimum
@@ -18,7 +25,7 @@ interface BreadcrumbInterface {
    * @return bool
    *   If the breadcrumbs are visible.
    */
-  public function visible(int $minimum = 0): bool;
+  public function visible(int $minimum = self::BREADCRUMBS_MINIMUM_DEFAULT): bool;
 
   /**
    * Generates the markup for the breadcrumbs.
