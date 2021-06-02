@@ -25,9 +25,7 @@ abstract class ControllerBase implements ControllerInterface {
    * @param string $baseViewPath
    *   The base path to the views directory.
    */
-  public function __construct(
-    protected string $baseViewPath = ''
-  ) {}
+  public function __construct(protected string $baseViewPath = '') {}
 
   /**
    * Returns a domain view.
