@@ -37,7 +37,9 @@ final class DatabaseProcessor extends DatabaseConnection implements DatabaseProc
    * @inheritDoc
    */
   public function fetch(int $fetchMethod, $cursorOrientation = PDO::FETCH_ORI_NEXT, $cursorOffset = 0): array|object|null {
-    return $this->statement->fetch($fetchMethod, $cursorOrientation, $cursorOffset);
+    $result = $this->statement->fetch($fetchMethod, $cursorOrientation, $cursorOffset);
+
+    return $result ?: null;
   }
 
   /**
