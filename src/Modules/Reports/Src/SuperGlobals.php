@@ -34,7 +34,7 @@ final class SuperGlobals {
       $table->addRow([$value,]);
     }
 
-    return $table->get('undefined');
+    return $table->render('undefined');
   }
 
   /**
@@ -72,7 +72,7 @@ final class SuperGlobals {
       $table->addRow([$key, (string) $data,]);
     }
 
-    return $table->get('undefined');
+    return $table->render('undefined');
   }
 
   /**
@@ -103,7 +103,7 @@ final class SuperGlobals {
       $table->addRow([$key, $this->session()->get($key),]);
     }
 
-    return $table->get('undefined');
+    return $table->render('undefined');
   }
 
   /**
@@ -139,7 +139,7 @@ final class SuperGlobals {
       }
     }
 
-    return $table->get('undefined');
+    return $table->render('undefined');
   }
 
 }

@@ -36,7 +36,7 @@ interface DataTableInterface {
   public function addFooter(array $ths): void;
 
   /**
-   * Gets the build table.
+   * Renders the build table.
    *
    * @param string $id
    *   The ID of the table.
@@ -44,7 +44,7 @@ interface DataTableInterface {
    * @return string
    *   The renderable table.
    */
-  public function get(string $id = 'table'): string;
+  public function render(string $id = 'table'): string;
 
   /**
    * Add (multiple) ids to a piece of html.

@@ -71,7 +71,7 @@ final class DataTable extends DataTableHtmlBuilder {
   /**
    * {@inheritDoc}
    */
-  public function get(string $id = 'table'): string {
+  public function render(string $id = 'table'): string {
     $this->var = 'table';
 
     $this->addClasses('table table-hover');

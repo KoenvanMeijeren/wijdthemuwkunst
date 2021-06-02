@@ -73,7 +73,7 @@ abstract class DataTableBuilder implements DataTableBuilderInterface {
       );
     }
 
-    return $this->dataTable->get($id);
+    return $this->dataTable->render($id);
   }
 
 }

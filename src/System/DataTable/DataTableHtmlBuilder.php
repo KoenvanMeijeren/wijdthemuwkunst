@@ -78,7 +78,7 @@ abstract class DataTableHtmlBuilder implements DataTableInterface {
   /**
    * {@inheritDoc}
    */
-  abstract public function get(string $id = 'table'): string;
+  abstract public function render(string $id = 'table'): string;
 
   /**
    * {@inheritDoc}
