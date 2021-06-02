@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace System\Module;
 
+use Components\ComponentsTrait;
 use Components\File\Exceptions\FileNotFoundException;
 use Components\Validate\Validate;
 
@@ -13,15 +14,23 @@ use Components\Validate\Validate;
  */
 abstract class ModuleBase implements ModuleInterface {
 
+  use ComponentsTrait;
+
   /**
    * {@inheritDoc}
    */
-  public function getRoutesLocation(): string {
-    $file_location = $this->getModuleLocation() . '/routes.php';
+  public function getRoutesLocation(): ?string {
+    try {
+      $file_location = $this->getModuleLocation() . '/routes.php';
 
-    Validate::var($file_location)->fileExists();
+      Validate::var($file_location)->fileExists();
 
-    return $file_location;
+      return $file_location;
+    } catch (FileNotFoundException $exception) {
+      $this->log()->debug($exception->getMessage());
+    }
+
+    return null;
   }
 
   /**
@@ -45,6 +54,7 @@ abstract class ModuleBase implements ModuleInterface {
     try {
       return (array) include_file($this->getModuleLocation() . '/Translation');
     } catch (FileNotFoundException $exception) {
+      $this->log()->error($exception->getMessage());
       return [];
     }
   }

@@ -22,6 +22,13 @@ class ModuleHandler implements ModuleHandlerInterface {
   protected ConfigInterface $config;
 
   /**
+   * The loaded modules.
+   *
+   * @var ModuleInterface[]
+   */
+  protected static array $modules = [];
+
+  /**
    * ModuleHandler constructor.
    */
   public function __construct() {
@@ -34,13 +41,20 @@ class ModuleHandler implements ModuleHandlerInterface {
    * @return ModuleInterface[]
    *   The loaded modules.
    */
-  public function getModules(): array {
-    $modules = [];
-    foreach ($this->config->all() as $module) {
-      $modules[] = $this->getModule($module);
+  public function getModules(callable $callable = null): array {
+    if (count(self::$modules) > 0) {
+      if ($callable) {
+        return array_map($callable, self::$modules);
+      }
+
+      return self::$modules;
     }
 
-    return $modules;
+    self::$modules = array_map(static function (string $module) {
+      return new $module;
+    }, $this->config->all());
+
+    return $this->getModules($callable);
   }
 
   /**
@@ -50,29 +64,13 @@ class ModuleHandler implements ModuleHandlerInterface {
    *   The loaded modules.
    */
   public function getRoutes(): array {
-    $routes = [];
-    foreach ($this->config->all() as $module) {
-      try {
-        $routes[] = $this->getModule($module)->getRoutesLocation();
-      } catch (FileNotFoundException $exception) {
-        continue;
-      }
-    }
+    $routes = $this->getModules(static function(ModuleInterface $module) {
+      return $module->getRoutesLocation();
+    });
 
-    return $routes;
-  }
-
-  /**
-   * Gets a specific module.
-   *
-   * @param string $name
-   *   The name of the module.
-   *
-   * @return ModuleInterface
-   *   The loaded module.
-   */
-  public function getModule(string $name): ModuleInterface {
-    return new $name;
+    return array_filter($routes, static function(?string $route) {
+      return $route !== null;
+    });
   }
 
 }

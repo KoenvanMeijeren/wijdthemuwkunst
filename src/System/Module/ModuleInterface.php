@@ -26,10 +26,10 @@ interface ModuleInterface {
    * @return string
    *   The routes file location.
    *
-   * @throws FileNotFoundException
+   * @throws FileNotFoundException|null
    *   When the file does not exists.
    */
-  public function getRoutesLocation(): string;
+  public function getRoutesLocation(): ?string;
 
   /**
    * Returns the location of the functions file.
