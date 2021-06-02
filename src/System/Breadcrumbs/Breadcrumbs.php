@@ -38,7 +38,7 @@ final class Breadcrumbs extends BreadcrumbBase {
         $title = 'Home';
       }
 
-      $breadcrumbs .= $this->buildLink($title, $url);
+      $breadcrumbs .= $this->buildLink((string) $title, $url);
     }
 
     $breadcrumbs .= '</ol>';
