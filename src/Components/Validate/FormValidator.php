@@ -82,8 +82,8 @@ final class FormValidator implements FormValidatorInterface {
   /**
    * {@inheritDoc}
    */
-  public function isInArray(string $value, array $allowedValues, string $errorMessage = ''): FormValidatorInterface {
-    if (in_array($value, $allowedValues, strict: TRUE)) {
+  public function isInArray(array $allowedValues, string $errorMessage = ''): FormValidatorInterface {
+    if (in_array($this->input, $allowedValues)) {
       return $this;
     }
 

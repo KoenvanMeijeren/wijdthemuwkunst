@@ -50,9 +50,7 @@ interface FormValidatorInterface {
   /**
    * Checks if the value is an allowed value.
    *
-   * @param string $value
-   *   The value to be validated.
-   * @param string[] $allowedValues
+   * @param array $allowedValues
    *   The allowed values.
    * @param string $errorMessage
    *   The message to return if the value is invalid.
@@ -60,7 +58,7 @@ interface FormValidatorInterface {
    * @return FormValidatorInterface
    *   The form validator object reference.
    */
-  public function isInArray(string $value, array $allowedValues, string $errorMessage = ''): FormValidatorInterface;
+  public function isInArray(array $allowedValues, string $errorMessage = ''): FormValidatorInterface;
 
   /**
    * Verifies if the variable is between a given range.

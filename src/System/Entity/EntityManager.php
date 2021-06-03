@@ -45,7 +45,7 @@ final class EntityManager extends EntityRepositoryBase implements EntityManagerI
    * {@inheritDoc}
    */
   public function loadByAttributes(array $attributes): ?EntityInterface {
-    return $this->firstByAttributes($attributes);
+    return $this->getRepository()->firstByAttributes($attributes);
   }
 
 }

@@ -18,6 +18,19 @@ interface EntityRepositoryInterface {
   public function setEntity(EntityInterface $entity): void;
 
   /**
+   * Get the first record for the given attributes.
+   *
+   * @param string[] $attributes
+   *   The attributes to search the data for.
+   * @param array $columns
+   *   The columns to be selected.
+   *
+   * @return EntityInterface|null
+   *   The entity.
+   */
+  public function firstByAttributes(array $attributes, array $columns = ['*']): ?EntityInterface;
+
+  /**
    * Loads the first found record for the given id.
    *
    * @param int $id

@@ -7,25 +7,14 @@
 
 declare(strict_types=1);
 
-use Components\Route\RouterInterface;
 use Domain\Admin\Accounts\Account\Controllers\AccountController;
 use Domain\Admin\Accounts\User\Controllers\UserAccountControllerBase;
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Authentication\Controllers\AuthenticationController;
 use Domain\Admin\Event\Controllers\EventController as AdminEventController;
-use Modules\File\Controllers\UploadFileController;
-use Modules\Menu\Controller\MenuController;
-use Domain\Admin\Pages\Controllers\PageController as AdminPageController;
 use Domain\Event\Controllers\EventArchiveController;
 use Domain\Event\Controllers\EventController;
-use Domain\Pages\Controllers\PageController;
 use Components\Route\Router;
-
-// Index routes.
-Router::get('', PageController::class,
-    'index');
-Router::get('index', PageController::class,
-    'index');
 
 // Event routes.
 Router::get('concerten', EventController::class,
@@ -51,30 +40,6 @@ Router::prefix('admin')->group(static function () {
 
     // Content routes.
     Router::prefix('content')->group(static function () {
-        // Pages routes.
-        Router::prefix('pages')->group(static function () {
-            Router::get('', AdminPageController::class,
-                'index', User::ADMIN);
-            Router::get('page/create', AdminPageController::class,
-                'create', User::ADMIN);
-            Router::post('page/create/store', AdminPageController::class,
-                'store', User::ADMIN);
-            Router::get('page/edit/{slug}', AdminPageController::class,
-                'edit', User::ADMIN);
-            Router::post('page/edit/{slug}/remove/banner', AdminPageController::class,
-                'removeBanner', User::ADMIN);
-            Router::post('page/edit/{slug}/remove/thumbnail', AdminPageController::class,
-                'removeThumbnail', User::ADMIN);
-            Router::post('page/edit/{slug}/store', AdminPageController::class,
-                'update', User::ADMIN);
-            Router::post('page/publish/{slug}', AdminPageController::class,
-                'publish', User::ADMIN);
-            Router::post('page/unpublish/{slug}', AdminPageController::class,
-                'unPublish', User::ADMIN);
-            Router::post('page/delete/{slug}', AdminPageController::class,
-                'destroy', User::ADMIN);
-        });
-
         // Events routes.
         Router::prefix('events')->group(static function () {
             Router::get('', AdminEventController::class,
@@ -139,7 +104,3 @@ Router::prefix('admin')->group(static function () {
     });
 
 });
-
-// Page not found route.
-Router::get(RouterInterface::URL_PAGE_NOT_FOUND, PageController::class,
-    'findOr404');

@@ -57,7 +57,7 @@ abstract class EventControllerBase extends ControllerBase {
    */
   protected function notFound(): ViewInterface {
     // Overwrite the base view path in order to return page not found views.
-    $this->baseViewPath = 'Pages/Views/';
+    $this->baseViewPath = 'Page/Views/';
 
     if ($page = $this->page->getBySlug('pagina-niet-gevonden')) {
       $pageRepo = new PageRepository($page);

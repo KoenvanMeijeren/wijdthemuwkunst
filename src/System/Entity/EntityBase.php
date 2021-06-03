@@ -100,20 +100,40 @@ abstract class EntityBase extends EntityModel implements EntityInterface {
   /**
    * {@inheritDoc}
    */
+  public function preSave(): void {
+
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public function save(): int {
+    $this->preSave();
+
     $entity_id = $this->id();
     if ($entity_id === 0) {
       $this->create($this->attributes);
-      return self::SAVED_NEW;
+      $result = self::SAVED_NEW;
+    } else {
+      // Primary keys cannot be updated because they are auto incremented.
+      if (isset($this->attributes[$this->getPrimaryKey()])) {
+        unset($this->attributes[$this->getPrimaryKey()]);
+      }
+
+      $this->update($entity_id, $this->attributes);
+      $result = self::SAVED_UPDATED;
     }
 
-    // Primary keys cannot be updated because they are auto incremented.
-    if (isset($this->attributes[$this->getPrimaryKey()])) {
-      unset($this->attributes[$this->getPrimaryKey()]);
-    }
+    $this->postSave();
 
-    $this->update($entity_id, $this->attributes);
-    return self::SAVED_UPDATED;
+    return $result;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function postSave(): void {
+
   }
 
   /**

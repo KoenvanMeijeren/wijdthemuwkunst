@@ -19,7 +19,7 @@ trait SlugTrait {
   /**
    * {@inheritDoc}
    */
-  public function setSlug(string $url): self {
+  public function setSlug(string $url) {
     $slug = (new SlugConverter($url))->parse();
     $entity = $this->firstOrCreateSlug($slug);
 

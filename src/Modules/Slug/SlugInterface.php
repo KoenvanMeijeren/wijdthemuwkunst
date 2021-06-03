@@ -21,7 +21,7 @@ interface  SlugInterface extends EntityInterface {
    * @return $this
    *   The called object reference.
    */
-  public function setSlug(string $url): self;
+  public function setSlug(string $url);
 
   /**
    * Gets the slug.

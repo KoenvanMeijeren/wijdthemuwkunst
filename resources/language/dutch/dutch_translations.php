@@ -263,6 +263,7 @@ return [
     'table_row_publish_state' => 'Publicatie status',
     'table_row_edit' => 'Bewerken',
     'table_row_delete' => 'Verwijderen',
+    'table_row_actions' => 'Bewerkingen',
 
     /**
      * Regular Form texts translations.

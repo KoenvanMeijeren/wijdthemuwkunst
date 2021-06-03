@@ -39,17 +39,9 @@ abstract class EntityRepositoryBase implements EntityRepositoryInterface {
   }
 
   /**
-   * Get the first record for the given attributes.
-   *
-   * @param string[] $attributes
-   *   The attributes to search the data for.
-   * @param array $columns
-   *   The columns to be selected.
-   *
-   * @return EntityInterface|null
-   *   The entity.
+   * {@inheritDoc}
    */
-  protected function firstByAttributes(array $attributes, array $columns = ['*']): ?EntityInterface {
+  public function firstByAttributes(array $attributes, array $columns = ['*']): ?EntityInterface {
     $this->query = new Query($this->entity->getTable());
     $this->query->select($this->query->columnsToString($columns));
 

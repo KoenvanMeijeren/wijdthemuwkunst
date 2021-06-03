@@ -32,7 +32,7 @@ abstract class ControllerBase implements ControllerInterface {
    *
    * @param string $name
    *   The name of the domain view.
-   * @param string[] $content
+   * @param array $content
    *   The content of the domain view.
    *
    * @return \Components\View\ViewInterface

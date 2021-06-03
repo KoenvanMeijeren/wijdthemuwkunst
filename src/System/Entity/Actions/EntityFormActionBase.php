@@ -26,7 +26,7 @@ abstract class EntityFormActionBase extends FormAction {
    *
    * @var \System\Entity\EntityInterface
    */
-  protected ?EntityInterface $entity;
+  protected EntityInterface $entity;
 
   /**
    * The storage.
@@ -50,12 +50,29 @@ abstract class EntityFormActionBase extends FormAction {
   }
 
   /**
+   * {@inheritDoc}
+   */
+  protected function handle(): bool {
+    return $this->saveEntity();
+  }
+
+  /**
    * Gets the entity type.
    *
    * @return string
    *   The entity type.
    */
   abstract public function getEntityType(): string;
+
+  /**
+   * Gets the id of the entity.
+   *
+   * @return int|null
+   *   The id or null.
+   */
+  public function getEntityId(): ?int {
+    return $this->entity->id();
+  }
 
   /**
    * Saves the entity and flashes a message into the session.
