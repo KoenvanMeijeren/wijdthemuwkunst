@@ -71,11 +71,6 @@ abstract class BreadcrumbBase implements BreadcrumbInterface {
   /**
    * {@inheritDoc}
    */
-  abstract public function generate(): string;
-
-  /**
-   * {@inheritDoc}
-   */
   final public function visible(int $minimum = self::BREADCRUMBS_MINIMUM_DEFAULT): bool {
     return count($this->breadCrumbs) > $minimum;
   }
