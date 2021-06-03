@@ -5,6 +5,7 @@ namespace Components\Log;
 
 use Components\ComponentsTrait;
 use Components\Datetime\DateTimeInterface;
+use Components\File\Exceptions\FileNotFoundException;
 use Components\SuperGlobals\Url\Uri;
 use DateTimeZone;
 use Monolog\Formatter\LineFormatter;
@@ -68,9 +69,13 @@ final class Logger implements LoggerInterface {
    * {@inheritDoc}
    */
   public function getFile(string $date): string {
-    $file = new File(directory: STORAGE_PATH . '/logs/', file: "app-{$date}.log");
+    try {
+      $file = new File(directory: STORAGE_PATH . '/logs/', file: "app-{$date}.log");
 
-    return $file->getContent();
+      return $file->getContent();
+    } catch (FileNotFoundException $exception) {
+      return '';
+    }
   }
 
   /**
