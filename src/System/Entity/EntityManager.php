@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace System\Entity;
 
+use System\Entity\Exceptions\EntityNotFoundException;
+
 /**
  * Defines a manager for entities.
  *
@@ -15,6 +17,10 @@ final class EntityManager extends EntityRepositoryBase implements EntityManagerI
    * {@inheritDoc}
    */
   public function getStorage(string $entity): EntityManagerInterface {
+    if (!class_exists($entity)) {
+      throw new EntityNotFoundException($entity);
+    }
+
     $this->entity = new $entity();
     return $this;
   }

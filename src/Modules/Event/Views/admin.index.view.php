@@ -16,7 +16,7 @@ use Components\Translation\TranslationOld;
                 <div class="row no-gutters align-items-center">
                     <div class="col-md-12 mr-2 mb-4">
                         <div class="text-lg float-left font-weight-bold text-primary text-uppercase mb-1">
-                            <?php echo TranslationOld::get('event_overview_title') ?>
+                            <?= TranslationOld::get('event_overview_title') ?>
                         </div>
 
                         <a href="/admin/content/events/event/create"
@@ -31,7 +31,7 @@ use Components\Translation\TranslationOld;
 
                 <div class="row">
                     <div class="col-md-12">
-                        <?php echo $events ?? '' ?>
+                        <?= $events ?? '' ?>
                     </div>
                 </div>
             </div>
@@ -46,14 +46,14 @@ use Components\Translation\TranslationOld;
                 <div class="row no-gutters align-items-center">
                     <div class="col-md-12 mr-2 mb-4">
                         <div class="text-lg font-weight-bold text-primary text-uppercase mb-1">
-                            <?php echo TranslationOld::get('event_archive_overview_title') ?>
+                            <?= TranslationOld::get('event_archive_overview_title') ?>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-12">
-                        <?php echo $archived_events ?? '' ?>
+                        <?= $archived_events ?? '' ?>
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@
 
 use Modules\Cms\Structure\StructureModule;
 use Modules\Contact\ContactModule;
+use Modules\Event\EventModule;
 use Modules\File\FileModule;
 use Modules\Menu\MenuModule;
 use Modules\Page\PageModule;
@@ -20,4 +21,5 @@ return [
   SlugModule::class,
   MenuModule::class,
   PageModule::class,
+  EventModule::class,
 ];

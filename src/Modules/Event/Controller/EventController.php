@@ -1,18 +1,19 @@
 <?php
+declare(strict_types=1);
 
-namespace Domain\Event\Controllers;
+namespace Modules\Event\Controller;
 
 use Domain\Admin\Event\Repositories\EventRepository;
-use Domain\Admin\Pages\Repositories\PageRepository;
 use Components\View\ViewInterface;
+use System\Entity\EntityControllerBase;
 use System\View\DomainView;
 
 /**
  * Provides a controller for events.
  *
- * @package Domain\Event\Controllers
+ * @package Modules\Event\Controller
  */
-class EventController extends EventControllerBase {
+class EventController extends EntityControllerBase {
 
   /**
    * The index page of the events.

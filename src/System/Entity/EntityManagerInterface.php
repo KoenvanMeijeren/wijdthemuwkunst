@@ -16,6 +16,9 @@ interface EntityManagerInterface {
    *   The entity.
    *
    * @return $this
+   *
+   * @throws \System\Entity\Exceptions\EntityNotFoundException
+   *   If the entity does not exists.
    */
   public function getStorage(string $entity): EntityManagerInterface;
 

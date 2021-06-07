@@ -85,7 +85,7 @@ final class Request implements RequestInterface {
    *   The specified super global.
    * @param string $key
    *   The key to search for.
-   * @param string $default
+   * @param mixed $default
    *   The default value to return.
    *
    * @return string
@@ -93,9 +93,9 @@ final class Request implements RequestInterface {
    *
    * @throws \JsonException
    */
-  protected function requestFromGlobal(array $superGlobal, string $key, string $default = ''): string {
+  protected function requestFromGlobal(array $superGlobal, string $key, mixed $default = ''): string {
     if (!isset($superGlobal[$key])) {
-      return $default;
+      return (string) $default;
     }
 
     if (is_array($superGlobal[$key])) {

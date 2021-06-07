@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Admin\Event\Support;
+namespace Modules\Event\Utility;
 
 use Cake\Chronos\Chronos;
 use Components\Converter\ConverterBase;
@@ -10,7 +10,7 @@ use Components\Datetime\DateTime;
 /**
  * Provides a class for converting event date times.
  *
- * @package Domain\Admin\Event\Support
+ * @package Modules\Event\Utility
  */
 final class EventDatetimeConverter extends ConverterBase {
 

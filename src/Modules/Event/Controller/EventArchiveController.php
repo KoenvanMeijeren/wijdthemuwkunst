@@ -1,17 +1,18 @@
 <?php
+declare(strict_types=1);
 
-namespace Domain\Event\Controllers;
+namespace Modules\Event\Controller;
 
 use Domain\Admin\Event\Repositories\EventRepository;
-use Domain\Admin\Pages\Repositories\PageRepository;
 use Components\View\ViewInterface;
+use System\Entity\EntityControllerBase;
 
 /**
  * The event archive controller.
  *
- * @package Domain\Event\Controllers
+ * @package Modules\Event\Controller
  */
-class EventArchiveController extends EventControllerBase {
+class EventArchiveController extends EntityControllerBase {
 
   /**
    * Returns the archive of the events.

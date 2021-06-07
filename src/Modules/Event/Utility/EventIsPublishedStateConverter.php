@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Admin\Event\Support;
+namespace Modules\Event\Utility;
 
 use Components\Converter\ConverterBase;
 use Components\Translation\TranslationOld;
@@ -8,7 +8,7 @@ use Components\Translation\TranslationOld;
 /**
  * Provides a class for converting the published state of an event.
  *
- * @package Domain\Admin\Event\Support
+ * @package Modules\Event\Utility
  */
 final class EventIsPublishedStateConverter extends ConverterBase {
 
