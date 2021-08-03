@@ -16,7 +16,7 @@ if (!function_exists('include_file')) {
    *
    * @param string $name
    *   The file to be included.
-   * @param mixed|null $variables
+   * @param mixed $variables
    *   The variables to be extracted into the file.
    *
    * @return mixed
@@ -24,7 +24,7 @@ if (!function_exists('include_file')) {
    *
    * @throws \Components\File\Exceptions\FileNotFoundException
    */
-  function include_file(string $name, $variables = NULL): mixed {
+  function include_file(string $name, mixed $variables = NULL): mixed {
     if ($variables !== NULL) {
       extract($variables, EXTR_SKIP);
     }
@@ -47,7 +47,7 @@ if (!function_exists('get_file_contents')) {
    * @return string
    *   The content of the file.
    */
-  function get_file_contents(string $name) {
+  function get_file_contents(string $name): string {
     Validate::var($name)->fileExists();
 
     return (string) file_get_contents($name);
@@ -68,7 +68,7 @@ if (!function_exists('include_image')) {
    * @return string
    *   The image or a fallback otherwise nothing
    */
-  function include_image(string $name, string $fallback) {
+  function include_image(string $name, string $fallback): string {
     if (file_exists($_SERVER['DOCUMENT_ROOT'] . $name)) {
       return $name;
     }

@@ -18,7 +18,7 @@ if (!function_exists('array_to_csv')) {
    * @return string
    *   The renderable csv.
    */
-  function array_to_csv(array $inputArray) {
+  function array_to_csv(array $inputArray): string {
     $csvFieldRow = [];
     foreach ($inputArray as $csbRow) {
       $csvFieldRow[] = string_to_csv($csbRow);
@@ -44,11 +44,7 @@ if (!function_exists('string_to_csv')) {
    * @return string
    *   The string formatted as csv.
    */
-  function string_to_csv(
-        array $input,
-        string $delimiter = ',',
-        string $enclosure = '"'
-    ) {
+  function string_to_csv(array $input, string $delimiter = ',', string $enclosure = '"'): string {
     // Open a memory "file" for read/write.
     $fp = fopen('php://temp', 'rb+');
 
@@ -87,7 +83,7 @@ if (!function_exists('output_csv')) {
     header('Content-Type: text/csv');
     header('Content-Disposition: attachment;filename=' . $fileName . '.csv');
 
-    if (is_array($assocDataArray) && count($assocDataArray) > 0) {
+    if (count($assocDataArray) > 0) {
       $fp = fopen('php://output', 'wb');
 
       if (is_resource($fp)) {

@@ -29,60 +29,102 @@ use System\Entity\EntityManagerInterface;
 trait ComponentsTrait {
 
   /**
-   * Gets the request object.
+   * The request definition.
+   *
+   * @var \Components\SuperGlobals\RequestInterface
+   */
+  protected RequestInterface $request;
+
+  /**
+   * Gets the request definition.
    *
    * @return RequestInterface
-   *   The request object.
+   *   The request definition.
    */
   protected function request(): RequestInterface {
     return $this->request ??= new Request();
   }
 
   /**
-   * Gets the session object.
+   * The session definition.
+   *
+   * @var \Components\SuperGlobals\Session\SessionInterface
+   */
+  protected SessionInterface $session;
+
+  /**
+   * Gets the session definition.
    *
    * @return SessionInterface
-   *   The session object.
+   *   The session definition.
    */
   protected function session(): SessionInterface {
     return $this->session ??= new Session();
   }
 
   /**
-   * Gets the env object.
+   * The env definition.
+   *
+   * @var \Components\Env\EnvInterface
+   */
+  protected EnvInterface $env;
+
+  /**
+   * Gets the env definition.
    *
    * @return EnvInterface
-   *   The env object.
+   *   The env definition.
    */
   protected function env(): EnvInterface {
     return $this->env ??= new Env();
   }
 
   /**
-   * Gets the header object.
+   * The header definition.
+   *
+   * @var \Components\Header\HeaderInterface
+   */
+  protected HeaderInterface $header;
+
+  /**
+   * Gets the header definition.
    *
    * @return HeaderInterface
-   *   The env object.
+   *   The header definition.
    */
   protected function header(): HeaderInterface {
     return $this->header ??= new Header();
   }
 
   /**
-   * Gets the translation object.
+   * The translation definition.
+   *
+   * @var \Components\Translation\TranslationInterface
+   */
+  protected TranslationInterface $translation;
+
+  /**
+   * Gets the translation definition.
    *
    * @return TranslationInterface
-   *   The translator object.
+   *   The translator definition.
    */
   protected function t(): TranslationInterface {
     return $this->translation ??= new Translation();
   }
 
   /**
-   * Gets the logger object.
+   * The logger definition.
+   *
+   * @var \Components\Log\LoggerInterface
+   */
+  protected LoggerInterface $logger;
+
+  /**
+   * Gets the logger definition.
    *
    * @return \Psr\Log\LoggerInterface
-   *   The logger object.
+   *   The logger definition.
    */
   protected function log(): PsrLoggerInterface {
     $this->logger ??= new Logger();
@@ -90,22 +132,28 @@ trait ComponentsTrait {
     return $this->logger->getLogger();
   }
 
-
   /**
-   * Gets the logger object.
+   * Gets the logger definition.
    *
    * @return LoggerInterface
-   *   The logger object.
+   *   The logger definition.
    */
   protected function logger(): LoggerInterface {
     return $this->logger ??= new Logger();
   }
 
   /**
-   * Gets the user object.
+   * The user definition.
+   *
+   * @var \Domain\Admin\Accounts\User\Models\User
+   */
+  protected User $user;
+
+  /**
+   * Gets the user entity.
    *
    * @return User
-   *   The user object.
+   *   The user entity.
    */
   protected function currentUser(): User {
     return $this->user ??= new User();
@@ -131,6 +179,13 @@ trait ComponentsTrait {
 
     return '';
   }
+
+  /**
+   * The entity manager definition.
+   *
+   * @var \System\Entity\EntityManagerInterface
+   */
+  protected EntityManagerInterface $entityManager;
 
   /**
    * Gets the entity manager.

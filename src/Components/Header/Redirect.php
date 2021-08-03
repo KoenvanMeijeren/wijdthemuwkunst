@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Components\Header;
 
 use Components\ComponentsTrait;
+use JetBrains\PhpStorm\NoReturn;
 
 /**
  * Redirects an user to a specified location.
@@ -20,6 +21,7 @@ final class Redirect {
    * @param string $path
    *   The path to redirect to.
    */
+  #[NoReturn]
   public function __construct(
     protected string $path
   ) {

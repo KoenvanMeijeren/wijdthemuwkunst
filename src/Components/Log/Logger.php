@@ -5,6 +5,7 @@ namespace Components\Log;
 
 use Components\ComponentsTrait;
 use Components\Datetime\DateTimeInterface;
+use Components\Env\EnvInterface;
 use Components\File\Exceptions\FileNotFoundException;
 use Components\SuperGlobals\Url\Uri;
 use DateTimeZone;
@@ -15,7 +16,6 @@ use Monolog\Logger as MonologLogger;
 use Monolog\Processor\IntrospectionProcessor;
 use Monolog\Processor\ProcessIdProcessor;
 use Monolog\Processor\WebProcessor;
-use Components\Env\Env;
 use Components\File\File;
 use Psr\Log\LoggerInterface as PsrLoggerInterface;
 use System\StateInterface;
@@ -34,7 +34,7 @@ final class Logger implements LoggerInterface {
    *
    * @var \Psr\Log\LoggerInterface
    */
-  protected PsrLoggerInterface $logger;
+  protected PsrLoggerInterface $psrLogger;
 
   /**
    * Logger constructor.
@@ -44,11 +44,11 @@ final class Logger implements LoggerInterface {
     $timeFormat = self::TIME_FORMAT;
     $dateTimeZone = new DateTimeZone(DateTimeInterface::DEFAULT_TIMEZONE);
 
-    $this->logger = new MonologLogger($this->request()->env('app_name'));
-    $this->logger->setTimezone($dateTimeZone);
+    $this->psrLogger = new MonologLogger($this->request()->env('app_name'));
+    $this->psrLogger->setTimezone($dateTimeZone);
 
-    $this->logger->pushProcessor(new IntrospectionProcessor());
-    $this->logger->pushProcessor(new ProcessIdProcessor());
+    $this->psrLogger->pushProcessor(new IntrospectionProcessor());
+    $this->psrLogger->pushProcessor(new ProcessIdProcessor());
 
     $formatter = new LineFormatter($format, $timeFormat);
     $formatter->ignoreEmptyContextAndExtra();
@@ -56,13 +56,13 @@ final class Logger implements LoggerInterface {
     $defaultHandler = new RotatingFileHandler(
       filename: START_PATH . '/storage/logs/app.log',
       maxFiles: 365,
-      level: $this->env()->get() === Env::DEVELOPMENT ? MonologLogger::DEBUG : MonologLogger::INFO
+      level: $this->env()->get() === EnvInterface::DEVELOPMENT ? MonologLogger::DEBUG : MonologLogger::INFO
     );
     $defaultHandler->setFormatter($formatter);
 
-    $this->logger->pushHandler($defaultHandler);
-    $this->logger->pushHandler(new FirePHPHandler());
-    $this->logger->pushProcessor(new WebProcessor());
+    $this->psrLogger->pushHandler($defaultHandler);
+    $this->psrLogger->pushHandler(new FirePHPHandler());
+    $this->psrLogger->pushProcessor(new WebProcessor());
   }
 
   /**
@@ -82,7 +82,7 @@ final class Logger implements LoggerInterface {
    * {@inheritDoc}
    */
   public function getLogger(): PsrLoggerInterface {
-    return $this->logger;
+    return $this->psrLogger;
   }
 
   /**
@@ -94,7 +94,7 @@ final class Logger implements LoggerInterface {
       $message = "{$method} request for page {$url}";
     }
 
-    $this->logger->info("{$state} {$message}");
+    $this->psrLogger->info("{$state} {$message}");
   }
 
   /**
@@ -108,8 +108,7 @@ final class Logger implements LoggerInterface {
   public function logRequest(string $state, string $value): void {
     if ($state !== StateInterface::FAILED
       && $state !== StateInterface::SUCCESSFUL
-      && $state !== StateInterface::FORM_VALIDATION_FAILED
-    ) {
+      && $state !== StateInterface::FORM_VALIDATION_FAILED) {
       return;
     }
 

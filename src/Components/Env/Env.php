@@ -5,6 +5,7 @@ namespace Components\Env;
 
 use Components\ComponentsTrait;
 use Components\SuperGlobals\Request;
+use Components\SuperGlobals\RequestInterface;
 use JetBrains\PhpStorm\Pure;
 use Components\Log\LoggerHandler;
 use Components\Validate\Validate;
@@ -33,7 +34,7 @@ final class Env implements EnvInterface {
    *
    * @var string
    */
-  protected string $env;
+  protected string $currentEnvironment;
 
   /**
    * Env constructor.
@@ -47,7 +48,7 @@ final class Env implements EnvInterface {
    * Defines the host of the app.
    */
   protected function setHost(): void {
-    $host = $this->request()->server(Request::HTTP_HOST);
+    $host = $this->request()->server(RequestInterface::HTTP_HOST);
     $this->host = $host !== '' ? $host : 'localhost';
     Validate::var($this->host)->isDomain();
   }
@@ -63,19 +64,19 @@ final class Env implements EnvInterface {
    * Initializes the current env based on the current uri.
    */
   protected function initialize(): void {
-    $this->env = self::PRODUCTION;
+    $this->currentEnvironment = self::PRODUCTION;
     if (str_contains($this->host, 'localhost') || str_contains($this->host, '127.0.0.1')) {
-      $this->env = self::DEVELOPMENT;
+      $this->currentEnvironment = self::DEVELOPMENT;
     }
 
-    Validate::var($this->env)->isEnv();
+    Validate::var($this->currentEnvironment)->isEnv();
   }
 
   /**
    * {@inheritDoc}
    */
   public function get(): string {
-    return $this->env;
+    return $this->currentEnvironment;
   }
 
   /**
@@ -96,9 +97,9 @@ final class Env implements EnvInterface {
    * {@inheritDoc}
    */
   public function initializeErrorHandling(): void {
-    ini_set('display_errors', (self::DEVELOPMENT === $this->env ? '1' : '0'));
-    ini_set('display_startup_errors', (self::DEVELOPMENT === $this->env ? '1' : '0'));
-    error_reporting((self::DEVELOPMENT === $this->env ? E_ALL : -1));
+    ini_set('display_errors', (self::DEVELOPMENT === $this->currentEnvironment ? '1' : '0'));
+    ini_set('display_startup_errors', (self::DEVELOPMENT === $this->currentEnvironment ? '1' : '0'));
+    error_reporting((self::DEVELOPMENT === $this->currentEnvironment ? E_ALL : -1));
 
     $this->initializeWhoops();
   }
@@ -108,11 +109,11 @@ final class Env implements EnvInterface {
    */
   protected function initializeWhoops(): void {
     $whoops = new Whoops();
-    if (self::DEVELOPMENT === $this->env) {
+    if (self::DEVELOPMENT === $this->currentEnvironment) {
       $whoops->prependHandler(new PrettyPageHandler());
       $whoops->register();
     }
-    elseif (self::PRODUCTION === $this->env) {
+    elseif (self::PRODUCTION === $this->currentEnvironment) {
       $whoops->prependHandler(new ProductionErrorView());
       $whoops->register();
     }

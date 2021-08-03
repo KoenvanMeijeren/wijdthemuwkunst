@@ -5,6 +5,7 @@ namespace Components\SuperGlobals;
 
 use Components\Sanitize\Sanitize;
 use Components\Route\Router;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * Provides a class for interacting with super globals.
@@ -25,6 +26,7 @@ final class Request implements RequestInterface {
   /**
    * {@inheritDoc}
    */
+  #[Pure]
   public function getRouteParameter(): string {
     return Router::getWildcard();
   }
@@ -90,8 +92,6 @@ final class Request implements RequestInterface {
    *
    * @return string
    *   The requested data from the super global
-   *
-   * @throws \JsonException
    */
   protected function requestFromGlobal(array $superGlobal, string $key, mixed $default = ''): string {
     if (!isset($superGlobal[$key])) {
@@ -116,6 +116,7 @@ final class Request implements RequestInterface {
    * @return string[]
    *   The sanitized array.
    */
+  #[Pure]
   protected function buildNewArray(array $superGlobal, string $key): array {
     $newArray = [];
     foreach ($superGlobal[$key] as $data) {

@@ -7,6 +7,7 @@ namespace Components\SuperGlobals\Session;
 
 use Cake\Chronos\Chronos;
 use Components\ComponentsTrait;
+use Components\Env\EnvInterface;
 use Components\SuperGlobals\Cookie\Cookie;
 use Components\Env\Env;
 use Components\SuperGlobals\Session\Exceptions\InvalidSessionException;
@@ -72,7 +73,7 @@ final class SessionBuilder {
       return;
     }
 
-    if ($env === Env::PRODUCTION) {
+    if ($env === EnvInterface::PRODUCTION) {
       $this->secure = TRUE;
     }
 

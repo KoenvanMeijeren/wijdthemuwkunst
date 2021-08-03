@@ -104,18 +104,17 @@ final class Resource {
       $message = 'onclick="return confirm(\'' . $actionWarningMessage . '\')"';
     }
 
-    return '<form method="post"
-                          action="' . $action . '">
-                          ' . CSRF::insertToken($action) . '
-                        <button class="btn ' . $classes . ' table-edit-button"
-                                type="submit"
-                                data-toggle="tooltip"
-                                data-placement="top"
-                                title="' . $actionTitle . '"
-                                ' . $message . '>
-                            <i class="' . $icon . '"></i>
-                        </button>
-                    </form>';
+    return '<form method="post" action="' . $action . '">
+                ' . CSRF::insertToken($action) . '
+                <button class="btn ' . $classes . ' table-edit-button"
+                        type="submit"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="' . $actionTitle . '"
+                        ' . $message . '>
+                    <i class="' . $icon . '"></i>
+                </button>
+            </form>';
   }
 
   /**
@@ -133,12 +132,12 @@ final class Resource {
    */
   public static function addTableLinkActionColumn(string $action, string $actionTitle, string $icon): string {
     return '<a href="' . $action . '"
-                       class="btn btn-outline-success table-edit-button"
-                       data-toggle="tooltip"
-                       data-placement="top"
-                       title="' . $actionTitle . '">
-                        <i class="' . $icon . '"></i>
-                    </a>';
+               class="btn btn-outline-success table-edit-button"
+               data-toggle="tooltip"
+               data-placement="top"
+               title="' . $actionTitle . '">
+                <i class="' . $icon . '"></i>
+            </a>';
   }
 
 }

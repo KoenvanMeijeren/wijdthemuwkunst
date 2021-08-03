@@ -25,7 +25,7 @@ if (!function_exists('sampling')) {
    * @return string[]
    *   All the possible combinations.
    */
-  function sampling(array $chars, int $size, array $combinations = []) {
+  function sampling(array $chars, int $size, array $combinations = []): array {
     if (count($combinations) < 1) {
       $combinations = $chars;
     }
@@ -46,7 +46,7 @@ if (!function_exists('sampling')) {
 
 }
 
-if (!function_exists('sampling_with_onlye_one_used_char_per_string')) {
+if (!function_exists('sampling_with_only_one_used_char_per_string')) {
 
   /**
    * Samples the maximum possible combinations for the given chars and max size.
@@ -62,7 +62,7 @@ if (!function_exists('sampling_with_onlye_one_used_char_per_string')) {
    * @return string
    *   The sampled combinations.
    */
-  function sampling_with_onlye_one_used_char_per_string(array $values, int $size) {
+  function sampling_with_only_one_used_char_per_string(array $values, int $size): string {
     $generator = generate_combinations($values, $size);
     $string = '';
 
@@ -96,10 +96,10 @@ if (!function_exists('generate_combinations')) {
    * @param int $count
    *   The maximum possible combinations.
    *
-   * @return Generator|mixed
+   * @return \Generator
    *   The generated combinations.
    */
-  function generate_combinations(array $values, int $count = 0) {
+  function generate_combinations(array $values, int $count = 0): Generator {
     $perm_count = count($values) ** $count;
 
     for ($i = 0; $i < $perm_count; $i++) {
@@ -127,7 +127,7 @@ if (!function_exists('get_combination')) {
    * @return string[]
    *   The combination.
    */
-  function get_combination(array $values, int $count, int $index) {
+  function get_combination(array $values, int $count, int $index): array {
     $result = [];
     $values_count = count($values);
     for ($i = 0; $i < $count; $i++) {

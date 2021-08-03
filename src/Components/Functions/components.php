@@ -15,7 +15,7 @@ use JetBrains\PhpStorm\Pure;
  * Gets the request definition.
  *
  * @return RequestInterface
- *   The request object.
+ *   The request definition.
  */
 #[Pure] function request(): RequestInterface {
   return new Request();
@@ -25,37 +25,37 @@ use JetBrains\PhpStorm\Pure;
  * Gets the session definition.
  *
  * @return SessionInterface
- *   The session object.
+ *   The session definition.
  */
 function session(): SessionInterface {
   return new Session();
 }
 
 /**
- * Gets the env object.
+ * Gets the env definition.
  *
  * @return EnvInterface
- *   The env object.
+ *   The env definition.
  */
 function env(): EnvInterface {
   return new Env();
 }
 
 /**
- * Gets the header object.
+ * Gets the header definition.
  *
  * @return HeaderInterface
- *   The env object.
+ *   The env definition.
  */
 #[Pure] function headerSend(): HeaderInterface {
   return new Header();
 }
 
 /**
- * Gets the user object.
+ * Gets the user definition.
  *
  * @return User
- *   The user object.
+ *   The user definition.
  */
 function user(): User {
   return new User();

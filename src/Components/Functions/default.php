@@ -16,16 +16,16 @@ if (!function_exists('array_replace_keys')) {
   /**
    * Replace the keys of an associate array by those supplied in the keys array.
    *
-   * @param mixed[] $array
+   * @param array $array
    *   Target associative array in which the keys are intended to be replaced.
-   * @param mixed[] $keys
+   * @param array $keys
    *   Associate array where search key => replace by key, for replacing
    *   respective keys.
    *
-   * @return mixed[]
+   * @return array
    *   The array with replaced keys.
    */
-  function array_replace_keys(array $array, array $keys) {
+  function array_replace_keys(array $array, array $keys): array {
     foreach ($keys as $search => $replace) {
       if (array_key_exists($search, $array)) {
         $array[$replace] = $array[$search];
@@ -49,7 +49,7 @@ if (!function_exists('html_entities_decode')) {
    * @return string
    *   The decoded html string.
    */
-  function html_entities_decode(string $data) {
+  function html_entities_decode(string $data): string {
     return html_entity_decode(htmlspecialchars_decode($data));
   }
 
@@ -114,7 +114,7 @@ if (!function_exists('replace_all_except_first_string')) {
    * @return string
    *   The updated string.
    */
-  function replace_all_except_first_string(string $remove, string $replace, string $subject) {
+  function replace_all_except_first_string(string $remove, string $replace, string $subject): string {
     return replace_string($replace, $remove, replace_string($remove, $replace, $subject), 1);
   }
 
@@ -131,7 +131,7 @@ if (!function_exists('is_json')) {
    * @return bool
    *   If the string is JSON.
    */
-  function is_json(string $data) {
+  function is_json(string $data): bool {
     if ($data === '') {
       return FALSE;
     }
@@ -191,7 +191,7 @@ if (!function_exists('strip_whitespaces')) {
    * @return string
    *   The string without unnecessary whitespaces.
    */
-  function strip_whitespaces(string $string) {
+  function strip_whitespaces(string $string): string {
     return trim($string);
   }
 
@@ -216,7 +216,7 @@ if (!function_exists('encode_url')) {
    * @return string
    *   The string encoded to an url.
    */
-  function encode_url(string $string, array $replace = [], string $delimiter = '-') {
+  function encode_url(string $string, array $replace = [], string $delimiter = '-'): string {
     if (count($replace) > 1) {
       $string = str_replace($replace, ' ', $string);
     }
@@ -244,7 +244,7 @@ if (!function_exists('validate_date')) {
    * @return bool
    *   If the date is valid.
    */
-  function validate_date($date, $format = 'Y-m-d') {
+  function validate_date(string $date, string $format = 'Y-m-d'): bool {
     $datetime = DateTime::createFromFormat($format, $date);
     if ($datetime !== FALSE) {
       return $datetime->format($format) === $date;
@@ -266,7 +266,7 @@ if (!function_exists('get_subclasses_of')) {
    * @return array
    *   The list with subclasses of the parent.
    */
-  function get_subclasses_of(string $className) {
+  function get_subclasses_of(string $className): array {
     $result = [];
 
     foreach (get_declared_classes() as $class) {

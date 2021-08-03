@@ -8,6 +8,7 @@
 declare(strict_types=1);
 
 use Components\File\Exceptions\FileNotFoundException;
+use Components\File\Exceptions\FileNotReadableException;
 use Components\Validate\Validate;
 use System\Module\ModuleHandler;
 
@@ -35,7 +36,7 @@ foreach ($modules as $module) {
     Validate::var($functionFile)->fileExists()->isReadable();
 
     include_once $functionFile;
-  } catch (FileNotFoundException $exception) {
+  } catch (FileNotFoundException | FileNotReadableException $exception) {
     continue;
   }
 }

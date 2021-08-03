@@ -6,9 +6,10 @@ namespace Components\SuperGlobals\Url;
 use Components\ComponentsTrait;
 use Components\SuperGlobals\Request;
 use Components\Sanitize\Sanitize;
+use Components\SuperGlobals\RequestInterface;
 
 /**
- * Provides an class for interacting with the url.
+ * Provides a class for interacting with the url.
  *
  * @package Components\SuperGlobals\Url
  */
@@ -23,7 +24,7 @@ final class Uri {
    */
   public static function getUrl(): string {
     $request = new Request();
-    $sanitize = new Sanitize($request->server(Request::URI), 'url');
+    $sanitize = new Sanitize($request->server(RequestInterface::URI), 'url');
 
     return (string) $sanitize->data();
   }
@@ -36,7 +37,7 @@ final class Uri {
   public static function getMethod(): string {
     $request = new Request();
 
-    return $request->server(Request::METHOD);
+    return $request->server(RequestInterface::METHOD);
   }
 
   /**
@@ -47,10 +48,7 @@ final class Uri {
   public static function getPreviousUrl(): string {
     $request = new Request();
 
-    $sanitize = new Sanitize(
-          $request->server(Request::HTTP_REFERER),
-          'url'
-      );
+    $sanitize = new Sanitize($request->server(RequestInterface::HTTP_REFERER), 'url');
 
     return (string) $sanitize->data();
   }
@@ -63,7 +61,7 @@ final class Uri {
   public static function getDomainExtension(): string {
     $request = new Request();
 
-    $hostExploded = explode('.', $request->server(Request::HTTP_HOST));
+    $hostExploded = explode('.', $request->server(RequestInterface::HTTP_HOST));
     $arrayKeyLast = array_key_last($hostExploded);
 
     return $hostExploded[$arrayKeyLast] ?? 'nl';

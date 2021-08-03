@@ -46,7 +46,7 @@ interface RouterInterface {
    *   The router object.
    *
    * @throws \Components\File\Exceptions\FileNotFoundException
-   *   If the routes file does not exists.
+   *   If the routes file does not exist.
    */
   public static function load(array $routes): Router;
 
