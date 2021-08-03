@@ -17,8 +17,8 @@ interface DatabaseConnectionInterface {
    *
    * @param int $fetchMethod
    *   The used method to fetch the database records.
-   * @param null $fetchArgument
-   *   This argument have a different meaning depending on the value of the
+   * @param int|null $fetchArgument
+   *   This argument has a different meaning depending on the value of the
    *   <i>fetch_style</i> parameter: <p><b>PDO::FETCH_COLUMN</b>: Returns the
    *   indicated 0-indexed column. </p>.
    * @param array $ctorArgs
@@ -28,7 +28,7 @@ interface DatabaseConnectionInterface {
    * @return mixed[]|null
    *   The fetched records.
    */
-  public function fetchAll(int $fetchMethod, $fetchArgument = NULL, array $ctorArgs = []): ?array;
+  public function fetchAll(int $fetchMethod, int $fetchArgument = NULL, array $ctorArgs = []): ?array;
 
   /**
    * Fetch one record from the database with the given fetch method.
@@ -48,6 +48,6 @@ interface DatabaseConnectionInterface {
    * @return string[]|object|null
    *   The fetched record.
    */
-  public function fetch(int $fetchMethod, $cursorOrientation = PDO::FETCH_ORI_NEXT, $cursorOffset = 0): array|object|null;
+  public function fetch(int $fetchMethod, int $cursorOrientation = PDO::FETCH_ORI_NEXT, int $cursorOffset = 0): array|object|null;
 
 }

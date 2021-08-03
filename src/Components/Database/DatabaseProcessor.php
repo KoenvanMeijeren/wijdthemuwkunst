@@ -25,7 +25,7 @@ final class DatabaseProcessor extends DatabaseConnection implements DatabaseProc
   /**
    * @inheritDoc
    */
-  public function fetchAll(int $fetchMethod, $fetchArgument = NULL, array $ctorArgs = []): ?array {
+  public function fetchAll(int $fetchMethod, int $fetchArgument = NULL, array $ctorArgs = []): ?array {
     if (!$fetchArgument) {
       return $this->statement->fetchAll($fetchMethod);
     }
@@ -36,7 +36,7 @@ final class DatabaseProcessor extends DatabaseConnection implements DatabaseProc
   /**
    * @inheritDoc
    */
-  public function fetch(int $fetchMethod, $cursorOrientation = PDO::FETCH_ORI_NEXT, $cursorOffset = 0): array|object|null {
+  public function fetch(int $fetchMethod, int $cursorOrientation = PDO::FETCH_ORI_NEXT, int $cursorOffset = 0): array|object|null {
     $result = $this->statement->fetch($fetchMethod, $cursorOrientation, $cursorOffset);
 
     return $result ?: null;

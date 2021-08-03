@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Components\Database\Scopes\SoftDelete;
 
 /**
- * Provides a trait for sub classes who uses soft delete.
+ * Provides a trait for subclasses who use soft delete.
  *
  * @package src\Model\Scopes\SoftDelete
  */

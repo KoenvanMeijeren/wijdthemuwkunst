@@ -102,11 +102,11 @@ abstract class DatabaseConnection implements DatabaseConnectionInterface {
   /**
    * {@inheritDoc}
    */
-  abstract public function fetchAll(int $fetchMethod, $fetchArgument = NULL, array $ctorArgs = []): ?array;
+  abstract public function fetchAll(int $fetchMethod, int $fetchArgument = NULL, array $ctorArgs = []): ?array;
 
   /**
    * {@inheritDoc}
    */
-  abstract public function fetch(int $fetchMethod, $cursorOrientation = PDO::FETCH_ORI_NEXT, $cursorOffset = 0): array|object|null;
+  abstract public function fetch(int $fetchMethod, int $cursorOrientation = PDO::FETCH_ORI_NEXT, int $cursorOffset = 0): array|object|null;
 
 }
