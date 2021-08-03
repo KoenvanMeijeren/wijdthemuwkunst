@@ -7,6 +7,7 @@
 declare(strict_types=1);
 
 use Components\Env\Env;
+use Components\Env\EnvInterface;
 use Components\Translation\TranslationOld;
 
 ?>
@@ -24,7 +25,7 @@ use Components\Translation\TranslationOld;
 
                 <div class="row">
                     <div class="col-md-12">
-                        <?php echo ucfirst($env ?? Env::DEVELOPMENT) ?>
+                        <?php echo ucfirst($env ?? EnvInterface::DEVELOPMENT) ?>
                     </div>
                 </div>
             </div>

@@ -5,6 +5,7 @@ namespace Modules\Contact\Controller;
 
 use Components\Header\Redirect;
 use Components\SuperGlobals\Url\Uri;
+use JetBrains\PhpStorm\Pure;
 use Modules\Contact\Actions\ContactAction;
 use Modules\Contact\Actions\SaveContactMessageAction;
 use System\Controller\ControllerBase;
@@ -21,7 +22,7 @@ final class ContactController extends ControllerBase {
    *
    * {@inheritDoc}
    */
-  public function __construct(){
+  #[Pure] public function __construct(){
     parent::__construct('Contact/Views/');
   }
 

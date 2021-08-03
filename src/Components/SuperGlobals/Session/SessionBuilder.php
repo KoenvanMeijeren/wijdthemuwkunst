@@ -68,7 +68,7 @@ final class SessionBuilder {
    * @param string $env
    *   The environment of the application.
    */
-  public function startSession(string $env = Env::PRODUCTION): void {
+  public function startSession(string $env = EnvInterface::PRODUCTION): void {
     if (PHP_SESSION_NONE !== session_status() || headers_sent()) {
       return;
     }

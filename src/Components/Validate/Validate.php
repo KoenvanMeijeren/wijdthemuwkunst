@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Components\Validate;
 
 use Components\Env\Env;
+use Components\Env\EnvInterface;
 use Components\Validate\Exceptions\Basic\InvalidTypeException;
 use Components\File\Exceptions\FileNotFoundException;
 use Components\File\Exceptions\FileNotOfResourceTypeException;
@@ -150,7 +151,7 @@ final class Validate implements ValidateInterface {
    * {@inheritDoc}
    */
   public function isEnv(): ValidateInterface {
-    if (Env::DEVELOPMENT !== self::$var && Env::PRODUCTION !== self::$var) {
+    if (EnvInterface::DEVELOPMENT !== self::$var && EnvInterface::PRODUCTION !== self::$var) {
       throw new InvalidEnvException(self::$var);
     }
 
