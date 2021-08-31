@@ -4,10 +4,13 @@ declare(strict_types=1);
 use Components\Route\Router;
 use Domain\Admin\Accounts\User\Models\User;
 use Modules\Event\Controller\AdminEventController;
+use Modules\Event\Controller\EventArchiveController;
 use Modules\Event\Controller\EventController;
 
 Router::get('concerten', EventController::class, 'index');
 Router::get('concerten/concert/{slug}', EventController::class, 'show');
+Router::get('concerten/historie', EventArchiveController::class, 'index');
+Router::get('concerten/historie/concert/{slug}', EventArchiveController::class, 'show');
 
 // Events routes.
 Router::prefix('admin/content/events')->group(static function () {

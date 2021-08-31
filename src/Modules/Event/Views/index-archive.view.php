@@ -4,13 +4,13 @@
  * @file
  */
 
-use Domain\Admin\Event\Repositories\EventRepository;
 use Components\SuperGlobals\Url\Uri;
 use System\Breadcrumbs\Breadcrumbs;
 
-/**
- * @var \Domain\Admin\Event\Repositories\EventRepository $eventRepository */
-$eventRepository = $eventRepo ?? NULL;
+/** @var \Modules\Page\Entity\PageInterface $page_entity */
+$page_entity = $page ?? NULL;
+/** @var \Modules\Event\Entity\EventInterface[] $event_entities */
+$event_entities = $events ?? [];
 $breadcrumbs = new Breadcrumbs(Uri::getUrl());
 ?>
 
@@ -25,33 +25,31 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
         <?php endif; ?>
 
         <div class="events-content">
-            <?php echo html_entities_decode($eventRepository->getContent()) ?>
+            <?php echo html_entities_decode($page_entity->getContent()) ?>
         </div>
 
         <div class="row">
-            <?php if (isset($events) && count($events) > 0) :
-              foreach ($events as $singleEvent) :
-                $singleEventRepository = new EventRepository($singleEvent);
-                ?>
+            <?php if (count($event_entities) > 0) :
+              foreach ($event_entities as $event_entity) : ?>
                     <div class="col-md-4">
                         <div class="card">
-                            <a href="/concerten/historie/concert/<?php echo $singleEventRepository->getSlug() ?>"
+                            <a href="/concerten/historie/concert/<?php echo $event_entity->getSlug() ?>"
                                 class="link-without-styling">
                                 <img class="card-img-top"
-                                     alt="<?php echo $singleEventRepository->getTitle() ?> thumbnail"
-                                     src="<?php echo $singleEventRepository->getThumbnail() ?>"
+                                     alt="<?php echo $event_entity->getTitle() ?> thumbnail"
+                                     src="<?php echo $event_entity->getThumbnail() ?>"
                                 >
                                 <div class="card-body p-2">
                                     <div class="row">
                                         <div class="col-md-8">
                                             <h4 class="card-title p-0 m-0">
-                                                <?php echo $singleEventRepository->getTitle() ?>
+                                                <?php echo $event_entity->getTitle() ?>
                                             </h4>
                                         </div>
                                         <div class="col-md-4">
                                             <h4 class="card-title p-0 m-0">
-                                                <?php echo $singleEventRepository->getDayNumber() ?>
-                                                <?php echo $singleEventRepository->getShortDate() ?>
+                                                <?php echo $event_entity->getDayNumber() ?>
+                                                <?php echo $event_entity->getShortDate() ?>
                                             </h4>
                                         </div>
                                     </div>

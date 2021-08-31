@@ -3,6 +3,7 @@
 namespace Modules\Event\Entity;
 
 use Modules\Slug\SlugTrait;
+use System\Entity\EntityInterface;
 use System\Entity\EntityRepositoryBase;
 
 /**
@@ -28,6 +29,15 @@ final class EventRepository extends EntityRepositoryBase implements EventReposit
     $this->archivedEvents = $archived;
 
     return parent::all($columns);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function firstByAttributes(array $attributes, array $columns = ['*'], bool $archived = FALSE): ?EntityInterface {
+    $this->archivedEvents = $archived;
+
+    return parent::firstByAttributes($attributes, $columns);
   }
 
   /**
