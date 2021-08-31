@@ -14,7 +14,7 @@ use System\StateInterface;
 final class DeleteContactMessageAction extends BaseContactAction {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function handle(): bool {
     $status = $this->entity->delete();
@@ -34,7 +34,7 @@ final class DeleteContactMessageAction extends BaseContactAction {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function validate(): bool {
     return TRUE;

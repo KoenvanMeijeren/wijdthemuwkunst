@@ -22,7 +22,7 @@ final class TranslationOld extends LoaderOld {
   private static array $translations = [];
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function __construct() {
     trigger_deprecation('Components/Translation', '1.0', 'This class is deprecated, you should use the Translation class.');
@@ -39,7 +39,7 @@ final class TranslationOld extends LoaderOld {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public static function get(string $key): string {
     new self();

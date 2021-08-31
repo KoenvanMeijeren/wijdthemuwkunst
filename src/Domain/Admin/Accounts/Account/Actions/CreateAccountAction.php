@@ -16,7 +16,7 @@ use System\StateInterface;
 final class CreateAccountAction extends BaseAccountAction {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function handle(): bool {
     $account = $this->account->firstOrCreate([
@@ -47,7 +47,7 @@ final class CreateAccountAction extends BaseAccountAction {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function validate(): bool {
     $this->validator->input($this->name, TranslationOld::get('name'))

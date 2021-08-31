@@ -13,7 +13,7 @@ use System\StateInterface;
 final class PublishEventAction extends EventActionBase {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function handle(): bool {
     $this->entity->setPublished(TRUE)->save();

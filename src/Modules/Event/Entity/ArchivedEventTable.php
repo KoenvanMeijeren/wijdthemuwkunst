@@ -17,7 +17,7 @@ use System\Entity\EntityInterface;
 final class ArchivedEventTable extends DataTableBuilder {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function buildHead(): array {
     return [

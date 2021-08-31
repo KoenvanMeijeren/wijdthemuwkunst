@@ -83,7 +83,7 @@ abstract class EventActionBase extends EntityFormActionBase {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function validate(): bool {
     $this->validator->input('title', 'Concert titel')->isRequired();

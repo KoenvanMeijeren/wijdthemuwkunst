@@ -11,7 +11,7 @@ namespace Modules\Page\Actions;
 final class RemovePageThumbnailAction extends BasePageAction {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function handle(): bool {
     $this->entity->setThumbnail(NULL);
@@ -20,7 +20,7 @@ final class RemovePageThumbnailAction extends BasePageAction {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function validate(): bool {
     return TRUE;

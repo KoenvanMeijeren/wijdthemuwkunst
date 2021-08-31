@@ -16,7 +16,7 @@ use System\StateInterface;
 final class DeletePageAction extends BasePageAction {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function handle(): bool {
     $slug = $this->entity->getTitle();
@@ -40,7 +40,7 @@ final class DeletePageAction extends BasePageAction {
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   protected function authorize(): bool {
     $user = new User();
@@ -58,7 +58,7 @@ final class DeletePageAction extends BasePageAction {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function validate(): bool {
     return TRUE;

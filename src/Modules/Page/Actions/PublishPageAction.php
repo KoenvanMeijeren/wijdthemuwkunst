@@ -15,7 +15,7 @@ use System\StateInterface;
 final class PublishPageAction extends BasePageAction {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function handle(): bool {
     $this->entity->setPublished(TRUE);
@@ -24,7 +24,7 @@ final class PublishPageAction extends BasePageAction {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function authorize(): bool {
     if ($this->entity->getInMenu() === PageInterface::PAGE_STATIC) {
@@ -37,7 +37,7 @@ final class PublishPageAction extends BasePageAction {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function validate(): bool {
     return TRUE;

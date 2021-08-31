@@ -11,7 +11,7 @@ namespace Modules\Page\Actions;
 final class RemovePageBannerAction extends BasePageAction {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function handle(): bool {
     $this->entity->setBanner(NULL);
@@ -20,7 +20,7 @@ final class RemovePageBannerAction extends BasePageAction {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function validate(): bool {
     return TRUE;

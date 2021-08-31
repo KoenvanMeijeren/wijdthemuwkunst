@@ -19,7 +19,7 @@ final class EditViewModel {
   use ComponentsTrait;
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function __construct(private ?stdClass $account) {
     $this->account = $account;

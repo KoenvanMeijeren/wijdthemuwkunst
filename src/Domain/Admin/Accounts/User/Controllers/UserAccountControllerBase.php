@@ -23,7 +23,7 @@ final class UserAccountControllerBase extends AdminControllerBase {
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function index(): ViewInterface {
     return $this->view('index', [

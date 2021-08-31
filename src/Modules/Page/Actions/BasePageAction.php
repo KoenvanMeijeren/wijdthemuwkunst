@@ -81,7 +81,7 @@ abstract class BasePageAction extends EntityFormActionBase {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function validate(): bool {
     $this->validator->input('title', TranslationOld::get('title'))->isRequired();

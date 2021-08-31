@@ -11,7 +11,7 @@ namespace Modules\Page\Actions;
 final class SaveAndPublishPageAction extends BasePageUpdateAction {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function handle(): bool {
     $this->entity->setPublished(TRUE);

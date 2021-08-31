@@ -14,7 +14,7 @@ use stdClass;
 final class DatabaseProcessor extends DatabaseConnection implements DatabaseProcessorInterface {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function bindValues(array $values): void {
     foreach ($values as $column => $value) {
@@ -23,7 +23,7 @@ final class DatabaseProcessor extends DatabaseConnection implements DatabaseProc
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function fetchAll(int $fetchMethod, int|string $fetchArgument = NULL, array $ctorArgs = []): ?array {
     if (!$fetchArgument) {
@@ -34,7 +34,7 @@ final class DatabaseProcessor extends DatabaseConnection implements DatabaseProc
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function fetch(int $fetchMethod, int $cursorOrientation = PDO::FETCH_ORI_NEXT, int $cursorOffset = 0): array|object|null {
     $result = $this->statement->fetch($fetchMethod, $cursorOrientation, $cursorOffset);
@@ -43,28 +43,28 @@ final class DatabaseProcessor extends DatabaseConnection implements DatabaseProc
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function all(): ?array {
     return $this->fetchAll(PDO::FETCH_OBJ);
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function allToArray(): ?array {
     return $this->fetchAll(PDO::FETCH_NAMED);
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function allToClass(string $class): ?array {
     return $this->fetchAll(PDO::FETCH_CLASS, $class);
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function first(): ?stdClass {
     $result = $this->fetch(PDO::FETCH_OBJ);
@@ -76,14 +76,14 @@ final class DatabaseProcessor extends DatabaseConnection implements DatabaseProc
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function firstToArray(): ?array {
     return $this->fetch(PDO::FETCH_NAMED);
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function firstToClass(string $class): ?object {
     $data = $this->fetchAll(PDO::FETCH_CLASS, $class);
@@ -91,7 +91,7 @@ final class DatabaseProcessor extends DatabaseConnection implements DatabaseProc
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function getLastInsertedId(): int {
     return $this->lastInsertedId;

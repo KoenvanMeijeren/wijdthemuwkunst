@@ -13,7 +13,7 @@ use Components\Translation\TranslationOld;
 final class UpdateUserDataAction extends BaseUserAction {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function prepareAttributes(): void {
     $this->attributes = [
@@ -22,7 +22,7 @@ final class UpdateUserDataAction extends BaseUserAction {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function validate(): bool {
     $this->validator->input($this->name, TranslationOld::get('name'))->isRequired();

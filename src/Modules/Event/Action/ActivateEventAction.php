@@ -13,7 +13,7 @@ use System\StateInterface;
 class ActivateEventAction extends EventActionBase {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function handle(): bool {
     $this->entity->setArchived(FALSE);

@@ -11,7 +11,7 @@ namespace Modules\Menu\Actions;
 final class CreateMenuAction extends BaseMenuAction {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function handle(): bool {
     $this->entity->setSlug($this->request()->post('slug'));

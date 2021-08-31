@@ -41,7 +41,7 @@ class DeleteEventAction extends EventActionBase {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function validate(): bool {
     return TRUE;

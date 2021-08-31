@@ -14,7 +14,7 @@ use System\StateInterface;
 final class UpdateAccountEmailAction extends BaseAccountAction {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function handle(): bool {
     $this->account->update($this->account->getId(), [
@@ -30,7 +30,7 @@ final class UpdateAccountEmailAction extends BaseAccountAction {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function validate(): bool {
     // Only validate if the email has been changed.

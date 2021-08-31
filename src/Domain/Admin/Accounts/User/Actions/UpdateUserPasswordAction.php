@@ -13,7 +13,7 @@ use Domain\Admin\Accounts\Account\Models\Account;
 final class UpdateUserPasswordAction extends BaseUserAction {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function prepareAttributes(): void {
     $this->attributes = [
@@ -25,7 +25,7 @@ final class UpdateUserPasswordAction extends BaseUserAction {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function validate(): bool {
     $this->validator->input($this->currentPassword)

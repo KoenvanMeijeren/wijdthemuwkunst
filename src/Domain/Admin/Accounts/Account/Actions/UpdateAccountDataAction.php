@@ -15,7 +15,7 @@ use System\StateInterface;
 final class UpdateAccountDataAction extends BaseAccountAction {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function handle(): bool {
     $this->account->update($this->account->getId(), [
@@ -32,7 +32,7 @@ final class UpdateAccountDataAction extends BaseAccountAction {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function authorize(): bool {
     if ($this->rights !== $this->user->getRights()
@@ -50,7 +50,7 @@ final class UpdateAccountDataAction extends BaseAccountAction {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function validate(): bool {
     $this->validator->input($this->name, TranslationOld::get('name'))

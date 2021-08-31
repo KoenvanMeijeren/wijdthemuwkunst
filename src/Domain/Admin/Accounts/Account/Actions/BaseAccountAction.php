@@ -25,7 +25,7 @@ abstract class BaseAccountAction extends FormAction {
   protected int $rights;
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function __construct() {
     $this->user = new User();

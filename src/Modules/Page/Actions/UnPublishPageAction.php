@@ -24,7 +24,7 @@ final class UnPublishPageAction extends BasePageAction {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function authorize(): bool {
     if ($this->entity->getInMenu() === PageInterface::PAGE_STATIC) {
@@ -37,7 +37,7 @@ final class UnPublishPageAction extends BasePageAction {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function validate(): bool {
     return TRUE;

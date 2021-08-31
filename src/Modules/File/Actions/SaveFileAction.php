@@ -68,14 +68,14 @@ final class SaveFileAction extends EntityActionBase {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function authorize(): bool {
     return TRUE;
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function validate(): bool {
     return TRUE;

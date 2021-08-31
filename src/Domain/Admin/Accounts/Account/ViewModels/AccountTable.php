@@ -19,7 +19,7 @@ use System\DataTable\DataTableBuilder;
 final class AccountTable extends DataTableBuilder {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function buildHead(): array {
     return [
@@ -31,7 +31,7 @@ final class AccountTable extends DataTableBuilder {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function buildRow(object $data): array {
     $account = new AccountRepository($data);
@@ -51,7 +51,7 @@ final class AccountTable extends DataTableBuilder {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function buildRowActions(object $data): string {
     $account = new AccountRepository($data);

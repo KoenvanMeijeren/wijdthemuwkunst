@@ -41,7 +41,7 @@ final class UploadImageAction extends FileAction {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function handle(): bool {
     if (isset($this->file['name'])) {

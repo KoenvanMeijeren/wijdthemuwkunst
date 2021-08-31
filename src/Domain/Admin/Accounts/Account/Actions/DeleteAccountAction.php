@@ -14,7 +14,7 @@ use System\StateInterface;
 final class DeleteAccountAction extends BaseAccountAction {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function handle(): bool {
     $this->account->delete($this->account->getId());
@@ -37,7 +37,7 @@ final class DeleteAccountAction extends BaseAccountAction {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function authorize(): bool {
     if ($this->user->getId() === $this->account->getId()) {
@@ -52,7 +52,7 @@ final class DeleteAccountAction extends BaseAccountAction {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function validate(): bool {
     return TRUE;

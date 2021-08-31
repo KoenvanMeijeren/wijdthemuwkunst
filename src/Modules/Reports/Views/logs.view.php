@@ -103,13 +103,12 @@ use System\StateInterface;
 
                                         <ul class="list-group list-group-flush">
                                             <?php
-                                            if (str_contains($log['message'] ?? '', 'ERROR')
-                                                || str_contains($log['message'] ?? '', 'failed')
-                                            ) {
+                                            $message = $log['message'] ?? NULL;
+                                            $class = 'list-group-item-success';
+                                            if (str_contains($message, StateInterface::ERROR) || str_contains($message, StateInterface::FAILED)) {
                                               $class = 'list-group-item-danger';
-                                            }
-                                            else {
-                                              $class = 'list-group-item-success';
+                                            } elseif (str_contains($message, StateInterface::DEBUG)) {
+                                              $class = 'list-group-item-primary';
                                             }
                                             ?>
                                             <li class="list-group-item <?= $class ?>">

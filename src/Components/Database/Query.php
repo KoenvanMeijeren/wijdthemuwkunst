@@ -425,7 +425,7 @@ final class Query implements QueryInterface {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function execute(): DatabaseProcessorInterface {
     return new DatabaseProcessor($this->getQuery(), $this->getValues());
@@ -502,7 +502,7 @@ final class Query implements QueryInterface {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function addStatement(string $statement): Query {
     if (str_contains($this->query, 'WHERE')) {
@@ -515,7 +515,7 @@ final class Query implements QueryInterface {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function addStatementWithValues(string $statement, array $values): QueryInterface {
     if (str_contains($this->query, 'WHERE')) {
@@ -531,7 +531,7 @@ final class Query implements QueryInterface {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function getQuery(): string {
     $this->addHooksForJoins();
@@ -540,7 +540,7 @@ final class Query implements QueryInterface {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function addValues(array $values): void {
     foreach ($values as $column => $condition) {
@@ -549,7 +549,7 @@ final class Query implements QueryInterface {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function getValues(): array {
     return $this->values;

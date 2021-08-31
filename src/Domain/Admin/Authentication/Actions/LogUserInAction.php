@@ -82,7 +82,7 @@ final class LogUserInAction extends FormAction {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function authorize(): bool {
     if ($this->account->isBlocked()) {
@@ -95,7 +95,7 @@ final class LogUserInAction extends FormAction {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function validate(): bool {
     $this->validator->input($this->email, TranslationOld::get('email'))
@@ -109,14 +109,14 @@ final class LogUserInAction extends FormAction {
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   private function storeToken(string $token): void {
     $this->attributes['account_login_token'] = $token;
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   private function rehashPassword(): void {
     if (password_needs_rehash($this->account->getPassword(), Account::PASSWORD_HASH_METHOD)) {
@@ -127,7 +127,7 @@ final class LogUserInAction extends FormAction {
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   private function resetFailedLogInAttempts(): void {
     if ($this->account->getRights() > User::ADMIN) {
@@ -138,7 +138,7 @@ final class LogUserInAction extends FormAction {
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   private function addFailedLogInAttempt(): void {
     if ($this->account->getRights() > User::ADMIN) {
@@ -164,7 +164,7 @@ final class LogUserInAction extends FormAction {
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   private function store(): void {
     if (count($this->attributes) === 0) {

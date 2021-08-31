@@ -34,7 +34,7 @@ final class AccountController extends AdminControllerBase {
   protected string $redirectBack = '/admin/account';
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function __construct() {
     parent::__construct('Admin/Accounts/Account/Views/');
@@ -43,7 +43,7 @@ final class AccountController extends AdminControllerBase {
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function index(): ViewInterface {
     $accountTable = new AccountTable($this->account->all());
@@ -55,7 +55,7 @@ final class AccountController extends AdminControllerBase {
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function create(): ViewInterface {
     return $this->view('create', [
@@ -136,7 +136,7 @@ final class AccountController extends AdminControllerBase {
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function block(): Redirect {
     $block = new BlockAccountAction();
@@ -148,7 +148,7 @@ final class AccountController extends AdminControllerBase {
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function unblock(): Redirect {
     $unblock = new UnblockAccountAction();
@@ -160,7 +160,7 @@ final class AccountController extends AdminControllerBase {
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function destroy(): Redirect {
     $delete = new DeleteAccountAction();

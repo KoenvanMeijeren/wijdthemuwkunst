@@ -18,14 +18,14 @@ final class LogUserOutAction extends Action {
   private User $user;
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function __construct(User $user) {
     $this->user = $user;
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function handle(): bool {
     $builder = new SessionBuilder();
@@ -39,14 +39,14 @@ final class LogUserOutAction extends Action {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function authorize(): bool {
     return $this->user->isLoggedIn();
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function validate(): bool {
     return TRUE;

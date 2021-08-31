@@ -15,7 +15,7 @@ use System\StateInterface;
 final class UpdateAccountPasswordAction extends BaseAccountAction {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function handle(): bool {
     $this->account->update($this->account->getId(), [
@@ -33,7 +33,7 @@ final class UpdateAccountPasswordAction extends BaseAccountAction {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function validate(): bool {
     $this->validator->input($this->password, TranslationOld::get('password'))

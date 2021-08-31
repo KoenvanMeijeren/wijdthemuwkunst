@@ -28,7 +28,7 @@ abstract class BaseUserAction extends FormAction {
   protected array $attributes = [];
 
   /**
-   *
+   * {@inheritDoc}
    */
   public function __construct() {
     $this->user = new User();
@@ -49,7 +49,7 @@ abstract class BaseUserAction extends FormAction {
   abstract protected function prepareAttributes(): void;
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function handle(): bool {
     $this->prepareAttributes();
