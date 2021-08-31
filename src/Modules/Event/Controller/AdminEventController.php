@@ -103,7 +103,7 @@ final class AdminEventController extends EntityControllerBase {
       $update = new SaveAndPublishEventAction();
     }
 
-    if ($update->execute()) {
+    if ($update->execute() && !empty($this->request()->getRouteParameter())) {
       return new Redirect($this->redirectSame . $this->request()->getRouteParameter());
     }
 
