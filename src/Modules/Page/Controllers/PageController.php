@@ -6,6 +6,7 @@ namespace Modules\Page\Controllers;
 use Components\SuperGlobals\Url\Uri;
 use Components\Translation\TranslationOld;
 use Components\View\ViewInterface;
+use Modules\Event\Entity\Event;
 use Modules\Page\Entity\Page;
 use Modules\Page\Entity\PageInterface;
 use System\Entity\EntityControllerBase;
@@ -36,14 +37,17 @@ class PageController extends EntityControllerBase {
     $page = $this->repository->firstByAttributes([
       'slug_name' => 'home',
     ]);
-    $events = $this->repository->firstByAttributes([
+    $event_page = $this->repository->firstByAttributes([
       'slug_name' => 'concerten',
     ]);
+    $event_storage = $this->entityManager->getStorage(Event::class)->getRepository();
+    $events = $event_storage->all();
 
     return $this->view('index', [
       'title' => TranslationOld::get('home_page_title'),
       'page' => $page,
-      'event' => $events,
+      'event_page' => $event_page,
+      'events' => $events,
     ]);
   }
 

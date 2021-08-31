@@ -10,70 +10,70 @@ use Components\SuperGlobals\Request;
 
 $documentRoot = request()->server(Request::DOCUMENT_ROOT);
 
-/** @var \Modules\Page\Entity\PageInterface $pageEntity */
-$pageEntity = $page ?? NULL;
-/** @var \Modules\Event\Entity\EventInterface[] $eventEntities */
-$eventEntity = $event ?? NULL;
+/** @var \Modules\Page\Entity\PageInterface $page_entity */
+$page_entity = $page ?? NULL;
+/** @var \Modules\Page\Entity\PageInterface $event_page_entity */
+$event_page_entity = $event_page ?? NULL;
+/** @var \Modules\Event\Entity\EventInterface[] $event_entities */
+$event_entities = $events ?? NULL;
 ?>
 
-<?php if ($pageEntity->getBanner() !== '' && file_exists($documentRoot . $pageEntity->getBanner())) : ?>
+<?php if ($page_entity->getBanner() !== '' && file_exists($documentRoot . $page_entity->getBanner())) : ?>
   <!-- Banner -->
   <section class="header">
-    <img class="banner" src="<?= $pageEntity->getBanner() ?>"
-         alt="<?= $pageEntity->getTitle() . ' image banner' ?>">
+    <img class="banner" src="<?= $page_entity->getBanner() ?>"
+         alt="<?= $page_entity->getTitle() . ' image banner' ?>">
   </section>
 <?php else : ?>
   <section class="header">
     <img class="banner" src="/themes/whuk_theme/src/images/banner.jpg"
-         alt="<?= $pageEntity->getTitle() . ' image banner' ?>">
+         alt="<?= $page_entity->getTitle() . ' image banner' ?>">
   </section>
 <?php endif;
-if ($pageEntity->getThumbnail() !== '' && file_exists($documentRoot . $pageEntity->getThumbnail())) : ?>
+if ($page_entity->getThumbnail() !== '' && file_exists($documentRoot . $page_entity->getThumbnail())) : ?>
   <!-- Thumbnail -->
   <section class="header">
-    <img class="thumbnail" src="<?= $pageEntity->getThumbnail() ?>"
-         alt="<?= $pageEntity->getTitle() . ' image banner' ?>">
+    <img class="thumbnail" src="<?= $page_entity->getThumbnail() ?>"
+         alt="<?= $page_entity->getTitle() . ' image banner' ?>">
   </section>
 <?php endif; ?>
 
 <div class="container page">
-  <?php if ($pageEntity->getContent() !== '') : ?>
+  <?php if ($page_entity->getContent() !== '') : ?>
     <div class="mt-5 mb-5">
-      <?= html_entities_decode($pageEntity->getContent()) ?>
+      <?= html_entities_decode($page_entity->getContent()) ?>
     </div>
   <?php endif; ?>
 
-  <?php if (isset($events) && !empty($events)) : ?>
+  <?php if (count($event_entities) > 0) : ?>
     <div class="mt-5 mb-5">
       <div class="row">
         <div class="events-content">
-          <?= html_entities_decode($eventEntity->getContent()) ?>
+          <?= html_entities_decode($event_page_entity->getContent()) ?>
         </div>
       </div>
 
       <div class="row">
-        <?php foreach ($events as $singleEvent) :
-          $event = new EventRepository($singleEvent);
-          ?>
+        <?php foreach ($event_entities as $eventEntity) : ?>
           <div class="col-md-4">
             <div class="card">
-              <a href="/concerten/concert/<?= $event->getSlug() ?>"
+              <a href="/concerten/concert/<?= $eventEntity->getSlug() ?>"
                  class="link-without-styling">
                 <img class="card-img-top"
-                     alt="<?= $event->getTitle() ?> thumbnail"
-                     src="<?= $event->getThumbnail() ?>"
+                     alt="<?= $eventEntity->getTitle() ?> thumbnail"
+                     src="<?= $eventEntity->getThumbnail() ?>"
                 >
                 <div class="card-body p-2">
                   <div class="row">
                     <div class="col-md-8">
                       <h4 class="card-title p-0 m-0">
-                        <?= $event->getTitle() ?>
+                        <?= $eventEntity->getTitle() ?>
                       </h4>
                     </div>
                     <div class="col-md-4">
                       <h4 class="card-title p-0 m-0">
-                        <?= $event->getDayNumber() ?>
-                        <?= $event->getShortDate() ?>
+                        <?= $eventEntity->getDayNumber() ?>
+                        <?= $eventEntity->getShortDate() ?>
                       </h4>
                     </div>
                   </div>
