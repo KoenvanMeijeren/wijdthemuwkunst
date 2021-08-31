@@ -3,10 +3,12 @@ declare(strict_types=1);
 
 namespace Modules\Event\Controller;
 
-use Domain\Admin\Event\Repositories\EventRepository;
+use Components\Translation\TranslationOld;
 use Components\View\ViewInterface;
+use Modules\Event\Entity\Event;
+use Modules\Event\Entity\EventInterface;
+use Modules\Page\Entity\Page;
 use System\Entity\EntityControllerBase;
-use System\View\DomainView;
 
 /**
  * Provides a controller for events.
@@ -16,22 +18,35 @@ use System\View\DomainView;
 class EventController extends EntityControllerBase {
 
   /**
+   * EventController constructor.
+   */
+  public function __construct(){
+    parent::__construct(entityClass: Event::class, baseViewPath: 'Event/Views/');
+  }
+
+  /**
    * The index page of the events.
    *
    * @return \Components\View\ViewInterface
    *   The view.
    */
   public function index(): ViewInterface {
-    $eventRepo = new PageRepository($this->page->getBySlug('concerten'));
-    $eventArchiveRepo = new PageRepository($this->page->getBySlug('concerten-historie'));
+    $page_storage = $this->entityManager->getStorage(Page::class)->getRepository();
+    $page = $page_storage->firstByAttributes([
+      'slug_name' => 'concerten',
+    ]);
+    $archived_page = $page_storage->firstByAttributes([
+      'slug_name' => 'concerten-historie',
+    ]);
+    $events = $this->repository->all();
+    $archived_events = $this->repository->all(['*'], TRUE);
 
     return $this->view('index', [
-      'title' => $eventRepo->getTitle(),
-      'eventRepo' => $eventRepo,
-      'eventArchiveRepo' => $eventArchiveRepo,
-      'events' => $this->event->all(),
-      'event_archive' => $this->eventArchive->getLimited(3),
-      'amount_of_events' => $this->eventArchive->getAmountOfEvents(),
+      'title' => TranslationOld::get('home_page_title'),
+      'page' => $page,
+      'archived_page' => $archived_page,
+      'events' => $events,
+      'archived_events' => $archived_events,
     ]);
   }
 
@@ -42,15 +57,30 @@ class EventController extends EntityControllerBase {
    *   The view.
    */
   public function show(): ViewInterface {
-    $event = $this->event->getBySlug($this->event->getSlug());
-    if ($event === NULL) {
-      return $this->notFound();
+    $event = $this->repository->firstByAttributes([
+      'slug_name' => $this->request()->getRouteParameter(),
+    ]);
+
+    if ($event instanceof EventInterface) {
+      return $this->view('show', [
+        'title' => $event->getTitle(),
+        'event' => $event,
+      ]);
     }
 
-    $eventRepo = new EventRepository($event);
-    return new DomainView($this->baseViewPath . 'show', [
-      'title' => $eventRepo->getTitle(),
-      'eventRepo' => $eventRepo,
+    return $this->notFound();
+  }
+
+  /**
+   * Shows the default 404 page.
+   *
+   * @return \Components\View\ViewInterface
+   *   The view.
+   */
+  public function notFound(): ViewInterface {
+    return $this->view('404', [
+      'title' => TranslationOld::get('page_not_found_title'),
+      'content' => TranslationOld::get('page_not_found_description'),
     ]);
   }
 

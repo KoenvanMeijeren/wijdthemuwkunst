@@ -36,6 +36,13 @@ final class DateTime implements DateTimeInterface {
   /**
    * {@inheritDoc}
    */
+  public function toDatabaseFormat(): string {
+    return $this->datetime->format('Y-m-d H:i:s');
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public function toTimestamp(): int {
     return $this->datetime->getTimestamp();
   }

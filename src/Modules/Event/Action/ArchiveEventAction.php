@@ -1,28 +1,29 @@
 <?php
 
-namespace Domain\Admin\Event\Actions;
+namespace Modules\Event\Action;
 
 use Components\Translation\TranslationOld;
 use System\StateInterface;
 
 /**
+ * Provides an action for archiving events.
  *
+ * @package Modules\Event\Action
  */
-class ArchiveEventAction extends BaseEventAction {
+class ArchiveEventAction extends EventActionBase {
 
   /**
    * {@inheritDoc}
    */
   protected function handle(): bool {
-    $this->event->update($this->eventRepository->getId(), [
-      'event_is_archived' => '1',
-    ]);
+    $this->entity->setArchived(TRUE);
+    $this->entity->save();
 
     $this->session()->flash(
           StateInterface::SUCCESSFUL,
           sprintf(
               TranslationOld::get('event_successfully_archived'),
-              $this->eventRepository->getTitle()
+              $this->entity->getTitle()
           )
       );
 
@@ -33,12 +34,12 @@ class ArchiveEventAction extends BaseEventAction {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    if (!$this->eventRepository->isPublished()) {
+    if (!$this->entity->isPublished()) {
       $this->session()->flash(
             StateInterface::FAILED,
             sprintf(
                 TranslationOld::get('event_cannot_archive_not_published'),
-                $this->eventRepository->getTitle()
+                $this->entity->getTitle()
             )
         );
 

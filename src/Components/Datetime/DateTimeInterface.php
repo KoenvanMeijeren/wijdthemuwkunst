@@ -50,6 +50,14 @@ interface DateTimeInterface {
   public function toDayNumber(): int;
 
   /**
+   * Converts the datetime to a database date format.
+   *
+   * @return string
+   *   The database date format.
+   */
+  public function toDatabaseFormat(): string;
+
+  /**
    * Converts the datetime to a readable date format.
    *
    * @return string

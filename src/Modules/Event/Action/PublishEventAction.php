@@ -1,28 +1,28 @@
 <?php
 
-namespace Domain\Admin\Event\Actions;
+namespace Modules\Event\Action;
 
 use Components\Translation\TranslationOld;
 use System\StateInterface;
 
 /**
+ * Provides an action for publishing events.
  *
+ * @package Modules\Event\Action
  */
-final class PublishEventAction extends BaseEventAction {
+final class PublishEventAction extends EventActionBase {
 
   /**
    * @inheritDoc
    */
   protected function handle(): bool {
-    $this->event->update($this->eventRepository->getId(), [
-      'event_is_published' => '1',
-    ]);
+    $this->entity->setPublished(TRUE)->save();
 
     $this->session()->flash(
           StateInterface::SUCCESSFUL,
           sprintf(
               TranslationOld::get('event_successfully_published'),
-              $this->eventRepository->getTitle()
+              $this->entity->getTitle()
           )
       );
 
@@ -30,7 +30,7 @@ final class PublishEventAction extends BaseEventAction {
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   protected function validate(): bool {
     return TRUE;

@@ -12,28 +12,28 @@ use System\Breadcrumbs\Breadcrumbs;
 
 $documentRoot = request()->server(Request::DOCUMENT_ROOT);
 
-/** @var \Domain\Admin\Event\Repositories\EventRepository $event */
-$event = $eventRepo ?? NULL;
+/** @var \Modules\Event\Entity\EventInterface $entity */
+$entity = $event ?? NULL;
 $breadcrumbs = new Breadcrumbs(Uri::getUrl());
 ?>
 
-<?php if ($event->getBanner() !== ''
+<?php if ($entity->getBanner() !== ''
     && file_exists($documentRoot . $event->getBanner())
 ) : ?>
     <!-- Banner -->
     <section class="header">
-        <img class="banner" src="<?php echo $event->getBanner() ?>"
-             alt="<?php echo $event->getTitle() . ' image banner' ?>">
+        <img class="banner" src="<?php echo $entity->getBanner() ?>"
+             alt="<?php echo $entity->getTitle() . ' image banner' ?>">
     </section>
 <?php endif; ?>
 
-<?php if ($event->getThumbnail() !== ''
-    && file_exists($documentRoot . $event->getThumbnail())
+<?php if ($entity->getThumbnail() !== ''
+    && file_exists($documentRoot . $entity->getThumbnail())
 ) : ?>
     <!-- Thumbnail -->
     <section class="header">
-        <img class="thumbnail" src="<?php echo $event->getThumbnail() ?>"
-             alt="<?php echo $event->getTitle() . ' image thumbnail' ?>">
+        <img class="thumbnail" src="<?php echo $entity->getThumbnail() ?>"
+             alt="<?php echo $entity->getTitle() . ' image thumbnail' ?>">
     </section>
 <?php endif; ?>
 
@@ -50,20 +50,20 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
         <div class="row">
             <div class="col">
                 <h1>
-                    <?php echo $event->getTitle() ?>
+                    <?php echo $entity->getTitle() ?>
                 </h1>
                 <h4>
                     <i class="fas fa-calendar-alt"></i>
-                    <?php echo $event->getReadableDatetime() ?>
+                    <?php echo $entity->getReadableDatetime() ?>
 
                     <span class="mr-5"></span>
 
                     <i class="fas fa-map-marker-alt"></i>
-                    <?php echo $event->getLocation() ?>
+                    <?php echo $entity->getLocation() ?>
                 </h4>
             </div>
         </div>
 
-        <?php echo html_entities_decode($event->getContent()) ?>
+        <?php echo html_entities_decode($entity->getContent()) ?>
     </div>
 </div>

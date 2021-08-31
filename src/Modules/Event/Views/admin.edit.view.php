@@ -126,8 +126,8 @@ if (!empty($event?->getThumbnail()) || !empty($event?->getBanner())) {
                                 <span class="text-danger">*</span>
                             </label>
                             <input type="text" name="date" id="datepicker" class="form-control"
-                                   value="<?= request()->post('date', $event?->getDateTime()) ?>"
-                                   required>
+                                   value="<?= request()->post('date', $event?->getDate()) ?>"
+                                   required autocomplete="off">
                         </div>
 
                         <div class="form-group">
@@ -138,7 +138,7 @@ if (!empty($event?->getThumbnail()) || !empty($event?->getBanner())) {
                             <input type="text" name="time" id="timepicker" class="form-control"
                                    placeholder="<?= TranslationOld::get('form_time') ?>"
                                    value="<?= request()->post('time', $event?->getTime()) ?>"
-                                   required>
+                                   required autocomplete="off">
                         </div>
                     </div>
                 </div>
@@ -273,7 +273,7 @@ if (!empty($event?->getThumbnail()) || !empty($event?->getBanner())) {
 
         <?php if (!$event?->isPublished()) : ?>
             <button type="submit" data-toggle="tooltip" data-placement="top"
-                    name="save-and-publish"
+                    name="save-and-publish" value="save_and_publish"
                     title="<?= TranslationOld::get('save_and_publish_button') ?>"
                     class="btn btn-outline-success">
                 <?= TranslationOld::get('save_and_publish_button') ?>

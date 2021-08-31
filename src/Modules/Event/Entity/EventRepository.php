@@ -6,7 +6,7 @@ use Modules\Slug\SlugTrait;
 use System\Entity\EntityRepositoryBase;
 
 /**
- * Defines a repository for Page entities.
+ * Defines a repository for Event entities.
  *
  * @package Modules\Event\Entity
  */
@@ -37,9 +37,7 @@ final class EventRepository extends EntityRepositoryBase implements EventReposit
     $this->addSlugJoin($this->query, 'event_slug_ID');
     $this->addSlugFilter($this->query);
 
-    if ($this->archivedEvents) {
-      $this->query->where('event_is_archived', '=', (string) TRUE);
-    }
+    $this->query->where('event_is_archived', '=', (string) $this->archivedEvents);
 
     parent::addGlobalFilters();
   }

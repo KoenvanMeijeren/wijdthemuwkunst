@@ -126,18 +126,42 @@ interface EventInterface extends EntityInterface, SlugInterface {
   /**
    * Gets the date of the entity.
    *
-   * @return string|null
+   * @return string
    *   The date of the entity.
    */
-  public function getDate(): ?string;
+  public function getDate(): string;
 
   /**
    * Gets the time of the entity.
    *
-   * @return string|null
+   * @return string
    *   The time of the entity.
    */
-  public function getTime(): ?string;
+  public function getTime(): string;
+
+  /**
+   * Gets the time of the entity.
+   *
+   * @return string
+   *   The time of the entity.
+   */
+  public function getReadableDatetime(): string;
+
+  /**
+   * Gets the time of the entity.
+   *
+   * @return string
+   *   The time of the entity.
+   */
+  public function getDayNumber(): string;
+
+  /**
+   * Gets the time of the entity.
+   *
+   * @return string
+   *   The time of the entity.
+   */
+  public function getShortDate(): string;
 
   /**
    * Determines if the text is deleted.

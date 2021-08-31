@@ -5,10 +5,22 @@ namespace Modules\Event\Controller;
 use Components\Header\Redirect;
 use Components\Translation\TranslationOld;
 use Components\View\ViewInterface;
+use Modules\Event\Action\ActivateEventAction;
+use Modules\Event\Action\ArchiveEventAction;
+use Modules\Event\Action\CreateEventAction;
+use Modules\Event\Action\DeleteEventAction;
+use Modules\Event\Action\PublishEventAction;
+use Modules\Event\Action\RemoveEventBannerAction;
+use Modules\Event\Action\RemoveEventThumbnailAction;
+use Modules\Event\Action\SaveAndPublishEventAction;
+use Modules\Event\Action\UnPublishEventAction;
+use Modules\Event\Action\UpdateEventAction;
 use Modules\Event\Entity\ArchivedEventTable;
 use Modules\Event\Entity\Event;
+use Modules\Event\Entity\EventInterface;
 use Modules\Event\Entity\EventTable;
 use System\Entity\EntityControllerBase;
+use System\StateInterface;
 
 /**
  * Provides a class for event actions.
@@ -60,7 +72,7 @@ final class AdminEventController extends EntityControllerBase {
 
   public function store(): ViewInterface|Redirect {
     $create = new CreateEventAction();
-    if ($this->request()->post('save-and-publish') !== '') {
+    if ($this->request()->post('save-and-publish') === 'save_and_publish') {
       $create = new SaveAndPublishEventAction();
     }
 
@@ -71,24 +83,23 @@ final class AdminEventController extends EntityControllerBase {
     return $this->create();
   }
 
-  public function edit(): ViewInterface {
-    $event = new EditViewModel(
-          $this->event->find($this->event->getId())
-      );
-    $eventRepository = new EventRepository($event->get());
+  public function edit(): ViewInterface|Redirect {
+    $event = $this->repository->loadById((int) $this->request()->getRouteParameter());
+    if (!$event instanceof EventInterface) {
+      $this->session()->flash(StateInterface::FAILED, TranslationOld::get('page_does_not_exists'));
+
+      return new Redirect($this->redirectBack);
+    }
 
     return $this->view('edit', [
-      'title' => sprintf(
-              TranslationOld::get('admin_edit_event_title'),
-              $eventRepository->getTitle()
-      ),
-      'event' => $event->get(),
+      'title' => sprintf(TranslationOld::get('admin_edit_event_title'), $event->getTitle()),
+      'event' => $event,
     ]);
   }
 
   public function update(): ViewInterface|Redirect {
     $update = new UpdateEventAction();
-    if ($this->request()->post('save-and-publish') !== '') {
+    if ($this->request()->post('save-and-publish') === 'save_and_publish') {
       $update = new SaveAndPublishEventAction();
     }
 

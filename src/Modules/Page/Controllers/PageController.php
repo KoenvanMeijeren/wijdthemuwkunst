@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Modules\Page\Controllers;
 
-use Components\SuperGlobals\Request;
-use Components\SuperGlobals\RequestInterface;
 use Components\SuperGlobals\Url\Uri;
 use Components\Translation\TranslationOld;
 use Components\View\ViewInterface;

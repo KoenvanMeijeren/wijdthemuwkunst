@@ -7,13 +7,12 @@
 declare(strict_types=1);
 
 use Components\SuperGlobals\Request;
-use Domain\Admin\Event\Repositories\EventRepository;
 
 $documentRoot = request()->server(Request::DOCUMENT_ROOT);
 
 /** @var \Modules\Page\Entity\PageInterface $pageEntity */
 $pageEntity = $page ?? NULL;
-/** @var \Modules\Page\Entity\PageInterface[] $eventEntities */
+/** @var \Modules\Event\Entity\EventInterface[] $eventEntities */
 $eventEntity = $event ?? NULL;
 ?>
 

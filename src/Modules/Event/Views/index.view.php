@@ -4,46 +4,45 @@
  * @file
  */
 
-use Domain\Admin\Event\Repositories\EventRepository;
-
-/**
- * @var \Domain\Admin\Event\Repositories\EventRepository $eventRepository */
-$eventRepository = $eventRepo ?? NULL;
-/**
- * @var \Domain\Admin\Event\Repositories\EventRepository $eventArchiveRepository */
-$eventArchiveRepository = $eventArchiveRepo ?? NULL;
+/** @var \Modules\Page\Entity\PageInterface $page_entity */
+$page_entity = $page ?? NULL;
+/** @var \Modules\Page\Entity\PageInterface $archived_page_entity */
+$archived_page_entity = $archived_page ?? NULL;
+/** @var \Modules\Event\Entity\EventInterface[] $event_entities */
+$event_entities = $events ?? [];
+/** @var \Modules\Event\Entity\EventInterface[] $archived_event_entities */
+$archived_event_entities = $archived_events ?? [];
 ?>
 
 <div class="container page">
     <div class="mt-5 mb-5">
         <div class="events-content">
-            <?php echo html_entities_decode($eventRepository->getContent()) ?>
+            <?php echo html_entities_decode($page_entity->getContent()) ?>
         </div>
 
         <div class="row">
-            <?php if (isset($events) && count($events) > 0) :
-              foreach ($events as $singleEvent) :
-                $singleEventRepository = new EventRepository($singleEvent);
+            <?php if (count($event_entities) > 0) :
+              foreach ($event_entities as $event_entity) :
                 ?>
                     <div class="col-md-4">
                         <div class="card">
-                            <a href="/concerten/concert/<?php echo $singleEventRepository->getSlug() ?>"
+                            <a href="/concerten/concert/<?php echo $event_entity->getSlug() ?>"
                                class="link-without-styling">
                                 <img class="card-img-top"
-                                     alt="<?php echo $singleEventRepository->getTitle() ?> thumbnail"
-                                     src="<?php echo $singleEventRepository->getThumbnail() ?>"
+                                     alt="<?php echo $event_entity->getTitle() ?> thumbnail"
+                                     src="<?php echo $event_entity->getThumbnail() ?>"
                                 >
                                 <div class="card-body p-2">
                                     <div class="row">
                                         <div class="col-md-8">
                                             <h4 class="card-title p-0 m-0">
-                                                <?php echo $singleEventRepository->getTitle() ?>
+                                                <?php echo $event_entity->getTitle() ?>
                                             </h4>
                                         </div>
                                         <div class="col-md-4">
                                             <h4 class="card-title p-0 m-0">
-                                                <?php echo $singleEventRepository->getDayNumber() ?>
-                                                <?php echo $singleEventRepository->getShortDate() ?>
+                                                <?php echo $event_entity->getDayNumber() ?>
+                                                <?php echo $event_entity->getShortDate() ?>
                                             </h4>
                                         </div>
                                     </div>
@@ -60,33 +59,31 @@ $eventArchiveRepository = $eventArchiveRepo ?? NULL;
         </div>
 
         <div class="row">
-            <?php if (isset($event_archive) && count($event_archive) > 0) : ?>
+            <?php if (count($archived_event_entities) > 0) : ?>
                 <div class="col-md-12 events-content">
-                    <?php echo html_entities_decode($eventArchiveRepository->getContent()) ?>
+                    <?php echo html_entities_decode($archived_page_entity->getContent()) ?>
                 </div>
 
-                <?php foreach ($event_archive as $singleEvent) :
-                  $singleEventRepository = new EventRepository($singleEvent);
-                  ?>
+                <?php foreach ($archived_event_entities as $archived_event_entity) : ?>
                     <div class="col-md-4">
                         <div class="card">
-                            <a href="/concerten/historie/concert/<?php echo $singleEventRepository->getSlug() ?>"
+                            <a href="/concerten/historie/concert/<?php echo $archived_event_entity->getSlug() ?>"
                                class="link-without-styling">
                                 <img class="card-img-top"
-                                     alt="<?php echo $singleEventRepository->getTitle() ?> thumbnail"
-                                     src="<?php echo $singleEventRepository->getThumbnail() ?>"
+                                     alt="<?php echo $archived_event_entity->getTitle() ?> thumbnail"
+                                     src="<?php echo $archived_event_entity->getThumbnail() ?>"
                                 >
                                 <div class="card-body p-2">
                                     <div class="row">
                                         <div class="col-md-8">
                                             <h4 class="card-title p-0 m-0">
-                                                <?php echo $singleEventRepository->getTitle() ?>
+                                                <?php echo $archived_event_entity->getTitle() ?>
                                             </h4>
                                         </div>
                                         <div class="col-md-4">
                                             <h4 class="card-title p-0 m-0">
-                                                <?php echo $singleEventRepository->getDayNumber() ?>
-                                                <?php echo $singleEventRepository->getShortDate() ?>
+                                                <?php echo $archived_event_entity->getDayNumber() ?>
+                                                <?php echo $archived_event_entity->getShortDate() ?>
                                             </h4>
                                         </div>
                                     </div>
@@ -97,7 +94,7 @@ $eventArchiveRepository = $eventArchiveRepo ?? NULL;
                 <?php endforeach;
             endif; ?>
 
-            <?php if (isset($amount_of_events) && (int) $amount_of_events > 3) : ?>
+            <?php if (count($archived_event_entities) > 3) : ?>
                 <div class="col-md-12 text-center">
                     <a class="button" href="/concerten/historie">
                       <?= t('View more') ?>

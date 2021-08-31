@@ -4,6 +4,7 @@ namespace Modules\Event\Entity;
 
 use Cake\Chronos\Chronos;
 use Components\Datetime\DateTime;
+use Modules\Event\Utility\EventDatetimeConverter;
 use Modules\Slug\SlugTrait;
 use System\Entity\EntityBase;
 
@@ -105,7 +106,7 @@ final class Event extends EntityBase implements EventInterface {
    * {@inheritDoc}
    */
   public function setDate(DateTime $dateTime): EventInterface {
-    $this->set('date', $dateTime->toFormattedDate());
+    $this->set('date', $dateTime->toDatabaseFormat());
     return $this;
   }
 
@@ -132,6 +133,33 @@ final class Event extends EntityBase implements EventInterface {
     $datetime = new Chronos($this->getDateTime());
 
     return $datetime->toTimeString();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function getReadableDatetime(): string {
+    $datetime = new EventDatetimeConverter($this->getDatetime());
+
+    return $datetime->toReadable();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function getDayNumber(): string {
+    $datetime = new DateTime(new Chronos($this->getDatetime()));
+
+    return (string) $datetime->toDayNumber();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function getShortDate(): string {
+    $datetime = new DateTime(new Chronos($this->getDatetime()));
+
+    return $datetime->toShortMonth();
   }
 
   /**
