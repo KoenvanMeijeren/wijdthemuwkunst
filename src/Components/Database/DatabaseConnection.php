@@ -102,7 +102,7 @@ abstract class DatabaseConnection implements DatabaseConnectionInterface {
   /**
    * {@inheritDoc}
    */
-  abstract public function fetchAll(int $fetchMethod, int $fetchArgument = NULL, array $ctorArgs = []): ?array;
+  abstract public function fetchAll(int $fetchMethod, int|string $fetchArgument = NULL, array $ctorArgs = []): ?array;
 
   /**
    * {@inheritDoc}

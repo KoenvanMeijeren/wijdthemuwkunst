@@ -25,7 +25,7 @@ final class DatabaseProcessor extends DatabaseConnection implements DatabaseProc
   /**
    * @inheritDoc
    */
-  public function fetchAll(int $fetchMethod, int $fetchArgument = NULL, array $ctorArgs = []): ?array {
+  public function fetchAll(int $fetchMethod, int|string $fetchArgument = NULL, array $ctorArgs = []): ?array {
     if (!$fetchArgument) {
       return $this->statement->fetchAll($fetchMethod);
     }

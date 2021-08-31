@@ -17,7 +17,7 @@ interface DatabaseConnectionInterface {
    *
    * @param int $fetchMethod
    *   The used method to fetch the database records.
-   * @param int|null $fetchArgument
+   * @param int|string|null $fetchArgument
    *   This argument has a different meaning depending on the value of the
    *   <i>fetch_style</i> parameter: <p><b>PDO::FETCH_COLUMN</b>: Returns the
    *   indicated 0-indexed column. </p>.
@@ -25,10 +25,10 @@ interface DatabaseConnectionInterface {
    *   Arguments of custom class constructor when the <i>fetch_style</i>
    *   parameter is <b>PDO::FETCH_CLASS</b>.
    *
-   * @return mixed[]|null
+   * @return array|null
    *   The fetched records.
    */
-  public function fetchAll(int $fetchMethod, int $fetchArgument = NULL, array $ctorArgs = []): ?array;
+  public function fetchAll(int $fetchMethod, int|string $fetchArgument = NULL, array $ctorArgs = []): ?array;
 
   /**
    * Fetch one record from the database with the given fetch method.
