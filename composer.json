@@ -58,7 +58,7 @@
         "phpmd/phpmd": "^2.9.1",
         "phpmetrics/phpmetrics": "^2.7.4",
         "phpstan/phpstan": "^0.12.96",
-        "roave/security-advisories": "dev-master",
+        "roave/security-advisories": "dev-latest",
         "sebastian/phpcpd": "^4.1.0",
         "symfony/var-dumper": "^4.4.30"
     },
@@ -72,16 +72,16 @@
             "docker-compose -f docker-compose.yml -f docker-compose.dev.yml stop"
         ],
         "inspect": [
-          "vendor/bin/phpcs --standard=Drupal --extensions=php --ignore=view.php src/Modules/Text",
-            "vendor/bin/phpcpd app",
-            "vendor/bin/phpmd app text phpmd.xml"
+            "vendor/bin/phpcs --standard=Drupal --extensions=php --ignore=view.php src",
+            "vendor/bin/phpcpd src",
+            "vendor/bin/phpmd src text phpmd.xml"
         ],
         "inspect-fix": [
-            "vendor/bin/phpcbf --standard=Drupal --extensions=php --ignore=view.php app"
+            "vendor/bin/phpcbf --standard=Drupal --extensions=php --ignore=view.php src"
         ],
         "insights": [
-            "vendor/bin/phploc app",
-            "vendor/bin/phpmetrics --report-html=public_html/phpmetrics app",
+            "vendor/bin/phploc src",
+            "vendor/bin/phpmetrics --report-html=public_html/phpmetrics src",
             "vendor/bin/phpstan analyse -c phpstan.neon"
         ]
     }
