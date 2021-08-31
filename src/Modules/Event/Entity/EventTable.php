@@ -45,7 +45,7 @@ final class EventTable extends DataTableBuilder {
       $this->dataTable->addClasses('row-warning');
     }
 
-    $slug = "<a href='/concerten/concert/{$entity->getSlug()}' target='_blank'>{$entity->getSlug()}</a>";
+    $slug = "<a href='/concerten/concert/{$entity->getSlug()}' class='text-white' target='_blank'>{$entity->getSlug()}</a>";
 
     return [
       $slug,
