@@ -22,14 +22,14 @@ final class DeleteSettingAction extends BaseSettingAction {
     $status = $this->entity->delete();
     if ($status === EntityInterface::SAVED_DELETED) {
       $this->session()->flash(StateInterface::SUCCESSFUL,
-        sprintf(TranslationOld::get('text_successful_deleted'), $this->entity->getKey())
+        sprintf(TranslationOld::get('setting_successful_deleted'), $this->entity->getKey())
       );
 
       return TRUE;
     }
 
     $this->session()->flash(StateInterface::SUCCESSFUL,
-      sprintf(TranslationOld::get('text_unsuccessful_deleted'), $this->entity->getKey())
+      sprintf(TranslationOld::get('setting_unsuccessful_deleted'), $this->entity->getKey())
     );
 
     return FALSE;
@@ -40,7 +40,7 @@ final class DeleteSettingAction extends BaseSettingAction {
    */
   protected function authorize(): bool {
     if ($this->currentUser()->getRights() !== User::DEVELOPER) {
-      $this->session()->flash(StateInterface::FAILED, TranslationOld::get('text_destroy_not_allowed'));
+      $this->session()->flash(StateInterface::FAILED, TranslationOld::get('setting_destroy_not_allowed'));
 
       return FALSE;
     }
