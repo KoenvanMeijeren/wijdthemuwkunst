@@ -27,7 +27,7 @@ abstract class ModuleBase implements ModuleInterface {
 
       return $file_location;
     } catch (FileNotFoundException $exception) {
-      $this->log()->debug($exception->getMessage());
+
     }
 
     return null;
