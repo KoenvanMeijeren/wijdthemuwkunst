@@ -22,8 +22,8 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
 ) : ?>
     <!-- Banner -->
     <section class="header">
-        <img class="banner" src="<?php echo $entity->getBanner() ?>"
-             alt="<?php echo $entity->getTitle() . ' image banner' ?>">
+        <img class="banner" src="<?= $entity->getBanner() ?>"
+             alt="<?= $entity->getTitle() . ' image banner' ?>">
     </section>
 <?php endif; ?>
 
@@ -32,8 +32,8 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
 ) : ?>
     <!-- Thumbnail -->
     <section class="header">
-        <img class="thumbnail" src="<?php echo $entity->getThumbnail() ?>"
-             alt="<?php echo $entity->getTitle() . ' image thumbnail' ?>">
+        <img class="thumbnail" src="<?= $entity->getThumbnail() ?>"
+             alt="<?= $entity->getTitle() . ' image thumbnail' ?>">
     </section>
 <?php endif; ?>
 
@@ -42,7 +42,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
         <?php if ($breadcrumbs->visible()) : ?>
             <div class="row breadcrumbs">
                 <div class="col-sm-12">
-                    <?php echo $breadcrumbs->generate() ?>
+                    <?= $breadcrumbs->generate() ?>
                 </div>
             </div>
         <?php endif; ?>
@@ -50,20 +50,20 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
         <div class="row">
             <div class="col">
                 <h1>
-                    <?php echo $entity->getTitle() ?>
+                    <?= $entity->getTitle() ?>
                 </h1>
                 <h4>
                     <i class="fas fa-calendar-alt"></i>
-                    <?php echo $entity->getReadableDatetime() ?>
+                    <?= $entity->getReadableDatetime() ?>
 
                     <span class="mr-5"></span>
 
                     <i class="fas fa-map-marker-alt"></i>
-                    <?php echo $entity->getLocation() ?>
+                    <?= $entity->getLocation() ?>
                 </h4>
             </div>
         </div>
 
-        <?php echo html_entities_decode($entity->getContent()) ?>
+        <?= html_entities_decode($entity->getContent()) ?>
     </div>
 </div>

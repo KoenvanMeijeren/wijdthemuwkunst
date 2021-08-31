@@ -19,13 +19,13 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
         <?php if ($breadcrumbs->visible()) : ?>
             <div class="row breadcrumbs">
                 <div class="col-sm-12">
-                    <?php echo $breadcrumbs->generate() ?>
+                    <?= $breadcrumbs->generate() ?>
                 </div>
             </div>
         <?php endif; ?>
 
         <div class="events-content">
-            <?php echo html_entities_decode($page_entity->getContent()) ?>
+            <?= html_entities_decode($page_entity->getContent()) ?>
         </div>
 
         <div class="row">
@@ -33,23 +33,23 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
               foreach ($event_entities as $event_entity) : ?>
                     <div class="col-md-4">
                         <div class="card">
-                            <a href="/concerten/historie/concert/<?php echo $event_entity->getSlug() ?>"
+                            <a href="/concerten/historie/concert/<?= $event_entity->getSlug() ?>"
                                 class="link-without-styling">
                                 <img class="card-img-top"
-                                     alt="<?php echo $event_entity->getTitle() ?> thumbnail"
-                                     src="<?php echo $event_entity->getThumbnail() ?>"
+                                     alt="<?= $event_entity->getTitle() ?> thumbnail"
+                                     src="<?= $event_entity->getThumbnail() ?>"
                                 >
                                 <div class="card-body p-2">
                                     <div class="row">
                                         <div class="col-md-8">
                                             <h4 class="card-title p-0 m-0">
-                                                <?php echo $event_entity->getTitle() ?>
+                                                <?= $event_entity->getTitle() ?>
                                             </h4>
                                         </div>
                                         <div class="col-md-4">
                                             <h4 class="card-title p-0 m-0">
-                                                <?php echo $event_entity->getDayNumber() ?>
-                                                <?php echo $event_entity->getShortDate() ?>
+                                                <?= $event_entity->getDayNumber() ?>
+                                                <?= $event_entity->getShortDate() ?>
                                             </h4>
                                         </div>
                                     </div>

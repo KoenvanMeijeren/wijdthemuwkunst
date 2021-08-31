@@ -18,14 +18,14 @@ use Components\Translation\TranslationOld;
                 <div class="row no-gutters align-items-center">
                     <div class="col-md-12 mr-2 mb-4">
                         <div class="text-lg font-weight-bold text-primary text-uppercase mb-1">
-                            <?php echo TranslationOld::get('app_status') ?>
+                            <?= TranslationOld::get('app_status') ?>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-12">
-                        <?php echo ucfirst($env ?? EnvInterface::DEVELOPMENT) ?>
+                        <?= ucfirst($env ?? EnvInterface::DEVELOPMENT) ?>
                     </div>
                 </div>
             </div>
@@ -38,14 +38,14 @@ use Components\Translation\TranslationOld;
                 <div class="row no-gutters align-items-center">
                     <div class="col-md-12 mr-2 mb-4">
                         <div class="text-lg font-weight-bold text-primary text-uppercase mb-1">
-                            <?php echo TranslationOld::get('header_data') ?>
+                            <?= TranslationOld::get('header_data') ?>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-12">
-                        <?php echo $headerDataTable ?? TranslationOld::get('no_header_data_available') ?>
+                        <?= $headerDataTable ?? TranslationOld::get('no_header_data_available') ?>
                     </div>
                 </div>
             </div>
@@ -58,14 +58,14 @@ use Components\Translation\TranslationOld;
                 <div class="row no-gutters align-items-center">
                     <div class="col-md-12 mr-2 mb-4">
                         <div class="text-lg font-weight-bold text-primary text-uppercase mb-1">
-                            <?php echo TranslationOld::get('session_settings') ?>
+                            <?= TranslationOld::get('session_settings') ?>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-12">
-                        <?php echo $sessionSettingsTable ?? TranslationOld::get('no_session_settings_data_available') ?>
+                        <?= $sessionSettingsTable ?? TranslationOld::get('no_session_settings_data_available') ?>
                     </div>
                 </div>
             </div>
@@ -88,7 +88,7 @@ use Components\Translation\TranslationOld;
                 <div class="row">
                     <div class="col-md-12">
                         <div class="scrollbox-vertical h-500">
-                            <?php echo $phpinfo ?? '' ?>
+                            <?= $phpinfo ?? '' ?>
                         </div>
                     </div>
                 </div>

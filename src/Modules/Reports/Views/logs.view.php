@@ -19,7 +19,7 @@ use System\StateInterface;
                     <div class="col-md-12 mr-2 mb-4">
                         <div
                             class="text-lg font-weight-bold text-primary text-uppercase mb-1 float-left">
-                            <?php echo TranslationOld::get('logs_data') ?>
+                            <?= TranslationOld::get('logs_data') ?>
                         </div>
 
                         <form class="form-inline float-right" method="get">
@@ -27,20 +27,20 @@ use System\StateInterface;
                                 <label for="unlimited-datepicker"></label>
                                 <input type="text" name="date"
                                        autocomplete="off"
-                                       placeholder="<?php echo TranslationOld::get('form_date') ?>"
+                                       placeholder="<?= TranslationOld::get('form_date') ?>"
                                        class="form-control"
                                        id="unlimited-datepicker"
-                                       value="<?php echo request()->get('date') ?>">
+                                       value="<?= request()->get('date') ?>">
                             </div>
 
                             <button class="btn btn-outline-primary">
-                                <?php echo TranslationOld::get('filter_button') ?>
+                                <?= TranslationOld::get('filter_button') ?>
                             </button>
 
                             <?php if (isset($_GET['date'])) : ?>
                                 <a href="/admin/reports/logs"
                                    class="btn btn-outline-danger ml-3">
-                                    <?php echo TranslationOld::get('reset_button') ?>
+                                    <?= TranslationOld::get('reset_button') ?>
                                 </a>
                             <?php endif; ?>
                         </form>
@@ -51,15 +51,15 @@ use System\StateInterface;
                     <?php if (count($logs ?? []) < 1) : ?>
                         <div class="col-md-12">
                             <p class="mt-2 font-weight-bold">
-                                <?php echo TranslationOld::get('no_log_data_found') ?>
-                                <?php echo request()->get('date') ?>.
+                                <?= TranslationOld::get('no_log_data_found') ?>
+                                <?= request()->get('date') ?>.
                             </p>
                         </div>
                     <?php else : ?>
                         <div class="col-sm-4">
                             <div class="form-label-group mb-2">
                                 <label for="searchLog" class="visually-hidden">
-                                    <b><?php echo TranslationOld::get('form_search') ?></b>
+                                    <b><?= TranslationOld::get('form_search') ?></b>
                                 </label>
                                 <input type="text" id="searchLog"
                                        class="form-control" autocomplete="off"
@@ -72,17 +72,19 @@ use System\StateInterface;
                                     <?php $active = 'active';
                                     foreach (($logs ?? []) as $key => $log) :
                                       $class = 'active-success';
-                                      if (str_contains($log['message'] ?? '', StateInterface::ERROR)
-                                            || str_contains($log['message'] ?? '', StateInterface::FAILED)) {
+                                      $message = $log['message'] ?? NULL;
+                                      if (str_contains($message, StateInterface::ERROR) || str_contains($message, StateInterface::FAILED)) {
                                         $class = 'active-danger';
+                                      } elseif (str_contains($message, StateInterface::DEBUG)) {
+                                        $class = 'active-primary';
                                       }
                                       ?>
-                                        <a class="list-group-item list-group-item-action <?php echo $active . ' ' . $class ?>"
-                                           id="list-<?php echo $key ?>-list"
+                                        <a class="list-group-item list-group-item-action <?= $active . ' ' . $class ?>"
+                                           id="list-<?= $key ?>-list"
                                            data-toggle="list"
-                                           href="#list-<?php echo $key ?>" role="tab"
-                                           aria-controls="<?php echo $key ?>">
-                                            <?php echo $log['title'] ?? 'undefined' ?>
+                                           href="#list-<?= $key ?>" role="tab"
+                                           aria-controls="<?= $key ?>">
+                                            <?= $log['title'] ?? 'undefined' ?>
                                         </a>
                                         <?php $active = '';
                                     endforeach; ?>
@@ -94,10 +96,10 @@ use System\StateInterface;
                                 <?php $active = 'active';
                                 foreach (($logs ?? []) as $key => $log) : ?>
                                     <div
-                                        class="tab-pane fade show <?php echo $active ?>"
-                                        id="list-<?php echo $key ?>" role="tabpanel"
-                                        aria-labelledby="list-<?php echo $key ?>">
-                                        <h3 class="mt-0 pt-0"><?php echo $log['date'] ?? '' ?></h3>
+                                        class="tab-pane fade show <?= $active ?>"
+                                        id="list-<?= $key ?>" role="tabpanel"
+                                        aria-labelledby="list-<?= $key ?>">
+                                        <h3 class="mt-0 pt-0"><?= $log['date'] ?? '' ?></h3>
 
                                         <ul class="list-group list-group-flush">
                                             <?php
@@ -110,80 +112,80 @@ use System\StateInterface;
                                               $class = 'list-group-item-success';
                                             }
                                             ?>
-                                            <li class="list-group-item <?php echo $class ?>">
+                                            <li class="list-group-item <?= $class ?>">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <?php echo TranslationOld::get('message') ?>
+                                                        <?= TranslationOld::get('message') ?>
                                                         :
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <?php echo $log['message'] ?? '' ?>
+                                                        <?= $log['message'] ?? '' ?>
                                                     </div>
                                                 </div>
                                             </li>
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <?php echo TranslationOld::get('url') ?>
+                                                        <?= TranslationOld::get('url') ?>
                                                         :
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <?php echo $log['meta']->url ?? '' ?>
+                                                        <?= $log['meta']->url ?? '' ?>
                                                     </div>
                                                 </div>
                                             </li>
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <?php echo TranslationOld::get('ip') ?>
+                                                        <?= TranslationOld::get('ip') ?>
                                                         :
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <?php echo $log['meta']->ip ?? '' ?>
+                                                        <?= $log['meta']->ip ?? '' ?>
                                                     </div>
                                                 </div>
                                             </li>
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <?php echo TranslationOld::get('http_method') ?>
+                                                        <?= TranslationOld::get('http_method') ?>
                                                         :
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <?php echo $log['meta']->http_method ?? '' ?>
+                                                        <?= $log['meta']->http_method ?? '' ?>
                                                     </div>
                                                 </div>
                                             </li>
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <?php echo TranslationOld::get('server') ?>
+                                                        <?= TranslationOld::get('server') ?>
                                                         :
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <?php echo $log['meta']->server ?? '' ?>
+                                                        <?= $log['meta']->server ?? '' ?>
                                                     </div>
                                                 </div>
                                             </li>
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <?php echo TranslationOld::get('referrer') ?>
+                                                        <?= TranslationOld::get('referrer') ?>
                                                         :
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <?php echo $log['meta']->referrer ?? '' ?>
+                                                        <?= $log['meta']->referrer ?? '' ?>
                                                     </div>
                                                 </div>
                                             </li>
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <?php echo TranslationOld::get('process_id') ?>
+                                                        <?= TranslationOld::get('process_id') ?>
                                                         :
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <?php echo $log['meta']->process_id ?? '' ?>
+                                                        <?= $log['meta']->process_id ?? '' ?>
                                                     </div>
                                                 </div>
                                             </li>
