@@ -67,25 +67,10 @@ final class Application implements ApplicationInterface {
     $this->preRun();
 
     $user = new User();
-    $output = Router::load($this->routesLocations)
-      ->direct(Uri::getUrl(), Uri::getMethod(), $user->getRights());
 
-    $this->postRun();
-
-    return (string) $output;
-  }
-
-  /**
-   * Executes actions after running the app.
-   */
-  protected function postRun(): void {
-    if ($this->session()->exists(StateInterface::FAILED)
-      || $this->session()->exists(StateInterface::FORM_VALIDATION_FAILED)
-      || $this->session()->exists(StateInterface::SUCCESSFUL)) {
-      return;
-    }
-
-    $this->logger()->appRequest(value: '', state: StateInterface::SUCCESSFUL, url: Uri::getUrl(), method: Uri::getMethod());
+    return (string) Router::load($this->routesLocations)->direct(
+      Uri::getUrl(), Uri::getMethod(), $user->getRights()
+    );
   }
 
 }
