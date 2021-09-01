@@ -37,7 +37,7 @@ function session(): SessionInterface {
  * @return EnvInterface
  *   The env definition.
  */
-function env(): EnvInterface {
+function environment(): EnvInterface {
   return new Env();
 }
 
