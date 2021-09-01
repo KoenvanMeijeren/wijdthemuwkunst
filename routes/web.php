@@ -7,7 +7,6 @@
 
 declare(strict_types=1);
 
-use Domain\Admin\Accounts\User\Controllers\UserAccountControllerBase;
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Authentication\Controllers\AuthenticationController;
 use Components\Route\Router;
@@ -21,15 +20,5 @@ Router::prefix('admin')->group(static function () {
         'login');
     Router::get('logout', AuthenticationController::class,
         'logout', User::ADMIN);
-
-    // User account routes.
-    Router::prefix('user/account')->group(static function () {
-        Router::get('', UserAccountControllerBase::class,
-            'index', User::ADMIN);
-        Router::post('store/data', UserAccountControllerBase::class,
-            'storeData', User::ADMIN);
-        Router::post('store/password', UserAccountControllerBase::class,
-            'storePassword', User::ADMIN);
-    });
 
 });

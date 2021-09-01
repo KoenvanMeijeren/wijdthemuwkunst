@@ -3,6 +3,17 @@
 use Domain\Admin\Accounts\User\Models\User;
 use Components\Route\Router;
 use Modules\User\Controller\AccountController;
+use Modules\User\Controller\UserAccountController;
+
+// User account routes.
+Router::prefix('admin/user/account')->group(static function () {
+  Router::get('', UserAccountController::class,
+    'index', User::ADMIN);
+  Router::post('store/data', UserAccountController::class,
+    'storeData', User::ADMIN);
+  Router::post('store/password', UserAccountController::class,
+    'storePassword', User::ADMIN);
+});
 
 // Account routes.
 Router::prefix('admin/account')->group(static function () {

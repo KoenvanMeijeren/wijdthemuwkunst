@@ -46,7 +46,7 @@ final class AccountController extends EntityControllerBase {
   protected string $redirectSame = '/admin/account/edit/';
 
   /**
-   * TextController constructor.
+   * AccountController constructor.
    */
   public function __construct(){
     parent::__construct(entityClass: Account::class, baseViewPath: 'User/Views/');
