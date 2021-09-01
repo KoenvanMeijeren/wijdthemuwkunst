@@ -52,7 +52,7 @@ abstract class FileAction extends Action {
   /**
    * Gets the uploaded file.
    *
-   * @return array
+   * @return string[]
    *   The file.
    */
   protected function getFile(): array {
