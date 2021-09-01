@@ -80,6 +80,7 @@
             "vendor/bin/phpcbf --standard=Drupal --extensions=php --ignore=view.php src"
         ],
         "insights": [
+            "vendor/bin/churn run src",
             "vendor/bin/phploc src",
             "vendor/bin/phpmetrics --report-html=public_html/phpmetrics src",
             "vendor/bin/phpstan analyse -c phpstan.neon"
