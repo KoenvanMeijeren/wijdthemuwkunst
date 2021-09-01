@@ -54,6 +54,7 @@
         "daniel-werner/php-quality-tools": "^1.2",
         "dealerdirect/phpcodesniffer-composer-installer": "^0.6",
         "drupal/coder": "^8.3",
+        "phploc/phploc": "^7.0",
         "phpmd/phpmd": "^2.10",
         "phpmetrics/phpmetrics": "^2.7",
         "phpstan/phpstan": "^0.12",
