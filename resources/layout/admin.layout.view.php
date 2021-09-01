@@ -7,8 +7,8 @@ use Components\Resource\Resource;
 use Modules\User\Support\AccountRightsConverter;
 use System\Breadcrumbs\Breadcrumbs;
 
-$user = new User();
-$rights = new AccountRightsConverter($user->getRights());
+$current_user = current_user();
+$rights = new AccountRightsConverter($current_user->getRights());
 $breadcrumbs = new Breadcrumbs(Uri::getUrl());
 ?>
 <!DOCTYPE html>
@@ -45,7 +45,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
 </head>
 <body id="page-top">
 <div id="wrapper">
-    <?php if ($user->isLoggedIn()) : ?>
+    <?php if ($current_user->isLoggedIn()) : ?>
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled"
             id="accordionSidebar">
@@ -64,7 +64,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
                 <hr class="sidebar-divider my-0">
             </li>
 
-            <?php if ($user->getRights() >= User::ADMIN) : ?>
+            <?php if ($current_user->getRights() >= User::ADMIN) : ?>
                 <li class="nav-item <?= str_contains(Uri::getUrl(), 'dashboard') ? 'active' : '' ?>">
                     <a class="nav-link" href="/admin/dashboard">
                         <i class="fas fa-home"></i>
@@ -141,7 +141,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
                 </li>
 
             <?php endif;
-            if ($user->getRights() >= User::SUPER_ADMIN) : ?>
+            if ($current_user->getRights() >= User::SUPER_ADMIN) : ?>
                 <li class="nav-item <?= str_contains(Uri::getUrl(), 'account') && !str_contains(Uri::getUrl(), 'user') ? 'active' : '' ?>">
                     <a class="nav-link" href="/admin/account">
                         <i class="fas fa-users"></i>
@@ -151,7 +151,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
                     </a>
                 </li>
             <?php endif;
-            if ($user->getRights() >= User::DEVELOPER) : ?>
+            if ($current_user->getRights() >= User::DEVELOPER) : ?>
                 <li class="nav-item <?= str_contains(Uri::getUrl(), 'reports') ? 'active' : '' ?>">
                     <a class="nav-link collapsed" href="#"
                        data-toggle="collapse"
@@ -214,7 +214,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
                             <a class="nav-link <?= str_contains(Uri::getUrl(), 'user/account') ? 'active-link' : '' ?>"
                                href="/admin/user/account">
                                 <?= TranslationOld::get('welcome_text') ?>
-                                <?= $user->getName() ?> -
+                                <?= $current_user->getName() ?> -
                                 <b><?= $rights->toReadable() ?></b>
                             </a>
                         </li>

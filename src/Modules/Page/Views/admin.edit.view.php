@@ -13,10 +13,10 @@ use Modules\Page\Entity\PageInterface;
 
 /** @var PageInterface $entity */
 $entity = $page ?? null;
-$user = new User();
+$current_user = current_user();
 
 $disabled = '';
-if ($user->getRights() !== User::DEVELOPER && $entity?->getInMenu() === PageInterface::PAGE_STATIC) {
+if ($current_user->getRights() !== User::DEVELOPER && $entity?->getInMenu() === PageInterface::PAGE_STATIC) {
   $disabled = 'disabled';
 }
 

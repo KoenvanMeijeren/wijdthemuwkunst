@@ -10,7 +10,7 @@ use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\User\Models\User;
 use Components\Security\CSRF;
 
-$current_user = new User();
+$current_user = current_user();
 /** @var \Modules\User\Entity\AccountInterface $entity */
 $entity = $account ?? NULL;
 $disabled = $current_user->getId() === $entity->id() ? 'disabled' : '';

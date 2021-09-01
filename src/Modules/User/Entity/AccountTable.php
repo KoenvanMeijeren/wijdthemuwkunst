@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 namespace Modules\User\Entity;
 
+use Components\ComponentsTrait;
 use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\User\Models\User;
 use Components\Resource\Resource;
@@ -19,6 +20,8 @@ use System\Entity\EntityInterface;
  * @package Modules\User\Entity
  */
 final class AccountTable extends DataTableBuilder {
+
+  use ComponentsTrait;
 
   /**
    * {@inheritDoc}
@@ -60,7 +63,7 @@ final class AccountTable extends DataTableBuilder {
    *   The entity.
    */
   protected function buildRowActions(EntityInterface $entity): string {
-    $current_user = new User();
+    $current_user = $this->currentUser();
 
     $actions = '<div class="table-edit-row">';
     $actions .= Resource::addTableLinkActionColumn(

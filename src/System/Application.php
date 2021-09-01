@@ -66,10 +66,10 @@ final class Application implements ApplicationInterface {
   public function run(): string {
     $this->preRun();
 
-    $user = new User();
+    $current_user = $this->currentUser();
 
     return (string) Router::load($this->routesLocations)->direct(
-      Uri::getUrl(), Uri::getMethod(), $user->getRights()
+      Uri::getUrl(), Uri::getMethod(), $current_user->getRights()
     );
   }
 

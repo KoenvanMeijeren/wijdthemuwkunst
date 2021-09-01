@@ -43,9 +43,8 @@ final class DeletePageAction extends BasePageAction {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    $user = new User();
-
-    if ($user->getRights() !== User::DEVELOPER && $this->entity->getInMenu() === PageInterface::PAGE_STATIC) {
+    if ($this->currentUser()->getRights() !== User::DEVELOPER
+      && $this->entity->getInMenu() === PageInterface::PAGE_STATIC) {
       $this->session()->flash(
         StateInterface::FAILED,
         sprintf(TranslationOld::get('page_static_cannot_be_deleted'), $this->entity->getSlug())
