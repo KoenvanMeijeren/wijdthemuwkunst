@@ -5,11 +5,10 @@ namespace System;
 
 use Components\ComponentsTrait;
 use Components\Datetime\DateTimeInterface;
-use Components\Route\Router;
-use Domain\Admin\Accounts\User\Models\User;
-use Components\SuperGlobals\Url\Uri;
 use Components\Header\Header;
+use Components\Route\Router;
 use Components\SuperGlobals\Session\SessionBuilder;
+use Components\SuperGlobals\Url\Uri;
 use System\Module\ModuleHandler;
 
 /**
