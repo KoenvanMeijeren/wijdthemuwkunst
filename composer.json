@@ -72,12 +72,12 @@
             "docker-compose -f docker-compose.yml -f docker-compose.dev.yml stop"
         ],
         "inspect": [
-            "vendor/bin/phpcs --standard=Drupal --extensions=php --ignore=view.php src",
+            "vendor/bin/phpcs --extensions=php --ignore=view.php src",
             "vendor/bin/phpcpd src",
             "vendor/bin/phpmd src text phpmd.xml"
         ],
         "inspect-fix": [
-            "vendor/bin/phpcbf --standard=Drupal --extensions=php --ignore=view.php src"
+            "vendor/bin/phpcbf --extensions=php --ignore=view.php src"
         ],
         "insights": [
             "vendor/bin/churn run src",
