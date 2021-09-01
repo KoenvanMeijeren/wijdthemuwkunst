@@ -47,7 +47,7 @@ function environment(): EnvInterface {
  * @return HeaderInterface
  *   The env definition.
  */
-#[Pure] function headerSend(): HeaderInterface {
+#[Pure] function header_send(): HeaderInterface {
   return new Header();
 }
 
@@ -57,6 +57,6 @@ function environment(): EnvInterface {
  * @return User
  *   The user definition.
  */
-function user(): User {
+function current_user(): User {
   return new User();
 }

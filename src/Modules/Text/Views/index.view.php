@@ -14,9 +14,9 @@ use Components\Translation\TranslationOld;
 /** @var \Modules\Text\Entity\TextInterface $entity */
 $entity = $text ?? null;
 $createText = $createText ?? FALSE;
-$disabled = user()->getRights() === User::DEVELOPER ? '' : 'disabled';
+$disabled = current_user()->getRights() === User::DEVELOPER ? '' : 'disabled';
 ?>
-<?php if (!$entity && $createText && user()->getRights() === User::DEVELOPER) : ?>
+<?php if (!$entity && $createText && current_user()->getRights() === User::DEVELOPER) : ?>
     <div class="row">
         <div class="col-xl-12 mb-4">
             <div class="card border-left-warning shadow h-100 py-2">
