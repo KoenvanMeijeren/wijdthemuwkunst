@@ -2,9 +2,9 @@
 
 use Components\SuperGlobals\Url\Uri;
 use Components\Translation\TranslationOld;
-use Domain\Admin\Accounts\Account\Support\AccountRightsConverter;
 use Domain\Admin\Accounts\User\Models\User;
 use Components\Resource\Resource;
+use Modules\User\Support\AccountRightsConverter;
 use System\Breadcrumbs\Breadcrumbs;
 
 $user = new User();

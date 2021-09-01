@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace Domain\Admin\Accounts\User\Actions;
 
-use Domain\Admin\Accounts\Account\Models\Account;
+use Modules\User\Entity\AccountInterface;
 
 /**
  *
@@ -19,7 +19,7 @@ final class UpdateUserPasswordAction extends BaseUserAction {
     $this->attributes = [
       'account_password' => (string) password_hash(
               $this->newPassword,
-              Account::PASSWORD_HASH_METHOD
+              AccountInterface::PASSWORD_HASH_METHOD
       ),
     ];
   }

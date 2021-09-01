@@ -12,7 +12,7 @@ use Components\Security\CSRF;
 
 ?>
 <form method="post" action="/admin/account/create/store">
-    <?php echo CSRF::insertToken('/admin/account/create/store') ?>
+    <?= CSRF::insertToken('/admin/account/create/store') ?>
 
     <div class="row">
         <div class="col-md-6">
@@ -30,52 +30,47 @@ use Components\Security\CSRF;
                     <div class="card-body">
                         <div class="form-group">
                             <label for="name">
-                                <?php echo TranslationOld::get('form_name') ?>
+                                <?= TranslationOld::get('form_name') ?>
                                 <span class="text-danger">*</span>
                             </label>
 
-                            <input type="text" name="name" id="name"
-                                   class="form-control form-control-user"
-                                   placeholder="<?php echo TranslationOld::get('form_name') ?>"
-                                   value="<?php echo request()->post('name') ?>"
-                                   required>
+                            <input type="text" name="name" id="name" class="form-control form-control-user"
+                                   placeholder="<?= TranslationOld::get('form_name') ?>"
+                                   value="<?= request()->post('name') ?>" required>
                         </div>
 
                         <div class="form-group">
                             <label for="email">
-                                <?php echo TranslationOld::get('form_email') ?>
+                                <?= TranslationOld::get('form_email') ?>
                                 <span class="text-danger">*</span>
                             </label>
                             <input type="email" id="email" class="form-control"
-                                   placeholder="<?php echo TranslationOld::get('form_email') ?>"
-                                   value="<?php echo request()->post('email') ?>"
+                                   placeholder="<?= TranslationOld::get('form_email') ?>"
+                                   value="<?= request()->post('email') ?>"
                                    required name="email">
                         </div>
 
                         <div class="form-group">
                             <label for="rights">
-                                <?php echo TranslationOld::get('form_rights') ?>
+                                <?= TranslationOld::get('form_rights') ?>
                                 <span class="text-danger">*</span>
                             </label>
 
-                            <select id="rights"
-                                    class="form-control"
-                                    name="rights"
-                                    required>
+                            <select id="rights" class="form-control" name="rights" required>
                                 <option value="0">
-                                    <?php echo TranslationOld::get('form_choose_rights') ?>
+                                    <?= TranslationOld::get('form_choose_rights') ?>
                                 </option>
-                                <option value="<?php echo User::ADMIN ?>"
-                                    <?php echo (int) request()->post('rights') === User::ADMIN ? 'selected' : '' ?>>
-                                    <?php echo TranslationOld::get('form_rights_admin') ?>
+                                <option value="<?= User::ADMIN ?>"
+                                    <?= (int) request()->post('rights') === User::ADMIN ? 'selected' : '' ?>>
+                                    <?= TranslationOld::get('form_rights_admin') ?>
                                 </option>
-                                <option value="<?php echo User::SUPER_ADMIN ?>"
-                                    <?php echo (int) request()->post('rights') === User::SUPER_ADMIN ? 'selected' : '' ?>>
-                                    <?php echo TranslationOld::get('form_rights_super_admin') ?>
+                                <option value="<?= User::SUPER_ADMIN ?>"
+                                    <?= (int) request()->post('rights') === User::SUPER_ADMIN ? 'selected' : '' ?>>
+                                    <?= TranslationOld::get('form_rights_super_admin') ?>
                                 </option>
-                                <option value="<?php echo User::DEVELOPER ?>"
-                                    <?php echo (int) request()->post('rights') === User::DEVELOPER ? 'selected' : '' ?>>
-                                    <?php echo TranslationOld::get('form_rights_developer') ?>
+                                <option value="<?= User::DEVELOPER ?>"
+                                    <?= (int) request()->post('rights') === User::DEVELOPER ? 'selected' : '' ?>>
+                                    <?= TranslationOld::get('form_rights_developer') ?>
                                 </option>
                             </select>
                         </div>
@@ -99,27 +94,21 @@ use Components\Security\CSRF;
                     <div class="card-body">
                         <div class="form-group">
                             <label for="newPassword">
-                                <?php echo TranslationOld::get('form_new_password') ?>
+                                <?= TranslationOld::get('form_new_password') ?>
                                 <span class="text-danger">*</span>
                             </label>
-                            <input type="password"
-                                   name="password"
-                                   id="newPassword"
-                                   class="form-control"
-                                   placeholder="<?php echo TranslationOld::get('form_new_password') ?>"
+                            <input type="password" name="password" id="newPassword" class="form-control"
+                                   placeholder="<?= TranslationOld::get('form_new_password') ?>"
                                    required autocomplete="false">
                         </div>
 
                         <div class="form-group">
                             <label for="confirmationPassword">
-                                <?php echo TranslationOld::get('form_confirmation_password') ?>
+                                <?= TranslationOld::get('form_confirmation_password') ?>
                                 <span class="text-danger">*</span>
                             </label>
-                            <input type="password"
-                                   name="confirmationPassword"
-                                   id="confirmationPassword"
-                                   class="form-control"
-                                   placeholder="<?php echo TranslationOld::get('form_confirmation_password') ?>"
+                            <input type="password" name="confirmationPassword" id="confirmationPassword"
+                                   class="form-control" placeholder="<?= TranslationOld::get('form_confirmation_password') ?>"
                                    required autocomplete="false">
 
                             <div id="password-feedback"></div>
@@ -133,15 +122,15 @@ use Components\Security\CSRF;
     <div class="form-actions-submit">
         <a href="/admin/account" class="btn btn-outline-primary float-left"
            data-toggle="tooltip" data-placement="top"
-           title="<?php echo TranslationOld::get('back_button') ?>">
+           title="<?= TranslationOld::get('back_button') ?>">
             <i class="fas fa-arrow-left"></i>
-            <?php echo TranslationOld::get('back_button') ?>
+            <?= TranslationOld::get('back_button') ?>
         </a>
 
         <button type="submit" data-toggle="tooltip" data-placement="top"
-                title="<?php echo TranslationOld::get('save_button') ?>"
+                title="<?= TranslationOld::get('save_button') ?>"
                 class="btn btn-outline-success float-right">
-            <?php echo TranslationOld::get('save_button') ?>
+            <?= TranslationOld::get('save_button') ?>
             <i class="far fa-save"></i>
         </button>
     </div>

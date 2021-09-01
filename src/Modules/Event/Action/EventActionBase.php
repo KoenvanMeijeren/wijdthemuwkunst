@@ -21,9 +21,9 @@ abstract class EventActionBase extends EntityFormActionBase {
   /**
    * The entity.
    *
-   * @var \Modules\Event\Entity\EventInterface
+   * @var \Modules\Event\Entity\EventInterface|null
    */
-  protected EntityInterface $entity;
+  protected ?EntityInterface $entity;
 
   /**
    * {@inheritDoc}

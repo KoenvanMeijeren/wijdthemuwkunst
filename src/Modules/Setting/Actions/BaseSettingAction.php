@@ -19,7 +19,7 @@ abstract class BaseSettingAction extends EntityFormActionBase {
   /**
    * The setting entity.
    *
-   * @var \Modules\Setting\Entity\SettingInterface
+   * @var \Modules\Setting\Entity\SettingInterface|null
    */
   protected ?EntityInterface $entity;
 

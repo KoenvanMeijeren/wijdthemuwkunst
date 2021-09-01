@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-namespace Domain\Admin\Accounts\Account\Support;
+namespace Modules\User\Support;
 
 use Components\Converter\ConverterBase;
 use Components\Translation\TranslationOld;
@@ -11,7 +11,7 @@ use Components\Translation\TranslationOld;
 /**
  * Provides a class for converting account is blocked states.
  *
- * @package Domain\Admin\Accounts\Account\Support
+ * @package Modules\User\Support
  */
 final class AccountBlockStateConverter extends ConverterBase {
 

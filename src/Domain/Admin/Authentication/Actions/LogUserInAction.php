@@ -7,10 +7,10 @@ namespace Domain\Admin\Authentication\Actions;
 
 use Components\Actions\FormAction;
 use Components\Translation\TranslationOld;
-use Domain\Admin\Accounts\Account\Models\Account;
 use Domain\Admin\Accounts\Repositories\AccountRepository;
 use Domain\Admin\Accounts\User\Models\User;
 use Domain\Admin\Authentication\Support\IDEncryption;
+use Modules\User\Entity\AccountInterface;
 use System\StateInterface;
 
 /**
@@ -119,9 +119,9 @@ final class LogUserInAction extends FormAction {
    * {@inheritDoc}
    */
   private function rehashPassword(): void {
-    if (password_needs_rehash($this->account->getPassword(), Account::PASSWORD_HASH_METHOD)) {
+    if (password_needs_rehash($this->account->getPassword(), AccountInterface::PASSWORD_HASH_METHOD)) {
       $this->attributes['account_password'] = (string) password_hash(
-        $this->account->getPassword(), Account::PASSWORD_HASH_METHOD
+        $this->account->getPassword(), AccountInterface::PASSWORD_HASH_METHOD
       );
     }
   }

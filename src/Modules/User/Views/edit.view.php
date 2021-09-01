@@ -7,15 +7,15 @@
 declare(strict_types=1);
 
 use Components\Translation\TranslationOld;
-use Domain\Admin\Accounts\Repositories\AccountRepository;
 use Domain\Admin\Accounts\User\Models\User;
 use Components\Security\CSRF;
 
-$user = new User();
-$account = new AccountRepository($account ?? NULL);
-$disabled = $user->getId() === $account->getId() ? 'disabled' : '';
+$current_user = new User();
+/** @var \Modules\User\Entity\AccountInterface $entity */
+$entity = $account ?? NULL;
+$disabled = $current_user->getId() === $entity->id() ? 'disabled' : '';
 $rights = (int) request()->post('rights');
-$rights = $rights !== 0 ? $rights : $account->getRights();
+$rights = $rights !== 0 ? $rights : $entity->getRights();
 ?>
 
 <div class="row">
@@ -33,44 +33,44 @@ $rights = $rights !== 0 ? $rights : $account->getRights();
             <div class="collapse show" id="collapseDataForm">
                 <div class="card-body">
                     <form method="post"
-                          action="/admin/account/edit/<?php echo $account->getId() ?>/store/data">
-                        <?php echo CSRF::insertToken('/admin/account/edit/' . $account->getId() . '/store/data') ?>
+                          action="/admin/account/edit/<?= $entity->id() ?>/store/data">
+                        <?= CSRF::insertToken('/admin/account/edit/' . $entity->id() . '/store/data') ?>
 
                         <div class="form-group">
                             <label for="name">
-                                <?php echo TranslationOld::get('form_name') ?>
+                                <?= TranslationOld::get('form_name') ?>
                                 <span class="text-danger">*</span>
                             </label>
                             <input type="text" name="name" id="name"
                                    class="form-control"
-                                   placeholder="<?php echo TranslationOld::get('form_name') ?>"
-                                   value="<?php echo request()->post('name', $account->getName()) ?>"
+                                   placeholder="<?= TranslationOld::get('form_name') ?>"
+                                   value="<?= request()->post('name', $entity->getName()) ?>"
                                    required>
                         </div>
 
                         <div class="form-group">
                             <label for="rights">
-                                <?php echo TranslationOld::get('form_rights') ?>
+                                <?= TranslationOld::get('form_rights') ?>
                                 <span class="text-danger">*</span>
                             </label>
 
                             <select id="rights" class="form-control"
                                     name="rights"
-                                <?php echo $disabled ?> required>
+                                <?= $disabled ?> required>
                                 <option value="0">
-                                    <?php echo TranslationOld::get('form_choose_rights') ?>
+                                    <?= TranslationOld::get('form_choose_rights') ?>
                                 </option>
-                                <option value="<?php echo User::ADMIN ?>"
-                                    <?php echo $rights === User::ADMIN ? 'selected' : '' ?>>
-                                    <?php echo TranslationOld::get('form_rights_admin') ?>
+                                <option value="<?= User::ADMIN ?>"
+                                    <?= $rights === User::ADMIN ? 'selected' : '' ?>>
+                                    <?= TranslationOld::get('form_rights_admin') ?>
                                 </option>
-                                <option value="<?php echo User::SUPER_ADMIN ?>"
-                                    <?php echo $rights === User::SUPER_ADMIN ? 'selected' : '' ?>>
-                                    <?php echo TranslationOld::get('form_rights_super_admin') ?>
+                                <option value="<?= User::SUPER_ADMIN ?>"
+                                    <?= $rights === User::SUPER_ADMIN ? 'selected' : '' ?>>
+                                    <?= TranslationOld::get('form_rights_super_admin') ?>
                                 </option>
-                                <option value="<?php echo User::DEVELOPER ?>"
-                                    <?php echo $rights === User::DEVELOPER ? 'selected' : '' ?>>
-                                    <?php echo TranslationOld::get('form_rights_developer') ?>
+                                <option value="<?= User::DEVELOPER ?>"
+                                    <?= $rights === User::DEVELOPER ? 'selected' : '' ?>>
+                                    <?= TranslationOld::get('form_rights_developer') ?>
                                 </option>
                             </select>
                         </div>
@@ -80,14 +80,14 @@ $rights = $rights !== 0 ? $rights : $account->getRights();
                                class="btn btn-outline-danger float-left"
                                data-toggle="tooltip"
                                data-placement="top"
-                               title="<?php echo TranslationOld::get('back_button') ?>">
+                               title="<?= TranslationOld::get('back_button') ?>">
                                 <i class="fas fa-arrow-left"></i>
-                                <?php echo TranslationOld::get('back_button') ?>
+                                <?= TranslationOld::get('back_button') ?>
                             </a>
 
                             <button type="submit"
                                     class="btn btn-outline-success float-right">
-                                <?php echo TranslationOld::get('save_button') ?>
+                                <?= TranslationOld::get('save_button') ?>
                                 <i class="far fa-save"></i>
                             </button>
                         </div>
@@ -114,20 +114,20 @@ $rights = $rights !== 0 ? $rights : $account->getRights();
                 <div class="collapse show" id="collapseEmailForm">
                     <div class="card-body">
                         <form method="post"
-                              action="/admin/account/edit/<?php echo $account->getId() ?>/store/email">
-                            <?php echo CSRF::insertToken('/admin/account/edit/' . $account->getId() . '/store/email') ?>
+                              action="/admin/account/edit/<?= $entity->id() ?>/store/email">
+                            <?= CSRF::insertToken('/admin/account/edit/' . $entity->id() . '/store/email') ?>
 
                             <div class="form-group">
                                 <label for="email">
-                                    <?php echo TranslationOld::get('form_email') ?>
+                                    <?= TranslationOld::get('form_email') ?>
                                     <span class="text-danger">*</span>
                                 </label>
                                 <input type="email" id="email"
                                        name="email"
                                        class="form-control"
-                                       placeholder="<?php echo TranslationOld::get('form_email') ?>"
-                                       value="<?php echo request()->post('email') !== '' ?
-                                           request()->post('email') : $account->getEmail() ?>"
+                                       placeholder="<?= TranslationOld::get('form_email') ?>"
+                                       value="<?= request()->post('email') !== '' ?
+                                           request()->post('email') : $entity->getEmail() ?>"
                                        required>
                             </div>
 
@@ -136,14 +136,14 @@ $rights = $rights !== 0 ? $rights : $account->getRights();
                                    class="btn btn-outline-danger float-left"
                                    data-toggle="tooltip"
                                    data-placement="top"
-                                   title="<?php echo TranslationOld::get('back_button') ?>">
+                                   title="<?= TranslationOld::get('back_button') ?>">
                                     <i class="fas fa-arrow-left"></i>
-                                    <?php echo TranslationOld::get('back_button') ?>
+                                    <?= TranslationOld::get('back_button') ?>
                                 </a>
 
                                 <button type="submit"
                                         class="btn btn-outline-success float-right">
-                                    <?php echo TranslationOld::get('save_button') ?>
+                                    <?= TranslationOld::get('save_button') ?>
                                     <i class="far fa-save"></i>
                                 </button>
                             </div>
@@ -170,32 +170,32 @@ $rights = $rights !== 0 ? $rights : $account->getRights();
             <div class="collapse show" id="collapsePasswordForm">
                 <div class="card-body">
                     <form method="post"
-                          action="/admin/account/edit/<?php echo $account->getId() ?>/store/password">
-                        <?php echo CSRF::insertToken('/admin/account/edit/' . $account->getId() . '/store/password') ?>
+                          action="/admin/account/edit/<?= $entity->id() ?>/store/password">
+                        <?= CSRF::insertToken('/admin/account/edit/' . $entity->id() . '/store/password') ?>
 
                         <div class="form-group">
                             <label for="newPassword">
-                                <?php echo TranslationOld::get('form_new_password') ?>
+                                <?= TranslationOld::get('form_new_password') ?>
                                 <span class="text-danger">*</span>
                             </label>
                             <input type="password"
                                    name="password"
                                    id="newPassword"
                                    class="form-control"
-                                   placeholder="<?php echo TranslationOld::get('form_new_password') ?>"
+                                   placeholder="<?= TranslationOld::get('form_new_password') ?>"
                                    required autocomplete="false">
                         </div>
 
                         <div class="form-group">
                             <label for="confirmationPassword">
-                                <?php echo TranslationOld::get('form_confirmation_password') ?>
+                                <?= TranslationOld::get('form_confirmation_password') ?>
                                 <span class="text-danger">*</span>
                             </label>
                             <input type="password"
                                    name="confirmationPassword"
                                    id="confirmationPassword"
                                    class="form-control"
-                                   placeholder="<?php echo TranslationOld::get('form_confirmation_password') ?>"
+                                   placeholder="<?= TranslationOld::get('form_confirmation_password') ?>"
                                    required autocomplete="false">
 
                             <div id="password-feedback"></div>
@@ -206,14 +206,14 @@ $rights = $rights !== 0 ? $rights : $account->getRights();
                                class="btn btn-outline-danger float-left"
                                data-toggle="tooltip"
                                data-placement="top"
-                               title="<?php echo TranslationOld::get('back_button') ?>">
+                               title="<?= TranslationOld::get('back_button') ?>">
                                 <i class="fas fa-arrow-left"></i>
-                                <?php echo TranslationOld::get('back_button') ?>
+                                <?= TranslationOld::get('back_button') ?>
                             </a>
 
                             <button type="submit"
                                     class="btn btn-outline-success float-right">
-                                <?php echo TranslationOld::get('save_button') ?>
+                                <?= TranslationOld::get('save_button') ?>
                                 <i class="far fa-save"></i>
                             </button>
                         </div>
@@ -239,7 +239,7 @@ $rights = $rights !== 0 ? $rights : $account->getRights();
                 <!-- Card Content - Collapse -->
                 <div class="collapse show" id="collapseBlockAccountForm">
                     <div class="card-body">
-                        <?php if ($account->isBlocked()) : ?>
+                        <?php if ($entity->isBlocked()) : ?>
                             <div class="card-text mb-4">
                                 <h4 class="card-title">
                                     Account is geblokkeerd
@@ -247,11 +247,11 @@ $rights = $rights !== 0 ? $rights : $account->getRights();
                             </div>
 
                             <form method="post"
-                                  action="/admin/account/unblock/<?php echo $account->getId() ?>">
-                                <?php echo CSRF::insertToken("/admin/account/unblock/{$account->getId()}") ?>
+                                  action="/admin/account/unblock/<?= $entity->id() ?>">
+                                <?= CSRF::insertToken("/admin/account/unblock/{$entity->id()}") ?>
                                 <button type="submit"
                                         class="btn btn-outline-success">
-                                    <?php echo TranslationOld::get('unblock_button') ?>
+                                    <?= TranslationOld::get('unblock_button') ?>
                                     <i class="far fa-save"></i>
                                 </button>
                                 <div class="clearfix"></div>
@@ -264,12 +264,12 @@ $rights = $rights !== 0 ? $rights : $account->getRights();
                             </div>
 
                             <form method="post"
-                                  action="/admin/account/block/<?php echo $account->getId() ?>">
-                                <?php echo CSRF::insertToken("/admin/account/block/{$account->getId()}") ?>
+                                  action="/admin/account/block/<?= $entity->id() ?>">
+                                <?= CSRF::insertToken("/admin/account/block/{$entity->id()}") ?>
 
                                 <button type="submit"
                                         class="btn btn-outline-danger">
-                                    <?php echo TranslationOld::get('block_button') ?>
+                                    <?= TranslationOld::get('block_button') ?>
                                     <i class="far fa-save"></i>
                                 </button>
                                 <div class="clearfix"></div>

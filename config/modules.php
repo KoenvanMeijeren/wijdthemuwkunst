@@ -10,6 +10,7 @@ use Modules\Reports\ReportsModule;
 use Modules\Setting\SettingModule;
 use Modules\Slug\SlugModule;
 use Modules\Text\TextModule;
+use Modules\User\AccountModule;
 
 return [
   TextModule::class,
@@ -22,4 +23,5 @@ return [
   MenuModule::class,
   PageModule::class,
   EventModule::class,
+  AccountModule::class,
 ];

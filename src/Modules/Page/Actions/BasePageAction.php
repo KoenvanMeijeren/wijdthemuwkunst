@@ -20,9 +20,9 @@ abstract class BasePageAction extends EntityFormActionBase {
   /**
    * The page entity.
    *
-   * @var \Modules\Page\Entity\PageInterface
+   * @var \Modules\Page\Entity\PageInterface|null
    */
-  protected EntityInterface $entity;
+  protected ?EntityInterface $entity;
 
   /**
    * {@inheritDoc}

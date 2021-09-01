@@ -19,7 +19,7 @@ abstract class BaseContactAction extends EntityFormActionBase {
   /**
    * The contact form entity.
    *
-   * @var \Modules\Contact\Entity\ContactInterface
+   * @var \Modules\Contact\Entity\ContactInterface|null
    */
   protected ?EntityInterface $entity;
 

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-namespace Domain\Admin\Accounts\Account\Support;
+namespace Modules\User\Support;
 
 use Components\Converter\ConverterBase;
 use Components\Translation\TranslationOld;
@@ -12,7 +12,7 @@ use Domain\Admin\Accounts\User\Models\User;
 /**
  * Provides a class for converting account rights.
  *
- * @package Domain\Admin\Accounts\Account\Support
+ * @package Modules\User\Support
  */
 final class AccountRightsConverter extends ConverterBase {
 

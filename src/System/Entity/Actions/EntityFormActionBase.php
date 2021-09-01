@@ -26,7 +26,7 @@ abstract class EntityFormActionBase extends FormAction {
    *
    * @var \System\Entity\EntityInterface
    */
-  protected EntityInterface $entity;
+  protected ?EntityInterface $entity;
 
   /**
    * The storage.

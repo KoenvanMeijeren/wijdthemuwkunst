@@ -19,7 +19,7 @@ abstract class BaseMenuAction extends EntityFormActionBase {
   /**
    * The text entity.
    *
-   * @var \Modules\Menu\Entity\MenuInterface
+   * @var \Modules\Menu\Entity\MenuInterface|null
    */
   protected ?EntityInterface $entity;
 
