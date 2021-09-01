@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Components\SuperGlobals\Url;
 
 use Components\ComponentsTrait;
-use Components\SuperGlobals\Request;
 use Components\Sanitize\Sanitize;
 use Components\SuperGlobals\RequestInterface;
 
@@ -23,8 +22,7 @@ final class Uri {
    * @return string
    */
   public static function getUrl(): string {
-    $request = new Request();
-    $sanitize = new Sanitize($request->server(RequestInterface::URI), 'url');
+    $sanitize = new Sanitize(self::requestStatic()->server(RequestInterface::URI), 'url');
 
     return (string) $sanitize->data();
   }
@@ -35,9 +33,7 @@ final class Uri {
    * @return string
    */
   public static function getMethod(): string {
-    $request = new Request();
-
-    return $request->server(RequestInterface::METHOD);
+    return self::requestStatic()->server(RequestInterface::METHOD);
   }
 
   /**
@@ -46,9 +42,7 @@ final class Uri {
    * @return string
    */
   public static function getPreviousUrl(): string {
-    $request = new Request();
-
-    $sanitize = new Sanitize($request->server(RequestInterface::HTTP_REFERER), 'url');
+    $sanitize = new Sanitize(self::requestStatic()->server(RequestInterface::HTTP_REFERER), 'url');
 
     return (string) $sanitize->data();
   }
@@ -59,9 +53,7 @@ final class Uri {
    * @return string
    */
   public static function getDomainExtension(): string {
-    $request = new Request();
-
-    $hostExploded = explode('.', $request->server(RequestInterface::HTTP_HOST));
+    $hostExploded = explode('.', self::requestStatic()->server(RequestInterface::HTTP_HOST));
     $arrayKeyLast = array_key_last($hostExploded);
 
     return $hostExploded[$arrayKeyLast] ?? 'nl';

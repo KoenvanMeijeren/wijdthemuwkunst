@@ -6,7 +6,6 @@ namespace System\Mail;
 use Components\ComponentsTrait;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
-use Components\Env\Env;
 
 /**
  * Provides a class for sending emails.
@@ -32,7 +31,7 @@ final class Mail implements MailInterface {
    */
   public function __construct(string $companyName) {
     $this->mailer = new PHPMailer(TRUE);
-    $env = new Env();
+    $env = $this->env();
 
     // Set mail credentials.
     if ($env->isProduction()) {

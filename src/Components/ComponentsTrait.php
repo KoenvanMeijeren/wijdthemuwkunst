@@ -46,6 +46,23 @@ trait ComponentsTrait {
   }
 
   /**
+   * The request definition.
+   *
+   * @var \Components\SuperGlobals\RequestInterface
+   */
+  protected static RequestInterface $requestStatic;
+
+  /**
+   * Gets the request definition.
+   *
+   * @return RequestInterface
+   *   The request definition.
+   */
+  protected static function requestStatic(): RequestInterface {
+    return static::$requestStatic ??= new Request();
+  }
+
+  /**
    * The session definition.
    *
    * @var \Components\SuperGlobals\Session\SessionInterface
