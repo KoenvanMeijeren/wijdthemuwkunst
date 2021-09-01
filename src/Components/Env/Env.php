@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Components\Env;
 
 use Components\ComponentsTrait;
-use Components\SuperGlobals\Request;
 use Components\SuperGlobals\RequestInterface;
 use JetBrains\PhpStorm\Pure;
 use Components\Log\LoggerHandler;
