@@ -22,7 +22,7 @@ interface DateTimeInterface {
   /**
    * The default timezone.
    *
-   * @var int
+   * @var string
    */
   public const DEFAULT_TIMEZONE = 'Europe/Amsterdam';
 
