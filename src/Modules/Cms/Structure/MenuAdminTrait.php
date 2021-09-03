@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace Modules\Cms\Structure;
 
 use Components\Translation\TranslationOld;
-use Domain\Admin\Accounts\User\Models\User;
 use JetBrains\PhpStorm\ArrayShape;
+use Modules\User\Entity\AccountInterface;
 
 /**
  * Provides a trait for the admin menu.
@@ -17,14 +17,15 @@ trait MenuAdminTrait {
   /**
    * The index menu.
    *
-   * @param User $user
+   * @param \Modules\User\Entity\AccountInterface $user
    *   The current user.
    *
    * @return array[]
    *   The index menu items.
+   * @throws \Components\Validate\Exceptions\Basic\InvalidKeyException
    */
   #[ArrayShape(['content' => "array", 'structure' => "array", 'configuration' => "array", 'reports' => "array", 'accounts' => "array"])]
-  protected function indexMenu(User $user): array {
+  protected function indexMenu(AccountInterface $user): array {
     $items = [
       'content' => [
         'icon' => 'far fa-file-alt',
@@ -43,7 +44,7 @@ trait MenuAdminTrait {
       ],
     ];
 
-    if ($user->getRights() >= User::SUPER_ADMIN) {
+    if ($user->getRights() >= AccountInterface::SUPER_ADMIN) {
       $items['accounts'] = [
         'icon' => 'fas fa-users',
         'title' => TranslationOld::get('admin_accounts_title'),
@@ -51,7 +52,7 @@ trait MenuAdminTrait {
       ];
     }
 
-    if ($user->getRights() >= User::DEVELOPER) {
+    if ($user->getRights() >= AccountInterface::DEVELOPER) {
       $items['reports'] = [
         'icon' => 'fas fa-chart-bar',
         'title' => TranslationOld::get('admin_reports_title'),

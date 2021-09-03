@@ -20,4 +20,12 @@ interface CurrentUserInterface {
    */
   public function get(): AccountInterface;
 
+  /**
+   * Determine if the user is logged in.
+   *
+   * @return bool
+   *   Whether the user is logged in or not.
+   */
+  public function isLoggedIn(): bool;
+
 }

@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace Modules\Page\Actions;
 
 use Components\Translation\TranslationOld;
-use Domain\Admin\Accounts\User\Models\User;
 use Modules\Page\Entity\PageInterface;
+use Modules\User\Entity\AccountInterface;
 use System\StateInterface;
 
 /**
@@ -43,7 +43,7 @@ final class DeletePageAction extends BasePageAction {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    if ($this->currentUser()->getRights() !== User::DEVELOPER
+    if ($this->user()->getRights() !== AccountInterface::DEVELOPER
       && $this->entity->getInMenu() === PageInterface::PAGE_STATIC) {
       $this->session()->flash(
         StateInterface::FAILED,

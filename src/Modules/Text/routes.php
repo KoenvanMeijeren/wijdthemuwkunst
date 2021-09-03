@@ -1,23 +1,23 @@
 <?php
 
 use Components\Route\Router;
-use Domain\Admin\Accounts\User\Models\User;
 use Modules\Text\Controllers\TextController;
+use Modules\User\Entity\AccountInterface;
 
 Router::prefix('admin/configuration/texts')->group(static function () {
   Router::get('', TextController::class,
-    'index', User::ADMIN);
+    'index', AccountInterface::ADMIN);
 
   Router::get('text/create', TextController::class,
-    'create', User::ADMIN);
+    'create', AccountInterface::ADMIN);
   Router::post('text/create/store', TextController::class,
-    'store', User::ADMIN);
+    'store', AccountInterface::ADMIN);
 
   Router::get('text/edit/{slug}', TextController::class,
-    'edit', User::ADMIN);
+    'edit', AccountInterface::ADMIN);
   Router::post('text/edit/{slug}/update', TextController::class,
-    'update', User::ADMIN);
+    'update', AccountInterface::ADMIN);
 
   Router::post('text/delete/{slug}', TextController::class,
-    'destroy', User::ADMIN);
+    'destroy', AccountInterface::ADMIN);
 });

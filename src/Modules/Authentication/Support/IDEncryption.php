@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-namespace Domain\Admin\Authentication\Support;
+namespace Modules\Authentication\Support;
 
 use Components\ComponentsTrait;
 use JetBrains\PhpStorm\Pure;
@@ -11,7 +11,7 @@ use JetBrains\PhpStorm\Pure;
 /**
  * Provides a class for encrypting identifiers.
  *
- * @package Domain\Admin\Authentication\Support
+ * @package Modules\Authentication\Support
  */
 final class IDEncryption {
 

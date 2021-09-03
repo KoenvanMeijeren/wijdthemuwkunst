@@ -15,8 +15,10 @@ use Components\SuperGlobals\Session\Session;
 use Components\SuperGlobals\Session\SessionInterface;
 use Components\Translation\Translation;
 use Components\Translation\TranslationInterface;
-use Domain\Admin\Accounts\User\Models\User;
 use Modules\Setting\Entity\Setting;
+use Modules\User\CurrentUser;
+use Modules\User\CurrentUserInterface;
+use Modules\User\Entity\AccountInterface;
 use Psr\Log\LoggerInterface as PsrLoggerInterface;
 use System\Entity\EntityManager;
 use System\Entity\EntityManagerInterface;
@@ -160,20 +162,30 @@ trait ComponentsTrait {
   }
 
   /**
-   * The user definition.
+   * The current user service.
    *
-   * @var \Domain\Admin\Accounts\User\Models\User
+   * @var CurrentUserInterface
    */
-  protected User $user;
+  protected CurrentUserInterface $currentUserDl;
 
   /**
-   * Gets the user entity.
+   * Gets the current user service.
    *
-   * @return User
-   *   The user entity.
+   * @return CurrentUserInterface
+   *   The current user service.
    */
-  protected function currentUser(): User {
-    return $this->user ??= new User();
+  protected function currentUserService(): CurrentUserInterface {
+    return $this->currentUserDl ??= new CurrentUser();
+  }
+
+  /**
+   * Gets the current user entity.
+   *
+   * @return AccountInterface
+   *   The current user entity.
+   */
+  protected function user(): AccountInterface {
+    return $this->currentUserService()->get();
   }
 
   /**

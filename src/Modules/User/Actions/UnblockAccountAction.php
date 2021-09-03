@@ -32,7 +32,7 @@ final class UnblockAccountAction extends AccountActionBase {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    if ($this->currentUser()->getId() === $this->entity->id()) {
+    if ($this->user()->id() === $this->entity->id()) {
       $this->session()->flash(
         StateInterface::FAILED,
         TranslationOld::get('cannot_unblock_own_account_message')

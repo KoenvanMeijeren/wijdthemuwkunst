@@ -7,7 +7,7 @@ namespace Modules\User\Support;
 
 use Components\Converter\ConverterBase;
 use Components\Translation\TranslationOld;
-use Domain\Admin\Accounts\User\Models\User;
+use Modules\User\Entity\AccountInterface;
 
 /**
  * Provides a class for converting account rights.
@@ -21,15 +21,15 @@ final class AccountRightsConverter extends ConverterBase {
    */
   public function toReadable(): string {
     $rights = (int) $this->var;
-    if ($rights === User::ADMIN) {
+    if ($rights === AccountInterface::ADMIN) {
       return TranslationOld::get('account_rights_admin');
     }
 
-    if ($rights === User::SUPER_ADMIN) {
+    if ($rights === AccountInterface::SUPER_ADMIN) {
       return TranslationOld::get('account_rights_super_admin');
     }
 
-    if ($rights === User::DEVELOPER) {
+    if ($rights === AccountInterface::DEVELOPER) {
       return TranslationOld::get('account_rights_developer');
     }
 

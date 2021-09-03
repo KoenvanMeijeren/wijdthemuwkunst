@@ -6,7 +6,7 @@ namespace Components\Route;
 use Closure;
 use Components\Validate\Exceptions\Basic\UndefinedRouteException;
 use Components\Validate\Validate;
-use Domain\Admin\Accounts\User\Models\User;
+use Modules\User\Entity\AccountInterface;
 use System\View\DomainView;
 
 /**
@@ -80,7 +80,7 @@ final class Router implements RouterInterface {
   /**
    * {@inheritDoc}
    */
-  public static function get(string $route, string $controller, string $method = self::METHOD_DEFAULT, int $rights = User::GUEST): void {
+  public static function get(string $route, string $controller, string $method = self::METHOD_DEFAULT, int $rights = AccountInterface::GUEST): void {
     $route = self::prefixRoute($route);
 
     self::$routes[self::HTTP_TYPE_GET][$rights][$route] = [$controller, $method];
@@ -89,7 +89,7 @@ final class Router implements RouterInterface {
   /**
    * {@inheritDoc}
    */
-  public static function post(string $route, string $controller, string $method = self::METHOD_DEFAULT, int $rights = User::GUEST): void {
+  public static function post(string $route, string $controller, string $method = self::METHOD_DEFAULT, int $rights = AccountInterface::GUEST): void {
     $route = self::prefixRoute($route);
 
     self::$routes[self::HTTP_TYPE_POST][$rights][$route] = [$controller, $method];

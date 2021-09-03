@@ -3,7 +3,7 @@
 namespace Modules\Text\Actions;
 
 use Components\Translation\TranslationOld;
-use Domain\Admin\Accounts\User\Models\User;
+use Modules\User\Entity\AccountInterface;
 use System\Entity\EntityInterface;
 use System\StateInterface;
 
@@ -38,7 +38,7 @@ final class DeleteTextAction extends BaseTextAction {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    if ($this->currentUser()->getRights() !== User::DEVELOPER) {
+    if ($this->user()->getRights() !== AccountInterface::DEVELOPER) {
       $this->session()->flash(StateInterface::FAILED, TranslationOld::get('text_destroy_not_allowed'));
 
       return FALSE;

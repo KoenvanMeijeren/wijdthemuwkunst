@@ -8,12 +8,12 @@ declare(strict_types=1);
 
 use Components\Security\CSRF;
 use Components\Translation\TranslationOld;
-use Domain\Admin\Accounts\User\Models\User;
+use Modules\User\Entity\AccountInterface;
 
-$current_user = current_user();
+$current_user = user();
 /** @var \Modules\User\Entity\AccountInterface $entity */
 $entity = $account ?? NULL;
-$disabled = $current_user->getId() === $entity->id() ? 'disabled' : '';
+$disabled = $current_user->id() === $entity->id() ? 'disabled' : '';
 $rights = (int) request()->post('rights');
 $rights = $rights !== 0 ? $rights : $entity->getRights();
 ?>
@@ -60,16 +60,16 @@ $rights = $rights !== 0 ? $rights : $entity->getRights();
                                 <option value="0">
                                     <?= TranslationOld::get('form_choose_rights') ?>
                                 </option>
-                                <option value="<?= User::ADMIN ?>"
-                                    <?= $rights === User::ADMIN ? 'selected' : '' ?>>
+                                <option value="<?= AccountInterface::ADMIN ?>"
+                                    <?= $rights === AccountInterface::ADMIN ? 'selected' : '' ?>>
                                     <?= TranslationOld::get('form_rights_admin') ?>
                                 </option>
-                                <option value="<?= User::SUPER_ADMIN ?>"
-                                    <?= $rights === User::SUPER_ADMIN ? 'selected' : '' ?>>
+                                <option value="<?= AccountInterface::SUPER_ADMIN ?>"
+                                    <?= $rights === AccountInterface::SUPER_ADMIN ? 'selected' : '' ?>>
                                     <?= TranslationOld::get('form_rights_super_admin') ?>
                                 </option>
-                                <option value="<?= User::DEVELOPER ?>"
-                                    <?= $rights === User::DEVELOPER ? 'selected' : '' ?>>
+                                <option value="<?= AccountInterface::DEVELOPER ?>"
+                                    <?= $rights === AccountInterface::DEVELOPER ? 'selected' : '' ?>>
                                     <?= TranslationOld::get('form_rights_developer') ?>
                                 </option>
                             </select>

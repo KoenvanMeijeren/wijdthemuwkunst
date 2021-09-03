@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Modules\Setting\Actions;
 
 use Components\Translation\TranslationOld;
-use Domain\Admin\Accounts\User\Models\User;
+use Modules\User\Entity\AccountInterface;
 use System\StateInterface;
 
 /**
@@ -28,7 +28,7 @@ final class UpdateSettingAction extends BaseSettingAction {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    if ($this->currentUser()->getRights() !== User::DEVELOPER
+    if ($this->user()->getRights() !== AccountInterface::DEVELOPER
       && $this->request()->post('key') !== $this->entity->getKey()) {
       $this->session()->flash(StateInterface::FAILED, TranslationOld::get('setting_editing_key_not_allowed'));
 

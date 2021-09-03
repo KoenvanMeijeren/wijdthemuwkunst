@@ -2,38 +2,53 @@
 
 declare(strict_types=1);
 
-
-namespace Domain\Admin\Authentication\Controllers;
+namespace Modules\Authentication\Controllers;
 
 use Components\Header\Redirect;
 use Components\Translation\TranslationOld;
-use Domain\Admin\Authentication\Actions\LogUserInAction;
-use Domain\Admin\Authentication\Actions\LogUserOutAction;
-use System\Controller\AdminControllerBase;
+use Components\View\ViewInterface;
+use Modules\Authentication\Actions\UserLogInAction;
+use Modules\Authentication\Actions\UserLogOutAction;
+use System\Controller\ControllerBase;
 
 /**
  * The authentication controller.
  *
- * @package Domain\Admin\Authentication\Controllers
+ * @package Modules\Authentication\Controllers
  */
-final class AuthenticationController extends AdminControllerBase {
+final class AuthenticationController extends ControllerBase {
 
-  private string $redirectTo = '/admin/dashboard';
-  private string $redirectBack = '/admin';
+  /**
+   * The redirect to destination.
+   *
+   * @var string
+   */
+  protected string $redirectTo = '/admin/dashboard';
 
-  public function __construct(){
-    parent::__construct('Admin/Authentication/Views/');
+  /**
+   * The redirect back destination.
+   *
+   * @var string
+   */
+  protected string $redirectBack = '/admin';
+
+  /**
+   * {@inheritDoc}
+   */
+  public function __construct() {
+    parent::__construct('Authentication/Views/');
   }
 
   /**
-   * Load the login page.
-   * If the user is already logged in redirect him to the dashboard.
+   * Loads the login page.
+   *
+   * If the user is already logged in redirect to the dashboard.
    *
    * @return \Components\Header\Redirect|\Components\View\ViewInterface
    *   Either a redirect response or the login view.
    */
-  public function index() {
-    if ($this->currentUser()->isLoggedIn()) {
+  public function index(): ViewInterface|Redirect {
+    if ($this->currentUserService()->isLoggedIn()) {
       return new Redirect($this->redirectTo);
     }
 
@@ -49,7 +64,7 @@ final class AuthenticationController extends AdminControllerBase {
    *   The redirect response.
    */
   public function login(): Redirect {
-    $login = new LogUserInAction($this->currentUser());
+    $login = new UserLogInAction();
     if ($login->execute()) {
       return new Redirect($this->redirectTo);
     }
@@ -64,7 +79,7 @@ final class AuthenticationController extends AdminControllerBase {
    *   The redirect response.
    */
   public function logout(): Redirect {
-    $logout = new LogUserOutAction($this->currentUser());
+    $logout = new UserLogOutAction();
     $logout->execute();
 
     return new Redirect($this->redirectBack);

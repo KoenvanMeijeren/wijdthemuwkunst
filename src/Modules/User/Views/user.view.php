@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 use Components\Security\CSRF;
 use Components\Translation\TranslationOld;
-use Domain\Admin\Accounts\Repositories\AccountRepository;
 
-$account = new AccountRepository($account ?? NULL);
+/** @var \Modules\User\Entity\AccountInterface $entity */
+$entity = $account ?? NULL;
 ?>
 <div class="row">
   <div class="col-md-6">
@@ -20,45 +20,45 @@ $account = new AccountRepository($account ?? NULL);
          data-toggle="collapse" role="button" aria-expanded="true"
          aria-controls="collapseDataForm">
         <h6 class="m-0 font-weight-bold text-primary">
-          <?php echo TranslationOld::get('admin_edit_regular_data_account_title') ?>
+          <?= TranslationOld::get('admin_edit_regular_data_account_title') ?>
         </h6>
       </a>
       <!-- Card Content - Collapse -->
       <div class="collapse show" id="collapseDataForm">
         <div class="card-body">
           <form method="post" action="/admin/user/account/store/data">
-            <?php echo CSRF::insertToken('/admin/user/account/store/data') ?>
+            <?= CSRF::insertToken('/admin/user/account/store/data') ?>
 
             <div class="form-group">
               <label for="name">
-                <?php echo TranslationOld::get('form_name') ?>
+                <?= TranslationOld::get('form_name') ?>
                 <span class="text-danger">*</span>
               </label>
 
               <input type="text" name="name" id="name"
                      class="form-control form-control-user"
-                     placeholder="<?php echo TranslationOld::get('form_name') ?>"
-                     value="<?php echo request()->post('name') !== '' ?
-                       request()->post('name') : $account->getName() ?>"
+                     placeholder="<?= TranslationOld::get('form_name') ?>"
+                     value="<?= request()->post('name') !== '' ?
+                       request()->post('name') : $entity->getName() ?>"
                      required>
             </div>
 
             <div class="form-group">
               <label for="email">
-                <?php echo TranslationOld::get('form_email') ?>
+                <?= TranslationOld::get('form_email') ?>
                 <span class="text-danger">*</span>
               </label>
               <input type="email" id="email"
                      class="form-control"
-                     placeholder="<?php echo TranslationOld::get('form_email') ?>"
-                     value="<?php echo $account->getEmail() ?>"
+                     placeholder="<?= TranslationOld::get('form_email') ?>"
+                     value="<?= $entity->getEmail() ?>"
                      disabled
                      required>
             </div>
 
             <button type="submit"
                     class="btn btn-outline-primary float-right">
-              <?php echo TranslationOld::get('save_button') ?>
+              <?= TranslationOld::get('save_button') ?>
               <i class="far fa-save"></i>
             </button>
 
@@ -76,7 +76,7 @@ $account = new AccountRepository($account ?? NULL);
          data-toggle="collapse" role="button" aria-expanded="true"
          aria-controls="collapsePasswordForm">
         <h6 class="m-0 font-weight-bold text-primary">
-          <?php echo TranslationOld::get('admin_edit_password_account_title') ?>
+          <?= TranslationOld::get('admin_edit_password_account_title') ?>
         </h6>
       </a>
       <!-- Card Content - Collapse -->
@@ -84,18 +84,18 @@ $account = new AccountRepository($account ?? NULL);
         <div class="card-body">
           <form method="post"
                 action="/admin/user/account/store/password">
-            <?php echo CSRF::insertToken('/admin/user/account/store/password') ?>
+            <?= CSRF::insertToken('/admin/user/account/store/password') ?>
 
             <div class="row">
               <div class="col-sm-12">
                 <div class="form-group">
                   <label for="currentPassword">
-                    <?php echo TranslationOld::get('form_current_password') ?>
+                    <?= TranslationOld::get('form_current_password') ?>
                     <span class="text-danger">*</span>
                   </label>
                   <input type="password" name="currentPassword"
                          id="currentPassword" class="form-control"
-                         placeholder="<?php echo TranslationOld::get('form_current_password') ?>"
+                         placeholder="<?= TranslationOld::get('form_current_password') ?>"
                          required autocomplete="true">
                 </div>
               </div>
@@ -105,24 +105,24 @@ $account = new AccountRepository($account ?? NULL);
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="newPassword">
-                    <?php echo TranslationOld::get('form_new_password') ?>
+                    <?= TranslationOld::get('form_new_password') ?>
                     <span class="text-danger">*</span>
                   </label>
                   <input type="password" name="newPassword"
                          id="newPassword" class="form-control"
-                         placeholder="<?php echo TranslationOld::get('form_new_password') ?>"
+                         placeholder="<?= TranslationOld::get('form_new_password') ?>"
                          required autocomplete="false">
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="confirmationPassword">
-                    <?php echo TranslationOld::get('form_confirmation_password') ?>
+                    <?= TranslationOld::get('form_confirmation_password') ?>
                     <span class="text-danger">*</span>
                   </label>
                   <input type="password" name="confirmationPassword"
                          id="confirmationPassword" class="form-control"
-                         placeholder="<?php echo TranslationOld::get('form_confirmation_password') ?>"
+                         placeholder="<?= TranslationOld::get('form_confirmation_password') ?>"
                          required autocomplete="false">
 
                   <div id="password-feedback"></div>
@@ -132,7 +132,7 @@ $account = new AccountRepository($account ?? NULL);
 
             <button type="submit"
                     class="btn btn-outline-primary float-right">
-              <?php echo TranslationOld::get('save_button') ?>
+              <?= TranslationOld::get('save_button') ?>
               <i class="far fa-save"></i>
             </button>
 

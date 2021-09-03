@@ -8,8 +8,10 @@ use Components\SuperGlobals\Request;
 use Components\SuperGlobals\RequestInterface;
 use Components\SuperGlobals\Session\Session;
 use Components\SuperGlobals\Session\SessionInterface;
-use Domain\Admin\Accounts\User\Models\User;
 use JetBrains\PhpStorm\Pure;
+use Modules\User\CurrentUser;
+use Modules\User\CurrentUserInterface;
+use Modules\User\Entity\AccountInterface;
 
 /**
  * Gets the request definition.
@@ -52,11 +54,21 @@ function environment(): EnvInterface {
 }
 
 /**
- * Gets the user definition.
+ * Gets the current user entity.
  *
- * @return User
- *   The user definition.
+ * @return \Modules\User\Entity\AccountInterface
+ *   The current user entity.
  */
-function current_user(): User {
-  return new User();
+function user(): AccountInterface {
+  return current_user()->get();
+}
+
+/**
+ * Gets the current user definition.
+ *
+ * @return \Modules\User\CurrentUserInterface
+ *   The current user definition.
+ */
+function current_user(): CurrentUserInterface {
+  return new CurrentUser();
 }

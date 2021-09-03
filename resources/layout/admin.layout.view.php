@@ -1,13 +1,13 @@
 <?php
 
+use Components\Resource\Resource;
 use Components\SuperGlobals\Url\Uri;
 use Components\Translation\TranslationOld;
-use Domain\Admin\Accounts\User\Models\User;
-use Components\Resource\Resource;
+use Modules\User\Entity\AccountInterface;
 use Modules\User\Support\AccountRightsConverter;
 use System\Breadcrumbs\Breadcrumbs;
 
-$current_user = current_user();
+$current_user = current_user()->get();
 $rights = new AccountRightsConverter($current_user->getRights());
 $breadcrumbs = new Breadcrumbs(Uri::getUrl());
 ?>
@@ -45,7 +45,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
 </head>
 <body id="page-top">
 <div id="wrapper">
-    <?php if ($current_user->isLoggedIn()) : ?>
+    <?php if (current_user()->isLoggedIn()) : ?>
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled"
             id="accordionSidebar">
@@ -64,7 +64,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
                 <hr class="sidebar-divider my-0">
             </li>
 
-            <?php if ($current_user->getRights() >= User::ADMIN) : ?>
+            <?php if ($current_user->getRights() >= AccountInterface::ADMIN) : ?>
                 <li class="nav-item <?= str_contains(Uri::getUrl(), 'dashboard') ? 'active' : '' ?>">
                     <a class="nav-link" href="/admin/dashboard">
                         <i class="fas fa-home"></i>
@@ -141,7 +141,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
                 </li>
 
             <?php endif;
-            if ($current_user->getRights() >= User::SUPER_ADMIN) : ?>
+            if ($current_user->getRights() >= AccountInterface::SUPER_ADMIN) : ?>
                 <li class="nav-item <?= str_contains(Uri::getUrl(), 'account') && !str_contains(Uri::getUrl(), 'user') ? 'active' : '' ?>">
                     <a class="nav-link" href="/admin/account">
                         <i class="fas fa-users"></i>
@@ -151,7 +151,7 @@ $breadcrumbs = new Breadcrumbs(Uri::getUrl());
                     </a>
                 </li>
             <?php endif;
-            if ($current_user->getRights() >= User::DEVELOPER) : ?>
+            if ($current_user->getRights() >= AccountInterface::DEVELOPER) : ?>
                 <li class="nav-item <?= str_contains(Uri::getUrl(), 'reports') ? 'active' : '' ?>">
                     <a class="nav-link collapsed" href="#"
                        data-toggle="collapse"

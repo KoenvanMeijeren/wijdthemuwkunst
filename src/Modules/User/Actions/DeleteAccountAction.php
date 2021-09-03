@@ -39,7 +39,7 @@ final class DeleteAccountAction extends AccountActionBase {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    if ($this->currentUser()->getId() === $this->entity->id()) {
+    if ($this->user()->id() === $this->entity->id()) {
       $this->session()->flash(
         StateInterface::FAILED,
         TranslationOld::get('cannot_delete_own_account_message')

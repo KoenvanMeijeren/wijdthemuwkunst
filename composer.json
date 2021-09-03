@@ -13,9 +13,7 @@
             "src/Components/Functions/autoload.php"
         ],
         "psr-4": {
-            "Domain\\": "src/Domain/",
             "Components\\": "src/Components/",
-            "Src\\": "src/Src/",
             "Modules\\": "src/Modules/",
             "System\\": "src/System/"
         }

@@ -3,7 +3,7 @@
 namespace Modules\User;
 
 use Components\ComponentsTrait;
-use Domain\Admin\Authentication\Support\IDEncryption;
+use Modules\Authentication\Support\IDEncryption;
 use Modules\User\Entity\Account;
 use Modules\User\Entity\AccountInterface;
 use System\Entity\EntityManagerInterface;
@@ -42,6 +42,13 @@ class CurrentUser implements CurrentUserInterface {
     return $this->storage->create([
       'rights' => AccountInterface::GUEST,
     ]);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function isLoggedIn(): bool {
+    return $this->get()->getRights() > AccountInterface::GUEST;
   }
 
   /**

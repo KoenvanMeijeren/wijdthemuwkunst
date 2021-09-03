@@ -28,21 +28,11 @@ final class Application implements ApplicationInterface {
   protected array $routesLocations = [];
 
   /**
-   * Construct the app.
+   * Executes actions before running the app.
    *
    * Set the env based on the current environment (development - production)
    * Start the session and set some basic security protection.
    * Set the user for the application.
-   *
-   * @param string $routesLocation
-   *   The file location of the base routes.
-   */
-  public function __construct(string $routesLocation = 'web.php') {
-    $this->routesLocations[] = ROUTES_PATH . '/' . $routesLocation;
-  }
-
-  /**
-   * Executes actions before running the app.
    */
   protected function preRun(): void {
     $moduleHandler = new ModuleHandler();
@@ -65,7 +55,7 @@ final class Application implements ApplicationInterface {
   public function run(): string {
     $this->preRun();
 
-    $current_user = $this->currentUser();
+    $current_user = $this->user();
 
     return (string) Router::load($this->routesLocations)->direct(
       Uri::getUrl(), Uri::getMethod(), $current_user->getRights()

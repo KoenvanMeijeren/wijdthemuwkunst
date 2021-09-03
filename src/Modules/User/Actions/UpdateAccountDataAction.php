@@ -29,8 +29,8 @@ final class UpdateAccountDataAction extends AccountActionBase {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    if ($this->request()->post('rights') !== $this->currentUser()->getRights()
-      && $this->entity->id() === $this->currentUser()->getId()) {
+    if ($this->request()->post('rights') !== $this->user()->getRights()
+      && $this->entity->id() === $this->user()->id()) {
       $this->session()->flash(
         StateInterface::FAILED,
         TranslationOld::get('cannot_edit_own_account_rights_message')

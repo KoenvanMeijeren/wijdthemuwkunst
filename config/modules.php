@@ -1,5 +1,6 @@
 <?php
 
+use Modules\Authentication\AuthenticationModule;
 use Modules\Cms\Structure\StructureModule;
 use Modules\Contact\ContactModule;
 use Modules\Event\EventModule;
@@ -24,4 +25,5 @@ return [
   PageModule::class,
   EventModule::class,
   AccountModule::class,
+  AuthenticationModule::class,
 ];

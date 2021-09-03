@@ -5,7 +5,7 @@ namespace Modules\Setting\Entity;
 use Components\ComponentsTrait;
 use Components\Resource\Resource;
 use Components\Translation\TranslationOld;
-use Domain\Admin\Accounts\User\Models\User;
+use Modules\User\Entity\AccountInterface;
 use System\DataTable\DataTableBuilder;
 use System\Entity\EntityInterface;
 
@@ -50,7 +50,7 @@ final class SettingTable extends DataTableBuilder {
         TranslationOld::get('delete_setting_confirmation_message'),
         $entity->getKey()
       ),
-      $this->currentUser()->getRights() !== User::DEVELOPER
+      $this->user()->getRights() !== AccountInterface::DEVELOPER
     );
   }
 

@@ -9,14 +9,14 @@ declare(strict_types=1);
 
 use Components\Security\CSRF;
 use Components\Translation\TranslationOld;
-use Domain\Admin\Accounts\User\Models\User;
+use Modules\User\Entity\AccountInterface;
 
 /** @var \Modules\Text\Entity\TextInterface $entity */
 $entity = $text ?? null;
 $createText = $createText ?? FALSE;
-$disabled = current_user()->getRights() === User::DEVELOPER ? '' : 'disabled';
+$disabled = user()->getRights() === AccountInterface::DEVELOPER ? '' : 'disabled';
 ?>
-<?php if (!$entity && $createText && current_user()->getRights() === User::DEVELOPER) : ?>
+<?php if (!$entity && $createText && user()->getRights() === AccountInterface::DEVELOPER) : ?>
     <div class="row">
         <div class="col-xl-12 mb-4">
             <div class="card border-left-warning shadow h-100 py-2">

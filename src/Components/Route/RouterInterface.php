@@ -4,7 +4,7 @@ namespace Components\Route;
 
 
 use Closure;
-use Domain\Admin\Accounts\User\Models\User;
+use Modules\User\Entity\AccountInterface;
 use System\View\DomainView;
 
 /**
@@ -62,7 +62,7 @@ interface RouterInterface {
    * @param int $rights
    *   The minimum rights to be able to visit routes based on the given rights.
    */
-  public static function get(string $route, string $controller, string $method = self::METHOD_DEFAULT, int $rights = User::GUEST): void;
+  public static function get(string $route, string $controller, string $method = self::METHOD_DEFAULT, int $rights = AccountInterface::GUEST): void;
 
   /**
    * Defines the post routes.
@@ -76,7 +76,7 @@ interface RouterInterface {
    * @param int $rights
    *   The minimum rights to be able to visit routes based on the given rights.
    */
-  public static function post(string $route, string $controller, string $method = self::METHOD_DEFAULT, int $rights = User::GUEST): void;
+  public static function post(string $route, string $controller, string $method = self::METHOD_DEFAULT, int $rights = AccountInterface::GUEST): void;
 
   /**
    * Prefixes a group of routes.

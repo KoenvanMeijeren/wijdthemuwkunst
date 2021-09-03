@@ -8,15 +8,15 @@ declare(strict_types=1);
 
 use Components\Security\CSRF;
 use Components\Translation\TranslationOld;
-use Domain\Admin\Accounts\User\Models\User;
 use Modules\Page\Entity\PageInterface;
+use Modules\User\Entity\AccountInterface;
 
 /** @var PageInterface $entity */
 $entity = $page ?? null;
-$current_user = current_user();
+$current_user = user();
 
 $disabled = '';
-if ($current_user->getRights() !== User::DEVELOPER && $entity?->getInMenu() === PageInterface::PAGE_STATIC) {
+if ($current_user->getRights() !== AccountInterface::DEVELOPER && $entity?->getInMenu() === PageInterface::PAGE_STATIC) {
   $disabled = 'disabled';
 }
 

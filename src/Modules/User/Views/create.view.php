@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 use Components\Security\CSRF;
 use Components\Translation\TranslationOld;
-use Domain\Admin\Accounts\User\Models\User;
+use Modules\User\Entity\AccountInterface;
 
 ?>
 <form method="post" action="/admin/account/create/store">
@@ -60,16 +60,16 @@ use Domain\Admin\Accounts\User\Models\User;
                                 <option value="0">
                                     <?= TranslationOld::get('form_choose_rights') ?>
                                 </option>
-                                <option value="<?= User::ADMIN ?>"
-                                    <?= (int) request()->post('rights') === User::ADMIN ? 'selected' : '' ?>>
+                                <option value="<?= AccountInterface::ADMIN ?>"
+                                    <?= (int) request()->post('rights') === AccountInterface::ADMIN ? 'selected' : '' ?>>
                                     <?= TranslationOld::get('form_rights_admin') ?>
                                 </option>
-                                <option value="<?= User::SUPER_ADMIN ?>"
-                                    <?= (int) request()->post('rights') === User::SUPER_ADMIN ? 'selected' : '' ?>>
+                                <option value="<?= AccountInterface::SUPER_ADMIN ?>"
+                                    <?= (int) request()->post('rights') === AccountInterface::SUPER_ADMIN ? 'selected' : '' ?>>
                                     <?= TranslationOld::get('form_rights_super_admin') ?>
                                 </option>
-                                <option value="<?= User::DEVELOPER ?>"
-                                    <?= (int) request()->post('rights') === User::DEVELOPER ? 'selected' : '' ?>>
+                                <option value="<?= AccountInterface::DEVELOPER ?>"
+                                    <?= (int) request()->post('rights') === AccountInterface::DEVELOPER ? 'selected' : '' ?>>
                                     <?= TranslationOld::get('form_rights_developer') ?>
                                 </option>
                             </select>

@@ -2,26 +2,34 @@
 
 declare(strict_types=1);
 
-
-namespace Domain\Admin\Authentication\Actions;
+namespace Modules\Authentication\Actions;
 
 use Components\Actions\Action;
 use Components\SuperGlobals\Session\SessionBuilder;
 use Components\Translation\TranslationOld;
-use Domain\Admin\Accounts\User\Models\User;
+use Modules\User\CurrentUser;
+use Modules\User\CurrentUserInterface;
 use System\StateInterface;
 
 /**
+ * Provides an action for logging an user out.
  *
+ * @package Modules\Authentication\Actions
  */
-final class LogUserOutAction extends Action {
-  private User $user;
+final class UserLogOutAction extends Action {
 
   /**
-   * {@inheritDoc}
+   * The current user.
+   *
+   * @var \Modules\User\CurrentUserInterface
    */
-  public function __construct(User $user) {
-    $this->user = $user;
+  protected CurrentUserInterface $currentUser;
+
+  /**
+   * Creates a new log user out action.
+   */
+  public function __construct() {
+    $this->currentUser = new CurrentUser();
   }
 
   /**
@@ -42,7 +50,7 @@ final class LogUserOutAction extends Action {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    return $this->user->isLoggedIn();
+    return $this->currentUser->isLoggedIn();
   }
 
   /**

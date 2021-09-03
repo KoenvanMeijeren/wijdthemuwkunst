@@ -1,15 +1,15 @@
 <?php
 
 use Components\Route\Router;
-use Domain\Admin\Accounts\User\Models\User;
 use Modules\File\Controllers\UploadFileController;
+use Modules\User\Entity\AccountInterface;
 
 // File routes.
 Router::prefix('admin/upload')->group(static function () {
   Router::post('file', UploadFileController::class,
-    'store', User::ADMIN);
+    'store', AccountInterface::ADMIN);
   Router::post('thumbnail', UploadFileController::class,
-    'thumbnail', User::ADMIN);
+    'thumbnail', AccountInterface::ADMIN);
   Router::post('banner', UploadFileController::class,
-    'banner', User::ADMIN);
+    'banner', AccountInterface::ADMIN);
 });

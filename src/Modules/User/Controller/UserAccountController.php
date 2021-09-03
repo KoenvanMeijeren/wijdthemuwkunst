@@ -36,7 +36,7 @@ final class UserAccountController extends EntityControllerBase {
   public function index(): ViewInterface {
     return $this->view('user', [
       'title' => TranslationOld::get('admin_account_maintenance_title'),
-      'account' => $this->currentUser()->getAccount(),
+      'account' => $this->currentUserService()->get(),
     ]);
   }
 

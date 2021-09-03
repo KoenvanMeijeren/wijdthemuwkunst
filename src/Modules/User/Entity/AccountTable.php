@@ -62,7 +62,7 @@ final class AccountTable extends DataTableBuilder {
    *   The entity.
    */
   protected function buildRowActions(EntityInterface $entity): string {
-    $current_user = $this->currentUser();
+    $current_user = $this->user();
 
     $actions = '<div class="table-edit-row">';
     $actions .= Resource::addTableLinkActionColumn(
@@ -76,7 +76,7 @@ final class AccountTable extends DataTableBuilder {
       'fas fa-trash-alt',
       'btn-outline-danger',
       TranslationOld::get('admin_delete_account_warning_message'),
-      $current_user->getId() === $entity->id()
+      $current_user->id() === $entity->id()
     );
     $actions .= '</div>';
 
