@@ -2,8 +2,8 @@
 
 namespace Modules\Text\Actions;
 
-use Domain\Admin\Accounts\User\Models\User;
 use Components\Translation\TranslationOld;
+use Domain\Admin\Accounts\User\Models\User;
 use System\Entity\EntityInterface;
 use System\StateInterface;
 

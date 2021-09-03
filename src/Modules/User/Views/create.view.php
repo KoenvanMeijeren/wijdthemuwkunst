@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
+use Components\Security\CSRF;
 use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\User\Models\User;
-use Components\Security\CSRF;
 
 ?>
 <form method="post" action="/admin/account/create/store">

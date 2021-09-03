@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace Components\Route;
 
 use Closure;
-use Domain\Admin\Accounts\User\Models\User;
 use Components\Validate\Exceptions\Basic\UndefinedRouteException;
 use Components\Validate\Validate;
+use Domain\Admin\Accounts\User\Models\User;
 use System\View\DomainView;
 
 /**

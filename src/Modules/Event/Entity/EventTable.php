@@ -3,8 +3,8 @@
 namespace Modules\Event\Entity;
 
 use Components\ComponentsTrait;
-use Components\Translation\TranslationOld;
 use Components\Resource\Resource;
+use Components\Translation\TranslationOld;
 use Modules\Event\Utility\EventDatetimeConverter;
 use Modules\Event\Utility\EventIsPublishedStateConverter;
 use System\DataTable\DataTableBuilder;

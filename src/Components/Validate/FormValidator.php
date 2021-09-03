@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace Components\Validate;
 
 use Components\ComponentsTrait;
+use Components\Translation\TranslationOld;
 use DateTime;
 use System\StateInterface;
-use Components\Translation\TranslationOld;
 
 /**
  * Provides a class for form validation actions.

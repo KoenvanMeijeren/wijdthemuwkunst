@@ -1,8 +1,8 @@
 <?php
 
+use Components\Route\Router;
 use Domain\Admin\Accounts\User\Models\User;
 use Modules\Text\Controllers\TextController;
-use Components\Route\Router;
 
 Router::prefix('admin/configuration/texts')->group(static function () {
   Router::get('', TextController::class,

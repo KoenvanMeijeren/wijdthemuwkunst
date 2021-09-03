@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Components\SuperGlobals;
 
-use Components\Sanitize\Sanitize;
 use Components\Route\Router;
+use Components\Sanitize\Sanitize;
 use JetBrains\PhpStorm\Pure;
 
 /**

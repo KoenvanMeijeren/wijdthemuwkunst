@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
+use Components\Security\CSRF;
 use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\Repositories\AccountRepository;
-use Components\Security\CSRF;
 
 $account = new AccountRepository($account ?? NULL);
 ?>

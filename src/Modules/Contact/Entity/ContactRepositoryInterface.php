@@ -2,7 +2,6 @@
 
 namespace Modules\Contact\Entity;
 
-use Components\Datetime\DateTimeInterface;
 use System\Entity\EntityRepositoryInterface;
 
 /**

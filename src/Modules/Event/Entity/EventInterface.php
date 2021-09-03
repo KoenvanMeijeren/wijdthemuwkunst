@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Modules\Event\Entity;
 
-use Cake\Chronos\Date;
 use Components\Datetime\DateTime;
 use Modules\Slug\SlugInterface;
 use System\Entity\EntityInterface;

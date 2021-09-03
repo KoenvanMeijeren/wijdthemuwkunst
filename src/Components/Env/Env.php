@@ -4,10 +4,10 @@ declare(strict_types=1);
 namespace Components\Env;
 
 use Components\ComponentsTrait;
-use Components\SuperGlobals\RequestInterface;
-use JetBrains\PhpStorm\Pure;
 use Components\Log\LoggerHandler;
+use Components\SuperGlobals\RequestInterface;
 use Components\Validate\Validate;
+use JetBrains\PhpStorm\Pure;
 use System\View\ProductionErrorView;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run as Whoops;

@@ -4,7 +4,6 @@ namespace Modules\Contact\Entity;
 
 use Cake\Chronos\Chronos;
 use Components\Database\Query;
-use Components\Datetime\DateTime;
 use System\Entity\EntityRepositoryBase;
 
 /**

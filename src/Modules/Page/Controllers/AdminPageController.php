@@ -5,6 +5,7 @@ namespace Modules\Page\Controllers;
 
 use Components\Header\Redirect;
 use Components\Translation\TranslationOld;
+use Components\View\ViewInterface;
 use Modules\Page\Actions\CreatePageAction;
 use Modules\Page\Actions\DeletePageAction;
 use Modules\Page\Actions\PublishPageAction;
@@ -13,7 +14,6 @@ use Modules\Page\Actions\RemovePageThumbnailAction;
 use Modules\Page\Actions\SaveAndPublishPageAction;
 use Modules\Page\Actions\UnPublishPageAction;
 use Modules\Page\Actions\UpdatePageAction;
-use Components\View\ViewInterface;
 use Modules\Page\Entity\Page;
 use Modules\Page\Entity\PageInterface;
 use Modules\Page\Entity\PageTable;

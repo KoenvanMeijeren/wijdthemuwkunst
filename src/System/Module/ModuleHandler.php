@@ -5,7 +5,6 @@ namespace System\Module;
 
 use Components\Config\Config;
 use Components\Config\ConfigInterface;
-use Components\File\Exceptions\FileNotFoundException;
 
 /**
  * Provides a class for interacting with the modules.

@@ -2,11 +2,7 @@
 
 namespace Modules\Event\Action;
 
-use Cake\Chronos\Chronos;
-use Components\Datetime\DateTime;
 use Components\Translation\TranslationOld;
-use Domain\Admin\Accounts\User\Models\User;
-use Modules\Page\Entity\PageInterface;
 use System\StateInterface;
 
 /**

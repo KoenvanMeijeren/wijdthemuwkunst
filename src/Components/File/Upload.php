@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace Components\File;
 
 use Components\ComponentsTrait;
+use Components\File\Exceptions\ErrorWhileUploadingFileException;
 use Components\SuperGlobals\RequestInterface;
+use Components\Translation\TranslationOld;
 use Exception;
 use Sirius\Upload\Handler as UploadHandler;
-use Components\File\Exceptions\ErrorWhileUploadingFileException;
-use Components\Translation\TranslationOld;
 use System\StateInterface;
 
 /**

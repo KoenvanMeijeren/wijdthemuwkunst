@@ -4,10 +4,10 @@ declare(strict_types=1);
 namespace Components\Security;
 
 use Components\ComponentsTrait;
-use ReCaptcha\ReCaptcha as GoogleRecaptcha;
 use Components\SuperGlobals\Request;
-use System\StateInterface;
 use Components\Translation\TranslationOld;
+use ReCaptcha\ReCaptcha as GoogleRecaptcha;
+use System\StateInterface;
 
 /**
  * Provides a class for interacting with the Google Recaptcha API.

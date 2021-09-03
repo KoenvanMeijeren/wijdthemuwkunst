@@ -3,7 +3,6 @@
 namespace Modules\User\Entity;
 
 use System\Entity\EntityBase;
-use System\Entity\EntityRepository;
 
 /**
  * Defines the User entity.

@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Components\Actions;
 
-use Components\SuperGlobals\Request;
 use Components\File\Upload;
+use Components\SuperGlobals\Request;
 
 /**
  * Provides a base class for file actions.

@@ -5,11 +5,11 @@ namespace Modules\Reports\Controllers;
 
 use Cake\Chronos\Chronos;
 use Components\Translation\TranslationOld;
+use Components\View\ViewInterface;
+use JetBrains\PhpStorm\Pure;
 use Modules\Reports\Src\Logs;
 use Modules\Reports\Src\PhpInfo;
 use Modules\Reports\Src\SuperGlobals;
-use Components\View\ViewInterface;
-use JetBrains\PhpStorm\Pure;
 use System\Controller\ControllerBase;
 
 /**

@@ -6,9 +6,9 @@ declare(strict_types=1);
 namespace Domain\Admin\Authentication\Actions;
 
 use Components\Actions\Action;
+use Components\SuperGlobals\Session\SessionBuilder;
 use Components\Translation\TranslationOld;
 use Domain\Admin\Accounts\User\Models\User;
-use Components\SuperGlobals\Session\SessionBuilder;
 use System\StateInterface;
 
 /**

@@ -6,7 +6,6 @@
 
 declare(strict_types=1);
 
-use Components\Env\Env;
 use Components\Env\EnvInterface;
 use Components\Translation\TranslationOld;
 

@@ -4,10 +4,10 @@ declare(strict_types=1);
 namespace System\View;
 
 use Components\File\Exceptions\FileNotFoundException;
-use Modules\Cms\Structure\MenuAdminTrait;
-use JetBrains\PhpStorm\ArrayShape;
 use Components\SuperGlobals\Url\Uri;
 use Components\View\BaseView;
+use JetBrains\PhpStorm\ArrayShape;
+use Modules\Cms\Structure\MenuAdminTrait;
 use Modules\Menu\Entity\Menu;
 use System\Entity\EntityManager;
 

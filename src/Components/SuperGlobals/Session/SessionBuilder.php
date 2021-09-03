@@ -9,7 +9,6 @@ use Cake\Chronos\Chronos;
 use Components\ComponentsTrait;
 use Components\Env\EnvInterface;
 use Components\SuperGlobals\Cookie\Cookie;
-use Components\Env\Env;
 use Components\SuperGlobals\Session\Exceptions\InvalidSessionException;
 
 /**

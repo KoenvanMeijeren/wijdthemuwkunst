@@ -1,7 +1,7 @@
 <?php
 
-use Domain\Admin\Accounts\User\Models\User;
 use Components\Route\Router;
+use Domain\Admin\Accounts\User\Models\User;
 use Modules\User\Controller\AccountController;
 use Modules\User\Controller\UserAccountController;
 

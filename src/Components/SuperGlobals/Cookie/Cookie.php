@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace Components\SuperGlobals\Cookie;
 
 use Components\Array\ArrayBase;
-use Components\Sanitize\Sanitize;
 use Components\Encrypt\Encrypt;
+use Components\Sanitize\Sanitize;
 
 /**
  * Provides a class for interacting with cookies.

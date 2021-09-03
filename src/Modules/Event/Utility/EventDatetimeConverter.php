@@ -4,8 +4,8 @@ namespace Modules\Event\Utility;
 
 use Cake\Chronos\Chronos;
 use Components\Converter\ConverterBase;
-use Components\Translation\TranslationOld;
 use Components\Datetime\DateTime;
+use Components\Translation\TranslationOld;
 
 /**
  * Provides a class for converting event date times.

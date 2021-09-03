@@ -4,8 +4,8 @@ namespace Modules\Contact\Controller;
 
 use Components\Header\Redirect;
 use Components\Translation\TranslationOld;
-use Modules\Contact\Actions\DeleteContactMessageAction;
 use Components\View\ViewInterface;
+use Modules\Contact\Actions\DeleteContactMessageAction;
 use Modules\Contact\Entity\Contact;
 use Modules\Contact\Entity\ContactRepositoryInterface;
 use System\Entity\EntityControllerBase;

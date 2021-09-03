@@ -6,8 +6,8 @@
 
 declare(strict_types=1);
 
-use Components\Translation\TranslationOld;
 use Components\Security\CSRF;
+use Components\Translation\TranslationOld;
 
 /** @var \Modules\Event\Entity\EventInterface $event */
 $event = $event ?? NULL;

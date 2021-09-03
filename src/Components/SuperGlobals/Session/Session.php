@@ -5,8 +5,8 @@ namespace Components\SuperGlobals\Session;
 
 use Components\Array\ArrayBase;
 use Components\ComponentsTrait;
-use Components\Sanitize\Sanitize;
 use Components\Encrypt\Encrypt;
+use Components\Sanitize\Sanitize;
 
 /**
  * Defines a class for interacting with the session.

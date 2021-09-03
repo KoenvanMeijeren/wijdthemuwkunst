@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Modules\Text\Actions;
 
-use System\Entity\Actions\EntityFormActionBase;
-use Modules\Text\Entity\Text;
 use Components\Translation\TranslationOld;
+use Modules\Text\Entity\Text;
+use System\Entity\Actions\EntityFormActionBase;
 use System\Entity\EntityInterface;
 use System\StateInterface;
 

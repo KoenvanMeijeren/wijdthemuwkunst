@@ -7,9 +7,9 @@
 
 declare(strict_types=1);
 
-use Domain\Admin\Accounts\User\Models\User;
 use Components\Security\CSRF;
 use Components\Translation\TranslationOld;
+use Domain\Admin\Accounts\User\Models\User;
 
 /** @var \Modules\Text\Entity\TextInterface $entity */
 $entity = $text ?? null;

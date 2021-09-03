@@ -5,10 +5,10 @@ namespace Modules\Menu\Controller;
 
 use Components\Header\Redirect;
 use Components\Translation\TranslationOld;
+use Components\View\ViewInterface;
 use Modules\Menu\Actions\CreateMenuAction;
 use Modules\Menu\Actions\DeleteMenuAction;
 use Modules\Menu\Actions\UpdateMenuAction;
-use Components\View\ViewInterface;
 use Modules\Menu\Entity\Menu;
 use Modules\Menu\Entity\MenuInterface;
 use Modules\Menu\Entity\MenuTable;

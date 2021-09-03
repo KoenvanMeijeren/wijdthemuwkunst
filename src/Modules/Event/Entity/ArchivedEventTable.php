@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Modules\Event\Entity;
 
-use Components\Translation\TranslationOld;
 use Components\Resource\Resource;
+use Components\Translation\TranslationOld;
 use Modules\Event\Utility\EventDatetimeConverter;
 use System\DataTable\DataTableBuilder;
 use System\Entity\EntityInterface;

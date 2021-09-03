@@ -4,8 +4,8 @@ namespace Modules\User\Actions;
 
 use Components\Translation\TranslationOld;
 use Modules\User\Entity\Account;
-use System\Entity\EntityInterface;
 use System\Entity\Actions\EntityFormActionBase;
+use System\Entity\EntityInterface;
 use System\StateInterface;
 
 /**

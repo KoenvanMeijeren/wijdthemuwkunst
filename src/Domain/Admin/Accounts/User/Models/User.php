@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace Domain\Admin\Accounts\User\Models;
 
 use Components\ComponentsTrait;
+use Components\Header\Redirect;
 use Domain\Admin\Authentication\Actions\LogUserOutAction;
 use Domain\Admin\Authentication\Support\IDEncryption;
-use Components\Header\Redirect;
 use Src\Model\Model;
 use Src\Model\Scopes\SoftDelete\SoftDelete;
 use stdClass;

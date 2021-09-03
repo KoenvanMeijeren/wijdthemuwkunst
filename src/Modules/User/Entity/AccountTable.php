@@ -6,9 +6,8 @@ declare(strict_types=1);
 namespace Modules\User\Entity;
 
 use Components\ComponentsTrait;
-use Components\Translation\TranslationOld;
-use Domain\Admin\Accounts\User\Models\User;
 use Components\Resource\Resource;
+use Components\Translation\TranslationOld;
 use Modules\User\Support\AccountBlockStateConverter;
 use Modules\User\Support\AccountRightsConverter;
 use System\DataTable\DataTableBuilder;

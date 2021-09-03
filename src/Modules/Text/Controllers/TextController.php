@@ -3,13 +3,13 @@
 namespace Modules\Text\Controllers;
 
 use Components\Header\Redirect;
+use Components\Translation\TranslationOld;
+use Components\View\ViewInterface;
 use Modules\Text\Actions\CreateTextAction;
 use Modules\Text\Actions\DeleteTextAction;
 use Modules\Text\Actions\UpdateTextAction;
 use Modules\Text\Entity\Text;
 use Modules\Text\Entity\TextTable;
-use Components\Translation\TranslationOld;
-use Components\View\ViewInterface;
 use System\Entity\EntityControllerBase;
 use System\StateInterface;
 

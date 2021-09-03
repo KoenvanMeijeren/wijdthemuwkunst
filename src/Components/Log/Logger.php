@@ -7,6 +7,7 @@ use Components\ComponentsTrait;
 use Components\Datetime\DateTimeInterface;
 use Components\Env\EnvInterface;
 use Components\File\Exceptions\FileNotFoundException;
+use Components\File\File;
 use Components\SuperGlobals\Url\Uri;
 use DateTimeZone;
 use Monolog\Formatter\LineFormatter;
@@ -16,7 +17,6 @@ use Monolog\Logger as MonologLogger;
 use Monolog\Processor\IntrospectionProcessor;
 use Monolog\Processor\ProcessIdProcessor;
 use Monolog\Processor\WebProcessor;
-use Components\File\File;
 use Psr\Log\LoggerInterface as PsrLoggerInterface;
 use System\StateInterface;
 
