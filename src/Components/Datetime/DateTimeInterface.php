@@ -15,7 +15,7 @@ interface DateTimeInterface {
   /**
    * The default locale.
    *
-   * @var int
+   * @var string
    */
   public const DEFAULT_LOCALE = 'nl_NL';
 
