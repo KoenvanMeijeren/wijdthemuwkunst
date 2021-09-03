@@ -6,7 +6,7 @@ declare(strict_types=1);
 namespace Modules\User\Actions;
 
 use Components\Translation\TranslationOld;
-use Domain\Admin\Authentication\Support\IDEncryption;
+use Modules\User\CurrentUser;
 use System\StateInterface;
 
 /**
@@ -22,24 +22,8 @@ final class UpdateUserPasswordAction extends AccountActionBase {
   public function __construct() {
     parent::__construct();
 
-    if ($id = $this->getUserId()) {
-      $this->entity = $this->storage->load($id);
-    }
-  }
-
-  /**
-   * Get the id of the user.
-   *
-   * It does not matter if the user is logged in.
-   * If the user is logged in, the id of the user will be returned.
-   * Otherwise, the guest id is returned.
-   *
-   * @return int the id of the user
-   */
-  protected function getUserId(): int {
-    $idEncryption = new IDEncryption();
-
-    return $idEncryption->decrypt($this->session()->get('userID'));
+    $current_user = new CurrentUser();
+    $this->entity = $current_user->get();
   }
 
   /**
