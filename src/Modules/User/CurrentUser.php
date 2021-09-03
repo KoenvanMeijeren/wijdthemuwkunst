@@ -40,6 +40,9 @@ class CurrentUser implements CurrentUserInterface {
     }
 
     return $this->storage->create([
+      'name' => '',
+      'email' => '',
+      'password' => '',
       'rights' => AccountInterface::GUEST,
     ]);
   }

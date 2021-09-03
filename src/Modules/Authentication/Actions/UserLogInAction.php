@@ -40,13 +40,18 @@ final class UserLogInAction extends FormAction {
 
     $this->maximumLoginAttempts = (int) $this->request()->env('login_attempts');
     $this->entity = $this->user();
-    if ($email = $this->request()->post('email')) {
-      $this->entity = $this->getEntityManager()
+    $email = $this->request()->post('email');
+    if ($email && !$this->currentUserService()->isLoggedIn()) {
+      $entity = $this->getEntityManager()
         ->getStorage(Account::class)
         ->getRepository()
         ->firstByAttributes([
           'account_email' => $email,
         ]);
+
+      if ($entity instanceof AccountInterface) {
+        $this->entity = $entity;
+      }
     }
   }
 
@@ -54,6 +59,12 @@ final class UserLogInAction extends FormAction {
    * {@inheritDoc}
    */
   protected function handle(): bool {
+    if ($this->entity->id() === 0) {
+      $this->session()->flash(StateInterface::FAILED, TranslationOld::get('login_failed_message'));
+
+      return FALSE;
+    }
+
     if (password_verify($this->request()->post('password'), $this->entity->getPassword())) {
       $this->session()->unset('userID');
 
