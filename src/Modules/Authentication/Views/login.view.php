@@ -21,41 +21,41 @@ use Components\Translation\TranslationOld;
                         <div class="p-5">
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">
-                                    <?php echo TranslationOld::get('login_page_title') ?>
+                                    <?= TranslationOld::get('login_page_title') ?>
                                 </h1>
 
                                 <?php Resource::loadFlashMessage(); ?>
                             </div>
 
                             <form class="user" method="post" action="/admin/login">
-                                <?php echo CSRF::insertToken('/admin/login') ?>
+                                <?= CSRF::insertToken('/admin/login') ?>
 
                                 <div class="form-group">
                                     <label for="email">
                                         <b>
-                                            <?php echo TranslationOld::get('form_email') ?>
+                                            <?= TranslationOld::get('form_email') ?>
                                             <span>*</span>
                                         </b>
                                     </label>
                                     <input class="form-control form-control-user" type="email" id="email"
                                            name="email" required autofocus="autofocus"
-                                           placeholder="<?php echo TranslationOld::get('form_email_placeholder') ?>">
+                                           placeholder="<?= TranslationOld::get('form_email_placeholder') ?>">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="password">
                                         <b>
-                                            <?php echo TranslationOld::get('form_password') ?>
+                                            <?= TranslationOld::get('form_password') ?>
                                             <span>*</span>
                                         </b>
                                     </label>
                                     <input class="form-control form-control-user" type="password" id="password"
                                            name="password" required
-                                           placeholder="<?php echo TranslationOld::get('form_password_placeholder') ?>">
+                                           placeholder="<?= TranslationOld::get('form_password_placeholder') ?>">
                                 </div>
 
                                 <button class="btn btn-primary btn-user btn-block" type="submit">
-                                    <?php echo TranslationOld::get('login_button') ?>
+                                    <?= TranslationOld::get('login_button') ?>
                                     <i class="fas fa-sign-in-alt"></i>
                                 </button>
                             </form>
