@@ -129,7 +129,7 @@ use System\StateInterface;
                                                         :
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <?= $log['meta']->url ?? '' ?>
+                                                        <?= $log['meta']['url'] ?? '' ?>
                                                     </div>
                                                 </div>
                                             </li>
@@ -140,7 +140,7 @@ use System\StateInterface;
                                                         :
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <?= $log['meta']->ip ?? '' ?>
+                                                        <?= $log['meta']['ip'] ?? '' ?>
                                                     </div>
                                                 </div>
                                             </li>
@@ -151,7 +151,7 @@ use System\StateInterface;
                                                         :
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <?= $log['meta']->http_method ?? '' ?>
+                                                        <?= $log['meta']['http_method'] ?? '' ?>
                                                     </div>
                                                 </div>
                                             </li>
@@ -162,7 +162,7 @@ use System\StateInterface;
                                                         :
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <?= $log['meta']->server ?? '' ?>
+                                                        <?= $log['meta']['server'] ?? '' ?>
                                                     </div>
                                                 </div>
                                             </li>
@@ -173,7 +173,7 @@ use System\StateInterface;
                                                         :
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <?= $log['meta']->referrer ?? '' ?>
+                                                        <?= $log['meta']['referrer'] ?? '' ?>
                                                     </div>
                                                 </div>
                                             </li>
@@ -184,7 +184,7 @@ use System\StateInterface;
                                                         :
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <?= $log['meta']->process_id ?? '' ?>
+                                                        <?= $log['meta']['process_id'] ?? '' ?>
                                                     </div>
                                                 </div>
                                             </li>
