@@ -19,7 +19,7 @@ use Components\Translation\TranslationOld;
                             <?= TranslationOld::get('admin_accounts_maintenance_title') ?>
                         </div>
 
-                        <a href="/admin/account/create"
+                        <a href="<?= urlFromRoute('entity.account.create') ?>"
                            class="btn btn-outline-primary float-right"
                            data-toggle="tooltip"
                            data-placement="top"

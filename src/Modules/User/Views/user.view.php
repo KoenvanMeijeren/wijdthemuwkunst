@@ -26,7 +26,7 @@ $entity = $account ?? NULL;
       <!-- Card Content - Collapse -->
       <div class="collapse show" id="collapseDataForm">
         <div class="card-body">
-          <form method="post" action="/admin/user/account/store/data">
+          <form method="post" action="<?= urlFromRoute('entity.user.saveData') ?>">
             <?= CSRF::insertToken('/admin/user/account/store/data') ?>
 
             <div class="form-group">
@@ -82,9 +82,8 @@ $entity = $account ?? NULL;
       <!-- Card Content - Collapse -->
       <div class="collapse show" id="collapsePasswordForm">
         <div class="card-body">
-          <form method="post"
-                action="/admin/user/account/store/password">
-            <?= CSRF::insertToken('/admin/user/account/store/password') ?>
+          <form method="post" action="<?= urlFromRoute('entity.user.savePassword') ?>">
+            <?= CSRF::insertToken(urlFromRoute('entity.user.savePassword')) ?>
 
             <div class="row">
               <div class="col-sm-12">

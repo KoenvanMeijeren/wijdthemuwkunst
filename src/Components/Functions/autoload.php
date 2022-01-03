@@ -18,6 +18,7 @@ $filenames = [
   'components',
   'math',
   'load_items',
+  'route',
 ];
 
 foreach ($filenames as $filename) {

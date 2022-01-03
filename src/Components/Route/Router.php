@@ -37,6 +37,13 @@ final class Router implements RouterInterface {
   ];
 
   /**
+   * All the routes stored by name.
+   *
+   * @var string[]
+   */
+  protected static array $namedRoutes = [];
+
+  /**
    * All the available routes based on the current rights of the user.
    *
    * @var array[]
@@ -80,19 +87,46 @@ final class Router implements RouterInterface {
   /**
    * {@inheritDoc}
    */
-  public static function get(string $route, string $controller, string $method = self::METHOD_DEFAULT, int $rights = AccountInterface::GUEST): void {
-    $route = self::prefixRoute($route);
-
-    self::$routes[self::HTTP_TYPE_GET][$rights][$route] = [$controller, $method];
+  public static function urlFromRoute(string $route): ?string {
+    return self::$namedRoutes[$route] ?? NULL;
   }
 
   /**
    * {@inheritDoc}
    */
-  public static function post(string $route, string $controller, string $method = self::METHOD_DEFAULT, int $rights = AccountInterface::GUEST): void {
-    $route = self::prefixRoute($route);
+  public static function get(string $url, string $controller, string $method = self::METHOD_DEFAULT, int $rights = AccountInterface::GUEST, string $route = NULL): void {
+    $prefixed_url = self::prefixRoute($url);
 
-    self::$routes[self::HTTP_TYPE_POST][$rights][$route] = [$controller, $method];
+    self::$routes[self::HTTP_TYPE_GET][$rights][$prefixed_url] = [$controller, $method];
+
+    if ($route && !isset(self::$namedRoutes[$route])) {
+      self::$namedRoutes[$route] = $prefixed_url;
+      return;
+    }
+
+    $controllerPathExploded = explode(separator: '\\', string: $controller);
+    $controllerName = strtolower(end($controllerPathExploded));
+
+    self::$namedRoutes["{$controllerName}.{$method}"] = $prefixed_url;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public static function post(string $url, string $controller, string $method = self::METHOD_DEFAULT, int $rights = AccountInterface::GUEST, string $route = NULL): void {
+    $prefixed_url = self::prefixRoute($url);
+
+    self::$routes[self::HTTP_TYPE_POST][$rights][$prefixed_url] = [$controller, $method];
+
+    if ($route && !isset(self::$namedRoutes[$route])) {
+      self::$namedRoutes[$route] = $prefixed_url;
+      return;
+    }
+
+    $controllerPathExploded = explode(separator: '\\', string: $controller);
+    $controllerName = strtolower(end($controllerPathExploded));
+
+    self::$namedRoutes["{$controllerName}.{$method}"] = $prefixed_url;
   }
 
   /**
@@ -121,7 +155,7 @@ final class Router implements RouterInterface {
 
     // Convert the prefixes to one prefix and return the (prefixed) route.
     $prefix = implode('/', self::$prefixes);
-    if ($prefix === '') {
+    if ($prefix === '' || str_contains($route, $prefix)) {
       return $route;
     }
 

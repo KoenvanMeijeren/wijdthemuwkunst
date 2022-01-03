@@ -11,8 +11,8 @@ use Components\Translation\TranslationOld;
 use Modules\User\Entity\AccountInterface;
 
 ?>
-<form method="post" action="/admin/account/create/store">
-    <?= CSRF::insertToken('/admin/account/create/store') ?>
+<form method="post" action="<?= urlFromRoute('entity.account.save') ?>">
+    <?= CSRF::insertToken(urlFromRoute('entity.account.save')) ?>
 
     <div class="row">
         <div class="col-md-6">
@@ -120,7 +120,7 @@ use Modules\User\Entity\AccountInterface;
     </div>
 
     <div class="form-actions-submit">
-        <a href="/admin/account" class="btn btn-outline-primary float-left"
+        <a href="<?= urlFromRoute('entity.account.collection') ?>" class="btn btn-outline-primary float-left"
            data-toggle="tooltip" data-placement="top"
            title="<?= TranslationOld::get('back_button') ?>">
             <i class="fas fa-arrow-left"></i>

@@ -51,32 +51,47 @@ interface RouterInterface {
   public static function load(array $routes): Router;
 
   /**
-   * Defines the get routes.
+   * Tries to get an url from a given route.
    *
    * @param string $route
    *   The route.
+   *
+   * @return string|null
+   *   The url or null.
+   */
+  public static function urlFromRoute(string $route): ?string;
+
+  /**
+   * Defines the get routes.
+   *
+   * @param string $url
+   *   The url.
    * @param string $controller
    *   The controller to execute when the route is called.
    * @param string $method
    *   The method from the controller.
    * @param int $rights
    *   The minimum rights to be able to visit routes based on the given rights.
+   * @param string|null $route
+   *   The route.
    */
-  public static function get(string $route, string $controller, string $method = self::METHOD_DEFAULT, int $rights = AccountInterface::GUEST): void;
+  public static function get(string $url, string $controller, string $method = self::METHOD_DEFAULT, int $rights = AccountInterface::GUEST, string $route = NULL): void;
 
   /**
    * Defines the post routes.
    *
-   * @param string $route
-   *   The route.
+   * @param string $url
+   *   The url.
    * @param string $controller
    *   The controller to execute when the route is called.
    * @param string $method
    *   The method from the controller.
    * @param int $rights
    *   The minimum rights to be able to visit routes based on the given rights.
+   * @param string|null $route
+   *   The route.
    */
-  public static function post(string $route, string $controller, string $method = self::METHOD_DEFAULT, int $rights = AccountInterface::GUEST): void;
+  public static function post(string $url, string $controller, string $method = self::METHOD_DEFAULT, int $rights = AccountInterface::GUEST, string $route = NULL): void;
 
   /**
    * Prefixes a group of routes.
