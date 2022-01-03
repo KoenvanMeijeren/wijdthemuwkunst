@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Components\SuperGlobals\Url;
 
 use Components\ComponentsTrait;
+use Components\Http\HttpTypes;
 use Components\Sanitize\Sanitize;
 use Components\SuperGlobals\RequestInterface;
 
@@ -28,12 +29,15 @@ final class Uri {
   }
 
   /**
-   * Get the used method for accessing the page.
+   * Get the used HTTP method for accessing the page.
    *
-   * @return string
+   * @return \Components\Http\HttpTypes
+   *   The HTTP type.
+   *
+   * @throws \Components\Http\InvalidHttpTypeException
    */
-  public static function getMethod(): string {
-    return self::requestStatic()->server(RequestInterface::METHOD);
+  public static function getHttpType(): HttpTypes {
+    return HttpTypes::set(self::requestStatic()->server(RequestInterface::METHOD));
   }
 
   /**

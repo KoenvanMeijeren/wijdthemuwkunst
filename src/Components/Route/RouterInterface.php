@@ -2,8 +2,8 @@
 
 namespace Components\Route;
 
-
 use Closure;
+use Components\Http\HttpTypes;
 use Modules\User\Entity\AccountInterface;
 use System\View\DomainView;
 
@@ -13,14 +13,6 @@ use System\View\DomainView;
  * @package Components\Route
  */
 interface RouterInterface {
-
-  /**
-   * The various HTTP types.
-   *
-   * @var string
-   */
-  public const HTTP_TYPE_GET = 'GET';
-  public const HTTP_TYPE_POST = 'POST';
 
   /**
    * The default controller method to be executed.
@@ -117,8 +109,8 @@ interface RouterInterface {
    *
    * @param string $url
    *   The url to search for a corresponding route.
-   * @param string $requestType
-   *   The request type.
+   * @param HttpTypes $httpType
+   *   The HTTP type.
    * @param int $rights
    *   The rights of the user.
    *
@@ -129,6 +121,6 @@ interface RouterInterface {
    * @throws \Components\Validate\Exceptions\Object\InvalidMethodCalledException
    * @throws \Components\Validate\Exceptions\Basic\UndefinedRouteException
    */
-  public function direct(string $url, string $requestType, int $rights): string|DomainView;
+  public function direct(string $url, HttpTypes $httpType, int $rights): string|DomainView;
 
 }

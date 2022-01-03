@@ -18,11 +18,11 @@ final class InvalidEnvException extends Exception {
   /**
    * InvalidDomainException constructor.
    *
-   * @param string $env
+   * @param string $http_type
    *   The env.
    */
-  #[Pure] public function __construct(string $env) {
-    parent::__construct("Invalid environment `{$env}` given.");
+  #[Pure] public function __construct(string $http_type) {
+    parent::__construct("Invalid environment `{$http_type}` given.");
   }
 
 }

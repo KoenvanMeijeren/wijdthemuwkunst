@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Components\Route;
 
 use Closure;
+use Components\Http\HttpTypes;
 use Components\Validate\Exceptions\Basic\UndefinedRouteException;
 use Components\Validate\Validate;
 use Modules\User\Entity\AccountInterface;
@@ -31,10 +32,7 @@ final class Router implements RouterInterface {
    *
    * @var array[]
    */
-  protected static array $routes = [
-    self::HTTP_TYPE_GET => [],
-    self::HTTP_TYPE_POST => [],
-  ];
+  protected static array $routes = [];
 
   /**
    * All the routes stored by name.
@@ -95,38 +93,14 @@ final class Router implements RouterInterface {
    * {@inheritDoc}
    */
   public static function get(string $url, string $controller, string $method = self::METHOD_DEFAULT, int $rights = AccountInterface::GUEST, string $route = NULL): void {
-    $prefixed_url = self::prefixRoute($url);
-
-    self::$routes[self::HTTP_TYPE_GET][$rights][$prefixed_url] = [$controller, $method];
-
-    if ($route && !isset(self::$namedRoutes[$route])) {
-      self::$namedRoutes[$route] = $prefixed_url;
-      return;
-    }
-
-    $controllerPathExploded = explode(separator: '\\', string: $controller);
-    $controllerName = strtolower(end($controllerPathExploded));
-
-    self::$namedRoutes["{$controllerName}.{$method}"] = $prefixed_url;
+    self::saveRoute(HttpTypes::GET, $url, $controller, $method, $rights, $route);
   }
 
   /**
    * {@inheritDoc}
    */
   public static function post(string $url, string $controller, string $method = self::METHOD_DEFAULT, int $rights = AccountInterface::GUEST, string $route = NULL): void {
-    $prefixed_url = self::prefixRoute($url);
-
-    self::$routes[self::HTTP_TYPE_POST][$rights][$prefixed_url] = [$controller, $method];
-
-    if ($route && !isset(self::$namedRoutes[$route])) {
-      self::$namedRoutes[$route] = $prefixed_url;
-      return;
-    }
-
-    $controllerPathExploded = explode(separator: '\\', string: $controller);
-    $controllerName = strtolower(end($controllerPathExploded));
-
-    self::$namedRoutes["{$controllerName}.{$method}"] = $prefixed_url;
+    self::saveRoute(HttpTypes::POST, $url, $controller, $method, $rights, $route);
   }
 
   /**
@@ -200,14 +174,14 @@ final class Router implements RouterInterface {
   /**
    * {@inheritDoc}
    */
-  public function direct(string $url, string $requestType, int $rights): string|DomainView {
-    $this->setAvailableRoutes($requestType, $rights);
+  public function direct(string $url, HttpTypes $httpType, int $rights): string|DomainView {
+    $this->setAvailableRoutes($httpType, $rights);
     $this->replaceWildcards($url);
     if (isset(self::$availableRoutes[$url])) {
       return $this->executeRoute($url);
     }
 
-    $this->setAvailableRoutes(self::HTTP_TYPE_GET, $rights);
+    $this->setAvailableRoutes(HttpTypes::GET, $rights);
     if (isset(self::$availableRoutes[self::URL_PAGE_NOT_FOUND])) {
       return $this->executeRoute(self::URL_PAGE_NOT_FOUND);
     }
@@ -241,16 +215,16 @@ final class Router implements RouterInterface {
   /**
    * Sets the available routes based on the current rights of the user.
    *
-   * @param string $requestType
-   *   The request type.
+   * @param \Components\Http\HttpTypes $httpType
+   *   The HTTP type.
    * @param int $rights
    *   The rights of the user.
    */
-  protected function setAvailableRoutes(string $requestType, int $rights): void {
+  protected function setAvailableRoutes(HttpTypes $httpType, int $rights): void {
     self::$availableRoutes = [];
     for ($maximumRights = 0; $maximumRights <= $rights; ++$maximumRights) {
-      if (isset(self::$routes[$requestType][$maximumRights])) {
-        foreach (self::$routes[$requestType][$maximumRights] as $url => $route) {
+      if (isset(self::$routes[$httpType->value][$maximumRights])) {
+        foreach (self::$routes[$httpType->value][$maximumRights] as $url => $route) {
           self::$availableRoutes[$url] = $route;
         }
       }
@@ -270,7 +244,7 @@ final class Router implements RouterInterface {
     foreach ($routes as $route) {
       $routeExploded = explode('/', $route);
 
-      if ((bool) preg_match('/{+[a-zA-Z]+}/', $route)) {
+      if (preg_match('/{+[a-zA-Z]+}/', $route)) {
         $this->updateRoute($routeExploded, $urlExploded, $route);
       }
     }
@@ -335,11 +309,40 @@ final class Router implements RouterInterface {
    * Resets all the current stored routes.
    */
   protected static function resetRoutes(): void {
-    self::$routes = [
-      self::HTTP_TYPE_GET => [],
-      self::HTTP_TYPE_POST => [],
-    ];
+    self::$routes = [];
     self::$availableRoutes = [];
+  }
+
+  /**
+   * Saves the route into the corresponding properties.
+   *
+   * @param \Components\Http\HttpTypes $httpType
+   *   The HTTP type.
+   * @param string $url
+   *   The url.
+   * @param string $controller
+   *   The controller to execute when the route is called.
+   * @param string $method
+   *   The method from the controller.
+   * @param int $rights
+   *   The minimum rights to be able to visit routes based on the given rights.
+   * @param string|null $route
+   *   The route.
+   */
+  protected static function saveRoute(HttpTypes $httpType, string $url, string $controller, string $method, int $rights, string $route = NULL): void {
+    $prefixed_url = self::prefixRoute($url);
+
+    self::$routes[$httpType->value][$rights][$prefixed_url] = [$controller, $method];
+
+    if ($route && !isset(self::$namedRoutes[$route])) {
+      self::$namedRoutes[$route] = "/{$prefixed_url}";
+      return;
+    }
+
+    $controllerPathExploded = explode(separator: '\\', string: $controller);
+    $controllerName = strtolower(end($controllerPathExploded));
+
+    self::$namedRoutes["{$controllerName}.{$method}"] = "/{$prefixed_url}";
   }
 
 }

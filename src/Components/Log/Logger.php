@@ -110,7 +110,7 @@ final class Logger implements LoggerInterface {
       return;
     }
 
-    $this->appRequest($value, $state, Uri::getUrl(), Uri::getMethod());
+    $this->appRequest($value, $state, Uri::getUrl(), Uri::getHttpType()->value);
   }
 
 }
