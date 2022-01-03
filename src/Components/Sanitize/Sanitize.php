@@ -64,7 +64,7 @@ final class Sanitize implements SanitizeInterface {
   #[Pure]
   protected function filterData(float|bool|int|string $data): float|bool|int|string {
     if ($this->type === self::TYPE_STRING) {
-      $data = (string) filter_var($data, FILTER_SANITIZE_STRING);
+      $data = (string) filter_var($data);
       return trim($data);
     }
 

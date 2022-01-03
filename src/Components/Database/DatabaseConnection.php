@@ -82,8 +82,8 @@ abstract class DatabaseConnection implements DatabaseConnectionInterface {
     $password = $this->request()->env('database_password');
 
     $options = [
-      PDO::ATTR_EMULATE_PREPARES => $this->request()->env('PDO_ATTR_EMULATE_PREPARES'),
-      PDO::ATTR_ERRMODE => $this->request()->env('PDO_ATTR_ERROR_MODE')
+      PDO::ATTR_EMULATE_PREPARES => (bool) $this->request()->env('PDO_ATTR_EMULATE_PREPARES'),
+      PDO::ATTR_ERRMODE => (bool) $this->request()->env('PDO_ATTR_ERROR_MODE')
     ];
 
     return new PDO($dsn, $username, $password, $options);
