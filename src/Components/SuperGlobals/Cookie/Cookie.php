@@ -29,11 +29,11 @@ final class Cookie extends ArrayBase implements CookieInterface {
    *   Determine if the cookie must be http only.
    */
   public function __construct(
-    private int $expiringTime = 1 * 24 * 60 * 60,
-    private string $path = '/',
-    private string $domain = '',
-    private bool $secure = FALSE,
-    private bool $httpOnly = TRUE
+    private readonly int $expiringTime = 1 * 24 * 60 * 60,
+    private readonly string $path = '/',
+    private readonly string $domain = '',
+    private readonly bool $secure = FALSE,
+    private readonly bool $httpOnly = TRUE
   ) {
     parent::__construct($_COOKIE, true, true);
   }

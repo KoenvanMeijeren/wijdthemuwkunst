@@ -14,21 +14,17 @@ use System\Entity\EntityInterface;
 abstract class DataTableBuilder implements DataTableBuilderInterface {
 
   /**
-   * The datatable definition.
-   *
-   * @var DataTable
-   */
-  protected DataTable $dataTable;
-
-  /**
    * DataTableBuilder constructor.
    *
    * @param \System\Entity\EntityInterface[] $entities
    *   The entities.
+   * @param \System\DataTable\DataTable $dataTable
+   *   The datatable definition.
    */
-  public function __construct(protected array $entities) {
-    $this->dataTable = new DataTable();
-  }
+  public function __construct(
+    protected array $entities,
+    protected DataTable $dataTable = new DataTable()
+  ) {}
 
   /**
    * Build the head of the table.

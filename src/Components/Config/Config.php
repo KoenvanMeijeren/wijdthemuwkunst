@@ -20,7 +20,7 @@ final class Config extends ArrayBase implements ConfigInterface {
    *   The name of the config file.
    */
   public function __construct(
-    protected string $name
+    protected readonly string $name
   ) {
     $file = new File(CONFIG_PATH, "{$this->name}.php");
     $config = $file->get();

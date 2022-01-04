@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace System\View;
 
 use Components\Env\Env;
+use Components\Env\EnvInterface;
 use Components\Translation\TranslationOld;
 use Components\View\View;
 use Whoops\Handler\Handler;
@@ -19,7 +20,7 @@ final class ProductionErrorView extends Handler {
    * {@inheritDoc}
    */
   public function handle(): int {
-    new View(Env::ERROR_PAGE, [
+    new View(EnvInterface::ERROR_PAGE, [
       'title' => TranslationOld::get('internal_server_error_title'),
       'description' => TranslationOld::get('internal_server_error_description'),
     ]);

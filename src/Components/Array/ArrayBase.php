@@ -25,8 +25,8 @@ abstract class ArrayBase implements ArrayBaseInterface {
    */
   protected function __construct(
     private array &$array,
-    private bool $sanitize = false,
-    private bool $encrypt = false
+    private readonly bool $sanitize = false,
+    private readonly bool $encrypt = false
   ) {}
 
   /**

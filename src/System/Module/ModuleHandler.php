@@ -14,13 +14,6 @@ use Components\Config\ConfigInterface;
 class ModuleHandler implements ModuleHandlerInterface {
 
   /**
-   * The config definition.
-   *
-   * @var ConfigInterface
-   */
-  protected ConfigInterface $config;
-
-  /**
    * The loaded modules.
    *
    * @var ModuleInterface[]
@@ -29,10 +22,13 @@ class ModuleHandler implements ModuleHandlerInterface {
 
   /**
    * ModuleHandler constructor.
+   *
+   * @param \Components\Config\ConfigInterface $config
+   *   The config definition.
    */
-  public function __construct() {
-    $this->config = new Config('modules');
-  }
+  public function __construct(
+    protected ConfigInterface $config = new Config('modules')
+  ) {}
 
   /**
    * Gets the modules.

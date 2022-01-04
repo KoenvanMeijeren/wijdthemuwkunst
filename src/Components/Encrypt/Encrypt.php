@@ -23,7 +23,7 @@ final class Encrypt implements EncryptInterface {
    *   The data to be encrypted.
    */
   public function __construct(
-    private string $data
+    private readonly string $data
   ) {}
 
   /**

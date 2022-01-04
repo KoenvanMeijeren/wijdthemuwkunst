@@ -6,6 +6,7 @@ namespace Components\Actions;
 use Components\Security\CSRF;
 use Components\Translation\TranslationOld;
 use Components\Validate\FormValidator;
+use JetBrains\PhpStorm\Pure;
 use System\State;
 
 /**
@@ -25,7 +26,7 @@ abstract class FormAction extends Action {
   /**
    * FormAction constructor.
    */
-  public function __construct() {
+  #[Pure] public function __construct() {
     $this->validator = new FormValidator();
   }
 

@@ -25,7 +25,7 @@ final class Query implements QueryInterface {
    *   The values of the query.
    */
   public function __construct(
-    protected string $table,
+    protected readonly string $table,
     protected string $query = '',
     protected array $values = []
   ) {}

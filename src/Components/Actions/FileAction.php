@@ -93,7 +93,6 @@ abstract class FileAction extends Action {
   protected function authorize(): bool {
     if (!in_array($this->origin, $this->acceptedOrigins, TRUE)) {
       $this->header()->accessDenied();
-      return FALSE;
     }
 
     $this->header()->allowOrigin($this->origin);

@@ -27,10 +27,10 @@ final class DateTime implements DateTimeInterface {
    *   This is one of the IntlDateFormatter calendar constants.
    */
   public function __construct(
-    protected Chronos $datetime,
-    protected string $locale = self::DEFAULT_LOCALE,
-    protected string $timezone = self::DEFAULT_TIMEZONE,
-    protected int $calendar = self::DEFAULT_CALENDAR
+    protected readonly Chronos $datetime,
+    protected readonly string $locale = self::DEFAULT_LOCALE,
+    protected readonly string $timezone = self::DEFAULT_TIMEZONE,
+    protected readonly int $calendar = self::DEFAULT_CALENDAR
   ) {}
 
   /**

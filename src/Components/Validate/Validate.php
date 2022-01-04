@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Components\Validate;
 
 use Components\Env\EnvInterface;
+use Components\Env\Environments;
 use Components\File\Exceptions\FileNotFoundException;
 use Components\File\Exceptions\FileNotOfResourceTypeException;
 use Components\File\Exceptions\FileNotReadableException;
@@ -136,7 +137,7 @@ final class Validate implements ValidateInterface {
    * {@inheritDoc}
    */
   public function isDomain(): ValidateInterface {
-    if (self::$var !== 'localhost'
+    if (self::$var !== EnvInterface::LOCALHOST_STRING
       && preg_match('/[a-zA-Z]{0,9}+[:][\d]{0,4}/', self::$var) === 0
       && preg_match('/(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/', self::$var) === 0
     ) {
@@ -150,7 +151,7 @@ final class Validate implements ValidateInterface {
    * {@inheritDoc}
    */
   public function isEnv(): ValidateInterface {
-    if (EnvInterface::DEVELOPMENT !== self::$var && EnvInterface::PRODUCTION !== self::$var) {
+    if (!self::$var instanceof Environments) {
       throw new InvalidEnvException(self::$var);
     }
 

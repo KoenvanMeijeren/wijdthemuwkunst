@@ -13,13 +13,6 @@ use ParagonIE\AntiCSRF\AntiCSRF;
 final class CSRF implements CSRFInterface {
 
   /**
-   * The CSRF definition.
-   *
-   * @var AntiCSRF
-   */
-  protected static AntiCSRF $csrf;
-
-  /**
    * Holds the class references.
    *
    * @var CSRF
@@ -28,10 +21,13 @@ final class CSRF implements CSRFInterface {
 
   /**
    * CSRF constructor.
+   *
+   * @param \ParagonIE\AntiCSRF\AntiCSRF $csrf
+   *   The CSRF definition.
    */
-  protected function __construct() {
-    self::$csrf = new AntiCSRF();
-  }
+  protected function __construct(
+    protected AntiCSRF $csrf = new AntiCSRF()
+  ) {}
 
   /**
    * {@inheritDoc}
@@ -44,16 +40,16 @@ final class CSRF implements CSRFInterface {
    * {@inheritDoc}
    */
   public static function insertToken(string $lockTo): string {
-    self::getInstance();
-    return self::$csrf->insertToken($lockTo, self::ECHO_CSRF_TOKEN);
+    $instance = self::getInstance();
+    return $instance->csrf->insertToken($lockTo, self::ECHO_CSRF_TOKEN);
   }
 
   /**
    * {@inheritDoc}
    */
   public static function validate(): bool {
-    self::getInstance();
-    return self::$csrf->validateRequest();
+    $instance = self::getInstance();
+    return $instance::$csrf->validateRequest();
   }
 
 }

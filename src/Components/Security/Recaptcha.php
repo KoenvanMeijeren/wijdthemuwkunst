@@ -19,7 +19,7 @@ final class Recaptcha implements RecaptchaInterface {
   use ComponentsTrait;
 
   /**
-   * The google recaptcha definition.
+   * The Google recaptcha definition.
    *
    * @var GoogleRecaptcha
    */

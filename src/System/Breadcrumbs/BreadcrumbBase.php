@@ -10,28 +10,23 @@ namespace System\Breadcrumbs;
 abstract class BreadcrumbBase implements BreadcrumbInterface {
 
   /**
-   * The array with breadcrumbs.
-   *
-   * @var string[]
-   */
-  protected array $breadCrumbs = [];
-
-  /**
-   * A list with url parts which are forbidden to generate a breadcrumb from.
-   *
-   * @var string[]
-   */
-  protected array $blacklist = [];
-
-  /**
    * BreadcrumbBase constructor.
    *
    * @param string $string
    *   The string to generate breadcrumbs from.
    * @param string $delimiter
    *   The boundary string.
+   * @param string[] $blacklist
+   *   A list with url parts which are forbidden to generate a breadcrumb from.
+   * @param string[] $breadCrumbs
+   *   The array with breadcrumbs.
    */
-  public function __construct(protected string $string, string $delimiter = '/') {
+  public function __construct(
+    protected readonly string $string,
+    string $delimiter = '/',
+    protected array $blacklist = [],
+    protected array $breadCrumbs = []
+  ) {
     $this->breadCrumbs = $this->stringToBreadcrumbs($string, $delimiter);
   }
 

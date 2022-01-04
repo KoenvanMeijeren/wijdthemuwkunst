@@ -15,6 +15,8 @@ final class Resource {
 
   /**
    * Loads a message formatted as a string.
+   *
+   * @throws \Components\File\Exceptions\FileNotFoundException
    */
   public static function loadStringMessage(): void {
     include_file(RESOURCES_PATH . '/partials/error.view.php');
@@ -22,6 +24,8 @@ final class Resource {
 
   /**
    * Loads a message formatted as a one time visible string.
+   *
+   * @throws \Components\File\Exceptions\FileNotFoundException
    */
   public static function loadFlashMessage(): void {
     include_file(RESOURCES_PATH . '/partials/flash.view.php');
