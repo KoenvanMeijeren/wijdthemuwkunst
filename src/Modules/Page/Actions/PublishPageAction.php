@@ -5,6 +5,7 @@ namespace Modules\Page\Actions;
 
 use Components\Translation\TranslationOld;
 use Modules\Page\Entity\PageInterface;
+use Modules\Page\Entity\PageVisibility;
 use System\State;
 
 /**
@@ -27,7 +28,7 @@ final class PublishPageAction extends BasePageAction {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    if ($this->entity->getInMenu() === PageInterface::PAGE_STATIC) {
+    if ($this->entity->getVisibility()->isEqual(PageVisibility::PAGE_STATIC)) {
       $this->session()->flash(State::FAILED->value, TranslationOld::get('page_static_cannot_be_published'));
 
       return FALSE;

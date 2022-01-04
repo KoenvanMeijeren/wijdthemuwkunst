@@ -6,6 +6,7 @@ namespace Modules\Page\Actions;
 use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
 use Modules\Page\Entity\PageInterface;
+use Modules\Page\Entity\PageVisibility;
 use Modules\User\Entity\AccountInterface;
 use System\State;
 
@@ -45,7 +46,7 @@ final class DeletePageAction extends BasePageAction {
    */
   protected function authorize(): bool {
     if ($this->user()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)
-      && $this->entity->getInMenu() === PageInterface::PAGE_STATIC) {
+      && $this->entity->getVisibility()->isEqual(PageVisibility::PAGE_STATIC)) {
       $this->session()->flash(
         State::FAILED->value,
         sprintf(TranslationOld::get('page_static_cannot_be_deleted'), $this->entity->getSlug())

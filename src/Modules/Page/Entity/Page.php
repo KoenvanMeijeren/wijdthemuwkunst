@@ -87,16 +87,23 @@ final class Page extends EntityBase implements PageInterface {
   /**
    * {@inheritDoc}
    */
-  public function setInMenu(int $menu): PageInterface {
-    $this->set('in_menu', $menu);
+  public function setVisibility(int $visibility): PageInterface {
+    $this->set('in_menu', $visibility);
     return $this;
   }
 
   /**
    * {@inheritDoc}
    */
-  public function getInMenu(): int {
+  public function getVisibilityNumeric(): int {
     return (int) $this->get('in_menu');
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function getVisibility(): PageVisibility {
+    return PageVisibility::set($this->getVisibilityNumeric());
   }
 
   /**
@@ -135,7 +142,7 @@ final class Page extends EntityBase implements PageInterface {
   public function preSave(): void {
     parent::preSave();
 
-    if ($this->getInMenu() === self::PAGE_STATIC) {
+    if ($this->getVisibility()->isEqual(PageVisibility::PAGE_STATIC)) {
       $this->setPublished(true);
     }
   }

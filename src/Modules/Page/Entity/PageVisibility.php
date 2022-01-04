@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Modules\Page\Entity;
 
@@ -12,6 +13,25 @@ use JetBrains\PhpStorm\Pure;
 enum PageVisibility: int {
   case PAGE_NORMAL = 1;
   case PAGE_STATIC = 2;
+
+  /**
+   * Sets the page visibility.
+   *
+   * @param int $visibility
+   *   The visibility.
+   *
+   * @return \Modules\Page\Entity\PageVisibility
+   *   The page visibility.
+   *
+   * @throws \Modules\Page\Entity\InvalidPageVisibilityException
+   */
+  public static function set(int $visibility): PageVisibility {
+    return match ($visibility) {
+      self::PAGE_NORMAL->value => self::PAGE_NORMAL,
+      self::PAGE_STATIC->value => self::PAGE_STATIC,
+      default => throw new InvalidPageVisibilityException($visibility),
+    };
+  }
 
   /**
    * Determines if the page visibility is equal or not.

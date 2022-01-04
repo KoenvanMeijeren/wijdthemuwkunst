@@ -7,6 +7,7 @@ use Components\Translation\TranslationOld;
 use Modules\File\Actions\SaveFileAction;
 use Modules\Page\Entity\Page;
 use Modules\Page\Entity\PageInterface;
+use Modules\Page\Entity\PageVisibility;
 use System\Entity\Actions\EntityFormActionBase;
 use System\Entity\EntityInterface;
 use System\State;
@@ -98,9 +99,12 @@ abstract class BasePageAction extends EntityFormActionBase {
         );
     }
 
-    $this->validator->input('menu', TranslationOld::get('page_visibility'))
+    $this->validator->input('visibility', TranslationOld::get('page_visibility'))
       ->isRequired()
-      ->isInArray([PageInterface::PAGE_NORMAL, PageInterface::PAGE_STATIC,]);
+      ->isInArray([
+        PageVisibility::PAGE_NORMAL->value,
+        PageVisibility::PAGE_STATIC->value,
+      ]);
 
     $this->validator->input('content', TranslationOld::get('page_content'))->isRequired();
 

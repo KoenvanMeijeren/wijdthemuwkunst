@@ -39,16 +39,16 @@ final class PageTable extends DataTableBuilder {
    *   The entity.
    */
   protected function buildRow(EntityInterface $entity): array {
-    $inMenu = match ($entity->getInMenu()) {
-      PageInterface::PAGE_NORMAL => TranslationOld::get('page_normal'),
-      PageInterface::PAGE_STATIC => TranslationOld::get('page_static'),
+    $visibility = match ($entity->getVisibilityNumeric()) {
+      PageVisibility::PAGE_NORMAL->value => TranslationOld::get('page_normal'),
+      PageVisibility::PAGE_STATIC->value => TranslationOld::get('page_static'),
       default => TranslationOld::get('page_in_menu_state_unknown'),
     };
 
     return [
       "<a target='_blank' href='/{$entity->getSlug()}'>{$entity->getSlug()}</a>",
       $entity->getTitle(),
-      $inMenu,
+      $visibility,
       $entity->isPublished() ? TranslationOld::get('admin_page_is_published') : TranslationOld::get('admin_page_is_not_published'),
     ];
   }

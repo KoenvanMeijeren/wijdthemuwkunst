@@ -4,6 +4,7 @@ namespace Modules\Page\Actions;
 
 use Components\Translation\TranslationOld;
 use Modules\Page\Entity\PageInterface;
+use Modules\Page\Entity\PageVisibility;
 use System\State;
 
 /**
@@ -18,8 +19,8 @@ abstract class BasePageUpdateAction extends BasePageAction {
    */
   protected function authorize(): bool {
     // Url cannot be edited if the page is static.
-    $inMenu = $this->entity->getInMenu();
-    if ($inMenu === PageInterface::PAGE_STATIC && $this->request()->post('slug') !== $this->entity->getSlug()) {
+    if (PageVisibility::PAGE_STATIC->isEqual($this->entity->getVisibility())
+      && $this->request()->post('slug') !== $this->entity->getSlug()) {
       $this->session()->flash(
         State::FAILED->value,
         sprintf(TranslationOld::get('page_static_slug_cannot_be_edited'), $this->entity->getSlug())
@@ -28,8 +29,9 @@ abstract class BasePageUpdateAction extends BasePageAction {
     }
 
     // Visibility cannot be edited if the page is static.
-    $input_menu = (int) $this->request()->post('menu');
-    if ($inMenu === PageInterface::PAGE_STATIC && $input_menu !== $inMenu) {
+    $input_visibility = (int) $this->request()->post('visibility');
+    if (PageVisibility::PAGE_STATIC->isEqual($this->entity->getVisibility())
+      && $input_visibility !== $this->entity->getVisibilityNumeric()) {
       $this->session()->flash(State::FAILED->value,
         sprintf(TranslationOld::get('page_static_cannot_be_edited'), $this->entity->getSlug())
       );

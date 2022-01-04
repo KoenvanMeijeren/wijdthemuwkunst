@@ -14,14 +14,6 @@ use System\Entity\EntityInterface;
 interface PageInterface extends EntityInterface, SlugInterface {
 
   /**
-   * Possible page visibility options.
-   *
-   * @var int
-   */
-  public const PAGE_NORMAL = 1;
-  public const PAGE_STATIC = 2;
-
-  /**
    * Sets the key of the text.
    *
    * @param string $title
@@ -94,22 +86,30 @@ interface PageInterface extends EntityInterface, SlugInterface {
   public function getContent(): ?string;
 
   /**
-   * Sets the in menu value of the entity.
+   * Sets the visibility value of the entity.
    *
-   * @param int $menu
-   *   The in menu value.
+   * @param int $visibility
+   *   The visibility value.
    *
    * @return $this
    */
-  public function setInMenu(int $menu): PageInterface;
+  public function setVisibility(int $visibility): PageInterface;
 
   /**
-   * Gets the in menu value of the entity.
+   * Gets the visibility value of the entity.
    *
    * @return int
-   *   The in menu value.
+   *   The visibility value.
    */
-  public function getInMenu(): int;
+  public function getVisibilityNumeric(): int;
+
+  /**
+   * Gets the visibility value of the entity.
+   *
+   * @return \Modules\Page\Entity\PageVisibility
+   *   The visibility value.
+   */
+  public function getVisibility(): PageVisibility;
 
   /**
    * Determines if the text is deleted.

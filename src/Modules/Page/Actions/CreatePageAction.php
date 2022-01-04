@@ -17,7 +17,7 @@ final class CreatePageAction extends BasePageAction {
     $this->entity->setSlug($this->request()->post('slug'));
     $this->entity->setTitle($this->request()->post('title'));
     $this->entity->setContent($this->request()->post('content'));
-    $this->entity->setInMenu((int) $this->request()->post('menu'));
+    $this->entity->setVisibility((int) $this->request()->post('visibility'));
     $this->entity->setPublished((bool) $this->request()->post('published'));
 
     return parent::handle();

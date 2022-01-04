@@ -10,13 +10,15 @@ use Components\Route\RouteRights;
 use Components\Security\CSRF;
 use Components\Translation\TranslationOld;
 use Modules\Page\Entity\PageInterface;
+use Modules\Page\Entity\PageVisibility;
 
 /** @var PageInterface $entity */
 $entity = $page ?? null;
 $current_user = user();
 
 $disabled = '';
-if ($current_user->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER) && $entity?->getInMenu() === PageInterface::PAGE_STATIC) {
+if ($current_user->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)
+  && $entity?->getVisibility()->isEqual(PageVisibility::PAGE_STATIC)) {
   $disabled = 'disabled';
 }
 
@@ -31,12 +33,12 @@ if ($entity && $entity?->id() !== 0) {
   $removeBannerAction = '/admin/content/pages/page/edit/' . $entity?->id() . '/remove/banner';
 }
 
-if ($entity?->getInMenu() === PageInterface::PAGE_STATIC) {
+if ($entity?->getVisibility()->isEqual(PageVisibility::PAGE_STATIC)) {
   $publishActionsVisible = FALSE;
 }
 
 $collapsePageDetails = 'show';
-if (!empty($entity?->getTitle()) && !empty($entity?->getInMenu()) && !empty($entity?->getSlug())) {
+if (!empty($entity?->getTitle()) && !empty($entity?->getVisibilityNumeric()) && !empty($entity?->getSlug())) {
   $collapsePageDetails = '';
 }
 
@@ -45,7 +47,7 @@ if (!empty($entity?->getThumbnail()) || !empty($entity?->getBanner())) {
   $collapsePagePictures = '';
 }
 
-$pageInMenu = (int) request()->post('pageInMenu', (string) $entity?->getInMenu());
+$visibility = (int) request()->post('visibility', (string) $entity?->getVisibilityNumeric());
 ?>
 <div class="form-actions-container">
     <?php if ($publishActionsVisible) : ?>
@@ -131,18 +133,18 @@ $pageInMenu = (int) request()->post('pageInMenu', (string) $entity?->getInMenu()
                         </div>
 
                         <div class="form-group">
-                            <label for="menu">
+                            <label for="visibility">
                                 <?= TranslationOld::get('form_show_page_in_menu') ?>
                                 <span class="text-danger">*</span>
                             </label>
 
-                            <select id="menu" class="form-control" name="menu" <?= $disabled ?>required>
-                                <option value="<?= PageInterface::PAGE_NORMAL ?>"
-                                    <?= $pageInMenu === PageInterface::PAGE_NORMAL ? 'selected' : '' ?>>
+                            <select id="visibility" class="form-control" name="visibility" <?= $disabled ?>required>
+                                <option value="<?= PageVisibility::PAGE_NORMAL->value ?>"
+                                    <?= $visibility === PageVisibility::PAGE_NORMAL->value ? 'selected' : '' ?>>
                                     <?= TranslationOld::get('page_normal') ?>
                                 </option>
-                                <option value="<?= PageInterface::PAGE_STATIC ?>"
-                                    <?= $pageInMenu === PageInterface::PAGE_STATIC ? 'selected' : '' ?>>
+                                <option value="<?= PageVisibility::PAGE_STATIC->value ?>"
+                                    <?= $visibility === PageVisibility::PAGE_STATIC->value ? 'selected' : '' ?>>
                                     <?= TranslationOld::get('page_static') ?>
                                 </option>
                             </select>
