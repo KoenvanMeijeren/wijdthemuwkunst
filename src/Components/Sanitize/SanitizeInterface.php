@@ -11,16 +11,6 @@ namespace Components\Sanitize;
 interface SanitizeInterface {
 
   /**
-   * The various variable type options.
-   *
-   * @var string
-   */
-  public const TYPE_STRING = 'string';
-  public const TYPE_INT = 'integer';
-  public const TYPE_FLOAT = 'float';
-  public const TYPE_URL = 'url';
-
-  /**
    * Executes the sanitizing of the data and returns it.
    *
    * @return string

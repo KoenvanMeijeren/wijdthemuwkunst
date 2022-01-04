@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Components\Header;
 
+use Components\Sanitize\DataTypes;
 use Components\Sanitize\Sanitize;
 use Components\Sanitize\SanitizeInterface;
 use JetBrains\PhpStorm\NoReturn;
@@ -33,7 +34,7 @@ final class Header implements HeaderInterface {
    * {@inheritDoc}
    */
   public function refresh(string $url, int $refreshTime): void {
-    $sanitize = new Sanitize($url, SanitizeInterface::TYPE_URL);
+    $sanitize = new Sanitize($url, DataTypes::URL);
 
     header("Refresh: {$refreshTime}; URL=/" . $sanitize->data());
   }

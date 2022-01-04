@@ -5,6 +5,7 @@ namespace Components\SuperGlobals\Url;
 
 use Components\ComponentsTrait;
 use Components\Http\HttpTypes;
+use Components\Sanitize\DataTypes;
 use Components\Sanitize\Sanitize;
 use Components\SuperGlobals\RequestInterface;
 
@@ -23,7 +24,7 @@ final class Uri {
    * @return string
    */
   public static function getUrl(): string {
-    $sanitize = new Sanitize(self::requestStatic()->server(RequestInterface::URI), 'url');
+    $sanitize = new Sanitize(self::requestStatic()->server(RequestInterface::URI), DataTypes::URL);
 
     return (string) $sanitize->data();
   }
@@ -46,7 +47,7 @@ final class Uri {
    * @return string
    */
   public static function getPreviousUrl(): string {
-    $sanitize = new Sanitize(self::requestStatic()->server(RequestInterface::HTTP_REFERER), 'url');
+    $sanitize = new Sanitize(self::requestStatic()->server(RequestInterface::HTTP_REFERER), DataTypes::URL);
 
     return (string) $sanitize->data();
   }

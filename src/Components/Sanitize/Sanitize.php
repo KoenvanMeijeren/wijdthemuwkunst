@@ -17,20 +17,22 @@ final class Sanitize implements SanitizeInterface {
    *
    * @param string|float|int|bool $data
    *   The data to be sanitized.
-   * @param string $type
+   * @param \Components\Sanitize\DataTypes $type
    *   The type of the data.
    * @param int $flags
    *   The flags for htmlspecialchars filtering.
    * @param string $encoding
    *   The encoding for htmlspecialchars filtering.
+   *
+   * @throws \Components\Sanitize\InvalidDataTypeException
    */
   public function __construct(
     private string|float|int|bool $data,
-    private string $type = '',
-    private int $flags = ENT_NOQUOTES,
-    private string $encoding = 'UTF-8'
+    private ?DataTypes $type = NULL,
+    private readonly int $flags = ENT_NOQUOTES,
+    private readonly string $encoding = 'UTF-8'
   ) {
-    $this->type = $type === '' ? gettype($data) : $type;
+    $this->type = !$this->type ? DataTypes::set(gettype($data)) : $this->type;
   }
 
   /**
@@ -63,20 +65,20 @@ final class Sanitize implements SanitizeInterface {
    */
   #[Pure]
   protected function filterData(float|bool|int|string $data): float|bool|int|string {
-    if ($this->type === self::TYPE_STRING) {
+    if ($this->type->isEqual(DataTypes::STRING)) {
       $data = (string) filter_var($data);
       return trim($data);
     }
 
-    if ($this->type === self::TYPE_INT) {
+    if ($this->type->isEqual(DataTypes::INT)) {
       return (int) filter_var($data, FILTER_SANITIZE_NUMBER_INT);
     }
 
-    if ($this->type === self::TYPE_FLOAT) {
+    if ($this->type->isEqual(DataTypes::FLOAT)) {
       return (float) filter_var($data);
     }
 
-    if ($this->type === self::TYPE_URL) {
+    if ($this->type->isEqual(DataTypes::URL)) {
       $parsedUrl = parse_url((string) $data, PHP_URL_PATH);
       $data = trim((string) $parsedUrl, '/');
       return filter_var($data, FILTER_SANITIZE_URL);
