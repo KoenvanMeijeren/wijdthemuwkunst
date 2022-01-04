@@ -5,7 +5,7 @@ namespace Components\File;
 
 use Components\ComponentsTrait;
 use Components\File\Exceptions\ErrorWhileUploadingFileException;
-use Components\SuperGlobals\RequestInterface;
+use Components\SuperGlobals\ServerOptions;
 use Components\Translation\TranslationOld;
 use Exception;
 use Sirius\Upload\Handler as UploadHandler;
@@ -39,8 +39,8 @@ final class Upload implements UploadInterface {
    */
   public function __construct(
     protected array $file,
-    protected string $path = PUBLIC_PATH . '/storage/media/',
-    protected string $stripedPath = '/storage/media/'
+    protected readonly string $path = PUBLIC_PATH . '/storage/media/',
+    protected readonly string $stripedPath = '/storage/media/'
   ) {}
 
   /**
@@ -54,7 +54,7 @@ final class Upload implements UploadInterface {
    * {@inheritDoc}
    */
   public function getFileIfItExists(): ?string {
-    $documentRoot = $this->request()->server(RequestInterface::DOCUMENT_ROOT);
+    $documentRoot = $this->request()->server(ServerOptions::DOCUMENT_ROOT);
     $fileLocation = $this->stripedPath . $this->file['name'];
     $file = $documentRoot . $fileLocation;
 

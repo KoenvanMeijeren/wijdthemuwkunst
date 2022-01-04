@@ -5,7 +5,7 @@ namespace Components\Env;
 
 use Components\ComponentsTrait;
 use Components\Log\LoggerHandler;
-use Components\SuperGlobals\RequestInterface;
+use Components\SuperGlobals\ServerOptions;
 use Components\Validate\Validate;
 use JetBrains\PhpStorm\Pure;
 use System\View\ProductionErrorView;
@@ -47,7 +47,7 @@ final class Env implements EnvInterface {
    * Defines the host of the app.
    */
   protected function setHost(): void {
-    $host = $this->request()->server(RequestInterface::HTTP_HOST);
+    $host = $this->request()->server(ServerOptions::HTTP_HOST);
     $this->host = $host !== '' ? $host : self::LOCALHOST_STRING;
     Validate::var($this->host)->isDomain();
   }

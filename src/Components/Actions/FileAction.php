@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Components\Actions;
 
 use Components\File\Upload;
-use Components\SuperGlobals\Request;
+use Components\SuperGlobals\ServerOptions;
 
 /**
  * Provides a base class for file actions.
@@ -46,7 +46,7 @@ abstract class FileAction extends Action {
     $this->acceptedOrigins[] = $uri;
     $this->acceptedOrigins[] = $shortUri;
 
-    $this->origin = $this->request()->server(Request::HTTP_ORIGIN);
+    $this->origin = $this->request()->server(ServerOptions::HTTP_ORIGIN);
   }
 
   /**

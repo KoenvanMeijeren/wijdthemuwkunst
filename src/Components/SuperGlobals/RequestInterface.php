@@ -11,31 +11,6 @@ namespace Components\SuperGlobals;
 interface RequestInterface {
 
   /**
-   * A few server item options.
-   *
-   * @var string
-   */
-  public const URI = 'REQUEST_URI';
-  // Used path info for page access.
-  public const PATH_INFO = 'PATH_INFO';
-  // Used method for page access.
-  public const METHOD = 'REQUEST_METHOD';
-  // Host header from current request.
-  public const HTTP_HOST = 'HTTP_HOST';
-  // Complete URL of current page.
-  public const HTTP_REFERER = 'HTTP_REFERER';
-  // The agent of the user.
-  public const HTTP_USER_AGENT = 'HTTP_USER_AGENT';
-  // IP address from the user his IP.
-  public const USER_IP_ADDRESS = 'REMOTE_ADDR';
-  // The root of the document.
-  public const DOCUMENT_ROOT = 'DOCUMENT_ROOT';
-  // The http origin of the request.
-  public const HTTP_ORIGIN = 'HTTP_ORIGIN';
-  // The server name of the request.
-  public const SERVER_NAME = 'SERVER_NAME';
-
-  /**
    * Gets the current host.
    *
    * @return string
@@ -54,7 +29,7 @@ interface RequestInterface {
   /**
    * Gets a value from the session.
    *
-   * @param string $key
+   * @param \Components\SuperGlobals\ServerOptions $key
    *   The key to search for.
    * @param string $default
    *   The default value to return.
@@ -62,7 +37,7 @@ interface RequestInterface {
    * @return string
    *   The session value.
    */
-  public function server(string $key, string $default = ''): string;
+  public function server(ServerOptions $key, string $default = ''): string;
 
   /**
    * Gets a value from the post data.

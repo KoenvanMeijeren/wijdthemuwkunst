@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
-use Components\SuperGlobals\Request;
+use Components\SuperGlobals\ServerOptions;
 
-$documentRoot = request()->server(Request::DOCUMENT_ROOT);
+$documentRoot = request()->server(ServerOptions::DOCUMENT_ROOT);
 
 /** @var \Modules\Page\Entity\PageInterface $page_entity */
 $page_entity = $page ?? NULL;

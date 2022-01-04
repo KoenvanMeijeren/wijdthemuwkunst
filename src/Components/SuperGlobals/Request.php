@@ -34,8 +34,8 @@ final class Request implements RequestInterface {
   /**
    * {@inheritDoc}
    */
-  public function server(string $key, string $default = ''): string {
-    return $this->requestFromGlobal($_SERVER, $key, $default);
+  public function server(ServerOptions $key, string $default = ''): string {
+    return $this->requestFromGlobal($_SERVER, $key->value, $default);
   }
 
   /**

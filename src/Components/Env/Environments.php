@@ -43,7 +43,7 @@ enum Environments: string {
    *   Whether the environment is equal or not.
    */
   #[Pure]
-  public function isEqualNumeric(string $environment): bool {
+  public function isEqualString(string $environment): bool {
     return $this->value === $environment;
   }
 
@@ -58,6 +58,6 @@ enum Environments: string {
    */
   #[Pure]
   public function isEqual(Environments $environment): bool {
-    return $this->isEqualNumeric($environment->value);
+    return $this->isEqualString($environment->value);
   }
 }

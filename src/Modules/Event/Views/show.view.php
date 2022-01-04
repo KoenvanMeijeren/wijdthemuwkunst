@@ -6,11 +6,11 @@
 
 declare(strict_types=1);
 
-use Components\SuperGlobals\Request;
+use Components\SuperGlobals\ServerOptions;
 use Components\SuperGlobals\Url\Uri;
 use System\Breadcrumbs\Breadcrumbs;
 
-$documentRoot = request()->server(Request::DOCUMENT_ROOT);
+$documentRoot = request()->server(ServerOptions::DOCUMENT_ROOT);
 
 /** @var \Modules\Event\Entity\EventInterface $entity */
 $entity = $event ?? NULL;

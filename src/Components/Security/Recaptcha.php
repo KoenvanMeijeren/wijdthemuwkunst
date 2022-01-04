@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Components\Security;
 
 use Components\ComponentsTrait;
-use Components\SuperGlobals\Request;
+use Components\SuperGlobals\ServerOptions;
 use Components\Translation\TranslationOld;
 use ReCaptcha\ReCaptcha as GoogleRecaptcha;
 use System\State;
@@ -23,7 +23,7 @@ final class Recaptcha implements RecaptchaInterface {
    *
    * @var GoogleRecaptcha
    */
-  protected GoogleRecaptcha $recaptcha;
+  protected readonly GoogleRecaptcha $recaptcha;
 
   /**
    * Recaptcha constructor.
@@ -38,7 +38,7 @@ final class Recaptcha implements RecaptchaInterface {
   public function validate(): bool {
     $response = $this->recaptcha->verify(
       $this->request()->post('g-recaptcha-response'),
-      $this->request()->server(Request::USER_IP_ADDRESS)
+      $this->request()->server(ServerOptions::USER_IP_ADDRESS)
     );
 
     if ($response->isSuccess()) {
