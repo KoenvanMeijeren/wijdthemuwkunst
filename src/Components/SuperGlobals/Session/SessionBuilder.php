@@ -7,7 +7,7 @@ namespace Components\SuperGlobals\Session;
 
 use Cake\Chronos\Chronos;
 use Components\ComponentsTrait;
-use Components\Env\EnvInterface;
+use Components\Env\Environments;
 use Components\SuperGlobals\Cookie\Cookie;
 use Components\SuperGlobals\Session\Exceptions\InvalidSessionException;
 
@@ -19,13 +19,6 @@ use Components\SuperGlobals\Session\Exceptions\InvalidSessionException;
 final class SessionBuilder {
 
   use ComponentsTrait;
-
-  /**
-   * The session security definition.
-   *
-   * @var \Components\SuperGlobals\Session\SessionSecurityInterface
-   */
-  protected SessionSecurityInterface $security;
 
   /**
    * The name of the session.
@@ -47,6 +40,8 @@ final class SessionBuilder {
    *   Determine if the session must be secure.
    * @param bool $httpOnly
    *   Determine if the session must be http only.
+   * @param \Components\SuperGlobals\Session\SessionSecurityInterface $security
+   *   The session security definition.
    *
    * @throws \Exception
    */
@@ -55,24 +50,24 @@ final class SessionBuilder {
     private string $path = '/',
     private string $domain = '',
     private bool $secure = FALSE,
-    private bool $httpOnly = TRUE
+    private bool $httpOnly = TRUE,
+    protected SessionSecurityInterface $security = new SessionSecurity()
   ) {
     $this->name = random_string(128);
-    $this->security = new SessionSecurity();
   }
 
   /**
    * Start the session.
    *
-   * @param string $env
+   * @param \Components\Env\Environments $env
    *   The environment of the application.
    */
-  public function startSession(string $env = EnvInterface::PRODUCTION): void {
+  public function startSession(Environments $env): void {
     if (PHP_SESSION_NONE !== session_status() || headers_sent()) {
       return;
     }
 
-    if ($env === EnvInterface::PRODUCTION) {
+    if ($env->isEqual(Environments::PRODUCTION)) {
       $this->secure = TRUE;
     }
 

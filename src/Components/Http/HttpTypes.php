@@ -1,6 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace Components\Http;
+
+use JetBrains\PhpStorm\Pure;
 
 /**
  * Provides an enumeration for HTTP types.
@@ -30,6 +33,34 @@ enum HttpTypes: string {
       self::POST->value => self::POST,
       default => throw new InvalidHttpTypeException($http_type)
     };
+  }
+
+  /**
+   * Determines if the HTTP type is equal or not.
+   *
+   * @param string $type
+   *   The HTTP type.
+   *
+   * @return bool
+   *   Whether the HTTP type is equal or not.
+   */
+  #[Pure]
+  public function isEqualNumeric(string $type): bool {
+    return $this->value === $type;
+  }
+
+  /**
+   * Determines if the HTTP type is equal or not.
+   *
+   * @param \Components\Http\HttpTypes $type
+   *   The HTTP type.
+   *
+   * @return bool
+   *   Whether the HTTP type is equal or not.
+   */
+  #[Pure]
+  public function isEqual(HttpTypes $type): bool {
+    return $this->isEqualNumeric($type->value);
   }
 
 }

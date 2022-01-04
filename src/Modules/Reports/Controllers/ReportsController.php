@@ -40,7 +40,7 @@ final class ReportsController extends ControllerBase {
 
     return $this->view('application', [
       'title' => TranslationOld::get('admin_reports_application_title'),
-      'env' => $this->env()->get(),
+      'env' => $this->env()->get()->value,
       'headerDataTable' => $superGlobals->getHeadersInformation(),
       'sessionSettingsTable' => $superGlobals->getSessionSettingsInformation(),
       'phpinfo' => $phpInfo->get(),

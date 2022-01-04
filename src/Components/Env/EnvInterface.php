@@ -11,12 +11,12 @@ namespace Components\Env;
 interface EnvInterface {
 
   /**
-   * The environment options.
+   * The various localhost strings.
    *
    * @var string
    */
-  public const DEVELOPMENT = 'development';
-  public const PRODUCTION = 'production';
+  public const LOCALHOST_STRING = 'localhost';
+  public const LOCALHOST_NUMERIC = '127.0.0.1';
 
   /**
    * The default error page.
@@ -29,17 +29,17 @@ interface EnvInterface {
    * Returns the host of the app.
    *
    * @return string
-   *   The host name.
+   *   The host.
    */
   public function getHost(): string;
 
   /**
    * Gets the current env.
    *
-   * @return string
+   * @return \Components\Env\Environments
    *   The current environment.
    */
-  public function get(): string;
+  public function get(): Environments;
 
   /**
    * Determines if the env is in development.

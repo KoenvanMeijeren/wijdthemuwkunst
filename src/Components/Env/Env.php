@@ -26,14 +26,14 @@ final class Env implements EnvInterface {
    *
    * @var string
    */
-  protected string $host;
+  public readonly string $host;
 
   /**
    * The current environment of the app.
    *
-   * @var string
+   * @var \Components\Env\Environments
    */
-  protected string $currentEnvironment;
+  public readonly Environments $current;
 
   /**
    * Env constructor.
@@ -48,7 +48,7 @@ final class Env implements EnvInterface {
    */
   protected function setHost(): void {
     $host = $this->request()->server(RequestInterface::HTTP_HOST);
-    $this->host = $host !== '' ? $host : 'localhost';
+    $this->host = $host !== '' ? $host : self::LOCALHOST_STRING;
     Validate::var($this->host)->isDomain();
   }
 
@@ -63,42 +63,43 @@ final class Env implements EnvInterface {
    * Initializes the current env based on the current uri.
    */
   protected function initialize(): void {
-    $this->currentEnvironment = self::PRODUCTION;
-    if (str_contains($this->host, 'localhost') || str_contains($this->host, '127.0.0.1')) {
-      $this->currentEnvironment = self::DEVELOPMENT;
+    $enviroment = Environments::PRODUCTION;
+    if (str_contains($this->host, self::LOCALHOST_STRING) || str_contains($this->host, self::LOCALHOST_NUMERIC)) {
+      $enviroment = Environments::DEVELOPMENT;
     }
 
-    Validate::var($this->currentEnvironment)->isEnv();
+    $this->current = $enviroment;
+    Validate::var($this->current)->isEnv();
   }
 
   /**
    * {@inheritDoc}
    */
-  public function get(): string {
-    return $this->currentEnvironment;
+  public function get(): Environments {
+    return $this->current;
   }
 
   /**
    * {@inheritDoc}
    */
   #[Pure] public function isDevelopment(): bool {
-    return $this->get() === self::DEVELOPMENT;
+    return $this->current->isEqual(Environments::DEVELOPMENT);
   }
 
   /**
    * {@inheritDoc}
    */
   #[Pure] public function isProduction(): bool {
-    return $this->get() === self::PRODUCTION;
+    return $this->current->isEqual(Environments::PRODUCTION);
   }
 
   /**
    * {@inheritDoc}
    */
   public function initializeErrorHandling(): void {
-    ini_set('display_errors', (self::DEVELOPMENT === $this->currentEnvironment ? '1' : '0'));
-    ini_set('display_startup_errors', (self::DEVELOPMENT === $this->currentEnvironment ? '1' : '0'));
-    error_reporting((self::DEVELOPMENT === $this->currentEnvironment ? E_ALL : -1));
+    ini_set('display_errors', ($this->current->isEqual(Environments::DEVELOPMENT) ? '1' : '0'));
+    ini_set('display_startup_errors', ($this->current->isEqual(Environments::DEVELOPMENT) ? '1' : '0'));
+    error_reporting(($this->current->isEqual(Environments::DEVELOPMENT) ? E_ALL : -1));
 
     $this->initializeWhoops();
   }
@@ -108,11 +109,11 @@ final class Env implements EnvInterface {
    */
   protected function initializeWhoops(): void {
     $whoops = new Whoops();
-    if (self::DEVELOPMENT === $this->currentEnvironment) {
+    if ($this->current->isEqual(Environments::DEVELOPMENT)) {
       $whoops->prependHandler(new PrettyPageHandler());
       $whoops->register();
     }
-    elseif (self::PRODUCTION === $this->currentEnvironment) {
+    elseif ($this->current->isEqual(Environments::PRODUCTION)) {
       $whoops->prependHandler(new ProductionErrorView());
       $whoops->register();
     }

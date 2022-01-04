@@ -5,7 +5,6 @@ namespace Components\Log;
 
 use Components\ComponentsTrait;
 use Components\Datetime\DateTimeInterface;
-use Components\Env\EnvInterface;
 use Components\File\Exceptions\FileNotFoundException;
 use Components\File\File;
 use Components\SuperGlobals\Url\Uri;
@@ -56,7 +55,7 @@ final class Logger implements LoggerInterface {
     $defaultHandler = new RotatingFileHandler(
       filename: START_PATH . '/storage/logs/app.log',
       maxFiles: 365,
-      level: $this->env()->get() === EnvInterface::DEVELOPMENT ? MonologLogger::DEBUG : MonologLogger::INFO
+      level: $this->env()->isDevelopment() ? MonologLogger::DEBUG : MonologLogger::INFO
     );
     $defaultHandler->setFormatter($formatter);
 

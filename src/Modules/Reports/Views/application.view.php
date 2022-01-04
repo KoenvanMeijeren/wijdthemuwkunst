@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-use Components\Env\EnvInterface;
+use Components\Env\Environments;
 use Components\Translation\TranslationOld;
 
 ?>
@@ -24,7 +24,7 @@ use Components\Translation\TranslationOld;
 
                 <div class="row">
                     <div class="col-md-12">
-                        <?= ucfirst($env ?? EnvInterface::DEVELOPMENT) ?>
+                        <?= ucfirst($env ?? Environments::DEVELOPMENT->value) ?>
                     </div>
                 </div>
             </div>
