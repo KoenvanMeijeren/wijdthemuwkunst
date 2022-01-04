@@ -29,10 +29,10 @@ enum RouteRights: int {
    */
   public static function set(int $route_rights): RouteRights {
     return match ($route_rights) {
-      0 => self::GUEST,
-      1 => self::ADMIN,
-      2 => self::SUPER_ADMIN,
-      3 => self::DEVELOPER,
+      self::GUEST->value => self::GUEST,
+      self::ADMIN->value => self::ADMIN,
+      self::SUPER_ADMIN->value => self::SUPER_ADMIN,
+      self::DEVELOPER->value => self::DEVELOPER,
       default => throw new InvalidRouteRightsException($route_rights)
     };
   }

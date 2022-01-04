@@ -34,7 +34,7 @@ enum State: string {
   /**
    * Determines if the state is equal to the given one.
    *
-   * @param string $state
+   * @param \System\State $state
    *   The state.
    *
    * @return bool

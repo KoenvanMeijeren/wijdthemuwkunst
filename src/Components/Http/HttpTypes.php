@@ -26,8 +26,8 @@ enum HttpTypes: string {
    */
   public static function set(string $http_type): HttpTypes {
     return match (strtoupper($http_type)) {
-      'GET' => self::GET,
-      'POST' => self::POST,
+      self::GET->value => self::GET,
+      self::POST->value => self::POST,
       default => throw new InvalidHttpTypeException($http_type)
     };
   }
