@@ -153,7 +153,10 @@ final class Page extends EntityBase implements PageInterface {
   protected function alterSavableAttributes(): void {
     parent::alterSavableAttributes();
 
-    $this->removeSlugAttributesForSaving($this->attributes);
+    unset(
+      $this->attributes['page_slug_name'],
+      $this->attributes['page_slug_is_deleted']
+    );
   }
 
 }

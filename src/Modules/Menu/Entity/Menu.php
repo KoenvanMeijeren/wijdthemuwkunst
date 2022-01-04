@@ -76,7 +76,10 @@ final class Menu extends EntityBase implements MenuInterface {
   protected function alterSavableAttributes(): void {
     parent::alterSavableAttributes();
 
-    $this->removeSlugAttributesForSaving($this->attributes);
+    unset(
+      $this->attributes['menu_slug_name'],
+      $this->attributes['menu_slug_is_deleted']
+    );
   }
 
 }

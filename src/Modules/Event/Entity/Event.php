@@ -213,7 +213,10 @@ final class Event extends EntityBase implements EventInterface {
   protected function alterSavableAttributes(): void {
     parent::alterSavableAttributes();
 
-    $this->removeSlugAttributesForSaving($this->attributes);
+    unset(
+      $this->attributes['event_slug_name'],
+      $this->attributes['event_slug_is_deleted']
+    );
   }
 
 }

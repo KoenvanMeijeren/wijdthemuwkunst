@@ -81,14 +81,4 @@ trait SlugTrait {
     $query->where('slug_is_deleted', '=', '0');
   }
 
-  /**
-   * Removes the attributes from the entity for saving.
-   *
-   * @param string[] $attributes
-   *   The entity values indexed by column name.
-   */
-  protected function removeSlugAttributesForSaving(array &$attributes): void {
-    unset($attributes['page_slug_name'], $attributes['page_slug_is_deleted']);
-  }
-
 }
