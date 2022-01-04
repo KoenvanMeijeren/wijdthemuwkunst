@@ -13,7 +13,7 @@ use Modules\Menu\Entity\Menu;
 use Modules\Menu\Entity\MenuInterface;
 use Modules\Menu\Entity\MenuTable;
 use System\Entity\EntityControllerBase;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides the controller for the menu entity.
@@ -94,7 +94,7 @@ final class MenuController extends EntityControllerBase {
     /** @var MenuInterface $menu */
     $menu = $this->repository->loadById((int) $this->request()->getRouteParameter());
     if ($menu === NULL) {
-      $this->session()->flash(StateInterface::FAILED, TranslationOld::get('menu_item_does_not_exists'));
+      $this->session()->flash(State::FAILED->value, TranslationOld::get('menu_item_does_not_exists'));
 
       return new Redirect($this->redirectBack);
     }

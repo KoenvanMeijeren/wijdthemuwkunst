@@ -7,7 +7,7 @@ use Components\ComponentsTrait;
 use Components\SuperGlobals\Request;
 use Components\Translation\TranslationOld;
 use ReCaptcha\ReCaptcha as GoogleRecaptcha;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides a class for interacting with the Google Recaptcha API.
@@ -46,7 +46,7 @@ final class Recaptcha implements RecaptchaInterface {
     }
 
     $this->session()->flash(
-      StateInterface::FAILED,
+      State::FAILED->value,
       TranslationOld::get('failed_recaptcha_check_message')
     );
 

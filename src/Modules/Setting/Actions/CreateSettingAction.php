@@ -6,7 +6,7 @@ namespace Modules\Setting\Actions;
 use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
 use Modules\User\Entity\AccountInterface;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides a class for the create setting action.
@@ -30,7 +30,7 @@ final class CreateSettingAction extends BaseSettingAction {
    */
   public function authorize(): bool {
     if ($this->user()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)) {
-      $this->session()->flash(StateInterface::FAILED, TranslationOld::get('setting_creation_not_allowed'));
+      $this->session()->flash(State::FAILED->value, TranslationOld::get('setting_creation_not_allowed'));
 
       return FALSE;
     }

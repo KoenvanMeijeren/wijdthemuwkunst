@@ -6,7 +6,7 @@ namespace Components\Validate;
 use Components\ComponentsTrait;
 use Components\Translation\TranslationOld;
 use DateTime;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides a class for form validation actions.
@@ -226,7 +226,7 @@ final class FormValidator implements FormValidatorInterface {
       return;
     }
 
-    $this->session()->flash(StateInterface::FORM_VALIDATION_FAILED, $this->getErrorsAsString());
+    $this->session()->flash(State::FORM_VALIDATION_FAILED->value, $this->getErrorsAsString());
   }
 
   /**

@@ -7,7 +7,7 @@ namespace Modules\User\Actions;
 
 use Components\Translation\TranslationOld;
 use Modules\User\CurrentUser;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides an action for updating account entities.
@@ -34,7 +34,7 @@ final class UpdateUserPasswordAction extends AccountActionBase {
     $this->entity->save();
 
     $this->session()->flash(
-      StateInterface::SUCCESSFUL,
+      State::SUCCESSFUL->value,
       TranslationOld::get('admin_edited_account_successful_message')
     );
 

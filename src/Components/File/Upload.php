@@ -9,7 +9,7 @@ use Components\SuperGlobals\RequestInterface;
 use Components\Translation\TranslationOld;
 use Exception;
 use Sirius\Upload\Handler as UploadHandler;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides a class for uploading files.
@@ -86,7 +86,7 @@ final class Upload implements UploadInterface {
       }
     }
 
-    $this->session()->flash(StateInterface::FAILED, TranslationOld::get('error_while_uploading_file'));
+    $this->session()->flash(State::FAILED->value, TranslationOld::get('error_while_uploading_file'));
 
     return FALSE;
   }
@@ -109,7 +109,7 @@ final class Upload implements UploadInterface {
 
     $type = isset($this->file['type'], $this->file['name']) ? $this->file['type'] : '';
     if (!isset(self::ALLOWED_FILE_TYPES[$type])) {
-      $this->session()->flash(StateInterface::FAILED, TranslationOld::get('not_allowed_file_upload'));
+      $this->session()->flash(State::FAILED->value, TranslationOld::get('not_allowed_file_upload'));
       return FALSE;
     }
 

@@ -7,7 +7,7 @@ use Components\Translation\TranslationOld;
 use Modules\Setting\Entity\Setting;
 use System\Entity\Actions\EntityFormActionBase;
 use System\Entity\EntityInterface;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides a base class for setting actions.
@@ -37,21 +37,21 @@ abstract class BaseSettingAction extends EntityFormActionBase {
     $status = $this->entity->save();
     switch ($status) {
       case EntityInterface::SAVED_NEW:
-        $this->session()->flash(StateInterface::SUCCESSFUL,
+        $this->session()->flash(State::SUCCESSFUL->value,
           sprintf(TranslationOld::get('setting_successful_created'), $this->entity->getKey())
         );
 
         return TRUE;
 
       case EntityInterface::SAVED_UPDATED:
-        $this->session()->flash(StateInterface::SUCCESSFUL,
+        $this->session()->flash(State::SUCCESSFUL->value,
           sprintf(TranslationOld::get('setting_successful_updated'), $this->entity->getKey())
         );
 
         return TRUE;
 
       default:
-        $this->session()->flash(StateInterface::FAILED,
+        $this->session()->flash(State::FAILED->value,
           sprintf(TranslationOld::get('setting_unsuccessful_updated'), $this->entity->getKey())
         );
 

@@ -19,7 +19,7 @@ use Modules\User\Entity\Account;
 use Modules\User\Entity\AccountInterface;
 use Modules\User\Entity\AccountTable;
 use System\Entity\EntityControllerBase;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides a controller for account actions.
@@ -79,7 +79,7 @@ final class AccountController extends EntityControllerBase {
   public function edit(): ViewInterface|Redirect {
     $account = $this->repository->loadById((int) $this->request()->getRouteParameter());
     if (!$account instanceof AccountInterface) {
-      $this->session()->flash(StateInterface::FAILED, TranslationOld::get('account_does_not_exists'));
+      $this->session()->flash(State::FAILED->value, TranslationOld::get('account_does_not_exists'));
 
       return new Redirect($this->redirectBack);
     }

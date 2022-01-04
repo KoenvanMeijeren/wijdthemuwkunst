@@ -6,7 +6,7 @@ use Components\Translation\TranslationOld;
 use Modules\User\Entity\Account;
 use System\Entity\Actions\EntityFormActionBase;
 use System\Entity\EntityInterface;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides a base class for Account actions.
@@ -36,21 +36,21 @@ abstract class AccountActionBase extends EntityFormActionBase {
     $status = $this->entity->save();
     switch ($status) {
       case EntityInterface::SAVED_NEW:
-        $this->session()->flash(StateInterface::SUCCESSFUL,
+        $this->session()->flash(State::SUCCESSFUL->value,
           sprintf(TranslationOld::get('admin_create_account_successful_message'), $this->entity->getName())
         );
 
         return TRUE;
 
       case EntityInterface::SAVED_UPDATED:
-        $this->session()->flash(StateInterface::SUCCESSFUL,
+        $this->session()->flash(State::SUCCESSFUL->value,
           sprintf(TranslationOld::get('admin_edited_account_successful_message'), $this->entity->getName())
         );
 
         return TRUE;
 
       default:
-        $this->session()->flash(StateInterface::FAILED,
+        $this->session()->flash(State::FAILED->value,
           sprintf(TranslationOld::get('admin_create_account_unsuccessful_message'), $this->entity->getName())
         );
 

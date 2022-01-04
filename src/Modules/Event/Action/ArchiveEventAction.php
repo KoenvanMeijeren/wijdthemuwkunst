@@ -3,7 +3,7 @@
 namespace Modules\Event\Action;
 
 use Components\Translation\TranslationOld;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides an action for archiving events.
@@ -20,7 +20,7 @@ class ArchiveEventAction extends EventActionBase {
     $this->entity->save();
 
     $this->session()->flash(
-          StateInterface::SUCCESSFUL,
+          State::SUCCESSFUL->value,
           sprintf(
               TranslationOld::get('event_successfully_archived'),
               $this->entity->getTitle()
@@ -36,7 +36,7 @@ class ArchiveEventAction extends EventActionBase {
   protected function authorize(): bool {
     if (!$this->entity->isPublished()) {
       $this->session()->flash(
-            StateInterface::FAILED,
+            State::FAILED->value,
             sprintf(
                 TranslationOld::get('event_cannot_archive_not_published'),
                 $this->entity->getTitle()

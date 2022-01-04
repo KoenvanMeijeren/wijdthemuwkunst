@@ -7,7 +7,7 @@ use Components\Translation\TranslationOld;
 use Modules\Menu\Entity\Menu;
 use System\Entity\Actions\EntityFormActionBase;
 use System\Entity\EntityInterface;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides a base class for menu actions.
@@ -37,21 +37,21 @@ abstract class BaseMenuAction extends EntityFormActionBase {
     $status = $this->entity->save();
     switch ($status) {
       case EntityInterface::SAVED_NEW:
-        $this->session()->flash(StateInterface::SUCCESSFUL,
+        $this->session()->flash(State::SUCCESSFUL->value,
           sprintf(TranslationOld::get('menu_item_successful_created'), $this->entity->getTitle())
         );
 
         return TRUE;
 
       case EntityInterface::SAVED_UPDATED:
-        $this->session()->flash(StateInterface::SUCCESSFUL,
+        $this->session()->flash(State::SUCCESSFUL->value,
           sprintf(TranslationOld::get('menu_item_successful_updated'), $this->entity->getTitle())
         );
 
         return TRUE;
 
       default:
-        $this->session()->flash(StateInterface::FAILED,
+        $this->session()->flash(State::FAILED->value,
           sprintf(TranslationOld::get('menu_item_unsuccessful_update'), $this->entity->getTitle())
         );
 

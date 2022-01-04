@@ -6,7 +6,7 @@ namespace Modules\User\Actions;
 
 use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides an action for updating account entities.
@@ -33,7 +33,7 @@ final class UpdateAccountDataAction extends AccountActionBase {
     if (RouteRights::GUEST->hasAccessHigherNumeric($input_rights) && $input_rights !== $this->user()->getRights()
       && $this->entity->id() === $this->user()->id()) {
       $this->session()->flash(
-        StateInterface::FAILED,
+        State::FAILED->value,
         TranslationOld::get('cannot_edit_own_account_rights_message')
       );
 

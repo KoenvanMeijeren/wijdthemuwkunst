@@ -6,7 +6,7 @@ namespace Modules\Setting\Actions;
 use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
 use Modules\User\Entity\AccountInterface;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides a class for the update text action.
@@ -31,7 +31,7 @@ final class UpdateSettingAction extends BaseSettingAction {
   protected function authorize(): bool {
     if ($this->user()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)
       && $this->request()->post('key') !== $this->entity->getKey()) {
-      $this->session()->flash(StateInterface::FAILED, TranslationOld::get('setting_editing_key_not_allowed'));
+      $this->session()->flash(State::FAILED->value, TranslationOld::get('setting_editing_key_not_allowed'));
 
       return FALSE;
     }

@@ -1,8 +1,8 @@
 <?php
 
-use System\StateInterface;
+use System\State;
 
-$error = session()->get(StateInterface::FAILED, unset: true);
+$error = session()->get(State::FAILED->value, unset: true);
 if (!empty($error)) :
     ?>
     <div data-notify="container" role="alert"
@@ -19,7 +19,7 @@ if (!empty($error)) :
 <?php endif; ?>
 
 <?php
-$message = session()->get(StateInterface::SUCCESSFUL, unset: true);
+$message = session()->get(State::SUCCESSFUL->value, unset: true);
 if (!empty($message)) :
     ?>
     <div data-notify="container" role="alert"
@@ -36,7 +36,7 @@ if (!empty($message)) :
 <?php endif; ?>
 
 <?php
-$message = session()->get(StateInterface::FORM_VALIDATION_FAILED, unset: true);
+$message = session()->get(State::FORM_VALIDATION_FAILED->value, unset: true);
 if (!empty($message)) :
     ?>
     <div data-notify="container" role="alert"

@@ -9,7 +9,7 @@ use Components\SuperGlobals\Session\SessionBuilder;
 use Components\Translation\TranslationOld;
 use Modules\User\CurrentUser;
 use Modules\User\CurrentUserInterface;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides an action for logging an user out.
@@ -41,7 +41,7 @@ final class UserLogOutAction extends Action {
     $builder->startSession();
     $builder->secureSession();
 
-    $this->session()->flash(StateInterface::SUCCESSFUL, TranslationOld::get('admin_logout_message'));
+    $this->session()->flash(State::SUCCESSFUL->value, TranslationOld::get('admin_logout_message'));
 
     return TRUE;
   }

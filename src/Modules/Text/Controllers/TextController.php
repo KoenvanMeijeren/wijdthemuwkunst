@@ -11,7 +11,7 @@ use Modules\Text\Actions\UpdateTextAction;
 use Modules\Text\Entity\Text;
 use Modules\Text\Entity\TextTable;
 use System\Entity\EntityControllerBase;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides a controller for maintaining the texts.
@@ -90,7 +90,7 @@ final class TextController extends EntityControllerBase {
     $textTable = new TextTable($this->repository->all());
     $text = $this->repository->loadById((int) $this->request()->getRouteParameter());
     if ($text === NULL) {
-      $this->session()->flash(StateInterface::FAILED, TranslationOld::get('text_does_not_exists'));
+      $this->session()->flash(State::FAILED->value, TranslationOld::get('text_does_not_exists'));
 
       return new Redirect('/admin/configuration/texts');
     }

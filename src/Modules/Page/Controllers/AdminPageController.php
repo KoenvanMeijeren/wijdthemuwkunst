@@ -18,7 +18,7 @@ use Modules\Page\Entity\Page;
 use Modules\Page\Entity\PageInterface;
 use Modules\Page\Entity\PageTable;
 use System\Entity\EntityControllerBase;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides a class for page actions.
@@ -79,7 +79,7 @@ final class AdminPageController extends EntityControllerBase {
   public function edit(): ViewInterface|Redirect {
     $page = $this->repository->loadById((int) $this->request()->getRouteParameter());
     if (!$page instanceof PageInterface) {
-      $this->session()->flash(StateInterface::FAILED, TranslationOld::get('page_does_not_exists'));
+      $this->session()->flash(State::FAILED->value, TranslationOld::get('page_does_not_exists'));
 
       return new Redirect($this->redirectBack);
     }

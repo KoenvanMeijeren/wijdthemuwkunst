@@ -7,7 +7,7 @@ use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
 use Modules\Page\Entity\PageInterface;
 use Modules\User\Entity\AccountInterface;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides an action for deleting pages.
@@ -25,7 +25,7 @@ final class DeletePageAction extends BasePageAction {
 
     if ($this->entityManager->getStorage($this->getEntityType())->load($this->entity->id()) !== NULL) {
       $this->session()->flash(
-        StateInterface::FAILED,
+        State::FAILED->value,
         sprintf(TranslationOld::get('page_unsuccessfully_deleted'), $slug)
       );
 
@@ -33,7 +33,7 @@ final class DeletePageAction extends BasePageAction {
     }
 
     $this->session()->flash(
-      StateInterface::SUCCESSFUL,
+      State::SUCCESSFUL->value,
       sprintf(TranslationOld::get('page_successfully_deleted'), $slug)
     );
 
@@ -47,7 +47,7 @@ final class DeletePageAction extends BasePageAction {
     if ($this->user()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)
       && $this->entity->getInMenu() === PageInterface::PAGE_STATIC) {
       $this->session()->flash(
-        StateInterface::FAILED,
+        State::FAILED->value,
         sprintf(TranslationOld::get('page_static_cannot_be_deleted'), $this->entity->getSlug())
       );
 

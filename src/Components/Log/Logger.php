@@ -18,7 +18,7 @@ use Monolog\Processor\IntrospectionProcessor;
 use Monolog\Processor\ProcessIdProcessor;
 use Monolog\Processor\WebProcessor;
 use Psr\Log\LoggerInterface as PsrLoggerInterface;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides a class for logging information.
@@ -104,9 +104,9 @@ final class Logger implements LoggerInterface {
    *   The value to be logged.
    */
   public function logRequest(string $state, string $value): void {
-    if ($state !== StateInterface::FAILED
-      && $state !== StateInterface::SUCCESSFUL
-      && $state !== StateInterface::FORM_VALIDATION_FAILED) {
+    if (!State::FAILED->isEqualString($state)
+      && !State::SUCCESSFUL->isEqualString($state)
+      && !State::FORM_VALIDATION_FAILED->isEqualString($state)) {
       return;
     }
 

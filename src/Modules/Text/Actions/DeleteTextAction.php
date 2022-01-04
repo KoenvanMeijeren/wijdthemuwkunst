@@ -6,7 +6,7 @@ use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
 use Modules\User\Entity\AccountInterface;
 use System\Entity\EntityInterface;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides a class for the delete text action.
@@ -21,14 +21,14 @@ final class DeleteTextAction extends BaseTextAction {
   protected function handle(): bool {
     $status = $this->entity->delete();
     if ($status === EntityInterface::SAVED_DELETED) {
-      $this->session()->flash(StateInterface::SUCCESSFUL,
+      $this->session()->flash(State::SUCCESSFUL->value,
         sprintf(TranslationOld::get('text_successful_deleted'), $this->entity->getKey())
       );
 
       return TRUE;
     }
 
-    $this->session()->flash(StateInterface::SUCCESSFUL,
+    $this->session()->flash(State::SUCCESSFUL->value,
       sprintf(TranslationOld::get('text_unsuccessful_deleted'), $this->entity->getKey())
     );
 
@@ -40,7 +40,7 @@ final class DeleteTextAction extends BaseTextAction {
    */
   protected function authorize(): bool {
     if ($this->user()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)) {
-      $this->session()->flash(StateInterface::FAILED, TranslationOld::get('text_destroy_not_allowed'));
+      $this->session()->flash(State::FAILED->value, TranslationOld::get('text_destroy_not_allowed'));
 
       return FALSE;
     }

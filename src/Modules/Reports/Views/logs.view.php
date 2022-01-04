@@ -7,7 +7,8 @@
 declare(strict_types=1);
 
 use Components\Translation\TranslationOld;
-use System\StateInterface;
+use System\State;
+use System\State;
 
 ?>
 
@@ -73,9 +74,9 @@ use System\StateInterface;
                                     foreach (($logs ?? []) as $key => $log) :
                                       $class = 'active-success';
                                       $message = $log['message'] ?? NULL;
-                                      if (str_contains($message, StateInterface::ERROR) || str_contains($message, StateInterface::FAILED)) {
+                                      if (State::ERROR->isPartOf($message) || State::FAILED->isPartOf($message)) {
                                         $class = 'active-danger';
-                                      } elseif (str_contains($message, StateInterface::DEBUG)) {
+                                      } elseif (State::DEBUG->isPartOf($message)) {
                                         $class = 'active-primary';
                                       }
                                       ?>
@@ -105,9 +106,9 @@ use System\StateInterface;
                                             <?php
                                             $message = $log['message'] ?? NULL;
                                             $class = 'list-group-item-success';
-                                            if (str_contains($message, StateInterface::ERROR) || str_contains($message, StateInterface::FAILED)) {
+                                            if (State::ERROR->isPartOf($message) || State::FAILED->isPartOf($message)) {
                                               $class = 'list-group-item-danger';
-                                            } elseif (str_contains($message, StateInterface::DEBUG)) {
+                                            } elseif (State::DEBUG->isPartOf($message)) {
                                               $class = 'list-group-item-primary';
                                             }
                                             ?>

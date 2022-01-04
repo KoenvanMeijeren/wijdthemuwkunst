@@ -10,7 +10,7 @@ use Components\Translation\TranslationOld;
 use Modules\Authentication\Support\IDEncryption;
 use Modules\User\Entity\Account;
 use Modules\User\Entity\AccountInterface;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides an action for logging an user in.
@@ -69,7 +69,7 @@ final class UserLogInAction extends FormAction {
       $this->resetFailedLogInAttempts();
       $this->entity->save();
 
-      $this->session()->flash(StateInterface::SUCCESSFUL, TranslationOld::get('login_successful_message'));
+      $this->session()->flash(State::SUCCESSFUL->value, TranslationOld::get('login_successful_message'));
 
       return TRUE;
     }
@@ -80,7 +80,7 @@ final class UserLogInAction extends FormAction {
 
     $this->entity->save();
 
-    $this->session()->flash(StateInterface::FAILED, TranslationOld::get('login_failed_message'));
+    $this->session()->flash(State::FAILED->value, TranslationOld::get('login_failed_message'));
 
     return FALSE;
   }
@@ -90,7 +90,7 @@ final class UserLogInAction extends FormAction {
    */
   protected function authorize(): bool {
     if ($this->entity->isBlocked()) {
-      $this->session()->flash(StateInterface::FAILED, TranslationOld::get('login_failed_blocked_account_message'));
+      $this->session()->flash(State::FAILED->value, TranslationOld::get('login_failed_blocked_account_message'));
 
       return FALSE;
     }

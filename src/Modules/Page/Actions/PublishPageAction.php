@@ -5,7 +5,7 @@ namespace Modules\Page\Actions;
 
 use Components\Translation\TranslationOld;
 use Modules\Page\Entity\PageInterface;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides an action for publishing a page.
@@ -28,7 +28,7 @@ final class PublishPageAction extends BasePageAction {
    */
   protected function authorize(): bool {
     if ($this->entity->getInMenu() === PageInterface::PAGE_STATIC) {
-      $this->session()->flash(StateInterface::FAILED, TranslationOld::get('page_static_cannot_be_published'));
+      $this->session()->flash(State::FAILED->value, TranslationOld::get('page_static_cannot_be_published'));
 
       return FALSE;
     }

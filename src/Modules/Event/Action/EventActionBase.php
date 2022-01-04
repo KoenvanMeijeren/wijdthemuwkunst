@@ -9,7 +9,7 @@ use Modules\Event\Entity\Event;
 use Modules\File\Actions\SaveFileAction;
 use System\Entity\Actions\EntityFormActionBase;
 use System\Entity\EntityInterface;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides a base for event actions.
@@ -57,21 +57,21 @@ abstract class EventActionBase extends EntityFormActionBase {
     $status = $this->entity->save();
     switch ($status) {
       case EntityInterface::SAVED_NEW:
-        $this->session()->flash(StateInterface::SUCCESSFUL,
+        $this->session()->flash(State::SUCCESSFUL->value,
           sprintf(TranslationOld::get('event_successfully_created'), $this->entity->getTitle())
         );
 
         return TRUE;
 
       case EntityInterface::SAVED_UPDATED:
-        $this->session()->flash(StateInterface::SUCCESSFUL,
+        $this->session()->flash(State::SUCCESSFUL->value,
           sprintf(TranslationOld::get('event_successfully_updated'), $this->entity->getTitle())
         );
 
         return TRUE;
 
       default:
-        $this->session()->flash(StateInterface::FAILED,
+        $this->session()->flash(State::FAILED->value,
           sprintf(TranslationOld::get('event_unsuccessfully_updated'), $this->entity->getTitle())
         );
 

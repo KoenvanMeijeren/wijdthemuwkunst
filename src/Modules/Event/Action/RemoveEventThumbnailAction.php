@@ -3,7 +3,7 @@
 namespace Modules\Event\Action;
 
 use Components\Translation\TranslationOld;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides an action for removing thumbnails from events.
@@ -19,7 +19,7 @@ final class RemoveEventThumbnailAction extends EventActionBase {
     $this->entity->setThumbnail(NULL)->save();
 
     $this->session()->flash(
-      StateInterface::SUCCESSFUL,
+      State::SUCCESSFUL->value,
       sprintf(
         TranslationOld::get('event_thumbnail_successfully_removed'),
         $this->entity->getTitle()

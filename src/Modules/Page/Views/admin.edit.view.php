@@ -10,7 +10,6 @@ use Components\Route\RouteRights;
 use Components\Security\CSRF;
 use Components\Translation\TranslationOld;
 use Modules\Page\Entity\PageInterface;
-use Modules\User\Entity\AccountInterface;
 
 /** @var PageInterface $entity */
 $entity = $page ?? null;

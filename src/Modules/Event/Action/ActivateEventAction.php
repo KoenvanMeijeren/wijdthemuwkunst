@@ -3,7 +3,7 @@
 namespace Modules\Event\Action;
 
 use Components\Translation\TranslationOld;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides an action for activating events.
@@ -20,7 +20,7 @@ class ActivateEventAction extends EventActionBase {
     $this->entity->save();
 
     $this->session()->flash(
-      StateInterface::SUCCESSFUL,
+      State::SUCCESSFUL->value,
       sprintf(
         TranslationOld::get('event_successfully_activated'),
         $this->entity->getTitle()

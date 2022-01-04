@@ -20,7 +20,7 @@ use Modules\Event\Entity\Event;
 use Modules\Event\Entity\EventInterface;
 use Modules\Event\Entity\EventTable;
 use System\Entity\EntityControllerBase;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides a class for event actions.
@@ -86,7 +86,7 @@ final class AdminEventController extends EntityControllerBase {
   public function edit(): ViewInterface|Redirect {
     $event = $this->repository->loadById((int) $this->request()->getRouteParameter());
     if (!$event instanceof EventInterface) {
-      $this->session()->flash(StateInterface::FAILED, TranslationOld::get('page_does_not_exists'));
+      $this->session()->flash(State::FAILED->value, TranslationOld::get('page_does_not_exists'));
 
       return new Redirect($this->redirectBack);
     }

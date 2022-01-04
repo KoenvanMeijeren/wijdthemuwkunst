@@ -6,7 +6,7 @@ namespace Modules\User\Actions;
 
 use Components\Translation\TranslationOld;
 use System\Entity\EntityInterface;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides an action for deleting account entities.
@@ -21,14 +21,14 @@ final class DeleteAccountAction extends AccountActionBase {
   protected function handle(): bool {
     $status = $this->entity->delete();
     if ($status === EntityInterface::SAVED_DELETED) {
-      $this->session()->flash(StateInterface::SUCCESSFUL,
+      $this->session()->flash(State::SUCCESSFUL->value,
         sprintf(TranslationOld::get('admin_deleted_account_successful_message'), $this->entity->getKey())
       );
 
       return TRUE;
     }
 
-    $this->session()->flash(StateInterface::SUCCESSFUL,
+    $this->session()->flash(State::SUCCESSFUL->value,
       sprintf(TranslationOld::get('admin_deleted_account_failed_message'), $this->entity->getKey())
     );
 
@@ -41,7 +41,7 @@ final class DeleteAccountAction extends AccountActionBase {
   protected function authorize(): bool {
     if ($this->user()->id() === $this->entity->id()) {
       $this->session()->flash(
-        StateInterface::FAILED,
+        State::FAILED->value,
         TranslationOld::get('cannot_delete_own_account_message')
       );
 

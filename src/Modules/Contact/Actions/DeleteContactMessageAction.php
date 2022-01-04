@@ -4,7 +4,7 @@ namespace Modules\Contact\Actions;
 
 use Components\Translation\TranslationOld;
 use System\Entity\EntityInterface;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides a way to delete contact form messages.
@@ -19,14 +19,14 @@ final class DeleteContactMessageAction extends BaseContactAction {
   protected function handle(): bool {
     $status = $this->entity->delete();
     if ($status === EntityInterface::SAVED_DELETED) {
-      $this->session()->flash(StateInterface::SUCCESSFUL,
+      $this->session()->flash(State::SUCCESSFUL->value,
         sprintf(TranslationOld::get('admin_delete_contact_form_message'), $this->entity->getName())
       );
 
       return TRUE;
     }
 
-    $this->session()->flash(StateInterface::SUCCESSFUL,
+    $this->session()->flash(State::SUCCESSFUL->value,
       sprintf(TranslationOld::get('text_unsuccessful_deleted'), $this->entity->getName())
     );
 

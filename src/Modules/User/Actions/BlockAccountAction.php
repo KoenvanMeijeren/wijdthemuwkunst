@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Modules\User\Actions;
 
 use Components\Translation\TranslationOld;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides an action for blocking account entities.
@@ -21,7 +21,7 @@ final class BlockAccountAction extends AccountActionBase {
     $this->entity->setBlocked(TRUE)->save();
 
     $this->session()->flash(
-      StateInterface::SUCCESSFUL,
+      State::SUCCESSFUL->value,
       TranslationOld::get('admin_account_successful_blocked_message')
     );
 
@@ -34,7 +34,7 @@ final class BlockAccountAction extends AccountActionBase {
   protected function authorize(): bool {
     if ($this->user()->id() === $this->entity->id()) {
       $this->session()->flash(
-        StateInterface::FAILED,
+        State::FAILED->value,
         TranslationOld::get('cannot_block_own_account_message')
       );
 

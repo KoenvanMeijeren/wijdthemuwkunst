@@ -12,7 +12,7 @@ use Modules\Setting\Actions\UpdateSettingAction;
 use Modules\Setting\Entity\Setting;
 use Modules\Setting\Entity\SettingTable;
 use System\Entity\EntityControllerBase;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides a controller for maintaining the settings.
@@ -91,7 +91,7 @@ final class SettingsControllers extends EntityControllerBase {
     $settingTable = new SettingTable($this->repository->all());
     $setting = $this->repository->loadById((int) $this->request()->getRouteParameter());
     if ($setting === NULL) {
-      $this->session()->flash(StateInterface::FAILED, TranslationOld::get('setting_does_not_exists'));
+      $this->session()->flash(State::FAILED->value, TranslationOld::get('setting_does_not_exists'));
 
       return new Redirect('/admin/configuration/settings');
     }

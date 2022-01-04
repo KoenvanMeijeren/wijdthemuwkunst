@@ -3,7 +3,7 @@
 namespace Modules\Event\Action;
 
 use Components\Translation\TranslationOld;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides an action for deleting events.
@@ -21,7 +21,7 @@ class DeleteEventAction extends EventActionBase {
 
     if ($this->entityManager->getStorage($this->getEntityType())->load($this->entity->id()) !== NULL) {
       $this->session()->flash(
-        StateInterface::FAILED,
+        State::FAILED->value,
         sprintf(TranslationOld::get('event_unsuccessfully_deleted'), $slug)
       );
 
@@ -29,7 +29,7 @@ class DeleteEventAction extends EventActionBase {
     }
 
     $this->session()->flash(
-      StateInterface::SUCCESSFUL,
+      State::SUCCESSFUL->value,
       sprintf(TranslationOld::get('event_successfully_deleted'), $slug)
     );
 

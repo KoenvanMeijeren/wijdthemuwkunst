@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Modules\User\Actions;
 
 use Components\Translation\TranslationOld;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides an action for unblocking account entities.
@@ -21,7 +21,7 @@ final class UnblockAccountAction extends AccountActionBase {
     $this->entity->setBlocked(FALSE)->save();
 
     $this->session()->flash(
-      StateInterface::SUCCESSFUL,
+      State::SUCCESSFUL->value,
       TranslationOld::get('admin_account_successful_unblocked_message')
     );
 
@@ -34,7 +34,7 @@ final class UnblockAccountAction extends AccountActionBase {
   protected function authorize(): bool {
     if ($this->user()->id() === $this->entity->id()) {
       $this->session()->flash(
-        StateInterface::FAILED,
+        State::FAILED->value,
         TranslationOld::get('cannot_unblock_own_account_message')
       );
 

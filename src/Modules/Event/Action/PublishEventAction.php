@@ -3,7 +3,7 @@
 namespace Modules\Event\Action;
 
 use Components\Translation\TranslationOld;
-use System\StateInterface;
+use System\State;
 
 /**
  * Provides an action for publishing events.
@@ -19,7 +19,7 @@ final class PublishEventAction extends EventActionBase {
     $this->entity->setPublished(TRUE)->save();
 
     $this->session()->flash(
-          StateInterface::SUCCESSFUL,
+          State::SUCCESSFUL->value,
           sprintf(
               TranslationOld::get('event_successfully_published'),
               $this->entity->getTitle()

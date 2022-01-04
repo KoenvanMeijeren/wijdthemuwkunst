@@ -14,9 +14,9 @@ use Components\Translation\TranslationOld;
 /** @var \Modules\Setting\Entity\SettingInterface $entity */
 $entity = $setting ?? null;
 $createSetting = $createSetting ?? FALSE;
-$disabled = user()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER) ? '' : 'disabled';
+$disabled = user()->getRouteRights()->hasAccess(RouteRights::DEVELOPER) ? '' : 'disabled';
 ?>
-<?php if (!$entity && $createSetting && user()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)) : ?>
+<?php if (!$entity && $createSetting && user()->getRouteRights()->hasAccess(RouteRights::DEVELOPER)) : ?>
     <div class="row">
         <div class="col-xl-12 mb-4">
             <div class="card border-left-warning shadow h-100 py-2">
