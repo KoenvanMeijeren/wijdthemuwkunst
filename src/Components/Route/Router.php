@@ -92,14 +92,14 @@ final class Router implements RouterInterface {
   /**
    * {@inheritDoc}
    */
-  public static function get(string $url, string $controller, string $method = self::METHOD_DEFAULT, int $rights = AccountInterface::GUEST, string $route = NULL): void {
+  public static function get(string $url, string $controller, string $method = self::METHOD_DEFAULT, RouteRights $rights = RouteRights::GUEST, string $route = NULL): void {
     self::saveRoute(HttpTypes::GET, $url, $controller, $method, $rights, $route);
   }
 
   /**
    * {@inheritDoc}
    */
-  public static function post(string $url, string $controller, string $method = self::METHOD_DEFAULT, int $rights = AccountInterface::GUEST, string $route = NULL): void {
+  public static function post(string $url, string $controller, string $method = self::METHOD_DEFAULT, RouteRights $rights = RouteRights::GUEST, string $route = NULL): void {
     self::saveRoute(HttpTypes::POST, $url, $controller, $method, $rights, $route);
   }
 
@@ -174,7 +174,7 @@ final class Router implements RouterInterface {
   /**
    * {@inheritDoc}
    */
-  public function direct(string $url, HttpTypes $httpType, int $rights): string|DomainView {
+  public function direct(string $url, HttpTypes $httpType, RouteRights $rights): string|DomainView {
     $this->setAvailableRoutes($httpType, $rights);
     $this->replaceWildcards($url);
     if (isset(self::$availableRoutes[$url])) {
@@ -217,12 +217,12 @@ final class Router implements RouterInterface {
    *
    * @param \Components\Http\HttpTypes $httpType
    *   The HTTP type.
-   * @param int $rights
+   * @param \Components\Route\RouteRights $rights
    *   The rights of the user.
    */
-  protected function setAvailableRoutes(HttpTypes $httpType, int $rights): void {
+  protected function setAvailableRoutes(HttpTypes $httpType, RouteRights $rights): void {
     self::$availableRoutes = [];
-    for ($maximumRights = 0; $maximumRights <= $rights; ++$maximumRights) {
+    for ($maximumRights = RouteRights::GUEST->value; $maximumRights <= $rights->value; ++$maximumRights) {
       if (isset(self::$routes[$httpType->value][$maximumRights])) {
         foreach (self::$routes[$httpType->value][$maximumRights] as $url => $route) {
           self::$availableRoutes[$url] = $route;
@@ -324,15 +324,15 @@ final class Router implements RouterInterface {
    *   The controller to execute when the route is called.
    * @param string $method
    *   The method from the controller.
-   * @param int $rights
+   * @param \Components\Route\RouteRights $rights
    *   The minimum rights to be able to visit routes based on the given rights.
    * @param string|null $route
    *   The route.
    */
-  protected static function saveRoute(HttpTypes $httpType, string $url, string $controller, string $method, int $rights, string $route = NULL): void {
+  protected static function saveRoute(HttpTypes $httpType, string $url, string $controller, string $method, RouteRights $rights, string $route = NULL): void {
     $prefixed_url = self::prefixRoute($url);
 
-    self::$routes[$httpType->value][$rights][$prefixed_url] = [$controller, $method];
+    self::$routes[$httpType->value][$rights->value][$prefixed_url] = [$controller, $method];
 
     if ($route && !isset(self::$namedRoutes[$route])) {
       self::$namedRoutes[$route] = "/{$prefixed_url}";

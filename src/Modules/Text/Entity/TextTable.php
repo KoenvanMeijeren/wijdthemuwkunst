@@ -4,6 +4,7 @@ namespace Modules\Text\Entity;
 
 use Components\ComponentsTrait;
 use Components\Resource\Resource;
+use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
 use Modules\User\Entity\AccountInterface;
 use System\DataTable\DataTableBuilder;
@@ -56,7 +57,7 @@ final class TextTable extends DataTableBuilder {
         TranslationOld::get('delete_text_confirmation_message'),
         $entity->getKey()
       ),
-      $this->user()->getRights() !== AccountInterface::DEVELOPER
+      $this->user()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)
     );
   }
 

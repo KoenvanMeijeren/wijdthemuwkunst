@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Modules\Setting\Actions;
 
+use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
 use Modules\User\Entity\AccountInterface;
 use System\Entity\EntityInterface;
@@ -39,7 +40,7 @@ final class DeleteSettingAction extends BaseSettingAction {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    if ($this->user()->getRights() !== AccountInterface::DEVELOPER) {
+    if ($this->user()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)) {
       $this->session()->flash(StateInterface::FAILED, TranslationOld::get('setting_destroy_not_allowed'));
 
       return FALSE;

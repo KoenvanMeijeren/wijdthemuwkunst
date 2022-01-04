@@ -1,22 +1,22 @@
 <?php
 
 use Components\Route\Router;
+use Components\Route\RouteRights;
 use Modules\Cms\Structure\Controllers\StructureControllerBase;
-use Modules\User\Entity\AccountInterface;
 
 Router::prefix('admin')->group(static function() {
   Router::get('dashboard', StructureControllerBase::class,
-    'index', AccountInterface::ADMIN);
+    'index', RouteRights::ADMIN);
 
   Router::get('content', StructureControllerBase::class,
-    'content', AccountInterface::ADMIN);
+    'content', RouteRights::ADMIN);
 
   Router::get('structure', StructureControllerBase::class,
-    'structure', AccountInterface::ADMIN);
+    'structure', RouteRights::ADMIN);
 
   Router::get('configuration', StructureControllerBase::class,
-    'configuration', AccountInterface::ADMIN);
+    'configuration', RouteRights::ADMIN);
 
   Router::get('reports', StructureControllerBase::class,
-    'reports', AccountInterface::DEVELOPER);
+    'reports', RouteRights::DEVELOPER);
 });

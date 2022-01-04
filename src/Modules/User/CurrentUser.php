@@ -3,6 +3,7 @@
 namespace Modules\User;
 
 use Components\ComponentsTrait;
+use Components\Route\RouteRights;
 use Modules\Authentication\Support\IDEncryption;
 use Modules\User\Entity\Account;
 use Modules\User\Entity\AccountInterface;
@@ -40,7 +41,7 @@ class CurrentUser implements CurrentUserInterface {
     }
 
     return $this->storage->create([
-      'rights' => AccountInterface::GUEST,
+      'rights' => RouteRights::GUEST->value,
     ]);
   }
 
@@ -48,7 +49,7 @@ class CurrentUser implements CurrentUserInterface {
    * {@inheritDoc}
    */
   public function isLoggedIn(): bool {
-    return $this->get()->getRights() > AccountInterface::GUEST;
+    return $this->get()->getRouteRights()->hasAccess(RouteRights::ADMIN);
   }
 
   /**

@@ -6,6 +6,7 @@
 
 declare(strict_types=1);
 
+use Components\Route\RouteRights;
 use Components\Security\CSRF;
 use Components\Translation\TranslationOld;
 use Modules\Page\Entity\PageInterface;
@@ -16,7 +17,7 @@ $entity = $page ?? null;
 $current_user = user();
 
 $disabled = '';
-if ($current_user->getRights() !== AccountInterface::DEVELOPER && $entity?->getInMenu() === PageInterface::PAGE_STATIC) {
+if ($current_user->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER) && $entity?->getInMenu() === PageInterface::PAGE_STATIC) {
   $disabled = 'disabled';
 }
 

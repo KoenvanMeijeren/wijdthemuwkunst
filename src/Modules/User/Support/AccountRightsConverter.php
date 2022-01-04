@@ -6,8 +6,8 @@ declare(strict_types=1);
 namespace Modules\User\Support;
 
 use Components\Converter\ConverterBase;
+use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
-use Modules\User\Entity\AccountInterface;
 
 /**
  * Provides a class for converting account rights.
@@ -21,15 +21,15 @@ final class AccountRightsConverter extends ConverterBase {
    */
   public function toReadable(): string {
     $rights = (int) $this->var;
-    if ($rights === AccountInterface::ADMIN) {
+    if ($rights === RouteRights::ADMIN->value) {
       return TranslationOld::get('account_rights_admin');
     }
 
-    if ($rights === AccountInterface::SUPER_ADMIN) {
+    if ($rights === RouteRights::SUPER_ADMIN->value) {
       return TranslationOld::get('account_rights_super_admin');
     }
 
-    if ($rights === AccountInterface::DEVELOPER) {
+    if ($rights === RouteRights::DEVELOPER->value) {
       return TranslationOld::get('account_rights_developer');
     }
 

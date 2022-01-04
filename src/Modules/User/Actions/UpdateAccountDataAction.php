@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\User\Actions;
 
+use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
-use Modules\User\Entity\AccountInterface;
 use System\StateInterface;
 
 /**
@@ -29,7 +29,8 @@ final class UpdateAccountDataAction extends AccountActionBase {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    if ($this->request()->post('rights') !== $this->user()->getRights()
+    $input_rights = (int) $this->request()->post('rights');
+    if (RouteRights::GUEST->hasAccessHigherNumeric($input_rights) && $input_rights !== $this->user()->getRights()
       && $this->entity->id() === $this->user()->id()) {
       $this->session()->flash(
         StateInterface::FAILED,
@@ -51,7 +52,7 @@ final class UpdateAccountDataAction extends AccountActionBase {
 
     $this->validator->input('rights', TranslationOld::get('rights'))
       ->isRequired()
-      ->isBetweenRange(AccountInterface::ADMIN, AccountInterface::DEVELOPER);
+      ->isBetweenRange(RouteRights::ADMIN->value, RouteRights::DEVELOPER->value);
 
     return $this->validator->handleFormValidation();
   }

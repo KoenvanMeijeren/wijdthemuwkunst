@@ -62,12 +62,12 @@ interface RouterInterface {
    *   The controller to execute when the route is called.
    * @param string $method
    *   The method from the controller.
-   * @param int $rights
+   * @param \Components\Route\RouteRights $rights
    *   The minimum rights to be able to visit routes based on the given rights.
    * @param string|null $route
    *   The route.
    */
-  public static function get(string $url, string $controller, string $method = self::METHOD_DEFAULT, int $rights = AccountInterface::GUEST, string $route = NULL): void;
+  public static function get(string $url, string $controller, string $method = self::METHOD_DEFAULT, RouteRights $rights = RouteRights::GUEST, string $route = NULL): void;
 
   /**
    * Defines the post routes.
@@ -78,12 +78,12 @@ interface RouterInterface {
    *   The controller to execute when the route is called.
    * @param string $method
    *   The method from the controller.
-   * @param int $rights
+   * @param \Components\Route\RouteRights $rights
    *   The minimum rights to be able to visit routes based on the given rights.
    * @param string|null $route
    *   The route.
    */
-  public static function post(string $url, string $controller, string $method = self::METHOD_DEFAULT, int $rights = AccountInterface::GUEST, string $route = NULL): void;
+  public static function post(string $url, string $controller, string $method = self::METHOD_DEFAULT, RouteRights $rights = RouteRights::GUEST, string $route = NULL): void;
 
   /**
    * Prefixes a group of routes.
@@ -111,7 +111,7 @@ interface RouterInterface {
    *   The url to search for a corresponding route.
    * @param HttpTypes $httpType
    *   The HTTP type.
-   * @param int $rights
+   * @param \Components\Route\RouteRights $rights
    *   The rights of the user.
    *
    * @return \System\View\DomainView|string
@@ -121,6 +121,6 @@ interface RouterInterface {
    * @throws \Components\Validate\Exceptions\Object\InvalidMethodCalledException
    * @throws \Components\Validate\Exceptions\Basic\UndefinedRouteException
    */
-  public function direct(string $url, HttpTypes $httpType, int $rights): string|DomainView;
+  public function direct(string $url, HttpTypes $httpType, RouteRights $rights): string|DomainView;
 
 }

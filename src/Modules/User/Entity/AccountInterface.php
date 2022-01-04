@@ -1,7 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace Modules\User\Entity;
 
+use Components\Route\RouteRights;
 use System\Entity\EntityInterface;
 
 /**
@@ -10,21 +12,6 @@ use System\Entity\EntityInterface;
  * @package Modules\User\Entity
  */
 interface AccountInterface extends EntityInterface {
-
-  /**
-   * The follow rights option are available.
-   *
-   * - Accessible for everyone
-   * - Admin
-   * - Super Admin
-   * - Developer.
-   *
-   * @var int
-   */
-  public const GUEST = 0;
-  public const ADMIN = 1;
-  public const SUPER_ADMIN = 2;
-  public const DEVELOPER = 3;
 
   /**
    * The hash method of the account password.
@@ -108,6 +95,14 @@ interface AccountInterface extends EntityInterface {
    *   The rights of the account.
    */
   public function getRights(): int;
+
+  /**
+   * Gets the rights of the account.
+   *
+   * @return RouteRights
+   *   The rights of the account.
+   */
+  public function getRouteRights(): RouteRights;
 
   /**
    * Sets the login token of the account.

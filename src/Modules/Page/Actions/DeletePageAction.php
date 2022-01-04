@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Modules\Page\Actions;
 
+use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
 use Modules\Page\Entity\PageInterface;
 use Modules\User\Entity\AccountInterface;
@@ -43,7 +44,7 @@ final class DeletePageAction extends BasePageAction {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    if ($this->user()->getRights() !== AccountInterface::DEVELOPER
+    if ($this->user()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)
       && $this->entity->getInMenu() === PageInterface::PAGE_STATIC) {
       $this->session()->flash(
         StateInterface::FAILED,

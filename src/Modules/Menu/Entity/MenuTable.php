@@ -4,8 +4,8 @@ namespace Modules\Menu\Entity;
 
 use Components\ComponentsTrait;
 use Components\Resource\Resource;
+use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
-use Modules\User\Entity\AccountInterface;
 use System\DataTable\DataTableBuilder;
 use System\Entity\EntityInterface;
 
@@ -58,7 +58,7 @@ final class MenuTable extends DataTableBuilder {
         TranslationOld::get('delete_menu_item_confirmation_message'),
         $entity->getTitle()
       ),
-      $this->user()->getRights() !== AccountInterface::DEVELOPER
+      $this->user()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)
     );
   }
 

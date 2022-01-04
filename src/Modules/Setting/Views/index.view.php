@@ -7,16 +7,16 @@
 
 declare(strict_types=1);
 
+use Components\Route\RouteRights;
 use Components\Security\CSRF;
 use Components\Translation\TranslationOld;
-use Modules\User\Entity\AccountInterface;
 
 /** @var \Modules\Setting\Entity\SettingInterface $entity */
 $entity = $setting ?? null;
 $createSetting = $createSetting ?? FALSE;
-$disabled = user()->getRights() === AccountInterface::DEVELOPER ? '' : 'disabled';
+$disabled = user()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER) ? '' : 'disabled';
 ?>
-<?php if (!$entity && $createSetting && user()->getRights() === AccountInterface::DEVELOPER) : ?>
+<?php if (!$entity && $createSetting && user()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)) : ?>
     <div class="row">
         <div class="col-xl-12 mb-4">
             <div class="card border-left-warning shadow h-100 py-2">

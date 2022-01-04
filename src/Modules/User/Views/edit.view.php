@@ -6,6 +6,7 @@
 
 declare(strict_types=1);
 
+use Components\Route\RouteRights;
 use Components\Security\CSRF;
 use Components\Translation\TranslationOld;
 use Modules\User\Entity\AccountInterface;
@@ -60,16 +61,16 @@ $rights = $rights !== 0 ? $rights : $entity->getRights();
                                 <option value="0">
                                     <?= TranslationOld::get('form_choose_rights') ?>
                                 </option>
-                                <option value="<?= AccountInterface::ADMIN ?>"
-                                    <?= $rights === AccountInterface::ADMIN ? 'selected' : '' ?>>
+                                <option value="<?= RouteRights::ADMIN->value ?>"
+                                    <?= $rights === RouteRights::ADMIN->value ? 'selected' : '' ?>>
                                     <?= TranslationOld::get('form_rights_admin') ?>
                                 </option>
-                                <option value="<?= AccountInterface::SUPER_ADMIN ?>"
-                                    <?= $rights === AccountInterface::SUPER_ADMIN ? 'selected' : '' ?>>
+                                <option value="<?= RouteRights::SUPER_ADMIN->value ?>"
+                                    <?= $rights === RouteRights::SUPER_ADMIN->value ? 'selected' : '' ?>>
                                     <?= TranslationOld::get('form_rights_super_admin') ?>
                                 </option>
-                                <option value="<?= AccountInterface::DEVELOPER ?>"
-                                    <?= $rights === AccountInterface::DEVELOPER ? 'selected' : '' ?>>
+                                <option value="<?= RouteRights::DEVELOPER->value ?>"
+                                    <?= $rights === RouteRights::DEVELOPER->value ? 'selected' : '' ?>>
                                     <?= TranslationOld::get('form_rights_developer') ?>
                                 </option>
                             </select>

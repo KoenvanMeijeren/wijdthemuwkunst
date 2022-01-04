@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Authentication\Actions;
 
 use Components\Actions\FormAction;
+use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
 use Modules\Authentication\Support\IDEncryption;
 use Modules\User\Entity\Account;
@@ -124,7 +125,7 @@ final class UserLogInAction extends FormAction {
    * {@inheritDoc}
    */
   private function resetFailedLogInAttempts(): void {
-    if ($this->entity->getRights() > AccountInterface::ADMIN) {
+    if ($this->entity->getRouteRights()->hasAccess(RouteRights::ADMIN)) {
       return;
     }
 
@@ -135,7 +136,7 @@ final class UserLogInAction extends FormAction {
    * {@inheritDoc}
    */
   private function addFailedLogInAttempt(): void {
-    if ($this->entity->getRights() > AccountInterface::ADMIN) {
+    if ($this->entity->getRouteRights()->hasAccess(RouteRights::ADMIN)) {
       return;
     }
 
@@ -148,7 +149,7 @@ final class UserLogInAction extends FormAction {
    * the maximum number of failed log in attempts, block the account.
    */
   private function blockAccount(): void {
-    if ($this->entity->getRights() > AccountInterface::ADMIN
+    if ($this->entity->getRouteRights()->hasAccess(RouteRights::ADMIN)
       || $this->entity->getFailedLogins() < $this->maximumLoginAttempts) {
       return;
     }

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Structure;
 
+use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
 use JetBrains\PhpStorm\ArrayShape;
 use Modules\User\Entity\AccountInterface;
@@ -44,7 +45,7 @@ trait MenuAdminTrait {
       ],
     ];
 
-    if ($user->getRights() >= AccountInterface::SUPER_ADMIN) {
+    if ($user->getRouteRights()->hasAccess(RouteRights::SUPER_ADMIN)) {
       $items['accounts'] = [
         'icon' => 'fas fa-users',
         'title' => TranslationOld::get('admin_accounts_title'),
@@ -52,7 +53,7 @@ trait MenuAdminTrait {
       ];
     }
 
-    if ($user->getRights() >= AccountInterface::DEVELOPER) {
+    if ($user->getRouteRights()->hasAccess(RouteRights::DEVELOPER)) {
       $items['reports'] = [
         'icon' => 'fas fa-chart-bar',
         'title' => TranslationOld::get('admin_reports_title'),

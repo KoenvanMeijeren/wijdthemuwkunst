@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
+use Components\Route\RouteRights;
 use Components\Security\CSRF;
 use Components\Translation\TranslationOld;
-use Modules\User\Entity\AccountInterface;
 
 ?>
 <form method="post" action="<?= urlFromRoute('entity.account.save') ?>">
@@ -57,19 +57,19 @@ use Modules\User\Entity\AccountInterface;
                             </label>
 
                             <select id="rights" class="form-control" name="rights" required>
-                                <option value="0">
+                                <option value="<?= RouteRights::GUEST->value ?>">
                                     <?= TranslationOld::get('form_choose_rights') ?>
                                 </option>
-                                <option value="<?= AccountInterface::ADMIN ?>"
-                                    <?= (int) request()->post('rights') === AccountInterface::ADMIN ? 'selected' : '' ?>>
+                                <option value="<?= RouteRights::ADMIN->value ?>"
+                                    <?= (int) request()->post('rights') === RouteRights::ADMIN->value ? 'selected' : '' ?>>
                                     <?= TranslationOld::get('form_rights_admin') ?>
                                 </option>
-                                <option value="<?= AccountInterface::SUPER_ADMIN ?>"
-                                    <?= (int) request()->post('rights') === AccountInterface::SUPER_ADMIN ? 'selected' : '' ?>>
+                                <option value="<?= RouteRights::SUPER_ADMIN->value ?>"
+                                    <?= (int) request()->post('rights') === RouteRights::SUPER_ADMIN->value ? 'selected' : '' ?>>
                                     <?= TranslationOld::get('form_rights_super_admin') ?>
                                 </option>
-                                <option value="<?= AccountInterface::DEVELOPER ?>"
-                                    <?= (int) request()->post('rights') === AccountInterface::DEVELOPER ? 'selected' : '' ?>>
+                                <option value="<?= RouteRights::DEVELOPER->value ?>"
+                                    <?= (int) request()->post('rights') === RouteRights::DEVELOPER->value ? 'selected' : '' ?>>
                                     <?= TranslationOld::get('form_rights_developer') ?>
                                 </option>
                             </select>

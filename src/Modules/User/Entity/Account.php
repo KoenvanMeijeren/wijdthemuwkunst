@@ -2,6 +2,7 @@
 
 namespace Modules\User\Entity;
 
+use Components\Route\RouteRights;
 use System\Entity\EntityBase;
 
 /**
@@ -74,6 +75,13 @@ final class Account extends EntityBase implements AccountInterface {
    */
   public function getRights(): int {
     return (int) $this->get('rights');
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function getRouteRights(): RouteRights {
+    return RouteRights::set($this->getRights());
   }
 
   /**

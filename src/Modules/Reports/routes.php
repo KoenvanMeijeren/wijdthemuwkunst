@@ -1,20 +1,20 @@
 <?php
 
 use Components\Route\Router;
+use Components\Route\RouteRights;
 use Modules\Reports\Controllers\ReportsController;
-use Modules\User\Entity\AccountInterface;
 
 // Reports routes.
 Router::prefix('admin/reports')->group(static function () {
   // Application routes.
   Router::get('application', ReportsController::class,
-    'application', AccountInterface::DEVELOPER);
+    'application', RouteRights::DEVELOPER);
 
   // Logs routes.
   Router::get('logs', ReportsController::class,
-    'logs', AccountInterface::DEVELOPER);
+    'logs', RouteRights::DEVELOPER);
 
   // Storage routes.
   Router::get('storage', ReportsController::class,
-    'storage', AccountInterface::DEVELOPER);
+    'storage', RouteRights::DEVELOPER);
 });

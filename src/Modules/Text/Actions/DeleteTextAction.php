@@ -2,6 +2,7 @@
 
 namespace Modules\Text\Actions;
 
+use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
 use Modules\User\Entity\AccountInterface;
 use System\Entity\EntityInterface;
@@ -38,7 +39,7 @@ final class DeleteTextAction extends BaseTextAction {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    if ($this->user()->getRights() !== AccountInterface::DEVELOPER) {
+    if ($this->user()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)) {
       $this->session()->flash(StateInterface::FAILED, TranslationOld::get('text_destroy_not_allowed'));
 
       return FALSE;

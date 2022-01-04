@@ -58,7 +58,7 @@ final class Application implements ApplicationInterface {
     $current_user = $this->user();
 
     return (string) Router::load($this->routesLocations)->direct(
-      Uri::getUrl(), Uri::getHttpType(), $current_user->getRights()
+      Uri::getUrl(), Uri::getHttpType(), $current_user->getRouteRights()
     );
   }
 

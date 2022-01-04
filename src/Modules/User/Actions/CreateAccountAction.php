@@ -2,6 +2,7 @@
 
 namespace Modules\User\Actions;
 
+use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
 use Modules\User\Entity\Account;
 
@@ -44,8 +45,8 @@ class CreateAccountAction extends AccountActionBase {
     $this->validator->input('rights', TranslationOld::get('rights'))
       ->isRequired()
       ->isBetweenRange(
-        Account::ADMIN,
-        Account::DEVELOPER,
+        RouteRights::ADMIN->value,
+        RouteRights::DEVELOPER->value,
         TranslationOld::get('admin_invalid_rights_message')
       );
 

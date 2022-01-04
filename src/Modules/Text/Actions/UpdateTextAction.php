@@ -2,6 +2,7 @@
 
 namespace Modules\Text\Actions;
 
+use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
 use Modules\User\Entity\AccountInterface;
 use System\StateInterface;
@@ -27,7 +28,7 @@ final class UpdateTextAction extends BaseTextAction {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    if ($this->user()->getRights() !== AccountInterface::DEVELOPER
+    if ($this->user()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)
       && $this->request()->post('key') !== $this->entity->getKey()) {
       $this->session()->flash(StateInterface::FAILED, TranslationOld::get('text_editing_key_not_allowed'));
 
