@@ -24,7 +24,7 @@ final class Header implements HeaderInterface {
   /**
    * {@inheritDoc}
    */
-  #[NoReturn] public function redirect(string $url): void {
+  #[NoReturn] public function redirect(string $url): never {
     header('Location: ' . $url);
     exit();
   }
@@ -41,8 +41,9 @@ final class Header implements HeaderInterface {
   /**
    * {@inheritDoc}
    */
-  public function accessDenied(): void {
+  public function accessDenied(): never {
     header('HTTP/1.1 403 Origin Denied');
+    exit();
   }
 
   /**

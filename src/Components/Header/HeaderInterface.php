@@ -50,7 +50,7 @@ interface HeaderInterface {
    * @param string $url
    *   The url to redirect to.
    */
-  public function redirect(string $url): void;
+  public function redirect(string $url): never;
 
   /**
    * Refreshes to a specified location.
@@ -65,7 +65,7 @@ interface HeaderInterface {
   /**
    * Access denied, returns the HTTP 403 response.
    */
-  public function accessDenied(): void;
+  public function accessDenied(): never;
 
   /**
    * Allows the given origin.
