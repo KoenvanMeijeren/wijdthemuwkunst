@@ -142,7 +142,7 @@ final class Page extends EntityBase implements PageInterface {
   public function preSave(): void {
     parent::preSave();
 
-    if ($this->getVisibility()->isEqual(PageVisibility::PAGE_STATIC)) {
+    if ($this->getVisibility()->isEqual(PageVisibility::STATIC)) {
       $this->setPublished(true);
     }
   }

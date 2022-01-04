@@ -102,8 +102,8 @@ abstract class BasePageAction extends EntityFormActionBase {
     $this->validator->input('visibility', TranslationOld::get('page_visibility'))
       ->isRequired()
       ->isInArray([
-        PageVisibility::PAGE_NORMAL->value,
-        PageVisibility::PAGE_STATIC->value,
+        PageVisibility::NORMAL->value,
+        PageVisibility::STATIC->value,
       ]);
 
     $this->validator->input('content', TranslationOld::get('page_content'))->isRequired();

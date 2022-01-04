@@ -18,7 +18,7 @@ $current_user = user();
 
 $disabled = '';
 if ($current_user->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)
-  && $entity?->getVisibility()->isEqual(PageVisibility::PAGE_STATIC)) {
+  && $entity?->getVisibility()->isEqual(PageVisibility::STATIC)) {
   $disabled = 'disabled';
 }
 
@@ -33,7 +33,7 @@ if ($entity && $entity?->id() !== 0) {
   $removeBannerAction = '/admin/content/pages/page/edit/' . $entity?->id() . '/remove/banner';
 }
 
-if ($entity?->getVisibility()->isEqual(PageVisibility::PAGE_STATIC)) {
+if ($entity?->getVisibility()->isEqual(PageVisibility::STATIC)) {
   $publishActionsVisible = FALSE;
 }
 
@@ -139,12 +139,12 @@ $visibility = (int) request()->post('visibility', (string) $entity?->getVisibili
                             </label>
 
                             <select id="visibility" class="form-control" name="visibility" <?= $disabled ?>required>
-                                <option value="<?= PageVisibility::PAGE_NORMAL->value ?>"
-                                    <?= $visibility === PageVisibility::PAGE_NORMAL->value ? 'selected' : '' ?>>
+                                <option value="<?= PageVisibility::NORMAL->value ?>"
+                                    <?= $visibility === PageVisibility::NORMAL->value ? 'selected' : '' ?>>
                                     <?= TranslationOld::get('page_normal') ?>
                                 </option>
-                                <option value="<?= PageVisibility::PAGE_STATIC->value ?>"
-                                    <?= $visibility === PageVisibility::PAGE_STATIC->value ? 'selected' : '' ?>>
+                                <option value="<?= PageVisibility::STATIC->value ?>"
+                                    <?= $visibility === PageVisibility::STATIC->value ? 'selected' : '' ?>>
                                     <?= TranslationOld::get('page_static') ?>
                                 </option>
                             </select>

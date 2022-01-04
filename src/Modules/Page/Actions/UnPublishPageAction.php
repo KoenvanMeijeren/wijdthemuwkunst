@@ -28,7 +28,7 @@ final class UnPublishPageAction extends BasePageAction {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    if ($this->entity->getVisibility()->isEqual(PageVisibility::PAGE_STATIC)) {
+    if ($this->entity->getVisibility()->isEqual(PageVisibility::STATIC)) {
       $this->session()->flash(State::FAILED->value, TranslationOld::get('page_static_cannot_be_unpublished'));
 
       return FALSE;

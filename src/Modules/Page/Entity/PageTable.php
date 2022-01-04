@@ -40,8 +40,8 @@ final class PageTable extends DataTableBuilder {
    */
   protected function buildRow(EntityInterface $entity): array {
     $visibility = match ($entity->getVisibilityNumeric()) {
-      PageVisibility::PAGE_NORMAL->value => TranslationOld::get('page_normal'),
-      PageVisibility::PAGE_STATIC->value => TranslationOld::get('page_static'),
+      PageVisibility::NORMAL->value => TranslationOld::get('page_normal'),
+      PageVisibility::STATIC->value => TranslationOld::get('page_static'),
       default => TranslationOld::get('page_in_menu_state_unknown'),
     };
 

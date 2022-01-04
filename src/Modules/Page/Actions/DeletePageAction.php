@@ -46,7 +46,7 @@ final class DeletePageAction extends BasePageAction {
    */
   protected function authorize(): bool {
     if ($this->user()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)
-      && $this->entity->getVisibility()->isEqual(PageVisibility::PAGE_STATIC)) {
+      && $this->entity->getVisibility()->isEqual(PageVisibility::STATIC)) {
       $this->session()->flash(
         State::FAILED->value,
         sprintf(TranslationOld::get('page_static_cannot_be_deleted'), $this->entity->getSlug())
