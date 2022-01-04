@@ -380,8 +380,8 @@ final class Query implements QueryInterface {
   /**
    * {@inheritDoc}
    */
-  public function delete(string $column): QueryInterface {
-    $this->update([$column => TRUE]);
+  public function delete(string $column, int $status): QueryInterface {
+    $this->update([$column => $status]);
 
     return $this;
   }

@@ -466,11 +466,13 @@ interface QueryInterface extends DatabaseProcessorInterface, DatabaseConnectionI
    * @param string $column
    *   The column to be updated. This value will be used to determine if the
    *   record has been deleted.
+   * @param int $status
+   *   The new value of the column.
    *
    * @return $this
    *   The called object reference.
    */
-  public function delete(string $column): QueryInterface;
+  public function delete(string $column, int $status): QueryInterface;
 
   /**
    * The DELETE statement is used to delete existing records in a table.

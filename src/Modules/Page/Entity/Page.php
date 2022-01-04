@@ -4,15 +4,19 @@ namespace Modules\Page\Entity;
 
 use Modules\Slug\SlugTrait;
 use System\Entity\EntityBase;
+use System\Entity\Status\EntityStatusColumn;
+use System\Entity\Status\EntityStatusTrait;
 
 /**
  * Defines the Page entity.
  *
  * @package Modules\Page\Entity
  */
+#[EntityStatusColumn('is_deleted')]
 final class Page extends EntityBase implements PageInterface {
 
   use SlugTrait;
+  use EntityStatusTrait;
 
   /**
    * {@inheritdoc}
@@ -119,21 +123,6 @@ final class Page extends EntityBase implements PageInterface {
    */
   public function isPublished(): bool {
     return (bool) $this->get('is_published');
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function setDeleted(bool $deleted = TRUE): PageInterface {
-    $this->set('is_deleted', (int) $deleted);
-    return $this;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function isDeleted(): bool {
-    return (bool) $this->get('is_deleted');
   }
 
   /**

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace System\Entity\Model;
@@ -7,6 +6,7 @@ namespace System\Entity\Model;
 use Components\Database\Query;
 use Components\Database\QueryInterface;
 use JetBrains\PhpStorm\Pure;
+use System\Entity\Status\EntityStatus;
 
 /**
  * Provides a model for entities to interact with the database.
@@ -81,7 +81,7 @@ abstract class EntityModel implements EntityModelInterface {
    */
   protected function softDelete(int $id): void {
     $this->query = new Query($this->getTable());
-    $this->query->delete($this->getSoftDeletedKey())
+    $this->query->delete($this->getSoftDeletedKey(), EntityStatus::DELETED->value)
       ->where($this->getPrimaryKey(), '=', (string) $id)
       ->execute();
   }

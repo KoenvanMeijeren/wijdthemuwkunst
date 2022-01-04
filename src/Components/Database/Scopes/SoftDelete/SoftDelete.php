@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Components\Database\Scopes\SoftDelete;
 
+use System\Entity\Status\EntityStatus;
+
 /**
  * Provides a trait for subclasses who use soft delete.
  *
@@ -17,7 +19,7 @@ trait SoftDelete {
    *   The name of the is deleted column.
    */
   public function initializeSoftDelete(string $softDeletedKey): void {
-    $this->query->where($softDeletedKey, '=', '0');
+    $this->query->where($softDeletedKey, '=', (string) EntityStatus::ACTIVE->value);
   }
 
 }

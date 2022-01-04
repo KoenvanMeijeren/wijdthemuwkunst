@@ -5,13 +5,14 @@ namespace Modules\Page\Entity;
 
 use Modules\Slug\SlugInterface;
 use System\Entity\EntityInterface;
+use System\Entity\Status\EntityStatusInterface;
 
 /**
  * Provides an interface for Page entities.
  *
  * @package Modules\Page\Entity
  */
-interface PageInterface extends EntityInterface, SlugInterface {
+interface PageInterface extends EntityInterface, SlugInterface, EntityStatusInterface {
 
   /**
    * Sets the key of the text.
@@ -128,23 +129,5 @@ interface PageInterface extends EntityInterface, SlugInterface {
    *   Whether the entity is published or not.
    */
   public function isPublished(): bool;
-
-  /**
-   * Determines if the entity is deleted.
-   *
-   * @param bool $deleted
-   *   If the entity is deleted.
-   *
-   * @return $this
-   */
-  public function setDeleted(bool $deleted = TRUE): PageInterface;
-
-  /**
-   * If the entity is deleted.
-   *
-   * @return bool
-   *   Whether the entity is deleted or not.
-   */
-  public function isDeleted(): bool;
 
 }
