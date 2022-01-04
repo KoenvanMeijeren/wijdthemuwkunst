@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 use Components\Translation\TranslationOld;
 use System\State;
-use System\State;
 
 ?>
 
