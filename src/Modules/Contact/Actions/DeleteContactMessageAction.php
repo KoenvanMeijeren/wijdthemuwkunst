@@ -3,7 +3,7 @@
 namespace Modules\Contact\Actions;
 
 use Components\Translation\TranslationOld;
-use System\Entity\EntityInterface;
+use System\Entity\Status\EntitySaveStatus;
 use System\State;
 
 /**
@@ -18,7 +18,7 @@ final class DeleteContactMessageAction extends BaseContactAction {
    */
   protected function handle(): bool {
     $status = $this->entity->delete();
-    if ($status === EntityInterface::SAVED_DELETED) {
+    if ($status === EntitySaveStatus::SAVED_DELETED) {
       $this->session()->flash(State::SUCCESSFUL->value,
         sprintf(TranslationOld::get('admin_delete_contact_form_message'), $this->entity->getName())
       );

@@ -3,6 +3,7 @@
 namespace System\Entity;
 
 use System\Entity\Model\EntityModelInterface;
+use System\Entity\Status\EntitySaveStatus;
 
 /**
  * Provides an interface for entities.
@@ -12,25 +13,11 @@ use System\Entity\Model\EntityModelInterface;
 interface EntityInterface extends EntityModelInterface {
 
   /**
-   * Return status for saving which involved creating a new item.
+   * The undefined identifier value.
    *
    * @var int
    */
-  public const SAVED_NEW = 1;
-
-  /**
-   * Return status for saving which involved an update to an existing item.
-   *
-   * @var int
-   */
-  public const SAVED_UPDATED = 2;
-
-  /**
-   * Return status for saving which deleted an existing item.
-   *
-   * @var int
-   */
-  public const SAVED_DELETED = 3;
+  public const UNDEFINED_IDENTIFIER = -1;
 
   /**
    * Returns the repository for the entity.
@@ -89,10 +76,10 @@ interface EntityInterface extends EntityModelInterface {
   /**
    * Saves an entity.
    *
-   * @return int
+   * @return \System\Entity\Status\EntitySaveStatus
    *   Either SAVED_NEW or SAVED_UPDATED, depending on the operation performed.
    */
-  public function save(): int;
+  public function save(): EntitySaveStatus;
 
   /**
    * Acts on the post save of an entity.
@@ -102,9 +89,9 @@ interface EntityInterface extends EntityModelInterface {
   /**
    * Delete an entity.
    *
-   * @return int
+   * @return \System\Entity\Status\EntitySaveStatus
    *   The status of deleting an entity.
    */
-  public function delete(): int;
+  public function delete(): EntitySaveStatus;
 
 }

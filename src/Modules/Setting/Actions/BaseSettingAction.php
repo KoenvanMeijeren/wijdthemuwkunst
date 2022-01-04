@@ -7,6 +7,7 @@ use Components\Translation\TranslationOld;
 use Modules\Setting\Entity\Setting;
 use System\Entity\Actions\EntityFormActionBase;
 use System\Entity\EntityInterface;
+use System\Entity\Status\EntitySaveStatus;
 use System\State;
 
 /**
@@ -36,14 +37,14 @@ abstract class BaseSettingAction extends EntityFormActionBase {
   protected function saveEntity(): bool {
     $status = $this->entity->save();
     switch ($status) {
-      case EntityInterface::SAVED_NEW:
+      case EntitySaveStatus::SAVED_NEW:
         $this->session()->flash(State::SUCCESSFUL->value,
           sprintf(TranslationOld::get('setting_successful_created'), $this->entity->getKey())
         );
 
         return TRUE;
 
-      case EntityInterface::SAVED_UPDATED:
+      case EntitySaveStatus::SAVED_UPDATED:
         $this->session()->flash(State::SUCCESSFUL->value,
           sprintf(TranslationOld::get('setting_successful_updated'), $this->entity->getKey())
         );

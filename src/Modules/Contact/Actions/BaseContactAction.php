@@ -8,6 +8,7 @@ use Components\Translation\TranslationOld;
 use Modules\Contact\Entity\Contact;
 use System\Entity\Actions\EntityFormActionBase;
 use System\Entity\EntityInterface;
+use System\Entity\Status\EntitySaveStatus;
 
 /**
  * Provides a base class for contact form actions.
@@ -36,7 +37,7 @@ abstract class BaseContactAction extends EntityFormActionBase {
   protected function saveEntity(): bool {
     $status = $this->entity->save();
     return match ($status) {
-      EntityInterface::SAVED_NEW, EntityInterface::SAVED_UPDATED => TRUE,
+      EntitySaveStatus::SAVED_NEW, EntitySaveStatus::SAVED_UPDATED => TRUE,
       default => FALSE,
     };
   }

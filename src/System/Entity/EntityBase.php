@@ -3,6 +3,7 @@
 namespace System\Entity;
 
 use System\Entity\Model\EntityModel;
+use System\Entity\Status\EntitySaveStatus;
 
 /**
  * Provides a base class for entities.
@@ -107,7 +108,7 @@ abstract class EntityBase extends EntityModel implements EntityInterface {
   /**
    * {@inheritDoc}
    */
-  public function save(): int {
+  public function save(): EntitySaveStatus {
     // Stores the current state of the attributes for saving.
     $attributes = $this->attributes;
 
@@ -116,7 +117,7 @@ abstract class EntityBase extends EntityModel implements EntityInterface {
     $entity_id = $this->id();
     if ($entity_id === 0) {
       $this->create($this->attributes);
-      $result = self::SAVED_NEW;
+      $result = EntitySaveStatus::SAVED_NEW;
     } else {
       // Primary keys cannot be updated because they are auto incremented.
       if (isset($this->attributes[$this->getPrimaryKey()])) {
@@ -124,7 +125,7 @@ abstract class EntityBase extends EntityModel implements EntityInterface {
       }
 
       $this->update($entity_id, $this->attributes);
-      $result = self::SAVED_UPDATED;
+      $result = EntitySaveStatus::SAVED_UPDATED;
     }
 
     $this->postSave();
@@ -152,10 +153,10 @@ abstract class EntityBase extends EntityModel implements EntityInterface {
   /**
    * {@inheritDoc}
    */
-  public function delete(): int {
+  public function delete(): EntitySaveStatus {
     $this->softDelete($this->id());
 
-    return self::SAVED_DELETED;
+    return EntitySaveStatus::SAVED_DELETED;
   }
 
 }

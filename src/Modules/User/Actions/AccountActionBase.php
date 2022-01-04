@@ -6,6 +6,7 @@ use Components\Translation\TranslationOld;
 use Modules\User\Entity\Account;
 use System\Entity\Actions\EntityFormActionBase;
 use System\Entity\EntityInterface;
+use System\Entity\Status\EntitySaveStatus;
 use System\State;
 
 /**
@@ -35,14 +36,14 @@ abstract class AccountActionBase extends EntityFormActionBase {
   protected function saveEntity(): bool {
     $status = $this->entity->save();
     switch ($status) {
-      case EntityInterface::SAVED_NEW:
+      case EntitySaveStatus::SAVED_NEW:
         $this->session()->flash(State::SUCCESSFUL->value,
           sprintf(TranslationOld::get('admin_create_account_successful_message'), $this->entity->getName())
         );
 
         return TRUE;
 
-      case EntityInterface::SAVED_UPDATED:
+      case EntitySaveStatus::SAVED_UPDATED:
         $this->session()->flash(State::SUCCESSFUL->value,
           sprintf(TranslationOld::get('admin_edited_account_successful_message'), $this->entity->getName())
         );

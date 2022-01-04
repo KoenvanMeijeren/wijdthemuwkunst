@@ -4,8 +4,7 @@ namespace Modules\Text\Actions;
 
 use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
-use Modules\User\Entity\AccountInterface;
-use System\Entity\EntityInterface;
+use System\Entity\Status\EntitySaveStatus;
 use System\State;
 
 /**
@@ -20,7 +19,7 @@ final class DeleteTextAction extends BaseTextAction {
    */
   protected function handle(): bool {
     $status = $this->entity->delete();
-    if ($status === EntityInterface::SAVED_DELETED) {
+    if ($status === EntitySaveStatus::SAVED_DELETED) {
       $this->session()->flash(State::SUCCESSFUL->value,
         sprintf(TranslationOld::get('text_successful_deleted'), $this->entity->getKey())
       );

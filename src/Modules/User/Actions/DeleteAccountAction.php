@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Modules\User\Actions;
 
 use Components\Translation\TranslationOld;
-use System\Entity\EntityInterface;
+use System\Entity\Status\EntitySaveStatus;
 use System\State;
 
 /**
@@ -20,7 +20,7 @@ final class DeleteAccountAction extends AccountActionBase {
    */
   protected function handle(): bool {
     $status = $this->entity->delete();
-    if ($status === EntityInterface::SAVED_DELETED) {
+    if ($status === EntitySaveStatus::SAVED_DELETED) {
       $this->session()->flash(State::SUCCESSFUL->value,
         sprintf(TranslationOld::get('admin_deleted_account_successful_message'), $this->entity->getKey())
       );

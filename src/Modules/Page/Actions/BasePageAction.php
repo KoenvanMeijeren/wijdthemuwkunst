@@ -6,10 +6,10 @@ namespace Modules\Page\Actions;
 use Components\Translation\TranslationOld;
 use Modules\File\Actions\SaveFileAction;
 use Modules\Page\Entity\Page;
-use Modules\Page\Entity\PageInterface;
 use Modules\Page\Entity\PageVisibility;
 use System\Entity\Actions\EntityFormActionBase;
 use System\Entity\EntityInterface;
+use System\Entity\Status\EntitySaveStatus;
 use System\State;
 
 /**
@@ -39,14 +39,14 @@ abstract class BasePageAction extends EntityFormActionBase {
   protected function saveEntity(): bool {
     $status = $this->entity->save();
     switch ($status) {
-      case EntityInterface::SAVED_NEW:
+      case EntitySaveStatus::SAVED_NEW:
         $this->session()->flash(State::SUCCESSFUL->value,
           sprintf(TranslationOld::get('page_successfully_created'), $this->entity->getTitle())
         );
 
         return TRUE;
 
-      case EntityInterface::SAVED_UPDATED:
+      case EntitySaveStatus::SAVED_UPDATED:
         $this->session()->flash(State::SUCCESSFUL->value,
           sprintf(TranslationOld::get('page_successfully_updated'), $this->entity->getTitle())
         );

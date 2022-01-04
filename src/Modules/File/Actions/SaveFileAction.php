@@ -6,6 +6,7 @@ namespace Modules\File\Actions;
 use Modules\File\Entity\File;
 use System\Entity\Actions\EntityActionBase;
 use System\Entity\EntityInterface;
+use System\Entity\Status\EntitySaveStatus;
 
 /**
  * Provides a save file action.
@@ -53,7 +54,7 @@ final class SaveFileAction extends EntityActionBase {
     new self($this->entity->getPath());
 
     return match ($status) {
-      EntityInterface::SAVED_NEW, EntityInterface::SAVED_UPDATED => TRUE,
+      EntitySaveStatus::SAVED_NEW, EntitySaveStatus::SAVED_UPDATED => TRUE,
       default => FALSE,
     };
   }

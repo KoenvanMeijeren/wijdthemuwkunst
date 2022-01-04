@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Modules\Menu\Actions;
 
 use Components\Translation\TranslationOld;
-use System\Entity\EntityInterface;
+use System\Entity\Status\EntitySaveStatus;
 use System\State;
 
 /**
@@ -19,7 +19,7 @@ final class DeleteMenuAction extends BaseMenuAction {
    */
   protected function handle(): bool {
     $status = $this->entity->delete();
-    if ($status === EntityInterface::SAVED_DELETED) {
+    if ($status === EntitySaveStatus::SAVED_DELETED) {
       $this->session()->flash(State::SUCCESSFUL->value,
         sprintf(TranslationOld::get('menu_item_successful_deleted'), $this->entity->getTitle())
       );
