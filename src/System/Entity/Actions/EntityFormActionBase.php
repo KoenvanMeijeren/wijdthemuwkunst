@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace System\Entity\Actions;
 
@@ -45,7 +46,7 @@ abstract class EntityFormActionBase extends FormAction {
     $this->storage = $this->entityManager->getStorage($this->getEntityType());
     $this->entity = $this->storage->create();
     if ($id = $this->request()->getRouteParameter()) {
-      $this->entity = $this->storage->load((int) $id);
+      $this->entity = $this->storage->getRepository()->loadById((int) $id);
     }
   }
 

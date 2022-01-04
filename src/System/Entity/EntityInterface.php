@@ -82,12 +82,22 @@ interface EntityInterface extends EntityModelInterface {
   public function setValues(array $values);
 
   /**
+   * Acts on the pre save of an entity.
+   */
+  public function preSave(): void;
+
+  /**
    * Saves an entity.
    *
    * @return int
    *   Either SAVED_NEW or SAVED_UPDATED, depending on the operation performed.
    */
   public function save(): int;
+
+  /**
+   * Acts on the post save of an entity.
+   */
+  public function postSave(): void;
 
   /**
    * Delete an entity.

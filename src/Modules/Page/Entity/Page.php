@@ -140,4 +140,13 @@ final class Page extends EntityBase implements PageInterface {
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  protected function alterSavableAttributes(): void {
+    parent::alterSavableAttributes();
+
+    $this->removeSlugAttributesForSaving($this->attributes);
+  }
+
 }

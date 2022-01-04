@@ -207,4 +207,13 @@ final class Event extends EntityBase implements EventInterface {
     return (bool) $this->get('is_deleted');
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  protected function alterSavableAttributes(): void {
+    parent::alterSavableAttributes();
+
+    $this->removeSlugAttributesForSaving($this->attributes);
+  }
+
 }

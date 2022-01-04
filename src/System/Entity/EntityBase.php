@@ -101,13 +101,16 @@ abstract class EntityBase extends EntityModel implements EntityInterface {
    * {@inheritDoc}
    */
   public function preSave(): void {
-
+    $this->alterSavableAttributes();
   }
 
   /**
    * {@inheritDoc}
    */
   public function save(): int {
+    // Stores the current state of the attributes for saving.
+    $attributes = $this->attributes;
+
     $this->preSave();
 
     $entity_id = $this->id();
@@ -126,7 +129,17 @@ abstract class EntityBase extends EntityModel implements EntityInterface {
 
     $this->postSave();
 
+    // Restores the attributes after saving it.
+    $this->attributes = $attributes;
+
     return $result;
+  }
+
+  /**
+   * Alters the attributes in order to prepare the save of the entity.
+   */
+  protected function alterSavableAttributes(): void {
+
   }
 
   /**
