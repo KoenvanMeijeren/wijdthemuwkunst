@@ -21,9 +21,9 @@ final class UserLogInAction extends FormAction {
   /**
    * The account entity.
    *
-   * @var \Modules\User\Entity\AccountInterface
+   * @var \Modules\User\Entity\AccountInterface|null
    */
-  protected readonly AccountInterface $entity;
+  protected readonly ?AccountInterface $entity;
 
   /**
    * The maximum number of login attempts.
@@ -90,6 +90,10 @@ final class UserLogInAction extends FormAction {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
+    if (!$this->entity instanceof AccountInterface) {
+      return FALSE;
+    }
+
     if ($this->entity->isBlocked()) {
       $this->session()->flash(State::FAILED->value, TranslationOld::get('login_failed_blocked_account_message'));
 

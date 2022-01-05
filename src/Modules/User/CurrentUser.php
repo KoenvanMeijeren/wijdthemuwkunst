@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Modules\User;
 
@@ -36,13 +37,21 @@ class CurrentUser implements CurrentUserInterface {
    * {@inheritDoc}
    */
   public function get(): AccountInterface {
-    if ($id = $this->getUserId()) {
-      return $this->storage->load($id);
-    }
-
-    return $this->storage->create([
+    $default_user = $this->storage->create([
       'rights' => RouteRights::GUEST->value,
     ]);
+
+    $user_id = $this->getUserId();
+    if (!$user_id) {
+      return $default_user;
+    }
+
+    $user = $this->storage->load($user_id);
+    if (!$user) {
+      return $default_user;
+    }
+
+    return $user;
   }
 
   /**
