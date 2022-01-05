@@ -196,6 +196,7 @@ return [
     'admin_edit_account_wrong_current_password_message' => 'Onjuist huidig wachtwoord gegeven. Wachtwoord is niet bijgewerkt.',
     'admin_edited_account_successful_message' => 'Account is succesvol bijgewerkt.',
     'admin_account_cannot_be_visited' => 'Dit account bestaat niet.',
+    'account_does_not_exists' => 'Dit account bestaat niet.',
     'admin_edited_other_account_successful_message' => 'Account is succesvol bijgewerkt.',
     'no_accounts_were_found_message' => 'Er zijn geen accounts gevonden',
     'cannot_block_own_account_message' => 'Je kan niet je eigen account blokkeren.',
