@@ -5,7 +5,6 @@ namespace Components\Header;
 
 use Components\Sanitize\DataTypes;
 use Components\Sanitize\Sanitize;
-use Components\Sanitize\SanitizeInterface;
 use JetBrains\PhpStorm\NoReturn;
 
 /**
@@ -18,7 +17,7 @@ final class Header implements HeaderInterface {
   /**
    * {@inheritDoc}
    */
-  public function send(string $header, bool $replace = TRUE, int $response_code = 0): void {
+  public function send(string $header, bool $replace = TRUE, int $response_code = self::DEFAULT_RESPONSE_CODE): void {
     header($header, $replace, $response_code);
   }
 

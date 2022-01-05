@@ -1,7 +1,5 @@
 <?php
-
 declare(strict_types=1);
-
 
 namespace Modules\Authentication\Support;
 
@@ -25,6 +23,27 @@ final class IDEncryption {
   private readonly string $secretToken;
 
   /**
+   * The value of the undefined identifier.
+   *
+   * @var int
+   */
+  public const UNDEFINED_IDENTIFIER = -1;
+
+  /**
+   * The length of the generated token.
+   *
+   * @var int
+   */
+  public const TOKEN_LENGTH = 200;
+
+  /**
+   * The used algorithm for hashing.
+   *
+   * @var string
+   */
+  public const HASH_ALGORITHM = 'sha256';
+
+  /**
    * IDEncryption constructor.
    */
   public function __construct() {
@@ -40,7 +59,7 @@ final class IDEncryption {
    * @return string
    *   The generated token.
    */
-  public function generateToken(int $length = 200): string {
+  public function generateToken(int $length = self::TOKEN_LENGTH): string {
     return bin2hex(random_bytes($length));
   }
 
@@ -57,7 +76,7 @@ final class IDEncryption {
    */
   #[Pure] public function encrypt(int $id, string $token): string {
     $string = "{$id}:{$token}";
-    $string .= ':' . hash_hmac('sha256', $string, $this->secretToken);
+    $string .= ':' . hash_hmac(self::HASH_ALGORITHM, $string, $this->secretToken);
 
     return $string;
   }
@@ -73,14 +92,14 @@ final class IDEncryption {
    */
   #[Pure] public function decrypt(?string $encryptedId): int {
     if (empty($encryptedId)) {
-      return 0;
+      return self::UNDEFINED_IDENTIFIER;
     }
 
     [$id, $token, $mac] = explode(':', $encryptedId);
 
     $data = "{$id}:{$token}";
-    if (!hash_equals(hash_hmac('sha256', $data, $this->secretToken), $mac)) {
-      return 0;
+    if (!hash_equals(hash_hmac(self::HASH_ALGORITHM, $data, $this->secretToken), $mac)) {
+      return self::UNDEFINED_IDENTIFIER;
     }
 
     return (int) $id;

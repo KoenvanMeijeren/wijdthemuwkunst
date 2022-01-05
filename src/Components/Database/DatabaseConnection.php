@@ -42,7 +42,7 @@ abstract class DatabaseConnection implements DatabaseConnectionInterface {
    *
    * @var int
    */
-  protected int $lastInsertedId = 0;
+  protected int $lastInsertedId = self::UNDEFINED_IDENTIFIER;
 
   /**
    * Connects with the database and executes the query.
@@ -107,6 +107,6 @@ abstract class DatabaseConnection implements DatabaseConnectionInterface {
   /**
    * {@inheritDoc}
    */
-  abstract public function fetch(int $fetchMethod, int $cursorOrientation = PDO::FETCH_ORI_NEXT, int $cursorOffset = 0): array|object|null;
+  abstract public function fetch(int $fetchMethod, int $cursorOrientation = PDO::FETCH_ORI_NEXT, int $cursorOffset = self::DEFAULT_CURSOR_OFFSET): array|object|null;
 
 }

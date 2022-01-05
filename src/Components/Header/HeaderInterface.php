@@ -18,6 +18,13 @@ interface HeaderInterface {
   public const X_XSS_PROTECTION = 'X-XSS-Protection: 1; mode=block;';
 
   /**
+   * Forces the HTTP response code to the specified value.
+   *
+   * @var int
+   */
+  public const DEFAULT_RESPONSE_CODE = 0;
+
+  /**
    * Sends a raw HTTP header.
    *
    * @param string $header
@@ -42,13 +49,16 @@ interface HeaderInterface {
    *
    * @link https://php.net/manual/en/function.header.php
    */
-  public function send(string $header, bool $replace = TRUE, int $response_code = 0): void;
+  public function send(string $header, bool $replace = TRUE, int $response_code = self::DEFAULT_RESPONSE_CODE): void;
 
   /**
    * Redirects to a specific url.
    *
    * @param string $url
    *   The url to redirect to.
+   *
+   * @return never
+   *   Never returns.
    */
   public function redirect(string $url): never;
 
@@ -64,6 +74,9 @@ interface HeaderInterface {
 
   /**
    * Access denied, returns the HTTP 403 response.
+   *
+   * @return never
+   *   Never returns.
    */
   public function accessDenied(): never;
 

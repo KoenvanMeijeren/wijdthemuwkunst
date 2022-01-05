@@ -1,22 +1,20 @@
 <?php
+declare(strict_types=1);
 
 /**
  * @file
  */
 
-declare(strict_types=1);
-
 use Components\Route\RouteRights;
 use Components\Security\CSRF;
 use Components\Translation\TranslationOld;
-use Modules\User\Entity\AccountInterface;
 
 $current_user = user();
 /** @var \Modules\User\Entity\AccountInterface $entity */
 $entity = $account ?? NULL;
 $disabled = $current_user->id() === $entity->id() ? 'disabled' : '';
 $rights = (int) request()->post('rights');
-$rights = $rights !== 0 ? $rights : $entity->getRights();
+$rights = RouteRights::GUEST->hasAccessHigherNumeric($rights) ? $rights : $entity->getRights();
 ?>
 
 <div class="row">

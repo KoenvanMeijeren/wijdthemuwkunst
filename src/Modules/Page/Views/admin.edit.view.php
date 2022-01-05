@@ -11,6 +11,7 @@ use Components\Security\CSRF;
 use Components\Translation\TranslationOld;
 use Modules\Page\Entity\PageInterface;
 use Modules\Page\Entity\PageVisibility;
+use System\Entity\EntityInterface;
 
 /** @var PageInterface $entity */
 $entity = $page ?? null;
@@ -26,7 +27,7 @@ $action = '/admin/content/pages/page/create/store';
 $removeBannerAction = '';
 $removeThumbnailAction = '';
 $publishActionsVisible = FALSE;
-if ($entity && $entity?->id() !== 0) {
+if ($entity && $entity?->id() !== EntityInterface::UNDEFINED_IDENTIFIER) {
   $publishActionsVisible = TRUE;
   $action = '/admin/content/pages/page/edit/' . $entity?->id() . '/store';
   $removeThumbnailAction = '/admin/content/pages/page/edit/' . $entity?->id() . '/remove/thumbnail';

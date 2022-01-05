@@ -13,6 +13,27 @@ use PDO;
 interface DatabaseConnectionInterface {
 
   /**
+   * The undefined identifier value.
+   *
+   * @var int
+   */
+  public const UNDEFINED_IDENTIFIER = -1;
+
+  /**
+   * The offset of the cursor.
+   *
+   * @var int
+   */
+  public const DEFAULT_CURSOR_OFFSET = 0;
+
+  /**
+   * The default cursor orientation.
+   *
+   * @var int
+   */
+  public const DEFAULT_CURSOR_ORIENTATION = PDO::FETCH_ORI_NEXT;
+
+  /**
    * Fetch all records from the database with the given fetch method.
    *
    * @param int $fetchMethod
@@ -48,6 +69,6 @@ interface DatabaseConnectionInterface {
    * @return string[]|object|null
    *   The fetched record.
    */
-  public function fetch(int $fetchMethod, int $cursorOrientation = PDO::FETCH_ORI_NEXT, int $cursorOffset = 0): array|object|null;
+  public function fetch(int $fetchMethod, int $cursorOrientation = self::DEFAULT_CURSOR_ORIENTATION, int $cursorOffset = self::DEFAULT_CURSOR_OFFSET): array|object|null;
 
 }

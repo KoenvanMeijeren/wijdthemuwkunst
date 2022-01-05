@@ -2,6 +2,7 @@
 
 namespace System\Entity;
 
+use Components\Database\DatabaseConnectionInterface;
 use System\Entity\Model\EntityModelInterface;
 use System\Entity\Status\EntitySaveStatus;
 
@@ -17,7 +18,7 @@ interface EntityInterface extends EntityModelInterface {
    *
    * @var int
    */
-  public const UNDEFINED_IDENTIFIER = -1;
+  public const UNDEFINED_IDENTIFIER = DatabaseConnectionInterface::UNDEFINED_IDENTIFIER;
 
   /**
    * Returns the repository for the entity.

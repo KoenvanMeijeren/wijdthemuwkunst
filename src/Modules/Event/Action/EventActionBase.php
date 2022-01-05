@@ -88,13 +88,13 @@ abstract class EventActionBase extends EntityFormActionBase {
    */
   protected function getFileId(string $fileLocation): int {
     if ($fileLocation === '') {
-      return 0;
+      return EntityInterface::UNDEFINED_IDENTIFIER;
     }
 
     $fileLocation = json_decode(html_entities_decode($fileLocation), TRUE, 512, JSON_THROW_ON_ERROR);
 
     if (isset($fileLocation['location'])) {
-      return 0;
+      return EntityInterface::UNDEFINED_IDENTIFIER;
     }
 
     $saveFile = new SaveFileAction($fileLocation['location']);

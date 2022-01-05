@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 use Components\Security\CSRF;
 use Components\Translation\TranslationOld;
+use System\Entity\EntityInterface;
 
 /** @var \Modules\Event\Entity\EventInterface $event */
 $event = $event ?? NULL;
@@ -16,7 +17,7 @@ $action = '/admin/content/events/event/create/store';
 $removeBannerAction = '';
 $removeThumbnailAction = '';
 $publishActionsVisible = FALSE;
-if ($event?->id() !== 0) {
+if ($event?->id() !== EntityInterface::UNDEFINED_IDENTIFIER) {
   $publishActionsVisible = TRUE;
   $action = '/admin/content/events/event/edit/' . $event?->id() . '/store';
   $removeThumbnailAction = '/admin/content/events/event/edit/' . $event?->id() . '/remove/thumbnail';

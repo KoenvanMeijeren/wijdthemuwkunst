@@ -441,7 +441,7 @@ final class Query implements QueryInterface {
   /**
    * {@inheritDoc}
    */
-  public function fetch(int $fetchMethod, $cursorOrientation = PDO::FETCH_ORI_NEXT, $cursorOffset = 0): array|object|null {
+  public function fetch(int $fetchMethod, $cursorOrientation = self::DEFAULT_CURSOR_ORIENTATION, $cursorOffset = self::DEFAULT_CURSOR_OFFSET): array|object|null {
     return $this->execute()->fetch($fetchMethod, $cursorOrientation, $cursorOffset);
   }
 
@@ -584,10 +584,7 @@ final class Query implements QueryInterface {
       return;
     }
 
-    $hooks = '';
-    for ($x = 0; $x < $countedJoins; $x++) {
-      $hooks .= '(';
-    }
+    $hooks = str_repeat('(', $countedJoins);
 
     $this->query = (string) preg_replace(pattern: '/\b(FROM)\b/', replacement: "FROM {$hooks}", subject: $this->query);
     if ($this->countJoins() === 1) {
