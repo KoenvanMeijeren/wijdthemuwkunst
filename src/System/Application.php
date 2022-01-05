@@ -52,14 +52,15 @@ final class Application implements ApplicationInterface {
   /**
    * {@inheritDoc}
    */
-  public function run(): string {
+  public function run(): never {
     $this->preRun();
 
     $current_user = $this->user();
 
-    return (string) Router::load($this->routesLocations)->direct(
+    echo Router::load($this->routesLocations)->direct(
       Uri::getUrl(), Uri::getHttpType(), $current_user->getRouteRights()
     );
+    exit();
   }
 
 }

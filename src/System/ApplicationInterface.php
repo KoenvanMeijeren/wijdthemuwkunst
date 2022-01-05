@@ -13,9 +13,9 @@ interface ApplicationInterface {
     /**
      * Runs the app.
      *
-     * @return string
-     *   The output of running the app.
+     * @return never
+     *   Returns and echoes the output of running the app.
      */
-    public function run(): string;
+    public function run(): never;
 
 }

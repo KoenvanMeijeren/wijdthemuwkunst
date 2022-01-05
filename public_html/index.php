@@ -10,4 +10,4 @@ $dotEnv = Dotenv::createImmutable(START_PATH, '.env.development');
 $dotEnv->load();
 
 $application = new Application();
-echo $application->run();
+$application->run();
