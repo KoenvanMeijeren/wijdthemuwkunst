@@ -1,17 +1,18 @@
 <?php
 declare(strict_types=1);
 
-namespace Components\Array;
+namespace Components\Collection;
 
 use Components\Encrypt\Encrypt;
 use Components\Sanitize\Sanitize;
+use function is_json;
 
 /**
  * Provides a class for interacting with arrays.
  *
- * @package Components\Array
+ * @package \Components\Array
  */
-abstract class ArrayBase implements ArrayBaseInterface {
+abstract class CollectionStringBase implements CollectionStringBaseInterface {
 
   /**
    * ArrayBase constructor.

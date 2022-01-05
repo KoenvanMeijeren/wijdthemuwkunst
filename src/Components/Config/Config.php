@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Components\Config;
 
-use Components\Array\ArrayBase;
+use Components\Collection\CollectionStringBase;
 use Components\File\File;
 
 /**
@@ -11,7 +11,7 @@ use Components\File\File;
  *
  * @package src\Config
  */
-final class Config extends ArrayBase implements ConfigInterface {
+final class Config extends CollectionStringBase implements ConfigInterface {
 
   /**
    * ConfigLoader constructor.

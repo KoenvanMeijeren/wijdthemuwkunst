@@ -3,14 +3,14 @@ declare(strict_types=1);
 
 namespace Components\SuperGlobals\Cookie;
 
-use Components\Array\ArrayBaseInterface;
+use Components\Collection\CollectionStringBaseInterface;
 
 /**
  * Provides an interface for interacting with cookies.
  *
  * @package Components\SuperGlobals\Cookie
  */
-interface CookieInterface extends ArrayBaseInterface {
+interface CookieInterface extends CollectionStringBaseInterface {
 
   /**
    * Save data in the cookie.

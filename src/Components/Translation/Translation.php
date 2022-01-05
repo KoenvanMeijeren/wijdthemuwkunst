@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Components\Translation;
 
-use Components\Array\ArrayBase;
+use Components\Collection\CollectionStringBase;
 use Modules\Text\TextModule;
 
 /**
@@ -11,7 +11,7 @@ use Modules\Text\TextModule;
  *
  * @package Components\Translation
  */
-class Translation extends ArrayBase implements TranslationInterface {
+class Translation extends CollectionStringBase implements TranslationInterface {
 
   /**
    * All the available translations.

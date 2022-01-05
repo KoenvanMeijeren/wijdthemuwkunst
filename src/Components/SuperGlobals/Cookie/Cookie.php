@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Components\SuperGlobals\Cookie;
 
-use Components\Array\ArrayBase;
+use Components\Collection\CollectionStringBase;
 use Components\Encrypt\Encrypt;
 use Components\Sanitize\Sanitize;
 
@@ -12,7 +12,7 @@ use Components\Sanitize\Sanitize;
  *
  * @package src\Core
  */
-final class Cookie extends ArrayBase implements CookieInterface {
+final class Cookie extends CollectionStringBase implements CookieInterface {
 
   /**
    * Constructs the cookie.

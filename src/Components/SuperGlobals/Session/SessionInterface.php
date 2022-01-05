@@ -3,14 +3,14 @@ declare(strict_types=1);
 
 namespace Components\SuperGlobals\Session;
 
-use Components\Array\ArrayBaseInterface;
+use Components\Collection\CollectionStringBaseInterface;
 
 /**
  * Provides an interfaces for classes which are interacting with the session.
  *
  * @package src\Session
  */
-interface SessionInterface extends ArrayBaseInterface {
+interface SessionInterface extends CollectionStringBaseInterface {
 
   /**
    * Forced saving data in the session.

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Components\SuperGlobals\Session;
 
-use Components\Array\ArrayBase;
+use Components\Collection\CollectionStringBase;
 use Components\ComponentsTrait;
 use Components\Encrypt\Encrypt;
 use Components\Sanitize\Sanitize;
@@ -13,7 +13,7 @@ use Components\Sanitize\Sanitize;
  *
  * @package src\Session
  */
-final class Session extends ArrayBase implements SessionInterface {
+final class Session extends CollectionStringBase implements SessionInterface {
 
   use ComponentsTrait;
 

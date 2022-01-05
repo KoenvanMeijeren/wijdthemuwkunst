@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace Components\Array;
+namespace Components\Collection;
 
 /**
  * Provides an interface for interacting with arrays.
  *
- * @package Components\Array
+ * @package \Components\Array
  */
-interface ArrayBaseInterface {
+interface CollectionStringBaseInterface {
 
   /**
    * Saves data in the array.
