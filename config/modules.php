@@ -14,10 +14,10 @@ use Modules\Text\TextModule;
 use Modules\User\AccountModule;
 
 return [
+  StructureModule::class,
   TextModule::class,
   SettingModule::class,
   ReportsModule::class,
-  StructureModule::class,
   ContactModule::class,
   FileModule::class,
   SlugModule::class,
