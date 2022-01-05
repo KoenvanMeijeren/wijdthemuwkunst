@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace System\Entity;
 
-use System\Entity\Model\EntityModel;
+use System\Entity\Model\EntityModelBase;
 use System\Entity\Status\EntitySaveStatus;
 
 /**
@@ -11,14 +11,14 @@ use System\Entity\Status\EntitySaveStatus;
  *
  * @package System\Entity
  */
-abstract class EntityBase extends EntityModel implements EntityInterface {
+abstract class EntityBase extends EntityModelBase implements EntityInterface {
 
   /**
    * The name of the repository of the entity.
    *
    * @var string
    */
-  protected string $repository = EntityRepository::class;
+  protected readonly string $repository;
 
   /**
    * The attributes of the entity.
@@ -26,6 +26,15 @@ abstract class EntityBase extends EntityModel implements EntityInterface {
    * @var array
    */
   protected array $attributes = [];
+
+  /**
+   * {@inheritDoc}
+   */
+  final public function __construct() {
+    parent::__construct();
+
+    $this->repository = $this->contentEntityType->repository;
+  }
 
   /**
    * {@inheritDoc}
@@ -48,8 +57,8 @@ abstract class EntityBase extends EntityModel implements EntityInterface {
    * {@inheritDoc}
    */
   public function set(string $key, $value) {
-    $attribute = "{$this->table}_{$key}";
-    if (str_contains($key, $this->table)) {
+    $attribute = "{$this->getTable()}_{$key}";
+    if (str_contains($key, $this->getTable())) {
       $attribute = $key;
     }
 
@@ -73,8 +82,8 @@ abstract class EntityBase extends EntityModel implements EntityInterface {
    * {@inheritDoc}
    */
   public function get(string $key) {
-    $attribute = "{$this->table}_{$key}";
-    if (str_contains($key, $this->table)) {
+    $attribute = "{$this->getTable()}_{$key}";
+    if (str_contains($key, $this->getTable())) {
       $attribute = $key;
     }
 
@@ -89,6 +98,26 @@ abstract class EntityBase extends EntityModel implements EntityInterface {
    */
   public function __get($name) {
     $this->get($name);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function has(string $key): bool {
+    return isset($this->attributes[$key]);
+  }
+
+  /**
+   * Determines if an attribute is set.
+   *
+   * @param string $key
+   *   The key of the attribute.
+   *
+   * @return bool
+   *   Whether the attribute is set or not.
+   */
+  public function __isset(string $key): bool {
+    return $this->has($key);
   }
 
   /**
@@ -116,7 +145,7 @@ abstract class EntityBase extends EntityModel implements EntityInterface {
     $this->preSave();
 
     $entity_id = $this->id();
-    if ($entity_id === 0) {
+    if ($entity_id === self::UNDEFINED_IDENTIFIER) {
       $this->create($this->attributes);
       $result = EntitySaveStatus::SAVED_NEW;
     } else {

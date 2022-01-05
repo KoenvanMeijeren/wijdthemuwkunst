@@ -1,25 +1,21 @@
 <?php
+declare(strict_types=1);
 
 namespace Modules\Slug\Entity;
 
-use System\Entity\EntityBase;
+use System\Entity\Status\EntityStatusBase;
+use System\Entity\Type\ContentEntityType;
 
 /**
  * Defines the Slug entity.
  *
  * @package Modules\Slug\Entity
  */
-final class Slug extends EntityBase implements SlugInterface {
-
-  /**
-   * {@inheritdoc}
-   */
-  protected string $table = 'slug';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected string $repository = SlugRepository::class;
+#[ContentEntityType(
+  table: 'slug',
+  repository: SlugRepository::class
+)]
+final class Slug extends EntityStatusBase implements SlugInterface {
 
   /**
    * {@inheritDoc}
@@ -34,21 +30,6 @@ final class Slug extends EntityBase implements SlugInterface {
    */
   public function getName(): ?string {
     return $this->get('name');
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function setDeleted(bool $deleted = TRUE): SlugInterface {
-    $this->set('is_deleted', $deleted);
-    return $this;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function isDeleted(): bool {
-    return (bool) $this->get('is_deleted');
   }
 
 }

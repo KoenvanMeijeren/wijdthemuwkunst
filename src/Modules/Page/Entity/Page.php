@@ -1,11 +1,12 @@
 <?php
+declare(strict_types=1);
 
 namespace Modules\Page\Entity;
 
 use Modules\Slug\SlugTrait;
-use System\Entity\EntityBase;
+use System\Entity\Status\EntityStatusBase;
 use System\Entity\Status\EntityStatusColumn;
-use System\Entity\Status\EntityStatusTrait;
+use System\Entity\Type\ContentEntityType;
 
 /**
  * Defines the Page entity.
@@ -13,20 +14,13 @@ use System\Entity\Status\EntityStatusTrait;
  * @package Modules\Page\Entity
  */
 #[EntityStatusColumn('is_deleted')]
-final class Page extends EntityBase implements PageInterface {
+#[ContentEntityType(
+  table: 'page',
+  repository: PageRepository::class
+)]
+final class Page extends EntityStatusBase implements PageInterface {
 
   use SlugTrait;
-  use EntityStatusTrait;
-
-  /**
-   * {@inheritdoc}
-   */
-  protected string $table = 'page';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected string $repository = PageRepository::class;
 
   /**
    * {@inheritDoc}
@@ -55,7 +49,12 @@ final class Page extends EntityBase implements PageInterface {
    * {@inheritDoc}
    */
   public function getThumbnail(): ?string {
-    return $this->get('thumbnail_ID');
+    $thumbnail = $this->get('thumbnail_ID');
+    if (!is_string($thumbnail)) {
+      return NULL;
+    }
+
+    return $thumbnail;
   }
 
   /**
@@ -70,7 +69,12 @@ final class Page extends EntityBase implements PageInterface {
    * {@inheritDoc}
    */
   public function getBanner(): ?string {
-    return $this->get('banner_ID');
+    $banner = $this->get('banner_ID');
+    if (!is_string($banner)) {
+      return NULL;
+    }
+
+    return $banner;
   }
 
   /**

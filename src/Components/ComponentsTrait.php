@@ -35,7 +35,7 @@ trait ComponentsTrait {
    *
    * @var \Components\SuperGlobals\RequestInterface
    */
-  protected RequestInterface $request;
+  private RequestInterface $requestDl;
 
   /**
    * Gets the request definition.
@@ -44,7 +44,7 @@ trait ComponentsTrait {
    *   The request definition.
    */
   protected function request(): RequestInterface {
-    return $this->request ??= new Request();
+    return $this->requestDl ??= new Request();
   }
 
   /**
@@ -52,7 +52,7 @@ trait ComponentsTrait {
    *
    * @var \Components\SuperGlobals\RequestInterface
    */
-  protected static RequestInterface $requestStatic;
+  private static RequestInterface $requestStaticDl;
 
   /**
    * Gets the request definition.
@@ -61,7 +61,7 @@ trait ComponentsTrait {
    *   The request definition.
    */
   protected static function requestStatic(): RequestInterface {
-    return static::$requestStatic ??= new Request();
+    return static::$requestStaticDl ??= new Request();
   }
 
   /**
@@ -69,7 +69,7 @@ trait ComponentsTrait {
    *
    * @var \Components\SuperGlobals\Session\SessionInterface
    */
-  protected SessionInterface $session;
+  private SessionInterface $sessionDl;
 
   /**
    * Gets the session definition.
@@ -78,7 +78,7 @@ trait ComponentsTrait {
    *   The session definition.
    */
   protected function session(): SessionInterface {
-    return $this->session ??= new Session();
+    return $this->sessionDl ??= new Session();
   }
 
   /**
@@ -86,7 +86,7 @@ trait ComponentsTrait {
    *
    * @var \Components\Env\EnvInterface
    */
-  protected EnvInterface $env;
+  private EnvInterface $envDl;
 
   /**
    * Gets the env definition.
@@ -95,7 +95,7 @@ trait ComponentsTrait {
    *   The env definition.
    */
   protected function env(): EnvInterface {
-    return $this->env ??= new Env();
+    return $this->envDl ??= new Env();
   }
 
   /**
@@ -103,7 +103,7 @@ trait ComponentsTrait {
    *
    * @var \Components\Header\HeaderInterface
    */
-  protected HeaderInterface $header;
+  private HeaderInterface $headerDl;
 
   /**
    * Gets the header definition.
@@ -112,7 +112,7 @@ trait ComponentsTrait {
    *   The header definition.
    */
   protected function header(): HeaderInterface {
-    return $this->header ??= new Header();
+    return $this->headerDl ??= new Header();
   }
 
   /**
@@ -120,7 +120,7 @@ trait ComponentsTrait {
    *
    * @var \Components\Translation\TranslationInterface
    */
-  protected TranslationInterface $translation;
+  private TranslationInterface $translationDl;
 
   /**
    * Gets the translation definition.
@@ -129,7 +129,7 @@ trait ComponentsTrait {
    *   The translator definition.
    */
   protected function t(): TranslationInterface {
-    return $this->translation ??= new Translation();
+    return $this->translationDl ??= new Translation();
   }
 
   /**
@@ -137,7 +137,7 @@ trait ComponentsTrait {
    *
    * @var \Components\Log\LoggerInterface
    */
-  protected LoggerInterface $logger;
+  private LoggerInterface $loggerDl;
 
   /**
    * Gets the logger definition.
@@ -146,9 +146,9 @@ trait ComponentsTrait {
    *   The logger definition.
    */
   protected function log(): PsrLoggerInterface {
-    $this->logger ??= new Logger();
+    $this->loggerDl ??= new Logger();
 
-    return $this->logger->getLogger();
+    return $this->loggerDl->getLogger();
   }
 
   /**
@@ -166,7 +166,7 @@ trait ComponentsTrait {
    *
    * @var CurrentUserInterface
    */
-  protected CurrentUserInterface $currentUserDl;
+  private CurrentUserInterface $currentUserDl;
 
   /**
    * Gets the current user service.
@@ -214,7 +214,7 @@ trait ComponentsTrait {
    *
    * @var \System\Entity\EntityManagerInterface
    */
-  protected EntityManagerInterface $entityManager;
+  private EntityManagerInterface $EntityManagerDl;
 
   /**
    * Gets the entity manager.
@@ -223,7 +223,7 @@ trait ComponentsTrait {
    *   The entity manager definition.
    */
   protected function getEntityManager(): EntityManagerInterface {
-    return $this->entityManager ??= new EntityManager();
+    return $this->EntityManagerDl ??= new EntityManager();
   }
 
 }

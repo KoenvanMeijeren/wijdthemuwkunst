@@ -49,7 +49,7 @@ final class CSRF implements CSRFInterface {
    */
   public static function validate(): bool {
     $instance = self::getInstance();
-    return $instance::$csrf->validateRequest();
+    return $instance->csrf->validateRequest();
   }
 
 }

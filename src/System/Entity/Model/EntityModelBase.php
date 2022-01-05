@@ -3,24 +3,19 @@ declare(strict_types=1);
 
 namespace System\Entity\Model;
 
+use Components\Attribute\AttributeHelper;
 use Components\Database\Query;
 use Components\Database\QueryInterface;
 use JetBrains\PhpStorm\Pure;
 use System\Entity\Status\EntityStatus;
+use System\Entity\Type\ContentEntityType;
 
 /**
  * Provides a model for entities to interact with the database.
  *
  * @package src\Model
  */
-abstract class EntityModel implements EntityModelInterface {
-
-  /**
-   * The name of the table of the entity.
-   *
-   * @var string
-   */
-  protected string $table;
+abstract class EntityModelBase implements EntityModelInterface {
 
   /**
    * The query definition.
@@ -30,10 +25,41 @@ abstract class EntityModel implements EntityModelInterface {
   private QueryInterface $query;
 
   /**
+   * The content entity type.
+   *
+   * @var \System\Entity\Type\ContentEntityType
+   */
+  protected ContentEntityType $contentEntityType;
+
+  /**
+   * Constructs the entity model.
+   */
+  public function __construct() {
+    $this->initialize();
+  }
+
+  /**
+   * Initializes the entity.
+   */
+  protected function initialize(): void {
+    $contentEntityType = (new AttributeHelper($this))->getAttribute(ContentEntityType::class);
+    if (!$contentEntityType instanceof ContentEntityType) {
+      $class_name = get_class($this);
+      throw new \InvalidArgumentException("The entity {$class_name} does not have a content type specified.");
+    }
+
+    $this->contentEntityType = $contentEntityType;
+  }
+
+  /**
    * {@inheritDoc}
    */
   public function getTable(): string {
-    return $this->table;
+    if (!isset($this->contentEntityType)) {
+      $this->initialize();
+    }
+
+    return $this->contentEntityType->table;
   }
 
   /**

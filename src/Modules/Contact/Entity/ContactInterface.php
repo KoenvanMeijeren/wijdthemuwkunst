@@ -1,16 +1,18 @@
 <?php
+declare(strict_types=1);
 
 namespace Modules\Contact\Entity;
 
 use Components\Datetime\DateTimeInterface;
 use System\Entity\EntityInterface;
+use System\Entity\Status\EntityStatusInterface;
 
 /**
  * Provides an interface for setting entities.
  *
  * @package Modules\Setting\Entity
  */
-interface ContactInterface extends EntityInterface {
+interface ContactInterface extends EntityInterface, EntityStatusInterface {
 
   /**
    * Sets the key of the text.
@@ -91,23 +93,5 @@ interface ContactInterface extends EntityInterface {
    *   The datetime of the text.
    */
   public function getDateTime(): DateTimeInterface;
-
-  /**
-   * Determines if the text is deleted.
-   *
-   * @param bool $deleted
-   *   If the text text is deleted.
-   *
-   * @return $this
-   */
-  public function setDeleted(bool $deleted = TRUE): ContactInterface;
-
-  /**
-   * If the text is deleted.
-   *
-   * @return bool
-   *   Whether the text is deleted or not.
-   */
-  public function isDeleted(): bool;
 
 }

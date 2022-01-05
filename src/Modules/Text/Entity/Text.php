@@ -1,25 +1,21 @@
 <?php
+declare(strict_types=1);
 
 namespace Modules\Text\Entity;
 
-use System\Entity\EntityBase;
+use System\Entity\Status\EntityStatusBase;
+use System\Entity\Type\ContentEntityType;
 
 /**
  * Defines the text entity.
  *
  * @package Domain\Admin\Text\Entity
  */
-final class Text extends EntityBase implements TextInterface {
-
-  /**
-   * {@inheritdoc}
-   */
-  protected string $table = 'translation';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected string $repository = TextRepository::class;
+#[ContentEntityType(
+  table: 'translation',
+  repository: TextRepository::class
+)]
+final class Text extends EntityStatusBase implements TextInterface {
 
   /**
    * {@inheritDoc}
@@ -64,21 +60,6 @@ final class Text extends EntityBase implements TextInterface {
    */
   public function getLanguage(): ?string {
     return $this->get('language');
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function setDeleted(bool $deleted = TRUE) {
-    $this->set('is_deleted', $deleted);
-    return $this;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function isDeleted(): bool {
-    return (bool) $this->get('is_deleted');
   }
 
 }

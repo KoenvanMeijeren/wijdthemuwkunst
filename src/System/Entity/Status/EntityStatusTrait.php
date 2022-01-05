@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace System\Entity\Status;
 
+use Components\Attribute\AttributeHelper;
+
 /**
  * Provides a trait for the entity status behavior.
  *
@@ -11,17 +13,26 @@ namespace System\Entity\Status;
 trait EntityStatusTrait {
 
   /**
-   * {@inheritdoc}
+   * Sets the status of an entity.
+   *
+   * @param int $status
+   *   The status.
+   *
+   * @return \System\Entity\Status\EntityStatusInterface
+   *   The called object reference.
    */
-  public function setStatusNumeric(int $status): EntityStatusInterface {
+  protected function setStatusNumeric(int $status): EntityStatusInterface {
     $this->set($this->getEntityStatusColumn()->column, $status);
     return $this;
   }
 
   /**
-   * {@inheritdoc}
+   * Gets the entity status.
+   *
+   * @return int
+   *   The entity status.
    */
-  public function getStatusNumeric(): int {
+  protected function getStatusNumeric(): int {
     return (int) $this->get($this->getEntityStatusColumn()->column);
   }
 
@@ -61,10 +72,7 @@ trait EntityStatusTrait {
    *   The entity status column.
    */
   protected function getEntityStatusColumn(): EntityStatusColumn {
-    $reflectionClass = new \ReflectionClass($this);
-    $attributes = $reflectionClass->getAttributes(EntityStatusColumn::class);
-
-    return reset($attributes);
+    return (new AttributeHelper($this))->getAttribute(EntityStatusColumn::class);
   }
 
 }

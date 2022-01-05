@@ -22,7 +22,7 @@ abstract class BaseTextAction extends EntityFormActionBase {
    *
    * @var \Modules\Text\Entity\TextInterface|null
    */
-  protected ?EntityInterface $entity;
+  protected readonly ?EntityInterface $entity;
 
   /**
    * {@inheritDoc}

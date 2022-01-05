@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Modules\User\Actions;
 
@@ -21,7 +22,7 @@ abstract class AccountActionBase extends EntityFormActionBase {
    *
    * @var \Modules\User\Entity\AccountInterface|null
    */
-  protected ?EntityInterface $entity;
+  protected readonly ?EntityInterface $entity;
 
   /**
    * {@inheritDoc}

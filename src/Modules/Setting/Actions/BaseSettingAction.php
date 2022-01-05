@@ -22,7 +22,7 @@ abstract class BaseSettingAction extends EntityFormActionBase {
    *
    * @var \Modules\Setting\Entity\SettingInterface|null
    */
-  protected ?EntityInterface $entity;
+  protected readonly ?EntityInterface $entity;
 
   /**
    * {@inheritDoc}

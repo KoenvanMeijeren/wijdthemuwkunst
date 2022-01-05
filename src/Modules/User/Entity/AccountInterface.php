@@ -5,13 +5,14 @@ namespace Modules\User\Entity;
 
 use Components\Route\RouteRights;
 use System\Entity\EntityInterface;
+use System\Entity\Status\EntityStatusInterface;
 
 /**
  * Provides an interface for User entities.
  *
  * @package Modules\User\Entity
  */
-interface AccountInterface extends EntityInterface {
+interface AccountInterface extends EntityInterface, EntityStatusInterface {
 
   /**
    * The hash method of the account password.
@@ -160,24 +161,5 @@ interface AccountInterface extends EntityInterface {
    *   Whether the account is blocked or not.
    */
   public function isBlocked(): bool;
-
-  /**
-   * Determines if the account is deleted.
-   *
-   * @param bool $deleted
-   *   If the account is deleted.
-   *
-   * @return $this
-   *   The called object reference.
-   */
-  public function setDeleted(bool $deleted = TRUE): AccountInterface;
-
-  /**
-   * If the account is deleted.
-   *
-   * @return bool
-   *   Whether the account is deleted or not.
-   */
-  public function isDeleted(): bool;
 
 }

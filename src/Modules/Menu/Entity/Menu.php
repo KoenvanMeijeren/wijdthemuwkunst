@@ -5,25 +5,21 @@ namespace Modules\Menu\Entity;
 
 use Modules\Slug\SlugTrait;
 use System\Entity\EntityBase;
+use System\Entity\Status\EntityStatusBase;
+use System\Entity\Type\ContentEntityType;
 
 /**
  * Defines the Menu entity.
  *
  * @package Modules\Menu\Entity
  */
-final class Menu extends EntityBase implements MenuInterface {
+#[ContentEntityType(
+  table: 'menu',
+  repository: MenuRepository::class
+)]
+final class Menu extends EntityStatusBase implements MenuInterface {
 
   use SlugTrait;
-
-  /**
-   * {@inheritdoc}
-   */
-  protected string $table = 'menu';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected string $repository = MenuRepository::class;
 
   /**
    * {@inheritDoc}
@@ -53,21 +49,6 @@ final class Menu extends EntityBase implements MenuInterface {
    */
   public function getWeight(): ?string {
     return (string) $this->get('weight');
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function setDeleted(bool $deleted = TRUE): MenuInterface {
-    $this->set('is_deleted', $deleted);
-    return $this;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function isDeleted(): bool {
-    return (bool) $this->get('is_deleted');
   }
 
   /**

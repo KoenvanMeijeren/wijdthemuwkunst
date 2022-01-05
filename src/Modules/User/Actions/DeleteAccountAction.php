@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Modules\User\Actions;
@@ -22,14 +21,14 @@ final class DeleteAccountAction extends AccountActionBase {
     $status = $this->entity->delete();
     if ($status === EntitySaveStatus::SAVED_DELETED) {
       $this->session()->flash(State::SUCCESSFUL->value,
-        sprintf(TranslationOld::get('admin_deleted_account_successful_message'), $this->entity->getKey())
+        sprintf(TranslationOld::get('admin_deleted_account_successful_message'), $this->entity->getName())
       );
 
       return TRUE;
     }
 
     $this->session()->flash(State::SUCCESSFUL->value,
-      sprintf(TranslationOld::get('admin_deleted_account_failed_message'), $this->entity->getKey())
+      sprintf(TranslationOld::get('admin_deleted_account_failed_message'), $this->entity->getName())
     );
 
     return FALSE;
@@ -39,7 +38,7 @@ final class DeleteAccountAction extends AccountActionBase {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    if ($this->user()->id() === $this->entity->id()) {
+    if ($this->user()->id() === $this->entity?->id()) {
       $this->session()->flash(
         State::FAILED->value,
         TranslationOld::get('cannot_delete_own_account_message')

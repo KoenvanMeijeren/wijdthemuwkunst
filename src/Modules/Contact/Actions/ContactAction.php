@@ -19,7 +19,16 @@ final class ContactAction extends BaseContactAction {
    *
    * @var string
    */
-  protected string $baseViewPath = 'Contact/Views';
+  protected readonly string $baseViewPath;
+
+  /**
+   * {@inheritDoc}
+   */
+  public function __construct() {
+    parent::__construct();
+
+    $this->baseViewPath = 'Contact/Views';
+  }
 
   /**
    * {@inheritDoc}

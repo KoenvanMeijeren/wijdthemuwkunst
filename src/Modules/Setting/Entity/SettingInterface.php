@@ -1,15 +1,17 @@
 <?php
+declare(strict_types=1);
 
 namespace Modules\Setting\Entity;
 
 use System\Entity\EntityInterface;
+use System\Entity\Status\EntityStatusInterface;
 
 /**
  * Provides an interface for setting entities.
  *
  * @package Modules\Setting\Entity
  */
-interface SettingInterface extends EntityInterface {
+interface SettingInterface extends EntityInterface, EntityStatusInterface {
 
   /**
    * Sets the key of the text.
@@ -54,23 +56,5 @@ interface SettingInterface extends EntityInterface {
    *   The value of the text.
    */
   public function getValue(): ?string;
-
-  /**
-   * Determines if the text is deleted.
-   *
-   * @param bool $deleted
-   *   If the text text is deleted.
-   *
-   * @return $this
-   */
-  public function setDeleted(bool $deleted = TRUE): SettingInterface;
-
-  /**
-   * If the text is deleted.
-   *
-   * @return bool
-   *   Whether the text is deleted or not.
-   */
-  public function isDeleted(): bool;
 
 }

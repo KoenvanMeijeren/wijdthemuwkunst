@@ -37,6 +37,10 @@ final class EntityManager extends EntityRepositoryBase implements EntityManagerI
    */
   public function create(array $values = []): EntityInterface {
     $this->entity->setValues($values);
+    if (!$this->entity->has($this->entity->getPrimaryKey())) {
+      $this->entity->set($this->entity->getPrimaryKey(), EntityInterface::UNDEFINED_IDENTIFIER);
+    }
+
     return $this->entity;
   }
 

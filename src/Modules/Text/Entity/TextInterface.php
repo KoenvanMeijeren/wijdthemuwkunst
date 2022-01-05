@@ -1,15 +1,17 @@
 <?php
+declare(strict_types=1);
 
 namespace Modules\Text\Entity;
 
 use System\Entity\EntityInterface;
+use System\Entity\Status\EntityStatusInterface;
 
 /**
  * Provides an interface for text entities.
  *
  * @package Domain\Admin\Text\Entity
  */
-interface TextInterface extends EntityInterface {
+interface TextInterface extends EntityInterface, EntityStatusInterface {
 
   /**
    * Sets the key of the text.
@@ -64,23 +66,5 @@ interface TextInterface extends EntityInterface {
    *   The value of the text.
    */
   public function getLanguage(): ?string;
-
-  /**
-   * Determines if the text is deleted.
-   *
-   * @param bool $deleted
-   *   If the text text is deleted.
-   *
-   * @return $this
-   */
-  public function setDeleted(bool $deleted = TRUE);
-
-  /**
-   * If the text is deleted.
-   *
-   * @return bool
-   *   Whether the text is deleted or not.
-   */
-  public function isDeleted(): bool;
 
 }

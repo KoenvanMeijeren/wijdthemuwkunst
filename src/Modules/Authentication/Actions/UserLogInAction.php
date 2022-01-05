@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Modules\Authentication\Actions;
@@ -24,14 +23,14 @@ final class UserLogInAction extends FormAction {
    *
    * @var \Modules\User\Entity\AccountInterface
    */
-  protected AccountInterface $entity;
+  protected readonly AccountInterface $entity;
 
   /**
    * The maximum number of login attempts.
    *
    * @var int
    */
-  protected int $maximumLoginAttempts;
+  protected readonly int $maximumLoginAttempts;
 
   /**
    * UserLogInAction constructor.
@@ -40,15 +39,17 @@ final class UserLogInAction extends FormAction {
     parent::__construct();
 
     $this->maximumLoginAttempts = (int) $this->request()->env('login_attempts');
-    $this->entity = $this->user();
+    $entity = $this->user();
     if ($email = $this->request()->post('email')) {
-      $this->entity = $this->getEntityManager()
+      $entity = $this->getEntityManager()
         ->getStorage(Account::class)
         ->getRepository()
         ->firstByAttributes([
           'account_email' => $email,
         ]);
     }
+
+    $this->entity = $entity;
   }
 
   /**

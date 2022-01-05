@@ -3,19 +3,18 @@ declare(strict_types=1);
 
 namespace Modules\File\Entity;
 
-use System\Entity\EntityBase;
+use System\Entity\Status\EntityStatusBase;
+use System\Entity\Type\ContentEntityType;
 
 /**
  * Defines the file entity.
  *
  * @package Modules\File\Entity
  */
-class File extends EntityBase implements FileInterface {
-
-  /**
-   * {@inheritdoc}
-   */
-  protected string $table = 'file';
+#[ContentEntityType(
+  table: 'file'
+)]
+class File extends EntityStatusBase implements FileInterface {
 
   /**
    * {@inheritdoc}
@@ -30,21 +29,6 @@ class File extends EntityBase implements FileInterface {
    */
   public function getPath(): ?string {
     return $this->get('path');
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function setDeleted(bool $deleted = TRUE): FileInterface {
-    $this->set('is_deleted', $deleted);
-    return $this;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function isDeleted(): bool {
-    return (bool) $this->get('is_deleted');
   }
 
 }

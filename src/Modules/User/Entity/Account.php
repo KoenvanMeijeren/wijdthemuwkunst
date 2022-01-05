@@ -1,21 +1,19 @@
 <?php
+declare(strict_types=1);
 
 namespace Modules\User\Entity;
 
 use Components\Route\RouteRights;
-use System\Entity\EntityBase;
+use System\Entity\Status\EntityStatusBase;
+use System\Entity\Type\ContentEntityType;
 
 /**
  * Defines the User entity.
  *
  * @package Modules\User\Entity
  */
-final class Account extends EntityBase implements AccountInterface {
-
-  /**
-   * {@inheritdoc}
-   */
-  protected string $table = 'account';
+#[ContentEntityType(table: 'account')]
+final class Account extends EntityStatusBase implements AccountInterface {
 
   /**
    * {@inheritDoc}
@@ -127,21 +125,6 @@ final class Account extends EntityBase implements AccountInterface {
    */
   public function isBlocked(): bool {
     return (bool) $this->get('is_blocked');
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function setDeleted(bool $deleted = TRUE): AccountInterface {
-    $this->set('is_deleted', $deleted);
-    return $this;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function isDeleted(): bool {
-    return (bool) $this->get('is_deleted');
   }
 
 }

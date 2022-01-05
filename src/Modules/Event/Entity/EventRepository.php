@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Modules\Event\Entity;
 
@@ -38,6 +39,15 @@ final class EventRepository extends EntityRepositoryBase implements EventReposit
     $this->archivedEvents = $archived;
 
     return parent::firstByAttributes($attributes, $columns);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function loadById(int $id, array $columns = ['*'], bool $archived = FALSE): ?EntityInterface {
+    $this->archivedEvents = $archived;
+
+    return parent::loadById($id, $columns);
   }
 
   /**

@@ -20,21 +20,21 @@ abstract class EntityFormActionBase extends FormAction {
    *
    * @var \System\Entity\EntityManagerInterface
    */
-  protected EntityManagerInterface $entityManager;
+  protected readonly EntityManagerInterface $entityManager;
 
   /**
    * The entity definition.
    *
    * @var \System\Entity\EntityInterface
    */
-  protected ?EntityInterface $entity;
+  protected readonly ?EntityInterface $entity;
 
   /**
    * The storage.
    *
    * @var EntityManagerInterface
    */
-  protected EntityManagerInterface $storage;
+  protected readonly EntityManagerInterface $storage;
 
   /**
    * EntityFormActionBase constructor.
@@ -44,10 +44,22 @@ abstract class EntityFormActionBase extends FormAction {
 
     $this->entityManager = new EntityManager();
     $this->storage = $this->entityManager->getStorage($this->getEntityType());
-    $this->entity = $this->storage->create();
+    $this->entity = $this->getEntity();
+  }
+
+  /**
+   * Gets the entity.
+   *
+   * @return \System\Entity\EntityInterface|null
+   *   The entity.
+   */
+  protected function getEntity(): ?EntityInterface {
+    $entity = $this->storage->create();
     if ($id = $this->request()->getRouteParameter()) {
-      $this->entity = $this->storage->getRepository()->loadById((int) $id);
+      $entity = $this->storage->getRepository()->loadById((int) $id);
     }
+
+    return $entity;
   }
 
   /**

@@ -4,48 +4,32 @@ declare(strict_types=1);
 namespace Modules\File\Entity;
 
 use System\Entity\EntityInterface;
+use System\Entity\Status\EntityStatusInterface;
 
 /**
  * Defines an interface for file entities.
  *
  * @package Modules\File\Entity
  */
-interface FileInterface extends EntityInterface {
+interface FileInterface extends EntityInterface, EntityStatusInterface {
 
   /**
-   * Sets the path of the text.
+   * Sets the path of the file.
    *
    * @param string $path
-   *   The path of the text.
+   *   The path of the file.
    *
    * @return $this
+   *   The called object reference.
    */
   public function setPath(string $path): FileInterface;
 
   /**
-   * Gets the path of the text.
+   * Gets the path of the file.
    *
    * @return string|null
-   *   The path of the text.
+   *   The path of the file.
    */
   public function getPath(): ?string;
-
-  /**
-   * Determines if the text is deleted.
-   *
-   * @param bool $deleted
-   *   If the text text is deleted.
-   *
-   * @return $this
-   */
-  public function setDeleted(bool $deleted = TRUE): FileInterface;
-
-  /**
-   * If the text is deleted.
-   *
-   * @return bool
-   *   Whether the text is deleted or not.
-   */
-  public function isDeleted(): bool;
 
 }

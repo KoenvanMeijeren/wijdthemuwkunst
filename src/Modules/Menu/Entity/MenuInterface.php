@@ -1,16 +1,18 @@
 <?php
+declare(strict_types=1);
 
 namespace Modules\Menu\Entity;
 
 use Modules\Slug\SlugInterface;
 use System\Entity\EntityInterface;
+use System\Entity\Status\EntityStatusInterface;
 
 /**
  * Provides an interface for Menu entities.
  *
  * @package Modules\Menu\Entity
  */
-interface MenuInterface extends EntityInterface, SlugInterface {
+interface MenuInterface extends EntityInterface, SlugInterface, EntityStatusInterface {
 
   /**
    * Sets the key of the text.
@@ -47,23 +49,5 @@ interface MenuInterface extends EntityInterface, SlugInterface {
    *   The value of the text.
    */
   public function getWeight(): ?string;
-
-  /**
-   * Determines if the text is deleted.
-   *
-   * @param bool $deleted
-   *   If the text text is deleted.
-   *
-   * @return $this
-   */
-  public function setDeleted(bool $deleted = TRUE): MenuInterface;
-
-  /**
-   * If the text is deleted.
-   *
-   * @return bool
-   *   Whether the text is deleted or not.
-   */
-  public function isDeleted(): bool;
 
 }

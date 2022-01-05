@@ -23,14 +23,14 @@ final class AdminContactController extends EntityControllerBase {
    *
    * @var ContactRepositoryInterface
    */
-  protected EntityRepositoryInterface $repository;
+  protected readonly EntityRepositoryInterface $repository;
 
   /**
    * The path to redirect to if the users must go back.
    *
    * @var string
    */
-  protected string $redirectBack = '/admin/content/contact';
+  protected readonly string $redirectBack;
 
   /**
    * AdminContactController constructor.
@@ -39,6 +39,8 @@ final class AdminContactController extends EntityControllerBase {
    */
   public function __construct(){
     parent::__construct(entityClass: Contact::class, baseViewPath: 'Contact/Views/');
+
+    $this->redirectBack = '/admin/content/contact';
   }
 
   /**

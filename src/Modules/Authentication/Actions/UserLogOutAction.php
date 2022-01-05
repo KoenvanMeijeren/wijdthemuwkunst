@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Modules\Authentication\Actions;
@@ -19,18 +18,14 @@ use System\State;
 final class UserLogOutAction extends Action {
 
   /**
-   * The current user.
-   *
-   * @var \Modules\User\CurrentUserInterface
-   */
-  protected CurrentUserInterface $currentUser;
-
-  /**
    * Creates a new log user out action.
+   *
+   * @param \Modules\User\CurrentUserInterface $currentUser
+   *   The current user.
    */
-  public function __construct() {
-    $this->currentUser = new CurrentUser();
-  }
+  public function __construct(
+    protected readonly CurrentUserInterface $currentUser = new CurrentUser()
+  ) {}
 
   /**
    * {@inheritDoc}

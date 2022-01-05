@@ -59,6 +59,17 @@ interface EntityInterface extends EntityModelInterface {
   public function get(string $key);
 
   /**
+   * Determines if an attribute is set.
+   *
+   * @param string $key
+   *   The key of the attribute.
+   *
+   * @return bool
+   *   Whether the attribute is set or not.
+   */
+  public function has(string $key): bool;
+
+  /**
    * Sets the default values of the entity.
    *
    * @param array $values

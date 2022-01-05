@@ -1,28 +1,24 @@
 <?php
+declare(strict_types=1);
 
 namespace Modules\Contact\Entity;
 
 use Cake\Chronos\Chronos;
 use Components\Datetime\DateTime;
 use Components\Datetime\DateTimeInterface;
-use System\Entity\EntityBase;
+use System\Entity\Status\EntityStatusBase;
+use System\Entity\Type\ContentEntityType;
 
 /**
  * Defines the Contact entity.
  *
  * @package Modules\Contact\Entity
  */
-final class Contact extends EntityBase implements ContactInterface {
-
-  /**
-   * {@inheritdoc}
-   */
-  protected string $table = 'contact_form';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected string $repository = ContactRepository::class;
+#[ContentEntityType(
+  table: 'contact_form',
+  repository: ContactRepository::class
+)]
+final class Contact extends EntityStatusBase implements ContactInterface {
 
   /**
    * {@inheritDoc}
@@ -89,21 +85,6 @@ final class Contact extends EntityBase implements ContactInterface {
    */
   public function getDateTime(): DateTimeInterface {
     return new DateTime(new Chronos($this->getCreatedAt()));
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function setDeleted(bool $deleted = TRUE): ContactInterface {
-    $this->set('is_deleted', $deleted);
-    return $this;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function isDeleted(): bool {
-    return (bool) $this->get('is_deleted');
   }
 
 }

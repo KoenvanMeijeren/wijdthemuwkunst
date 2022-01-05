@@ -6,13 +6,14 @@ namespace Modules\Event\Entity;
 use Components\Datetime\DateTime;
 use Modules\Slug\SlugInterface;
 use System\Entity\EntityInterface;
+use System\Entity\Status\EntityStatusInterface;
 
 /**
  * Provides an interface for Event entities.
  *
  * @package Modules\Event\Entity
  */
-interface EventInterface extends EntityInterface, SlugInterface {
+interface EventInterface extends EntityInterface, SlugInterface, EntityStatusInterface {
 
   /**
    * Sets the title of the entity.
@@ -197,23 +198,5 @@ interface EventInterface extends EntityInterface, SlugInterface {
    *   Whether the entity is archived or not.
    */
   public function isArchived(): bool;
-
-  /**
-   * Determines if the entity is deleted.
-   *
-   * @param bool $deleted
-   *   If the entity is deleted.
-   *
-   * @return $this
-   */
-  public function setDeleted(bool $deleted = TRUE): EventInterface;
-
-  /**
-   * If the entity is deleted.
-   *
-   * @return bool
-   *   Whether the entity is deleted or not.
-   */
-  public function isDeleted(): bool;
 
 }

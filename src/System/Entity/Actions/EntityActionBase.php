@@ -20,21 +20,21 @@ abstract class EntityActionBase extends Action implements EntityActionInterface 
    *
    * @var \System\Entity\EntityManagerInterface
    */
-  protected EntityManagerInterface $entityManager;
+  protected readonly EntityManagerInterface $entityManager;
 
   /**
    * The entity definition.
    *
    * @var \System\Entity\EntityInterface|null
    */
-  protected ?EntityInterface $entity;
+  protected readonly ?EntityInterface $entity;
 
   /**
    * The storage.
    *
    * @var EntityManagerInterface
    */
-  protected EntityManagerInterface $storage;
+  protected readonly EntityManagerInterface $storage;
 
   /**
    * EntityActionBase constructor.
@@ -42,10 +42,22 @@ abstract class EntityActionBase extends Action implements EntityActionInterface 
   public function __construct() {
     $this->entityManager = new EntityManager();
     $this->storage = $this->entityManager->getStorage($this->getEntityType());
-    $this->entity = $this->storage->create();
+    $this->entity = $this->getEntity();
+  }
+
+  /**
+   * Gets the entity.
+   *
+   * @return \System\Entity\EntityInterface|null
+   *   The entity.
+   */
+  protected function getEntity(): ?EntityInterface {
+    $entity = $this->storage->create();
     if ($id = $this->request()->getRouteParameter()) {
-      $this->entity = $this->storage->load((int) $id);
+      $entity = $this->storage->getRepository()->loadById((int) $id);
     }
+
+    return $entity;
   }
 
   /**

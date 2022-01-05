@@ -22,7 +22,7 @@ final class IDEncryption {
    *
    * @var string
    */
-  private string $secretToken;
+  private readonly string $secretToken;
 
   /**
    * IDEncryption constructor.

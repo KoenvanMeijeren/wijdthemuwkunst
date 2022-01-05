@@ -1,26 +1,22 @@
 <?php
+declare(strict_types=1);
 
 namespace Modules\Setting\Entity;
 
 use Components\Converter\Slug;
-use System\Entity\EntityBase;
+use System\Entity\Status\EntityStatusBase;
+use System\Entity\Type\ContentEntityType;
 
 /**
  * Defines the setting entity.
  *
  * @package Modules\Setting\Entity
  */
-final class Setting extends EntityBase implements SettingInterface {
-
-  /**
-   * {@inheritdoc}
-   */
-  protected string $table = 'setting';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected string $repository = SettingRepository::class;
+#[ContentEntityType(
+  table: 'setting',
+  repository: SettingRepository::class
+)]
+final class Setting extends EntityStatusBase implements SettingInterface {
 
   /**
    * {@inheritDoc}
@@ -60,21 +56,6 @@ final class Setting extends EntityBase implements SettingInterface {
    */
   public function getValue(): ?string {
     return $this->get('value');
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function setDeleted(bool $deleted = TRUE): SettingInterface {
-    $this->set('is_deleted', $deleted);
-    return $this;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function isDeleted(): bool {
-    return (bool) $this->get('is_deleted');
   }
 
 }

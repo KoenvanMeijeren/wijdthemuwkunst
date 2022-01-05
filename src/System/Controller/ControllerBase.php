@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace System\Controller;
@@ -23,10 +22,10 @@ abstract class ControllerBase implements ControllerInterface {
    * ControllerBase constructor.
    *
    * @param string $baseViewPath
-   *   The base path to the views directory.
+   *   The base path to the view directory.
    */
   public function __construct(
-    protected readonly string $baseViewPath
+    protected readonly string $baseViewPath = ''
   ) {}
 
   /**

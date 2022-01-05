@@ -1,8 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace Modules\Event\Action;
 
 use Components\Translation\TranslationOld;
+use System\Entity\EntityInterface;
 use System\State;
 
 /**
@@ -11,6 +13,18 @@ use System\State;
  * @package Modules\Event\Action
  */
 class ActivateEventAction extends EventActionBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getEntity(): ?EntityInterface {
+    $entity = $this->storage->create();
+    if ($id = $this->request()->getRouteParameter()) {
+      $entity = $this->storage->getRepository()->loadById((int) $id, archived: TRUE);
+    }
+
+    return $entity;
+  }
 
   /**
    * {@inheritDoc}

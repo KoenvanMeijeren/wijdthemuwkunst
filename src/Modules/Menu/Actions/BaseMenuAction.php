@@ -22,7 +22,7 @@ abstract class BaseMenuAction extends EntityFormActionBase {
    *
    * @var \Modules\Menu\Entity\MenuInterface|null
    */
-  protected ?EntityInterface $entity;
+  protected readonly ?EntityInterface $entity;
 
   /**
    * {@inheritDoc}

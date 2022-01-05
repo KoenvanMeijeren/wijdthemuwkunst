@@ -1,12 +1,11 @@
 <?php
-
 declare(strict_types=1);
-
 
 namespace Modules\User\Actions;
 
 use Components\Translation\TranslationOld;
 use Modules\User\CurrentUser;
+use System\Entity\EntityInterface;
 use System\State;
 
 /**
@@ -19,11 +18,8 @@ final class UpdateUserPasswordAction extends AccountActionBase {
   /**
    * {@inheritDoc}
    */
-  public function __construct() {
-    parent::__construct();
-
-    $current_user = new CurrentUser();
-    $this->entity = $current_user->get();
+  protected function getEntity(): ?EntityInterface {
+    return (new CurrentUser())->get();
   }
 
   /**

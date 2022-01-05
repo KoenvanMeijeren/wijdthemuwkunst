@@ -17,14 +17,14 @@ abstract class EntityControllerBase extends ControllerBase {
    *
    * @var \System\Entity\EntityManagerInterface
    */
-  protected EntityManagerInterface $entityManager;
+  protected readonly EntityManagerInterface $entityManager;
 
   /**
    * The entity repository definition.
    *
    * @var \System\Entity\EntityRepositoryInterface
    */
-  protected EntityRepositoryInterface $repository;
+  protected readonly EntityRepositoryInterface $repository;
 
   /**
    * EntityControllerBase constructor.

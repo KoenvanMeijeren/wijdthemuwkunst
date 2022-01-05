@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Modules\Contact\Actions;
@@ -22,7 +21,7 @@ abstract class BaseContactAction extends EntityFormActionBase {
    *
    * @var \Modules\Contact\Entity\ContactInterface|null
    */
-  protected ?EntityInterface $entity;
+  protected readonly ?EntityInterface $entity;
 
   /**
    * {@inheritDoc}

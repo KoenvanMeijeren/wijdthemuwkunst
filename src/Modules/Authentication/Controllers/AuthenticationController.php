@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Modules\Authentication\Controllers;
@@ -7,6 +6,7 @@ namespace Modules\Authentication\Controllers;
 use Components\Header\Redirect;
 use Components\Translation\TranslationOld;
 use Components\View\ViewInterface;
+use JetBrains\PhpStorm\Pure;
 use Modules\Authentication\Actions\UserLogInAction;
 use Modules\Authentication\Actions\UserLogOutAction;
 use System\Controller\ControllerBase;
@@ -23,20 +23,23 @@ final class AuthenticationController extends ControllerBase {
    *
    * @var string
    */
-  protected string $redirectTo = '/admin/dashboard';
+  protected readonly string $redirectTo;
 
   /**
    * The redirect back destination.
    *
    * @var string
    */
-  protected string $redirectBack = '/admin';
+  protected readonly string $redirectBack;
 
   /**
    * {@inheritDoc}
    */
-  public function __construct() {
+  #[Pure] public function __construct() {
     parent::__construct('Authentication/Views/');
+
+    $this->redirectBack = '/admin';
+    $this->redirectTo = '/admin/dashboard';
   }
 
   /**

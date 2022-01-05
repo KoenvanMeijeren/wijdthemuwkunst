@@ -15,25 +15,6 @@ interface EntityStatusInterface extends EntityInterface {
   /**
    * Sets the status of an entity.
    *
-   * @param int $status
-   *   The status.
-   *
-   * @return $this
-   *   The called object reference.
-   */
-  public function setStatusNumeric(int $status): EntityStatusInterface;
-
-  /**
-   * Gets the entity status.
-   *
-   * @return int
-   *   The entity status.
-   */
-  public function getStatusNumeric(): int;
-
-  /**
-   * Sets the status of an entity.
-   *
    * @param \System\Entity\Status\EntityStatus $status
    *   The status.
    *

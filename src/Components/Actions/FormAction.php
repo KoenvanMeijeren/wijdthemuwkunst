@@ -21,7 +21,7 @@ abstract class FormAction extends Action {
    *
    * @var \Components\Validate\FormValidator
    */
-  protected FormValidator $validator;
+  protected readonly FormValidator $validator;
 
   /**
    * FormAction constructor.

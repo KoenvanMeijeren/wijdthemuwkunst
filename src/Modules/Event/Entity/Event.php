@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Modules\Event\Entity;
 
@@ -6,26 +7,18 @@ use Cake\Chronos\Chronos;
 use Components\Datetime\DateTime;
 use Modules\Event\Utility\EventDatetimeConverter;
 use Modules\Slug\SlugTrait;
-use System\Entity\EntityBase;
+use System\Entity\Status\EntityStatusBase;
+use System\Entity\Type\ContentEntityType;
 
 /**
  * Defines the Event entity.
  *
  * @package Modules\Event\Entity
  */
-final class Event extends EntityBase implements EventInterface {
+#[ContentEntityType(table: 'event', repository: EventRepository::class)]
+final class Event extends EntityStatusBase implements EventInterface {
 
   use SlugTrait;
-
-  /**
-   * {@inheritdoc}
-   */
-  protected string $table = 'event';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected string $repository = EventRepository::class;
 
   /**
    * {@inheritDoc}
@@ -54,7 +47,12 @@ final class Event extends EntityBase implements EventInterface {
    * {@inheritDoc}
    */
   public function getThumbnail(): ?string {
-    return $this->get('thumbnail_ID');
+    $thumbnail = $this->get('thumbnail_ID');
+    if (!is_string($thumbnail)) {
+      return NULL;
+    }
+
+    return $thumbnail;
   }
 
   /**
@@ -69,7 +67,12 @@ final class Event extends EntityBase implements EventInterface {
    * {@inheritDoc}
    */
   public function getBanner(): ?string {
-    return $this->get('banner_ID');
+    $banner = $this->get('banner_ID');
+    if (!is_string($banner)) {
+      return NULL;
+    }
+
+    return $banner;
   }
 
   /**
@@ -190,21 +193,6 @@ final class Event extends EntityBase implements EventInterface {
    */
   public function isArchived(): bool {
     return (bool) $this->get('is_archived');
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function setDeleted(bool $deleted = TRUE): EventInterface {
-    $this->set('is_deleted', (int) $deleted);
-    return $this;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function isDeleted(): bool {
-    return (bool) $this->get('is_deleted');
   }
 
   /**
