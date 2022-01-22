@@ -77,6 +77,8 @@ use System\State;
                                         $class = 'active-danger';
                                       } elseif (State::DEBUG->isPartOf($message)) {
                                         $class = 'active-primary';
+                                      } elseif (str_contains(strtolower($message), 'warning')) {
+                                        $class = 'active-warning';
                                       }
                                       ?>
                                         <a class="list-group-item list-group-item-action <?= $active . ' ' . $class ?>"
@@ -109,6 +111,8 @@ use System\State;
                                               $class = 'list-group-item-danger';
                                             } elseif (State::DEBUG->isPartOf($message)) {
                                               $class = 'list-group-item-primary';
+                                            } elseif (str_contains(strtolower($message), 'warning')) {
+                                              $class = 'list-group-item-warning';
                                             }
                                             ?>
                                             <li class="list-group-item <?= $class ?>">
