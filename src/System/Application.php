@@ -6,7 +6,7 @@ namespace System;
 use Components\ComponentsTrait;
 use Components\Datetime\DateTimeInterface;
 use Components\Header\Header;
-use Components\Route\Router;
+use Components\Route\RouteProcessor;
 use Components\SuperGlobals\Session\SessionBuilder;
 use Components\SuperGlobals\Url\Uri;
 use System\Module\ModuleHandler;
@@ -21,13 +21,6 @@ final class Application implements ApplicationInterface {
   use ComponentsTrait;
 
   /**
-   * The location of the routes.
-   *
-   * @var array
-   */
-  protected array $routesLocations = [];
-
-  /**
    * Executes actions before running the app.
    *
    * Set the env based on the current environment (development - production)
@@ -35,10 +28,6 @@ final class Application implements ApplicationInterface {
    * Set the user for the application.
    */
   protected function preRun(): void {
-    $moduleHandler = new ModuleHandler();
-
-    $this->routesLocations = array_merge($moduleHandler->getRoutes(), $this->routesLocations);
-
     date_default_timezone_set(DateTimeInterface::DEFAULT_TIMEZONE);
 
     $this->env()->initializeErrorHandling();
@@ -55,11 +44,12 @@ final class Application implements ApplicationInterface {
   public function run(): never {
     $this->preRun();
 
-    $current_user = $this->user();
+    $moduleHandler = new ModuleHandler();
 
-    echo Router::load($this->routesLocations)->direct(
-      Uri::getUrl(), Uri::getHttpType(), $current_user->getRouteRights()
-    );
+    $current_user = $this->user();
+    $route_processor = new RouteProcessor($moduleHandler->getRouteCollection());
+
+    echo $route_processor->direct(Uri::getUrl(), Uri::getHttpType(), $current_user->getRouteRights());
     exit();
   }
 
