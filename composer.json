@@ -27,6 +27,10 @@
         },
         "platform-dev": {
             "ext-xdebug": "2.8.0"
+        },
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "composer/package-versions-deprecated": true
         }
     },
     "require": {
