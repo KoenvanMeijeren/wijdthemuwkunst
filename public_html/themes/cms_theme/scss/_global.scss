@@ -140,6 +140,17 @@ a {
     color: $white;
 }
 
+.active-warning {
+  background-color: $warning;
+  border-color: $warning;
+  color: $white;
+}
+
+.active-warning:hover {
+  background-color: lighten($warning, 5%);
+  color: $white;
+}
+
 .text-danger {
     color: $danger;
 }
