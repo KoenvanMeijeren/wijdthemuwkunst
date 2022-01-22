@@ -51,4 +51,15 @@ final class Session extends CollectionStringBase implements SessionInterface {
     $this->logger()->logRequest($key, $value);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  public function unset(string $key): bool {
+    if ($this->exists($key)) {
+      unset($_SESSION[$key]);
+    }
+
+    return parent::unset($key);
+  }
+
 }
