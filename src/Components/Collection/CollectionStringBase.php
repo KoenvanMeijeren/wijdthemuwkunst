@@ -12,23 +12,32 @@ use function is_json;
  *
  * @package \Components\Array
  */
-abstract class CollectionStringBase implements CollectionStringBaseInterface {
+abstract class CollectionStringBase extends CollectionBase implements CollectionStringInterface {
 
   /**
    * ArrayBase constructor.
    *
-   * @param array $array
+   * @param array $items
    *   The array to interact with.
    * @param bool $sanitize
    *   Whether the data must be sanitized or not.
    * @param bool $encrypt
    *   Whether the data must be encrypted or not.
    */
-  protected function __construct(
-    private array &$array,
+  public function __construct(
+    protected array $items = [],
     private readonly bool $sanitize = false,
     private readonly bool $encrypt = false
-  ) {}
+  ) {
+    parent::__construct($this->items);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function add(string $key, mixed $value): void {
+    $this->save($key, $value);
+  }
 
   /**
    * {@inheritDoc}
@@ -45,23 +54,19 @@ abstract class CollectionStringBase implements CollectionStringBaseInterface {
     }
 
     if (!$this->encrypt) {
-      $this->array[$key] = $data;
+      parent::add($key, $value);
       return;
     }
 
     $data = new Encrypt($data);
-    $this->array[$key] = $data->encrypt();
+    parent::add($key, $data->encrypt());
   }
 
   /**
    * {@inheritDoc}
    */
-  public function get(string $key, string $default = '', bool $unset = FALSE): string {
-    if (!$this->exists($key)) {
-      return $default;
-    }
-
-    $data = $this->array[$key];
+  public function get(string $key, mixed $default = '', bool $unset = FALSE): string {
+    $data = parent::get($key, $default);
     if ($data === '') {
       return $default;
     }
@@ -85,33 +90,6 @@ abstract class CollectionStringBase implements CollectionStringBaseInterface {
 
     $data = new Encrypt($data);
     return $data->decrypt();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function all(): array {
-    return $this->array;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function exists(string $key): bool {
-    return isset($this->array[$key]);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function unset(string $key): bool {
-    if ($this->exists($key)) {
-      unset($this->array[$key]);
-
-      return TRUE;
-    }
-
-    return FALSE;
   }
 
 }

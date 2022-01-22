@@ -7,8 +7,6 @@
 
 declare(strict_types=1);
 
-use Components\Route\Router;
-
 if (!function_exists('urlFromRoute')) {
 
   /**
@@ -21,7 +19,7 @@ if (!function_exists('urlFromRoute')) {
    *   The url or a hashtag.
    */
   function urlFromRoute(string $route): string {
-    return Router::urlFromRoute($route) ?? '#';
+    return '#';
   }
 
 }

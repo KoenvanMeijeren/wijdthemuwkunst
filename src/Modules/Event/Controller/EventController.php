@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Modules\Event\Controller;
 
+use Components\Route\RouteGet;
 use Components\Translation\TranslationOld;
 use Components\View\ViewInterface;
 use Modules\Event\Entity\Event;
@@ -30,6 +31,7 @@ class EventController extends EntityControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    */
+  #[RouteGet(url: 'concerten')]
   public function index(): ViewInterface {
     $page_storage = $this->entityManager->getStorage(Page::class)->getRepository();
     $page = $page_storage->firstByAttributes([
@@ -56,6 +58,7 @@ class EventController extends EntityControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    */
+  #[RouteGet(url: 'concerten/concert/{slug}')]
   public function show(): ViewInterface {
     $event = $this->repository->firstByAttributes([
       'slug_name' => $this->request()->getRouteParameter(),

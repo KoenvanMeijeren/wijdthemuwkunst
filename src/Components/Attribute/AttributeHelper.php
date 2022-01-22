@@ -3,12 +3,14 @@ declare(strict_types=1);
 
 namespace Components\Attribute;
 
+use JetBrains\PhpStorm\Pure;
+
 /**
  * Provides a class for helper methods for attributes.
  *
  * @package \Components\Attribute
  */
-class AttributeHelper implements AttributeHelperInterface {
+final class AttributeHelper implements AttributeHelperInterface {
 
   /**
    * The reflection class.
@@ -24,7 +26,7 @@ class AttributeHelper implements AttributeHelperInterface {
    *   The parent class.
    */
   public function __construct(
-    public readonly object $parentClass
+    public readonly object|string $parentClass
   ) {
     $this->reflectionClass = new \ReflectionClass($this->parentClass);
   }
@@ -32,7 +34,7 @@ class AttributeHelper implements AttributeHelperInterface {
   /**
    * {@inheritdoc}
    */
-  public function getAttribute(string $attribute): ?AttributeInterface {
+  public function getByClass(string $attribute): ?AttributeInterface {
     $attributes = $this->reflectionClass->getAttributes($attribute);
     if (empty($attributes)) {
       return NULL;
@@ -47,6 +49,24 @@ class AttributeHelper implements AttributeHelperInterface {
     }
 
     return $instance;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getByMethods(string $attribute): ?array {
+    $attributes = [];
+    foreach ($this->reflectionClass->getMethods() as $method) {
+      $method_attributes = $method->getAttributes($attribute);
+      $method_attribute = reset($method_attributes);
+      if (!$method_attribute instanceof \ReflectionAttribute) {
+        continue;
+      }
+
+      $attributes["{$this->reflectionClass->name}.{$method->name}"] = $method_attribute->newInstance();
+    }
+
+    return $attributes;
   }
 
 }

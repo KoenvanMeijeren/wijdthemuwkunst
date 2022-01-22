@@ -3,6 +3,9 @@
 namespace Modules\Text\Controllers;
 
 use Components\Header\Redirect;
+use Components\Route\RouteGet;
+use Components\Route\RoutePost;
+use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
 use Components\View\ViewInterface;
 use Modules\Text\Actions\CreateTextAction;
@@ -40,6 +43,7 @@ final class TextController extends EntityControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    */
+  #[RouteGet('admin/configuration/texts/', rights: RouteRights::ADMIN)]
   public function index(): ViewInterface {
     $textTable = new TextTable($this->repository->all());
 
@@ -55,6 +59,7 @@ final class TextController extends EntityControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    */
+  #[RouteGet('admin/configuration/texts/text/create', rights: RouteRights::ADMIN)]
   public function create(): ViewInterface {
     $textTable = new TextTable($this->repository->all());
 
@@ -71,6 +76,7 @@ final class TextController extends EntityControllerBase {
    * @return \Components\View\ViewInterface|\Components\Header\Redirect
    *   Returns the view or a redirect response.
    */
+  #[RoutePost('admin/configuration/texts/text/create/store', rights: RouteRights::ADMIN)]
   public function store(): ViewInterface|Redirect {
     $create = new CreateTextAction();
     if ($create->execute()) {
@@ -86,6 +92,7 @@ final class TextController extends EntityControllerBase {
    * @return \Components\Header\Redirect|ViewInterface
    *   The view.
    */
+  #[RouteGet('admin/configuration/texts/text/edit/{slug}', rights: RouteRights::ADMIN)]
   public function edit(): ViewInterface|Redirect {
     $textTable = new TextTable($this->repository->all());
     $text = $this->repository->loadById((int) $this->request()->getRouteParameter());
@@ -108,6 +115,7 @@ final class TextController extends EntityControllerBase {
    * @return \Components\View\ViewInterface|\Components\Header\Redirect
    *   Returns the view or a redirect response.
    */
+  #[RoutePost('admin/configuration/texts/text/edit/{slug}/update', rights: RouteRights::ADMIN)]
   public function update(): ViewInterface|Redirect {
     $update = new UpdateTextAction();
     if ($update->execute()) {
@@ -123,6 +131,7 @@ final class TextController extends EntityControllerBase {
    * @return \Components\Header\Redirect
    *   The redirect response.
    */
+  #[RoutePost('admin/configuration/texts/text/delete/{slug}', rights: RouteRights::ADMIN)]
   public function destroy(): Redirect {
     $destroy = new DeleteTextAction();
     $destroy->execute();

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Modules\Event\Controller;
 
+use Components\Route\RouteGet;
 use Components\Translation\TranslationOld;
 use Components\View\ViewInterface;
 use Modules\Event\Entity\Event;
@@ -30,6 +31,7 @@ class EventArchiveController extends EntityControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    */
+  #[RouteGet(url: 'concerten/historie')]
   public function index(): ViewInterface {
     $page_storage = $this->entityManager->getStorage(Page::class)->getRepository();
     $archived_page = $page_storage->firstByAttributes([
@@ -50,6 +52,7 @@ class EventArchiveController extends EntityControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    */
+  #[RouteGet(url: 'concerten/historie/concert/{slug}')]
   public function show(): ViewInterface {
     $event = $this->repository->firstByAttributes([
       'slug_name' => $this->request()->getRouteParameter(),

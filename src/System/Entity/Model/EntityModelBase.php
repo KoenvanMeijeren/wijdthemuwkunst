@@ -42,7 +42,7 @@ abstract class EntityModelBase implements EntityModelInterface {
    * Initializes the entity.
    */
   protected function initialize(): void {
-    $contentEntityType = (new AttributeHelper($this))->getAttribute(ContentEntityType::class);
+    $contentEntityType = (new AttributeHelper($this))->getByClass(ContentEntityType::class);
     if (!$contentEntityType instanceof ContentEntityType) {
       $class_name = get_class($this);
       throw new \InvalidArgumentException("The entity {$class_name} does not have a content type specified.");

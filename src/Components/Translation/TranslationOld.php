@@ -25,8 +25,6 @@ final class TranslationOld extends LoaderOld {
    * {@inheritDoc}
    */
   protected function __construct() {
-    trigger_deprecation('Components/Translation', '1.0', 'This class is deprecated, you should use the Translation class.');
-
     if (str_contains(Uri::getDomainExtension(), 'localhost')
       || str_contains(Uri::getDomainExtension(), 'nl')) {
       $this->language = self::DUTCH_LANGUAGE_ID;

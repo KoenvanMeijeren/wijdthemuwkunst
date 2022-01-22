@@ -4,6 +4,9 @@ declare(strict_types=1);
 namespace Modules\Page\Controllers;
 
 use Components\Header\Redirect;
+use Components\Route\RouteGet;
+use Components\Route\RoutePost;
+use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
 use Components\View\ViewInterface;
 use Modules\Page\Actions\CreatePageAction;
@@ -48,6 +51,7 @@ final class AdminPageController extends EntityControllerBase {
     parent::__construct(entityClass: Page::class, baseViewPath: 'Page/Views/admin.');
   }
 
+  #[RouteGet(url: 'admin/content/pages', rights: RouteRights::ADMIN)]
   public function index(): ViewInterface {
     $pageTable = new PageTable($this->repository->all());
 
@@ -57,12 +61,14 @@ final class AdminPageController extends EntityControllerBase {
     ]);
   }
 
+  #[RouteGet(url: 'admin/content/pages/page/create', rights: RouteRights::ADMIN)]
   public function create(): ViewInterface {
     return $this->view('edit', [
       'title' => TranslationOld::get('admin_create_page_title'),
     ]);
   }
 
+  #[RoutePost(url: 'admin/content/pages/page/create/store', rights: RouteRights::ADMIN)]
   public function store(): ViewInterface|Redirect {
     $create = new CreatePageAction();
     if ($this->request()->post('save-and-publish') !== '') {
@@ -76,6 +82,7 @@ final class AdminPageController extends EntityControllerBase {
     return $this->create();
   }
 
+  #[RouteGet(url: 'admin/content/pages/page/edit/{slug}', rights: RouteRights::ADMIN)]
   public function edit(): ViewInterface|Redirect {
     $page = $this->repository->loadById((int) $this->request()->getRouteParameter());
     if (!$page instanceof PageInterface) {
@@ -90,6 +97,7 @@ final class AdminPageController extends EntityControllerBase {
     ]);
   }
 
+  #[RoutePost(url: 'admin/content/pages/page/edit/{slug}/store', rights: RouteRights::ADMIN)]
   public function update(): ViewInterface|Redirect {
     $update = new UpdatePageAction();
     if (array_key_exists('save-and-publish', $_POST)) {
@@ -103,6 +111,7 @@ final class AdminPageController extends EntityControllerBase {
     return $this->edit();
   }
 
+  #[RoutePost(url: 'admin/content/pages/page/publish/{slug}', rights: RouteRights::ADMIN)]
   public function publish(): Redirect {
     $publish = new PublishPageAction();
     $publish->execute();
@@ -110,6 +119,7 @@ final class AdminPageController extends EntityControllerBase {
     return new Redirect($this->redirectSame . $this->request()->getRouteParameter());
   }
 
+  #[RoutePost(url: 'admin/content/pages/page/unpublish/{slug}', rights: RouteRights::ADMIN)]
   public function unPublish(): Redirect {
     $unPublish = new UnPublishPageAction();
     $unPublish->execute();
@@ -117,6 +127,7 @@ final class AdminPageController extends EntityControllerBase {
     return new Redirect($this->redirectSame . $this->request()->getRouteParameter());
   }
 
+  #[RoutePost(url: 'admin/content/pages/page/edit/{slug}/remove/thumbnail', rights: RouteRights::ADMIN)]
   public function removeThumbnail(): Redirect {
     $removeThumbnail = new RemovePageThumbnailAction();
     $removeThumbnail->execute();
@@ -124,6 +135,7 @@ final class AdminPageController extends EntityControllerBase {
     return new Redirect($this->redirectSame . $this->request()->getRouteParameter());
   }
 
+  #[RoutePost(url: 'admin/content/pages/page/edit/{slug}/remove/banner', rights: RouteRights::ADMIN)]
   public function removeBanner(): Redirect {
     $removeBanner = new RemovePageBannerAction();
     $removeBanner->execute();
@@ -131,6 +143,7 @@ final class AdminPageController extends EntityControllerBase {
     return new Redirect($this->redirectSame . $this->request()->getRouteParameter());
   }
 
+  #[RoutePost(url: 'admin/content/pages/page/delete/{slug}', rights: RouteRights::ADMIN)]
   public function destroy(): Redirect {
     $delete = new DeletePageAction();
     $delete->execute();

@@ -1,7 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace Modules\Text;
 
+use Modules\Text\Controllers\TextController;
+use System\Module\Module;
 use System\Module\ModuleBase;
 
 /**
@@ -9,13 +12,12 @@ use System\Module\ModuleBase;
  *
  * @package Domain\Admin\Text
  */
+#[Module(
+  name: 'Text',
+  routes: [
+    TextController::class,
+  ]
+)]
 class TextModule extends ModuleBase {
-
-  /**
-   * {@inheritDoc}
-   */
-  public function getName(): string {
-    return 'Text';
-  }
 
 }

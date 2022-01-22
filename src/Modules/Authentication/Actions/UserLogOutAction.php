@@ -32,9 +32,7 @@ final class UserLogOutAction extends Action {
    */
   protected function handle(): bool {
     $builder = new SessionBuilder();
-    $builder->destroy();
-    $builder->startSession($this->env()->get());
-    $builder->secureSession();
+    $builder->restartSecure();
 
     $this->session()->flash(State::SUCCESSFUL->value, TranslationOld::get('admin_logout_message'));
 

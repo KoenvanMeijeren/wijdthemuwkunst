@@ -4,13 +4,10 @@ declare(strict_types=1);
 namespace Components\Env;
 
 use Components\ComponentsTrait;
-use Components\Log\LoggerHandler;
 use Components\SuperGlobals\ServerOptions;
 use Components\Validate\Validate;
 use JetBrains\PhpStorm\Pure;
-use System\View\ProductionErrorView;
-use Whoops\Handler\PrettyPageHandler;
-use Whoops\Run as Whoops;
+use Spatie\Ignition\Ignition;
 
 /**
  * The environment handler of the application.
@@ -101,25 +98,16 @@ final class Env implements EnvInterface {
     ini_set('display_startup_errors', ($this->current->isEqual(Environments::DEVELOPMENT) ? '1' : '0'));
     error_reporting(($this->current->isEqual(Environments::DEVELOPMENT) ? E_ALL : -1));
 
-    $this->initializeWhoops();
+    $this->initializeIgnition();
   }
 
   /**
    * Initializes the whoops error and exception handler.
    */
-  protected function initializeWhoops(): void {
-    $whoops = new Whoops();
-    if ($this->current->isEqual(Environments::DEVELOPMENT)) {
-      $whoops->prependHandler(new PrettyPageHandler());
-      $whoops->register();
-    }
-    elseif ($this->current->isEqual(Environments::PRODUCTION)) {
-      $whoops->prependHandler(new ProductionErrorView());
-      $whoops->register();
-    }
-
-    $whoops->prependHandler(new LoggerHandler());
-    $whoops->register();
+  protected function initializeIgnition(): void {
+    Ignition::make()
+      ->shouldDisplayException($this->isDevelopment())
+      ->register();
   }
 
 }

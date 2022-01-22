@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace System\Module;
 
+use Components\Attribute\AttributeHelper;
 use Components\ComponentsTrait;
 use Components\File\Exceptions\FileNotFoundException;
 use Components\Validate\Validate;
@@ -15,6 +16,40 @@ use Components\Validate\Validate;
 abstract class ModuleBase implements ModuleInterface {
 
   use ComponentsTrait;
+
+  /**
+   * The module.
+   *
+   * @var \System\Module\Module
+   */
+  public readonly Module $attribute;
+
+  /**
+   * Constructs a new module.
+   */
+  public function __construct() {
+    $loaded_module = (new AttributeHelper($this))->getByClass(Module::class);
+    if (!$loaded_module instanceof Module) {
+      $class_name = get_class($this);
+      throw new \InvalidArgumentException("The class {$class_name} does not have a module specified.");
+    }
+
+    $this->attribute = $loaded_module;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function getAttribute(): Module {
+    return $this->attribute;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function getName(): string {
+    return $this->attribute->name;
+  }
 
   /**
    * {@inheritDoc}

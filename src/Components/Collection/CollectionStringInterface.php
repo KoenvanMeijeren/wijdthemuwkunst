@@ -8,7 +8,7 @@ namespace Components\Collection;
  *
  * @package \Components\Array
  */
-interface CollectionStringBaseInterface {
+interface CollectionStringInterface extends CollectionInterface {
 
   /**
    * Saves data in the array.
@@ -33,36 +33,6 @@ interface CollectionStringBaseInterface {
    * @return string|null
    *   The value of the array item.
    */
-  public function get(string $key, string $default = '', bool $unset = FALSE): ?string;
-
-  /**
-   * Returns all items of the array.
-   *
-   * @return array
-   *   The items of the array.
-   */
-  public function all(): array;
-
-  /**
-   * Check if the given key exists in the array.
-   *
-   * @param string $key
-   *   The key of the array item.
-   *
-   * @return bool
-   *   If the array item does exists.
-   */
-  public function exists(string $key): bool;
-
-  /**
-   * Unset data from the array.
-   *
-   * @param string $key
-   *   The key to search for.
-   *
-   * @return bool
-   *   If the data is unset from the array.
-   */
-  public function unset(string $key): bool;
+  public function get(string $key, mixed $default = '', bool $unset = FALSE): ?string;
 
 }

@@ -4,6 +4,9 @@ declare(strict_types=1);
 namespace Modules\Setting\Controllers;
 
 use Components\Header\Redirect;
+use Components\Route\RouteGet;
+use Components\Route\RoutePost;
+use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
 use Components\View\ViewInterface;
 use Modules\Setting\Actions\CreateSettingAction;
@@ -41,6 +44,7 @@ final class SettingsControllers extends EntityControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    */
+  #[RouteGet(url: 'admin/configuration/settings', rights: RouteRights::ADMIN)]
   public function index(): ViewInterface {
     $settingTable = new SettingTable($this->repository->all());
 
@@ -56,6 +60,7 @@ final class SettingsControllers extends EntityControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    */
+  #[RouteGet(url: 'admin/configuration/settings/setting/create', rights: RouteRights::ADMIN)]
   public function create(): ViewInterface {
     $settingTable = new SettingTable($this->repository->all());
 
@@ -72,6 +77,7 @@ final class SettingsControllers extends EntityControllerBase {
    * @return \Components\View\ViewInterface|\Components\Header\Redirect
    *   Returns the view or a redirect response.
    */
+  #[RoutePost(url: 'admin/configuration/settings/setting/create/store', rights: RouteRights::ADMIN)]
   public function store(): ViewInterface|Redirect {
     $create = new CreateSettingAction();
     if ($create->execute()) {
@@ -87,6 +93,7 @@ final class SettingsControllers extends EntityControllerBase {
    * @return \Components\Header\Redirect|ViewInterface
    *   The view.
    */
+  #[RouteGet(url: 'admin/configuration/settings/setting/edit/{slug}', rights: RouteRights::ADMIN)]
   public function edit(): ViewInterface|Redirect {
     $settingTable = new SettingTable($this->repository->all());
     $setting = $this->repository->loadById((int) $this->request()->getRouteParameter());
@@ -109,6 +116,7 @@ final class SettingsControllers extends EntityControllerBase {
    * @return \Components\View\ViewInterface|\Components\Header\Redirect
    *   Returns the view or a redirect response.
    */
+  #[RoutePost(url: 'admin/configuration/settings/setting/edit/{slug}/updae', rights: RouteRights::ADMIN)]
   public function update(): ViewInterface|Redirect {
     $update = new UpdateSettingAction();
     if ($update->execute()) {
@@ -124,6 +132,7 @@ final class SettingsControllers extends EntityControllerBase {
    * @return \Components\Header\Redirect
    *   The redirect response.
    */
+  #[RoutePost(url: 'admin/configuration/settings/setting/delete/{slug}', rights: RouteRights::ADMIN)]
   public function destroy(): Redirect {
     $destroy = new DeleteSettingAction();
     $destroy->execute();

@@ -4,6 +4,9 @@ declare(strict_types=1);
 namespace Modules\Event\Controller;
 
 use Components\Header\Redirect;
+use Components\Route\RouteGet;
+use Components\Route\RoutePost;
+use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
 use Components\View\ViewInterface;
 use Modules\Event\Action\ActivateEventAction;
@@ -51,6 +54,7 @@ final class AdminEventController extends EntityControllerBase {
     parent::__construct(entityClass: Event::class, baseViewPath: 'Event/Views/admin.');
   }
 
+  #[RouteGet(url: 'admin/content/events', rights: RouteRights::ADMIN)]
   public function index(): ViewInterface {
     /** @var \Modules\Event\Entity\EventRepositoryInterface $repository */
     $repository = $this->repository;
@@ -65,12 +69,14 @@ final class AdminEventController extends EntityControllerBase {
     ]);
   }
 
+  #[RouteGet(url: 'admin/content/events/event/create', rights: RouteRights::ADMIN)]
   public function create(): ViewInterface {
     return $this->view('edit', [
       'title' => TranslationOld::get('admin_create_event_title'),
     ]);
   }
 
+  #[RoutePost(url: 'admin/content/events/event/create/store', rights: RouteRights::ADMIN)]
   public function store(): ViewInterface|Redirect {
     $create = new CreateEventAction();
     if ($this->request()->post('save-and-publish') === 'save_and_publish') {
@@ -84,6 +90,7 @@ final class AdminEventController extends EntityControllerBase {
     return $this->create();
   }
 
+  #[RouteGet(url: 'admin/content/events/event/edit/{slug}', rights: RouteRights::ADMIN)]
   public function edit(): ViewInterface|Redirect {
     $event = $this->repository->loadById((int) $this->request()->getRouteParameter());
     if (!$event instanceof EventInterface) {
@@ -98,6 +105,7 @@ final class AdminEventController extends EntityControllerBase {
     ]);
   }
 
+  #[RoutePost(url: 'admin/content/events/event/edit/{slug}/store', rights: RouteRights::ADMIN)]
   public function update(): ViewInterface|Redirect {
     $update = new UpdateEventAction();
     if ($this->request()->post('save-and-publish') === 'save_and_publish') {
@@ -111,6 +119,7 @@ final class AdminEventController extends EntityControllerBase {
     return $this->edit();
   }
 
+  #[RoutePost(url: 'admin/content/events/event/publish/{slug}', rights: RouteRights::ADMIN)]
   public function publish(): Redirect {
     $publish = new PublishEventAction();
     $publish->execute();
@@ -118,6 +127,7 @@ final class AdminEventController extends EntityControllerBase {
     return new Redirect($this->redirectSame . $this->request()->getRouteParameter());
   }
 
+  #[RoutePost(url: 'admin/content/events/event/unpublish/{slug}', rights: RouteRights::ADMIN)]
   public function unPublish(): Redirect {
     $unPublish = new UnPublishEventAction();
     $unPublish->execute();
@@ -125,6 +135,7 @@ final class AdminEventController extends EntityControllerBase {
     return new Redirect($this->redirectSame . $this->request()->getRouteParameter());
   }
 
+  #[RoutePost(url: 'admin/content/events/event/edit/{slug}/remove/thumbnail', rights: RouteRights::ADMIN)]
   public function removeThumbnail(): Redirect {
     $removeThumbnail = new RemoveEventThumbnailAction();
     $removeThumbnail->execute();
@@ -132,6 +143,7 @@ final class AdminEventController extends EntityControllerBase {
     return new Redirect($this->redirectSame . $this->request()->getRouteParameter());
   }
 
+  #[RoutePost(url: 'admin/content/events/event/edit/{slug}/remove/banner', rights: RouteRights::ADMIN)]
   public function removeBanner(): Redirect {
     $removeBanner = new RemoveEventBannerAction();
     $removeBanner->execute();
@@ -139,6 +151,7 @@ final class AdminEventController extends EntityControllerBase {
     return new Redirect($this->redirectSame . $this->request()->getRouteParameter());
   }
 
+  #[RoutePost(url: 'admin/content/events/event/archive/{slug}', rights: RouteRights::ADMIN)]
   public function archive(): Redirect {
     $archive = new ArchiveEventAction();
     $archive->execute();
@@ -146,6 +159,7 @@ final class AdminEventController extends EntityControllerBase {
     return new Redirect($this->redirectBack);
   }
 
+  #[RoutePost(url: 'admin/content/events/event/activate/{slug}', rights: RouteRights::ADMIN)]
   public function activate(): Redirect {
     $activate = new ActivateEventAction();
     $activate->execute();
@@ -153,6 +167,7 @@ final class AdminEventController extends EntityControllerBase {
     return new Redirect($this->redirectBack);
   }
 
+  #[RoutePost(url: 'admin/content/events/event/delete/{slug}', rights: RouteRights::ADMIN)]
   public function destroy(): Redirect {
     $delete = new DeleteEventAction();
     $delete->execute();

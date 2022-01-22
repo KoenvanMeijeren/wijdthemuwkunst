@@ -19,6 +19,17 @@ interface AttributeHelperInterface {
    * @return \Components\Attribute\AttributeInterface|null
    *   The attribute.
    */
-  public function getAttribute(string $attribute): ?AttributeInterface;
+  public function getByClass(string $attribute): ?AttributeInterface;
+
+  /**
+   * Gets the specified attributes from the parent class methods.
+   *
+   * @param string $attribute
+   *   The attribute to search for.
+   *
+   * @return \Components\Attribute\AttributeInterface[]|null
+   *   The attributes, only one attribute per method is loaded.
+   */
+  public function getByMethods(string $attribute): ?array;
 
 }

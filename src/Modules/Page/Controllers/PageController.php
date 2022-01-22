@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Modules\Page\Controllers;
 
+use Components\Route\RouteGet;
+use Components\Route\RouterInterface;
 use Components\SuperGlobals\Url\Uri;
 use Components\Translation\TranslationOld;
 use Components\View\ViewInterface;
@@ -33,6 +35,7 @@ class PageController extends EntityControllerBase {
    *
    * @throws \Components\Validate\Exceptions\Basic\InvalidKeyException
    */
+  #[RouteGet(url: '')]
   public function index(): ViewInterface {
     $page = $this->repository->firstByAttributes([
       'slug_name' => 'home',
@@ -57,6 +60,7 @@ class PageController extends EntityControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    */
+  #[RouteGet(url: RouterInterface::URL_PAGE_NOT_FOUND)]
   public function findOr404(): ViewInterface {
     $page = $this->repository->firstByAttributes([
       'slug_name' => Uri::getUrl(),

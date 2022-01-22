@@ -1,7 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace Modules\Authentication;
 
+use Modules\Authentication\Controllers\AuthenticationController;
+use System\Module\Module;
 use System\Module\ModuleBase;
 
 /**
@@ -9,13 +12,12 @@ use System\Module\ModuleBase;
  *
  * @package Modules\Authentication
  */
+#[Module(
+  name: 'Authentication',
+  routes: [
+    AuthenticationController::class,
+  ]
+)]
 class AuthenticationModule extends ModuleBase {
-
-  /**
-   * {@inheritDoc}
-   */
-  public function getName(): string {
-    return 'Authentication';
-  }
 
 }

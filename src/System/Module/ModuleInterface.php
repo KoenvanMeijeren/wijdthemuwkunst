@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 
 namespace System\Module;
 
@@ -11,6 +11,14 @@ use Components\File\Exceptions\FileNotFoundException;
  * @package System\Module
  */
 interface ModuleInterface {
+
+  /**
+   * Gets the attribute.
+   *
+   * @return \System\Module\Module
+   *   The attribute.
+   */
+  public function getAttribute(): Module;
 
   /**
    * Gets the name of the module.

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Components\SuperGlobals;
 
+use Components\Route\RouteProcessor;
 use Components\Route\Router;
 use Components\Sanitize\Sanitize;
 use JetBrains\PhpStorm\Pure;
@@ -28,7 +29,7 @@ final class Request implements RequestInterface {
    */
   #[Pure]
   public function getRouteParameter(): string {
-    return Router::getWildcard();
+    return RouteProcessor::getWildcard();
   }
 
   /**

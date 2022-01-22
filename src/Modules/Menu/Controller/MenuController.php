@@ -4,6 +4,9 @@ declare(strict_types=1);
 namespace Modules\Menu\Controller;
 
 use Components\Header\Redirect;
+use Components\Route\RouteGet;
+use Components\Route\RoutePost;
+use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
 use Components\View\ViewInterface;
 use Modules\Menu\Actions\CreateMenuAction;
@@ -43,6 +46,7 @@ final class MenuController extends EntityControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    */
+  #[RouteGet(url: 'admin/structure/menu', rights: RouteRights::ADMIN)]
   public function index(): ViewInterface {
     $menuTable = new MenuTable($this->repository->all());
 
@@ -58,6 +62,7 @@ final class MenuController extends EntityControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    */
+  #[RouteGet(url: 'admin/structure/menu/item/create', rights: RouteRights::ADMIN)]
   public function create(): ViewInterface {
     $menuTable = new MenuTable($this->repository->all());
 
@@ -74,6 +79,7 @@ final class MenuController extends EntityControllerBase {
    * @return \Components\View\ViewInterface|\Components\Header\Redirect
    *   Returns the view or a redirect response.
    */
+  #[RoutePost(url: 'admin/structure/menu/item/create/store', rights: RouteRights::ADMIN)]
   public function store(): ViewInterface|Redirect {
     $create = new CreateMenuAction();
     if ($create->execute()) {
@@ -89,6 +95,7 @@ final class MenuController extends EntityControllerBase {
    * @return \Components\Header\Redirect|ViewInterface
    *   The view.
    */
+  #[RouteGet(url: 'admin/structure/menu/item/edit/{slug}', rights: RouteRights::ADMIN)]
   public function edit(): ViewInterface|Redirect {
     $menuTable = new MenuTable($this->repository->all());
     /** @var MenuInterface $menu */
@@ -112,6 +119,7 @@ final class MenuController extends EntityControllerBase {
    * @return \Components\View\ViewInterface|\Components\Header\Redirect
    *   Returns the view or a redirect response.
    */
+  #[RoutePost(url: 'admin/structure/menu/item/edit/{slug}/update', rights: RouteRights::ADMIN)]
   public function update(): ViewInterface|Redirect {
     $update = new UpdateMenuAction();
     if ($update->execute()) {
@@ -127,6 +135,7 @@ final class MenuController extends EntityControllerBase {
    * @return \Components\Header\Redirect
    *   The redirect response.
    */
+  #[RoutePost(url: 'admin/structure/menu/item/delete/{slug}', rights: RouteRights::ADMIN)]
   public function destroy(): Redirect {
     $destroy = new DeleteMenuAction();
     $destroy->execute();

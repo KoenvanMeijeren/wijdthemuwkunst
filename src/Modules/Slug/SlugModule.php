@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Modules\Slug;
 
+use System\Module\Module;
 use System\Module\ModuleBase;
 
 /**
@@ -10,12 +11,9 @@ use System\Module\ModuleBase;
  *
  * @package Modules\Menu
  */
+#[Module(
+  name: 'Slug'
+)]
 class SlugModule extends ModuleBase {
 
-  /**
-   * {@inheritDoc}
-   */
-  public function getName(): string {
-    return 'Slug';
-  }
 }

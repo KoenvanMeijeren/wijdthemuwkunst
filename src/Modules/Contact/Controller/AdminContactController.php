@@ -3,6 +3,9 @@
 namespace Modules\Contact\Controller;
 
 use Components\Header\Redirect;
+use Components\Route\RouteGet;
+use Components\Route\RoutePost;
+use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
 use Components\View\ViewInterface;
 use Modules\Contact\Actions\DeleteContactMessageAction;
@@ -49,6 +52,7 @@ final class AdminContactController extends EntityControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    */
+  #[RouteGet(url: 'admin/content/contact', rights: RouteRights::ADMIN)]
   public function index(): ViewInterface {
     return $this->view('index', [
       'title' => TranslationOld::get('admin_contact_form_title'),
@@ -62,6 +66,7 @@ final class AdminContactController extends EntityControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    */
+  #[RouteGet(url: 'admin/content/contact/filter', rights: RouteRights::ADMIN)]
   public function showByDate(): ViewInterface {
     return $this->view('index', [
       'title' => TranslationOld::get('admin_contact_form_title'),
@@ -75,6 +80,7 @@ final class AdminContactController extends EntityControllerBase {
    * @return Redirect
    *   The redirect response.
    */
+  #[RoutePost(url: 'admin/content/contact/delete/{slug}', rights: RouteRights::ADMIN)]
   public function destroy(): Redirect {
     $delete = new DeleteContactMessageAction();
     $delete->execute();

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Modules\Cms\Structure\Controllers;
 
+use Components\Route\RouteGet;
+use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
 use Components\View\ViewInterface;
 use JetBrains\PhpStorm\Pure;
@@ -13,7 +15,7 @@ use System\Controller\ControllerBase;
  *
  * @package Modules\Cms\Structure\Controllers
  */
-final class StructureControllerBase extends ControllerBase {
+final class StructureController extends ControllerBase {
 
   /**
    * {@inheritdoc}
@@ -30,6 +32,7 @@ final class StructureControllerBase extends ControllerBase {
    *
    * @throws \Components\Validate\Exceptions\Basic\InvalidKeyException
    */
+  #[RouteGet('admin/dashboard', rights: RouteRights::ADMIN)]
   public function index(): ViewInterface {
     return $this->view('index', [
       'title' => TranslationOld::get('admin_dashboard_title'),
@@ -45,6 +48,7 @@ final class StructureControllerBase extends ControllerBase {
    *
    * @throws \Components\Validate\Exceptions\Basic\InvalidKeyException
    */
+  #[RouteGet('admin/content', rights: RouteRights::ADMIN)]
   public function content(): ViewInterface {
     return $this->view('index', [
       'title' => TranslationOld::get('admin_content_title'),
@@ -60,6 +64,7 @@ final class StructureControllerBase extends ControllerBase {
    *
    * @throws \Components\Validate\Exceptions\Basic\InvalidKeyException
    */
+  #[RouteGet('admin/structure', rights: RouteRights::ADMIN)]
   public function structure(): ViewInterface {
     return $this->view('index', [
       'title' => TranslationOld::get('admin_structure_title'),
@@ -75,6 +80,7 @@ final class StructureControllerBase extends ControllerBase {
    *
    * @throws \Components\Validate\Exceptions\Basic\InvalidKeyException
    */
+  #[RouteGet('admin/configuration', rights: RouteRights::ADMIN)]
   public function configuration(): ViewInterface {
     return $this->view('index', [
       'title' => TranslationOld::get('admin_configuration_title'),
@@ -90,6 +96,7 @@ final class StructureControllerBase extends ControllerBase {
    *
    * @throws \Components\Validate\Exceptions\Basic\InvalidKeyException
    */
+  #[RouteGet('admin/reports', rights: RouteRights::ADMIN)]
   public function reports(): ViewInterface {
     return $this->view('index', [
       'title' => TranslationOld::get('admin_reports_title'),

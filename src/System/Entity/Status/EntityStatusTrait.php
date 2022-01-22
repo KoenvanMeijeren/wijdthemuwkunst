@@ -72,7 +72,7 @@ trait EntityStatusTrait {
    *   The entity status column.
    */
   protected function getEntityStatusColumn(): EntityStatusColumn {
-    return (new AttributeHelper($this))->getAttribute(EntityStatusColumn::class);
+    return (new AttributeHelper($this))->getByClass(EntityStatusColumn::class);
   }
 
 }

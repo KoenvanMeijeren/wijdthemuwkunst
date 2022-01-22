@@ -4,6 +4,9 @@ declare(strict_types=1);
 namespace Modules\Authentication\Controllers;
 
 use Components\Header\Redirect;
+use Components\Route\RouteGet;
+use Components\Route\RoutePost;
+use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
 use Components\View\ViewInterface;
 use JetBrains\PhpStorm\Pure;
@@ -50,6 +53,7 @@ final class AuthenticationController extends ControllerBase {
    * @return \Components\Header\Redirect|\Components\View\ViewInterface
    *   Either a redirect response or the login view.
    */
+  #[RouteGet(url: 'admin')]
   public function index(): ViewInterface|Redirect {
     if ($this->currentUserService()->isLoggedIn()) {
       return new Redirect($this->redirectTo);
@@ -66,6 +70,7 @@ final class AuthenticationController extends ControllerBase {
    * @return \Components\Header\Redirect
    *   The redirect response.
    */
+  #[RoutePost(url: 'admin/login')]
   public function login(): Redirect {
     $login = new UserLogInAction();
     if ($login->execute()) {
@@ -81,6 +86,7 @@ final class AuthenticationController extends ControllerBase {
    * @return \Components\Header\Redirect
    *   The redirect response.
    */
+  #[RoutePost(url: 'admin/logout', rights: RouteRights::ADMIN)]
   public function logout(): Redirect {
     $logout = new UserLogOutAction();
     $logout->execute();

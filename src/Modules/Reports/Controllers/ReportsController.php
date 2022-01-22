@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace Modules\Reports\Controllers;
 
 use Cake\Chronos\Chronos;
+use Components\Route\RouteGet;
+use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
 use Components\View\ViewInterface;
 use JetBrains\PhpStorm\Pure;
@@ -34,6 +36,7 @@ final class ReportsController extends ControllerBase {
    * @return ViewInterface
    *   The view.
    */
+  #[RouteGet(url: 'admin/reports/application', rights: RouteRights::DEVELOPER)]
   public function application(): ViewInterface {
     $phpInfo = new PhpInfo();
     $superGlobals = new SuperGlobals();
@@ -53,6 +56,7 @@ final class ReportsController extends ControllerBase {
    * @return ViewInterface
    *   The view.
    */
+  #[RouteGet(url: 'admin/reports/logs', rights: RouteRights::DEVELOPER)]
   public function logs(): ViewInterface {
     $logs = new Logs();
 
@@ -78,6 +82,7 @@ final class ReportsController extends ControllerBase {
    * @return ViewInterface
    *   The view.
    */
+  #[RouteGet(url: 'admin/reports/storage', rights: RouteRights::DEVELOPER)]
   public function storage(): ViewInterface {
     $superGlobals = new SuperGlobals();
 

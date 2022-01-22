@@ -1,7 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace Modules\User;
 
+use Modules\User\Controller\AccountController;
+use Modules\User\Controller\UserAccountController;
+use System\Module\Module;
 use System\Module\ModuleBase;
 
 /**
@@ -9,13 +13,13 @@ use System\Module\ModuleBase;
  *
  * @package Modules\User
  */
+#[Module(
+  name: 'Account',
+  routes: [
+    AccountController::class,
+    UserAccountController::class,
+  ]
+)]
 class AccountModule extends ModuleBase {
-
-  /**
-   * {@inheritDoc}
-   */
-  public function getName(): string {
-    return 'User';
-  }
 
 }
