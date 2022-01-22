@@ -43,7 +43,7 @@ final class TextController extends EntityControllerBase {
    * @return \Components\View\ViewInterface
    *   The view.
    */
-  #[RouteGet('admin/configuration/texts/', rights: RouteRights::ADMIN)]
+  #[RouteGet('admin/configuration/texts', rights: RouteRights::ADMIN)]
   public function index(): ViewInterface {
     $textTable = new TextTable($this->repository->all());
 
