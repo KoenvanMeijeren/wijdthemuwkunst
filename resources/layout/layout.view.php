@@ -1,8 +1,8 @@
 <?php
 
-use Components\Translation\TranslationOld;
-use Components\Security\CSRF;
 use Components\Resource\Resource;
+use Components\Security\CSRF;
+use Components\Translation\TranslationOld;
 
 ?>
 <!DOCTYPE html>

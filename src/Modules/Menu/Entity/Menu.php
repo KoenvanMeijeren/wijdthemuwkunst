@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Modules\Menu\Entity;
 
 use Modules\Slug\SlugTrait;
-use System\Entity\EntityBase;
 use System\Entity\Status\EntityStatusBase;
 use System\Entity\Type\ContentEntityType;
 

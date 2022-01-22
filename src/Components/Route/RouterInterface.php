@@ -4,7 +4,6 @@ namespace Components\Route;
 
 use Closure;
 use Components\Http\HttpTypes;
-use Modules\User\Entity\AccountInterface;
 use System\View\DomainView;
 
 /**

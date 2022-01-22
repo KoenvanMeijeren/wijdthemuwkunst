@@ -5,7 +5,6 @@ namespace Modules\Setting\Actions;
 
 use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
-use Modules\User\Entity\AccountInterface;
 use System\State;
 
 /**

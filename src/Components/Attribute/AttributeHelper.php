@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Components\Attribute;
 
-use JetBrains\PhpStorm\Pure;
-
 /**
  * Provides a class for helper methods for attributes.
  *

@@ -4,7 +4,6 @@ use Components\Resource\Resource;
 use Components\Route\RouteRights;
 use Components\SuperGlobals\Url\Uri;
 use Components\Translation\TranslationOld;
-use Modules\User\Entity\AccountInterface;
 use Modules\User\Support\AccountRightsConverter;
 use System\Breadcrumbs\Breadcrumbs;
 

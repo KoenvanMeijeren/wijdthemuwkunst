@@ -5,9 +5,7 @@ namespace Modules\Page\Actions;
 
 use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
-use Modules\Page\Entity\PageInterface;
 use Modules\Page\Entity\PageVisibility;
-use Modules\User\Entity\AccountInterface;
 use System\State;
 
 /**

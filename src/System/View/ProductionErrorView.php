@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace System\View;
 
-use Components\Env\Env;
 use Components\Env\EnvInterface;
 use Components\Translation\TranslationOld;
 use Components\View\View;

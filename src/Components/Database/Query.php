@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Components\Database;
 
 use JetBrains\PhpStorm\Pure;
-use PDO;
 use stdClass;
 
 /**

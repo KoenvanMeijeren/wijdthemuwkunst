@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Modules\Page\Actions;
 
 use Components\Translation\TranslationOld;
-use Modules\Page\Entity\PageInterface;
 use Modules\Page\Entity\PageVisibility;
 use System\State;
 

@@ -4,7 +4,6 @@ namespace Modules\User\Actions;
 
 use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
-use Modules\User\Entity\Account;
 
 /**
  * Provides an action for creating account entities.

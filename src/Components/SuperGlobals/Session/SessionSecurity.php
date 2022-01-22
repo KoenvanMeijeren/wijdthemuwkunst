@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Components\SuperGlobals\Session;
 
 use Components\ComponentsTrait;
-use Components\SuperGlobals\RequestInterface;
 use Components\SuperGlobals\ServerOptions;
 
 /**
