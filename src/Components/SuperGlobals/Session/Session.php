@@ -27,10 +27,19 @@ final class Session extends CollectionStringBase implements SessionInterface {
   /**
    * {@inheritDoc}
    */
+  public function save(string $key, string $value): void {
+    parent::save($key, $value);
+    $_SESSION[$key] = $this->items[$key];
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public function saveForced(string $key, string $value): void {
     $sanitize = new Sanitize($value);
     $data = new Encrypt((string) $sanitize->data());
     $_SESSION[$key] = $data->encrypt();
+    $this->items[$key] = $_SESSION[$key];
   }
 
   /**
