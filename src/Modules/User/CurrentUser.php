@@ -15,7 +15,7 @@ use System\Entity\EntityManagerInterface;
  *
  * @package Modules\User
  */
-class CurrentUser implements CurrentUserInterface {
+final class CurrentUser implements CurrentUserInterface {
 
   use ComponentsTrait;
 
@@ -71,9 +71,7 @@ class CurrentUser implements CurrentUserInterface {
    * @return int the id of the user
    */
   protected function getUserId(): int {
-    $idEncryption = new IDEncryption();
-
-    return $idEncryption->decrypt($this->session()->get('userID'));
+    return (new IDEncryption())->decrypt($this->session()->get('userID'));
   }
 
 }

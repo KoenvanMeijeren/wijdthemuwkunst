@@ -28,7 +28,7 @@ final class CreateSettingAction extends BaseSettingAction {
    * {@inheritDoc}
    */
   public function authorize(): bool {
-    if ($this->user()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)) {
+    if ($this->currentUser()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)) {
       $this->session()->flash(State::FAILED->value, TranslationOld::get('setting_creation_not_allowed'));
 
       return FALSE;

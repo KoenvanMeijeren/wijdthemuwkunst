@@ -50,7 +50,7 @@ final class SettingTable extends DataTableBuilder {
         TranslationOld::get('delete_setting_confirmation_message'),
         $entity->getKey()
       ),
-      $this->user()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)
+      $this->currentUser()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)
     );
   }
 

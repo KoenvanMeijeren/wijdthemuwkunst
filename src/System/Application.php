@@ -46,7 +46,7 @@ final class Application implements ApplicationInterface {
 
     $moduleHandler = new ModuleHandler();
 
-    $current_user = $this->user();
+    $current_user = $this->currentUser();
     $route_processor = new RouteProcessor($moduleHandler->getRouteCollection());
 
     echo $route_processor->direct(Uri::getUrl(), Uri::getHttpType(), $current_user->getRouteRights());

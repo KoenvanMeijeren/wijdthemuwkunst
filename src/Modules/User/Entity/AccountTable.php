@@ -62,7 +62,7 @@ final class AccountTable extends DataTableBuilder {
    *   The entity.
    */
   protected function buildRowActions(EntityInterface $entity): string {
-    $current_user = $this->user();
+    $current_user = $this->currentUser();
 
     $actions = '<div class="table-edit-row">';
     $actions .= Resource::addTableLinkActionColumn(

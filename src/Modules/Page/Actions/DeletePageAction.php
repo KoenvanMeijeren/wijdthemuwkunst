@@ -43,7 +43,7 @@ final class DeletePageAction extends BasePageAction {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    if ($this->user()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)
+    if ($this->currentUser()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)
       && $this->entity->getVisibility()->isEqual(PageVisibility::STATIC)) {
       $this->session()->flash(
         State::FAILED->value,

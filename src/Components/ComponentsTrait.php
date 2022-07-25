@@ -180,11 +180,8 @@ trait ComponentsTrait {
 
   /**
    * Gets the current user entity.
-   *
-   * @return AccountInterface
-   *   The current user entity.
    */
-  protected function user(): AccountInterface {
+  protected function currentUser(): AccountInterface {
     return $this->currentUserService()->get();
   }
 

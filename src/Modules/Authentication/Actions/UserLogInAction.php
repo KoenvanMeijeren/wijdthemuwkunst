@@ -39,7 +39,7 @@ final class UserLogInAction extends FormAction {
     parent::__construct();
 
     $this->maximumLoginAttempts = (int) $this->request()->env('login_attempts');
-    $entity = $this->user();
+    $entity = $this->currentUser();
     if ($email = $this->request()->post('email')) {
       $entity = $this->getEntityManager()
         ->getStorage(Account::class)
@@ -159,7 +159,7 @@ final class UserLogInAction extends FormAction {
       return;
     }
 
-    $this->entity->setBlocked(TRUE);
+    $this->entity->setBlocked();
   }
 
 }

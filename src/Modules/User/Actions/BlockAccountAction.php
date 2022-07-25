@@ -18,7 +18,7 @@ final class BlockAccountAction extends AccountActionBase {
    * {@inheritDoc}
    */
   protected function handle(): bool {
-    $this->entity->setBlocked(TRUE)->save();
+    $this->entity->setBlocked()->save();
 
     $this->session()->flash(
       State::SUCCESSFUL->value,
@@ -32,7 +32,7 @@ final class BlockAccountAction extends AccountActionBase {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    if ($this->user()->id() === $this->entity->id()) {
+    if ($this->currentUser()->id() === $this->entity->id()) {
       $this->session()->flash(
         State::FAILED->value,
         TranslationOld::get('cannot_block_own_account_message')

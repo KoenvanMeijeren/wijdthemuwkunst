@@ -36,7 +36,7 @@ final class StructureController extends ControllerBase {
   public function index(): ViewInterface {
     return $this->view('index', [
       'title' => TranslationOld::get('admin_dashboard_title'),
-      'items' => $this->indexMenu($this->user()),
+      'items' => $this->indexMenu($this->currentUser()),
     ]);
   }
 
