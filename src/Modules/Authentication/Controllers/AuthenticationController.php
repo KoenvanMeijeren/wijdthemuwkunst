@@ -77,7 +77,7 @@ final class AuthenticationController extends ControllerBase {
    */
   #[RouteGet(url: 'admin/logout', rights: RouteRights::ADMIN)]
   public function logout(): Redirect {
-    $logout = new UserLogOutAction();
+    $logout = new UserLogOutAction($this->currentUserService());
     $logout->execute();
 
     return new Redirect($this->redirectBack);
