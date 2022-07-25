@@ -14,7 +14,7 @@ use System\Entity\Type\ContentEntityType;
 #[ContentEntityType(
   table: 'file'
 )]
-class File extends EntityStatusBase implements FileInterface {
+final class File extends EntityStatusBase implements FileInterface {
 
   /**
    * {@inheritdoc}

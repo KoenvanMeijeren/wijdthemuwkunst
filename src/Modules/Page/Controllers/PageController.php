@@ -18,7 +18,7 @@ use System\Entity\EntityControllerBase;
  *
  * @package Modules\Page\Controllers
  */
-class PageController extends EntityControllerBase {
+final class PageController extends EntityControllerBase {
 
   /**
    * AdminPageController constructor.

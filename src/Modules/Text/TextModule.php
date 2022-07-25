@@ -18,6 +18,6 @@ use System\Module\ModuleBase;
     TextController::class,
   ]
 )]
-class TextModule extends ModuleBase {
+final class TextModule extends ModuleBase {
 
 }

@@ -10,7 +10,7 @@ use System\State;
  *
  * @package Modules\Event\Action
  */
-class DeleteEventAction extends EventActionBase {
+final class DeleteEventAction extends EventActionBase {
 
   /**
    * {@inheritDoc}

@@ -20,6 +20,6 @@ use System\Module\ModuleBase;
     ContactController::class,
   ]
 )]
-class ContactModule extends ModuleBase {
+final class ContactModule extends ModuleBase {
 
 }

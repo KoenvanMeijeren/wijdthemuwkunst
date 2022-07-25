@@ -10,7 +10,7 @@ use System\State;
  *
  * @package Modules\Event\Action
  */
-class ArchiveEventAction extends EventActionBase {
+final class ArchiveEventAction extends EventActionBase {
 
   /**
    * {@inheritDoc}

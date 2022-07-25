@@ -27,11 +27,6 @@ abstract class EntityControllerBase extends ControllerBase {
   protected readonly EntityRepositoryInterface $repository;
 
   /**
-   * EntityControllerBase constructor.
-   *
-   * @param string $entityClass
-   *   The entity class.
-   *
    * {@inheritDoc}
    */
   public function __construct(string $entityClass, string $baseViewPath = '') {

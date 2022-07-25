@@ -18,6 +18,6 @@ use System\Module\ModuleBase;
     MenuController::class,
   ]
 )]
-class MenuModule extends ModuleBase {
+final class MenuModule extends ModuleBase {
 
 }

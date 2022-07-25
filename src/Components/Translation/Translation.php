@@ -11,7 +11,7 @@ use Modules\Text\TextModule;
  *
  * @package Components\Translation
  */
-class Translation extends CollectionStringBase implements TranslationInterface {
+final class Translation extends CollectionStringBase implements TranslationInterface {
 
   /**
    * All the available translations.

@@ -68,13 +68,8 @@ abstract class EntityBase extends EntityModelBase implements EntityInterface {
 
   /**
    * Stores an attribute of the entity.
-   *
-   * @param $name
-   *   The name of the attribute.
-   * @param $value
-   *   The value of the attribute.
    */
-  public function __set($name, $value) {
+  public function __set(string $name, mixed $value): void {
     $this->set($name, $value);
   }
 
@@ -91,13 +86,10 @@ abstract class EntityBase extends EntityModelBase implements EntityInterface {
   }
 
   /**
-   * Stores an attribute of the entity.
-   *
-   * @param $name
-   *   The name of the attribute.
+   * Gets an attribute of the entity.
    */
-  public function __get($name) {
-    $this->get($name);
+  public function __get(string $name): mixed {
+    return $this->get($name);
   }
 
   /**
@@ -109,12 +101,6 @@ abstract class EntityBase extends EntityModelBase implements EntityInterface {
 
   /**
    * Determines if an attribute is set.
-   *
-   * @param string $key
-   *   The key of the attribute.
-   *
-   * @return bool
-   *   Whether the attribute is set or not.
    */
   public function __isset(string $key): bool {
     return $this->has($key);

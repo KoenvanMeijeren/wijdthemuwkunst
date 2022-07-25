@@ -20,6 +20,6 @@ use System\Module\ModuleBase;
     AdminPageController::class,
   ]
 )]
-class PageModule extends ModuleBase {
+final class PageModule extends ModuleBase {
 
 }

@@ -20,6 +20,6 @@ use System\Module\ModuleBase;
     UserAccountController::class,
   ]
 )]
-class AccountModule extends ModuleBase {
+final class AccountModule extends ModuleBase {
 
 }

@@ -7,6 +7,6 @@ namespace Modules\Event\Action;
  *
  * @package Modules\Event\Action
  */
-class UpdateEventAction extends EventActionBase {
+final class UpdateEventAction extends EventActionBase {
 
 }
