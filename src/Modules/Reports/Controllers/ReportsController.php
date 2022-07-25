@@ -22,8 +22,6 @@ use System\Controller\ControllerBase;
 final class ReportsController extends ControllerBase {
 
   /**
-   * ReportsController constructor.
-   *
    * {@inheritDoc}
    */
   #[Pure] public function __construct() {
@@ -39,7 +37,7 @@ final class ReportsController extends ControllerBase {
   #[RouteGet(url: 'admin/reports/application', rights: RouteRights::DEVELOPER)]
   public function application(): ViewInterface {
     $phpInfo = new PhpInfo();
-    $superGlobals = new SuperGlobals();
+    $superGlobals = new SuperGlobals($this->request());
 
     return $this->view('application', [
       'title' => TranslationOld::get('admin_reports_application_title'),
