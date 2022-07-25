@@ -54,7 +54,7 @@ final class Upload implements UploadInterface {
    * {@inheritDoc}
    */
   public function getFileIfItExists(): ?string {
-    $documentRoot = $this->request()->server(ServerOptions::DOCUMENT_ROOT);
+    $documentRoot = $this->request()->server->get(ServerOptions::DOCUMENT_ROOT);
     $fileLocation = $this->stripedPath . $this->file['name'];
     $file = $documentRoot . $fileLocation;
 

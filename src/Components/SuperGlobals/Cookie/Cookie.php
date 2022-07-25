@@ -33,9 +33,11 @@ final class Cookie extends CollectionStringBase implements CookieInterface {
     private readonly string $path = '/',
     private readonly string $domain = '',
     private readonly bool $secure = FALSE,
-    private readonly bool $httpOnly = TRUE
+    private readonly bool $httpOnly = TRUE,
+    private readonly bool $sanitize = TRUE,
+    private readonly bool $encrypt = TRUE
   ) {
-    parent::__construct($_COOKIE, true, true);
+    parent::__construct($_COOKIE, $this->sanitize, $this->encrypt);
   }
 
   /**
@@ -48,10 +50,10 @@ final class Cookie extends CollectionStringBase implements CookieInterface {
 
     $sanitize = new Sanitize($value);
     $data = new Encrypt((string) $sanitize->data());
+    $encrypted_data = $data->encrypt();
 
-    setcookie($key, $data->encrypt(), time() + $this->expiringTime, $this->path, $this->domain, $this->secure, $this->httpOnly);
-
-    parent::save($key, $value);
+    setcookie($key, $encrypted_data, time() + $this->expiringTime, $this->path, $this->domain, $this->secure, $this->httpOnly);
+    $_COOKIE[$key] = $encrypted_data;
   }
 
   /**

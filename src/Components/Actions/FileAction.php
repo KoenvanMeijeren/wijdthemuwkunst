@@ -46,7 +46,7 @@ abstract class FileAction extends Action {
     $this->acceptedOrigins[] = $uri;
     $this->acceptedOrigins[] = $shortUri;
 
-    $this->origin = $this->request()->server(ServerOptions::HTTP_ORIGIN);
+    $this->origin = $this->request()->server->get(ServerOptions::HTTP_ORIGIN);
   }
 
   /**

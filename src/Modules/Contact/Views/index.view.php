@@ -28,7 +28,7 @@ $amountMessages = count($messages ?? []);
                             <div class="form-group mr-2">
                                 <label for="unlimited-datepicker"></label>
                                 <input type="text" name="date" autocomplete="off" placeholder="<?= TranslationOld::get('form_date') ?>"
-                                       class="form-control" id="unlimited-datepicker" value="<?= request()->get('date') ?>">
+                                       class="form-control" id="unlimited-datepicker" value="<?= request()->query->get('date') ?>">
                             </div>
 
                             <button class="btn btn-outline-primary">

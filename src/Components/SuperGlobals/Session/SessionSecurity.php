@@ -19,7 +19,7 @@ final class SessionSecurity implements SessionSecurityInterface {
    * {@inheritDoc}
    */
   public function userAgentProtection(): void {
-    $user_agent = $this->request()->server(ServerOptions::HTTP_USER_AGENT);
+    $user_agent = $this->request()->server->get(ServerOptions::HTTP_USER_AGENT);
     if (!$this->session()->exists('user_agent')) {
       $this->session()->saveForced('user_agent', $user_agent);
     }
@@ -41,7 +41,7 @@ final class SessionSecurity implements SessionSecurityInterface {
    * {@inheritDoc}
    */
   public function remoteIpProtection(): void {
-    $user_ip = $this->request()->server(ServerOptions::USER_IP_ADDRESS);
+    $user_ip = $this->request()->server->get(ServerOptions::USER_IP_ADDRESS);
     if (!$this->session()->exists('user_remote_ip')) {
       $this->session()->saveForced('user_remote_ip', $user_ip);
     }

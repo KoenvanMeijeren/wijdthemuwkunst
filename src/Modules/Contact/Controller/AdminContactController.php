@@ -70,7 +70,7 @@ final class AdminContactController extends EntityControllerBase {
   public function showByDate(): ViewInterface {
     return $this->view('index', [
       'title' => TranslationOld::get('admin_contact_form_title'),
-      'messages' => $this->repository->loadByDate($this->request()->get('date')),
+      'messages' => $this->repository->loadByDate($this->request()->query->get('date')),
     ]);
   }
 

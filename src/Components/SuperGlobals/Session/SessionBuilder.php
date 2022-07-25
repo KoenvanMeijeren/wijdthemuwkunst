@@ -46,11 +46,11 @@ final class SessionBuilder {
    * @throws \Exception
    */
   public function __construct(
-    private int $expiringTime = 1 * 4 * 60 * 60,
-    private string $path = '/',
-    private string $domain = '',
+    private readonly int $expiringTime = 1 * 4 * 60 * 60,
+    private readonly string $path = '/',
+    private readonly string $domain = '',
     private bool $secure = FALSE,
-    private bool $httpOnly = TRUE,
+    private readonly bool $httpOnly = TRUE,
     protected SessionSecurityInterface $security = new SessionSecurity()
   ) {
     $this->name = random_string(128);
@@ -110,7 +110,7 @@ final class SessionBuilder {
     }
 
     // Unset all session name cookies.
-    foreach ($_COOKIE as $key => $value) {
+    foreach ($cookie->all() as $key => $value) {
       if (strlen($key) === strlen($this->name)) {
         $cookie->unset($key);
       }
@@ -186,6 +186,15 @@ final class SessionBuilder {
 
     session_unset();
     session_destroy();
+  }
+
+  /**
+   * Restarts the session.
+   */
+  public function restart(): void {
+    $this->destroy();
+    $this->startSession($this->env()->get());
+    $this->secureSession();
   }
 
 }

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Components\SuperGlobals;
 
+use Components\SuperGlobals\File\File;
+
 /**
  * Provides an interface for interacting with super globals.
  *
@@ -27,19 +29,6 @@ interface RequestInterface {
   public function getRouteParameter(): string;
 
   /**
-   * Gets a value from the session.
-   *
-   * @param \Components\SuperGlobals\ServerOptions $key
-   *   The key to search for.
-   * @param string $default
-   *   The default value to return.
-   *
-   * @return string
-   *   The session value.
-   */
-  public function server(ServerOptions $key, string $default = ''): string;
-
-  /**
    * Gets a value from the post data.
    *
    * @param string $key
@@ -49,32 +38,20 @@ interface RequestInterface {
    *
    * @return string
    *   The post value.
+   *
+   * @deprecated
    */
   public function post(string $key, $default = ''): string;
 
   /**
-   * Gets a value from the get data.
+   * Gets the file collection.
    *
-   * @param string $key
-   *   The key to search for.
-   * @param string $default
-   *   The default value to return.
+   * @return \Components\SuperGlobals\File\File
+   *   The file collection.
    *
-   * @return string
-   *   The get value.
+   * @deprecated
    */
-  public function get(string $key, string $default = ''): string;
-
-  /**
-   * Gets a uploaded file.
-   *
-   * @param string $key
-   *   The key to search for.
-   *
-   * @return string[]
-   *   The uploaded file.
-   */
-  public function file(string $key): array;
+  public function file(): File;
 
   /**
    * Gets a value from the env.
@@ -86,6 +63,8 @@ interface RequestInterface {
    *
    * @return string
    *   The env value.
+   *
+   * @deprecated
    */
   public function env(string $key, string $default = ''): string;
 
@@ -99,6 +78,8 @@ interface RequestInterface {
    *
    * @return string
    *   The cookie value.
+   *
+   * @deprecated
    */
   public function cookie(string $key, string $default = ''): string;
 
@@ -112,6 +93,8 @@ interface RequestInterface {
    *
    * @return string
    *   The session value.
+   *
+   * @deprecated
    */
   public function session(string $key, string $default = ''): string;
 

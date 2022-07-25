@@ -60,7 +60,7 @@ final class ReportsController extends ControllerBase {
   public function logs(): ViewInterface {
     $logs = new Logs();
 
-    $date = $this->request()->get('date');
+    $date = $this->request()->query->get('date');
     $arrayDate = explode('-', $date);
     $day = (int) ($arrayDate[0] ?? 0);
     $month = (int) ($arrayDate[1] ?? 0);
@@ -84,7 +84,7 @@ final class ReportsController extends ControllerBase {
    */
   #[RouteGet(url: 'admin/reports/storage', rights: RouteRights::DEVELOPER)]
   public function storage(): ViewInterface {
-    $superGlobals = new SuperGlobals();
+    $superGlobals = new SuperGlobals($this->request());
 
     return $this->view('storage', [
       'title' => TranslationOld::get('admin_reports_storage_title'),

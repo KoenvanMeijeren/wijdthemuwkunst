@@ -24,7 +24,7 @@ final class Uri {
    * @return string
    */
   public static function getUrl(): string {
-    $sanitize = new Sanitize(self::requestStatic()->server(ServerOptions::URI), DataTypes::URL);
+    $sanitize = new Sanitize(self::requestStatic()->server->get(ServerOptions::URI), DataTypes::URL);
 
     return (string) $sanitize->data();
   }
@@ -38,7 +38,7 @@ final class Uri {
    * @throws \Components\Http\InvalidHttpTypeException
    */
   public static function getHttpType(): HttpTypes {
-    return HttpTypes::set(self::requestStatic()->server(ServerOptions::METHOD));
+    return HttpTypes::set(self::requestStatic()->server->get(ServerOptions::METHOD));
   }
 
   /**
@@ -47,7 +47,7 @@ final class Uri {
    * @return string
    */
   public static function getPreviousUrl(): string {
-    $sanitize = new Sanitize(self::requestStatic()->server(ServerOptions::HTTP_REFERER), DataTypes::URL);
+    $sanitize = new Sanitize(self::requestStatic()->server->get(ServerOptions::HTTP_REFERER), DataTypes::URL);
 
     return (string) $sanitize->data();
   }
@@ -56,12 +56,12 @@ final class Uri {
    * Get the domain extension.
    *
    * @return string
+   *   The extension of the domain.
    */
   public static function getDomainExtension(): string {
-    $hostExploded = explode('.', self::requestStatic()->server(ServerOptions::HTTP_HOST));
-    $arrayKeyLast = array_key_last($hostExploded);
+    $host_parts = explode('.', self::requestStatic()->server->get(ServerOptions::HTTP_HOST));
 
-    return $hostExploded[$arrayKeyLast] ?? 'nl';
+    return end($host_parts) ?? 'nl';
   }
 
 }

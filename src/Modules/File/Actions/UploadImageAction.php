@@ -37,7 +37,7 @@ final class UploadImageAction extends FileAction {
   public function __construct(string $name) {
     parent::__construct();
 
-    $this->file = $this->request()->file($name);
+    $this->file = $this->request()->file->get($name);
   }
 
   /**
