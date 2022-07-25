@@ -47,11 +47,6 @@ final class AuthenticationController extends ControllerBase {
 
   /**
    * Loads the login page.
-   *
-   * If the user is already logged in redirect to the dashboard.
-   *
-   * @return \Components\Header\Redirect|\Components\View\ViewInterface
-   *   Either a redirect response or the login view.
    */
   #[RouteGet(url: 'admin')]
   public function index(): ViewInterface|Redirect {
@@ -65,10 +60,7 @@ final class AuthenticationController extends ControllerBase {
   }
 
   /**
-   * Tries to log the user in and redirect back or to the specified page.
-   *
-   * @return \Components\Header\Redirect
-   *   The redirect response.
+   * Logs the user in.
    */
   #[RoutePost(url: 'admin/login')]
   public function login(): Redirect {
@@ -81,10 +73,7 @@ final class AuthenticationController extends ControllerBase {
   }
 
   /**
-   * Logs the current user out and redirect back to specified page.
-   *
-   * @return \Components\Header\Redirect
-   *   The redirect response.
+   * Logs the current user out.
    */
   #[RouteGet(url: 'admin/logout', rights: RouteRights::ADMIN)]
   public function logout(): Redirect {
