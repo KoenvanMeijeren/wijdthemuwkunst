@@ -56,7 +56,7 @@ abstract class EntityBase extends EntityModelBase implements EntityInterface {
   /**
    * {@inheritDoc}
    */
-  public function set(string $key, $value) {
+  public function set(string $key, mixed $value) {
     $attribute = "{$this->getTable()}_{$key}";
     if (str_contains($key, $this->getTable())) {
       $attribute = $key;
