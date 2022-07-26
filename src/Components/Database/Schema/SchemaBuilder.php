@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Components\Database\Schema;
 
 use Components\Database\DatabaseProcessor;
-use Components\Database\Query;
 
 /**
  * Provides a class for SchemaBuilder.
@@ -15,23 +14,19 @@ use Components\Database\Query;
 final class SchemaBuilder implements SchemaBuilderInterface
 {
 
-  public function createDatabase(string $name): self {
+  public static function createDatabase(string $name): void {
     new DatabaseProcessor(
       "CREATE DATABASE {$name};"
     );
-
-    return $this;
   }
 
-  public function dropDatabase(string $name): self {
+  public static function dropDatabase(string $name): void {
     new DatabaseProcessor(
       "DROP DATABASE {$name};"
     );
-
-    return $this;
   }
 
-  public function backupDatabase(string $name, ?string $disk = null, bool $differential = false): self {
+  public static function backupDatabase(string $name, ?string $disk = null, bool $differential = false): void {
     $query = "BACKUP DATABASE {$name}";
     if ($disk) {
       $query .= " TO DISK = '{$disk}'";
@@ -42,32 +37,26 @@ final class SchemaBuilder implements SchemaBuilderInterface
     }
 
     new DatabaseProcessor("{$query};");
-
-    return $this;
   }
 
-  public function createTable(string $name): self {
+  public static function createTable(string $name): void {
     throw new \LogicException('This function is not yet implemented!');
   }
 
-  public function alterTable(string $name): self {
+  public static function alterTable(string $name): void {
     throw new \LogicException('This function is not yet implemented!');
   }
 
-  public function truncateTable(string $name): self {
+  public static function truncateTable(string $name): void {
     new DatabaseProcessor(
       "TRUNCATE TABLE {$name};"
     );
-
-    return $this;
   }
 
-  public function dropTable(string $name): self {
+  public static function dropTable(string $name): self {
     new DatabaseProcessor(
       "DROP TABLE {$name};"
     );
-
-    return $this;
   }
 
 }

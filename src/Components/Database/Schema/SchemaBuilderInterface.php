@@ -15,12 +15,12 @@ interface SchemaBuilderInterface
   /**
    * The CREATE DATABASE statement is used to create a new SQL database.
    */
-  public function createDatabase(string $name): self;
+  public static function createDatabase(string $name): void;
 
   /**
    * The DROP DATABASE statement is used to drop an existing SQL database.
    */
-  public function dropDatabase(string $name): self;
+  public static function dropDatabase(string $name): void;
 
   /**
    * The DROP DATABASE statement is used to drop an existing SQL database.
@@ -32,6 +32,6 @@ interface SchemaBuilderInterface
    * A differential back up reduces the back up time (since only the changes are
    * backed up).
    */
-  public function backupDatabase(string $name, ?string $disk = null, bool $differential = false): self;
+  public static function backupDatabase(string $name, ?string $disk = null, bool $differential = false): void;
 
 }
