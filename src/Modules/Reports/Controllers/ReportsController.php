@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Modules\Reports\Controllers;
 
 use Cake\Chronos\Chronos;
+use Components\Datetime\DateTimeHelper;
 use Components\Route\RouteGet;
 use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
@@ -30,9 +31,6 @@ final class ReportsController extends ControllerBase {
 
   /**
    * Returns the application data view.
-   *
-   * @return ViewInterface
-   *   The view.
    */
   #[RouteGet(url: 'admin/reports/application', rights: RouteRights::DEVELOPER)]
   public function application(): ViewInterface {
@@ -50,22 +48,16 @@ final class ReportsController extends ControllerBase {
 
   /**
    * Returns the log data view.
-   *
-   * @return ViewInterface
-   *   The view.
    */
   #[RouteGet(url: 'admin/reports/logs', rights: RouteRights::DEVELOPER)]
   public function logs(): ViewInterface {
     $logs = new Logs();
 
     $date = $this->request()->query->get('date');
-    $arrayDate = explode('-', $date);
-    $day = (int) ($arrayDate[0] ?? 0);
-    $month = (int) ($arrayDate[1] ?? 0);
-    $year = (int) ($arrayDate[2] ?? 0);
-    if (!checkdate($month, $day, $year)) {
+    if (!DateTimeHelper::isDate($date)) {
       $date = new Chronos();
       $date = $date->toDateString();
+      $this->request()->query->save('date', $date);
     }
 
     return $this->view('logs', [
@@ -76,9 +68,6 @@ final class ReportsController extends ControllerBase {
 
   /**
    * Returns the storage data view.
-   *
-   * @return ViewInterface
-   *   The view.
    */
   #[RouteGet(url: 'admin/reports/storage', rights: RouteRights::DEVELOPER)]
   public function storage(): ViewInterface {
