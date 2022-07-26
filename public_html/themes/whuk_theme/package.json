@@ -3,6 +3,10 @@
     "version": "1.0.0",
     "description": "This is the wijdt hem uw kunst theme.",
     "main": "./dist/js/main.js",
+    "scripts": {
+      "build": "node_modules/.bin/gulp default",
+      "watch": "node_modules/.bin/gulp watch"
+    },
     "author": {
         "name": "Wijdt Hem Uw Kunst",
         "url": "https://www.wijdthemuwkunst.nl"
