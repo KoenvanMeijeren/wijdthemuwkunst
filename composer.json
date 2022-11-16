@@ -28,6 +28,9 @@
         },
         "platform-dev": {
             "ext-xdebug": "2.8.0"
+        },
+        "allow-plugins": {
+            "ocramius/package-versions": true
         }
     },
     "require": {
