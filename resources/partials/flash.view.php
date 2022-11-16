@@ -1,11 +1,8 @@
 <?php
 
-use Src\Session\Session;
-use Src\State\State;
+use System\State;
 
-$session = new Session();
-
-$error = $session->get(State::FAILED, true);
+$error = session()->get(State::FAILED->value, unset: true);
 if (!empty($error)) :
     ?>
     <div data-notify="container" role="alert"
@@ -22,7 +19,7 @@ if (!empty($error)) :
 <?php endif; ?>
 
 <?php
-$message = $session->get(State::SUCCESSFUL, true);
+$message = session()->get(State::SUCCESSFUL->value, unset: true);
 if (!empty($message)) :
     ?>
     <div data-notify="container" role="alert"
@@ -39,7 +36,7 @@ if (!empty($message)) :
 <?php endif; ?>
 
 <?php
-$message = $session->get(State::FORM_VALIDATION_FAILED, true);
+$message = session()->get(State::FORM_VALIDATION_FAILED->value, unset: true);
 if (!empty($message)) :
     ?>
     <div data-notify="container" role="alert"
@@ -52,7 +49,7 @@ if (!empty($message)) :
         </button>
 
         <span data-notify="message">
-            <?= parseHtmlEntities($message) ?>
+            <?= html_entities_decode($message) ?>
         </span>
     </div>
 <?php endif; ?>

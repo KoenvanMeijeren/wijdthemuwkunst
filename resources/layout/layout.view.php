@@ -1,26 +1,12 @@
 <?php
 
-use App\Domain\Admin\Menu\Models\Menu;
-use App\Domain\Admin\Menu\Repositories\MenuRepository;
-use App\Domain\Admin\Text\Models\Text;
-use App\Domain\Event\Models\Event;
-use Domain\Admin\Settings\Models\Setting;
-use Src\Core\Request;
-use Src\Security\CSRF;
-use Src\Session\Session;
-use Src\Translation\Translation;
-use Support\Resource;
+use Components\Resource\Resource;
+use Components\Security\CSRF;
+use Components\Translation\TranslationOld;
 
-$setting = new Setting();
-$text = new Text();
-$session = new Session();
-$request = new Request();
-$event = new Event();
-$menu = new Menu();
-$menuItems = $menu->getAll();
 ?>
 <!DOCTYPE html>
-<html lang="<?= Translation::DUTCH_LANGUAGE_CODE ?>">
+<html lang="<?= TranslationOld::DUTCH_LANGUAGE_CODE ?>">
 <head>
     <title><?= $data['title'] ?? 'Undefined' ?></title>
 
@@ -40,12 +26,12 @@ $menuItems = $menu->getAll();
 <header id="header">
     <div class="inner">
         <a href="/" class="logo">
-            <?= $setting->get('website_naam') ?>
+            <?= setting('website_naam') ?>
         </a>
-        <?php if (count($menuItems) > 0) : ?>
+        <?php if (isset($data['menuItems']) && count($data['menuItems']) > 0) : ?>
             <nav id="nav">
-                <?php foreach ($menuItems as $menuItem) :
-                    $menu = new MenuRepository($menuItem);
+                <?php /** @var \Modules\Menu\Entity\MenuInterface $menu */
+                foreach ($data['menuItems'] as $menu) :
                     if ($menu->getSlug() === 'index') : ?>
                         <a href="/"><?= $menu->getTitle() ?></a>
                     <?php else : ?>
@@ -68,65 +54,35 @@ $menuItems = $menu->getAll();
 <section id="footer">
     <div class="inner">
         <header>
-            <h2>
-                <?= $text->get(
-                    'contact_formulier_titel',
-                    'Neem contact op'
-                ) ?>
-            </h2>
+            <h2><?= t('Please contact us') ?></h2>
         </header>
-        <form id="form" method="post" action="/contact">
+        <form id="form" method="POST" action="/contact">
             <?php Resource::loadStringMessage(); ?>
             <?= CSRF::insertToken('/contact') ?>
 
             <div class="field half first">
-                <label for="name">
-                    <?= $text->get(
-                        'contact_formulier_naam_veld',
-                        'Naam'
-                    ) ?>
-                </label>
-                <input type="text" name="name" id="name"
-                       value="<?= $session->get('name', true) ?>" required/>
+                <label for="name"><?= t('Name') ?></label>
+                <input type="text" name="name" id="name" value="<?= session()->get('name', unset: true) ?>" required/>
             </div>
             <div class="field half">
-                <label for="email">
-                    <?= $text->get(
-                        'contact_formulier_email_veld',
-                        'Email'
-                    ) ?>
-                </label>
-                <input type="text" name="email" id="email"
-                       value="<?= $session->get('email', true) ?>" required/>
+                <label for="email"><?= t('Email') ?></label>
+                <input type="text" name="email" id="email" value="<?= session()->get('email', unset: true) ?>" required/>
             </div>
             <div class="field">
-                <label for="message">
-                    <?= $text->get(
-                        'contact_formulier_bericht_veld',
-                        'Bericht'
-                    ) ?>
-                </label>
-                <textarea name="message" id="message" rows="6"
-                          required><?= $session->get('message', true) ?></textarea>
+                <label for="message"><?= t('Message') ?></label>
+                <textarea name="message" id="message" rows="6" required><?= session()->get('message', unset: true) ?></textarea>
             </div>
 
             <ul class="actions">
                 <li>
-                    <button type="submit" class="button g-recaptcha"
-                            data-sitekey="<?= $request->env('recaptcha_public_key') ?>"
-                            data-callback="onSubmit">
-                        <?= $text->get(
-                            'contact_formulier_verzenden_knop',
-                            'Bericht verzenden'
-                        ) ?>
+                    <button type="submit" class="button g-recaptcha" data-sitekey="<?= request()->env('recaptcha_public_key') ?>" data-callback="onSubmit">
+                      <?= t('Send message') ?>
                     </button>
                 </li>
             </ul>
         </form>
         <div class="copyright">
-            <p>
-                &copy; <?= $setting->get('copyright_tekst') ?>
-            </p>
+            <p>&copy; <?= setting('copyright_tekst') ?></p>
         </div>
     </div>
 </section>
