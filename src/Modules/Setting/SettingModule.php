@@ -18,6 +18,6 @@ use System\Module\ModuleBase;
     SettingsControllers::class,
   ]
 )]
-class SettingModule extends ModuleBase {
+final class SettingModule extends ModuleBase {
 
 }

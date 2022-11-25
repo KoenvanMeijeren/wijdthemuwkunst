@@ -11,7 +11,7 @@ use Components\Attribute\AttributeInterface;
  * @package \System\Entity\Status
  */
 #[\Attribute]
-class EntityStatusColumn implements AttributeInterface {
+final class EntityStatusColumn implements AttributeInterface {
 
   /**
    * Constructs the entity status column.

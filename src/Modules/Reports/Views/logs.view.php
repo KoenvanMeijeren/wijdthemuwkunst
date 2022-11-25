@@ -30,14 +30,14 @@ use System\State;
                                        placeholder="<?= TranslationOld::get('form_date') ?>"
                                        class="form-control"
                                        id="unlimited-datepicker"
-                                       value="<?= request()->get('date') ?>">
+                                       value="<?= request()->query->get('date') ?>">
                             </div>
 
                             <button class="btn btn-outline-primary">
                                 <?= TranslationOld::get('filter_button') ?>
                             </button>
 
-                            <?php if (isset($_GET['date'])) : ?>
+                            <?php if (request()->query->exists('date')) : ?>
                                 <a href="/admin/reports/logs"
                                    class="btn btn-outline-danger ml-3">
                                     <?= TranslationOld::get('reset_button') ?>
@@ -52,7 +52,7 @@ use System\State;
                         <div class="col-md-12">
                             <p class="mt-2 font-weight-bold">
                                 <?= TranslationOld::get('no_log_data_found') ?>
-                                <?= request()->get('date') ?>.
+                                <?= request()->query->get('date') ?>.
                             </p>
                         </div>
                     <?php else : ?>

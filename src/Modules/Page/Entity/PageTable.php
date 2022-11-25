@@ -66,7 +66,7 @@ final class PageTable extends DataTableBuilder {
         TranslationOld::get('delete_page_confirmation_message'),
         $entity->getTitle()
       ),
-      $this->user()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)
+      $this->currentUser()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)
     );
   }
 

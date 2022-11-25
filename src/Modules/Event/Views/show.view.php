@@ -10,7 +10,7 @@ use Components\SuperGlobals\ServerOptions;
 use Components\SuperGlobals\Url\Uri;
 use System\Breadcrumbs\Breadcrumbs;
 
-$documentRoot = request()->server(ServerOptions::DOCUMENT_ROOT);
+$documentRoot = request()->server->get(ServerOptions::DOCUMENT_ROOT);
 
 /** @var \Modules\Event\Entity\EventInterface $entity */
 $entity = $event ?? NULL;

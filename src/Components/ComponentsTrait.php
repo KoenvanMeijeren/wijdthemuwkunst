@@ -33,17 +33,17 @@ trait ComponentsTrait {
   /**
    * The request definition.
    *
-   * @var \Components\SuperGlobals\RequestInterface
+   * @var \Components\SuperGlobals\Request
    */
-  private RequestInterface $requestDl;
+  private Request $requestDl;
 
   /**
    * Gets the request definition.
    *
-   * @return RequestInterface
+   * @return Request
    *   The request definition.
    */
-  protected function request(): RequestInterface {
+  protected function request(): Request {
     return $this->requestDl ??= new Request();
   }
 
@@ -180,22 +180,13 @@ trait ComponentsTrait {
 
   /**
    * Gets the current user entity.
-   *
-   * @return AccountInterface
-   *   The current user entity.
    */
-  protected function user(): AccountInterface {
+  protected function currentUser(): AccountInterface {
     return $this->currentUserService()->get();
   }
 
   /**
    * Gets a setting.
-   *
-   * @param string $setting
-   *   The setting.
-   *
-   * @return string
-   *   The setting.
    */
   protected function setting(string $setting): string {
     $entityManager = $this->getEntityManager();
@@ -218,9 +209,6 @@ trait ComponentsTrait {
 
   /**
    * Gets the entity manager.
-   *
-   * @return EntityManagerInterface
-   *   The entity manager definition.
    */
   protected function getEntityManager(): EntityManagerInterface {
     return $this->EntityManagerDl ??= new EntityManager();

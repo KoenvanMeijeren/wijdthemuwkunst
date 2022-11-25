@@ -18,6 +18,6 @@ use System\Module\ModuleBase;
     AuthenticationController::class,
   ]
 )]
-class AuthenticationModule extends ModuleBase {
+final class AuthenticationModule extends ModuleBase {
 
 }

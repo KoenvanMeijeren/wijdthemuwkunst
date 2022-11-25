@@ -58,7 +58,7 @@ final class MenuTable extends DataTableBuilder {
         TranslationOld::get('delete_menu_item_confirmation_message'),
         $entity->getTitle()
       ),
-      $this->user()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)
+      $this->currentUser()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)
     );
   }
 

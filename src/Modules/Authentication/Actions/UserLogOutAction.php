@@ -6,8 +6,8 @@ namespace Modules\Authentication\Actions;
 use Components\Actions\Action;
 use Components\SuperGlobals\Session\SessionBuilder;
 use Components\Translation\TranslationOld;
-use Modules\User\CurrentUser;
 use Modules\User\CurrentUserInterface;
+use Modules\User\Entity\AccountInterface;
 use System\State;
 
 /**
@@ -18,21 +18,28 @@ use System\State;
 final class UserLogOutAction extends Action {
 
   /**
-   * Creates a new log user out action.
+   * The currentUser.
    *
-   * @param \Modules\User\CurrentUserInterface $currentUser
-   *   The current user.
+   * @var \Modules\User\Entity\AccountInterface
+   */
+  protected readonly AccountInterface $currentUser;
+
+  /**
+   * Constructs a new object.
    */
   public function __construct(
-    protected readonly CurrentUserInterface $currentUser = new CurrentUser()
-  ) {}
+    protected readonly CurrentUserInterface $currentUserService
+  ) {
+    $this->currentUser = $this->currentUserService->get();
+  }
 
   /**
    * {@inheritDoc}
    */
   protected function handle(): bool {
+    $this->currentUser->setLoginToken(NULL)->save();
     $builder = new SessionBuilder();
-    $builder->restartSecure();
+    $builder->restart();
 
     $this->session()->flash(State::SUCCESSFUL->value, TranslationOld::get('admin_logout_message'));
 
@@ -43,7 +50,7 @@ final class UserLogOutAction extends Action {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    return $this->currentUser->isLoggedIn();
+    return $this->currentUserService->isLoggedIn();
   }
 
   /**

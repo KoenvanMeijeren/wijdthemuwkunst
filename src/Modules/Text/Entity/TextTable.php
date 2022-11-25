@@ -56,7 +56,7 @@ final class TextTable extends DataTableBuilder {
         TranslationOld::get('delete_text_confirmation_message'),
         $entity->getKey()
       ),
-      $this->user()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)
+      $this->currentUser()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)
     );
   }
 

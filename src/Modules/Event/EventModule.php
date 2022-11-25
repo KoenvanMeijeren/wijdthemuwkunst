@@ -22,6 +22,6 @@ use System\Module\ModuleBase;
     EventArchiveController::class,
   ]
 )]
-class EventModule extends ModuleBase {
+final class EventModule extends ModuleBase {
 
 }

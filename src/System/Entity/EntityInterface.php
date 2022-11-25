@@ -41,7 +41,7 @@ interface EntityInterface extends EntityModelInterface {
    *
    * @param string $key
    *   The key of the attribute.
-   * @param $value
+   * @param mixed $value
    *   The value of the attribute.
    *
    * @return $this

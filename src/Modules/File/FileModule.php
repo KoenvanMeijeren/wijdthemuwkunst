@@ -18,6 +18,6 @@ use System\Module\ModuleBase;
     UploadFileController::class,
   ]
 )]
-class FileModule extends ModuleBase {
+final class FileModule extends ModuleBase {
 
 }

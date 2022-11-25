@@ -14,6 +14,6 @@ use System\Module\ModuleBase;
 #[Module(
   name: 'Slug'
 )]
-class SlugModule extends ModuleBase {
+final class SlugModule extends ModuleBase {
 
 }

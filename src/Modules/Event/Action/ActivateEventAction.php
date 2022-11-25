@@ -12,7 +12,7 @@ use System\State;
  *
  * @package Modules\Event\Action
  */
-class ActivateEventAction extends EventActionBase {
+final class ActivateEventAction extends EventActionBase {
 
   /**
    * {@inheritdoc}

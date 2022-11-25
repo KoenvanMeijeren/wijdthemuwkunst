@@ -30,8 +30,8 @@ final class UpdateAccountDataAction extends AccountActionBase {
    */
   protected function authorize(): bool {
     $input_rights = (int) $this->request()->post('rights');
-    if (RouteRights::GUEST->hasAccessHigherNumeric($input_rights) && $input_rights !== $this->user()->getRights()
-      && $this->entity->id() === $this->user()->id()) {
+    if (RouteRights::GUEST->hasAccessHigherNumeric($input_rights) && $input_rights !== $this->currentUser()->getRights()
+      && $this->entity->id() === $this->currentUser()->id()) {
       $this->session()->flash(
         State::FAILED->value,
         TranslationOld::get('cannot_edit_own_account_rights_message')

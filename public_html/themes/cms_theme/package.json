@@ -1,9 +1,10 @@
 {
-    "title": "SB Admin 2",
-    "name": "startbootstrap-sb-admin-2",
+    "title": "Admin theme",
+    "name": "admin-theme",
     "version": "4.0.7",
     "scripts": {
-        "start": "node_modules/.bin/gulp watch"
+        "build": "node_modules/.bin/gulp build",
+        "watch": "node_modules/.bin/gulp watch"
     },
     "license": "MIT",
     "repository": {

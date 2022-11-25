@@ -39,7 +39,7 @@ final class DeleteSettingAction extends BaseSettingAction {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    if ($this->user()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)) {
+    if ($this->currentUser()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)) {
       $this->session()->flash(State::FAILED->value, TranslationOld::get('setting_destroy_not_allowed'));
 
       return FALSE;

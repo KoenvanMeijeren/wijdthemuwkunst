@@ -3,8 +3,10 @@ declare(strict_types=1);
 
 namespace Components\SuperGlobals;
 
+use JetBrains\PhpStorm\Pure;
+
 /**
- * Proivides an enumeration for the server options.
+ * Provides an enumeration for the server options.
  *
  * @package \Components\SuperGlobals
  */

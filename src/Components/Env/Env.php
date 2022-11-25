@@ -44,7 +44,7 @@ final class Env implements EnvInterface {
    * Defines the host of the app.
    */
   protected function setHost(): void {
-    $host = $this->request()->server(ServerOptions::HTTP_HOST);
+    $host = $this->request()->server->get(ServerOptions::HTTP_HOST);
     $this->host = $host !== '' ? $host : self::LOCALHOST_STRING;
     Validate::var($this->host)->isDomain();
   }

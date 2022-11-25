@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace Modules\Reports\Src;
 
 use Cake\Chronos\Chronos;
-use Components\ComponentsTrait;
 use Components\Datetime\DateTime;
 use Components\SuperGlobals\Cookie\Cookie;
+use Components\SuperGlobals\Request;
 use Components\Translation\TranslationOld;
 use Defuse\Crypto\Exception\WrongKeyOrModifiedCiphertextException;
 use System\DataTable\DataTable;
@@ -18,13 +18,15 @@ use System\DataTable\DataTable;
  */
 final class SuperGlobals {
 
-  use ComponentsTrait;
+  /**
+   * Constructs a new object.
+   */
+  public function __construct(
+    protected readonly Request $request
+  ) {}
 
   /**
    * Gets data from the headers.
-   *
-   * @return string
-   *   The headers data.
    */
   public function getHeadersInformation(): string {
     $table = new DataTable();
@@ -39,9 +41,6 @@ final class SuperGlobals {
 
   /**
    * Gets data from the session settings.
-   *
-   * @return string
-   *   The session settings data.
    */
   public function getSessionSettingsInformation(): string {
     $table = new DataTable();
@@ -51,8 +50,8 @@ final class SuperGlobals {
       TranslationOld::get('table_row_value'),
     ]);
     foreach (session_get_cookie_params() as $key => $data) {
-      if ($key === 'lifetime' && $this->session()->exists('createdAt')) {
-        $createdAt = new Chronos($this->session()->get('createdAt'));
+      if ($key === 'lifetime' && $this->request->session->exists('createdAt')) {
+        $createdAt = new Chronos($this->request->session->get('createdAt'));
         $expiredAt = $createdAt->addSeconds($data);
         $lifetime = new Chronos();
 
@@ -77,9 +76,6 @@ final class SuperGlobals {
 
   /**
    * Gets data from the session.
-   *
-   * @return string
-   *   The session data.
    */
   public function getSessionInformation(): string {
     $table = new DataTable();
@@ -88,19 +84,19 @@ final class SuperGlobals {
       TranslationOld::get('table_row_key'),
       TranslationOld::get('table_row_value'),
     ]);
-    foreach (array_keys($_SESSION) as $key) {
+    foreach ($this->request->session->all() as $key => $item) {
       if ($key === 'CSRF') {
         continue;
       }
 
       if ($key === 'createdAt') {
-        $dateTime = new DateTime(new Chronos($this->session()->get($key)));
-        $table->addRow([$key, $dateTime->toDateTime(),]);
+        $dateTime = new DateTime(new Chronos($item));
+        $table->addRow([$key, $dateTime->toDateTime()]);
 
         continue;
       }
 
-      $table->addRow([$key, $this->session()->get($key),]);
+      $table->addRow([$key, $item]);
     }
 
     return $table->render('undefined');
@@ -108,9 +104,6 @@ final class SuperGlobals {
 
   /**
    * Gets data from the cookies.
-   *
-   * @return string
-   *   The cookies data.
    */
   public function getCookieInformation(): string {
     $cookie = new Cookie();
@@ -120,14 +113,10 @@ final class SuperGlobals {
       TranslationOld::get('table_row_key'),
       TranslationOld::get('table_row_value'),
     ]);
-    foreach (array_keys($_COOKIE) as $key) {
-      if ($key === $cookie->get('sessionName')
-        && $cookie->exists($cookie->get('sessionName'))) {
-        $table->addRow([
-          'sessie cookie',
-          $_COOKIE[$cookie->get('sessionName')],
-        ]);
-
+    foreach (array_keys($this->request->cookie->all()) as $key) {
+      $sessionName = $this->request->cookie->get('sessionName');
+      if ($key === $sessionName && $cookie->exists($sessionName)) {
+        $table->addRow(['sessie cookie', $sessionName,]);
         continue;
       }
 

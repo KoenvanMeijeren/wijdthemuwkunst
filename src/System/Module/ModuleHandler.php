@@ -16,7 +16,7 @@ use Components\Route\RoutePost;
  *
  * @package System\Module
  */
-class ModuleHandler implements ModuleHandlerInterface {
+final class ModuleHandler implements ModuleHandlerInterface {
 
   /**
    * The loaded modules.

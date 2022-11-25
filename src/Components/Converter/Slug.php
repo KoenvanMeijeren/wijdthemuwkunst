@@ -8,7 +8,7 @@ namespace Components\Converter;
  *
  * @package Components\Converter
  */
-class Slug implements SlugInterface {
+final class Slug implements SlugInterface {
 
   /**
    * Slug constructor.

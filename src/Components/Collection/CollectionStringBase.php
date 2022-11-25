@@ -17,7 +17,7 @@ abstract class CollectionStringBase extends CollectionBase implements Collection
   /**
    * ArrayBase constructor.
    *
-   * @param array $items
+   * @param string[] $items
    *   The array to interact with.
    * @param bool $sanitize
    *   Whether the data must be sanitized or not.
@@ -30,6 +30,23 @@ abstract class CollectionStringBase extends CollectionBase implements Collection
     private readonly bool $encrypt = false
   ) {
     parent::__construct($this->items);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function all(): array {
+    $items = parent::all();
+    if (!$this->encrypt) {
+      return $items;
+    }
+
+    $result = [];
+    foreach (array_keys($items) as $key) {
+      $result[$key] = $this->get($key);
+    }
+
+    return $result;
   }
 
   /**
@@ -50,7 +67,7 @@ abstract class CollectionStringBase extends CollectionBase implements Collection
     $data = $value;
     if ($this->sanitize) {
       $sanitize = new Sanitize($value);
-      $data = $sanitize->data();
+      $data = (string) $sanitize->data();
     }
 
     if (!$this->encrypt) {
@@ -68,6 +85,10 @@ abstract class CollectionStringBase extends CollectionBase implements Collection
   public function get(string $key, mixed $default = '', bool $unset = FALSE): string {
     $data = parent::get($key, $default);
     if ($data === '') {
+      return $default;
+    }
+
+    if (!is_string($data)) {
       return $default;
     }
 

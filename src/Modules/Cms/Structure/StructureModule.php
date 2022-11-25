@@ -18,6 +18,6 @@ use System\Module\ModuleBase;
     StructureController::class,
   ]
 )]
-class StructureModule extends ModuleBase {
+final class StructureModule extends ModuleBase {
 
 }

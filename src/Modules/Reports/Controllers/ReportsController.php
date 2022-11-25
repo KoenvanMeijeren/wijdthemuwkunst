@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Modules\Reports\Controllers;
 
 use Cake\Chronos\Chronos;
+use Components\Datetime\DateTimeHelper;
 use Components\Route\RouteGet;
 use Components\Route\RouteRights;
 use Components\Translation\TranslationOld;
@@ -22,8 +23,6 @@ use System\Controller\ControllerBase;
 final class ReportsController extends ControllerBase {
 
   /**
-   * ReportsController constructor.
-   *
    * {@inheritDoc}
    */
   #[Pure] public function __construct() {
@@ -32,14 +31,11 @@ final class ReportsController extends ControllerBase {
 
   /**
    * Returns the application data view.
-   *
-   * @return ViewInterface
-   *   The view.
    */
   #[RouteGet(url: 'admin/reports/application', rights: RouteRights::DEVELOPER)]
   public function application(): ViewInterface {
     $phpInfo = new PhpInfo();
-    $superGlobals = new SuperGlobals();
+    $superGlobals = new SuperGlobals($this->request());
 
     return $this->view('application', [
       'title' => TranslationOld::get('admin_reports_application_title'),
@@ -52,22 +48,16 @@ final class ReportsController extends ControllerBase {
 
   /**
    * Returns the log data view.
-   *
-   * @return ViewInterface
-   *   The view.
    */
   #[RouteGet(url: 'admin/reports/logs', rights: RouteRights::DEVELOPER)]
   public function logs(): ViewInterface {
     $logs = new Logs();
 
-    $date = $this->request()->get('date');
-    $arrayDate = explode('-', $date);
-    $day = (int) ($arrayDate[0] ?? 0);
-    $month = (int) ($arrayDate[1] ?? 0);
-    $year = (int) ($arrayDate[2] ?? 0);
-    if (!checkdate($month, $day, $year)) {
+    $date = $this->request()->query->get('date');
+    if (!DateTimeHelper::isDate($date)) {
       $date = new Chronos();
       $date = $date->toDateString();
+      $this->request()->query->save('date', $date);
     }
 
     return $this->view('logs', [
@@ -78,13 +68,10 @@ final class ReportsController extends ControllerBase {
 
   /**
    * Returns the storage data view.
-   *
-   * @return ViewInterface
-   *   The view.
    */
   #[RouteGet(url: 'admin/reports/storage', rights: RouteRights::DEVELOPER)]
   public function storage(): ViewInterface {
-    $superGlobals = new SuperGlobals();
+    $superGlobals = new SuperGlobals($this->request());
 
     return $this->view('storage', [
       'title' => TranslationOld::get('admin_reports_storage_title'),

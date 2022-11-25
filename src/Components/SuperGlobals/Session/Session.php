@@ -21,7 +21,7 @@ final class Session extends CollectionStringBase implements SessionInterface {
    * Session constructor.
    */
   public function __construct() {
-    parent::__construct($_SESSION, true, true);
+    parent::__construct($_SESSION ?? [], true, true);
   }
 
   /**

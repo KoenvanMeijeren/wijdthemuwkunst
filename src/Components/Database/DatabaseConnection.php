@@ -54,7 +54,7 @@ abstract class DatabaseConnection implements DatabaseConnectionInterface {
    *
    * @throws \PDOException
    */
-  public function __construct(string $query, array $values) {
+  public function __construct(string $query, array $values = []) {
     $this->pdo = $this->getConnection();
 
     $this->statement = $this->pdo->prepare($query);

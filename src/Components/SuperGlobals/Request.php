@@ -4,8 +4,13 @@ declare(strict_types=1);
 namespace Components\SuperGlobals;
 
 use Components\Route\RouteProcessor;
-use Components\Route\Router;
-use Components\Sanitize\Sanitize;
+use Components\SuperGlobals\Cookie\Cookie;
+use Components\SuperGlobals\Env\Env;
+use Components\SuperGlobals\File\File;
+use Components\SuperGlobals\Post\Post;
+use Components\SuperGlobals\Query\Query;
+use Components\SuperGlobals\Server\Server;
+use Components\SuperGlobals\Session\Session;
 use JetBrains\PhpStorm\Pure;
 
 /**
@@ -14,6 +19,34 @@ use JetBrains\PhpStorm\Pure;
  * @package Components\SuperGlobals
  */
 final class Request implements RequestInterface {
+
+  /**
+   * Constructs the request.
+   *
+   * @param \Components\SuperGlobals\Query\Query $query
+   *   The query.
+   * @param \Components\SuperGlobals\Post\Post $post
+   *   The posted form values.
+   * @param \Components\SuperGlobals\Server\Server $server
+   *   The server values.
+   * @param \Components\SuperGlobals\File\File $file
+   *   The uploaded files.
+   * @param \Components\SuperGlobals\Env\Env $env
+   *   The environment values.
+   * @param \Components\SuperGlobals\Cookie\Cookie $cookie
+   *   The cookies.
+   * @param \Components\SuperGlobals\Session\Session $session
+   *   The session values.
+   */
+  public function __construct(
+    public readonly Query $query = new Query(),
+    public readonly Post $post = new Post(),
+    public readonly Server $server = new Server(),
+    public readonly File $file = new File(),
+    public readonly Env $env = new Env(),
+    public readonly Cookie $cookie = new Cookie(encrypt: FALSE),
+    public readonly Session $session = new Session()
+  ) {}
 
   /**
    * {@inheritDoc}
@@ -35,100 +68,36 @@ final class Request implements RequestInterface {
   /**
    * {@inheritDoc}
    */
-  public function server(ServerOptions $key, string $default = ''): string {
-    return $this->requestFromGlobal($_SERVER, $key->value, $default);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public function post(string $key, $default = ''): string {
-    return $this->requestFromGlobal($_POST, $key, $default);
+    return $this->post->get($key, $default);
   }
 
   /**
    * {@inheritDoc}
    */
-  public function get(string $key, string $default = ''): string {
-    return $this->requestFromGlobal($_GET, $key, $default);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function file(string $key): array {
-    return $_FILES[$key] ?? [];
+  public function file(): File {
+    return $this->file;
   }
 
   /**
    * {@inheritDoc}
    */
   public function env(string $key, string $default = ''): string {
-    return $this->requestFromGlobal($_ENV, $key, $default);
+    return $this->env->get($key, $default);
   }
 
   /**
    * {@inheritDoc}
    */
   public function cookie(string $key, string $default = ''): string {
-    return $this->requestFromGlobal($_COOKIE, $key, $default);
+    return $this->cookie->get($key, $default);
   }
 
   /**
    * {@inheritDoc}
    */
   public function session(string $key, string $default = ''): string {
-    return $this->requestFromGlobal($_SESSION, $key, $default);
-  }
-
-  /**
-   * Requests data from the super globals.
-   *
-   * @param array[] $superGlobal
-   *   The specified super global.
-   * @param string $key
-   *   The key to search for.
-   * @param mixed $default
-   *   The default value to return.
-   *
-   * @return string
-   *   The requested data from the super global
-   */
-  protected function requestFromGlobal(array $superGlobal, string $key, mixed $default = ''): string {
-    if (!isset($superGlobal[$key])) {
-      return (string) $default;
-    }
-
-    if (is_array($superGlobal[$key])) {
-      return json_encode($this->buildNewArray($superGlobal, $key), JSON_THROW_ON_ERROR);
-    }
-
-    return (new Sanitize((string) $superGlobal[$key]))->data();
-  }
-
-  /**
-   * Builds a new array with sanitized values.
-   *
-   * @param array[] $superGlobal
-   *   The specified super global.
-   * @param string $key
-   *   The key to search for.
-   *
-   * @return string[]
-   *   The sanitized array.
-   */
-  #[Pure]
-  protected function buildNewArray(array $superGlobal, string $key): array {
-    $newArray = [];
-    foreach ($superGlobal[$key] as $data) {
-      if (is_scalar($data)) {
-        $newArray[] = (new Sanitize($data))->data();
-      }
-
-      $newArray[] = $data;
-    }
-
-    return $newArray;
+    return $this->session->get($key, $default);
   }
 
 }

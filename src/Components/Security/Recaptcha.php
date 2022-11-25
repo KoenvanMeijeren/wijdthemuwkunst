@@ -37,8 +37,8 @@ final class Recaptcha implements RecaptchaInterface {
    */
   public function validate(): bool {
     $response = $this->recaptcha->verify(
-      $this->request()->post('g-recaptcha-response'),
-      $this->request()->server(ServerOptions::USER_IP_ADDRESS)
+      $this->request()->post->get('g-recaptcha-response'),
+      $this->request()->server->get(ServerOptions::USER_IP_ADDRESS)
     );
 
     if ($response->isSuccess()) {

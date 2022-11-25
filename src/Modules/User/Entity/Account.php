@@ -85,7 +85,7 @@ final class Account extends EntityStatusBase implements AccountInterface {
   /**
    * {@inheritDoc}
    */
-  public function setLoginToken(string $login_token): AccountInterface {
+  public function setLoginToken(?string $login_token): AccountInterface {
     $this->set('login_token', $login_token);
     return $this;
   }
@@ -115,8 +115,16 @@ final class Account extends EntityStatusBase implements AccountInterface {
   /**
    * {@inheritDoc}
    */
-  public function setBlocked(bool $blocked = TRUE): AccountInterface {
-    $this->set('is_blocked', (int) $blocked);
+  public function setBlocked(): AccountInterface {
+    $this->set('is_blocked', TRUE);
+    return $this;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function setActive(): AccountInterface {
+    $this->set('is_blocked', FALSE);
     return $this;
   }
 

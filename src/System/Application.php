@@ -5,7 +5,7 @@ namespace System;
 
 use Components\ComponentsTrait;
 use Components\Datetime\DateTimeInterface;
-use Components\Header\Header;
+use Components\Header\HeaderInterface;
 use Components\Route\RouteProcessor;
 use Components\SuperGlobals\Session\SessionBuilder;
 use Components\SuperGlobals\Url\Uri;
@@ -31,7 +31,7 @@ final class Application implements ApplicationInterface {
     date_default_timezone_set(DateTimeInterface::DEFAULT_TIMEZONE);
 
     $this->env()->initializeErrorHandling();
-    $this->header()->send(Header::X_XSS_PROTECTION);
+    $this->header()->send(HeaderInterface::X_XSS_PROTECTION);
 
     $sessionBuilder = new SessionBuilder();
     $sessionBuilder->startSession($this->env()->get());
@@ -46,7 +46,7 @@ final class Application implements ApplicationInterface {
 
     $moduleHandler = new ModuleHandler();
 
-    $current_user = $this->user();
+    $current_user = $this->currentUser();
     $route_processor = new RouteProcessor($moduleHandler->getRouteCollection());
 
     echo $route_processor->direct(Uri::getUrl(), Uri::getHttpType(), $current_user->getRouteRights());

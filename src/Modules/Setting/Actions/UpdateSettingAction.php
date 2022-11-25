@@ -28,7 +28,7 @@ final class UpdateSettingAction extends BaseSettingAction {
    * {@inheritDoc}
    */
   protected function authorize(): bool {
-    if ($this->user()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)
+    if ($this->currentUser()->getRouteRights()->hasAccessForbidden(RouteRights::DEVELOPER)
       && $this->request()->post('key') !== $this->entity->getKey()) {
       $this->session()->flash(State::FAILED->value, TranslationOld::get('setting_editing_key_not_allowed'));
 

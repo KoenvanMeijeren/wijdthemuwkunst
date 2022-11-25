@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 use Components\SuperGlobals\ServerOptions;
 
-$documentRoot = request()->server(ServerOptions::DOCUMENT_ROOT);
+$documentRoot = request()->server->get(ServerOptions::DOCUMENT_ROOT);
 
 /** @var \Modules\Page\Entity\PageInterface $entity */
 $entity = $page ?? NULL;

@@ -16,7 +16,7 @@ use System\Entity\EntityControllerBase;
  *
  * @package Modules\Event\Controller
  */
-class EventController extends EntityControllerBase {
+final class EventController extends EntityControllerBase {
 
   /**
    * EventController constructor.

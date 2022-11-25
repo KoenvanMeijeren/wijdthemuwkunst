@@ -12,7 +12,7 @@ use System\Entity\EntityRepository;
  * @package System\Entity\Type;
  */
 #[\Attribute]
-class ContentEntityType implements AttributeInterface {
+final class ContentEntityType implements AttributeInterface {
 
   /**
    * Constructs a new content entity type.
